@@ -11,3 +11,4 @@ This file configures some of my preferred settings/tools for editing:
 - Comments (~toggle-comment-on-line~ and ~comment-or-uncomment-region-or-line~)
 - Helm [[http://betterthanack.com][ag]]
 - [[http://www.emacswiki.org/emacs/HideShow][HideShow]]
+** [[https://github.com/yurrriq/dotfiles/tree/fish][Fish]]
