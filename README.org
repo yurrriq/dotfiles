@@ -2,12 +2,12 @@
 ** [[https://github.com/yurrriq/dotfiles/tree/emacs][Emacs]]
 *** [[https://github.com/yurrriq/dotfiles/blob/emacs/lisp/init-editing-utils.el][Editing Utils]]
 This file configures some of my preferred settings/tools for editing:
-- Global config like muting the bell and `(setq fill-column 80)`
+- Global config like muting the bell and ~(setq fill-column 80)~
 - Whitespace cleanup
 - Prettify symbols
 - FCI
 - Goto symbol (like Sublime Text's ⌘-R)
 - Indentation
-- Comments (`toggle-comment-on-line` and `comment-or-uncomment-region-or-line`)
+- Comments (~toggle-comment-on-line~ and ~comment-or-uncomment-region-or-line~)
 - Helm ag ([[http://betterthanack.com][ag]] in Helm)
 - [[http://www.emacswiki.org/emacs/HideShow][HideShow]]
