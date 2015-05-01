@@ -8,5 +8,5 @@ This file configures some of my preferred settings/tools for editing:
 - Goto symbol (like Sublime Text's ⌘-R)
 - Indentation
 - Comments (~toggle-comment-on-line~ and ~comment-or-uncomment-region-or-line~)
-- Helm ag ([[http://betterthanack.com][ag]] in Helm)
+- Helm [[http://betterthanack.com][ag]]
 - [[http://www.emacswiki.org/emacs/HideShow][HideShow]]
