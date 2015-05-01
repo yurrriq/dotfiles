@@ -6,3 +6,7 @@
 	path = fish
 	url = git@github.com:yurrriq/dotfiles.git
 	branch = fish
+[submodule "leiningen"]
+	path = leiningen
+	url = git@github.com:yurrriq/dotfiles.git
+	branch = leiningen
