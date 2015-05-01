@@ -2,3 +2,7 @@
 	path = emacs
 	url = git@github.com:yurrriq/dotfiles.git
 	branch = emacs
+[submodule "fish"]
+	path = fish
+	url = git@github.com:yurrriq/dotfiles.git
+	branch = fish
