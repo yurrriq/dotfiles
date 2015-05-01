@@ -1,0 +1,4 @@
+[submodule "emacs"]
+	path = emacs
+	url = git@github.com:yurrriq/dotfiles.git
+	branch = emacs
