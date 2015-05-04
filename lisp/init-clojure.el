@@ -17,6 +17,7 @@
     (alter-var-root 1)
     (assoc 1)
     (assoc-in 1)
+    (apply 1)
     (condp-> 'defun)
     (context 2)
     (contract 1)
@@ -119,7 +120,8 @@
   (yurrriq/customize-clojure-font-lock)
   (yurrriq/customize-clojure-indent)
   (add-hook 'clojure-mode-hook 'eldoc-mode)
-  (add-hook 'clojure-mode-hook 'fci-mode)
+  ;; org-mode html export hates this...
+  ;; (add-hook 'clojure-mode-hook 'fci-mode)
   (add-hook 'clojure-mode-hook 'hs-minor-mode)
   (add-hook 'clojure-mode-hook 'paredit-mode)
   (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)

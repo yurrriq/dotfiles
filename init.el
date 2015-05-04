@@ -87,10 +87,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(edts-man-root "/Users/yurrriq/.emacs.d/edts/doc/17.5")
+ '(safe-local-variable-values
+   (quote
+    ((org-export-html-style . "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\" />")
+     (org-export-html-style . "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\">")
+     (org-html-doctype . "html5")
+     (css-indent-offset . 2))))
  '(session-use-package t nil (session)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
