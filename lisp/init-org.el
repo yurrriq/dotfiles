@@ -137,6 +137,20 @@
 (setq org-mobile-inbox-for-pull "~/org/flagged.org")
 
 
+;; ===== PROJECTS =====
+
+(setq org-publish-project-alist
+      '(("notes"
+         :base-directory "~/org/notes/"
+         :base-extension "org"
+         :exclude "\\(notes\\|README\\).org"
+         :publishing-directory "~/org/notes/public_html/"
+         :publishing-function org-html-publish-to-html)))
+
+;; https://github.com/yurrriq/exercism/blob/master/org/projects.el
+(load-file "~/src/yurrriq/exercism/org/projects.el")
+
+
 ;; ===== BABEL =====
 
 (after-load 'org
