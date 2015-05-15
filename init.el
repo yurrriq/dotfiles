@@ -36,6 +36,7 @@
 (require 'init-lilypond)
 (require 'init-scheme)
 (require 'init-shen)
+(require 'init-swift)
 
 (global-unset-key (kbd "C-x C-c"))
 (global-unset-key (kbd "C-x C-z"))
