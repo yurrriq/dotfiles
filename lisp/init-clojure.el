@@ -22,6 +22,8 @@
     (context 2)
     (contract 1)
     (defroutes 'defun)
+    (branch 'defun)
+    (mlet 'defun)
     (dissoc 1)
     (ffirst 0)
     (go-let 1)
