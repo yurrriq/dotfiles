@@ -1,5 +1,5 @@
 config.fish: ~/.config/fish/config.fish
-	cp $< .
+	rsync -avz $< .
 
 clean:
 	rm -f config.fish
