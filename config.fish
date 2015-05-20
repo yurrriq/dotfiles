@@ -75,3 +75,6 @@ end
 function fuck
   eval (thefuck $history[1])
 end
+
+# OPAM configuration
+. /Users/yurrriq/.opam/opam-init/init.fish > /dev/null 2> /dev/null or true
