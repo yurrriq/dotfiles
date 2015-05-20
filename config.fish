@@ -21,6 +21,8 @@ source ~/src/scripts/z.fish
 set -x GOPATH $HOME/src/go
 set PATH $PATH ~/src/scripts $HOME/src/go
 
+set PATH $PATH $HOME/Library/Haskell/bin
+
 source ~/src/erlang/17.5/activate.fish
 
 # set LEIN_JAVA_CMD (which drip)
