@@ -87,7 +87,7 @@
   "Add a font lock hook to replace the matched part of PATTERN with the
   Unicode symbol SYMBOL looked up with UNICODE-SYMBOL."
   (font-lock-add-keywords
-   nil `((,pattern 
+   nil `((,pattern
 	  (0 (progn (compose-region (match-beginning 1) (match-end 1)
 				    ,(unicode-symbol symbol)
 				    'decompose-region)
@@ -126,13 +126,12 @@
 
 (defun prettify-haskell-symbols ()
   (setq prettify-symbols-alist
-	'(("\\" . 955)    ; λ
-	  ("<-" . 8592)   ; ←
-	  ("->" . 8594)   ; →
-	  ("-->" . 10230) ; ⟶
-	  ("=>" . 8658)      ; ⇒
-	  ("map" . 8614)  ; ↦
-	  ))
+	'(("\\" . 955)     ; λ
+	  ("<-" . 8592)    ; ←
+	  ("->" . 8594)    ; →
+	  ("-->" . 10230)  ; ⟶
+	  ("=>" . 8658)    ; ⇒
+	  ("map" . 8614))) ; ↦
   (prettify-symbols-mode))
 
 (add-hook 'haskell-mode-hook 'haskell-unicode)
