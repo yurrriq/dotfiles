@@ -1,5 +1,6 @@
 ;; Based on https://github.com/purcell/emacs.d/blob/8208151ab23cdcaa7b1027d16d8bd108a3b0dfd6/lisp/init-org.el
 
+(require-package 'org-doing)
 (require-package 'org-fstree)
 (require-package 'org-mac-link)
 (autoload 'org-mac-grab-link "org-mac-link" nil t)
