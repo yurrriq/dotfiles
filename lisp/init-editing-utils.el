@@ -218,4 +218,10 @@
 (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
 
 
+;; ===== GOLDEN RATIO =====
+
+(require-package 'golden-ratio)
+
+(golden-ratio-mode 1)
+
 (provide 'init-editing-utils)
