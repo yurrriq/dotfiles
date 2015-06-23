@@ -3,6 +3,7 @@
 (require 'init-utils)
 (require 'init-elpa)
 (require 'init-exec-path)
+(require 'init-paradox)
 
 (require 'init-themes)
 (require 'init-gui-frames)
