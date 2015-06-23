@@ -170,6 +170,8 @@
 
 ;; ===== EXPORT =====
 
-(setq org-export-backends '(ascii html icalendar latex md))
+(require-package 'ox-gfm)
+
+(setq org-export-backends '(ascii html icalendar latex md gfm))
 
 (provide 'init-org)
