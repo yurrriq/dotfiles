@@ -27,6 +27,8 @@
 
 (require 'init-org)
 
+(require 'init-magit)
+
 (require 'init-clojure)
 (require 'init-clojure-cider)
 (require 'init-erlang)
