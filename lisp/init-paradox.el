@@ -1,5 +1,6 @@
 (require-package 'paradox)
 
-(setq paradox-github-token "9fad978405eadb041cebf09123ae1fc1a6e28ea0")
+;; https://github.com/settings/tokens/new
+(setq paradox-github-token "TOKEN-GOES-HERE")
 
 (provide 'init-paradox)
