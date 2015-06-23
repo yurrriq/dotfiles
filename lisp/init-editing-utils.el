@@ -207,10 +207,14 @@
 
 
 ;; ===== HIDE/SHOW =====
+
 (require-package 'hideshow)
+
 (global-set-key (kbd "C-M-h") 'hs-toggle-hiding)
+
 ;; (global-set-key (kbd "<f2> h h") 'hs-hide-all)
 ;; (global-set-key (kbd "<f2> h j") 'hs-show-all)
+
 (add-hook 'emacs-lisp-mode-hook 'hs-minor-mode)
 
 

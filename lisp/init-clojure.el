@@ -7,6 +7,7 @@
 
 (defun yurrriq/customize-clojure-indent ()
   (define-clojure-indent
+    ;; compojure
     (ANY 2)
     (DELETE 2)
     (GET 2)
@@ -14,16 +15,22 @@
     (OPTIONS 2)
     (POST 2)
     (PUT 2)
+    (context 2)
+    (defroutes 'defun)
+    ;;;;;;;;;;;;;;;;;;
     (alter-var-root 1)
     (assoc 1)
     (assoc-in 1)
     (apply 1)
     (condp-> 'defun)
-    (context 2)
     (contract 1)
-    (defroutes 'defun)
+    ;; cats
+    (bind 'defun)
     (branch 'defun)
     (mlet 'defun)
+    (branch-left 'defun)
+    (when-left 'defun)
+    ;;;;;;;;;;;;;;;;;;
     (dissoc 1)
     (ffirst 0)
     (go-let 1)
@@ -40,6 +47,9 @@
     (some->> 1)
     (thunk-timeout 0)
     (update-in 1)
+    ;; invisible friend
+    (main-layout 1)
+    (enqueue 'defun)
     ;; (-> 1)
     ;; (->> 1)
     ;; (cond-> 1)
@@ -51,7 +61,8 @@
     (expect 'defun)
     (expect-let 'defun)
     (given 'defun)
-    (context 1)
+    ;; The following conflicts with Compojure:
+    ;; (context 1)
     (freeze-time 1)
     (redef-state 1)
     (from-each 1)))

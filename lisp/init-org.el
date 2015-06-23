@@ -124,9 +124,9 @@
 
 ;; ===== GRAPHVIZ =====
 
-(after-load 'org
-  (add-to-list 'org-src-lang-modes (quote ("dot" . graphviz-dot)))
-  (org-babel-do-load-languages 'org-babel-load-languages '((dot . t))))
+;; (after-load 'org
+;;   (add-to-list 'org-src-lang-modes (quote ("dot" . graphviz-dot)))
+;;   (org-babel-do-load-languages 'org-babel-load-languages '((dot . t))))
 
 
 ;; ===== MOBILE ORG =====
@@ -157,6 +157,7 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((R . t)
+     (clojure . t)
      (dot . t)
      (emacs-lisp . t)
      (gnuplot . t)
@@ -164,8 +165,7 @@
      (latex . t)
      (python . t)
      (ruby . t)
-     (sh . t)
-     (clojure . t))))
+     (sh . t))))
 
 
 ;; ===== EXPORT =====
