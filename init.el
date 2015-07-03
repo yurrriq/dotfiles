@@ -58,6 +58,11 @@
 ;; (global-set-key (kbd "A-r") 'helm-imenu-anywhere)
 
 
+(require 'ido)
+(ido-mode 'buffers)
+(setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*"
+                           "*Messages*" "Async Shell Command"))
+
 ;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;; (add-hook 'text-mode-hook '(lambda() (set-fill-column 80)))
 
