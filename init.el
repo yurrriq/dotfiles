@@ -69,14 +69,6 @@
 
 ;; (put 'add-hook 'lisp-indent-function 1)
 
-;; (setq load-path (append (list "/usr/local/Cellar/lilypond/2.18.2_3/share/emacs/site-lisp/")) load-path)
-
-(add-to-list 'load-path "~/site-lisp")
-(autoload 'LilyPond-mode "lilypond-mode" "LilyPond Editing Mode" t)
-(add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode))
-(add-to-list 'auto-mode-alist '("\\.ily$" . LilyPond-mode))
-(add-hook 'LilyPond-mode-hook (lambda () (turn-on-font-lock)))
-
 (defun pg-format-region (beg end)
   "Format PostgreSQL in region between BEG and END."
   (interactive "r")
