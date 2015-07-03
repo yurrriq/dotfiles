@@ -8,8 +8,7 @@
 #+INFOJS_OPT: path:org-info.js view:showall toc:nil ltoc:nil tdepth:2 mouse:#dddddd
 
 
-* Literate Emacs Config
-** Utils
+* Utils
 :PROPERTIES:
 :tangle: ~/.emacs.d/lisp/init-utils.el
 :END:
@@ -22,7 +21,7 @@
 ;;; Code:
 
 #+END_SRC
-*** Auto-tangle this file
+** Auto-tangle this file
 To make the process of writing my Emacs config in a literate style a bit more
 pleasant, I add an ~after-save-hook~ to ~(org-babel-tangle)~ it.
 #+BEGIN_SRC emacs-lisp
@@ -36,7 +35,7 @@ pleasant, I add an ~after-save-hook~ to ~(org-babel-tangle)~ it.
 (add-hook 'after-save-hook 'yurrriq/auto-tangle-literate-config)
 #+END_SRC
 
-*** Evaluating forms after a feature is loaded
+** Evaluating forms after a feature is loaded
 As with much of this config, I've taken some convenience functions and macros
 from [[http://www.sanityinc.com/about/][Steve Purcell]]'s [[https://github.com/purcell/emacs.d][Emacs config]].
 
@@ -53,7 +52,7 @@ we define it as a macro.
        '(progn ,@body))))
 #+END_SRC
 
-*** Adding entries to ~auto-mode-alist~
+** Adding entries to ~auto-mode-alist~
 ~add-auto-mode~ provides a handier way to add modes to ~auto-mode-alist~.
 
 #+BEGIN_SRC emacs-lisp :exports none
@@ -69,7 +68,7 @@ we define it as a macro.
     (add-to-list 'auto-mode-alist (cons pattern mode))))
 #+END_SRC
 
-*** Faster ~yes-or-no-p~
+** Faster ~yes-or-no-p~
 I don't want to have to type =yes= or =no=, but rather =y= or =no=.
 #+BEGIN_SRC emacs-lisp
 (defalias 'yes-or-no-p 'y-or-n-p)
