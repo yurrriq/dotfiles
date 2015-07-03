@@ -17,7 +17,7 @@
     (PUT 2)
     (context 2)
     (defroutes 'defun)
-    ;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;
     (alter-var-root 1)
     (assoc 1)
     (assoc-in 1)
@@ -30,7 +30,7 @@
     (mlet 'defun)
     (branch-left 'defun)
     (when-left 'defun)
-    ;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;
     (dissoc 1)
     (ffirst 0)
     (go-let 1)

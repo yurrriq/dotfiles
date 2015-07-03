@@ -1,10 +1,18 @@
+;;; init-org --- Configuration for org-mode
+
+;;; Commentary:
+
 ;; Based on https://github.com/purcell/emacs.d/blob/8208151ab23cdcaa7b1027d16d8bd108a3b0dfd6/lisp/init-org.el
 
+
+;;; Code:
 (require-package 'org-doing)
 (require-package 'org-fstree)
 (require-package 'org-mac-link)
 (autoload 'org-mac-grab-link "org-mac-link" nil t)
 (require-package 'org-mac-iCal)
+(require 'org)
+
 
 ;; ===== KEY BINDINGS =====
 (define-key global-map (kbd "C-c l") 'org-store-link)
@@ -46,8 +54,8 @@
 
 ;; ===== TODO =====
 (setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
-              (sequence "WAITING(w@/!)" "SOMEDAY(S)" "|" "CANCELLED(c@/!)"))))
+      '((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
+        (sequence "WAITING(w@/!)" "SOMEDAY(S)" "|" "CANCELLED(c@/!)")))
 
 
 ;; ===== ORG CLOCK =====
@@ -154,6 +162,8 @@
 
 ;; ===== BABEL =====
 
+(require-package 'babel)
+
 (after-load 'org
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -176,3 +186,4 @@
 (setq org-export-backends '(ascii html icalendar latex md gfm))
 
 (provide 'init-org)
+;;; init-org.el ends here
