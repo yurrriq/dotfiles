@@ -133,18 +133,26 @@
 
 ;; ===== GRAPHVIZ =====
 
-;; (after-load 'org
-;;   (add-to-list 'org-src-lang-modes (quote ("dot" . graphviz-dot)))
+(after-load 'org
+  (add-to-list 'org-src-lang-modes '("dot" . graphviz-dot)))
 ;;   (org-babel-do-load-languages 'org-babel-load-languages '((dot . t))))
 
 
 ;; ===== MOBILE ORG =====
 
+(require 'org-mobile)
 (setq org-directory "~/org")
 (setq org-agenda-files (quote ("~/org/learning.org" "~/org/tasks.org")))
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
 (setq org-mobile-inbox-for-pull "~/org/flagged.org")
 
+
+;; ===== LATEX =====
+
+(require 'ox-latex)
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted)
+(setq org-latex-custom-lang-environments nil)
 
 ;; ===== PROJECTS =====
 
@@ -163,6 +171,7 @@
 ;; ===== BABEL =====
 
 (require-package 'babel)
+(require 'ob-shell)
 
 (after-load 'org
   (org-babel-do-load-languages
@@ -177,6 +186,9 @@
      (python . t)
      (ruby . t)
      (sh . t))))
+
+;; Use cider as the clojure execution backend
+(setq org-babel-clojure-backend 'cider)
 
 
 ;; ===== EXPORT =====
