@@ -48,6 +48,9 @@
 (require 'init-shen)
 (require 'init-swift)
 
+(require-package 'nyan-mode)
+(nyan-mode)
+
 (global-unset-key (kbd "C-x C-c"))
 (global-unset-key (kbd "C-x C-z"))
 
