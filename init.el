@@ -19,7 +19,7 @@
 (require 'init-dired)
 (require 'init-flycheck)
 (require 'init-windows)
-(require 'init-sessions)
+;; (require 'init-sessions)
 (require 'init-fonts)
 ;; (require 'init-mmm)
 (require 'init-multi-web-mode)
