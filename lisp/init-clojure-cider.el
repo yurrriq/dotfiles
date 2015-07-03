@@ -29,6 +29,7 @@
   ;; (add-hook 'cider-repl-mode-hook 'subword-mode)
   (add-hook 'cider-repl-mode-hook 'paredit-mode)
   (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'cider-repl-mode-hook 'auto-complete-mode)
   (define-key cider-mode-map (kbd "C-c C-d") 'ac-cider-popup-doc)
 
   ;; nrepl isn't based on comint

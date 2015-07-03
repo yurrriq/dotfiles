@@ -48,8 +48,13 @@
     (thunk-timeout 0)
     (update-in 1)
     ;; invisible friend
+    (info-layout 2)
+    (c-main-layout 1)
     (main-layout 1)
+    (shade-layout 2)
     (enqueue 'defun)
+    (section 1)
+    (r/concat-map 1)
     ;; (-> 1)
     ;; (->> 1)
     ;; (cond-> 1)
@@ -66,6 +71,8 @@
     (freeze-time 1)
     (redef-state 1)
     (from-each 1)))
+
+;; (yurrriq/customize-clojure-indent)
 
 ;; (custom-set-variables
 ;;  ;; custom-set-variables was added by Custom.
