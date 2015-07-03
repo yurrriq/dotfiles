@@ -1,12 +1,81 @@
-** [[https://github.com/yurrriq/dotfiles/tree/emacs][Emacs]]
-*** [[https://github.com/yurrriq/dotfiles/blob/emacs/lisp/init-editing-utils.el][Editing Utils]]
-This file configures some of my preferred settings/tools for editing:
-- Global config like muting the bell and ~(setq fill-column 80)~
-- Whitespace cleanup
-- Prettify symbols
-- FCI
-- Goto symbol (like Sublime Text's ⌘-R)
-- Indentation
-- Comments (~toggle-comment-on-line~ and ~comment-or-uncomment-region-or-line~)
-- Helm [[http://betterthanack.com][ag]]
-- [[http://www.emacswiki.org/emacs/HideShow][HideShow]]
+#+TITLE: Literate Emacs Config
+#+AUTHOR: Eric Bailey
+#+OPTIONS: toc:2
+#+HTML_DOCTYPE: html5
+#+HTML_HEAD: <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.min.css">
+#+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+INFOJS_OPT: path:org-info.js view:showall toc:nil ltoc:nil tdepth:2 mouse:#dddddd
+
+
+* Literate Emacs Config
+** Utils
+:PROPERTIES:
+:tangle: ~/.emacs.d/lisp/init-utils.el
+:END:
+#+BEGIN_SRC emacs-lisp :padline no :exports none
+;;; init-utils --- Global utility functions
+
+;;; Commentary:
+;; Based on https://github.com/purcell/emacs.d/blob/c60299cfdd799ccf81eefacb1a6fca1d9d703ff4/lisp/init-utils.el
+
+;;; Code:
+
+#+END_SRC
+*** Auto-tangle this file
+To make the process of writing my Emacs config in a literate style a bit more
+pleasant, I add an ~after-save-hook~ to ~(org-babel-tangle)~ it.
+#+BEGIN_SRC emacs-lisp
+(declare-function org-babel-tangle "ob-tangle")
+
+(defun yurrriq/auto-tangle-literate-config ()
+  "Upon saving ~/.emacs.d/README.org, tangle it."
+  (when (file-equal-p buffer-file-name "~/.emacs.d/README.org")
+    (org-babel-tangle)))
+
+(add-hook 'after-save-hook 'yurrriq/auto-tangle-literate-config)
+#+END_SRC
+
+*** Evaluating forms after a feature is loaded
+As with much of this config, I've taken some convenience functions and macros
+from [[http://www.sanityinc.com/about/][Steve Purcell]]'s [[https://github.com/purcell/emacs.d][Emacs config]].
+
+If ~with-eval-after-load~ is bound, we define an alias, ~after-load~, otherwise
+we define it as a macro.
+
+#+BEGIN_SRC emacs-lisp
+(if (fboundp 'with-eval-after-load)
+    (defalias 'after-load 'with-eval-after-load)
+  (defmacro after-load (feature &rest body)
+    "After FEATURE is loaded, evaluate BODY."
+    (declare (indent defun))
+    `(eval-after-load ,feature
+       '(progn ,@body))))
+#+END_SRC
+
+*** Adding entries to ~auto-mode-alist~
+~add-auto-mode~ provides a handier way to add modes to ~auto-mode-alist~.
+
+#+BEGIN_SRC emacs-lisp :exports none
+;;----------------------------------------------------------------------------
+;; Handier way to add modes to auto-mode-alist
+;;----------------------------------------------------------------------------
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :padline no
+(defun add-auto-mode (mode &rest patterns)
+  "Add entries to `auto-mode-alist' to use `MODE' for all given file `PATTERNS'."
+  (dolist (pattern patterns)
+    (add-to-list 'auto-mode-alist (cons pattern mode))))
+#+END_SRC
+
+*** Faster ~yes-or-no-p~
+I don't want to have to type =yes= or =no=, but rather =y= or =no=.
+#+BEGIN_SRC emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :exports none
+(provide 'init-utils)
+;;; init-utils.el ends here
+#+END_SRC
