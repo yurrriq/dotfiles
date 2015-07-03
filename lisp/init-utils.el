@@ -5,6 +5,15 @@
 
 ;;; Code:
 
+(declare-function org-babel-tangle "ob-tangle")
+
+(defun yurrriq/auto-tangle-literate-config ()
+  "Upon saving ~/.emacs.d/README.org, tangle it."
+  (when (file-equal-p buffer-file-name "~/.emacs.d/README.org")
+    (org-babel-tangle)))
+
+(add-hook 'after-save-hook 'yurrriq/auto-tangle-literate-config)
+
 (if (fboundp 'with-eval-after-load)
     (defalias 'after-load 'with-eval-after-load)
   (defmacro after-load (feature &rest body)
