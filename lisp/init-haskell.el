@@ -152,7 +152,7 @@
 
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
-(add-hook 'haskell-interactive-mode-hook 'sanityinc/no-trailing-whitespace)
+;; (add-hook 'haskell-interactive-mode-hook 'sanityinc/no-trailing-whitespace)
 
 
 ;; ===== INTERACTION =====
