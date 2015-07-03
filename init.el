@@ -102,6 +102,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(edts-man-root "/Users/yurrriq/.emacs.d/edts/doc/18.0")
+ '(org-export-backends (quote (html latex md gfm)))
  '(safe-local-variable-values
    (quote
     ((org-export-html-style . "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\" />")

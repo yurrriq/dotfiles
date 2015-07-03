@@ -195,7 +195,6 @@
 
 (require-package 'ox-gfm)
 
-(setq org-export-backends '(ascii html icalendar latex md gfm))
 
 (provide 'init-org)
 ;;; init-org.el ends here
