@@ -4,13 +4,19 @@
 
 ;;; Code:
 
+(package-initialize)
+
 (require 'org)
-(org-babel-tangle-file "README.org")
+(org-babel-load-file "README.org")
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 (require 'init-utils)
 (require 'init-elpa)
+
+;; =============================================================================
+
+
 (require 'init-exec-path)
 (require 'init-paradox)
 

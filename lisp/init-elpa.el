@@ -1,12 +1,17 @@
+;;; init-elpa.pl -- (m)elpa config
+
+;;; Commentary:
 ;; Includes portions of https://github.com/purcell/emacs.d/blob/8208151ab23cdcaa7b1027d16d8bd108a3b0dfd6/lisp/init-elpa.el
 
-;; (add-to-list 'load-path "~/.emacs.d/elpa")
+;;; Code:
 
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives
-	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("org" . "http://orgmode.org/elpa/") t)
 
 (defun require-package (package &optional min-version no-refresh)
   "Install given PACKAGE, optionally requiring MIN-VERSION.
@@ -32,26 +37,15 @@ locate PACKAGE."
      (message "Couldn't install package `%s': %S" package err)
      nil)))
 
-
-;; ===== INITIALIZE =====
-
+;; TODO: move this to the top?
 (setq package-enable-at-startup nil)
 (package-initialize)
-
-
-;; ===== FULL FRAME =====
 
 (require-package 'fullframe)
 (fullframe list-packages quit-window)
 
-
-;; ===== CL-LB =====
-
 (require-package 'cl-lib)
 (require 'cl-lib)
-
-
-;; ===== PACKAGE MENU =====
 
 (defun sanityinc/set-tabulated-list-column-width (col-name width)
   "Set any column with name COL-NAME to the given WIDTH."
@@ -68,17 +62,5 @@ locate PACKAGE."
 
 (add-hook 'package-menu-mode-hook 'sanityinc/maybe-widen-package-menu-columns)
 
-
-;; ===== SCRATCH =====
-
-;; (let ((base "~/.emacs.d/elpa"))
-;;   (add-to-list 'load-path base)
-;;   (dolist (f (directory-files base))
-;;     (let ((name (concat base "/" f)))
-;;       (when (and (file-directory-p name) 
-;;                  (not (equal f ".."))
-;;                  (not (equal f ".")))
-;;         (add-to-list 'load-path name)))))
-
-
 (provide 'init-elpa)
+;;; init-elpa.el ends here
