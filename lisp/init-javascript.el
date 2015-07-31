@@ -39,13 +39,15 @@
 
   (add-hook 'js2-mode-hook (lambda () (setq mode-name "JS2")))
 
+  ;; It's 2015. Ain't nobody got time for semicolons.
+  (setq-default js2-strict-missing-semi-warning nil)
+
   (setq-default
    js2-basic-offset preferred-javascript-indent-level
    js2-bounce-indent-p nil)
 
   (after-load 'js2-mode
     (js2-imenu-extras-setup)))
-
 
 ;; js-mode
 (setq-default js-indent-level preferred-javascript-indent-level)
