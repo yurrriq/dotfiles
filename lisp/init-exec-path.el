@@ -6,8 +6,9 @@
   (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE"))
     (add-to-list 'exec-path-from-shell-variables var))
   ;; https://github.com/yurrriq/kerl
-  (let ((path (shell-command-to-string "source ~/src/erlang/17.5/activate.fish; echo -n $PATH")))
+  (let ((path (shell-command-to-string "source ~/src/erlang/18.0/activate.fish; echo -n $PATH")))
     (setenv "PATH" path)
+    (setenv "ESHELL" "/bin/bash")
     (setq exec-path (append (split-string-and-unquote path " ") exec-path))))
 
 (when (memq window-system '(mac ns))
