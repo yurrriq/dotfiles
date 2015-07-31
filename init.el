@@ -31,6 +31,7 @@
 (require 'init-multi-web-mode)
 
 (require 'init-editing-utils)
+(require 'init-origami)
 (require 'init-paredit)
 (require 'init-lisp)
 (require 'init-quicklisp)
