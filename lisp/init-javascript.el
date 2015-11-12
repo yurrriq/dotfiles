@@ -1,28 +1,43 @@
+;;; init-javascript.el --- JS config
+
+;;; Commentary:
 ;; Based on https://github.com/purcell/emacs.d/blob/8208151ab23cdcaa7b1027d16d8bd108a3b0dfd6/lisp/init-javascript.el
 
-(require-package 'json-mode)
-(maybe-require-package 'js2-mode)
-(maybe-require-package 'ac-js2)
-(require-package 'js-comint)
+;;; Code:
 
+(require 'init-elpa)
+(require 'init-utils)
+
+(require-package 'js2-mode)
+(require-package 'js-comint)
+(require-package 'json-mode)
+(require-package 'jasminejs-mode)
+(maybe-require-package 'ac-js2)
+
+(require 'flycheck)
+(require 'js2-mode)
+(require 'js-comint)
+(require 'jasminejs-mode)
 
 (defcustom preferred-javascript-mode
-  (first (remove-if-not #'fboundp '(js2-mode js-mode)))
+  (first (remove-if-ndt #'fboundp '(js2-mode js-mode)))
   "Javascript mode to use for .js files."
-  :type 'symbol
-  :group 'programming
+  :type    'symbol
+  :group   'programming
   :options '(js2-mode js-mode))
+
 (defvar preferred-javascript-indent-level 2)
 
+;; Need to first remove from list if present, since elpa adds entries too,
+;; which may be in an arbitrary order
 
-;; Need to first remove from list if present, since elpa adds entries too, which
-;; may be in an arbitrary order
 (eval-when-compile (require 'cl))
-(setq auto-mode-alist (cons `("\\.js\\(\\.erb\\)?\\'" . ,preferred-javascript-mode)
-                            (loop for entry in auto-mode-alist
-                                  unless (eq preferred-javascript-mode (cdr entry))
-                                  collect entry)))
 
+(setq auto-mode-alist
+      (cons `("\\.js\\(\\.erb\\)?\\'" . ,preferred-javascript-mode)
+            (loop for entry in auto-mode-alist
+                  unless (eq preferred-javascript-mode (cdr entry))
+                  collect entry)))
 
 ;; js2-mode
 (after-load 'js2-mode
@@ -39,15 +54,26 @@
 
   (add-hook 'js2-mode-hook (lambda () (setq mode-name "JS2")))
 
+  (add-hook 'js2-mode-hook (lambda () (jasminejs-mode)))
+
+  (defvar jasmine-buffer "*jasmine-node-specs-buffer*")
+
+  (defun jasmine-compile ()
+    "Run Jasmine-Node"
+    (interactive)
+    (shell-command (concat "jasmine-node " buffer-file-name)
+                   (get-buffer-create jasmine-buffer))
+    (display-buffer jasmine-buffer)
+    (with-current-buffer jasmine-buffer
+      (ansi-color-apply-on-region (point-min) (point-max))))
+
   ;; It's 2015. Ain't nobody got time for semicolons.
   (setq-default js2-strict-missing-semi-warning nil)
 
-  (setq-default
-   js2-basic-offset preferred-javascript-indent-level
-   js2-bounce-indent-p nil)
+  (setq-default js2-basic-offset    preferred-javascript-indent-level
+                js2-bounce-indent-p nil)
 
-  (after-load 'js2-mode
-    (js2-imenu-extras-setup)))
+  (js2-imenu-extras-setup))
 
 ;; js-mode
 (setq-default js-indent-level preferred-javascript-indent-level)
@@ -79,5 +105,5 @@
 (dolist (hook '(js2-mode-hook js-mode-hook))
   (add-hook hook 'inferior-js-keys-mode))
 
-
 (provide 'init-javascript)
+;;; init-javascript.el ends here
