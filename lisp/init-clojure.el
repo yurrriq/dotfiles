@@ -25,6 +25,7 @@
     (condp-> 'defun)
     (contract 1)
     ;; cats
+    (alet 'defun)
     (bind 'defun)
     (branch 'defun)
     (mlet 'defun)
@@ -70,7 +71,12 @@
     ;; (context 1)
     (freeze-time 1)
     (redef-state 1)
-    (from-each 1)))
+    (from-each 1)
+    ;; HACKS
+    (send-off 'defun)
+    ;; test.check
+    (for-all 'defun)
+    ))
 
 ;; (yurrriq/customize-clojure-indent)
 
@@ -138,6 +144,16 @@
 ;; (add-hook 'clojure-mode-hook 'outline-minor-mode)
 
 
+;; ===== CLJ REFACTOR =====
+
+(require-package 'clj-refactor)
+
+(defun yurrriq/clj-refactor-hook ()
+  (clj-refactor-mode 1)
+  (yas-minor-mode 1)
+  (cljr-add-keybindings-with-prefix "C-c C-m"))
+
+
 ;; ===== CUSTOMIZATIONS AND HOOKS =====
 
 (after-load 'clojure-mode
@@ -149,7 +165,8 @@
   (add-hook 'clojure-mode-hook 'hs-minor-mode)
   (add-hook 'clojure-mode-hook 'paredit-mode)
   (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-  (add-hook 'clojure-mode-hook 'sanityinc/lisp-setup))
+  (add-hook 'clojure-mode-hook 'sanityinc/lisp-setup)
+  (add-hook 'clojure-mode-hook 'yurrriq/clj-refactor-hook))
 
 
 (provide 'init-clojure)

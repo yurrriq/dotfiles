@@ -1,7 +1,7 @@
 (require 'init-clojure)
 (require-package 'emacs '(24))
 
-(add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
+;; (add-to-list 'package-pinned-packages '(cider . "melpa-stable") t)
 
 (require-package 'cider)
 (require-package 'ac-cider)
