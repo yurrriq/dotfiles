@@ -4,7 +4,7 @@
 
 ;;; Code:
 
-(defvar lfe-dir (concat (getenv "HOME") "/src/lfe/lfe/emacs"))
+(defvar lfe-dir (concat (getenv "HOME") "/src/rvirding/lfe/emacs"))
 
 (setq load-path (cons lfe-dir load-path))
 
