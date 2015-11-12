@@ -6,6 +6,10 @@
 
 
 ;;; Code:
+
+(require 'init-elpa)
+(require 'init-utils)
+
 (require-package 'org-doing)
 (require-package 'org-fstree)
 (require-package 'org-mac-link)
@@ -152,7 +156,11 @@
 (require 'ox-latex)
 (add-to-list 'org-latex-packages-alist '("" "minted"))
 (setq org-latex-listings 'minted)
+(setq org-latex-custom-lang-environments
+      '((LilyPond "lilypond")))
+
 (setq org-latex-custom-lang-environments nil)
+
 
 ;; ===== PROJECTS =====
 
@@ -194,6 +202,35 @@
 ;; ===== EXPORT =====
 
 (require-package 'ox-gfm)
+
+
+;;; org-html-checkbox
+;; from Sacha Chua's Emacs tweaks:
+;; http://sachachua.com/blog/2014/03/emacs-tweaks-export-org-checkboxes-using-utf-8-symbols/
+
+;; (defun sacha/org-html-checkbox (checkbox)
+;;   "Format CHECKBOX into HTML."
+;;   (case checkbox (on "<span class=\"check\">&#x2611;</span>") ; checkbox (checked)
+;;         (off "<span class=\"checkbox\">&#x2610;</span>")
+;;         (trans "<code>[-]</code>")
+;;         (t "")))
+;; (defadvice org-html-checkbox (around sacha activate)
+;;   (setq ad-return-value (sacha/org-html-checkbox (ad-get-arg 0))))
+
+;;; org-html-checkbox
+;; from
+;; http://kdr2.com/tech/emacs/1405-orgmode-checkbox-unicode.html
+
+(defun unicode-for-org-html-checkbox (checkbox)
+  "Format `CHECKBOX' into Unicode Characters."
+  (case checkbox
+    (on    "&#x22A0;")
+    (off   "&#x25FB;")
+    (trans "&#x22A1;")
+    (t     "")))
+
+(defadvice org-html-checkbox (around unicode-checkbox activate)
+  (setq ad-return-value (unicode-for-org-html-checkbox (ad-get-arg 0))))
 
 
 (provide 'init-org)
