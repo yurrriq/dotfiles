@@ -1,10 +1,19 @@
+;;; init-windows.el --- Customization pertaining to windows
+
+;;; Commentary:
 ;; https://github.com/purcell/emacs.d/blob/8208151ab23cdcaa7b1027d16d8bd108a3b0dfd6/lisp/init-windows.el
+
+;;; Code:
+
+(require 'init-elpa)
+
+(require-package 'winner)
+(require 'winner)
 
 ;;----------------------------------------------------------------------------
 ;; Navigate window layouts with "C-c <left>" and "C-c <right>"
 ;;----------------------------------------------------------------------------
 (winner-mode 1)
-
 
 
 ;; Make "C-x o" prompt for a target window when there are more than 2
@@ -14,10 +23,8 @@
 (global-set-key (kbd "C-x o") 'switch-window)
 
 
-;;----------------------------------------------------------------------------
-;; When splitting window, show (other-buffer) in the new window
-;;----------------------------------------------------------------------------
 (defun split-window-func-with-other-buffer (split-function)
+  "When splitting window (via `SPLIT-FUNCTION'), show (other-buffer) in the new window."
   (lexical-let ((s-f split-function))
     (lambda ()
       (interactive)
@@ -41,12 +48,14 @@
 ;; Rearrange split windows
 ;;----------------------------------------------------------------------------
 (defun split-window-horizontally-instead ()
+  "If the window is split vertically, split it horizontally instead."
   (interactive)
   (save-excursion
     (delete-other-windows)
     (funcall (split-window-func-with-other-buffer 'split-window-horizontally))))
 
 (defun split-window-vertically-instead ()
+  "If the window is split horizontally, split it vertically instead."
   (interactive)
   (save-excursion
     (delete-other-windows)
@@ -76,3 +85,4 @@ Call a second time to restore the original window configuration."
 
 
 (provide 'init-windows)
+;;; init-windows.el ends here
