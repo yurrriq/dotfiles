@@ -1,4 +1,23 @@
-;; https://github.com/purcell/emacs.d/blob/8208151ab23cdcaa7b1027d16d8bd108a3b0dfd6/lisp/init-lisp.el
+;;; init-lisp.el --- Lisp config
+
+;;; Commentary:
+;; Based on https://github.com/purcell/emacs.d/blob/8208151ab23cdcaa7b1027d16d8bd108a3b0dfd6/lisp/init-lisp.el
+
+;;; Code:
+
+(require 'init-elpa)
+
+(require 'init-utils)
+
+(require 'slime)
+
+(setq inferior-lisp-program (executable-find "sbcl"))
+
+;; (setq lisp-indent-offset 2)
+
+;; (put 'add-hook 'lisp-indent-function 1)
+
+;; (put 'after-load 'lisp-indent-function 1)
 
 (require-package 'elisp-slime-nav)
 (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
@@ -13,7 +32,8 @@
 ;; Make C-x C-e run 'eval-region if the region is active
 
 (defun sanityinc/eval-last-sexp-or-region (prefix)
-  "Eval region from BEG to END if active, otherwise the last sexp."
+  "Eval region from `BEG' to `END' if active, otherwise the last sexp.
+Pretty-print output into current buffer with `PREFIX'."
   (interactive "P")
   (if (and (mark) (use-region-p))
       (eval-region (min (point) (mark)) (max (point) (mark)))
@@ -31,7 +51,7 @@
 
 
 (defadvice pp-display-expression (after make-read-only (expression out-buffer-name) activate)
-  "Enable `view-mode' in the output buffer - if any - so it can be closed with `\"q\"."
+  "Enable `view-mode' in the output buffer, if any, so it can be closed with `\"q\"."
   (when (get-buffer out-buffer-name)
     (with-current-buffer out-buffer-name
       (view-mode 1))))
@@ -75,6 +95,8 @@
 ;; ----------------------------------------------------------------------------
 
 (require-package 'auto-compile)
+(require 'auto-compile)
+
 (auto-compile-on-save-mode 1)
 (auto-compile-on-load-mode 1)
 
@@ -99,7 +121,8 @@
   (enable-paredit-mode)
   ;; (when (fboundp 'aggressive-indent-mode)
   ;;   (aggressive-indent-mode))
-  (turn-on-eldoc-mode)
+  ;; (turn-on-eldoc-mode) ; deprecated
+  (eldoc-mode)
   ;; (redshank-mode)
   (add-hook 'after-save-hook #'check-parens nil t))
 
@@ -133,7 +156,8 @@
     (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)
   (require-package 'eldoc-eval)
   (require 'eldoc-eval)
-  (eldoc-in-minibuffer-mode 1))
+  ;; (eldoc-in-minibuffer-mode 1) ; not defined?
+  )
 
 (add-to-list 'auto-mode-alist '("\\.emacs-project\\'" . emacs-lisp-mode))
 (add-to-list 'auto-mode-alist '("archive-contents\\'" . emacs-lisp-mode))
@@ -154,8 +178,11 @@
   (after-load 'flycheck
     (flycheck-package-setup)))
 
+(require 'lisp-mode)
+
 (after-load 'lisp-mode
   (require-package 'compile)
+  (require 'compile)
 
   ;; this means hitting the compile button always saves the buffer
   ;; having to separately hit C-x C-s is a waste of time
@@ -180,3 +207,4 @@
   (global-set-key [f12] 'compile))
 
 (provide 'init-lisp)
+;;; init-lisp.el ends here
