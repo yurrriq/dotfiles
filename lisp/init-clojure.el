@@ -1,4 +1,13 @@
+;;; init-clojure.el --- Clojure config
+
+;;; Commentary:
+
+;;; Code:
+
+(require 'init-elpa)
+(require 'init-utils)
 (require-package 'clojure-mode)
+(require 'clojure-mode)
 ;; (require-package 'cljsbuild-mode)
 (require-package 'elein)
 
@@ -6,6 +15,7 @@
 ;; ==== INDENDATION =====
 
 (defun yurrriq/customize-clojure-indent ()
+  "Define my Clojure indent customizations."
   (define-clojure-indent
     ;; compojure
     (ANY 2)
@@ -78,7 +88,7 @@
     (for-all 'defun)
     ))
 
-;; (yurrriq/customize-clojure-indent)
+(yurrriq/customize-clojure-indent)
 
 ;; (custom-set-variables
 ;;  ;; custom-set-variables was added by Custom.
@@ -91,17 +101,18 @@
 ;; ===== FONT LOCK =====
 
 (defun yurrriq/customize-clojure-font-lock ()
+  "Add my Clojure font lock customizations."
   (font-lock-add-keywords
    'clojure-mode
-   '(("\\(#\\)[^_]("
+   '(("\\(#\\)("
       (0 (progn (compose-region (match-beginning 1)
 				(match-end 1) "ƒ")
 		nil)))
-
      ("\\(#\\){"
       (0 (progn (compose-region (match-beginning 1)
 				(match-end 1) "∈")
 		nil)))
+     ("\\(#_\\)" 1 'font-lock-comment-face prepend)
      ("(\\(fn\\)[[:space:]]"
       (0 (progn (compose-region (match-beginning 1)
 				(match-end 1) "λ")
@@ -122,19 +133,18 @@
      ;;  (0 (progn (compose-region (match-beginning 1)
      ;;                            (match-end 1) "↦")
      ;;            nil)))
-     ;; ("(\\(and\\)[[:space:]]"
-     ;; 	(0 (progn (compose-region (match-beginning 1)
-     ;; 				  (match-end 1) "∧")
-     ;; 		  nil)))
-     ;; ("(\\(or\\)[[:space:]]"
-     ;; 	(0 (progn (compose-region (match-beginning 1)
-     ;; 				  (match-end 1) "∨")
-     ;; 		  nil)))
-     ;; ("(\\(comp\\)[[:space:]]"
-     ;;  (0 (progn (compose-region (match-beginning 1)
-     ;;                            (match-end 1) "∘")
-     ;;            nil)))
-     )))
+     ("(\\(and\\)[[:space:]]"
+     	(0 (progn (compose-region (match-beginning 1)
+     				  (match-end 1) "∧")
+     		  nil)))
+     ("(\\(or\\)[[:space:]]"
+     	(0 (progn (compose-region (match-beginning 1)
+     				  (match-end 1) "∨")
+     		  nil)))
+     ("(\\(comp\\)[[:space:]]"
+      (0 (progn (compose-region (match-beginning 1)
+                                (match-end 1) "∘")
+                nil))))))
 
 
 ;; ===== OUTSHINE =====
@@ -147,8 +157,10 @@
 ;; ===== CLJ REFACTOR =====
 
 (require-package 'clj-refactor)
+(require 'clj-refactor)
 
 (defun yurrriq/clj-refactor-hook ()
+  "My clj-refactor hook."
   (clj-refactor-mode 1)
   (yas-minor-mode 1)
   (cljr-add-keybindings-with-prefix "C-c C-m"))
@@ -170,3 +182,4 @@
 
 
 (provide 'init-clojure)
+;;; init-clojure.el ends here

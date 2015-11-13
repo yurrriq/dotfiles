@@ -4,7 +4,7 @@
 
 ;;; Code:
 
-;; (package-initialize)
+(package-initialize)
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
@@ -55,6 +55,7 @@
 (require 'init-swift)
 
 (require-package 'nyan-mode)
+(require 'nyan-mode)
 (nyan-mode)
 
 (global-unset-key (kbd "C-x C-c"))

@@ -226,7 +226,7 @@ locate `PACKAGE'."
 
 ;;; Code:
 
-;; (package-initialize)
+(package-initialize)
 #+END_SRC
 
 With everything set up to my liking, it's time to tie it all together ~init.el~.
@@ -300,6 +300,7 @@ With everything set up to my liking, it's time to tie it all together ~init.el~.
 
 #+BEGIN_SRC emacs-lisp
 (require-package 'nyan-mode)
+(require 'nyan-mode)
 (nyan-mode)
 #+END_SRC
 
@@ -331,6 +332,6 @@ With everything set up to my liking, it's time to tie it all together ~init.el~.
 (load custom-file)
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :exports none
 ;;; init.el ends here
 #+END_SRC

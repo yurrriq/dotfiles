@@ -10,12 +10,18 @@
 (require 'init-elpa)
 (require 'init-utils)
 
-(require-package 'org-doing)
-(require-package 'org-fstree)
-(require-package 'org-mac-link)
-(autoload 'org-mac-grab-link "org-mac-link" nil t)
-(require-package 'org-mac-iCal)
+(require-package 'org-plus-contrib)
 (require 'org)
+
+
+(require-package 'org-doing)
+(require 'org-doing)
+(require-package 'org-fstree)
+(require 'org-fstree)
+;; (require-package 'org-mac-link)
+;; (autoload 'org-mac-grab-link "org-mac-link" nil t)
+;; (require-package 'org-mac-iCal)
+
 
 
 ;; ===== KEY BINDINGS =====
@@ -179,6 +185,7 @@
 ;; ===== BABEL =====
 
 (require-package 'babel)
+(require 'babel)
 (require 'ob-shell)
 
 (after-load 'org
@@ -196,7 +203,7 @@
      (sh . t))))
 
 ;; Use cider as the clojure execution backend
-(setq org-babel-clojure-backend 'cider)
+;; (setq org-babel-clojure-backend 'cider)
 
 
 ;; ===== EXPORT =====
@@ -223,7 +230,7 @@
 
 (defun unicode-for-org-html-checkbox (checkbox)
   "Format `CHECKBOX' into Unicode Characters."
-  (case checkbox
+  (cl-case checkbox
     (on    "&#x22A0;")
     (off   "&#x25FB;")
     (trans "&#x22A1;")
