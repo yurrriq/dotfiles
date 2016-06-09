@@ -252,5 +252,4 @@ you should place your code here."
   (global-set-key (kbd "M-l") (lambda () (interactive) (insert "λ")))
   (global-set-key (kbd "M-f") (lambda () (interactive) (insert "ƒ")))
   (global-set-key (kbd "M--") (lambda () (interactive) (insert "→")))
-  (global-set-key (kbd "M-s-ƒ") 'helm-do-grep-ag)
-  (add-to-list 'auto-mode-alist '("\\.lfe\\'" . lfe-mode)))
+  (global-set-key (kbd "M-s-ƒ") 'helm-do-grep-ag))
