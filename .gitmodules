@@ -10,3 +10,7 @@
 	path = leiningen
 	url = git@github.com:yurrriq/dotfiles.git
 	branch = leiningen
+[submodule "spacemacs"]
+	path = spacemacs
+	url = git@github.com:yurrriq/dotfiles.git
+	branch = spacemacs
