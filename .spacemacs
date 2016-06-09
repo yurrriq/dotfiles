@@ -27,9 +27,9 @@ values."
      (colors :variables
              colors-enable-nyan-cat-progress-bar ,(display-graphic-p))
      emacs-lisp
+     git
      lfe
      lilypond
-     ;; git
      ;; markdown
      ;; org
      ;; (shell :variables
@@ -252,4 +252,5 @@ you should place your code here."
   (global-set-key (kbd "M-l") (lambda () (interactive) (insert "λ")))
   (global-set-key (kbd "M-f") (lambda () (interactive) (insert "ƒ")))
   (global-set-key (kbd "M--") (lambda () (interactive) (insert "→")))
-  (global-set-key (kbd "M-s-ƒ") 'helm-do-grep-ag))
+  (global-set-key (kbd "M-s-ƒ") 'helm-do-grep-ag)
+  (global-git-commit-mode t))
