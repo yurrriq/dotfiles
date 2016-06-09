@@ -24,10 +24,11 @@ values."
      ;; ----------------------------------------------------------------
      auto-completion
      ;; better-defaults
-     emacs-lisp
-     lfe
      (colors :variables
              colors-enable-nyan-cat-progress-bar ,(display-graphic-p))
+     emacs-lisp
+     lfe
+     lilypond
      ;; git
      ;; markdown
      ;; org
