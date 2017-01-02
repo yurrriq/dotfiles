@@ -47,7 +47,7 @@
     ghc cabal-install
   ]) ++ (with pkgs.haskellPackages; [
     pointfree pointful
-    cabal2nix
+    cabal2nix pandoc
   ]);
 
   services.nix-daemon.enable = true;
