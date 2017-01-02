@@ -165,3 +165,5 @@ set -x PATH $PATH ~/.cache/rebar3/bin
 set -x PATH "$CARGO_HOME/bin" $PATH
 
 # source ~/.iterm2_shell_integration.fish
+
+source /run/current-system/sw/share/autojump/autojump.fish
