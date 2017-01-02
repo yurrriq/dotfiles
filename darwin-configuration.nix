@@ -32,7 +32,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = (with pkgs; [
     # Shell
-    fish autojump silver-searcher
+    fish autojump silver-searcher jq
     # Web
     curl httpie
     # Git
