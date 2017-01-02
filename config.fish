@@ -16,16 +16,19 @@ set fish_theme yurrriq
 # Load oh-my-fish configuration.
 . $fish_path/oh-my-fish.fish
 
-source ~/src/sjl/z-fish/z.fish
+# source ~/src/sjl/z-fish/z.fish
 
 set -x MONO_GAC_PREFIX "/usr/local"
 
-# set -x GOPATH $HOME/src/go
-# set PATH $PATH ~/src/scripts $HOME/src/go
+set -x GOPATH $HOME/src/go
+set -x PATH ~/bin $PATH $HOME/src/go/bin /usr/local/opt/go/libexec/bin
 
 # set -x GHC_DOT_APP ~/Applications/ghc-7.10.2.app
 # set -x PATH $HOME/.cabal/bin $HOME/.local/bin {$GHC_DOT_APP}/Contents/bin $PATH
 set -x PATH $HOME/.cabal/bin $HOME/.local/bin $PATH
+
+# Add Idris sandbox to PATH
+set -x PATH $HOME/src/idris-lang/idris-dev/.cabal-sandbox/bin $PATH
 
 # source ~/src/erlang/18.0/activate.fish
 
@@ -70,17 +73,21 @@ function agn
 	ag --nogroup $argv
 end
 
-function et
+function et -d 'Start an Emacs client in the terminal, starting the server as necessary.'
   emacsclient -cnw -a "" $argv
 end
 
-
-function ec
-	emacsclient -cna "" $argv
+function ec -d 'Start an Emacs client in the Cocoa GUI, starting the server as necessary.'
+  emacsclient -cna "" $argv
 end
 
-function e
+function e -d 'Even shorter alias for `ec`'
   ec $argv
+end
+
+function magit-status -d 'Start an Emacs client in the terminal,
+  call magit-status with the current working directory, and delete other windows.'
+  et -e '(progn (magit-status "'(pwd)'") (delete-other-windows))'
 end
 
 # set -x EDITOR "emacsclient -cnw -a ''"
@@ -88,9 +95,9 @@ end
 set -x EDITOR 'emacsclient -cnw -a "" $argv'
 set -x VISUAL $EDITOR
 
-function nw
-	~/Applications/nwjs-v0.12.0-osx-x64/nwjs.app/Contents/MacOS/nwjs $argv
-end
+# function nw
+# 	/Applications/nwjs.app/Contents/MacOS/nwjs $argv
+# end
 
 function __thefuck_repl -d 'Replace operators into fish-compatible'
   set -l tmp (echo $argv | sed 's/ && / ; and /g')
@@ -111,22 +118,50 @@ end
 # OPAM configuration
 # . /Users/mohacker/.opam/opam-init/init.fish > /dev/null 2> /dev/null or true
 
-function rethinkdb-start
-  launchctl load /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist
+# function rethinkdb-start
+#   launchctl load /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist
+# end
+
+# function rethinkdb-stop
+#   launchctl unload /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist
+# end
+
+# function elasticsearch-start
+#   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
+# end
+
+# function elasticsearch-stop
+#   launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
+# end
+
+source ~/.config/fish/secrets.fish
+
+# set -x PATH $HOME/.cim/bin $PATH
+# set -x CIM_HOME $HOME/.cim
+# source $CIM_HOME/init.fish; and source $CIM_HOME/init.fsh
+
+function llfe -d "Literate Lisp Flavoured Erlang"
+  eval $HOME/src/llfe/llfe/llfe $argv
 end
 
-function rethinkdb-stop
-  launchctl unload /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist
+function r3 -d "A short alias for rebar3"
+  rebar3 $argv
 end
 
-function elasticsearch-start
-  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
-end
+# perlbrew
+. ~/perl5/perlbrew/etc/perlbrew.fish
 
-function elasticsearch-stop
-  launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.elasticsearch.plist
-end
+# nix
+# if test "$IN_NIX_SHELL" != "1"
+#   . ~/.nix-profile/etc/profile.d/nix.fish
+# end
 
-rvm default
+set -x CARGO_HOME "$HOME/.cargo"
 
-eval (docker-machine env default)
+# rebar3
+set -x PATH $PATH ~/.cache/rebar3/bin
+
+# cargo
+set -x PATH "$CARGO_HOME/bin" $PATH
+
+# source ~/.iterm2_shell_integration.fish
