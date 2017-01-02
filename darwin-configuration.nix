@@ -39,6 +39,8 @@
     git gitAndTools.hub
     # Graphics
     graphicsmagick imagemagick
+    # Graphing
+    graphviz gnuplot
     # Nix
     nixops # nix-repl
     # Haskell
