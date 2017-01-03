@@ -36,7 +36,9 @@
     # Web
     curl httpie
     # Git
-    git gitAndTools.hub
+    git git-crypt git-lfs gitAndTools.hub
+    # Cryptography
+    gnupg
     # Graphics
     graphicsmagick imagemagick
     # Graphing
@@ -103,6 +105,7 @@
   environment.shellAliases.l = "ls -G";
   environment.shellAliases.la = "ls -Glah";
   environment.shellAliases.ll = "ls -Glh";
+  environment.shellAliases.gpg = "gpg2";
 
   nix.nixPath = [ # Use local nixpkgs checkout instead of channels.
     "darwin=$HOME/.nix-defexpr/darwin"
