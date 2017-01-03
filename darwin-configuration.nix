@@ -43,6 +43,8 @@
     graphicsmagick imagemagick
     # Graphing
     graphviz gnuplot
+    # Tools
+    gnumake
     # Nix
     nixops # nix-repl
     # Haskell
