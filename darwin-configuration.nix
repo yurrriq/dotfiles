@@ -143,6 +143,17 @@
     setopt AUTOCD
   '';
 
+  programs.fish.enable = false;
+
+  programs.fish.variables.cfg = "$HOME/.nixpkgs/darwin-config.nix";
+  programs.fish.variables.darwin = "$HOME/.nix-defexpr/darwin";
+  programs.fish.variables.pkgs = "$HOME/.nix-defexpr/nixpkgs";
+  # programs.fish.variables.pkgs = "$HOME/src/NixOS/nixpkgs";
+
+  programs.fish.interactiveShellInit = ''
+    # TODO: programs.fish.interactiveShellInit
+  '';
+
   environment.shellAliases.gpg = "gpg2";
   environment.shellAliases.k = "clear";
   environment.shellAliases.l = "ls -Glah";
