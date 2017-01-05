@@ -76,6 +76,7 @@
     # FIXME: polyml
     # Tools
     autojump
+    awscli
     coreutils
     gawk
     gnumake
