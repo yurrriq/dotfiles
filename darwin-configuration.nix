@@ -173,6 +173,8 @@
     # "/nix/var/nix/profiles/per-user/root/channels"
   ];
 
+  nix.requireSignedBinaryCaches = false;
+
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.config.allowBroken = true;
 
