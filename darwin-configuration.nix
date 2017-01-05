@@ -61,6 +61,7 @@
     # Haskell
     cabal-install
     ghc
+    stack
 
     # Lisp
     sbcl
