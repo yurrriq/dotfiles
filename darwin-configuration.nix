@@ -117,6 +117,7 @@
   ];
 
   nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowBroken = true;
 
   nixpkgs.config.packageOverrides = pkgs: {
     # hub_2_2_9 = pkgs.stdenv.lib.overrideDerivation pkgs.gitAndTools.hub (oldAttrs: {
