@@ -61,6 +61,9 @@
     cabal-install
     ghc
 
+    # Lisp
+    sbcl
+
     # Nix
     nixops
     # nix-repl
@@ -72,6 +75,7 @@
     gnumake
     gnused
     gnutar
+    rlwrap
     silver-searcher
     tree
 
