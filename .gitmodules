@@ -14,3 +14,7 @@
 	path = spacemacs
 	url = git@github.com:yurrriq/dotfiles.git
 	branch = spacemacs
+[submodule "nix"]
+	path = nix
+	url = git@github.com:yurrriq/dotfiles.git
+	branch = nix
