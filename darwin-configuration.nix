@@ -87,6 +87,7 @@
     gnumake
     gnused
     gnutar
+    highlight
     rlwrap
     silver-searcher
     tree
@@ -158,6 +159,10 @@
 
   programs.fish.interactiveShellInit = ''
     # TODO: programs.fish.interactiveShellInit
+
+    function hicat -d 'A hackish hicat clone via highlight'
+      highlight -O xterm256 $argv | less -cR
+    end
   '';
 
   environment.shellAliases.gpg = "gpg2";
