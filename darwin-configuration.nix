@@ -103,11 +103,11 @@
     setopt AUTOCD
   '';
 
-  environment.shellAliases.k = "clear";
-  environment.shellAliases.l = "ls -G";
-  environment.shellAliases.la = "ls -Glah";
-  environment.shellAliases.ll = "ls -Glh";
   environment.shellAliases.gpg = "gpg2";
+  environment.shellAliases.k = "clear";
+  environment.shellAliases.l = "ls -Glah";
+  environment.shellAliases.ll = "ls -Glh";
+  environment.shellAliases.ls = "ls -G";
 
   nix.nixPath = [ # Use local nixpkgs checkout instead of channels.
     "darwin=$HOME/.nix-defexpr/darwin"
