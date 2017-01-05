@@ -39,6 +39,7 @@
     curl
     httpie
     jq
+    wget
 
     # Git
     git
