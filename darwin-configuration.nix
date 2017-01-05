@@ -31,27 +31,57 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = (with pkgs; [
+
     # Shell
-    fish autojump silver-searcher jq coreutils gnused gawk gnutar
-    # Web
-    curl httpie
+    fish
+
+    # Web/JSON
+    curl
+    httpie
+    jq
+
     # Git
-    git git-crypt git-lfs gitAndTools.hub
+    git
+    git-crypt
+    git-lfs
+    gitAndTools.hub
+
     # Cryptography
     gnupg
+
     # Graphics
-    graphicsmagick imagemagick
+    graphicsmagick
+    imagemagick
+
     # Graphing
-    graphviz gnuplot
-    # Tools
-    gnumake
-    # Nix
-    nixops # nix-repl
+    gnuplot
+    graphviz
+
     # Haskell
-    ghc cabal-install
+    cabal-install
+    ghc
+
+    # Nix
+    nixops
+    # nix-repl
+
+    # Tools
+    autojump
+    coreutils
+    gawk
+    gnumake
+    gnused
+    gnutar
+    silver-searcher
+    tree
+
   ]) ++ (with pkgs.haskellPackages; [
-    pointfree pointful
-    cabal2nix pandoc
+
+    cabal2nix
+    pandoc
+    pointfree
+    pointful
+
   ]);
 
   services.nix-daemon.enable = true;
