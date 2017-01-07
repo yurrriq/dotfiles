@@ -67,7 +67,7 @@
     sbcl
 
     # Nix
-    nixops
+    # nixops # FIXME: python/RSA issues
     # nix-repl
 
     # SML
@@ -178,10 +178,9 @@
     # "/nix/var/nix/profiles/per-user/root/channels"
   ];
 
-  nix.requireSignedBinaryCaches = false;
-
+  # nix.requireSignedBinaryCaches = false; # HACK
   nixpkgs.config.allowUnfree = true;
-  # nixpkgs.config.allowBroken = true;
+  # nixpkgs.config.allowBroken = true; # HACK
 
   nixpkgs.config.packageOverrides = pkgs: {
     # hub_2_2_9 = pkgs.stdenv.lib.overrideDerivation pkgs.gitAndTools.hub (oldAttrs: {
