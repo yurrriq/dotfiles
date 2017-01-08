@@ -98,6 +98,7 @@
   ]) ++ (with pkgs.haskellPackages; [
 
     cabal2nix
+    intero
     pandoc
     pointfree
     pointful
