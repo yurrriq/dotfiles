@@ -66,9 +66,6 @@
     # Lisp
     sbcl
 
-    # Literate Programming
-    # TODO: noweb_darwin
-
     # Nix
     # nixops # FIXME: python/RSA issues
     # nix-repl
@@ -187,17 +184,6 @@
   # nixpkgs.config.allowBroken = true; # HACK
 
   nixpkgs.config.packageOverrides = pkgs: {
-    # noweb_darwin = pkgs.stdenv.lib.overrideDerivation pkgs.noweb (oldAttrs: {
-    #   src = pkgs.fetchurl {
-    #     # url = "http://ftp.de.debian.org/debian/pool/main/n/noweb/noweb_2.11b.orig.tar.gz";
-    #     url = "ftp://www.eecs.harvard.edu/pub/nr/noweb.tgz";
-    #     sha256 = "10hdd6mrk26kyh4bnng4ah5h1pnanhsrhqa7qwqy6dyv3rng44y9";
-    #   };
-
-    #   meta = {
-    #     platforms = pkgs.stdenv.lib.platforms.darwin;
-    #   };
-    # });
     # hub_2_2_9 = pkgs.stdenv.lib.overrideDerivation pkgs.gitAndTools.hub (oldAttrs: {
     #   name = "hub-2.2.9";
     #   version = "2.2.9";
