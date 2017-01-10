@@ -55,6 +55,11 @@
     ghc
     stack
 
+    # JVM
+    clojure
+    leiningen
+    openjdk8
+
     # Lisp
     sbcl
 
