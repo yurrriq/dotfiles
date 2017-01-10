@@ -184,14 +184,5 @@
   # nixpkgs.config.allowBroken = true; # HACK
 
   nixpkgs.config.packageOverrides = pkgs: {
-    # hub_2_2_9 = pkgs.stdenv.lib.overrideDerivation pkgs.gitAndTools.hub (oldAttrs: {
-    #   name = "hub-2.2.9";
-    #   version = "2.2.9";
-    #   src = pkgs.fetchgit {
-    #     url = https://github.com/github/hub.git;
-    #     rev = "refs/tags/v2.2.9";
-    #     sha256 = "1fv4jb9vsbkscnb79gss2mwnd1yf9jhgzw1mhimhx25xizbx1fck";
-    #   };
-    # });
   };
 }
