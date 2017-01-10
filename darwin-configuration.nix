@@ -59,8 +59,8 @@
     sbcl
 
     # Nix
-    # nixops # FIXME: python/RSA issues
-    # nix-repl
+    nixops
+    nix-repl
 
     # Shell
     fish
