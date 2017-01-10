@@ -39,6 +39,10 @@
     lfe
     rebar3-open
 
+    # C
+    cc
+    gcc
+
     # Cryptography
     gnupg
 
