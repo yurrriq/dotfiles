@@ -32,23 +32,15 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = (with pkgs; [
 
-    # Shell
-    fish
 
-    # Web/JSON
-    curl
-    httpie
-    jq
-    wget
+    # Cryptography
+    gnupg
 
     # Git
     git
     git-crypt
     git-lfs
     gitAndTools.hub
-
-    # Cryptography
-    gnupg
 
     # Graphics
     # FIXME: graphicsmagick # NOTE: graphviz error
@@ -69,6 +61,9 @@
     # Nix
     # nixops # FIXME: python/RSA issues
     # nix-repl
+
+    # Shell
+    fish
 
     # SML
     # FIXME: smlnj
@@ -91,6 +86,13 @@
     rlwrap
     silver-searcher
     tree
+
+    # Web/JSON
+    curl
+    httpie
+    jid
+    jq
+    wget
 
   ]) ++ (with pkgs.haskellPackages; [
 
