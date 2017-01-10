@@ -51,12 +51,12 @@
     gnupg
 
     # Graphics
-    graphicsmagick
-    imagemagick
+    # FIXME: graphicsmagick # NOTE: graphviz error
+    # FIXME: imagemagick
 
     # Graphing
     gnuplot
-    graphviz
+    # FIXME: graphviz # NOTE: ApplicationServices ld error
 
     # Haskell
     cabal-install
