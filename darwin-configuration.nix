@@ -32,6 +32,12 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = (with pkgs; [
 
+    # BEAM
+    elixir
+    erlangR19
+    hex2nix
+    lfe
+    rebar3-open
 
     # Cryptography
     gnupg
@@ -195,5 +201,6 @@
   # nixpkgs.config.allowBroken = true; # HACK
 
   nixpkgs.config.packageOverrides = pkgs: {
+    erlang = pkgs.erlangR19;
   };
 }
