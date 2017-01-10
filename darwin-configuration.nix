@@ -179,6 +179,10 @@
     # "/nix/var/nix/profiles/per-user/root/channels"
   ];
 
+  nix.maxJobs = 8;
+  nix.buildCores = 4;
+  # FIXME: nix.useSandbox = "relaxed"; # NOTE: for testing
+
   # nix.requireSignedBinaryCaches = false; # HACK
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.config.allowBroken = true; # HACK
