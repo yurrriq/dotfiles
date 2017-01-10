@@ -137,39 +137,7 @@
           load-path))
   '';
 
-  programs.zsh.enable = true;
-  programs.zsh.enableBashCompletion = true;
-
-  programs.zsh.variables.cfg = "$HOME/.nixpkgs/darwin-config.nix";
-  programs.zsh.variables.darwin = "$HOME/.nix-defexpr/darwin";
-  programs.zsh.variables.pkgs = "$HOME/.nix-defexpr/nixpkgs";
-
-  programs.zsh.promptInit = ''
-    autoload -U promptinit && promptinit
-    PROMPT='%B%(?..%? )%b⇒ '
-    RPROMPT='%F{green}%~%f'
-
-    # Configure autojump
-    source /run/current-system/sw/share/autojump/autojump.zsh
-    autoload -U compinit && compinit -u
-  '';
-
-  programs.zsh.loginShellInit = ''
-    reexec() {
-      echo "reexecuting shell: $SHELL" >&2
-      __ETC_ZSHRC_SOURCED= \
-      __ETC_ZSHENV_SOURCED= \
-      __ETC_ZPROFILE_SOURCED= \
-        exec $SHELL -l
-    }
-  '';
-
-  programs.zsh.interactiveShellInit = ''
-    bindkey -e
-    setopt AUTOCD
-  '';
-
-  programs.fish.enable = false;
+  programs.fish.enable = true;
 
   programs.fish.variables.cfg = "$HOME/.nixpkgs/darwin-config.nix";
   programs.fish.variables.darwin = "$HOME/.nix-defexpr/darwin";
@@ -177,9 +145,7 @@
   # programs.fish.variables.pkgs = "$HOME/src/NixOS/nixpkgs";
 
   programs.fish.interactiveShellInit = ''
-    # TODO: programs.fish.interactiveShellInit
-
-    function hicat -d 'A hackish hicat clone via highlight'
+    function hicat -d 'Hackish hicat clone via highlight'
       highlight -O xterm256 $argv | less -cR
     end
   '';
