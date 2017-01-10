@@ -112,6 +112,7 @@
   ]) ++ (with pkgs.haskellPackages; [
 
     cabal2nix
+    # TODO: idris
     intero
     pandoc
     pointfree
