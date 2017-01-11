@@ -101,6 +101,7 @@
     nix-repl
 
     # Shell
+    bash
     fish
 
     # SML
@@ -114,6 +115,7 @@
 
     # Tools
     autojump
+    automake
     awscli
     coreutils
     # TODO: csvprintf (create package)
@@ -123,9 +125,16 @@
     gnused
     gnutar
     highlight
+    htop
+    mosh
+    # TODO: p7zip
     rlwrap
     silver-searcher
+    # FIXME: sshfs-fuse
+    sloccount
     tree
+    wakatime # FIXME: update to 6.2.
+    watchman
 
     # Virtualization
     # FIXME: xhyve
