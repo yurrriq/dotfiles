@@ -131,6 +131,10 @@
     ocamlPackages.camlp5_6_strict
     opam
 
+    # Python
+    python  # NOTE: `python2`
+    python3 # NOTE: `python` (not `python3`)
+
     # Shell
     bash
     fish
