@@ -289,11 +289,27 @@
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.config.allowBroken = true; # HACK
 
-  nixpkgs.config.packageOverrides = pkgs: {
+  nixpkgs.config.packageOverrides = pkgs: rec {
     camlp5 = pkgs.ocamlPackages.camlp5_6_strict;
     coq = pkgs.coq_8_6;
     erlang = pkgs.erlangR19;
     gcc = pkgs.gcc6;
+    # # HACK: revert https://github.com/NixOS/nixpkgs/commit/7165b389084966b7a5c96e9b512b7312ae9c676d
+    # libtasn1 = pkgs.stdenv.lib.overrideDerivation pkgs.libtasn1 (oldAttrs: {
+    #   name = "libtasn1-4.8";
+    #   src = pkgs.fetchurl {
+    #     url = "mirror://gnu/libtasn1/libtasn1-4.8.tar.gz";
+    #     sha256 = "04y5m29pqmvkfdbppmsdifyx89v8xclxzklpfc7a1fkr9p4jz07s";
+    #   };
+    # });
+    # # HACK: revert https://github.com/NixOS/nixpkgs/commit/cc40fadf62e8843dabb330659941d0d4d522f863
+    # gnutls = pkgs.stdenv.lib.overrideDerivation pkgs.gnutls34 (oldAttrs: {
+    #   version = "3.4.17";
+    #   src = pkgs.fetchurl {
+    #     url = "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4/gnutls-3.4.17.tar.xz";
+    #     sha256 = "0bhp8cqrmw15yins65cn0zwbcpj1vmymr4wnbm151sfmf2kfhl4v";
+    #   };
+    # });
     mono = pkgs.mono46;
     nodejs = pkgs.nodejs-7_x;
     ocaml = pkgs.ocaml_4_03;
