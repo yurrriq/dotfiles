@@ -96,6 +96,10 @@
     ghc
     stack
 
+    # JavaScript
+    nodejs
+    # TODO: planck (create package)
+
     # JVM
     clojure
     leiningen
@@ -233,6 +237,7 @@
     coq = pkgs.coq_8_6;
     erlang = pkgs.erlangR19;
     gcc = pkgs.gcc6;
+    nodejs = pkgs.nodejs-7_x;
     # TODO: mysql = mysql57;
   };
 }
