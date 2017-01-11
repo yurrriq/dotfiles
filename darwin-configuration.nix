@@ -33,8 +33,15 @@
   environment.systemPackages = (with pkgs; [
 
     # Audio/Video
+    # FIXME: faac
+    ffmpeg
+    flac
+    fluidsynth
     # FIXME: graphicsmagick # NOTE: graphviz error
     # FIXME: imagemagick
+    lame
+    # libsndfile # NOTE: used by fluidsynth
+    # FIXME: timidity
 
     # BEAM
     elixir
