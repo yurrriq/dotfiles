@@ -68,7 +68,7 @@
     docbook5_xsl
     ghostscript
     groff
-    # TODO: latex2html (create package)
+    latex2html
 
     # Engraving
     # FIXME: frescobaldi
