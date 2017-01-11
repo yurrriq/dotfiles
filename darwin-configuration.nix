@@ -194,7 +194,10 @@
     pandoc
     pointfree
     pointful
+    purescript
 
+  ]) ++ (with pkgs.elmPackages; [
+    elm
   ]);
 
   services.nix-daemon.enable = true;
