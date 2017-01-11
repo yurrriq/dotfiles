@@ -83,6 +83,8 @@
     # TODO: gitAndTools.git-flow (create package)
     gitAndTools.hub
 
+    # Go
+    go
 
     # Graphing/Statistics
     gnuplot
