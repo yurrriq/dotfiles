@@ -103,6 +103,7 @@
     # JVM
     clojure
     leiningen
+    maven
     openjdk8
 
     # Libraries
