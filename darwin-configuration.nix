@@ -131,6 +131,9 @@
     ocamlPackages.camlp5_6_strict
     opam
 
+    # Protocol Buffers
+    protobuf
+
     # Python
     python  # NOTE: `python2`
     python3 # NOTE: `python` (not `python3`)
@@ -253,6 +256,7 @@
     gcc = pkgs.gcc6;
     nodejs = pkgs.nodejs-7_x;
     ocaml = pkgs.ocaml_4_03;
+    protobuf = pkgs.protobuf3_1;
     # TODO: mysql = mysql57;
   };
 }
