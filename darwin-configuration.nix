@@ -125,6 +125,12 @@
     nixops
     nix-repl
 
+    # OCaml
+    ocaml
+    # TODO: ocamlPackages.ocamlbuild
+    ocamlPackages.camlp5_6_strict
+    opam
+
     # Shell
     bash
     fish
@@ -242,6 +248,7 @@
     erlang = pkgs.erlangR19;
     gcc = pkgs.gcc6;
     nodejs = pkgs.nodejs-7_x;
+    ocaml = pkgs.ocaml_4_03;
     # TODO: mysql = mysql57;
   };
 }
