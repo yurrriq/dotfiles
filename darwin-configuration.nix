@@ -52,7 +52,7 @@
     # C/C++
     cc
     gcc
-    # TODO: gperftools
+    gperftools
 
     # Cryptography
     gnupg
