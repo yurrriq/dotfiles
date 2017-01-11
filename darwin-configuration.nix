@@ -87,7 +87,9 @@
     # Libraries
     # TODO: openssl
 
-    # Lisp
+    # Lisp/Scheme
+    guile
+    racket
     sbcl
 
     # Miscellaneous
