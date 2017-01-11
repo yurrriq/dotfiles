@@ -32,6 +32,10 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = (with pkgs; [
 
+    # Audio/Video
+    # FIXME: graphicsmagick # NOTE: graphviz error
+    # FIXME: imagemagick
+
     # BEAM
     elixir
     erlangR19
@@ -39,26 +43,36 @@
     lfe
     rebar3-open
 
-    # C
+    # C/C++
     cc
     gcc
+    # TODO: gperftools
 
     # Cryptography
     gnupg
+
+    # Database
+    # TODO: mysql
+    # TODO: sqlite
+
+    # Engraving
+    # FIXME: frescobaldi
+    # TODO: lilypond (add 2.19.x package)
+    # FIXME: musescore
 
     # Git
     git
     git-crypt
     git-lfs
+    # TODO: gitAndTools.ghi (create package)
+    # TODO: gitAndTools.git-flow (create package)
     gitAndTools.hub
 
-    # Graphics
-    # FIXME: graphicsmagick # NOTE: graphviz error
-    # FIXME: imagemagick
 
-    # Graphing
+    # Graphing/Statistics
     gnuplot
     # FIXME: graphviz # NOTE: ApplicationServices ld error
+    # FIXME: R
 
     # Haskell
     cabal-install
@@ -70,8 +84,15 @@
     leiningen
     openjdk8
 
+    # Libraries
+    # TODO: openssl
+
     # Lisp
     sbcl
+
+    # Miscellaneous
+    # FIXME: exercism
+    # FIXME: kindlegen
 
     # Nix
     nixops
@@ -93,6 +114,8 @@
     autojump
     awscli
     coreutils
+    # TODO: csvprintf (create package)
+    # TODO: fswatch # FIXME: update to 1.9.3
     gawk
     gnumake
     gnused
@@ -102,11 +125,16 @@
     silver-searcher
     tree
 
+    # Virtualization
+    # FIXME: xhyve
+
     # Web/JSON
     curl
     httpie
     jid
     jq
+    # TODO: nginx # NOTE: will need to confugure daemon too
+    # TODO: prometheus
     wget
 
   ]) ++ (with pkgs.haskellPackages; [
@@ -156,6 +184,8 @@
   environment.shellAliases.ll = "ls -Glh";
   environment.shellAliases.ls = "ls -G";
 
+  # TODO: programs.tmux
+
   nix.nixPath = [ # Use local nixpkgs checkout instead of channels.
     "darwin=$HOME/.nix-defexpr/darwin"
     "darwin-config=$HOME/.nixpkgs/darwin-configuration.nix"
@@ -173,5 +203,6 @@
 
   nixpkgs.config.packageOverrides = pkgs: {
     erlang = pkgs.erlangR19;
+    # TODO: mysql = mysql57;
   };
 }
