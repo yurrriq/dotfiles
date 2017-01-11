@@ -108,7 +108,7 @@
     # FIXME: polyml
 
     # Theorem Proving
-    coq_8_6
+    coq
 
     # Tools
     autojump
@@ -202,7 +202,9 @@
   # nixpkgs.config.allowBroken = true; # HACK
 
   nixpkgs.config.packageOverrides = pkgs: {
+    coq = pkgs.coq_8_6;
     erlang = pkgs.erlangR19;
+    gcc = pkgs.gcc6;
     # TODO: mysql = mysql57;
   };
 }
