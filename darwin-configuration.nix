@@ -62,6 +62,14 @@
     # TODO: mysql
     # TODO: sqlite
 
+    # Document Preparation
+    asciidoc
+    docbook5
+    docbook5_xsl
+    ghostscript
+    groff
+    # TODO: latex2html (create package)
+
     # Engraving
     # FIXME: frescobaldi
     # TODO: lilypond (add 2.19.x package)
