@@ -33,7 +33,6 @@
   environment.systemPackages = (with pkgs; [
 
     # Audio/Video
-    # FIXME: faac
     ffmpeg
     flac
     fluidsynth
