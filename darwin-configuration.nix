@@ -37,8 +37,8 @@
     ffmpeg
     flac
     fluidsynth
-    # FIXME: graphicsmagick # NOTE: graphviz error
-    # FIXME: imagemagick
+    graphicsmagick
+    imagemagick
     lame
     # FIXME: timidity
 
@@ -88,7 +88,7 @@
 
     # Graphing/Statistics
     gnuplot
-    # FIXME: graphviz # NOTE: ApplicationServices ld error
+    graphviz
     # FIXME: R
 
     # Haskell
