@@ -118,6 +118,7 @@
     zeromq
 
     # Miscellaneous
+    # FIXME: calibre
     # FIXME: exercism
     # FIXME: kindlegen
 
