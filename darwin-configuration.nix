@@ -111,7 +111,7 @@
 
     # Lisp/Scheme
     guile
-    racket
+    # FIXME: racket
     sbcl
 
     # Messaging
