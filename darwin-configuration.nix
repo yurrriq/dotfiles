@@ -121,6 +121,9 @@
     # FIXME: exercism
     # FIXME: kindlegen
 
+    # .NET
+    mono
+
     # Nix
     nixops
     nix-repl
@@ -289,6 +292,7 @@
     coq = pkgs.coq_8_6;
     erlang = pkgs.erlangR19;
     gcc = pkgs.gcc6;
+    mono = pkgs.mono46;
     nodejs = pkgs.nodejs-7_x;
     ocaml = pkgs.ocaml_4_03;
     protobuf = pkgs.protobuf3_1;
