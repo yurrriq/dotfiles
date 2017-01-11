@@ -114,6 +114,9 @@
     racket
     sbcl
 
+    # Messaging
+    zeromq
+
     # Miscellaneous
     # FIXME: exercism
     # FIXME: kindlegen
