@@ -170,6 +170,7 @@
     highlight
     htop
     mosh
+    openssh
     # TODO: p7zip
     rlwrap
     silver-searcher
@@ -286,6 +287,14 @@
   nix.maxJobs = 8;
   nix.buildCores = 4;
   # FIXME: nix.useSandbox = "relaxed"; # NOTE: for testing
+
+  nix.distributedBuilds = true;
+  nix.buildMachines = [
+    { hostName = "build-slave";
+      system = "x86_64-linux";
+      maxJobs = 2;
+    }
+  ];
 
   # nix.requireSignedBinaryCaches = false; # HACK
   nixpkgs.config.allowUnfree = true;
