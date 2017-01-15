@@ -140,6 +140,8 @@
     # Python
     python  # NOTE: `python2`
     python3 # NOTE: `python` (not `python3`)
+    python35Packages.pip
+    python35Packages.pygments
 
     # Shell
     bash
