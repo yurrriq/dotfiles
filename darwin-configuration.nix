@@ -71,7 +71,7 @@
 
     # Engraving
     # FIXME: frescobaldi
-    # TODO: lilypond (add 2.19.x package)
+    lilypond
     # FIXME: musescore
 
     # Git
@@ -294,6 +294,7 @@
     coq = pkgs.coq_8_6;
     erlang = pkgs.erlangR19;
     gcc = pkgs.gcc6;
+    lilypond = pkgs.lilypondUnstable;
     mono = pkgs.mono46;
     nodejs = pkgs.nodejs-7_x;
     ocaml = pkgs.ocaml_4_03;
