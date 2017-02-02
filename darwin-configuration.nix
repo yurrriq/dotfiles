@@ -190,7 +190,7 @@
     jid
     jq
     # TODO: nginx # NOTE: will need to confugure daemon too
-    ngrok
+    # ngrok # TODO: 2.x
     # TODO: prometheus
     wget
 
