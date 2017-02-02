@@ -291,9 +291,13 @@
 
   nix.distributedBuilds = true;
   nix.buildMachines = [
-    { hostName = "build-slave";
+    # { hostName = "build-slave";
+    #   system = "x86_64-linux";
+    #   maxJobs = 2;
+    # }
+    { hostName = "nix-docker";
       system = "x86_64-linux";
-      maxJobs = 2;
+      maxJobs = 4;
     }
   ];
 
