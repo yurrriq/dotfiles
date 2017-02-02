@@ -103,7 +103,7 @@
     clojure
     leiningen
     maven
-    openjdk8
+    # openjdk8
 
     # Libraries
     # libsndfile # NOTE: used by fluidsynth
