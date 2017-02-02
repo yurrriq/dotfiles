@@ -110,6 +110,7 @@
     # openssl
 
     # Lisp/Scheme
+    # clisp-tip # FIXME: https://github.com/NixOS/nixpkgs/issues/20062
     guile
     # FIXME: racket
     sbcl
