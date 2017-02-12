@@ -36,8 +36,8 @@
     ffmpeg
     flac
     fluidsynth
-    graphicsmagick
-    imagemagick
+    # FIXME: graphicsmagick
+    # FIXME: imagemagick
     lame
     # FIXME: timidity
 
