@@ -103,7 +103,7 @@
     clojure
     leiningen
     maven
-    # openjdk8
+    jdk
 
     # Libraries
     # libsndfile # NOTE: used by fluidsynth
@@ -310,6 +310,7 @@
     coq = pkgs.coq_8_6;
     erlang = pkgs.erlangR19;
     gcc = pkgs.gcc6;
+    jdk = pkgs.openjdk8;
     lilypond = pkgs.lilypondUnstable;
     mono = pkgs.mono46;
     nodejs = pkgs.nodejs-7_x;
