@@ -195,7 +195,6 @@
     wget
 
   ]) ++ (with pkgs.haskellPackages; [
-
     cabal2nix
     # TODO: idris
     intero
@@ -262,7 +261,6 @@
   programs.fish.variables.cfg = "$HOME/.nixpkgs/darwin-config.nix";
   programs.fish.variables.darwin = "$HOME/.nix-defexpr/darwin";
   programs.fish.variables.pkgs = "$HOME/.nix-defexpr/nixpkgs";
-  # programs.fish.variables.pkgs = "$HOME/src/NixOS/nixpkgs";
 
   programs.fish.interactiveShellInit = ''
     function hicat -d 'Hackish hicat clone via highlight'
