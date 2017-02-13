@@ -93,7 +93,7 @@
     # Haskell
     cabal-install
     ghc
-    # FIXME: stack
+    stack
 
     # JavaScript
     nodejs
