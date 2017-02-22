@@ -141,8 +141,6 @@
     # Python
     python  # NOTE: `python2`
     python3 # NOTE: `python` (not `python3`)
-    python35Packages.pip
-    python35Packages.pygments
 
     # Shell
     bash
@@ -193,7 +191,8 @@
     # ngrok # TODO: 2.x
     # TODO: prometheus
     wget
-
+  ]) ++ (with pkgs.elmPackages; [
+    elm
   ]) ++ (with pkgs.haskellPackages; [
     cabal2nix
     # TODO: idris
@@ -202,9 +201,11 @@
     pointfree
     pointful
     purescript
-
-  ]) ++ (with pkgs.elmPackages; [
-    elm
+  ]) ++ (with pkgs.python27Packages; [
+    pywatchman
+  ]) ++ (with pkgs.python35Packages; [
+    pip
+    pygments
   ]);
 
   services.nix-daemon.enable = true;
