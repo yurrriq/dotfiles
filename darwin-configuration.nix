@@ -72,7 +72,7 @@
     # Engraving
     # FIXME: frescobaldi
     lilypond
-    # FIXME: musescore
+    musescore
 
     # Git
     git
@@ -312,6 +312,7 @@
     jdk = pkgs.openjdk8;
     lilypond = pkgs.lilypondUnstable;
     mono = pkgs.mono46;
+    musescore = pkgs.callPackage ./musescore.nix {};
     nodejs = pkgs.nodejs-7_x;
     ocaml = pkgs.ocaml_4_03;
     # TODO: postgresql = pks.postgresql96;
