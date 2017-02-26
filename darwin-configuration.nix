@@ -187,7 +187,7 @@
     httpie
     jid
     jq
-    # TODO: nginx # NOTE: will need to confugure daemon too
+    # TODO: nginx # NOTE: will need to configure daemon too
     # ngrok # TODO: 2.x
     # TODO: prometheus
     wget
