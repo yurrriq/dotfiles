@@ -71,7 +71,7 @@
 
     # Engraving
     # FIXME: frescobaldi
-    lilypond
+    lilypond-unstable
     musescore
 
     # Git
@@ -310,9 +310,7 @@
     erlang = pkgs.erlangR19;
     gcc = pkgs.gcc6;
     jdk = pkgs.openjdk8;
-    lilypond = pkgs.lilypondUnstable;
     mono = pkgs.mono46;
-    musescore = pkgs.callPackage ./musescore.nix {};
     nodejs = pkgs.nodejs-7_x;
     ocaml = pkgs.ocaml_4_03;
     # TODO: postgresql = pks.postgresql96;
