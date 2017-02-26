@@ -200,7 +200,7 @@
     pandoc
     pointfree
     pointful
-    purescript
+    # FIXME: purescript
   ]) ++ (with pkgs.python27Packages; [
     pywatchman
   ]) ++ (with pkgs.python35Packages; [
