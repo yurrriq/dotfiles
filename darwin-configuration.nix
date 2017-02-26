@@ -42,9 +42,9 @@
     # FIXME: timidity
 
     # BEAM
-    elixir
+    # FIXME: elixir
     erlangR19
-    hex2nix
+    # FIXME: hex2nix # NOTE: elixir issue
     lfe
     rebar3-open
 
@@ -127,7 +127,7 @@
     mono
 
     # Nix
-    nixops
+    # nixops
     nix-repl
 
     # OCaml
@@ -216,7 +216,7 @@
 
   # programs.nix-script.enable = true;
 
-  programs.emacs.enable = true;
+  programs.emacs.enable = false;
 
   programs.emacs.packages = (self: with {
     elpa = self.elpaPackages;
