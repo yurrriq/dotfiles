@@ -1,4 +1,5 @@
 { config, lib, pkgs, ... }:
+
 {
   # Enable full keyboard access, e.g. tab in dialogs
   system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
@@ -307,7 +308,7 @@
   nixpkgs.config.packageOverrides = pkgs: rec {
     camlp5 = pkgs.ocamlPackages.camlp5_6_strict;
     coq = pkgs.coq_8_6;
-    erlang = pkgs.erlangR19;
+    erlang = pkgs.erlangR19.override { enableDebugInfo = true; };
     gcc = pkgs.gcc6;
     jdk = pkgs.openjdk8;
     mono = pkgs.mono46;
