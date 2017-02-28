@@ -145,7 +145,7 @@
     python3 # NOTE: `python` (not `python3`)
 
     # Shell
-    bash
+    # FIXME: bash
     fish
 
     # SML
@@ -164,7 +164,6 @@
     awscli
     coreutils
     # TODO: csvprintf (create package)
-    # TODO: fswatch # FIXME: update to 1.9.3
     gawk
     gnumake
     gnused
