@@ -79,7 +79,7 @@
     git
     git-crypt
     git-lfs
-    # TODO: gitAndTools.ghi (create package)
+    # TODO: gitAndTools.ghi (add package)
     # NOTE: https://github.com/petervanderdoes/gitflow-avh
     gitAndTools.gitflow
     gitAndTools.hub
@@ -99,7 +99,7 @@
 
     # JavaScript
     nodejs
-    # TODO: planck (create package)
+    # TODO: planck (add package)
 
     # JVM
     boot
@@ -164,7 +164,7 @@
     automake
     awscli
     coreutils
-    # TODO: csvprintf (create package)
+    # TODO: csvprintf (add package)
     gawk
     gnumake
     gnused
@@ -178,6 +178,7 @@
     silver-searcher
     # FIXME: sshfs-fuse
     sloccount
+    # TODO: thefuck (add package)
     tree
     wakatime # FIXME: update to 6.2.
     watch
@@ -185,6 +186,7 @@
 
     # Virtualization
     # FIXME: xhyve
+    # src/vmm/vmm_mem.c:32:10: fatal error: 'Hypervisor/hv.h' file not found
 
     # Web/JSON
     curl
