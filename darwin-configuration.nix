@@ -80,7 +80,8 @@
     git-crypt
     git-lfs
     # TODO: gitAndTools.ghi (create package)
-    # TODO: gitAndTools.git-flow (create package)
+    # NOTE: https://github.com/petervanderdoes/gitflow-avh
+    gitAndTools.gitflow
     gitAndTools.hub
 
     # Go
