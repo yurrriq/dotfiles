@@ -191,6 +191,7 @@
     # Web/JSON
     curl
     httpie
+    html-tidy
     jid
     jq
     # TODO: nginx # NOTE: will need to configure daemon too
