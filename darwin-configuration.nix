@@ -318,16 +318,6 @@
     coq = pkgs.coq_8_6;
     erlang = pkgs.erlangR19.override { enableDebugInfo = true; };
     gcc = pkgs.gcc6;
-    graphicsmagick = lib.overrideDerivation pkgs.graphicsmagick (p: {
-      # TODO: submit a patch
-      preFixup = pkgs.stdenv.lib.optionalString pkgs.stdenv.isDarwin ''
-        for input in $out/lib/libGraphicsMagick.3.dylib $out/bin/gm; do
-          install_name_tool -change libgs.dylib.${pkgs.ghostscript.version} \
-            ${pkgs.ghostscript}/lib/libgs.dylib.${pkgs.ghostscript.version} \
-            $input
-        done
-      '';
-    });
     jdk = pkgs.openjdk8;
     mono = pkgs.mono46;
     nodejs = pkgs.nodejs-7_x;
