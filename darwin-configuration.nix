@@ -207,6 +207,7 @@
     pointfree
     pointful
     # FIXME: purescript
+    titlecase
   ]) ++ (with pkgs.python27Packages; [
     pywatchman
   ]) ++ (with pkgs.python35Packages; [
