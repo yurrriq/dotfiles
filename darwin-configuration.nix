@@ -101,6 +101,7 @@
     # TODO: planck (create package)
 
     # JVM
+    boot
     clojure
     leiningen
     maven
@@ -157,6 +158,7 @@
     coq
 
     # Tools
+    aspell
     autojump
     automake
     awscli
@@ -178,6 +180,7 @@
     sloccount
     tree
     wakatime # FIXME: update to 6.2.
+    watch
     watchman
 
     # Virtualization
