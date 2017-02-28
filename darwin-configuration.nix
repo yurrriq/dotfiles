@@ -205,6 +205,7 @@
   ]) ++ (with pkgs.python27Packages; [
     pywatchman
   ]) ++ (with pkgs.python35Packages; [
+    grip
     pip
     pygments
   ]);
