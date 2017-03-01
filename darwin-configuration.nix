@@ -43,7 +43,7 @@
 
     # BEAM
     # FIXME: elixir
-    erlangR19
+    erlang
     # FIXME: hex2nix # NOTE: elixir issue
     lfe
     rebar3-open
@@ -274,7 +274,24 @@
   nixpkgs.config.packageOverrides = pkgs: rec {
     camlp5 = pkgs.ocamlPackages.camlp5_6_strict;
     coq = pkgs.coq_8_6;
-    erlang = pkgs.erlangR19.override { enableDebugInfo = true; };
+    erlangR19 = pkgs.lib.overrideDerivation pkgs.erlangR19 (p: rec {
+      name = "erlang-" + version;
+      version = "19.2.3";
+
+      src = pkgs.fetchFromGitHub {
+        owner = "erlang";
+        repo = "otp";
+        rev = "OTP-${version}";
+        sha256 = "1lsmjpz2g4hj44fz95w7sswzj40iv7jq5jk64x0095lhvxmlf57c";
+      };
+
+      preBuild = ''
+        export NIX_BUILD_CORES=8
+      '';
+
+      enableParallelBuilding = true;
+    });
+    erlang = erlangR19;
     gcc = pkgs.gcc6;
     jdk = pkgs.openjdk8;
     mono = pkgs.mono46;
