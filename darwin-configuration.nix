@@ -172,7 +172,7 @@
     htop
     mosh
     openssh
-    # TODO: p7zip
+    p7zip
     rlwrap
     silver-searcher
     # FIXME: sshfs-fuse
