@@ -279,6 +279,8 @@
     erlang = pkgs.erlangR19;
     gcc = pkgs.gcc6;
     jdk = pkgs.openjdk8;
+    # HACK
+    libuv = pkgs.lib.overrideDerivation pkgs.libuv (p: { doCheck = false; });
     mono = pkgs.mono46;
     my-lilypond = pkgs.lilypond-with-fonts.override {
       fonts = with pkgs.openlilylib-fonts; [ improviso lilyjazz ];
