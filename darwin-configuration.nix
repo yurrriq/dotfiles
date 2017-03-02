@@ -94,10 +94,10 @@
     # Haskell
     cabal-install
     ghc
-    stack
+    # FIXME: stack
 
     # JavaScript
-    nodejs
+    # FIXME: nodejs
     # TODO: planck (add package)
 
     # JVM
@@ -155,7 +155,7 @@
     # FIXME: polyml
 
     # Theorem Proving
-    coq
+    # FIXME: coq
 
     # Tools
     aspell
@@ -168,7 +168,7 @@
     gnumake
     gnused
     gnutar
-    highlight
+    # FIXME: highlight (g++: command not found)
     htop
     mosh
     openssh
@@ -198,7 +198,7 @@
     # TODO: prometheus
     wget
   ]) ++ (with pkgs.elmPackages; [
-    elm
+    # FIXME: elm
   ]) ++ (with pkgs.haskellPackages; [
     cabal2nix
     # TODO: idris
