@@ -169,6 +169,7 @@
     gnutar
     # FIXME: highlight (g++: command not found)
     htop
+    moreutils
     mosh
     openssh
     p7zip
