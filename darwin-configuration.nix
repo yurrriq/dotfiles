@@ -179,7 +179,7 @@
     sloccount
     # TODO: thefuck (add package)
     tree
-    wakatime # FIXME: update to 6.2.
+    wakatime
     watch
     watchman
 
