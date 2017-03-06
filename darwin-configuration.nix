@@ -37,7 +37,6 @@
     flac
     fluidsynth
     graphicsmagick
-    # FIXME: imagemagick
     lame
     # FIXME: timidity
 
@@ -277,8 +276,6 @@
     erlang = pkgs.erlangR19;
     gcc = pkgs.gcc6;
     jdk = pkgs.openjdk8;
-    # HACK
-    libuv = pkgs.lib.overrideDerivation pkgs.libuv (p: { doCheck = false; });
     mono = pkgs.mono46;
     nodejs = pkgs.nodejs-7_x;
     ocaml = pkgs.ocaml_4_03;
