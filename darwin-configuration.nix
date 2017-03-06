@@ -254,7 +254,7 @@
   nix.buildCores = 4;
   # FIXME: nix.useSandbox = "relaxed"; # NOTE: for testing
 
-  nix.distributedBuilds = true;
+  nix.distributedBuilds = false;
   nix.buildMachines = [
     # { hostName = "build-slave";
     #   system = "x86_64-linux";
