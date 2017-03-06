@@ -41,9 +41,9 @@
     # FIXME: timidity
 
     # BEAM
-    # FIXME: elixir
+    elixir
     erlang
-    # FIXME: hex2nix # NOTE: elixir issue
+    hex2nix
     lfe
     rebar3-open
 
@@ -93,10 +93,10 @@
     # Haskell
     cabal-install
     ghc
-    # FIXME: stack
+    stack
 
     # JavaScript
-    # FIXME: nodejs
+    nodejs
     # TODO: planck (add package)
 
     # JVM
@@ -154,7 +154,7 @@
     # FIXME: polyml
 
     # Theorem Proving
-    # FIXME: coq
+    coq
 
     # Tools
     aspell
@@ -197,7 +197,7 @@
     # TODO: prometheus
     wget
   ]) ++ (with pkgs.elmPackages; [
-    # FIXME: elm
+    elm
   ]) ++ (with pkgs.haskellPackages; [
     cabal2nix
     # TODO: idris
