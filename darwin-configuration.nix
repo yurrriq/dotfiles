@@ -70,7 +70,7 @@
 
     # Engraving
     # FIXME: frescobaldi
-    lilypond-unstable
+    my-lilypond
     musescore
 
     # Git
@@ -278,6 +278,9 @@
     gcc = pkgs.gcc6;
     jdk = pkgs.openjdk8;
     mono = pkgs.mono46;
+    my-lilypond = pkgs.lilypond-with-fonts.override {
+      fonts = with pkgs.openlilylib-fonts; [ improviso lilyjazz ];
+    };
     nodejs = pkgs.nodejs-7_x;
     ocaml = pkgs.ocaml_4_03;
     # TODO: postgresql = pks.postgresql96;
