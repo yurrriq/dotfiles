@@ -123,6 +123,7 @@
     # FIXME: calibre
     # FIXME: exercism
     # FIXME: kindlegen
+    skim
 
     # .NET
     mono
@@ -163,6 +164,7 @@
     awscli
     coreutils
     # TODO: csvprintf (add package)
+    fpp
     gawk
     gnumake
     gnused
