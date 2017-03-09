@@ -50,7 +50,7 @@
     # C/C++
     cc
     gcc
-    gperftools
+    # gperftools
 
     # Cryptography
     gnupg
@@ -61,9 +61,9 @@
     # sqlite
 
     # Document Preparation
-    asciidoc
-    docbook5
-    docbook5_xsl
+    # asciidoc
+    # docbook5
+    # docbook5_xsl
     ghostscript
     groff
     latex2html
@@ -83,10 +83,10 @@
     gitAndTools.hub
 
     # Go
-    go
+    # go
 
     # Graphing/Statistics
-    gnuplot
+    # gnuplot
     graphviz
     # FIXME: R
 
@@ -100,7 +100,7 @@
     # TODO: planck (add package)
 
     # JVM
-    boot
+    # boot
     clojure
     leiningen
     maven
@@ -117,7 +117,7 @@
     sbcl
 
     # Messaging
-    zeromq
+    # zeromq
 
     # Miscellaneous
     # FIXME: calibre
@@ -126,16 +126,16 @@
     skim
 
     # .NET
-    mono
+    # mono
 
     # Nix
     # nixops
-    nix-repl
+    # nix-repl
 
     # OCaml
-    ocaml
-    camlp5
-    opam
+    # ocaml
+    # camlp5
+    # opam
 
     # Protocol Buffers
     protobuf
@@ -155,7 +155,7 @@
     # FIXME: polyml
 
     # Theorem Proving
-    coq
+    # coq
 
     # Tools
     aspell
@@ -172,9 +172,9 @@
     # FIXME: highlight (g++: command not found)
     htop
     moreutils
-    mosh
+    # mosh
     openssh
-    p7zip
+    # p7zip
     rlwrap
     silver-searcher
     # FIXME: sshfs-fuse
@@ -200,11 +200,11 @@
     # TODO: prometheus
     wget
   ]) ++ (with pkgs.elmPackages; [
-    elm
+    # elm
   ]) ++ (with pkgs.haskellPackages; [
     cabal2nix
     # TODO: idris
-    intero
+    # intero
     pandoc
     pointfree
     pointful
