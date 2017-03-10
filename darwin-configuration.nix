@@ -97,6 +97,8 @@
 
     # JavaScript
     nodejs
+    npm2nix
+    nodePackages.node2nix
     # TODO: planck (add package)
 
     # JVM
