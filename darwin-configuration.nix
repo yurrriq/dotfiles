@@ -93,7 +93,7 @@
     # Haskell
     cabal-install
     ghc
-    stack
+    # FIXME: stack # wait for binary, I guess
 
     # JavaScript
     nodejs
@@ -114,7 +114,7 @@
     # clisp-tip # FIXME: https://github.com/NixOS/nixpkgs/issues/20062
     guile
     # FIXME: racket
-    sbcl
+    # FIXME: sbcl
 
     # Messaging
     # zeromq
