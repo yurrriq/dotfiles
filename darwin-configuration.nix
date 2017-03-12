@@ -161,6 +161,12 @@
 
     # Tools
     aspell
+    aspellDicts.de
+    aspellDicts.en
+    aspellDicts.es
+    aspellDicts.fr
+    aspellDicts.it
+    aspellDicts.sv
     autojump
     automake
     awscli
@@ -233,6 +239,8 @@
   programs.fish.variables.cfg = "$HOME/.nixpkgs/darwin-config.nix";
   programs.fish.variables.darwin = "$HOME/.nix-defexpr/darwin";
   programs.fish.variables.pkgs = "$HOME/.nix-defexpr/nixpkgs";
+  programs.fish.variables.ASPELL_CONF =
+    "data-dir /run/current-system/sw/lib/aspell/";
 
   programs.fish.interactiveShellInit = ''
     function hicat -d 'Hackish hicat clone via highlight'
