@@ -259,7 +259,7 @@
   nix.buildCores = 4;
   # FIXME: nix.useSandbox = "relaxed"; # NOTE: for testing
 
-  nix.distributedBuilds = false;
+  nix.distributedBuilds = true;
   nix.buildMachines = [
     # { hostName = "build-slave";
     #   system = "x86_64-linux";
@@ -268,6 +268,7 @@
     { hostName = "nix-docker";
       system = "x86_64-linux";
       maxJobs = 4;
+      sshKey = "/Users/mohacker/.ssh/docker_rsa";
     }
   ];
 
