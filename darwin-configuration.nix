@@ -87,7 +87,7 @@
 
     # Graphing/Statistics
     # gnuplot
-    graphviz
+    # FIXME: graphviz SIGSEGV
     # FIXME: R
 
     # Haskell
