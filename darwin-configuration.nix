@@ -149,6 +149,7 @@
     # Shell
     # autoenv_fish
     # FIXME: bash
+    direnv
     fish
 
     # SML
@@ -251,6 +252,8 @@
     function hicat -d 'Hackish hicat clone via highlight'
       highlight -O xterm256 $argv | less -cR
     end
+
+    eval (direnv hook fish)
   '';
 
   environment.shellAliases.gpg = "gpg2";
