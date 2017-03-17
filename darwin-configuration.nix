@@ -147,6 +147,7 @@
     python3 # NOTE: `python` (not `python3`)
 
     # Shell
+    # autoenv_fish
     # FIXME: bash
     fish
 
@@ -242,6 +243,10 @@
   programs.fish.variables.ASPELL_CONF =
     "data-dir /run/current-system/sw/lib/aspell/";
 
+  # programs.fish.shellInit = ''
+  #   source ${pkgs.autoenv_fish}/share/autoenv_fish/activate.fish
+  # '';
+
   programs.fish.interactiveShellInit = ''
     function hicat -d 'Hackish hicat clone via highlight'
       highlight -O xterm256 $argv | less -cR
@@ -287,6 +292,7 @@
   # nixpkgs.config.allowBroken = true; # HACK
 
   nixpkgs.config.packageOverrides = pkgs: rec {
+    autoenv_fish = pkgs.callPackage ./pkgs/misc/autoenv_fish { };
     camlp5 = pkgs.ocamlPackages.camlp5_6_strict;
     coq = pkgs.coq_8_6;
     erlang = pkgs.erlangR19;
