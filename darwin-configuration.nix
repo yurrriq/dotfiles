@@ -269,13 +269,15 @@
 
   nix.distributedBuilds = true;
   nix.buildMachines = [
-    # { hostName = "build-slave";
+    # {
+    #   hostName = "build-slave";
     #   system = "x86_64-linux";
     #   maxJobs = 2;
     # }
-    { hostName = "nix-docker";
+    {
+      hostName = "nix-docker";
       system = "x86_64-linux";
-      maxJobs = 4;
+      maxJobs = 2;
       sshKey = "/Users/mohacker/.ssh/docker_rsa";
     }
   ];
