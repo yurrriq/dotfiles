@@ -302,6 +302,7 @@
     my-lilypond = pkgs.lilypond-with-fonts.override {
       fonts = with pkgs.openlilylib-fonts; [ improviso lilyjazz ];
     };
+    # nixops = pkgs.callPackage ./pkgs/tools/package-management/nixops { };
     nodejs = pkgs.nodejs-7_x;
     ocaml = pkgs.ocaml_4_03;
     # TODO: postgresql = pks.postgresql96;
