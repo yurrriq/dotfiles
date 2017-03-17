@@ -41,12 +41,11 @@
     # FIXME: timidity
 
     # BEAM
-    # NOTE: use Homebrew for now
-    # elixir
-    # erlang
-    # hex2nix
-    # lfe
-    # rebar3-open
+    elixir
+    erlang
+    hex2nix
+    lfe
+    rebar3-open
 
     # C/C++
     cc
