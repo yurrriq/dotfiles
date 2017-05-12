@@ -305,7 +305,7 @@
     camlp5 = pkgs.ocamlPackages.camlp5_6_strict;
     coq = pkgs.coq_8_6;
     erlang = pkgs.erlangR19;
-    gcc = pkgs.gcc6;
+    # gcc = pkgs.gcc6; # FIXME
     jdk = pkgs.openjdk8;
     mono = pkgs.mono46;
     my-lilypond = pkgs.lilypond-with-fonts.override {
