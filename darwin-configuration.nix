@@ -49,6 +49,7 @@
 
     # C/C++
     cc
+    clang
     gcc
     # gperftools
 
@@ -109,14 +110,17 @@
     jdk
 
     # Libraries
+    gmp
+    libffi
     # libsndfile # NOTE: used by fluidsynth
     # openssl
+    zlib
 
     # Lisp/Scheme
     # clisp-tip # FIXME: https://github.com/NixOS/nixpkgs/issues/20062
     guile
     # FIXME: racket
-    # FIXME: sbcl
+    sbcl
 
     # Messaging
     # zeromq
@@ -219,7 +223,8 @@
   ]) ++ (with pkgs.haskellPackages; [
     Agda
     cabal2nix
-    # TODO: idris
+    hpack
+    idris
     # intero
     pandoc
     pointfree
