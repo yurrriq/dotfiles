@@ -162,6 +162,7 @@
     # emacs # NOTE: use Homebrew for now
 
     # Theorem Proving
+    AgdaStdlib
     # coq
 
     # Tools
@@ -215,6 +216,7 @@
   ]) ++ (with pkgs.elmPackages; [
     # elm
   ]) ++ (with pkgs.haskellPackages; [
+    Agda
     cabal2nix
     # TODO: idris
     # intero
