@@ -301,9 +301,9 @@
   # nixpkgs.config.allowBroken = true; # HACK
 
   nixpkgs.config.packageOverrides = pkgs: rec {
-    autoenv_fish = pkgs.callPackage ./pkgs/misc/autoenv_fish { };
-    camlp5 = pkgs.ocamlPackages.camlp5_6_strict;
-    coq = pkgs.coq_8_6;
+    # autoenv_fish = pkgs.callPackage ./pkgs/misc/autoenv_fish { };
+    # camlp5 = pkgs.ocamlPackages.camlp5_6_strict;
+    # camlp5 = pkgs.ocamlPackages.camlp5_6_transitional;
     erlang = pkgs.erlangR19;
     # gcc = pkgs.gcc6; # FIXME
     jdk = pkgs.openjdk8;
@@ -326,7 +326,7 @@
       };
     };
     nodejs = pkgs.nodejs-7_x;
-    ocaml = pkgs.ocaml_4_03;
+    # ocaml = pkgs.ocaml_4_03;
     # TODO: postgresql = pks.postgresql96;
     protobuf = pkgs.protobuf3_1;
     # TODO: mysql = mysql57;
