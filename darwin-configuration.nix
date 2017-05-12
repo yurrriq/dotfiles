@@ -133,6 +133,7 @@
     # Nix
     # nixops
     # nix-repl
+    nix-visualize
 
     # OCaml
     # ocaml
@@ -311,6 +312,19 @@
       fonts = with pkgs.openlilylib-fonts; [ improviso lilyjazz ];
     };
     # nixops = pkgs.callPackage ./pkgs/tools/package-management/nixops { };
+    nix-visualize = pkgs.callPackage (pkgs.fetchFromGitHub {
+      owner = "craigmbooth";
+      repo = "nix-visualize";
+      rev = "2071fe8deb92cc057371325b840b0100ca31a70a";
+      sha256 = "1hyxf5qxz9r170i6v36975kh1r04v1322wr3cdvywczr6mmi01sq";
+    }) {
+      inherit pkgs;
+      pythonPackages = with pkgs.python2Packages; {
+        inherit buildPythonPackage matplotlib networkx;
+        # HACK: pygraphviz tests are broken, so skip them.
+        pygraphviz = pygraphviz.override { doCheck = false; };
+      };
+    };
     nodejs = pkgs.nodejs-7_x;
     ocaml = pkgs.ocaml_4_03;
     # TODO: postgresql = pks.postgresql96;
