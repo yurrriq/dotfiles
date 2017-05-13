@@ -269,6 +269,14 @@
     source ${pkgs.autojump}/share/autojump/autojump.fish
   '';
 
+  environment.pathsToLink =
+    [ "/bin"
+      "/lib"
+      "/share/info"
+      "/share/locale"
+      "/share/emacs"
+    ];
+
   environment.shellAliases.gpg = "gpg2";
   environment.shellAliases.k = "clear";
   environment.shellAliases.l = "ls -Glah";
