@@ -260,9 +260,9 @@
   # '';
 
   programs.fish.interactiveShellInit = ''
-    function hicat -d 'Hackish hicat clone via highlight'
-      highlight -O xterm256 $argv | less -cR
-    end
+    # function hicat -d 'Hackish hicat clone via highlight'
+    #   highlight -O xterm256 $argv | less -cR
+    # end
 
     eval (direnv hook fish)
   '';
