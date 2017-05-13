@@ -265,6 +265,8 @@
     # end
 
     eval (direnv hook fish)
+
+    source ${pkgs.autojump}/share/autojump/autojump.fish
   '';
 
   environment.shellAliases.gpg = "gpg2";
