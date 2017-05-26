@@ -99,7 +99,7 @@
     # JavaScript
     nodejs
     npm2nix
-    nodePackages.node2nix
+
     # TODO: planck (add package)
 
     # JVM
@@ -231,6 +231,18 @@
     pointful
     # FIXME: purescript
     titlecase
+  ]) ++ (with pkgs.nodePackages; [
+    # aglio
+    diff-so-fancy
+    dispatch-proxy
+    node2nix
+    json
+    # js-beautify
+    # json-minify
+    # jsonlint
+    resume-cli
+    speed-test
+    # vmd
   ]) ++ (with pkgs.python27Packages; [
     pywatchman
   ]) ++ (with pkgs.python35Packages; [
@@ -342,6 +354,10 @@
       };
     };
     nodejs = pkgs.nodejs-7_x;
+    nodePackages = pkgs.nodePackages //
+      pkgs.callPackage ./pkgs/development/node-packages {
+        inherit pkgs nodejs;
+      };
     # ocaml = pkgs.ocaml_4_03;
     # TODO: postgresql = pks.postgresql96;
     protobuf = pkgs.protobuf3_1;
