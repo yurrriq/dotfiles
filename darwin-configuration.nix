@@ -127,6 +127,7 @@
 
     # Miscellaneous
     # FIXME: calibre
+    cowsay
     # FIXME: exercism
     # FIXME: kindlegen
     skim
@@ -287,6 +288,7 @@
       "/lib"
       "/share/info"
       "/share/locale"
+      "/share/cows"
       "/share/emacs"
     ];
 
