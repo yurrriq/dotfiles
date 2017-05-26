@@ -337,6 +337,11 @@
     # camlp5 = pkgs.ocamlPackages.camlp5_6_transitional;
     erlang = pkgs.erlangR19;
     # gcc = pkgs.gcc6; # FIXME
+    haskellPackages = pkgs.haskellPackages.override {
+      overrides = self: super: rec {
+        idris = pkgs.haskell.lib.dontHaddock super.idris;
+      };
+    };
     jdk = pkgs.openjdk8;
     mono = pkgs.mono46;
     my-lilypond = pkgs.lilypond-with-fonts.override {
