@@ -237,6 +237,7 @@
     grip
     pip
     pygments
+    setuptools
   ]);
 
   services.nix-daemon.enable = true;
