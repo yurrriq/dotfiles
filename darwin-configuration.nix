@@ -196,6 +196,7 @@
     openssh
     # p7zip
     rlwrap
+    rsync
     silver-searcher
     # FIXME: sshfs-fuse
     sloccount
