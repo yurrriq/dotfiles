@@ -285,12 +285,13 @@
   '';
 
   environment.pathsToLink =
-    [ "/bin"
-      "/lib"
-      "/share/info"
-      "/share/locale"
+    [ # "/bin"
+      # "/lib"
+      # "/share/info"
+      # "/share/locale"
       "/share/cows"
       "/share/emacs"
+      # "/Appications"
     ];
 
   environment.shellAliases.gpg = "gpg2";
