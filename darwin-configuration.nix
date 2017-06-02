@@ -237,6 +237,7 @@
     # aglio
     diff-so-fancy
     dispatch-proxy
+    hicat
     node2nix
     json
     # js-beautify
