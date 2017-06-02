@@ -244,7 +244,7 @@
     # jsonlint
     resume-cli
     speed-test
-    # vmd
+    vmd
   ]) ++ (with pkgs.python27Packages; [
     pywatchman
   ]) ++ (with pkgs.python35Packages; [
