@@ -205,6 +205,7 @@
     wakatime
     watch
     watchman
+    xorg.lndir
 
     # Virtualization
     # FIXME: xhyve
