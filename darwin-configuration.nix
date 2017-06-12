@@ -128,7 +128,7 @@
     # Miscellaneous
     # FIXME: calibre
     cowsay
-    # FIXME: exercism
+    exercism
     # FIXME: kindlegen
     skim
 
