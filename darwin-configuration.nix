@@ -38,7 +38,7 @@
     fluidsynth
     graphicsmagick
     lame
-    # FIXME: timidity
+    timidity
 
     # BEAM
     elixir
@@ -373,5 +373,8 @@
     # ocaml = pkgs.ocaml_4_03;
     # TODO: postgresql = pks.postgresql96;
     protobuf = pkgs.protobuf3_1;
+    timidity = pkgs.callPackage ./pkgs/tools/misc/timidity {
+      inherit (pkgs.darwin.apple_sdk.frameworks) CoreAudio;
+    };
   };
 }
