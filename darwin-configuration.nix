@@ -364,6 +364,7 @@
         pygraphviz = pygraphviz.override { doCheck = false; };
       };
     };
+    # TODO: mysql = mysql57;
     nodejs = pkgs.nodejs-7_x;
     nodePackages = pkgs.nodePackages //
       pkgs.callPackage ./pkgs/development/node-packages {
@@ -372,6 +373,5 @@
     # ocaml = pkgs.ocaml_4_03;
     # TODO: postgresql = pks.postgresql96;
     protobuf = pkgs.protobuf3_1;
-    # TODO: mysql = mysql57;
   };
 }
