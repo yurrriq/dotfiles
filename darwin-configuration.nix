@@ -338,7 +338,14 @@
     # autoenv_fish = pkgs.callPackage ./pkgs/misc/autoenv_fish { };
     # camlp5 = pkgs.ocamlPackages.camlp5_6_strict;
     # camlp5 = pkgs.ocamlPackages.camlp5_6_transitional;
-    erlang = pkgs.erlangR19;
+    beam = pkgs.beam // rec {
+      interpreters = pkgs.beam.interpreters // {
+        erlang = pkgs.beam.interpreters.erlangR19;
+      };
+      packages = pkgs.beam.packages // {
+        erlang = pkgs.beam.packagesWith interpreters.erlang;
+      };
+    };
     # gcc = pkgs.gcc6; # FIXME
     haskellPackages = pkgs.haskellPackages.override {
       overrides = self: super: rec {
