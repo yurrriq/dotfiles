@@ -169,7 +169,7 @@
 
     # Theorem Proving
     # AgdaStdlib
-    # coq
+    coq
 
     # Tools
     aspell
