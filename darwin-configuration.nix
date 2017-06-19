@@ -106,6 +106,7 @@
     # boot
     clojure
     leiningen
+    # FIXME: lein-nix-build
     maven
     jdk
 
@@ -353,6 +354,13 @@
       };
     };
     jdk = pkgs.openjdk8;
+    # FIXME
+    # lein-nix-build = pkgs.fetchFromGitHub {
+    #   owner = "nix-hackers";
+    #   repo = "lein-nix-build";
+    #   rev = "98add306b4b86c7f2a106e437901fd276af4631d";
+    #   sha256 = "01q2mrfj31fj2ypgvnzrxfp1b2cdr33xv7pdbqdac79zaz3pa27v";
+    # };
     mono = pkgs.mono46;
     my-lilypond = pkgs.lilypond-with-fonts.override {
       fonts = with pkgs.openlilylib-fonts; [ improviso lilyjazz ];
