@@ -37,6 +37,7 @@
     flac
     fluidsynth
     graphicsmagick
+    imagemagick
     lame
     timidity
 
@@ -353,6 +354,7 @@
         idris = pkgs.haskell.lib.dontHaddock super.idris;
       };
     };
+    imagemagick = pkgs.imagemagick7;
     jdk = pkgs.openjdk8;
     # FIXME
     # lein-nix-build = pkgs.fetchFromGitHub {
