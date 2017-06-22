@@ -95,7 +95,7 @@
     # Haskell
     cabal-install
     ghc
-    # FIXME: stack # wait for binary, I guess
+    stack # wait for binary, I guess
 
     # JavaScript
     nodejs
