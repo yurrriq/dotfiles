@@ -42,11 +42,7 @@
     timidity
 
     # BEAM
-    elixir
-    erlang
-    hex2nix
-    lfe
-    rebar3-open
+    beam.interpreters.erlangR19
 
     # C/C++
     cc
@@ -223,6 +219,11 @@
     # ngrok # TODO: 2.x
     # TODO: prometheus
     wget
+  ]) ++ (with pkgs.beam.packages.erlangR19; [
+    elixir
+    hex2nix
+    lfe
+    rebar3-open
   ]) ++ (with pkgs.elmPackages; [
     # elm
   ]) ++ (with pkgs.haskellPackages; [
@@ -340,14 +341,6 @@
     # autoenv_fish = pkgs.callPackage ./pkgs/misc/autoenv_fish { };
     # camlp5 = pkgs.ocamlPackages.camlp5_6_strict;
     # camlp5 = pkgs.ocamlPackages.camlp5_6_transitional;
-    beam = pkgs.beam // rec {
-      interpreters = pkgs.beam.interpreters // {
-        erlang = pkgs.beam.interpreters.erlangR19;
-      };
-      packages = pkgs.beam.packages // {
-        erlang = pkgs.beam.packagesWith interpreters.erlang;
-      };
-    };
     # gcc = pkgs.gcc6; # FIXME
     haskellPackages = pkgs.haskellPackages.override {
       overrides = self: super: rec {
