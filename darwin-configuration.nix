@@ -368,11 +368,7 @@
       sha256 = "1hyxf5qxz9r170i6v36975kh1r04v1322wr3cdvywczr6mmi01sq";
     }) {
       inherit pkgs;
-      pythonPackages = with pkgs.python2Packages; {
-        inherit buildPythonPackage matplotlib networkx;
-        # HACK: pygraphviz tests are broken, so skip them.
-        pygraphviz = pygraphviz.override { doCheck = false; };
-      };
+      pythonPackages = pkgs.python2Packages;
     };
     # TODO: mysql = mysql57;
     nodejs = pkgs.nodejs-7_x;
