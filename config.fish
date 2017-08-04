@@ -18,17 +18,19 @@ set fish_theme yurrriq
 
 # source ~/src/sjl/z-fish/z.fish
 
-set -x MONO_GAC_PREFIX "/usr/local"
+# set -x MONO_GAC_PREFIX "/usr/local"
 
-set -x GOPATH $HOME/src/go
-set -x PATH ~/bin $PATH $HOME/src/go/bin /usr/local/opt/go/libexec/bin
+# set -x GOPATH $HOME/src/go
+# set -x PATH ~/bin $PATH $HOME/src/go/bin /usr/local/opt/go/libexec/bin
+# set -x PATH ~/bin $PATH $HOME/src/go/bin
+set -x PATH ~/bin $PATH
 
 # set -x GHC_DOT_APP ~/Applications/ghc-7.10.2.app
 # set -x PATH $HOME/.cabal/bin $HOME/.local/bin {$GHC_DOT_APP}/Contents/bin $PATH
 set -x PATH $HOME/.cabal/bin $HOME/.local/bin $PATH
 
 # Add Idris sandbox to PATH
-set -x PATH $HOME/src/idris-lang/idris-dev/.cabal-sandbox/bin $PATH
+set -x PATH $PATH $HOME/src/idris-lang/idris-dev/.cabal-sandbox/bin
 
 # source ~/src/erlang/18.0/activate.fish
 
@@ -40,6 +42,7 @@ set -x LEIN_FAST_TRAMPOLINE y
 # set -x SLIMERJSLAUNCHER = ~/Applications/Firefox.app/Contents/MacOS/firefox
 
 set -x MANPATH $MANPATH /usr/share/man /usr/local/share/man /usr/X11/share/man
+set -x MANPATH /run/current-system/sw/share/man $MANPATH
 
 function cljsbuild
 	lein trampoline cljsbuild $argv
@@ -165,3 +168,11 @@ set -x PATH $PATH ~/.cache/rebar3/bin
 set -x PATH "$CARGO_HOME/bin" $PATH
 
 # source ~/.iterm2_shell_integration.fish
+
+# source /run/current-system/sw/share/autojump/autojump.fish
+
+# function hicat -d 'A hackish hicat clone via highlight'
+#   highlight -O xterm256 $argv | less -cR
+# end
+
+set -x PATH $PATH /usr/local/texlive/2017/bin/x86_64-darwin
