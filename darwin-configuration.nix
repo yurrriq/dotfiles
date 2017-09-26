@@ -43,6 +43,7 @@
 
     # BEAM
     beam.interpreters.erlangR19
+    # FIXME: erlang
 
     # C/C++
     cc
@@ -91,7 +92,16 @@
     # Haskell
     cabal-install
     ghc
-    stack # wait for binary, I guess
+    stack
+
+    # FIXME: Io
+    # yajl
+    # libevent
+    # pcre
+    # memcached
+    # ode
+    # sqlite
+    # io
 
     # JavaScript
     nodejs
@@ -166,7 +176,7 @@
     # emacs # NOTE: use Homebrew for now
 
     # Theorem Proving
-    # AgdaStdlib
+    AgdaStdlib
     coq
 
     # Tools
@@ -227,7 +237,7 @@
   ]) ++ (with pkgs.elmPackages; [
     # elm
   ]) ++ (with pkgs.haskellPackages; [
-    # Agda
+    Agda
     cabal2nix
     hpack
     idris
@@ -240,7 +250,7 @@
   ]) ++ (with pkgs.nodePackages; [
     # aglio
     diff-so-fancy
-    dispatch-proxy
+    # dispatch-proxy
     hicat
     node2nix
     json
@@ -248,12 +258,11 @@
     # json-minify
     # jsonlint
     resume-cli
-    speed-test
+    # speed-test
     vmd
   ]) ++ (with pkgs.python27Packages; [
     pywatchman
   ]) ++ (with pkgs.python35Packages; [
-    grip
     pip
     pygments
     setuptools
@@ -341,8 +350,14 @@
     # autoenv_fish = pkgs.callPackage ./pkgs/misc/autoenv_fish { };
     # camlp5 = pkgs.ocamlPackages.camlp5_6_strict;
     # camlp5 = pkgs.ocamlPackages.camlp5_6_transitional;
-    # gcc = pkgs.gcc6; # FIXME
-    haskellPackages = pkgs.haskellPackages.override {
+    erlang = pkgs.beam.interpreters.erlangR19.override {
+      enableDebugInfo = true;
+      installTargets = "install";
+      wxSupport = false;
+    };
+    gcc = pkgs.gcc5; # FIXME
+    ghc = haskellPackages.ghc;
+    haskellPackages = pkgs.haskell.packages.ghc802.override {
       overrides = self: super: rec {
         idris = pkgs.haskell.lib.dontHaddock super.idris;
       };
@@ -374,7 +389,8 @@
     nodejs = pkgs.nodejs-7_x;
     nodePackages = pkgs.nodePackages //
       pkgs.callPackage ./pkgs/development/node-packages {
-        inherit pkgs nodejs;
+        inherit pkgs;
+        inherit nodejs;
       };
     # ocaml = pkgs.ocaml_4_03;
     # TODO: postgresql = pks.postgresql96;
