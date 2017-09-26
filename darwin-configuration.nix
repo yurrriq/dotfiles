@@ -229,6 +229,14 @@
     # ngrok # TODO: 2.x
     # TODO: prometheus
     wget
+
+    # VoiceHive
+    # apacheHttpd
+    php56
+    php56Packages.composer
+    php56Packages.xdebug
+    # mysql55
+    netbeans
   ]) ++ (with pkgs.beam.packages.erlangR19; [
     elixir
     hex2nix
@@ -342,6 +350,16 @@
     }
   ];
 
+
+  environment.etc."php.d/php.ini".text = ''
+    zend_extension = ${pkgs.php56Packages.xdebug}/lib/php/extensions/xdebug.so
+    xdebug.remote_enable=on
+    xdebug.remote_log="/var/log/xdebug.log"
+    xdebug.remote_host=localhost
+    xdebug.remote_handler=dbgp
+    xdebug.remote_port=9000
+  '';
+
   # nix.requireSignedBinaryCaches = false; # HACK
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.config.allowBroken = true; # HACK
@@ -393,6 +411,20 @@
         inherit nodejs;
       };
     # ocaml = pkgs.ocaml_4_03;
+    php = pkgs.php56.overrideDerivation (old: {
+      postInstall = ''
+        ${old.postInstall}
+
+        cat <<EOF >$out/etc/php.ini
+        zend_extension = ${pkgs.php56Packages.xdebug}/lib/php/extensions/xdebug.so
+        xdebug.remote_enable=on
+        xdebug.remote_log="/var/log/xdebug.log"
+        xdebug.remote_host=localhost
+        xdebug.remote_handler=dbgp
+        xdebug.remote_port=9000
+        EOF
+      '';
+    });
     # TODO: postgresql = pks.postgresql96;
     protobuf = pkgs.protobuf3_1;
     timidity = pkgs.callPackage ./pkgs/tools/misc/timidity {
