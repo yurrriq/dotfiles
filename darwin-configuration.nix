@@ -91,7 +91,6 @@
 
     # Haskell
     cabal-install
-    ghc
     stack
 
     # FIXME: Io
@@ -247,6 +246,7 @@
   ]) ++ (with pkgs.haskellPackages; [
     Agda
     cabal2nix
+    ghc
     hpack
     idris
     # intero
@@ -254,7 +254,7 @@
     pointfree
     pointful
     # FIXME: purescript
-    titlecase
+    # titlecase
   ]) ++ (with pkgs.nodePackages; [
     # aglio
     diff-so-fancy
@@ -374,7 +374,6 @@
       wxSupport = false;
     };
     gcc = pkgs.gcc5; # FIXME
-    ghc = haskellPackages.ghc;
     haskellPackages = pkgs.haskell.packages.ghc802.override {
       overrides = self: super: rec {
         idris = pkgs.haskell.lib.dontHaddock super.idris;
