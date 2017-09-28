@@ -373,7 +373,8 @@
       installTargets = "install";
       wxSupport = false;
     };
-    gcc = pkgs.gcc5; # FIXME
+    # TODO: gcc = pkgs.gcc6;
+    gcc = pkgs.gcc5;
     haskellPackages = pkgs.haskell.packages.ghc802.override {
       overrides = self: super: rec {
         idris = pkgs.haskell.lib.dontHaddock super.idris;
