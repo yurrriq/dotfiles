@@ -404,6 +404,7 @@
       pythonPackages = pkgs.python2Packages;
     };
     # TODO: mysql = mysql57;
+    # TODO: nodejs = pkgs.nodejs-8_x;
     nodejs = pkgs.nodejs-7_x;
     nodePackages = pkgs.nodePackages //
       pkgs.callPackage ./pkgs/development/node-packages {
