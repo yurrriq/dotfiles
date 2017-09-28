@@ -172,7 +172,7 @@
     polyml
 
     # Text Editing
-    # emacs # NOTE: use Homebrew for now
+    emacs # NOTE: use Homebrew for now
 
     # Theorem Proving
     AgdaStdlib
