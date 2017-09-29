@@ -229,6 +229,9 @@
     # TODO: prometheus
     wget
 
+    # Maths
+    gap4r8p8
+
     # VoiceHive
     # apacheHttpd
     php56
@@ -373,6 +376,7 @@
       installTargets = "install";
       wxSupport = false;
     };
+    gap4r8p8 = pkgs.callPackage ./pkgs/applications/science/math/gap/4r8p8.nix {};
     # TODO: gcc = pkgs.gcc6;
     gcc = pkgs.gcc5;
     haskellPackages = pkgs.haskell.packages.ghc802.override {
