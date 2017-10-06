@@ -1,12 +1,3 @@
 [
-  "aglio",
-  "diff-so-fancy",
-  "dispatch-proxy",
-  "hicat",
-  "js-beautify",
-  "json-minify",
-  "jsonlint",
-  "resume-cli",
-  "speed-test",
-  "vmd"
+  "diff-so-fancy"
 ]

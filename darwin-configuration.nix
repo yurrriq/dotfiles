@@ -69,7 +69,7 @@
 
     # Engraving
     # FIXME: frescobaldi
-    my-lilypond
+    # FIXME: my-lilypond # NOTE: (guile_1_8 seem broken...)
     musescore
 
     # Git
@@ -104,7 +104,7 @@
 
     # JavaScript
     nodejs
-    npm2nix
+    # npm2nix
 
     # TODO: planck (add package)
 
@@ -176,7 +176,7 @@
     emacs # NOTE: use Homebrew for now
 
     # Theorem Proving
-    AgdaStdlib
+    # FIXME: AgdaStdlib
     coq
 
     # Tools
@@ -197,7 +197,7 @@
     gnumake
     gnused
     gnutar
-    # FIXME: highlight (g++: command not found)
+    highlight
     htop
     moreutils
     # mosh
@@ -245,12 +245,12 @@
     hex2nix
     lfe
     rebar3-open
-  ]) ++ (with pkgs.elmPackages; [
-    # elm
+  # ]) ++ (with pkgs.elmPackages; [
+  #   elm
   ]) ++ (with pkgs.haskellPackages; [
-    Agda
-    cabal2nix
-    ghc
+    # FIXME: Agda
+    # FIXME: cabal2nix # NOTE: conflict with pandoc
+    # ghc
     hpack
     idris
     # intero
@@ -263,15 +263,15 @@
     # aglio
     diff-so-fancy
     # dispatch-proxy
-    hicat
+    # FIXME: hicat
     node2nix
     json
     # js-beautify
     # json-minify
     # jsonlint
-    resume-cli
+    # resume-cli
     # speed-test
-    vmd
+    # FIXME: vmd
   ]) ++ (with pkgs; with python27Packages; [
     pygments
     pygmentsGAP
@@ -308,9 +308,9 @@
   # '';
 
   programs.fish.interactiveShellInit = ''
-    # function hicat -d 'Hackish hicat clone via highlight'
-    #   highlight -O xterm256 $argv | less -cR
-    # end
+    function hicat -d 'Hackish hicat clone via highlight'
+      highlight -O xterm256 $argv | less -cR
+    end
 
     eval (direnv hook fish)
 
@@ -385,18 +385,18 @@
       wxSupport = false;
     };
     gap4r8p8 = super.callPackage ./pkgs/applications/science/math/gap/4r8p8.nix {};
-    # TODO: gcc = super.gcc6;
-    gcc = super.gcc5;
-    haskell = super.haskell // {
-      packages = super.haskell.packages // {
-        ghc802 = super.haskell.packages.ghc802.override {
-           overrides = self: super: {
-             idris = self.dontHaddock self.idris;
-             # FIXME: idris = self.callPackage ./pkgs/development/haskell-modules/idris {};
-           };
-         };
-      };
-    };
+    # NOTE: gcc = super.gcc6;
+    # TODO
+    # haskell = super.haskell // {
+    #   packages = super.haskell.packages // {
+    #     ghc802 = super.haskell.packages.ghc802.override {
+    #        overrides = self: super: {
+    #          idris = self.dontHaddock self.idris;
+    #          # FIXME: idris = self.callPackage ./pkgs/development/haskell-modules/idris {};
+    #        };
+    #      };
+    #   };
+    # };
     imagemagick = super.imagemagick7;
     jdk = super.openjdk8;
     # FIXME
@@ -407,6 +407,8 @@
     #   sha256 = "01q2mrfj31fj2ypgvnzrxfp1b2cdr33xv7pdbqdac79zaz3pa27v";
     # };
     mono = super.mono46;
+    musescore = super.callPackage ./pkgs/applications/audio/musescore/darwin.nix {};
+    # FIXME
     my-lilypond = super.lilypond-with-fonts.override {
       fonts = with super.openlilylib-fonts; [ improviso lilyjazz ];
     };
@@ -421,8 +423,7 @@
       pythonPackages = super.python2Packages;
     };
     # TODO: mysql = mysql57;
-    # TODO: nodejs = super.nodejs-8_x;
-    nodejs = super.nodejs-7_x;
+    nodejs = super.nodejs-8_x;
     nodePackages = super.nodePackages //
       super.callPackage ./pkgs/development/node-packages {
         inherit (super) pkgs;
@@ -461,8 +462,10 @@
         pygments
       ];
     };
+    skim = super.callPackage ./pkgs/applications/misc/skim {};
     timidity = super.callPackage ./pkgs/tools/misc/timidity {
       inherit (super.darwin.apple_sdk.frameworks) CoreAudio;
     };
+    wakatime = super.callPackage ./pkgs/tools/misc/wakatime {};
   };
 }
