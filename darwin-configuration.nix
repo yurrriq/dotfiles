@@ -146,6 +146,7 @@
     # nixops
     # nix-repl
     nix-visualize
+    nix-prefetch-git
 
     # OCaml
     # ocaml
@@ -271,11 +272,13 @@
     resume-cli
     # speed-test
     vmd
-  ]) ++ (with pkgs.python27Packages; [
+  ]) ++ (with pkgs; with python27Packages; [
+    pygments
+    pygmentsGAP
     pywatchman
   ]) ++ (with pkgs.python35Packages; [
     pip
-    pygments
+    # pygments
     setuptools
   ]);
 
@@ -284,6 +287,11 @@
 
   # Recreate /run/current-system symlink after boot.
   services.activate-system.enable = true;
+
+  # TODO
+  # services.mysql.enable = true;
+  # services.mysql.package = pkgs.mysql55;
+  # services.mysql.dataDir = "/var/db";
 
   # programs.nix-script.enable = true;
 
@@ -367,61 +375,66 @@
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.config.allowBroken = true; # HACK
 
-  nixpkgs.config.packageOverrides = pkgs: rec {
-    # autoenv_fish = pkgs.callPackage ./pkgs/misc/autoenv_fish { };
-    # camlp5 = pkgs.ocamlPackages.camlp5_6_strict;
-    # camlp5 = pkgs.ocamlPackages.camlp5_6_transitional;
-    erlang = pkgs.beam.interpreters.erlangR19.override {
+  nixpkgs.config.packageOverrides = super: let self = super.pkgs; in {
+    # autoenv_fish = super.callPackage ./pkgs/misc/autoenv_fish { };
+    # camlp5 = super.ocamlPackages.camlp5_6_strict;
+    # camlp5 = super.ocamlPackages.camlp5_6_transitional;
+    erlang = super.beam.interpreters.erlangR19.override {
       enableDebugInfo = true;
       installTargets = "install";
       wxSupport = false;
     };
-    gap4r8p8 = pkgs.callPackage ./pkgs/applications/science/math/gap/4r8p8.nix {};
-    # TODO: gcc = pkgs.gcc6;
-    gcc = pkgs.gcc5;
-    haskellPackages = pkgs.haskell.packages.ghc802.override {
-      overrides = self: super: rec {
-        idris = pkgs.haskell.lib.dontHaddock super.idris;
+    gap4r8p8 = super.callPackage ./pkgs/applications/science/math/gap/4r8p8.nix {};
+    # TODO: gcc = super.gcc6;
+    gcc = super.gcc5;
+    haskell = super.haskell // {
+      packages = super.haskell.packages // {
+        ghc802 = super.haskell.packages.ghc802.override {
+           overrides = self: super: {
+             idris = self.dontHaddock self.idris;
+             # FIXME: idris = self.callPackage ./pkgs/development/haskell-modules/idris {};
+           };
+         };
       };
     };
-    imagemagick = pkgs.imagemagick7;
-    jdk = pkgs.openjdk8;
+    imagemagick = super.imagemagick7;
+    jdk = super.openjdk8;
     # FIXME
-    # lein-nix-build = pkgs.fetchFromGitHub {
+    # lein-nix-build = super.fetchFromGitHub {
     #   owner = "nix-hackers";
     #   repo = "lein-nix-build";
     #   rev = "98add306b4b86c7f2a106e437901fd276af4631d";
     #   sha256 = "01q2mrfj31fj2ypgvnzrxfp1b2cdr33xv7pdbqdac79zaz3pa27v";
     # };
-    mono = pkgs.mono46;
-    my-lilypond = pkgs.lilypond-with-fonts.override {
-      fonts = with pkgs.openlilylib-fonts; [ improviso lilyjazz ];
+    mono = super.mono46;
+    my-lilypond = super.lilypond-with-fonts.override {
+      fonts = with super.openlilylib-fonts; [ improviso lilyjazz ];
     };
-    # nixops = pkgs.callPackage ./pkgs/tools/package-management/nixops { };
-    nix-visualize = pkgs.callPackage (pkgs.fetchFromGitHub {
+    # nixops = super.callPackage ./pkgs/tools/package-management/nixops { };
+    nix-visualize = super.callPackage (super.fetchFromGitHub {
       owner = "craigmbooth";
       repo = "nix-visualize";
       rev = "2071fe8deb92cc057371325b840b0100ca31a70a";
       sha256 = "1hyxf5qxz9r170i6v36975kh1r04v1322wr3cdvywczr6mmi01sq";
     }) {
       inherit pkgs;
-      pythonPackages = pkgs.python2Packages;
+      pythonPackages = super.python2Packages;
     };
     # TODO: mysql = mysql57;
-    # TODO: nodejs = pkgs.nodejs-8_x;
-    nodejs = pkgs.nodejs-7_x;
-    nodePackages = pkgs.nodePackages //
-      pkgs.callPackage ./pkgs/development/node-packages {
-        inherit pkgs;
-        inherit nodejs;
+    # TODO: nodejs = super.nodejs-8_x;
+    nodejs = super.nodejs-7_x;
+    nodePackages = super.nodePackages //
+      super.callPackage ./pkgs/development/node-packages {
+        inherit (super) pkgs;
+        inherit (self) nodejs;
       };
-    # ocaml = pkgs.ocaml_4_03;
-    php = pkgs.php56.overrideDerivation (old: {
+    # ocaml = super.ocaml_4_03;
+    php = super.php56.overrideDerivation (old: {
       postInstall = ''
         ${old.postInstall}
 
         cat <<EOF >$out/etc/php.ini
-        zend_extension = ${pkgs.php56Packages.xdebug}/lib/php/extensions/xdebug.so
+        zend_extension = ${super.php56Packages.xdebug}/lib/php/extensions/xdebug.so
         xdebug.remote_enable=on
         xdebug.remote_log="/var/log/xdebug.log"
         xdebug.remote_host=localhost
@@ -430,10 +443,26 @@
         EOF
       '';
     });
-    # TODO: postgresql = pks.postgresql96;
-    protobuf = pkgs.protobuf3_1;
-    timidity = pkgs.callPackage ./pkgs/tools/misc/timidity {
-      inherit (pkgs.darwin.apple_sdk.frameworks) CoreAudio;
+    # TODO: postgresql = super.postgresql96;
+    protobuf = super.protobuf3_1;
+    pygmentsGAP = with super.python27Packages; buildPythonPackage rec {
+      pname = "GAPLexer";
+      version = "1.1";
+      name = "${pname}-${version}";
+
+      src = super.fetchFromGitHub {
+        owner = "yurrriq";
+        repo = "gap-pygments-lexer";
+        rev = "034ef506e4bb6a09cafa3106be0c8d8aab5ce091";
+        sha256 = "11bcwdl1019psvqb13fbgacr7z9y51dw78mnqq975fbiglqy88r1";
+      };
+
+      propagatedBuildInputs = [
+        pygments
+      ];
+    };
+    timidity = super.callPackage ./pkgs/tools/misc/timidity {
+      inherit (super.darwin.apple_sdk.frameworks) CoreAudio;
     };
   };
 }
