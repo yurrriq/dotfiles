@@ -225,6 +225,7 @@
     html-tidy
     jid
     jq
+    oniguruma
     # TODO: nginx # NOTE: will need to configure daemon too
     # ngrok # TODO: 2.x
     # TODO: prometheus
