@@ -251,7 +251,7 @@
   #   elm
   ]) ++ (with pkgs.haskellPackages; [
     # FIXME: Agda
-    # FIXME: cabal2nix # NOTE: conflict with pandoc
+    # FIXME: cabal2nix # NOTE: conflict with pandoc (and hpack and idris)
     # ghc
     hpack
     idris
