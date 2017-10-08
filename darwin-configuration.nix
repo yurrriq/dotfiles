@@ -338,6 +338,8 @@
 
   # TODO: programs.tmux
 
+  nix.gc.automatic = true;
+
   nix.nixPath = [ # Use local nixpkgs checkout instead of channels.
     "darwin=$HOME/.nix-defexpr/darwin"
     "darwin-config=$HOME/.nixpkgs/darwin-configuration.nix"
