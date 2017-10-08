@@ -36,13 +36,13 @@
     ffmpeg
     flac
     fluidsynth
-    graphicsmagick
-    imagemagick
+    # graphicsmagick
+    # imagemagick
     lame
     timidity
 
     # BEAM
-    beam.interpreters.erlangR19
+    # beam.interpreters.erlangR19
     # FIXME: erlang
 
     # C/C++
@@ -63,9 +63,9 @@
     # asciidoc
     # docbook5
     # docbook5_xsl
-    ghostscript
-    groff
-    latex2html
+    # ghostscript
+    # groff
+    # latex2html
 
     # Engraving
     # FIXME: frescobaldi
@@ -74,8 +74,8 @@
 
     # Git
     git
-    git-crypt
-    git-lfs
+    # git-crypt
+    # git-lfs
     # TODO: gitAndTools.ghi (add package)
     # NOTE: https://github.com/petervanderdoes/gitflow-avh
     gitAndTools.gitflow
@@ -90,7 +90,7 @@
     # FIXME: R
 
     # Haskell
-    cabal-install
+    # cabal-install
     stack
 
     # FIXME: Io
@@ -110,10 +110,10 @@
 
     # JVM
     # boot
-    clojure
-    leiningen
+    # clojure
+    # leiningen
     # FIXME: lein-nix-build
-    maven
+    # maven
     jdk
 
     # Libraries
@@ -125,7 +125,7 @@
 
     # Lisp/Scheme
     # clisp-tip # FIXME: https://github.com/NixOS/nixpkgs/issues/20062
-    guile
+    # guile
     # FIXME: racket
     sbcl
 
@@ -134,8 +134,8 @@
 
     # Miscellaneous
     # FIXME: calibre
-    cowsay
-    exercism
+    # cowsay
+    # exercism
     # FIXME: kindlegen
     skim
 
@@ -145,7 +145,7 @@
     # Nix
     # nixops
     # nix-repl
-    nix-visualize
+    # nix-visualize
     nix-prefetch-git
 
     # OCaml
@@ -170,34 +170,34 @@
     # FIXME: smlnj
     # NOTE: smlnj needs MaxOSX10.9.sdk
     #       Use https://github.com/devernay/xcodelegacy to install it.
-    polyml
+    # polyml
 
     # Text Editing
     emacs # NOTE: use Homebrew for now
 
     # Theorem Proving
     # FIXME: AgdaStdlib
-    coq
+    # coq
 
     # Tools
     aspell
-    aspellDicts.de
+    # aspellDicts.de
     aspellDicts.en
     aspellDicts.es
-    aspellDicts.fr
-    aspellDicts.it
+    # aspellDicts.fr
+    # aspellDicts.it
     aspellDicts.sv
     autojump
-    automake
-    awscli
+    # automake
+    # awscli
     coreutils
     # TODO: csvprintf (add package)
-    fpp
+    # fpp
     gawk
     gnumake
     gnused
     gnutar
-    highlight
+    # highlight
     htop
     moreutils
     # mosh
@@ -207,11 +207,11 @@
     rsync
     silver-searcher
     # FIXME: sshfs-fuse
-    sloccount
+    # sloccount
     # TODO: thefuck (add package)
     tree
     wakatime
-    watch
+    # watch
     watchman
     xorg.lndir
 
@@ -225,11 +225,10 @@
     html-tidy
     jid
     jq
-    oniguruma
     # TODO: nginx # NOTE: will need to configure daemon too
     # ngrok # TODO: 2.x
     # TODO: prometheus
-    wget
+    # wget
 
     # Maths
     gap4r8p8
@@ -237,15 +236,16 @@
     # VoiceHive
     # apacheHttpd
     php56
-    php56Packages.composer
-    php56Packages.xdebug
     # mysql55
     netbeans
+  ]) ++ (with pkgs.php56Packages; [
+    composer
+    xdebug
   ]) ++ (with pkgs.beam.packages.erlangR19; [
-    elixir
-    hex2nix
-    lfe
-    rebar3-open
+    # elixir
+    # hex2nix
+    # lfe
+    # rebar3-open
   # ]) ++ (with pkgs.elmPackages; [
   #   elm
   ]) ++ (with pkgs.haskellPackages; [
@@ -278,9 +278,9 @@
     pygmentsGAP
     pywatchman
   ]) ++ (with pkgs.python35Packages; [
-    pip
+    # pip
     # pygments
-    setuptools
+    # setuptools
   ]);
 
   services.nix-daemon.enable = true;
@@ -309,9 +309,9 @@
   # '';
 
   programs.fish.interactiveShellInit = ''
-    function hicat -d 'Hackish hicat clone via highlight'
-      highlight -O xterm256 $argv | less -cR
-    end
+    # function hicat -d 'Hackish hicat clone via highlight'
+    #   highlight -O xterm256 $argv | less -cR
+    # end
 
     eval (direnv hook fish)
 
