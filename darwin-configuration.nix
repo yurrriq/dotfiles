@@ -325,6 +325,7 @@
       # "/share/locale"
       "/share/cows"
       "/share/emacs"
+      "/share/gap"
       # "/Appications"
     ];
 
