@@ -231,7 +231,8 @@
     # wget
 
     # Maths
-    gap4r8p8
+    gap
+    # TODO: gap4r8p8
 
     # VoiceHive
     # apacheHttpd
