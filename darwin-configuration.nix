@@ -199,6 +199,7 @@
     gnutar
     # highlight
     htop
+    m-cli
     moreutils
     # mosh
     openssh
@@ -412,6 +413,7 @@
     #   sha256 = "01q2mrfj31fj2ypgvnzrxfp1b2cdr33xv7pdbqdac79zaz3pa27v";
     # };
     mono = super.mono46;
+    m-cli = super.callPackage ./pkgs/tools/misc/m-cli {};
     musescore = super.callPackage ./pkgs/applications/audio/musescore/darwin.nix {};
     # FIXME
     my-lilypond = super.lilypond-with-fonts.override {
