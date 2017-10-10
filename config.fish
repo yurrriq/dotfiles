@@ -18,17 +18,15 @@ set fish_theme yurrriq
 
 # source ~/src/sjl/z-fish/z.fish
 
-set -x MONO_GAC_PREFIX "/usr/local"
 
-set -x GOPATH $HOME/src/go
-set -x PATH ~/bin $PATH $HOME/src/go/bin /usr/local/opt/go/libexec/bin
+set -x PATH ~/bin $PATH
 
 # set -x GHC_DOT_APP ~/Applications/ghc-7.10.2.app
 # set -x PATH $HOME/.cabal/bin $HOME/.local/bin {$GHC_DOT_APP}/Contents/bin $PATH
 set -x PATH $HOME/.cabal/bin $HOME/.local/bin $PATH
 
 # Add Idris sandbox to PATH
-set -x PATH $HOME/src/idris-lang/idris-dev/.cabal-sandbox/bin $PATH
+set -x PATH $PATH $HOME/src/idris-lang/idris-dev/.cabal-sandbox/bin
 
 # source ~/src/erlang/18.0/activate.fish
 
@@ -95,22 +93,6 @@ end
 set -x EDITOR 'emacsclient -cnw -a "" $argv'
 set -x VISUAL $EDITOR
 
-# function nw
-# 	/Applications/nwjs.app/Contents/MacOS/nwjs $argv
-# end
-
-function __thefuck_repl -d 'Replace operators into fish-compatible'
-  set -l tmp (echo $argv | sed 's/ && / ; and /g')
-  echo $tmp | sed 's/ || / ; or /g'
-end
-
-function fuck -d 'Correct your previous console command'
-  set -l eval_script (mktemp 2>/dev/null ; or mktemp -t 'thefuck')
-  thefuck $history[1] > $eval_script
-  eval (__thefuck_repl (cat $eval_script))
-  rm $eval_script
-end
-
 function lalily
   lilypond -I lalily -djob-count=8 -dmidi-extension=mid $argv
 end
@@ -166,4 +148,3 @@ set -x PATH "$CARGO_HOME/bin" $PATH
 
 # source ~/.iterm2_shell_integration.fish
 
-source /run/current-system/sw/share/autojump/autojump.fish
