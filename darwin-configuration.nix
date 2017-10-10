@@ -32,7 +32,7 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = (with pkgs; [
-    # Audio/Video
+    ### Audio/Video ###
     ffmpeg
     flac
     fluidsynth
@@ -41,25 +41,25 @@
     lame
     timidity
 
-    # BEAM
+    ### BEAM ###
     # beam.interpreters.erlangR19
     # FIXME: erlang
 
-    # C/C++
+    ### C/C++ ###
     cc
     clang
     gcc
     # gperftools
 
-    # Cryptography
+    ### Cryptography ###
     gnupg
 
-    # Database
+    ### Database ###
     # mysql
     # postgresql
     # sqlite
 
-    # Document Preparation
+    ### Document Preparation ###
     # asciidoc
     # docbook5
     # docbook5_xsl
@@ -67,12 +67,12 @@
     # groff
     # latex2html
 
-    # Engraving
+    ### Engraving ###
     # FIXME: frescobaldi
     # FIXME: my-lilypond # NOTE: (guile_1_8 seem broken...)
     musescore
 
-    # Git
+    ### Git ###
     git
     # git-crypt
     # git-lfs
@@ -81,19 +81,19 @@
     gitAndTools.gitflow
     gitAndTools.hub
 
-    # Go
+    ### Go ###
     # go
 
-    # Graphing/Statistics
+    ### Graphing/Statistics ###
     # gnuplot
-    # FIXME: graphviz SIGSEGV
+    # graphviz
     # FIXME: R
 
-    # Haskell
+    ### Haskell ###
     # cabal-install
     stack
 
-    # FIXME: Io
+    ### FIXME: Io ###
     # yajl
     # libevent
     # pcre
@@ -102,13 +102,12 @@
     # sqlite
     # io
 
-    # JavaScript
+    ### JavaScript ###
     nodejs
-    # npm2nix
 
     # TODO: planck (add package)
 
-    # JVM
+    ### JVM ###
     # boot
     # clojure
     # leiningen
@@ -116,70 +115,68 @@
     # maven
     jdk
 
-    # Libraries
+    ### Libraries ###
     gmp
     libffi
-    # libsndfile # NOTE: used by fluidsynth
     # openssl
     zlib
 
-    # Lisp/Scheme
+    ### Lisp/Scheme ###
     # clisp-tip # FIXME: https://github.com/NixOS/nixpkgs/issues/20062
-    # guile
+    guile
     # FIXME: racket
     sbcl
 
-    # Messaging
+    ### Messaging ###
     # zeromq
 
-    # Miscellaneous
+    ### Miscellaneous ###
     # FIXME: calibre
     # cowsay
     # exercism
     # FIXME: kindlegen
     skim
 
-    # .NET
+    ### .NET ###
     # mono
 
-    # Nix
+    ### Nix ###
     # nixops
     # nix-repl
     # nix-visualize
     nix-prefetch-git
 
-    # OCaml
+    ### OCaml ###
     # ocaml
     # camlp5
     # opam
 
-    # Protocol Buffers
+    ### Protocol Buffers ###
     protobuf
 
-    # Python
+    ### Python ###
     python  # NOTE: `python2`
     python3 # NOTE: `python` (not `python3`)
 
-    # Shell
-    # autoenv_fish
+    ### Shell ###
     # FIXME: bash
     direnv
     fish
 
-    # SML
+    ### SML ###
     # FIXME: smlnj
     # NOTE: smlnj needs MaxOSX10.9.sdk
     #       Use https://github.com/devernay/xcodelegacy to install it.
     # polyml
 
-    # Text Editing
-    emacs # NOTE: use Homebrew for now
+    ### Text Editing ###
+    emacs
 
-    # Theorem Proving
+    ### Theorem Proving ###
     # FIXME: AgdaStdlib
     # coq
 
-    # Tools
+    ### Tools ###
     aspell
     # aspellDicts.de
     aspellDicts.en
@@ -191,7 +188,6 @@
     # automake
     # awscli
     coreutils
-    # TODO: csvprintf (add package)
     # fpp
     gawk
     gnumake
@@ -209,18 +205,17 @@
     silver-searcher
     # FIXME: sshfs-fuse
     # sloccount
-    # TODO: thefuck (add package)
     tree
     wakatime
     # watch
     watchman
     xorg.lndir
 
-    # Virtualization
+    ### Virtualization ###
     # FIXME: xhyve
     # src/vmm/vmm_mem.c:32:10: fatal error: 'Hypervisor/hv.h' file not found
 
-    # Web/JSON
+    ### Web/JSON ###
     curl
     httpie
     html-tidy
@@ -231,11 +226,11 @@
     # TODO: prometheus
     # wget
 
-    # Maths
+    ### Maths ###
     gap
-    # TODO: gap4r8p8
+    # gap4r8p8
 
-    # VoiceHive
+    ### VoiceHive ###
     # apacheHttpd
     php56
     # mysql55
@@ -243,7 +238,7 @@
   ]) ++ (with pkgs.php56Packages; [
     composer
     xdebug
-  ]) ++ (with pkgs.beam.packages.erlangR19; [
+  # ]) ++ (with pkgs.beam.packages.erlangR19; [
     # elixir
     # hex2nix
     # lfe
@@ -305,10 +300,6 @@
   programs.fish.variables.pkgs = "$HOME/.nix-defexpr/nixpkgs";
   programs.fish.variables.ASPELL_CONF =
     "data-dir /run/current-system/sw/lib/aspell/";
-
-  # programs.fish.shellInit = ''
-  #   source ${pkgs.autoenv_fish}/share/autoenv_fish/activate.fish
-  # '';
 
   programs.fish.interactiveShellInit = ''
     # function hicat -d 'Hackish hicat clone via highlight'
@@ -382,7 +373,6 @@
   # nixpkgs.config.allowBroken = true; # HACK
 
   nixpkgs.config.packageOverrides = super: let self = super.pkgs; in {
-    # autoenv_fish = super.callPackage ./pkgs/misc/autoenv_fish { };
     # camlp5 = super.ocamlPackages.camlp5_6_strict;
     # camlp5 = super.ocamlPackages.camlp5_6_transitional;
     erlang = super.beam.interpreters.erlangR19.override {
@@ -403,7 +393,7 @@
     #      };
     #   };
     # };
-    imagemagick = super.imagemagick7;
+    # imagemagick = super.imagemagick7;
     jdk = super.openjdk8;
     # FIXME
     # lein-nix-build = super.fetchFromGitHub {
@@ -412,22 +402,11 @@
     #   rev = "98add306b4b86c7f2a106e437901fd276af4631d";
     #   sha256 = "01q2mrfj31fj2ypgvnzrxfp1b2cdr33xv7pdbqdac79zaz3pa27v";
     # };
-    mono = super.mono46;
     m-cli = super.callPackage ./pkgs/tools/misc/m-cli {};
     musescore = super.callPackage ./pkgs/applications/audio/musescore/darwin.nix {};
     # FIXME
     my-lilypond = super.lilypond-with-fonts.override {
       fonts = with super.openlilylib-fonts; [ improviso lilyjazz ];
-    };
-    # nixops = super.callPackage ./pkgs/tools/package-management/nixops { };
-    nix-visualize = super.callPackage (super.fetchFromGitHub {
-      owner = "craigmbooth";
-      repo = "nix-visualize";
-      rev = "2071fe8deb92cc057371325b840b0100ca31a70a";
-      sha256 = "1hyxf5qxz9r170i6v36975kh1r04v1322wr3cdvywczr6mmi01sq";
-    }) {
-      inherit pkgs;
-      pythonPackages = super.python2Packages;
     };
     # TODO: mysql = mysql57;
     nodejs = super.nodejs-8_x;
@@ -451,8 +430,8 @@
         EOF
       '';
     });
-    # TODO: postgresql = super.postgresql96;
-    protobuf = super.protobuf3_1;
+    # postgresql = super.postgresql96;
+    # protobuf = super.protobuf3_1;
     pygmentsGAP = with super.python27Packages; buildPythonPackage rec {
       pname = "GAPLexer";
       version = "1.1";
