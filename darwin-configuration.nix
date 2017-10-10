@@ -248,7 +248,7 @@
   ]) ++ (with pkgs.haskellPackages; [
     # FIXME: Agda
     # FIXME: cabal2nix # NOTE: conflict with pandoc (and hpack and idris)
-    # ghc
+    ghc
     hpack
     idris
     # intero
@@ -370,6 +370,14 @@
   nixpkgs.config.allowUnfree = true;
   # nixpkgs.config.allowBroken = true; # HACK
 
+  nixpkgs.config.haskellPackageOverrides = self: super: {
+    # FIXME
+    # idris = self.callPackage ./pkgs/development/haskell-modules/idris {};
+    # dyld: Library not loaded: @rpath/libHSidris-1.1.0-JiCWSzPgxk15LdR3aY8fQf-ghc8.0.2.dylib
+    #   Referenced from: /nix/tmp/nix-build-idris-1.1.0.drv-0/Idris-dev-70f172c/libs/prelude/../../dist/build/idris/idris
+    #   Reason: image not found
+  };
+
   nixpkgs.config.packageOverrides = super: let self = super.pkgs; in {
     # camlp5 = super.ocamlPackages.camlp5_6_strict;
     # camlp5 = super.ocamlPackages.camlp5_6_transitional;
@@ -380,17 +388,6 @@
     };
     gap4r8p8 = super.callPackage ./pkgs/applications/science/math/gap/4r8p8.nix {};
     # NOTE: gcc = super.gcc6;
-    # TODO
-    # haskell = super.haskell // {
-    #   packages = super.haskell.packages // {
-    #     ghc802 = super.haskell.packages.ghc802.override {
-    #        overrides = self: super: {
-    #          idris = self.dontHaddock self.idris;
-    #          # FIXME: idris = self.callPackage ./pkgs/development/haskell-modules/idris {};
-    #        };
-    #      };
-    #   };
-    # };
     # imagemagick = super.imagemagick7;
     jdk = super.openjdk8;
     # FIXME
