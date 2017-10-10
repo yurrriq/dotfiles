@@ -155,8 +155,8 @@
     protobuf
 
     ### Python ###
-    python  # NOTE: `python2`
-    python3 # NOTE: `python` (not `python3`)
+    # python  # NOTE: `python2`
+    # python3 # NOTE: `python` (not `python3`)
 
     ### Shell ###
     # FIXME: bash
@@ -261,7 +261,6 @@
     # aglio
     diff-so-fancy
     # dispatch-proxy
-    # FIXME: hicat
     node2nix
     json
     # js-beautify
@@ -276,7 +275,7 @@
     pywatchman
   ]) ++ (with pkgs.python35Packages; [
     # pip
-    # pygments
+    pygments
     # setuptools
   ]);
 
@@ -302,9 +301,9 @@
     "data-dir /run/current-system/sw/lib/aspell/";
 
   programs.fish.interactiveShellInit = ''
-    # function hicat -d 'Hackish hicat clone via highlight'
-    #   highlight -O xterm256 $argv | less -cR
-    # end
+    function hicat -d 'Hackish hicat clone via pygments'
+      pygmentize -f terminal -g $argv | less -cR
+    end
 
     eval (direnv hook fish)
 
