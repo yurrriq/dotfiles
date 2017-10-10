@@ -293,12 +293,6 @@
 
   programs.fish.enable = true;
 
-  programs.fish.variables.cfg = "$HOME/.nixpkgs/darwin-config.nix";
-  programs.fish.variables.darwin = "$HOME/.nix-defexpr/darwin";
-  programs.fish.variables.pkgs = "$HOME/.nix-defexpr/nixpkgs";
-  programs.fish.variables.ASPELL_CONF =
-    "data-dir /run/current-system/sw/lib/aspell/";
-
   programs.fish.interactiveShellInit = ''
     function hicat -d 'Hackish hicat clone via pygments'
       pygmentize -f terminal -g $argv | less -cR
@@ -307,6 +301,10 @@
     eval (direnv hook fish)
 
     source ${pkgs.autojump}/share/autojump/autojump.fish
+  '';
+
+  programs.fish.shellInit = ''
+    set -x ASPELL_CONF "data-dir /run/current-system/sw/lib/aspell/"
   '';
 
   environment.pathsToLink =
