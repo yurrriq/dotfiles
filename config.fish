@@ -38,6 +38,7 @@ set -x LEIN_FAST_TRAMPOLINE y
 # set -x SLIMERJSLAUNCHER = ~/Applications/Firefox.app/Contents/MacOS/firefox
 
 set -x MANPATH $MANPATH /usr/share/man /usr/local/share/man /usr/X11/share/man
+set -x MANPATH /run/current-system/sw/share/man $MANPATH
 
 function cljsbuild
 	lein trampoline cljsbuild $argv
