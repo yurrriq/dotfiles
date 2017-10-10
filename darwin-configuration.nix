@@ -262,13 +262,12 @@
     diff-so-fancy
     # dispatch-proxy
     node2nix
-    json
     # js-beautify
-    # json-minify
+    json-minify
     # jsonlint
     # resume-cli
     # speed-test
-    # FIXME: vmd
+    vmd
   ]) ++ (with pkgs; with python27Packages; [
     pygments
     pygmentsGAP
@@ -408,7 +407,7 @@
       fonts = with super.openlilylib-fonts; [ improviso lilyjazz ];
     };
     # TODO: mysql = mysql57;
-    nodejs = super.nodejs-8_x;
+    nodejs = super.nodejs-6_x;
     nodePackages = super.nodePackages //
       super.callPackage ./pkgs/development/node-packages {
         inherit (super) pkgs;
