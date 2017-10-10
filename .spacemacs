@@ -5,8 +5,8 @@
 You should not put any user code in this function besides modifying the variable
 values."
   ;; HACK
-  ;; (setq with-editor-emacsclient-executable "/run/current-system/sw/bin/emacsclient")
-  (setq with-editor-emacsclient-executable "/usr/local/bin/emacsclient")
+  (setq with-editor-emacsclient-executable "/run/current-system/sw/bin/emacsclient")
+  ;; (setq with-editor-emacsclient-executable "/usr/local/bin/emacsclient")
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
@@ -32,6 +32,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    `(
+     sql
+     php
      ruby
      ruby
      javascript
@@ -64,7 +66,7 @@ values."
      ;; +emacs
      (better-defaults :variables
                       better-defaults-move-to-beginning-of-code-first t)
-     ;; (org :variables org-enable-github-support t)
+     (org :variables org-enable-github-support t)
      ;; org
      smex
      ;; (typography :variables typography-enable-typographic-editing t)
@@ -154,7 +156,8 @@ values."
                                       htmlize
                                       ess
                                       dockerfile-mode
-                                      nix-buffer)
+                                      nix-buffer
+                                      gap-mode)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -204,8 +207,8 @@ values."
    dotspacemacs-themes '(; spacemacs-dark spacemacs-light
                          monokai leuven)
    dotspacemacs-colorize-cursor-according-to-state nil
-   dotspacemacs-default-font '("Hack"
-                               :size 14
+   dotspacemacs-default-font '("Iosevka"
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
