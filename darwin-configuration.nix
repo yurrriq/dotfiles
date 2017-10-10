@@ -294,17 +294,33 @@
   programs.fish.enable = true;
 
   programs.fish.interactiveShellInit = ''
+    set fish_path $HOME/.oh-my-fish
+    set fish_theme yurrriq
+    . $fish_path/oh-my-fish.fish
+
+    eval (${pkgs.direnv}/bin/direnv hook fish)
+
+    source ${pkgs.autojump}/share/autojump/autojump.fish
+    source ~/.config/fish/secrets.fish
+
+    set -x MANPATH $MANPATH /usr/share/man /usr/local/share/man /usr/X11/share/man
+    set -x MANPATH /run/current-system/sw/share/man $MANPATH
+
     function hicat -d 'Hackish hicat clone via pygments'
       pygmentize -f terminal -g $argv | less -cR
     end
 
-    eval (direnv hook fish)
-
-    source ${pkgs.autojump}/share/autojump/autojump.fish
+    function playmidi
+    	fluidsynth -i ~/lib/arachno-soundfont/Arachno\ SoundFont\ -\ Version\ 1.0.sf2 $argv
+    end
   '';
 
   programs.fish.shellInit = ''
     set -x ASPELL_CONF "data-dir /run/current-system/sw/lib/aspell/"
+    set -x EDITOR 'emacsclient -cnw -a ""'
+    set -x PATH ~/bin /run/current-system/sw/bin $PATH /usr/local/texlive/2017/bin/x86_64-darwin
+    set -x VISUAL $EDITOR
+    set fish_greeting
   '';
 
   environment.pathsToLink =
@@ -319,6 +335,9 @@
     ];
 
   environment.shellAliases.gpg = "gpg2";
+  environment.shellAliases.e = "ec";
+  environment.shellAliases.ec = ''emacsclient -cna ""'';
+  environment.shellAliases.et = ''emacsclient -cnw -a ""'';
   environment.shellAliases.k = "clear";
   environment.shellAliases.l = "ls -Glah";
   environment.shellAliases.ll = "ls -Glh";
