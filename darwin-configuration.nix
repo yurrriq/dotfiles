@@ -298,8 +298,6 @@
     set fish_theme yurrriq
     . $fish_path/oh-my-fish.fish
 
-    eval (${pkgs.direnv}/bin/direnv hook fish)
-
     source ~/.config/fish/secrets.fish
 
     set -x MANPATH $MANPATH /usr/share/man /usr/local/share/man /usr/X11/share/man
