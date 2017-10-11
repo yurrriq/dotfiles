@@ -327,7 +327,7 @@
 
   environment.pathsToLink =
     [ # "/bin"
-      # "/lib"
+      "/lib/aspell"
       # "/share/info"
       # "/share/locale"
       "/share/cows"
