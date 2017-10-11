@@ -141,6 +141,7 @@
     # mono
 
     ### Nix ###
+    nix
     # nixops
     # nix-repl
     # nix-visualize
@@ -300,6 +301,10 @@
 
     source ~/.config/fish/secrets.fish
 
+    eval (${pkgs.direnv}/bin/direnv hook fish)
+
+    source ${pkgs.autojump}/share/autojump/autojump.fish
+
     set -x MANPATH $MANPATH /usr/share/man /usr/local/share/man /usr/X11/share/man
     set -x MANPATH /run/current-system/sw/share/man $MANPATH
 
@@ -345,9 +350,9 @@
   nix.gc.automatic = true;
 
   nix.nixPath = [ # Use local nixpkgs checkout instead of channels.
-    "darwin=$HOME/.nix-defexpr/darwin"
+    "darwin=$HOME/.nix-defexpr/channels/darwin"
     "darwin-config=$HOME/.nixpkgs/darwin-configuration.nix"
-    "nixpkgs=$HOME/.nix-defexpr/nixpkgs"
+    "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
     # "/nix/var/nix/profiles/per-user/root/channels"
   ];
 
