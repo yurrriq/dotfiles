@@ -300,7 +300,6 @@
 
     eval (${pkgs.direnv}/bin/direnv hook fish)
 
-    source ${pkgs.autojump}/share/autojump/autojump.fish
     source ~/.config/fish/secrets.fish
 
     set -x MANPATH $MANPATH /usr/share/man /usr/local/share/man /usr/X11/share/man
@@ -396,6 +395,7 @@
   };
 
   nixpkgs.config.packageOverrides = super: let self = super.pkgs; in {
+    autojump = super.callPackage ./pkgs/tools/misc/autojump {};
     # camlp5 = super.ocamlPackages.camlp5_6_strict;
     # camlp5 = super.ocamlPackages.camlp5_6_transitional;
     erlang = super.beam.interpreters.erlangR19.override {
