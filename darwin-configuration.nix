@@ -308,8 +308,12 @@
     set -x MANPATH $MANPATH /usr/share/man /usr/local/share/man /usr/X11/share/man
     set -x MANPATH /run/current-system/sw/share/man $MANPATH
 
+    function pcat
+      pygmentize -f terminal -g $argv
+    end
+
     function hicat -d 'Hackish hicat clone via pygments'
-      pygmentize -f terminal -g $argv | less -cR
+      pcat $argv | less -cR
     end
 
     function playmidi
