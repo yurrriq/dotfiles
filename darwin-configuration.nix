@@ -33,6 +33,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = (with pkgs; [
     ### Audio/Video ###
+    clementine
     ffmpeg
     flac
     fluidsynth
@@ -412,6 +413,7 @@
       installTargets = "install";
       wxSupport = false;
     };
+    clementine = super.callPackage ./pkgs/applications/audio/clementine {};
     gap4r8p8 = super.callPackage ./pkgs/applications/science/math/gap/4r8p8.nix {};
     # NOTE: gcc = super.gcc6;
     # imagemagick = super.imagemagick7;
