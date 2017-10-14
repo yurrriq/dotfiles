@@ -190,6 +190,7 @@
     # automake
     # awscli
     coreutils
+    diff-pdf
     # fpp
     gawk
     gnumake
@@ -414,6 +415,9 @@
       wxSupport = false;
     };
     clementine = super.callPackage ./pkgs/applications/audio/clementine {};
+    diff-pdf = super.callPackage ./pkgs/tools/text/diff-pdf {
+      inherit (super.darwin.apple_sdk.frameworks) Cocoa;
+    };
     gap4r8p8 = super.callPackage ./pkgs/applications/science/math/gap/4r8p8.nix {};
     # NOTE: gcc = super.gcc6;
     # imagemagick = super.imagemagick7;
