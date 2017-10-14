@@ -336,14 +336,16 @@
       # "/Appications"
     ];
 
+  environment.shellAliases.agn = "ag --nogroup";
+  environment.shellAliases.agq = "ag -Q";
+  environment.shellAliases.e   = "ec";
+  environment.shellAliases.ec  = ''emacsclient -cna ""'';
+  environment.shellAliases.et  = ''emacsclient -cnw -a ""'';
   environment.shellAliases.gpg = "gpg2";
-  environment.shellAliases.e = "ec";
-  environment.shellAliases.ec = ''emacsclient -cna ""'';
-  environment.shellAliases.et = ''emacsclient -cnw -a ""'';
-  environment.shellAliases.k = "clear";
-  environment.shellAliases.l = "ls -Glah";
-  environment.shellAliases.ll = "ls -Glh";
-  environment.shellAliases.ls = "ls -G";
+  environment.shellAliases.k   = "clear";
+  environment.shellAliases.l   = "ls -Glah";
+  environment.shellAliases.ll  = "ls -Glh";
+  environment.shellAliases.ls  = "ls -G";
 
   # TODO: programs.tmux
 
