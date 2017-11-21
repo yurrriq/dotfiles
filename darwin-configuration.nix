@@ -32,6 +32,9 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = (with pkgs; [
+    ### Fonts
+    # iosevka
+
     ### Audio/Video ###
     clementine
     ffmpeg
@@ -87,11 +90,11 @@
 
     ### Graphing/Statistics ###
     # gnuplot
-    # graphviz
+    graphviz
     # FIXME: R
 
     ### Haskell ###
-    # cabal-install
+    cabal-install
     stack
 
     ### FIXME: Io ###
@@ -135,6 +138,7 @@
     # FIXME: calibre
     # cowsay
     # exercism
+    # FIXME: gnucash
     # FIXME: kindlegen
     skim
 
@@ -149,9 +153,9 @@
     nix-prefetch-git
 
     ### OCaml ###
-    # ocaml
+    ocaml
     # camlp5
-    # opam
+    opam
 
     ### Protocol Buffers ###
     protobuf
@@ -173,6 +177,8 @@
 
     ### Text Editing ###
     emacs
+
+    literate
 
     ### Theorem Proving ###
     # FIXME: AgdaStdlib
@@ -198,6 +204,7 @@
     gnutar
     # highlight
     htop
+    indent
     m-cli
     moreutils
     # mosh
@@ -208,6 +215,7 @@
     silver-searcher
     # FIXME: sshfs-fuse
     # sloccount
+    tmux
     tree
     wakatime
     # watch
@@ -251,7 +259,9 @@
   ]) ++ (with pkgs.haskellPackages; [
     # FIXME: Agda
     # FIXME: cabal2nix # NOTE: conflict with pandoc (and hpack and idris)
+    difftodo
     ghc
+    hindent
     hpack
     idris
     # intero
@@ -259,6 +269,7 @@
     pointfree
     pointful
     # FIXME: purescript
+    stylish-haskell
     # titlecase
   ]) ++ (with pkgs.nodePackages; [
     # aglio
@@ -269,7 +280,7 @@
     json-minify
     # jsonlint
     # resume-cli
-    # speed-test
+    speed-test
     vmd
   ]) ++ (with pkgs; with python27Packages; [
     pygments
@@ -296,7 +307,7 @@
 
   programs.fish.enable = true;
 
-  programs.fish.interactiveShellInit = ''
+  programs.fish.shellInit = ''
     set fish_path $HOME/.oh-my-fish
     set fish_theme yurrriq
     . $fish_path/oh-my-fish.fish
@@ -321,13 +332,11 @@
     function playmidi
     	fluidsynth -i ~/lib/arachno-soundfont/Arachno\ SoundFont\ -\ Version\ 1.0.sf2 $argv
     end
-  '';
 
-  programs.fish.shellInit = ''
-    set -x ASPELL_CONF "data-dir /run/current-system/sw/lib/aspell/"
     set -x EDITOR 'emacsclient -cnw -a ""'
-    set -x PATH ~/bin /run/current-system/sw/bin $PATH /usr/local/texlive/2017/bin/x86_64-darwin
+    set -x PATH ~/bin $PATH /usr/local/texlive/2017/bin/x86_64-darwin
     set -x VISUAL $EDITOR
+    test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
     set fish_greeting
   '';
 
@@ -405,7 +414,7 @@
     #   Reason: image not found
   };
 
-  nixpkgs.config.packageOverrides = super: let self = super.pkgs; in {
+  nixpkgs.config.packageOverrides = super: let self = super.pkgs; in rec {
     autojump = super.callPackage ./pkgs/tools/misc/autojump {};
     # camlp5 = super.ocamlPackages.camlp5_6_strict;
     # camlp5 = super.ocamlPackages.camlp5_6_transitional;
@@ -420,6 +429,26 @@
     };
     gap4r8p8 = super.callPackage ./pkgs/applications/science/math/gap/4r8p8.nix {};
     # NOTE: gcc = super.gcc6;
+    gnucash = super.callPackage ./pkgs/applications/office/gnucash {};
+    # idrisPackages = super.callPackage ./pkgs/development/idris-modules {
+    #   idris-no-deps =
+    #     let
+    #       inherit (self.haskell) lib;
+    #       haskellPackages = self.haskellPackages.override {
+    #         overrides = self: super: {
+    #           binary = lib.dontCheck self.binary_0_8_5_1;
+    #           cheapskate = self.cheapskate_0_1_1;
+    #           idris = self.idris_1_1_1;
+    #           parsers = lib.dontCheck super.parsers;
+    #           semigroupoids = lib.dontCheck super.semigroupoids;
+    #           trifecta = lib.dontCheck super.trifecta;
+    #         };
+    #       };
+    #     in
+    #       haskellPackages.idris;
+    # };
+    # idris = idrisPackages.with-packages [ idrisPackages.base ] ;
+
     # imagemagick = super.imagemagick7;
     jdk = super.openjdk8;
     # FIXME
@@ -429,12 +458,26 @@
     #   rev = "98add306b4b86c7f2a106e437901fd276af4631d";
     #   sha256 = "01q2mrfj31fj2ypgvnzrxfp1b2cdr33xv7pdbqdac79zaz3pa27v";
     # };
+    literate = super.callPackage ./pkgs/development/tools/literate-programming/literate {};
     m-cli = super.callPackage ./pkgs/tools/misc/m-cli {};
     musescore = super.callPackage ./pkgs/applications/audio/musescore/darwin.nix {};
     # FIXME
-    my-lilypond = super.lilypond-with-fonts.override {
+    my-lilypond = (super.lilypond-with-fonts.override {
+      lilypond = super.stdenv.lib.overrideDerivation super.lilypond-unstable (p: rec {
+        majorVersion = "2.19";
+        minorVersion = "80";
+        version="${majorVersion}.${minorVersion}";
+        name = "lilypond-${version}";
+
+        src = super.fetchurl {
+          url = "http://download.linuxaudio.org/lilypond/sources/v${majorVersion}/lilypond-${version}.tar.gz";
+          sha256 = "0lql4q946gna2pl1g409mmmsvn2qvnq2z5cihrkfhk7plcqdny9n";
+        };
+
+        configureFlags = p.configureFlags ++ [ "CC=${super.cc}" ];
+      });
       fonts = with super.openlilylib-fonts; [ improviso lilyjazz ];
-    };
+    });
     # TODO: mysql = mysql57;
     nodejs = super.nodejs-6_x;
     nodePackages = super.nodePackages //
