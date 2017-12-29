@@ -215,7 +215,6 @@
     silver-searcher
     # FIXME: sshfs-fuse
     # sloccount
-    tmux
     tree
     wakatime
     # watch
@@ -305,6 +304,8 @@
 
   # programs.nix-script.enable = true;
 
+  environment.loginShell = "${pkgs.fish}/bin/fish";
+
   programs.fish.enable = true;
 
   programs.fish.shellInit = ''
@@ -362,7 +363,13 @@
   environment.shellAliases.ll  = "ls -Glh";
   environment.shellAliases.ls  = "ls -G";
 
-  # TODO: programs.tmux
+  programs.tmux.enable = true;
+
+  programs.tmux.tmuxConfig = ''
+    set-option -g default-command ${config.environment.loginShell}
+    setw -g aggressive-resize off
+    set -s escape-time 0
+  '';
 
   nix.gc.automatic = true;
 
