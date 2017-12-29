@@ -94,7 +94,7 @@
     # FIXME: R
 
     ### Haskell ###
-    cabal-install
+    # cabal-install
     stack
 
     ### FIXME: Io ###
@@ -260,7 +260,7 @@
     # FIXME: Agda
     # FIXME: cabal2nix # NOTE: conflict with pandoc (and hpack and idris)
     difftodo
-    ghc
+    # ghc
     hindent
     hpack
     idris
