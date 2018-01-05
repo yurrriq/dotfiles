@@ -17,20 +17,47 @@
   system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
 
   system.defaults.dock.autohide = true;
+  system.defaults.dock.mru-spaces = false;
   system.defaults.dock.orientation = "right";
   system.defaults.dock.showhidden = true;
-  system.defaults.dock.mru-spaces = false;
 
   system.defaults.finder.AppleShowAllExtensions = true;
-  system.defaults.finder.QuitMenuItem = true;
   system.defaults.finder.FXEnableExtensionChangeWarning = false;
+  system.defaults.finder.QuitMenuItem = true;
 
   system.defaults.trackpad.Clicking = true;
 
   # TODO: dig through https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
+  environment.etc."php.d/php.ini".text = ''
+    zend_extension = ${pkgs.php56Packages.xdebug}/lib/php/extensions/xdebug.so
+    xdebug.remote_enable=on
+    xdebug.remote_log="/var/log/xdebug.log"
+    xdebug.remote_host=localhost
+    xdebug.remote_handler=dbgp
+    xdebug.remote_port=9000
+  '';
+
+  environment.loginShell = "${pkgs.fish}/bin/fish";
+
+  environment.pathsToLink = [
+    "/lib/aspell"
+    "/share/cows"
+    "/share/emacs"
+    "/share/gap"
+  ];
+
+  environment.shellAliases.agn = "ag --nogroup";
+  environment.shellAliases.agq = "ag -Q";
+  environment.shellAliases.e   = "ec";
+  environment.shellAliases.ec  = ''emacsclient -cna ""'';
+  environment.shellAliases.et  = ''emacsclient -cnw -a ""'';
+  environment.shellAliases.gpg = "gpg2";
+  environment.shellAliases.k   = "clear";
+  environment.shellAliases.l   = "ls -Glah";
+  environment.shellAliases.ll  = "ls -Glh";
+  environment.shellAliases.ls  = "ls -G";
+
   environment.systemPackages = (with pkgs; [
     ### Fonts
     # iosevka
@@ -40,8 +67,6 @@
     ffmpeg
     flac
     fluidsynth
-    # graphicsmagick
-    # imagemagick
     lame
     timidity
 
@@ -58,11 +83,6 @@
     ### Cryptography ###
     gnupg
 
-    ### Database ###
-    # mysql
-    # postgresql
-    # sqlite
-
     ### Document Preparation ###
     # asciidoc
     # docbook5
@@ -78,10 +98,9 @@
 
     ### Git ###
     git
-    # git-crypt
+    git-crypt
     # git-lfs
     # TODO: gitAndTools.ghi (add package)
-    # NOTE: https://github.com/petervanderdoes/gitflow-avh
     gitAndTools.gitflow
     gitAndTools.hub
 
@@ -131,9 +150,6 @@
     # FIXME: racket
     sbcl
 
-    ### Messaging ###
-    # zeromq
-
     ### Miscellaneous ###
     # FIXME: calibre
     # cowsay
@@ -142,30 +158,13 @@
     # FIXME: kindlegen
     skim
 
-    ### .NET ###
-    # mono
-
     ### Nix ###
     nix
     # nixops
-    # nix-repl
-    # nix-visualize
+    nix-repl
     nix-prefetch-git
 
-    ### OCaml ###
-    ocaml
-    # camlp5
-    opam
-
-    ### Protocol Buffers ###
-    protobuf
-
-    ### Python ###
-    # python  # NOTE: `python2`
-    # python3 # NOTE: `python` (not `python3`)
-
     ### Shell ###
-    # FIXME: bash
     direnv
     fish
 
@@ -194,10 +193,10 @@
     aspellDicts.sv
     autojump
     # automake
-    # awscli
+    awscli
     coreutils
     diff-pdf
-    # fpp
+    fpp
     gawk
     gnumake
     gnused
@@ -217,7 +216,7 @@
     # sloccount
     tree
     wakatime
-    # watch
+    watch
     watchman
     xorg.lndir
 
@@ -291,23 +290,7 @@
     # setuptools
   ]);
 
-  services.nix-daemon.enable = true;
-  services.nix-daemon.tempDir = "/nix/tmp";
-
-  # Recreate /run/current-system symlink after boot.
-  services.activate-system.enable = true;
-
-  # TODO
-  # services.mysql.enable = true;
-  # services.mysql.package = pkgs.mysql55;
-  # services.mysql.dataDir = "/var/db";
-
-  # programs.nix-script.enable = true;
-
-  environment.loginShell = "${pkgs.fish}/bin/fish";
-
   programs.fish.enable = true;
-
   programs.fish.shellInit = ''
     set fish_path $HOME/.oh-my-fish
     set fish_theme yurrriq
@@ -341,50 +324,29 @@
     set fish_greeting
   '';
 
-  environment.pathsToLink =
-    [ # "/bin"
-      "/lib/aspell"
-      # "/share/info"
-      # "/share/locale"
-      "/share/cows"
-      "/share/emacs"
-      "/share/gap"
-      # "/Appications"
-    ];
-
-  environment.shellAliases.agn = "ag --nogroup";
-  environment.shellAliases.agq = "ag -Q";
-  environment.shellAliases.e   = "ec";
-  environment.shellAliases.ec  = ''emacsclient -cna ""'';
-  environment.shellAliases.et  = ''emacsclient -cnw -a ""'';
-  environment.shellAliases.gpg = "gpg2";
-  environment.shellAliases.k   = "clear";
-  environment.shellAliases.l   = "ls -Glah";
-  environment.shellAliases.ll  = "ls -Glh";
-  environment.shellAliases.ls  = "ls -G";
+  programs.nix-script.enable = true;
 
   programs.tmux.enable = true;
-
+  programs.tmux.iTerm2 = true;
   programs.tmux.tmuxConfig = ''
-    set-option -g default-command ${config.environment.loginShell}
-    setw -g aggressive-resize off
     set -s escape-time 0
   '';
 
+  services.activate-system.enable = true;
+
+  services.nix-daemon.enable = true;
+  services.nix-daemon.tempDir = "/nix/tmp";
+
   nix.gc.automatic = true;
 
-  nix.nixPath = [ # Use local nixpkgs checkout instead of channels.
+  nix.nixPath = [
     "darwin=$HOME/.nix-defexpr/channels/darwin"
     "darwin-config=$HOME/.nixpkgs/darwin-configuration.nix"
     "nixpkgs=$HOME/.nix-defexpr/channels/nixpkgs"
     # "/nix/var/nix/profiles/per-user/root/channels"
   ];
 
-  nix.maxJobs = 8;
   nix.buildCores = 4;
-  # FIXME: nix.useSandbox = "relaxed"; # NOTE: for testing
-
-  nix.distributedBuilds = true;
   nix.buildMachines = [
     # {
     #   hostName = "build-slave";
@@ -399,19 +361,7 @@
     }
   ];
 
-
-  environment.etc."php.d/php.ini".text = ''
-    zend_extension = ${pkgs.php56Packages.xdebug}/lib/php/extensions/xdebug.so
-    xdebug.remote_enable=on
-    xdebug.remote_log="/var/log/xdebug.log"
-    xdebug.remote_host=localhost
-    xdebug.remote_handler=dbgp
-    xdebug.remote_port=9000
-  '';
-
-  # nix.requireSignedBinaryCaches = false; # HACK
   nixpkgs.config.allowUnfree = true;
-  # nixpkgs.config.allowBroken = true; # HACK
 
   nixpkgs.config.haskellPackageOverrides = self: super: {
     # FIXME
@@ -423,8 +373,6 @@
 
   nixpkgs.config.packageOverrides = super: let self = super.pkgs; in rec {
     autojump = super.callPackage ./pkgs/tools/misc/autojump {};
-    # camlp5 = super.ocamlPackages.camlp5_6_strict;
-    # camlp5 = super.ocamlPackages.camlp5_6_transitional;
     erlang = super.beam.interpreters.erlangR19.override {
       enableDebugInfo = true;
       installTargets = "install";
@@ -435,7 +383,6 @@
       inherit (super.darwin.apple_sdk.frameworks) Cocoa;
     };
     gap4r8p8 = super.callPackage ./pkgs/applications/science/math/gap/4r8p8.nix {};
-    # NOTE: gcc = super.gcc6;
     gnucash = super.callPackage ./pkgs/applications/office/gnucash {};
     # idrisPackages = super.callPackage ./pkgs/development/idris-modules {
     #   idris-no-deps =
@@ -455,8 +402,6 @@
     #       haskellPackages.idris;
     # };
     # idris = idrisPackages.with-packages [ idrisPackages.base ] ;
-
-    # imagemagick = super.imagemagick7;
     jdk = super.openjdk8;
     # FIXME
     # lein-nix-build = super.fetchFromGitHub {
@@ -485,14 +430,12 @@
       });
       fonts = with super.openlilylib-fonts; [ improviso lilyjazz ];
     });
-    # TODO: mysql = mysql57;
     nodejs = super.nodejs-6_x;
     nodePackages = super.nodePackages //
       super.callPackage ./pkgs/development/node-packages {
         inherit (super) pkgs;
         inherit (self) nodejs;
       };
-    # ocaml = super.ocaml_4_03;
     php = super.php56.overrideDerivation (old: {
       postInstall = ''
         ${old.postInstall}
@@ -507,8 +450,6 @@
         EOF
       '';
     });
-    # postgresql = super.postgresql96;
-    # protobuf = super.protobuf3_1;
     pygmentsGAP = with super.python27Packages; buildPythonPackage rec {
       pname = "GAPLexer";
       version = "1.1";
@@ -531,4 +472,8 @@
     };
     wakatime = super.callPackage ./pkgs/tools/misc/wakatime {};
   };
+
+  nix.distributedBuilds = true;
+  nix.maxJobs = 8;
+  # nix.requireSignedBinaryCaches = false; # HACK
 }
