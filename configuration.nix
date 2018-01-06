@@ -36,6 +36,7 @@
     autojump
     chromium
     git
+    gitAndTools.hub
     htop
     # TODO: iosevka
     keybase
