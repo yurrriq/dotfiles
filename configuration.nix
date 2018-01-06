@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./yubikey-gpg.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -17,7 +18,6 @@
   networking.hostName = "nixps";
   networking.networkmanager.enable = true;
 
-
   i18n = {
     consoleFont = "latarcyrheb-sun32";
     consoleKeyMap = "us";
@@ -26,18 +26,29 @@
 
   time.timeZone = "America/Chicago";
 
-  environment.systemPackages = with pkgs; [
+  nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.config.packageOverrides = super: let self = super.pkgs; in {
+  };
+
+  environment.systemPackages = with pkgs; ([
+    aspell
     autojump
     chromium
-    emacs
-    # fish
     git
+    htop
+    # TODO: iosevka
+    keybase
+    psmisc
     silver-searcher
     terminator
-  ];
+  ] ++ (with haskellPackages; [
+    idris
+  ]) ++ (with xorg; [
+    xbacklight
+  ]));
 
   programs.bash.enableCompletion = true;
-  # programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -48,7 +59,8 @@
     source ${pkgs.autojump}/share/autojump/autojump.fish
   '';
 
-  # TODO: programs.tmux.enable = true;
+  # TODO
+  # programs.tmux.enable = true;
 
   environment.shellAliases.agn = "ag --nogroup";
   environment.shellAliases.agq = "ag -Q";
@@ -59,6 +71,11 @@
   environment.shellAliases.l = "ls -Glah";
   environment.shellAliases.ll = "ls -Glh";
   environment.shellAliases.ls = "ls -G";
+
+  services.emacs.enable = true;
+  services.emacs.package = import ./emacs.nix {
+    inherit (pkgs) emacsWithPackages;
+  };
 
   # services.openssh.enable = true;
 
@@ -74,9 +91,7 @@
     autorun = true;
     libinput.enable = true;
 
-    # displayManager.sddm.enable = true;
     displayManager.lightdm.enable = true;
-    # desktopManager.plasma5.enable = true;
     windowManager.i3.enable = true;
 
     monitorSection = ''
@@ -84,6 +99,8 @@
     '';
 
     xkbOptions = "ctrl:nocaps";
+    # FIXME
+    # videoDrivers = [ "displaylink" "modesetting" ];
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
