@@ -155,9 +155,7 @@
         i3.enable = true;
       };
 
-      xkbOptions = ''
-        ctrl:nocaps
-      '';
+      xkbOptions = "ctrl:nocaps";
     };
   };
 
