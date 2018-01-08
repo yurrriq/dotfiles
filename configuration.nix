@@ -68,6 +68,7 @@
   nixpkgs.config = {
     allowUnfree = true;
     packageOverrides = super: let self = super.pkgs; in {
+      docker = self.docker-edge;
     };
   };
 
@@ -169,10 +170,13 @@
     extraGroups = [
       "wheel" "disk" "audio" "video"
       "networkmanager" "systemd-journal"
+      "docker"
     ];
     createHome = true;
     uid = 1000;
     home = "/home/yurrriq";
     shell = "/run/current-system/sw/bin/fish";
   };
+
+  virtualisation.docker.enable = true;
 }
