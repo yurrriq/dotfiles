@@ -133,7 +133,7 @@
     ### JVM ###
     # boot
     # clojure
-    # leiningen
+    leiningen
     # FIXME: lein-nix-build
     # maven
     jdk
@@ -280,6 +280,8 @@
     # resume-cli
     speed-test
     vmd
+  ]) ++ (with pkgs.nodePackages_8_x; [
+    heroku-cli
   ]) ++ (with pkgs; with python27Packages; [
     pygments
     pygmentsGAP
@@ -435,7 +437,12 @@
       super.callPackage ./pkgs/development/node-packages {
         inherit (super) pkgs;
         inherit (self) nodejs;
-      };
+    };
+    nodePackages_8_x = super.nodePackages_8_x //
+      super.callPackage ./pkgs/development/node-packages-8x {
+      inherit (super) pkgs;
+      nodejs = super.nodejs-8_x;
+    };
     php = super.php56.overrideDerivation (old: {
       postInstall = ''
         ${old.postInstall}
