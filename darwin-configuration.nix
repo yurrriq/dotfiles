@@ -47,16 +47,18 @@
     "/share/gap"
   ];
 
-  environment.shellAliases.agn = "ag --nogroup";
-  environment.shellAliases.agq = "ag -Q";
-  environment.shellAliases.e   = "ec";
-  environment.shellAliases.ec  = ''emacsclient -cna ""'';
-  environment.shellAliases.et  = ''emacsclient -cnw -a ""'';
-  environment.shellAliases.gpg = "gpg2";
-  environment.shellAliases.k   = "clear";
-  environment.shellAliases.l   = "ls -Glah";
-  environment.shellAliases.ll  = "ls -Glh";
-  environment.shellAliases.ls  = "ls -G";
+  environment.shellAliases = {
+    agn = "ag --nogroup";
+    agq = "ag -Q";
+    e   = "ec";
+    ec  = ''emacsclient -cna ""'';
+    et  = ''emacsclient -cnw -a ""'';
+    gpg = "gpg2";
+    k   = "clear";
+    l   = "ls -Glah";
+    ll  = "ls -Glh";
+    ls  = "ls -G";
+  };
 
   environment.systemPackages = (with pkgs; [
     ### Fonts
@@ -482,5 +484,4 @@
 
   nix.distributedBuilds = true;
   nix.maxJobs = 8;
-  # nix.requireSignedBinaryCaches = false; # HACK
 }
