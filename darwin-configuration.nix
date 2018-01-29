@@ -433,10 +433,10 @@
       fonts = with super.openlilylib-fonts; [ improviso lilyjazz ];
     });
     nodejs = super.nodejs-6_x;
-    nodePackages = super.nodePackages //
+    nodePackages = super.nodePackages_6_x //
       super.callPackage ./pkgs/development/node-packages {
         inherit (super) pkgs;
-        inherit (self) nodejs;
+        nodejs = super.nodejs-6_x;
     };
     nodePackages_8_x = super.nodePackages_8_x //
       super.callPackage ./pkgs/development/node-packages-8x {
