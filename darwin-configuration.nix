@@ -273,6 +273,7 @@
     # titlecase
   ]) ++ (with pkgs.nodePackages; [
     # aglio
+    aws-sam-local
     diff-so-fancy
     # dispatch-proxy
     node2nix
