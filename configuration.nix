@@ -38,6 +38,7 @@
       gitAndTools.gitflow
       gitAndTools.hub
       htop
+      httpie
       keybase
       psmisc
       qpdfview
