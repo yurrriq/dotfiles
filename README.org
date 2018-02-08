@@ -1,1 +1,29 @@
 * My Dotfiles
+** hacktop
+/Config files from my MacBook Pro/
+*** fish
+Really just [[https://github.com/yurrriq/dotfiles/blob/hacktop/fish/secrets.fish][=secrets.fish=]] at this point.
+*** leiningen
+Super stale [[https://leiningen.org/][Leiningen]] config.
+*** nix
+Where the [[https://nixos.org/nix/][magic]] happens.
+*** spacemacs
+My very messy [[http://spacemacs.org/][Spacemacs]] config.
+** lost+found
+/Deprecated config files which might still be interesting/
+*** emacs
+Old, messy, somewhat literate [[https://www.gnu.org/software/emacs/][Emacs]] config.
+** nixps
+/Config files from my NixOS box (NixOS on Dell XPS 9560 ⟶ NixPS)/
+*** i3
+Near-default [[https://i3wm.org/][i3]] config.
+*** nix
+Experimentally stratified [[rmail:https://nixos.org/][NixOS]] config.
+** srus
+/Config files from my work computer/
+*** git
+[[https://git-scm.com/][Git]] config for work.
+*** nix
+[[https://nixos.org/nix/][Nix]] ([[https://github.com/LnL7/nix-darwin][Darwin]]) config for work.
+*** spacemacs
+Slightly tamed version of =hacktop/spacemacs=.
