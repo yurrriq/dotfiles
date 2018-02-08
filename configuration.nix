@@ -38,7 +38,6 @@
       gitAndTools.gitflow
       gitAndTools.hub
       htop
-      iosevka
       keybase
       psmisc
       qpdfview
@@ -53,6 +52,10 @@
       xbacklight
     ]));
   };
+
+  fonts.fonts = with pkgs; [
+    iosevka
+  ];
 
   i18n = {
     consoleFont = "latarcyrheb-sun32";
@@ -74,6 +77,10 @@
     allowUnfree = true;
     packageOverrides = super: let self = super.pkgs; in {
       docker = self.docker-edge;
+      iosevka = super.iosevka.override {
+        design = [ "ligset-idris" ];
+        set = "idris";
+      };
     };
   };
 
