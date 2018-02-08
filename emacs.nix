@@ -24,9 +24,8 @@ in
 {
   environment = {
     shellAliases = {
-      e = "ec";
-      ec = ''emacsclient -cna ""'';
-      et = ''emacsclient -cnw -a ""'';
+      e = ''emacsclient -cna ""'';
+      et  = ''emacsclient -cta ""'';
     };
   };
 
