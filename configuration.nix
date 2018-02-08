@@ -96,6 +96,9 @@
 
   security = {
     pam.enableU2F = true;
+    sudo.extraConfig = ''
+      yurrriq ALL=(ALL) NOPASSWD: ALL
+    '';
   };
 
   services = {
