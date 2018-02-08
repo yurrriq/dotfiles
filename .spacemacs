@@ -66,7 +66,7 @@ values."
      ;; +emacs
      (better-defaults :variables
                       better-defaults-move-to-beginning-of-code-first t)
-     (org :variables org-enable-github-support t)
+     ;; (org :variables org-enable-github-support t)
      ;; org
      smex
      ;; (typography :variables typography-enable-typographic-editing t)
@@ -116,7 +116,7 @@ values."
      ;; +spacemacs
      (spacemacs-editing-visual :packages rainbow-delimeters)
      (spacemacs-editing :packages origami spacemacs-whitespace-cleanup)
-     ;; spacemacs-org
+     spacemacs-org
      (spacemacs-ui-visual :packages
                           fill-column-indicator
                           hl-todo
@@ -151,7 +151,8 @@ values."
                                       shen-mode
                                       rainbow-delimiters
                                       nix-mode
-                                      org-plus-contrib
+                                      ;; org
+                                      ;; org-plus-contrib
                                       ox-gfm
                                       htmlize
                                       ess
@@ -322,6 +323,7 @@ you should place your code here."
       :back "^```$")
      (scheme-lilypond
       :submode LilyPond-mode
+
       :face    mmm-default-submode-face
       :front   "^\s+#{"
       :back    "^\s+#}")))
@@ -342,23 +344,25 @@ you should place your code here."
   ;;              (shell-command-to-string "agda-mode locate")))
   (yas-global-mode 1)
 
+  (require 'ob-sh)
+
   ;; FIXME
-  ;; (org-babel-do-load-languages
-  ;;  'org-babel-load-languages
-  ;;  '((emacs-lisp . t)
-  ;;    (haskell . t)
-  ;;    (latex . t)
-  ;;    (sh . t)
-  ;;    (coq . t)
-  ;;    (java . t)
-  ;;    (R . t)
-  ;;    ))
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (haskell . t)
+     (latex . t)
+     (sh . t)
+     ;; (coq . t)
+     ;; (java . t)
+     ;; (R . t)
+     ))
 
   ;; (global-undo-tree-mode 0)
 
   (require 'wakatime-mode)
-  (setq wakatime-cli-path "/run/current-system/sw/lib/python2.7/site-packages/wakatime/cli.py")
-  (setq wakatime-python-bin "/run/current-system/sw/bin/python2")
+  (setq wakatime-cli-path "/run/current-system/sw/bin/wakatime")
+  (setq wakatime-python-bin "")
   (global-wakatime-mode)
 
   (require 'clojure-mode)
@@ -391,7 +395,10 @@ you should place your code here."
     ;; (burn-plink :defn)
     )
 
-  (dolist (m '(clojure-mode-hook cider-repl-mode-hook))
+  (dolist (m '(clojure-mode-hook
+               cider-repl-mode-hook
+               emacs-lisp-mode-hook
+               lisp-mode-hook))
     (add-hook m #'paredit-mode)
     (add-hook m #'rainbow-delimiters-mode))
 
@@ -415,4 +422,11 @@ you should place your code here."
 
   (define-key origami-mode-map (kbd "C-c f") 'origami-recursively-toggle-node)
   (define-key origami-mode-map (kbd "C-c F") 'origami-toggle-all-nodes)
+
+  (require 'helm-bookmark)
+
+  (add-to-list 'load-path "~/src/ott-lang/ott/emacs")
+  (add-to-list 'load-path "~/src/yurrriq/noweb/src/elisp")
+  (load-file (let ((coding-system-for-read 'utf-8))
+               (shell-command-to-string "agda-mode locate")))
   )
