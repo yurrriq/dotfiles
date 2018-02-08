@@ -1,2 +1,2 @@
-{:user {:plugins [[lein-auto "0.1.3"]]
-        :certificates ["clojars.pem"]}}
+{:user {:plugins [[lein-pprint "1.1.2"]
+                  [refactor-nrepl "2.0.0-SNAPSHOT"]]}}
