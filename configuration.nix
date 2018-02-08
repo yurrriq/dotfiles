@@ -77,7 +77,7 @@
   nixpkgs.config = {
     allowUnfree = true;
     packageOverrides = super: let self = super.pkgs; in {
-      docker = self.docker-edge;
+      docker = super.docker-edge;
       iosevka = super.iosevka.override {
         design = [ "ligset-idris" ];
         set = "idris";
