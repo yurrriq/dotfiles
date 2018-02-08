@@ -16,7 +16,7 @@
     root = {
       device = "/dev/nvme0n1p2";
     };
-  };  
+  };
 
   environment = {
     shellAliases = {
@@ -27,7 +27,7 @@
       ll = "ls -Glh";
       ls = "ls -G";
     };
-    
+
     systemPackages = with pkgs; ([
       aspell
       autojump
@@ -94,24 +94,25 @@
   security = {
     pam.enableU2F = true;
   };
-  
+
   services = {
+    # nix-daemon.enable = true;
     # openssh.enable = true;
 
     # printing.enable = true;
 
     # https://raw.githubusercontent.com/Yubico/libu2f-host/af4812c/70-u2f.rules
     udev.extraRules = pkgs.stdenv.lib.strings.fileContents ./70-u2f.rules;
-    
+
     xserver = {
       autorun = true;
 
       desktopManager = {
         gnome3.enable = true;
-	xterm.enable = false;
-	default = "none";
+        xterm.enable = false;
+        default = "none";
       };
-      
+
       displayManager = {
         lightdm.enable = true;
       };
@@ -121,19 +122,19 @@
       inputClassSections = [
         ''
           Identifier "touchpad"
-	  Driver "libinput"
-	  MatchIsTouchpad "on"	 
-	  Option "AccelSpeed" "1.0"
-	''
+          Driver "libinput"
+          MatchIsTouchpad "on"
+          Option "AccelSpeed" "1.0"
+        ''
       ];
 
       layout = "us";
 
       libinput = {
         enable = true;
-	naturalScrolling = false;
-	tapping = true;
-	disableWhileTyping = true;
+        naturalScrolling = false;
+        tapping = true;
+        disableWhileTyping = true;
       };
 
       monitorSection = ''
@@ -143,9 +144,9 @@
       multitouch = {
         enable = true;
         invertScroll = true;
-	ignorePalm = true;
+        ignorePalm = true;
       };
-      
+
       # FIXME
       # videoDrivers = [
       #   "displaylink"
