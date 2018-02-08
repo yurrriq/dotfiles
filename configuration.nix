@@ -3,7 +3,11 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./applications.nix
     ./emacs.nix
+    ./git.nix
+    # ./idris.nix
+    ./shell.nix
     ./voicehive.nix
     ./yubikey-gpg.nix
   ];
@@ -20,38 +24,9 @@
   };
 
   environment = {
-    shellAliases = {
-      agn = "ag --nogroup";
-      agq = "ag -Q";
-      k = "clear";
-      l = "ls -Glah";
-      ll = "ls -Glh";
-      ls = "ls -G";
-    };
-
-    systemPackages = with pkgs; ([
-      aspell
-      autojump
-      google-chrome
-      git
-      git-crypt
-      gitAndTools.gitflow
-      gitAndTools.hub
-      htop
-      httpie
-      keybase
-      psmisc
-      qpdfview
-      silver-searcher
-      terminator
-      tree
-    ] ++ (with haskellPackages; [
-      idris
-    ]) ++ (with python35Packages; [
-      pygments
-    ]) ++ (with xorg; [
-      xbacklight
-    ]));
+    systemPackages = with pkgs; [
+      xorg.xbacklight
+    ];
   };
 
   fonts.fonts = with pkgs; [
@@ -85,38 +60,10 @@
     };
   };
 
-  programs = {
-    bash.enableCompletion = true;
-
-    fish = {
-      enable = true;
-      shellInit = pkgs.stdenv.lib.strings.fileContents ./shellInit.fish;
-    };
-
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-
-    # TODO
-    # tmux.enable = true;
-  };
-
-  security = {
-    pam.enableU2F = true;
-    sudo.extraConfig = ''
-      yurrriq ALL=(ALL) NOPASSWD: ALL
-    '';
-  };
-
   services = {
     # nix-daemon.enable = true;
     # openssh.enable = true;
-
     # printing.enable = true;
-
-    # https://raw.githubusercontent.com/Yubico/libu2f-host/af4812c/70-u2f.rules
-    udev.extraRules = pkgs.stdenv.lib.strings.fileContents ./70-u2f.rules;
 
     xserver = {
       autorun = true;

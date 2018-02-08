@@ -27,8 +27,14 @@ in
       e = ''emacsclient -cna ""'';
       et  = ''emacsclient -cta ""'';
     };
-  };
 
+    systemPackages = with pkgs; [
+      aspell
+    ] ++ (with aspellDicts; [
+      en
+    ]);
+  };
+  
   services = {
     emacs = {
       enable = true;
