@@ -44,6 +44,8 @@
       tree
     ] ++ (with haskellPackages; [
       idris
+    ]) ++ (with python35Packages; [
+      pygments
     ]) ++ (with xorg; [
       xbacklight
     ]));
@@ -77,9 +79,7 @@
 
     fish = {
       enable = true;
-      shellInit = ''
-        source ${pkgs.autojump}/share/autojump/autojump.fish
-      '';
+      shellInit = pkgs.stdenv.lib.strings.fileContents ./shellInit.fish;
     };
 
     gnupg.agent = {
