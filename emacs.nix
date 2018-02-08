@@ -11,6 +11,7 @@ let
   ]) ++ (with melpa; [
     fish-mode
     idris-mode
+    magit
     nix-mode
     paredit
   ]) ++ (with melpaStable; [
