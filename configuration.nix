@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ./emacs.nix
+    ./voicehive.nix
     ./yubikey-gpg.nix
   ];
 
@@ -33,6 +34,8 @@
       autojump
       google-chrome
       git
+      git-crypt
+      gitAndTools.gitflow
       gitAndTools.hub
       htop
       iosevka
@@ -171,7 +174,7 @@
     extraGroups = [
       "wheel" "disk" "audio" "video"
       "networkmanager" "systemd-journal"
-      "docker"
+      "docker" "http"
     ];
     createHome = true;
     uid = 1000;
