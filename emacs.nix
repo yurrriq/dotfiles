@@ -9,10 +9,11 @@ let
     org = epkgs.orgPackages;
   }; (with elpa; [
   ]) ++ (with melpa; [
+    fish-mode
     idris-mode
     nix-mode
-  ]) ++ (with melpaStable; [
     paredit
+  ]) ++ (with melpaStable; [
   ]) ++ (with org; [
   ]) ++ [
   ]);
