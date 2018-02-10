@@ -57,6 +57,7 @@
         design = [ "ligset-idris" ];
         set = "idris";
       };
+      noweb = super.callPackage ./pkgs/development/tools/literate-programming/noweb {};
     };
   };
 
