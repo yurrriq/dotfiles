@@ -7,6 +7,7 @@
     ./emacs.nix
     ./git.nix
     ./idris.nix
+    ./pass.nix
     ./shell.nix
     ./voicehive.nix
     ./yubikey-gpg.nix
