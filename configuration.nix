@@ -9,6 +9,7 @@
     ./idris.nix
     ./pass.nix
     ./shell.nix
+    ./tomb.nix
     ./voicehive.nix
     ./yubikey-gpg.nix
   ];
