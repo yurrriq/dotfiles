@@ -13,17 +13,20 @@
 
     systemPackages = with pkgs; ([
       autojump
+      gcc
+      gnumake
       htop
       httpie
       keybase
       psmisc
       silver-searcher
+      texlive.combined.scheme-full
       tree
     ]) ++ (with python35Packages; [
       pygments
     ]);
   };
-  
+
   programs = {
     bash.enableCompletion = true;
 
@@ -41,5 +44,5 @@
       yurrriq ALL=(ALL) NOPASSWD: ALL
     '';
   };
-  
+
 }

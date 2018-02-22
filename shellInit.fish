@@ -8,7 +8,7 @@ function hicat -d 'Hackish hicat clone via pygments'
 	pcat $argv | less -cR
 end
 
-set -x EDITOR 'et'
-set -x VISUAL 'e'
+set -x EDITOR 'emacsclient -cta ""';
+set -x VISUAL 'emacsclient -cna ""';
 
 set fish_greeting
