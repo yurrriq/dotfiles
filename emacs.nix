@@ -10,7 +10,7 @@ let
   }; (with elpa; [
   ]) ++ (with melpa; [
     fish-mode
-    idris-mode
+    idris-mode    
     magit
     nix-mode
     paredit

@@ -6,7 +6,7 @@
     ./applications.nix
     ./emacs.nix
     ./git.nix
-    # ./idris.nix
+    ./idris.nix
     ./shell.nix
     ./voicehive.nix
     ./yubikey-gpg.nix
