@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./applications.nix
     ./emacs.nix
+    ./erlang.nix
     ./git.nix
     ./idris.nix
     ./pass.nix
@@ -59,7 +60,7 @@
         design = [ "ligset-idris" ];
         set = "idris";
       };
-      noweb = super.callPackage ./pkgs/development/tools/literate-programming/noweb {};
+      # noweb = super.callPackage ./pkgs/development/tools/literate-programming/noweb {};
     };
   };
 
@@ -101,15 +102,19 @@
         disableWhileTyping = true;
       };
 
-      monitorSection = ''
-        DisplaySize 406 228
-      '';
+      # monitorSection = ''
+      #   DisplaySize 406 228
+      # '';
 
       multitouch = {
         enable = true;
         invertScroll = true;
         ignorePalm = true;
       };
+
+      # screenSection = ''
+      #   Option "RandRRotation" "on"
+      # '';
 
       # FIXME
       # videoDrivers = [
@@ -122,6 +127,21 @@
       };
 
       xkbOptions = "ctrl:nocaps";
+
+      xrandrHeads = [
+        # "HDMI1"
+        {
+          output = "eDP1";
+          primary = true;
+          monitorConfig = ''
+            DisplaySize 406 228
+          '';
+        }
+      ];
+      resolutions = [
+        { x = "3840"; y = "2160"; }
+        # { x = "1080"; y = "1920"; }
+      ];
     };
   };
 

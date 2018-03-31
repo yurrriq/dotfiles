@@ -17,8 +17,7 @@ let
     paredit
   ]) ++ (with melpaStable; [
   ]) ++ (with org; [
-  ]) ++ [
-  ]);
+  ]));
 
 in
 

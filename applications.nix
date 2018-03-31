@@ -6,7 +6,7 @@
       clementine
       gitg
       google-chrome
-      # FIXME: noweb
+      noweb
       qpdfview
       spotify
       terminator

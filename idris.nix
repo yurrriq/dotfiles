@@ -5,5 +5,5 @@
     systemPackages = with pkgs; [
       idris
     ];
-  };
+  };  
 }

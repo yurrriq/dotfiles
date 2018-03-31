@@ -17,10 +17,15 @@
       gnumake
       htop
       httpie
+      indent      
       keybase
+      lean
+      noweb
       psmisc
       silver-searcher
-      texlive.combined.scheme-full
+      (texlive.combine {
+        inherit (texlive) scheme-full tufte-latex;
+      })
       tree
     ]) ++ (with python35Packages; [
       pygments
