@@ -55,6 +55,7 @@
   nixpkgs.config = {
     allowUnfree = true;
     packageOverrides = super: let self = super.pkgs; in {
+      browserpass = super.callPackage ./pkgs/tools/security/browserpass {};
       docker = super.docker-edge;
       iosevka = super.iosevka.override {
         design = [ "ligset-idris" ];
