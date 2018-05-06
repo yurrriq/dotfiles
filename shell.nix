@@ -13,6 +13,7 @@
 
     systemPackages = with pkgs; ([
       autojump
+      direnv
       gcc
       gnumake
       htop
