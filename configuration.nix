@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ./applications.nix
+    # ./coq.nix
     ./emacs.nix
     ./erlang.nix
     ./git.nix
