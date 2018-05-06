@@ -28,7 +28,8 @@
         inherit (texlive) scheme-full tufte-latex;
       })
       tree
-    ]) ++ (with python35Packages; [
+    ]) ++ (with python36Packages; [
+      grip
       pygments
     ]);
   };
