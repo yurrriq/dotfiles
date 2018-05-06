@@ -6,6 +6,7 @@
       clementine
       gitg
       google-chrome
+      nix
       noweb
       qpdfview
       spotify
