@@ -2,7 +2,11 @@
 
 let
 
-  package = pkgs.emacsWithPackages (epkgs: with {
+  myEmacs = pkgs.emacs;
+
+  emacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
+
+  package = emacsWithPackages (epkgs: with {
     elpa = epkgs.elpaPackages;
     melpa = epkgs.melpaPackages;
     melpaStable = epkgs.melpaStablePackages;
@@ -11,11 +15,14 @@ let
   ]) ++ (with melpa; [
     fish-mode
     hl-todo
-    idris-mode    
+    htmlize
+    idris-mode
     magit
     nix-mode
     paredit
   ]) ++ (with melpaStable; [
+    ess
+    monokai-theme
   ]) ++ (with org; [
   ]));
 
@@ -34,7 +41,7 @@ in
       en
     ]);
   };
-  
+
   services = {
     emacs = {
       enable = true;

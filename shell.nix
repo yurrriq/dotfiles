@@ -13,13 +13,14 @@
 
     systemPackages = with pkgs; ([
       autojump
+      clang
       direnv
       gcc
       gnumake
       htop
       httpie
-      indent      
-      keybase
+      indent
+      keybase      
       lean
       noweb
       psmisc

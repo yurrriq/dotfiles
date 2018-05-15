@@ -5,6 +5,7 @@
     systemPackages = (with pkgs; [
       erlang
       emacsPackages.erlangMode
+      lfe
     ]) ++ (with pkgs.beam.packages.erlangR20; [
       hex2nix
       rebar3-open

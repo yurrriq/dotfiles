@@ -5,10 +5,11 @@
     ./hardware-configuration.nix
     ./applications.nix
     # ./coq.nix
-    ./emacs.nix
+    ./modules/emacs.nix
     ./erlang.nix
     ./git.nix
     ./idris.nix
+    ./lilypond.nix
     ./pass.nix
     ./shell.nix
     ./tomb.nix
