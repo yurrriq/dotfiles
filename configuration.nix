@@ -1,17 +1,15 @@
 { config, pkgs, ... }:
 
 let
-  _useLocalNixpkgs = false;
-
-  _nixpkgs =
-    if _useLocalNixpkgs
-      then "/home/yurrriq/src/github.com/NixOS/nixpkgs"
-      else let
-             owner = "NixOS"; repo = "nixpkgs-channels";
-             # repo = "nixpkgs"; rev = "18.03";
-             rev = "ef74cafd3e5914fdadd08bf20303328d72d65d6c";
-           in
-             "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
+  # _nixpkgs = "/home/yurrriq/src/github.com/NixOS/nixpkgs";
+  _nixpkgs = "$HOME/.nix-defexpr/channels/nixos";
+  # _nixpkgs =
+  #   let
+  #     owner = "NixOS"; repo = "nixpkgs-channels";
+  #     # repo = "nixpkgs"; rev = "18.03";
+  #     rev = "ef74cafd3e5914fdadd08bf20303328d72d65d6c";
+  #   in
+  #     "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
 in
 
 {
