@@ -20,7 +20,7 @@
       htop
       httpie
       indent
-      keybase      
+      keybase
       lean
       noweb
       psmisc
@@ -40,7 +40,7 @@
 
     fish = {
       enable = true;
-      shellInit = pkgs.stdenv.lib.strings.fileContents ./shellInit.fish;
+      shellInit = pkgs.stdenv.lib.strings.fileContents ./shell/shellInit.fish;
     };
 
     # TODO

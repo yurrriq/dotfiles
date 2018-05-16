@@ -2,17 +2,17 @@
 
 {
   environment = {
-    systemPackages = (with pkgs; [
+    systemPackages = with pkgs; [
       erlang
       emacsPackages.erlangMode
       lfe
-    ]) ++ (with pkgs.beam.packages.erlangR20; [
+    ] ++ (with beam.packages.erlangR20; [
       hex2nix
       rebar3-open
     ]);
   };
 
-  nixpkgs.config.packageOverrides = super: let self = super.pkgs; in rec {
+  nixpkgs.config.packageOverrides = super: {
     erlang = super.beam.interpreters.erlangR20.override {
       enableDebugInfo = true;
       installTargets = "install";

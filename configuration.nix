@@ -1,20 +1,33 @@
 { config, pkgs, ... }:
 
+let
+  _nixpkgs = {
+    owner = "NixOS";
+    repo = "nixpkgs-channels";
+    # rev = "1728f8e113e8038a2c1cff8c8361920d07bffebd";
+    # rev = "62ccc2324f6bface7b336da3554051786efc8815";
+    # rev = "b6a8398e2cf4f501bddcc42c7fba498366f16885";
+    rev = "ef74cafd3e5914fdadd08bf20303328d72d65d6c";
+  };
+in
+
 {
   imports = [
     ./hardware-configuration.nix
+  ] ++ [
+    ./modules/applications.nix
+    ./modules/beam.nix
+    ./modules/coq.nix
     ./modules/emacs.nix
+    ./modules/git.nix
+    ./modules/idris.nix
+    ./modules/lilypond.nix
+    ./modules/pass.nix
+    ./modules/shell.nix
+    ./modules/tomb.nix
     ./modules/yubikey-gpg.nix
-    ./applications.nix
-    # ./coq.nix
-    ./erlang.nix
-    ./git.nix
-    ./idris.nix
-    ./lilypond.nix
-    ./pass.nix
-    ./shell.nix
-    ./tomb.nix
-    ./voicehive.nix
+  ] ++ [
+    ./modules/clients/voicehive.nix
   ];
 
   boot.loader = {
@@ -55,15 +68,21 @@
     networkmanager.enable = true;
   };
 
+  nix.nixPath = [
+    # "nixpkgs=/home/yurrriq/src/github.com/NixOS/nixpkgs"
+    "nixpkgs=https://github.com/${_nixpkgs.owner}/${_nixpkgs.repo}/archive/${_nixpkgs.rev}.tar.gz"
+    "nixos-config=/etc/nixos/configuration.nix"
+  ];
+
   nixpkgs.config = {
     allowUnfree = true;
     packageOverrides = super: let self = super.pkgs; in {
       browserpass = super.callPackage ./pkgs/tools/security/browserpass {};
       docker = super.docker-edge;
-      iosevka = super.iosevka.override {
-        design = [ "ligset-idris" ];
-        set = "idris";
-      };
+      # iosevka = super.iosevka.override {
+      #   design = [ "ligset-idris" ];
+      #   set = "idris";
+      # };
       # noweb = super.callPackage ./pkgs/development/tools/literate-programming/noweb {};
     };
   };
@@ -149,7 +168,7 @@
     };
   };
 
-  system.stateVersion = "17.09";
+  system.stateVersion = "18.03";
 
   time.timeZone = "America/Chicago";
 

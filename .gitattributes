@@ -1,1 +1,1 @@
-voicehive.nix filter=git-crypt diff=git-crypt
+modules/clients/* filter=git-crypt diff=git-crypt

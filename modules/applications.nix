@@ -3,11 +3,11 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      clementine
+      # TODO: clementine
       gitg
       google-chrome
       qpdfview
-      spotify
+      # FIXME: spotify
       terminator
       # TODO: thunderbird
     ];
