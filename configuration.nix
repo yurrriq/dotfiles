@@ -30,6 +30,7 @@
 
   environment = {
     systemPackages = with pkgs; [
+      nix
       xorg.xbacklight
     ];
   };

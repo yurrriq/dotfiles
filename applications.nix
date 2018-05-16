@@ -6,7 +6,6 @@
       clementine
       gitg
       google-chrome
-      nix
       qpdfview
       spotify
       terminator
