@@ -3,9 +3,10 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./modules/emacs.nix
+    ./modules/yubikey-gpg.nix
     ./applications.nix
     # ./coq.nix
-    ./modules/emacs.nix
     ./erlang.nix
     ./git.nix
     ./idris.nix
@@ -14,7 +15,6 @@
     ./shell.nix
     ./tomb.nix
     ./voicehive.nix
-    ./yubikey-gpg.nix
   ];
 
   boot.loader = {
