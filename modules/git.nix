@@ -6,6 +6,7 @@
     git-crypt
     gitAndTools.gitflow
     gitAndTools.hub
+    gitg
     gnupg
   ];
 
