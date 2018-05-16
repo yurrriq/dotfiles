@@ -34,6 +34,8 @@ in
     ./modules/clients/voicehive.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_4_9;
+
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
