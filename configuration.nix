@@ -1,18 +1,17 @@
 { config, pkgs, ... }:
 
 let
-  _nixpkgs = {
-    owner = "NixOS";
-    repo = "nixpkgs";
-    # repo = "nixpkgs-channels";
-    rev = "18.03";
-    # rev = "9b25b9347d97caf55732213dbf45653f866f8114";
-    # rev = "1728f8e113e8038a2c1cff8c8361920d07bffebd";
-    # rev = "62ccc2324f6bface7b336da3554051786efc8815";
-    # rev = "b6a8398e2cf4f501bddcc42c7fba498366f16885";
-    # rev = "6db7f92cc2af827e8b8b181bf5ed828a1d0f141d";
-    # rev = "ef74cafd3e5914fdadd08bf20303328d72d65d6c";
-  };
+  _useLocalNixpkgs = false;
+
+  _nixpkgs =
+    if _useLocalNixpkgs
+      then "/home/yurrriq/src/github.com/NixOS/nixpkgs"
+      else let
+             owner = "NixOS"; repo = "nixpkgs-channels";
+             # repo = "nixpkgs"; rev = "18.03";
+             rev = "ef74cafd3e5914fdadd08bf20303328d72d65d6c";
+           in
+             "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
 in
 
 {
@@ -75,8 +74,7 @@ in
   };
 
   nix.nixPath = [
-    # "nixpkgs=/home/yurrriq/src/github.com/NixOS/nixpkgs"
-    "nixpkgs=https://github.com/${_nixpkgs.owner}/${_nixpkgs.repo}/archive/${_nixpkgs.rev}.tar.gz"
+    "nixpkgs=${_nixpkgs}"
     "nixos-config=/etc/nixos/configuration.nix"
   ];
 
