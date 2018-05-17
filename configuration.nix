@@ -2,7 +2,7 @@
 
 let
   # _nixpkgs = "/home/yurrriq/src/github.com/NixOS/nixpkgs";
-  _nixpkgs = "$HOME/.nix-defexpr/channels/nixos";
+  _nixpkgs = "/nix/var/nix/profiles/per-user/yurrriq/channels/nixos/nixpkgs";
   # _nixpkgs =
   #   let
   #     owner = "NixOS"; repo = "nixpkgs-channels";
