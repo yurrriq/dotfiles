@@ -90,7 +90,6 @@ in
   };
 
   services = {
-    # nix-daemon.enable = true;
     # openssh.enable = true;
     # printing.enable = true;
 
