@@ -28,7 +28,8 @@ in
     ./modules/tomb.nix
     ./modules/yubikey-gpg.nix
   ] ++ [
-    ./modules/clients/voicehive.nix
+    ./modules/clients/invisiblefriend.nix
+    # ./modules/clients/voicehive.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_4_9;
