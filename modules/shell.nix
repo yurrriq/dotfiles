@@ -24,6 +24,7 @@
       lean
       noweb
       psmisc
+      ripgrep
       silver-searcher
       (texlive.combine {
         inherit (texlive) scheme-full tufte-latex;

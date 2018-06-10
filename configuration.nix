@@ -93,6 +93,13 @@ in
     # openssh.enable = true;
     # printing.enable = true;
 
+    redshift = {
+      enable = true;
+      latitude = "44.93";
+      longitude = "-93.24";
+      temperature.night = 2300;
+    };
+
     xserver = {
       autorun = true;
 
