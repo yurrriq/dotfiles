@@ -8,7 +8,7 @@
       qpdfview
       # FIXME: spotify
       terminator
-      # TODO: thunderbird
+      thunderbird
     ];
   };
 }
