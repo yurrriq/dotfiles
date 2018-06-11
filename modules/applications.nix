@@ -7,7 +7,7 @@
       google-chrome
       libreoffice
       qpdfview
-      # FIXME: spotify
+      spotify
       terminator
       thunderbird
     ];
