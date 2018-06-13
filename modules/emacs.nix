@@ -13,6 +13,9 @@ let
     org = epkgs.orgPackages;
   }; (with elpa; [
   ]) ++ (with melpa; [
+    clj-refactor
+    clojure-mode
+    erlang
     fish-mode
     hl-todo
     htmlize

@@ -4,7 +4,6 @@
   environment = {
     systemPackages = with pkgs; [
       erlang
-      emacsPackages.erlangMode
       lfe
     ] ++ (with beam.packages.erlangR20; [
       hex2nix
