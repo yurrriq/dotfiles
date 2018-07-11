@@ -31,6 +31,7 @@ in
     ./modules/yubikey-gpg.nix
   ] ++ [
     ./modules/clients/invisiblefriend.nix
+    ./modules/clients/yellowdig.nix
     # ./modules/clients/voicehive.nix
   ];
 
