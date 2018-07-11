@@ -63,11 +63,6 @@ in
   };
 
   networking = {
-    # firewall = {
-    #   allowedTCPPorts = [ ... ];
-    #   allowedUDPPorts = [ ... ];
-    #   enable = false;
-    # };
     hostName = "nixps";
     networkmanager.enable = true;
   };
