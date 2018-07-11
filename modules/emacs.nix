@@ -17,12 +17,15 @@ let
     clojure-mode
     erlang
     fish-mode
+    fill-column-indicator
     hl-todo
     htmlize
     idris-mode
     magit
     nix-mode
     paredit
+    rainbow-delimiters
+    whitespace-cleanup-mode
   ]) ++ (with melpaStable; [
     ess
     monokai-theme
