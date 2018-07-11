@@ -1,15 +1,17 @@
 { config, pkgs, ... }:
 
 let
-  # _nixpkgs = "/home/yurrriq/src/github.com/NixOS/nixpkgs";
-  _nixpkgs = "/nix/var/nix/profiles/per-user/yurrriq/channels/nixos/nixpkgs";
-  # _nixpkgs =
-  #   let
-  #     owner = "NixOS"; repo = "nixpkgs-channels";
-  #     # repo = "nixpkgs"; rev = "18.03";
-  #     rev = "ef74cafd3e5914fdadd08bf20303328d72d65d6c";
-  #   in
-  #     "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
+  _nixpkgs =
+    let
+      inherit (builtins) fetchTarball fromJSON readFile;
+      inherit (fromJSON (readFile ./nixpkgs-src.json)) owner repo rev sha256;
+    in
+    fetchTarball {
+      url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
+      inherit sha256;
+    };
+    # "$HOME/src/github.com/NixOS/nixpkgs";
+    # "$HOME/.nix-defexpr/channels/nixpkgs";
 in
 
 {
