@@ -1,0 +1,35 @@
+[user]
+email = eric@ericb.me
+name = Eric Bailey
+signingkey = 2F5FC34496E6DA1115F7F5D31E374869A79B56B1
+[core]
+excludesfile = ~/.gitignore_global
+[commit]
+gpgsign = false
+template = ~/.gitmessage
+[color "status"]
+added = green
+changed = yellow
+untracked = cyan
+[alias]
+co = checkout
+cob = checkout -b
+ca = commit --amend
+cam = commit --amend --no-edit -m
+can = commit --amend --no-edit
+cans = commit --amend --no-edit -S
+casm = commit --amend -S -m
+cm = commit -m
+csm = commit -S -m
+cs = crypt status
+cse = crypt status -e
+csu = crypt status -u
+tree = log --all --graph --oneline
+r = reset
+rh = reset --hard
+sl = stash list
+sa = stash apply
+sp = stash pop
+ss = stash save
+st = status -s
+rest = reset

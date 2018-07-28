@@ -1,0 +1,104 @@
+* =.gitconfig=
+  :PROPERTIES:
+  :header-args: :padline no :tangle .gitconfig
+  :END:
+** User
+Set my name, email and GPG key (for signing commits).
+#+BEGIN_SRC ini
+[user]
+email = eric@ericb.me
+name = Eric Bailey
+signingkey = 2F5FC34496E6DA1115F7F5D31E374869A79B56B1
+#+END_SRC
+** Core
+#+BEGIN_SRC ini
+[core]
+excludesfile = ~/.gitignore_global
+#+END_SRC
+** Commit
+#+BEGIN_SRC ini
+[commit]
+gpgsign = false
+template = ~/.gitmessage
+#+END_SRC
+** Color
+*** Status
+#+BEGIN_SRC ini
+[color "status"]
+added = green
+changed = yellow
+untracked = cyan
+#+END_SRC
+** Alias
+#+BEGIN_SRC ini :exports none
+[alias]
+#+END_SRC
+*** Checkout
+#+BEGIN_SRC ini
+co = checkout
+cob = checkout -b
+#+END_SRC
+*** Commit
+#+BEGIN_SRC ini
+ca = commit --amend
+cam = commit --amend --no-edit -m
+can = commit --amend --no-edit
+cans = commit --amend --no-edit -S
+casm = commit --amend -S -m
+cm = commit -m
+csm = commit -S -m
+#+END_SRC
+*** =git-crypt= Status
+#+BEGIN_SRC ini
+cs = crypt status
+cse = crypt status -e
+csu = crypt status -u
+#+END_SRC
+*** Log
+#+BEGIN_SRC ini
+tree = log --all --graph --oneline
+#+END_SRC
+*** Reset
+#+BEGIN_SRC ini
+r = reset
+rh = reset --hard
+#+END_SRC
+*** Stash
+#+BEGIN_SRC ini
+sl = stash list
+sa = stash apply
+sp = stash pop
+ss = stash save
+#+END_SRC
+*** Status
+#+BEGIN_SRC ini
+st = status -s
+#+END_SRC
+*** Typos
+#+BEGIN_SRC ini
+rest = reset
+#+END_SRC
+* =.gitignore_global=
+  :PROPERTIES:
+  :header-args: :padline no :tangle .gitignore_global
+  :END:
+#+BEGIN_SRC ini
+*~
+#+END_SRC
+
+* =.gitmessage=
+  :PROPERTIES:
+  :header-args: :padline no :tangle .gitmessage
+  :END:
+#+BEGIN_SRC sh
+# If applied, this commit will...
+
+# Why is this change needed?
+Prior to this change,
+
+# How does it address the issue?
+This change
+
+# Provide links to any relevant tickets, articles or other resources
+
+#+END_SRC
