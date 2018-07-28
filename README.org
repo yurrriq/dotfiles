@@ -54,6 +54,15 @@ cs = crypt status
 cse = crypt status -e
 csu = crypt status -u
 #+END_SRC
+*** =git-flow=
+#+BEGIN_SRC ini
+ffco = flow feature checkout
+ffr = flow feature rebase
+ffs = flow feature start
+frs = flow release start
+frf = flow release finish
+frfs = flow release finish -s
+#+END_SRC
 *** Log
 #+BEGIN_SRC ini
 tree = log --all --graph --oneline
