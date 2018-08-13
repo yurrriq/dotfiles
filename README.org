@@ -1,40 +1,30 @@
 #+STARTUP: showall
 * My Dotfiles
-** hacktop
+** Hacktop
 /Config files from my MacBook Pro/
-*** fish
-/[[https://github.com/yurrriq/dotfiles/tree/hacktop/fish][hacktop/fish]]/
-Really just [[https://github.com/yurrriq/dotfiles/blob/hacktop/fish/secrets.fish][secrets.fish]] at this point.
-*** leiningen
-/[[https://github.com/yurrriq/dotfiles/tree/hacktop/leiningen][hacktop/leiningen]]/
-Super stale [[https://leiningen.org/][Leiningen]] config.
-*** nix
-/[[https://github.com/yurrriq/dotfiles/tree/hacktop/nix][hacktop/nix]]/
-Where the [[https://nixos.org/nix/][magic]] happens.
-*** spacemacs
-/[[https://github.com/yurrriq/dotfiles/tree/hacktop/spacemacs][hacktop/spacemacs]]/
-My very messy [[http://spacemacs.org/][Spacemacs]] config.
+- /[[https://github.com/yurrriq/dotfiles/tree/hacktop/fish][hacktop/fish]]/
+  Really just [[https://github.com/yurrriq/dotfiles/blob/hacktop/fish/secrets.fish][secrets.fish]] at this point.
+- /[[https://github.com/yurrriq/dotfiles/tree/hacktop/leiningen][hacktop/leiningen]]/
+  Super stale [[https://leiningen.org/][Leiningen]] config.
+- /[[https://github.com/yurrriq/dotfiles/tree/hacktop/nix][hacktop/nix]]/
+  Where the [[https://nixos.org/nix/][magic]] happens.
+- /[[https://github.com/yurrriq/dotfiles/tree/hacktop/spacemacs][hacktop/spacemacs]]/
+  My very messy [[http://spacemacs.org/][Spacemacs]] config.
 ** lost+found
 /Deprecated config files which might still be interesting/
-*** emacs
-/[[https://github.com/yurrriq/dotfiles/tree/lost+found/emacs][lost+found/emacs]]/
-Old, messy, somewhat literate [[https://www.gnu.org/software/emacs/][Emacs]] config.
-** nixps
+- /[[https://github.com/yurrriq/dotfiles/tree/lost+found/emacs][lost+found/emacs]]/
+  Old, messy, somewhat literate [[https://www.gnu.org/software/emacs/][Emacs]] config.
+** NixPS
 /Config files from my NixOS box (NixOS on Dell XPS 9560 ⟶ NixPS)/
-*** i3
-/[[https://github.com/yurrriq/dotfiles/tree/nixps/i3][nixps/i3]]/
-Near-default [[https://i3wm.org/][i3]] config.
-*** nix
-/[[https://github.com/yurrriq/dotfiles/tree/nixps/nix][nixps/nix]]/
-Experimentally stratified [[rmail:https://nixos.org/][NixOS]] config.
-** srus
+- /[[https://github.com/yurrriq/dotfiles/tree/nixps/i3][nixps/i3]]/
+  Near-default [[https://i3wm.org/][i3]] config.
+- /[[https://github.com/yurrriq/dotfiles/tree/nixps/nix][nixps/nix]]/
+  Experimentally stratified [[rmail:https://nixos.org/][NixOS]] config.
+** SRUS
 /Config files from my work computer/
-*** git
-/[[https://github.com/yurrriq/dotfiles/tree/srus/git][srus/git]]/
-[[https://git-scm.com/][Git]] config for work.
-*** nix
-/[[https://github.com/yurrriq/dotfiles/tree/srus/nix][srus/nix]]/
-[[https://nixos.org/nix/][Nix]] ([[https://github.com/LnL7/nix-darwin][Darwin]]) config for work.
-*** spacemacs
-/[[https://github.com/yurrriq/dotfiles/tree/srus/spacemacs][srus/spacemcs]]/
-Updated and slimmed down version of /[[https://github.com/yurrriq/dotfiles/tree/hacktop/spacemacs][hacktop/spacemacs]]/.
+- /[[https://github.com/yurrriq/dotfiles/tree/srus/git][srus/git]]/
+  [[https://git-scm.com/][Git]] config for work.
+- /[[https://github.com/yurrriq/dotfiles/tree/srus/nix][srus/nix]]/
+  [[https://nixos.org/nix/][Nix]] ([[https://github.com/LnL7/nix-darwin][Darwin]]) config for work.
+- /[[https://github.com/yurrriq/dotfiles/tree/srus/spacemacs][srus/spacemcs]]/
+  Updated and slimmed down version of /[[https://github.com/yurrriq/dotfiles/tree/hacktop/spacemacs][hacktop/spacemacs]]/.
