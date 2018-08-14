@@ -16,11 +16,13 @@ in
 
 {
   imports = [
+    ./config/applications.nix
     ./config/beam.nix
     ./config/dhall.nix
     ./config/gap.nix
     ./config/git.nix
     ./config/haskell.nix
+    ./config/java.nix
     ./config/node.nix
     ./config/k8s.nix
     ./config/shell.nix
@@ -30,14 +32,10 @@ in
   environment.systemPackages = (with pkgs; [
     aspell
     aspellDicts.en
-    clementine
-    # copyq
     emacs
     gcc
     gnupg
     graphviz
-    jdk
-    # FIXME: kdiff3
     ncurses
     nix
     nix-prefetch-git
@@ -45,7 +43,6 @@ in
     pcre
     python
     python3
-    skim
     vim
     zlib
     ]) ++ (with pkgs.python27Packages; [
@@ -85,11 +82,4 @@ in
   };
 
   nixpkgs.config.allowUnfree = true;
-
-  nixpkgs.config.packageOverrides = super: {
-    clementine = super.callPackage ./pkgs/applications/audio/clementine {};
-    copyq = super.callPackage ./pkgs/applications/misc/copyq {};
-    jdk = super.openjdk8;
-    skim = super.callPackage ./pkgs/applications/misc/skim {};
-  };
 }
