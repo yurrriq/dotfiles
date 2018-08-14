@@ -1,15 +1,19 @@
-profile ?= srus
-
-configs = \
-	emacs \
-	git \
-	nix
+profile   ?= srus
+notconfigs = Makefile README.org
+configs    = $(filter-out ${notconfigs},$(wildcard *))
 
 
 .PHONY: all ${configs}
 
 all: ${configs}
 
+
 ${configs}:
-	@ ${MAKE} -C $@/${profile}
-	stow -Rvt ${HOME} ${profile} -d $@
+ifneq (,$(findstring B,$(MAKEFLAGS)))
+		if [ -f $@/${profile}/Makefile ]; then \
+			${MAKE} -C $@/${profile} ; \
+		fi
+endif
+	@ if [ -d $@/${profile} ]; then \
+		stow -Rvt ${HOME} ${profile} -d $@ ; \
+	fi
