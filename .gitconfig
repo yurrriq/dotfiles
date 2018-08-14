@@ -4,9 +4,24 @@ name = Eric Bailey
 signingkey = 2F5FC34496E6DA1115F7F5D31E374869A79B56B1
 [core]
 excludesfile = ~/.gitignore_global
+pager = diff-so-fancy | less --tabs=4 -RFX
 [commit]
 gpgsign = false
 template = ~/.gitmessage
+[color]
+ui = true
+[color "diff-highlight"]
+oldNormal = red bold
+oldHighlight = red bold 52
+newNormal = green bold
+newHighlight = green bold 22
+[color "diff"]
+meta = 227
+frag = magenta bold
+commit = 227 bold
+old = red bold
+new = green bold
+whitespace = red reverse
 [color "status"]
 added = green
 changed = yellow
@@ -18,6 +33,7 @@ ca = commit --amend
 cam = commit --amend --no-edit -m
 can = commit --amend --no-edit
 cans = commit --amend --no-edit -S
+cas = commit --amend -S
 casm = commit --amend -S -m
 cm = commit -m
 csm = commit -S -m
@@ -31,6 +47,11 @@ frs = flow release start
 frf = flow release finish
 frfs = flow release finish -s
 tree = log --all --graph --oneline
+rb = rebase
+rba = rebase --abort
+rbc = rebase --continue
+rbi = rebase --interactive
+rbs = rebase --skip
 r = reset
 rh = reset --hard
 sl = stash list
