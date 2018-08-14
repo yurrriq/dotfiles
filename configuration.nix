@@ -77,6 +77,12 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
+  programs.tomb = {
+    enable = true;
+    resize = true;
+    slam = true;
+  };
+
   security.sudo.extraConfig = ''
     yurrriq ALL=(ALL) NOPASSWD: ALL
   '';

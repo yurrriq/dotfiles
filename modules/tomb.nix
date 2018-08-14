@@ -28,7 +28,7 @@ in
         description = ''
           Whether to enable fast entropy generation for key forging.
         '';
-        types = types.bool;
+        type = types.bool;
       };
 
       qrcode = mkOption {
@@ -36,7 +36,7 @@ in
         description = ''
           Whether to enable engraving keys into printable QR code sheets.
         '';
-        types = types.bool;
+        type = types.bool;
       };
 
       resize = mkOption {
@@ -44,7 +44,7 @@ in
         description = ''
           Whether to enable extending the size of existing tomb volumes.
         '';
-        types = types.bool;
+        type = types.bool;
       };
 
       searchArchives = mkOption {
@@ -52,15 +52,15 @@ in
         description = ''
           Whether to enable fast searching of contents in compressed archives.
         '';
-        types = types.bool;
+        type = types.bool;
       };
 
       searchContents= mkOption {
         default = false;
         description = ''
-          Whether to enable fast searching of file contenst inside tombs.
+          Whether to enable fast searching of file contents inside tombs.
         '';
-        types = types.bool;
+        type = types.bool;
       };
 
       searchDocuments = mkOption {
@@ -68,7 +68,7 @@ in
         description = ''
           Whether to enable fast searching of contents in PDF and DOC files.
         '';
-        types = types.bool;
+        type = types.bool;
       };
 
       searchNames = mkOption {
@@ -76,7 +76,7 @@ in
         description = ''
           Whether to enable fast searching of file names inside tombs.
         '';
-        types = types.bool;
+        type = types.bool;
       };
 
       showProgress = mkOption {
@@ -84,7 +84,7 @@ in
         description = ''
           Whether to show progress while digging tombs and keys.
         '';
-        types = types.bool;
+        type = types.bool;
       };
 
       slam = mkOption {
@@ -92,7 +92,7 @@ in
         description = ''
           Whether to enable slamming a tomb.
         '';
-        types = types.bool;
+        type = types.bool;
       };
 
       steganography = mkOption {
@@ -100,7 +100,7 @@ in
         description = ''
           Whether to enable burying and exhuming keys inside images.
         '';
-        types = types.bool;
+        type = types.bool;
       };
     };
   };
