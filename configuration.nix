@@ -20,6 +20,7 @@ in
   ] ++ [
     ./modules/applications.nix
     ./modules/beam.nix
+    ./modules/docker.nix
     ./modules/emacs.nix
     ./modules/engraving.nix
     ./modules/git.nix
@@ -78,7 +79,6 @@ in
     allowUnfree = true;
     packageOverrides = super: let self = super.pkgs; in {
       browserpass = super.callPackage ./pkgs/tools/security/browserpass {};
-      docker = super.docker-edge;
       # iosevka = super.iosevka.override {
       #   design = [ "ligset-idris" ];
       #   set = "idris";
@@ -184,13 +184,11 @@ in
     extraGroups = [
       "wheel" "disk" "audio" "video"
       "networkmanager" "systemd-journal"
-      "docker" "http"
+      "http"
     ];
     createHome = true;
     uid = 1000;
     home = "/home/yurrriq";
     shell = "/run/current-system/sw/bin/fish";
   };
-
-  virtualisation.docker.enable = true;
 }
