@@ -1,19 +1,19 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
+
   environment.systemPackages = with pkgs; [
     git
+    git-cola
     git-crypt
     gitAndTools.gitflow
     gitAndTools.hub
-    gitg
     gnupg
   ];
 
-  programs = {
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
   };
+
 }

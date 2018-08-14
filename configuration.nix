@@ -75,17 +75,11 @@ in
     "nixos-config=/etc/nixos/configuration.nix"
   ];
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    packageOverrides = super: let self = super.pkgs; in {
-      browserpass = super.callPackage ./pkgs/tools/security/browserpass {};
-      # iosevka = super.iosevka.override {
-      #   design = [ "ligset-idris" ];
-      #   set = "idris";
-      # };
-      # noweb = super.callPackage ./pkgs/development/tools/literate-programming/noweb {};
-    };
-  };
+  nixpkgs.config.allowUnfree = true;
+
+  security.sudo.extraConfig = ''
+    yurrriq ALL=(ALL) NOPASSWD: ALL
+  '';
 
   services = {
     # openssh.enable = true;

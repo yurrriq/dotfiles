@@ -1,15 +1,14 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  environment = {
-    systemPackages = with pkgs; [
-      erlang
-      lfe
-    ] ++ (with beam.packages.erlangR20; [
-      hex2nix
-      rebar3-open
-    ]);
-  };
+
+  environment.systemPackages = with pkgs; [
+    erlang
+    lfe
+  ] ++ (with beam.packages.erlangR20; [
+    hex2nix
+    rebar3-open
+  ]);
 
   nixpkgs.config.packageOverrides = super: {
     erlang = super.beam.interpreters.erlangR20.override {
@@ -18,4 +17,5 @@
       wxSupport = false;
     };
   };
+
 }

@@ -35,7 +35,9 @@ let
 in
 
 {
+
   environment = {
+
     shellAliases = {
       e = ''emacsclient -cna ""'';
       et  = ''emacsclient -cta ""'';
@@ -46,12 +48,12 @@ in
     ] ++ (with aspellDicts; [
       en
     ]);
+
   };
 
-  services = {
-    emacs = {
-      enable = true;
-      inherit package;
-    };
+  services.emacs = {
+    enable = true;
+    inherit package;
   };
+
 }

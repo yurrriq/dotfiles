@@ -1,14 +1,14 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  environment = {
-    systemPackages = with pkgs; [
-      # TODO: clementine
-      google-chrome
-      libreoffice
-      spotify
-      terminator
-      thunderbird
-    ];
-  };
+
+  environment.systemPackages = with pkgs; [
+    # TODO: clementine
+    google-chrome
+    libreoffice
+    spotify
+    terminator
+    thunderbird
+  ];
+
 }

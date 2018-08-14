@@ -1,14 +1,14 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  environment = {
-    systemPackages = with pkgs; [
-      pass
-      # qtpass
-    ];
+  
+  environment.systemPackages = with pkgs; [
+    pass
+  ];
+
+  nixpkgs.config.packageOverrides = super: {
+    browserpass = super.callPackage ../pkgs/tools/security/browserpass {};
   };
     
-  programs = {
-    browserpass.enable = true;
-  };
+  programs.browserpass.enable = true;
 }
