@@ -1,7 +1,9 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
     coq
+    idris
+    lean
   ];
 }

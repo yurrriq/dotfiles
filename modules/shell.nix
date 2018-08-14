@@ -21,7 +21,6 @@
       httpie
       indent
       keybase
-      lean
       noweb
       psmisc
       ripgrep

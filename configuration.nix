@@ -20,13 +20,12 @@ in
   ] ++ [
     ./modules/applications.nix
     ./modules/beam.nix
-    ./modules/coq.nix
     ./modules/emacs.nix
     ./modules/engraving.nix
     ./modules/git.nix
-    ./modules/idris.nix
     ./modules/pass.nix
     ./modules/shell.nix
+    ./modules/theorem-proving.nix
     ./modules/tomb.nix
     ./modules/yubikey-gpg.nix
   ] ++ [
