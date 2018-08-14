@@ -191,4 +191,6 @@ in
     home = "/home/yurrriq";
     shell = "/run/current-system/sw/bin/fish";
   };
+
+  yubikey-gpg.enable = true;
 }
