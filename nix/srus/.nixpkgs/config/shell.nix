@@ -55,6 +55,7 @@
       silver-searcher
       stow
       tree
+      watch
       watchman
       wget
       xorg.lndir
