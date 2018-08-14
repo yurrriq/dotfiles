@@ -16,15 +16,15 @@ in
 
 {
   imports = [
-    ./modules/beam.nix
-    ./modules/dhall.nix
-    ./modules/gap.nix
-    ./modules/git.nix
-    ./modules/haskell.nix
-    ./modules/node.nix
-    ./modules/k8s.nix
-    ./modules/shell.nix
-    ./modules/system-defaults.nix
+    ./config/beam.nix
+    ./config/dhall.nix
+    ./config/gap.nix
+    ./config/git.nix
+    ./config/haskell.nix
+    ./config/node.nix
+    ./config/k8s.nix
+    ./config/shell.nix
+    ./config/system-defaults.nix
   ];
 
   environment.systemPackages = (with pkgs; [
