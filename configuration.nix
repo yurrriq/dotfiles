@@ -22,9 +22,9 @@ in
     ./modules/beam.nix
     ./modules/coq.nix
     ./modules/emacs.nix
+    ./modules/engraving.nix
     ./modules/git.nix
     ./modules/idris.nix
-    ./modules/lilypond.nix
     ./modules/pass.nix
     ./modules/shell.nix
     ./modules/tomb.nix

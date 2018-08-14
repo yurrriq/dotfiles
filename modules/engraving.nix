@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   nixpkgs.config.packageOverrides = super: rec {
@@ -17,5 +17,7 @@
 
   environment.systemPackages = with pkgs; [
     lilypond-with-fonts
+    musescore
+    qpdfview
   ];
 }

@@ -6,7 +6,6 @@
       # TODO: clementine
       google-chrome
       libreoffice
-      qpdfview
       spotify
       terminator
       thunderbird
