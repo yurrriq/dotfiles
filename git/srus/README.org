@@ -1,0 +1,157 @@
+* =.gitconfig=
+  :PROPERTIES:
+  :header-args: :padline no :tangle .gitconfig
+  :END:
+** User
+Set my name and email for writing commits, and [[https://keybase.io/yurrriq/pgp_keys.asc?fingerprint=2e8d082c324d5f5459cd27e755bf5d49549f04ad][GPG key]] for signing them.
+#+BEGIN_SRC ini
+[user]
+email = e.bailey@sportradar.com
+name = Eric Bailey
+signingkey = 2E8D082C324D5F5459CD27E755BF5D49549F04AD
+#+END_SRC
+** Core
+#+BEGIN_SRC ini
+[core]
+excludesfile = ~/.gitignore
+pager = diff-so-fancy | less --tabs=4 -RFX
+#+END_SRC
+** Diff Tool
+#+BEGIN_SRC ini
+[difftool "sourcetree"]
+cmd = kdiff3 \"$LOCAL\" \"$REMOTE\"
+path =
+#+END_SRC
+** Merge Tool
+#+BEGIN_SRC ini
+[mergetool "sourcetree"]
+cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+trustExitCode = true
+#+END_SRC
+** Commit
+#+BEGIN_SRC ini
+[commit]
+gpgsign = false
+template = ~/.gitmessage
+#+END_SRC
+** Color
+#+BEGIN_SRC ini
+[color]
+ui = true
+#+END_SRC
+*** Diff Highlight
+#+BEGIN_SRC ini
+[color "diff-highlight"]
+oldNormal = red bold
+oldHighlight = red bold 52
+newNormal = green bold
+newHighlight = green bold 22
+#+END_SRC
+*** Diff
+#+BEGIN_SRC ini
+[color "diff"]
+meta = 227
+frag = magenta bold
+commit = 227 bold
+old = red bold
+new = green bold
+whitespace = red reverse
+#+END_SRC
+*** Status
+#+BEGIN_SRC ini
+[color "status"]
+added = green
+changed = yellow
+untracked = cyan
+#+END_SRC
+** Alias
+#+BEGIN_SRC ini :exports none
+[alias]
+#+END_SRC
+*** Checkout
+#+BEGIN_SRC ini
+co = checkout
+cob = checkout -b
+#+END_SRC
+*** Commit
+#+BEGIN_SRC ini
+ca = commit --amend
+cam = commit --amend --no-edit -m
+can = commit --amend --no-edit
+cans = commit --amend --no-edit -S
+cas = commit --amend -S
+casm = commit --amend -S -m
+cm = commit -m
+csm = commit -S -m
+#+END_SRC
+*** =git-crypt= Status
+#+BEGIN_SRC ini
+cs = crypt status
+cse = crypt status -e
+csu = crypt status -u
+#+END_SRC
+*** =git-flow=
+#+BEGIN_SRC ini
+ffco = flow feature checkout
+ffr = flow feature rebase
+ffs = flow feature start
+frs = flow release start
+frf = flow release finish
+frfs = flow release finish -s
+#+END_SRC
+*** Log
+#+BEGIN_SRC ini
+tree = log --all --graph --oneline
+#+END_SRC
+#+BEGIN_SRC ini
+rb = rebase
+rba = rebase --abort
+rbc = rebase --continue
+rbi = rebase --interactive
+rbs = rebase --skip
+#+END_SRC
+*** Reset
+#+BEGIN_SRC ini
+r = reset
+rh = reset --hard
+#+END_SRC
+*** Stash
+#+BEGIN_SRC ini
+sl = stash list
+sa = stash apply
+sp = stash pop
+ss = stash save
+#+END_SRC
+*** Status
+#+BEGIN_SRC ini
+st = status -s
+#+END_SRC
+*** Typos
+#+BEGIN_SRC ini
+rest = reset
+#+END_SRC
+* =.gitignore=
+  :PROPERTIES:
+  :header-args: :padline no :tangle .gitignore
+  :END:
+#+BEGIN_SRC ini
+*~
+.DS_Store
+#+END_SRC
+
+* =.gitmessage=
+  :PROPERTIES:
+  :header-args: :padline no :tangle .gitmessage
+  :END:
+#+BEGIN_SRC sh
+# If applied, this commit will...
+
+# Why is this change needed?
+Prior to this change,
+
+# How does it address the issue?
+This change
+
+# Provide links to any relevant tickets, articles or other resources
+
+#+END_SRC
