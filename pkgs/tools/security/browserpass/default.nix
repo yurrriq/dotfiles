@@ -33,6 +33,6 @@ buildGoPackage rec {
     homepage = https://github.com/dannyvankooten/browserpass;
     license = licenses.mit;
     platforms = with platforms; linux ++ darwin ++ openbsd;
-    maintainers = with maintainers; [ rvolosatovs ];
+    maintainers = with maintainers; [ rvolosatovs yurrriq ];
   };
 }
