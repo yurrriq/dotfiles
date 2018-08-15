@@ -1,10 +1,18 @@
 #+STARTUP: showall
 * dotfiles
 /Managed with [[https://www.gnu.org/software/stow][GNU Stow]]/
+
+** NiXPS
+/Config files for my Dell XPS 15 9560 running NixOS/
+- [[./git/nixps][git/nixps]]: [[https://git-scm.com/][Git]] config
+- [[./gnupg/nixps][gnupg/nixps]]: barebones [[https://gnupg.org/][GnuPG]] config (just [[./gnupg/srus/.gnupg/gpg.conf][gpg.conf]], for now)
+- [[./i3/nixps][i3/nixps]]: near-default [[https://i3wm.org/][i3]] config
+- [[./nix/nixps][nix/nixps]]: [[https://nixos.org/][NixOS]] config
+
 ** SRUS
-/Config files for my work computer./
+/Config files for my Sportradar MacBook Pro/
 - [[./git/srus][git/srus]]: [[https://git-scm.com/][Git]] config
-- [[./gnupg/srus][gnupg/srus]]: [[https://gnupg.org/][GnuPG]] config (just a barebones [[./gnupg/srus/.gnupg/gpg.conf][gpg.conf]], for now)
+- [[./gnupg/srus][gnupg/srus]]: barebones [[https://gnupg.org/][GnuPG]] config (just [[./gnupg/srus/.gnupg/gpg.conf][gpg.conf]], for now)
 - [[./nix/srus][nix/srus]]: [[https://nixos.org/nix/][Nix]] (well, [[https://github.com/LnL7/nix-darwin][nix-darwin]]) config
 - [[./nixpkgs/srus][nixpkgs/srus]]: stubbed [[https://nixos.org/nixpkgs/][Nixpkgs]] config
 - [[./rebar3/srus][rebar3/srus]]: [[https://www.rebar3.org/][Rebar3]] config
