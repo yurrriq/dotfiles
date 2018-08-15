@@ -119,7 +119,9 @@ rh = reset --hard
 #+BEGIN_SRC ini
 sl = stash list
 sa = stash apply
+sk = stash --keep-index
 sp = stash pop
+spa = stash --patch
 ss = stash save
 #+END_SRC
 *** Status
