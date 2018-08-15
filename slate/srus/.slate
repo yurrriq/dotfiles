@@ -1,0 +1,91 @@
+# -*- conf -*-
+# Based on https://gist.githubusercontent.com/h0bbel/9afc8896438bd0dc2701
+
+
+# Configs
+
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+
+config secondsBetweenRepeat 0.1
+config checkDefaultsOnLoad true
+config focusCheckWidthMax 3000
+config windowHintsShowIcons true
+config windowHintsBackgroundColor 96;96;64;0.5
+config windowHintsIgnoreHiddenWindows true
+#config windowHintsOrder persist
+config windowHintsSpread true
+config windowHintsSpreadPadding 40
+config windowHintsSpreadSearchWidth 80
+config windowHintsSpreadSearchHeight 80
+config switchIconPadding 2
+config switchBackgroundColor 50;53;58;0.7
+config switchSelectedPadding 4
+config switchIconSize 96
+config switchShowTitles true
+config switchFontSize 11
+config switchRoundedCornerSize 4
+config undoOps move,resize
+
+# ======================================
+# The HYPER key (bound using PCKeyboardHack and KeyRemap4Macbook)
+# ======================================
+
+# alias hyper ctrl;shift;alt;cmd
+
+
+# bind space:${hyper} hint ASDFGHJKLQWERTYUIOPCVBN # use whatever keys you want
+# bind g:cmd grid padding:5 0:6,2 1:8,3
+
+# Abstract positions
+alias full move screenOriginX;screenOriginY screenSizeX;screenSizeY
+alias lefthalf move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
+alias righthalf move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
+alias tophalf move screenOriginX;screenOriginY screenSizeX;screenSizeY/2
+alias bottomhalf move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2
+alias topleft corner top-left resize:screenSizeX/2;screenSizeY/2
+alias topright corner top-right resize:screenSizeX/2;screenSizeY/2
+alias bottomleft corner bottom-left resize:screenSizeX/2;screenSizeY/2
+alias bottomright corner bottom-right resize:screenSizeX/2;screenSizeY/2
+
+# Push Bindings
+bind right:ctrl;alt;cmd ${righthalf}
+bind left:ctrl;alt;cmd ${lefthalf}
+bind up:ctrl;alt;cmd ${tophalf}
+bind down:ctrl;alt;cmd ${bottomhalf}
+
+bind right:ctrl;shift;alt ${topright}
+bind left:ctrl;shift;alt ${bottomleft}
+bind up:ctrl;shift;alt ${topleft}
+bind down:ctrl;shift;alt ${bottomright}
+
+bind m:ctrl;alt;cmd ${full}
+
+
+# Location Bindings
+# bind 1:${hyper} ${bottomleft}
+# bind 2:${hyper} push bottom bar-resize:screenSizeY/2
+# bind 3:${hyper} ${bottomright}
+# bind 4:${hyper} ${lefthalf}
+# bind 5:${hyper} ${full}
+# bind 6:${hyper} ${righthalf}
+# bind 7:${hyper} ${topleft}
+# bind 8:${hyper} push top bar-resize:screenSizeY/2
+# bind 9:${hyper} ${topright}
+
+# bind z:${hyper} undo
+
+# Throws
+# bind n:${hyper} throw next
+bind right:ctrl;alt throw next resize
+bind left:ctrl;alt  throw previous  resize
+
+# bind f:${hyper} throw 1 resize
+# bind g:${hyper} throw 0 resize
+
+# Slate
+# bind backslash:${hyper} relaunch
+
+# Run Applications
+# bind esc:cmd shell /Applications/Utilities/Terminal.app/Contents/MacOS/Terminal
