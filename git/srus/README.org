@@ -25,7 +25,7 @@ path =
 ** Merge Tool
 #+BEGIN_SRC ini
 [mergetool "sourcetree"]
-cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+cmd = /run/current-system/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 trustExitCode = true
 #+END_SRC
 ** Commit

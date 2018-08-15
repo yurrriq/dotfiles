@@ -9,7 +9,7 @@ pager = diff-so-fancy | less --tabs=4 -RFX
 cmd = kdiff3 \"$LOCAL\" \"$REMOTE\"
 path =
 [mergetool "sourcetree"]
-cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+cmd = /run/current-system/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 trustExitCode = true
 [commit]
 gpgsign = false

@@ -10,6 +10,7 @@
     onyx
     skim
     spotify
+    sourcetree
   ];
 
   nixpkgs.config.packageOverrides = super: {
@@ -18,6 +19,7 @@
     onyx = super.callPackage ../pkgs/os-specific/darwin/onyx {};
     skim = super.callPackage ../pkgs/applications/misc/skim {};
     spotify = super.callPackage ../pkgs/applications/audio/spotify/darwin.nix {};
+    sourcetree = super.callPackage ../pkgs/os-specific/darwin/sourcetree {};
   };
 
 }
