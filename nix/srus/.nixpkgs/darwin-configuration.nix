@@ -23,6 +23,7 @@ in
     ./config/git.nix
     ./config/haskell.nix
     ./config/java.nix
+    ./config/node-packages.nix
     ./config/node.nix
     ./config/k8s.nix
     ./config/shell.nix

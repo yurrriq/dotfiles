@@ -24,6 +24,7 @@ in
     ./config/emacs.nix
     ./config/engraving.nix
     ./config/git.nix
+    ./config/node-packages.nix
     ./config/pass.nix
     ./config/shell.nix
     ./config/theorem-proving.nix
