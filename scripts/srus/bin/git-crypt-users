@@ -1,0 +1,16 @@
+#! /usr/bin/env nix-shell
+#! nix-shell --pure -i bash -p bash findutils gnupg
+
+set -euo pipefail
+
+if [ ! -d .git-crypt ]
+then
+    echo "No .git-crypt/ found."
+    exit 100
+fi
+
+find .git-crypt/keys/default/0/ -type f -name '*.gpg' -printf '%f\n' | \
+    sed 's/.gpg$//' | \
+    xargs gpg --list-public-keys | \
+    awk '/^uid/{ print $NF }' | \
+    sort

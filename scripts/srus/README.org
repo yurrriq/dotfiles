@@ -1,0 +1,108 @@
+#+TITLE: Useful Scripts
+#+AUTHOR: Eric Bailey
+#+EMAIL: e.bailey@sportradar.com
+#+DATE: <2018-08-14 Tue>
+#+PROPERTY: header-args:bash :padline no :tangle bin/git-crypt-users :shebang "#! /usr/bin/env nix-shell"
+
+* Fix SourceTree Preferences
+#+PROPERTY: header-args:sh :padline yes :tangle bin/fix-stree-prefs :shebang "#! /usr/bin/env sh"
+
+Be safer.
+#+BEGIN_SRC sh
+set -euo pipefail
+#+END_SRC
+
+Define a helper function to DRY things up a bit.
+#+BEGIN_SRC sh
+defaults_write ()
+{
+    printf "%s : %s => %s\\n" \
+           "$1" \
+           "$(defaults read com.torusknot.SourceTreeNotMAS "$1")" \
+           "$2"
+
+    defaults write com.torusknot.SourceTreeNotMAS "$1" "$2"
+}
+#+END_SRC
+
+Use Nix's =git=.
+#+BEGIN_SRC sh
+defaults_write gitCustomPath       /run/current-system/sw/bin/git
+defaults_write gitWhichOne         1
+#+END_SRC
+
+Use Nix's =git-flow=.
+#+BEGIN_SRC sh
+defaults_write gitFlowCustomPath   /run/current-system/sw/bin/git-flow
+defaults_write gitFlowWhichOne     1
+#+END_SRC
+
+Use the correct [[../../git/srus/.gitignore][global .gitignore]].
+#+BEGIN_SRC sh
+defaults_write gitGlobalIgnoreFile ~/.gitignore
+#+END_SRC
+
+Use Nix's =git-lfs=.
+#+BEGIN_SRC sh
+defaults_write gitLfsCustomPath    /run/current-system/sw/bin/git-lfs
+defaults_write gitLfsWhichOne      1
+#+END_SRC
+
+Use Nix's =gpg=.
+#+BEGIN_SRC sh
+defaults_write gpgProgram          /run/current-system/sw/bin
+#+END_SRC
+
+# Local Variables:
+# org-src-preserve-indentation: t
+# End:
+
+* List =git-crypt= GPG Users
+Load the necessary packages, =bash=, =findutils= (for GNU find), and =gnupg=.
+#+BEGIN_SRC bash
+#! nix-shell --pure -i bash -p bash findutils gnupg
+#+END_SRC
+
+Be safer.
+#+BEGIN_SRC bash :padline yes
+set -euo pipefail
+#+END_SRC
+
+Quit if there's no =.git-crypt= directory.
+#+BEGIN_SRC bash :padline yes
+if [ ! -d .git-crypt ]
+then
+    echo "No .git-crypt/ found."
+    exit 100
+fi
+#+END_SRC
+
+Find all the GPG-encrypted keys and print just the filename.
+#+BEGIN_SRC bash :padline yes
+find .git-crypt/keys/default/0/ -type f -name '*.gpg' -printf '%f\n' | \
+#+END_SRC
+
+Strip the =.gpg= extension to list only key IDs.
+#+BEGIN_SRC bash
+    sed 's/.gpg$//' | \
+#+END_SRC
+
+Lookup the matching public keys.
+#+BEGIN_SRC bash
+    xargs gpg --list-public-keys | \
+#+END_SRC
+
+# Print only the associated Sportradar email addresses.
+#+BEGIN_SRC bash :exports none :tangle no
+    awk '/sportradar.com/{ print $NF }' | \
+#+END_SRC
+
+Print only email addresses.
+#+BEGIN_SRC bash
+    awk '/^uid/{ print $NF }' | \
+#+END_SRC
+
+Sort the email list.
+#+BEGIN_SRC bash
+    sort
+#+END_SRC
