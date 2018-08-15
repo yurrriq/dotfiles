@@ -16,21 +16,21 @@ ${configs}::
 endif
 
 
+${configs}:: target=${HOME}
+
 ifeq (nixps,${profile})
-$(filter-out nix,${configs})::
-	@ if [ -d $@/${profile} ]; then \
-		stow -Rvt ${HOME} ${profile} -d $@ ; \
-	fi
-nix::
-	@ if [ -d $@/${profile} ]; then \
-		stow -Rvt /etc/nixos ${profile} -d $@ ; \
-	fi
-else
+nix:: target=/etc/nixos
+else ifeq (srus,${profile})
+nix:: target=${HOME}/.nixpkgs
+endif
+
 ${configs}::
 	@ if [ -d $@/${profile} ]; then \
-		stow -Rvt ${HOME} ${profile} -d $@ ; \
+		if [ -d $@/common ]; then \
+			stow -Rvt $@/${profile} common -d $@ ; \
+		fi ; \
+		stow -Rvt ${target} ${profile} -d $@ ; \
 	fi
-endif
 
 
 .envrc:

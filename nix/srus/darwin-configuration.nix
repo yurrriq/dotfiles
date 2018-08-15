@@ -36,6 +36,7 @@ in
     emacs
     gcc
     graphviz
+    lab
     ncurses
     nix
     nix-prefetch-git
