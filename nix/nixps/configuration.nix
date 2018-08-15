@@ -18,21 +18,21 @@ in
   imports = [
     ./hardware-configuration.nix
   ] ++ [
-    ./modules/applications.nix
-    ./modules/beam.nix
-    ./modules/docker.nix
-    ./modules/emacs.nix
-    ./modules/engraving.nix
-    ./modules/git.nix
-    ./modules/pass.nix
-    ./modules/shell.nix
-    ./modules/theorem-proving.nix
+    ./config/applications.nix
+    ./config/beam.nix
+    ./config/docker.nix
+    ./config/emacs.nix
+    ./config/engraving.nix
+    ./config/git.nix
+    ./config/pass.nix
+    ./config/shell.nix
+    ./config/theorem-proving.nix
     ./modules/tomb.nix
     ./modules/yubikey-gpg.nix
   ] ++ [
-    ./modules/clients/invisiblefriend.nix
-    ./modules/clients/yellowdig.nix
-    # ./modules/clients/voicehive.nix
+    ./config/clients/invisiblefriend.nix
+    ./config/clients/yellowdig.nix
+    # ./config/clients/voicehive.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_4_9;
