@@ -4,6 +4,7 @@
 
 ** NiXPS
 /Config files for my Dell XPS 15 9560 running NixOS/
+- [[./emacs/nixps][emacs/nixps]]: short and sweet [[https://www.gnu.org/software/emacs/][Emacs]] config
 - [[./git/nixps][git/nixps]]: [[https://git-scm.com/][Git]] config
 - [[./gnupg/nixps][gnupg/nixps]]: barebones [[https://gnupg.org/][GnuPG]] config (just [[./gnupg/srus/.gnupg/gpg.conf][gpg.conf]], for now)
 - [[./i3/nixps][i3/nixps]]: near-default [[https://i3wm.org/][i3]] config
