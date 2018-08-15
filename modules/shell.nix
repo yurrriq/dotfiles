@@ -53,4 +53,6 @@
     # TODO: tmux.enable = true;
 
   };
+
+  services.keybase.enable = true;
 }
