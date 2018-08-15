@@ -13,8 +13,10 @@ let
     org = epkgs.orgPackages;
   }; (with elpa; [
   ]) ++ (with melpa; [
+    better-defaults
     clj-refactor
     clojure-mode
+    crux
     erlang
     fish-mode
     fill-column-indicator
@@ -22,6 +24,7 @@ let
     htmlize
     idris-mode
     magit
+    multiple-cursors
     nix-mode
     paredit
     rainbow-delimiters
