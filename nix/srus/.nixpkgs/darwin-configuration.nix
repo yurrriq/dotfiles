@@ -34,7 +34,6 @@ in
     aspellDicts.en
     emacs
     gcc
-    gnupg
     graphviz
     ncurses
     nix

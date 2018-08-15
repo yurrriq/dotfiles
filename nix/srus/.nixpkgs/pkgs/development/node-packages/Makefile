@@ -1,2 +1,2 @@
 node-packages.nix: node-packages.json
-	node2nix -6 -i $<
+	node2nix -8 -i $<
