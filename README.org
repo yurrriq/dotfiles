@@ -8,6 +8,7 @@
 - [[./gnupg/nixps][gnupg/nixps]]: barebones [[https://gnupg.org/][GnuPG]] config (just [[./gnupg/srus/.gnupg/gpg.conf][gpg.conf]], for now)
 - [[./i3/nixps][i3/nixps]]: near-default [[https://i3wm.org/][i3]] config
 - [[./nix/nixps][nix/nixps]]: [[https://nixos.org/][NixOS]] config
+- [[./rebar3/srus][rebar3/srus]]: [[https://www.rebar3.org/][Rebar3]] config
 
 ** SRUS
 /Config files for my Sportradar MacBook Pro/
