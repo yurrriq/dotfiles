@@ -29,6 +29,7 @@
       # TODO: pup
       ripgrep
       silver-searcher
+      stow
       (texlive.combine {
         inherit (texlive) scheme-full tufte-latex;
       })
