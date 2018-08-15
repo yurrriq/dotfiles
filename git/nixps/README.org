@@ -13,7 +13,7 @@ signingkey = 2F5FC34496E6DA1115F7F5D31E374869A79B56B1
 ** Core
 #+BEGIN_SRC ini
 [core]
-excludesfile = ~/.gitignore_global
+excludesfile = ~/.gitignore
 pager = diff-so-fancy | less --tabs=4 -RFX
 #+END_SRC
 ** Commit
@@ -118,9 +118,9 @@ st = status -s
 #+BEGIN_SRC ini
 rest = reset
 #+END_SRC
-* =.gitignore_global=
+* =.gitignore=
   :PROPERTIES:
-  :header-args: :padline no :tangle .gitignore_global
+  :header-args: :padline no :tangle .gitignore
   :END:
 #+BEGIN_SRC ini
 *~

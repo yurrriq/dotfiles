@@ -1,13 +1,4 @@
-all: $(addprefix ${HOME}/.git,\
-config \
-ignore_global \
-message \
-)
+.PHONY: all
 
-
-.git*: README.org
+all: README.org
 	@ emacs --batch --quick -l ob-tangle --eval '(org-babel-tangle-file "$<")'
-
-
-${HOME}/%: %
-	@ cp -vf $< "$@"

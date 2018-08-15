@@ -10,7 +10,7 @@ all: ${configs}
 
 ${configs}:
 ifneq (,$(findstring B,$(MAKEFLAGS)))
-		if [ -f $@/${profile}/Makefile ]; then \
+		@ if [ -f $@/${profile}/Makefile ]; then \
 			${MAKE} -C $@/${profile} ; \
 		fi
 endif
