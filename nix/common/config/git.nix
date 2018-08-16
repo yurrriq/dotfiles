@@ -19,11 +19,12 @@ in
     hub
   ]) ++ (with pkgs.nodePackages; [
     diff-so-fancy
+  ]) ++ (with pkgs.nur.repos.yurrriq; [
+    lab
   ]);
 
   nixpkgs.config.packageOverrides = super: {
     git-crypt = super.callPackage ../pkgs/applications/version-management/git-and-tools/git-crypt {};
-    lab = super.callPackage ../pkgs/applications/version-management/git-and-tools/lab {};
     sourcetree = super.callPackage ../pkgs/os-specific/darwin/sourcetree {};
   };
 

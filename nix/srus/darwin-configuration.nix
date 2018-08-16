@@ -13,6 +13,8 @@ let
 
   _nixpkgs = fetchTarballFromGitHub (fromJSONFile ./nixpkgs-src.json);
 
+  _nur = fetchTarballFromGitHub (fromJSONFile ./nur-src.json);
+
 in
 
 {
@@ -37,7 +39,6 @@ in
     emacs
     gcc
     graphviz
-    lab
     ncurses
     nix
     nix-prefetch-git
@@ -84,4 +85,11 @@ in
   };
 
   nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import _nur {
+      inherit pkgs;
+    };
+  };
+
 }
