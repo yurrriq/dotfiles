@@ -1,17 +1,18 @@
 { config, lib, pkgs, ... }:
 
 let
-  _nixpkgs =
-    let
-      inherit (builtins) fetchTarball fromJSON readFile;
-      inherit (fromJSON (readFile ./nixpkgs-src.json)) owner repo rev sha256;
-    in
-    fetchTarball {
+
+  fetchTarballFromGitHub =
+    { owner, repo, rev, sha256 }:
+    builtins.fetchTarball {
       url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
       inherit sha256;
     };
-    # "$HOME/src/github.com/NixOS/nixpkgs";
-    # "$HOME/.nix-defexpr/channels/nixpkgs";
+
+  fromJSONFile = f: builtins.fromJSON (builtins.readFile f);
+
+  _nixpkgs = fetchTarballFromGitHub (fromJSONFile ./nixpkgs-src.json);
+
 in
 
 {
