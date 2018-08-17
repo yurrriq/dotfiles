@@ -57,16 +57,33 @@ with import ./srcs;
     ];
 
   nix = {
+
+    binaryCaches = [
+      # "https://cache.nixos.org"
+      "https://yurrriq-nur-packages.cachix.org"
+    ];
+
+    binaryCachePublicKeys = [
+      # "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "yurrriq-nur-packages.cachix.org-1:7kbjuGBUZcWf876g2cdelmIQXrXzOhpMVBqYOyyAv70="
+    ];
+
     buildCores = 8;
+
     # TODO: buildMachines = [];
+
     distributedBuilds = false;
+
     gc.automatic = true;
+
     maxJobs = 8;
+
     nixPath = [
       "darwin=$HOME/.nix-defexpr/channels/darwin"
       "darwin-config=$HOME/.nixpkgs/darwin-configuration.nix"
       "nixpkgs=${_nixpkgs}"
     ];
+
   };
 
   nixpkgs.config.allowUnfree = true;
