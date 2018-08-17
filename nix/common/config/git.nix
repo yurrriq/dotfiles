@@ -19,6 +19,8 @@ in
     hub
   ]) ++ (with pkgs.nodePackages; [
     diff-so-fancy
+  ]) ++ (with pkgs.nur.repos.yurrriq; [
+    lab
   ]);
 
   nixpkgs.config.packageOverrides = super: {

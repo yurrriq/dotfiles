@@ -1,18 +1,6 @@
 { config, pkgs, ... }:
 
-let
-  _nixpkgs =
-    let
-      inherit (builtins) fetchTarball fromJSON readFile;
-      inherit (fromJSON (readFile ./nixpkgs-src.json)) owner repo rev sha256;
-    in
-    fetchTarball {
-      url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
-      inherit sha256;
-    };
-    # "$HOME/src/github.com/NixOS/nixpkgs";
-    # "$HOME/.nix-defexpr/channels/nixpkgs";
-in
+with import ./srcs;
 
 {
   imports = [
@@ -24,6 +12,7 @@ in
     ./config/emacs.nix
     ./config/engraving.nix
     ./config/git.nix
+    ./config/node-packages.nix
     ./config/pass.nix
     ./config/shell.nix
     ./config/theorem-proving.nix
@@ -76,6 +65,12 @@ in
   ];
 
   nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import _nur {
+      inherit pkgs;
+    };
+  };
 
   programs.tomb = {
     enable = true;

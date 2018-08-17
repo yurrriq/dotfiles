@@ -1,4 +1,13 @@
-.PHONY: all
+.PHONY: build switch srcs
 
-all:
-	${MAKE} -C .nixpkgs/pkgs/development/node-packages
+
+srcs:
+	${MAKE} -C $@
+
+
+build:
+	@ darwin-rebuild $@ -j8
+
+
+switch:
+	@ darwin-rebuild $@
