@@ -1,21 +1,6 @@
 { config, lib, pkgs, ... }:
 
-let
-
-  fetchTarballFromGitHub =
-    { owner, repo, rev, sha256 }:
-    builtins.fetchTarball {
-      url = "https://github.com/${owner}/${repo}/archive/${rev}.tar.gz";
-      inherit sha256;
-    };
-
-  fromJSONFile = f: builtins.fromJSON (builtins.readFile f);
-
-  _nixpkgs = fetchTarballFromGitHub (fromJSONFile ./nixpkgs-src.json);
-
-  _nur = fetchTarballFromGitHub (fromJSONFile ./nur-src.json);
-
-in
+with import ./srcs;
 
 {
   imports = [
