@@ -2,6 +2,14 @@
 
 with import ./srcs;
 
+let
+
+  # FIXME: nur-no-pkgs = import _nur {};
+  # HACK
+  nur-no-pkgs = { repos.yurrriq = import ../../../nur-packages {}; };
+
+in
+
 {
   imports = [
     ./hardware-configuration.nix
@@ -12,7 +20,6 @@ with import ./srcs;
     ./config/emacs.nix
     ./config/engraving.nix
     ./config/git.nix
-    ./config/node-packages.nix
     ./config/pass.nix
     ./config/shell.nix
     ./config/theorem-proving.nix
@@ -90,14 +97,25 @@ with import ./srcs;
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.overlays = [
-    (self: super: {
+    nur-no-pkgs.repos.yurrriq.overlays.engraving
+    nur-no-pkgs.repos.yurrriq.overlays.node
+    (self: super: rec {
+
       nur = import _nur {
         inherit pkgs;
       };
+
+      inherit (nur.repos.yurrriq)
+        browserpass
+        erlang;
+
+      gitAndTools = super.gitAndTools // {
+        inherit (nur.repos.yurrriq)
+          git-crypt
+          lab;
+      };
+
     })
-    (import ./overlays/beam.nix)
-    (import ./overlays/engraving.nix)
-    (import ./overlays/pass.nix)
   ];
 
   programs.tomb = {
