@@ -70,3 +70,5 @@
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
+
+(global-set-key (kbd "M-s-f") 'helm-do-grep-ag)

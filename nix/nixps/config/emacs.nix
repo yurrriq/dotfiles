@@ -20,6 +20,7 @@ let
     erlang
     fish-mode
     fill-column-indicator
+    helm-ag
     hl-todo
     htmlize
     idris-mode
