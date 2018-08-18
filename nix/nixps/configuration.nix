@@ -63,11 +63,13 @@ with import ./srcs;
 
     binaryCaches = [
       "https://cache.nixos.org"
+      "https://yurrriq.cachix.org"
       "https://yurrriq-nur-packages.cachix.org"
     ];
 
     binaryCachePublicKeys = [
       # "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
       "yurrriq-nur-packages.cachix.org-1:7kbjuGBUZcWf876g2cdelmIQXrXzOhpMVBqYOyyAv70="
     ];
 
@@ -76,19 +78,27 @@ with import ./srcs;
     gc.automatic = true;
 
     nixPath = [
-      "nixpkgs=${_nixpkgs}"
       "nixos-config=/etc/nixos/configuration.nix"
+      "nixpkgs=${_nixpkgs}"
+      "nixpkgs-overlays=/etc/nixos/overlays-compat/"
     ];
+
+    trustedUsers = [ "root" "yurrriq" ];
 
   };
 
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import _nur {
-      inherit pkgs;
-    };
-  };
+  nixpkgs.overlays = [
+    (self: super: {
+      nur = import _nur {
+        inherit pkgs;
+      };
+    })
+    (import ./overlays/beam.nix)
+    (import ./overlays/engraving.nix)
+    (import ./overlays/pass.nix)
+  ];
 
   programs.tomb = {
     enable = true;
