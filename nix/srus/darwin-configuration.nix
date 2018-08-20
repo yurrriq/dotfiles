@@ -111,6 +111,11 @@ in
         };
       };
 
+      inherit (self.nur.repos.yurrriq.pkgs)
+        git-crypt
+        lab
+        sourcetree;
+
     })
   ];
 

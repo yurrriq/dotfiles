@@ -10,7 +10,6 @@
     onyx
     skim
     spotify
-    sourcetree
   ];
 
   nixpkgs.config.packageOverrides = super: {
