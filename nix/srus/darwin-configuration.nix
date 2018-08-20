@@ -113,6 +113,10 @@ in
 
       inherit (self.nur.repos.yurrriq.pkgs)
         git-crypt
+        kops
+        kubectx
+        kubernetes
+        kubernetes-helm
         lab
         sourcetree;
 
