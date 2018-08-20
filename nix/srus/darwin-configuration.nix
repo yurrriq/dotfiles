@@ -2,6 +2,14 @@
 
 with import ./srcs;
 
+let
+
+  # FIXME: nur-no-pkgs = import _nur {};
+  # HACK
+  nur-no-pkgs = { repos.yurrriq = import ../../../nur-packages {}; };
+
+in
+
 {
   imports = [
     ./config/applications.nix
@@ -11,7 +19,6 @@ with import ./srcs;
     ./config/git.nix
     ./config/haskell.nix
     ./config/java.nix
-    ./config/node-packages.nix
     ./config/node.nix
     ./config/k8s.nix
     ./config/shell.nix
@@ -60,11 +67,13 @@ with import ./srcs;
 
     binaryCaches = [
       # "https://cache.nixos.org"
+      "https://yurrriq.cachix.org"
       "https://yurrriq-nur-packages.cachix.org"
     ];
 
     binaryCachePublicKeys = [
       # "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
       "yurrriq-nur-packages.cachix.org-1:7kbjuGBUZcWf876g2cdelmIQXrXzOhpMVBqYOyyAv70="
     ];
 
@@ -82,16 +91,27 @@ with import ./srcs;
       "darwin=$HOME/.nix-defexpr/channels/darwin"
       "darwin-config=$HOME/.nixpkgs/darwin-configuration.nix"
       "nixpkgs=${_nixpkgs}"
+      "nixpkgs-overlays=$HOME/.nixpkgs/overlays-compat/"
     ];
+
+    trustedUsers = [ "root" "e.bailey" ];
 
   };
 
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import _nur {
-      inherit pkgs;
-    };
-  };
+  nixpkgs.overlays = [
+    nur-no-pkgs.repos.yurrriq.overlays.node
+    (self: super: {
+
+      # FIXME: nur = import _nur {
+      nur = {
+        repos.yurrriq = import ../../../nur-packages {
+          pkgs = super;
+        };
+      };
+
+    })
+  ];
 
 }
