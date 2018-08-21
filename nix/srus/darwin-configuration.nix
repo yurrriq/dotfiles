@@ -4,8 +4,6 @@ with (import ./srcs { local = true; });
 
 let
 
-  nur-no-pkgs = import _nur { };
-
 in
 
 {

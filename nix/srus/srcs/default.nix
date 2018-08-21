@@ -13,7 +13,8 @@ let
 
 in
 
-{
+rec {
+
   _nixpkgs = fetchTarballFromGitHub (fromJSONFile ./nixpkgs.json);
 
   _nur = if local
@@ -21,5 +22,7 @@ in
            else fetchTarballFromGitHub (fromJSONFile ./nur.json);
 
   _nur-packages = fetchTarballFromGitHub (fromJSONFile ./nur-packages.json);
+
+  nur-no-pkgs = import _nur { };
 
 }
