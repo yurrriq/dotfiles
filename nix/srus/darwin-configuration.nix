@@ -1,12 +1,10 @@
 { config, lib, pkgs, ... }:
 
-with import ./srcs;
+with (import ./srcs { local = true; });
 
 let
 
-  # FIXME: nur-no-pkgs = import _nur {};
-  # HACK
-  nur-no-pkgs = { repos.yurrriq = import ../../../nur-packages {}; };
+  nur-no-pkgs = import _nur { };
 
 in
 
@@ -100,27 +98,10 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.overlays = [
-    nur-no-pkgs.repos.yurrriq.overlays.node
-    (self: super: {
-
-      # FIXME: nur = import _nur {
-      nur = {
-        repos.yurrriq = import ../../../nur-packages {
-          pkgs = super;
-        };
-      };
-
-      inherit (self.nur.repos.yurrriq.pkgs)
-        git-crypt
-        kops
-        kubectx
-        kubernetes
-        kubernetes-helm
-        lab
-        sourcetree;
-
-    })
+  nixpkgs.overlays = with nur-no-pkgs.repos.yurrriq.overlays; [
+    nur
+    git
+    node
   ];
 
 }

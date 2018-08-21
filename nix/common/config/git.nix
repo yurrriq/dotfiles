@@ -10,14 +10,14 @@ in
 
   environment.systemPackages = (with pkgs; [
     git
-    git-crypt
     git-lfs
     gitGUI
     gnupg
-    lab
   ]) ++ (with pkgs.gitAndTools; [
+    git-crypt
     gitflow
     hub
+    lab
   ]) ++ (with pkgs.nodePackages; [
     diff-so-fancy
   ]);

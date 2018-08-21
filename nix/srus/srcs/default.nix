@@ -1,3 +1,5 @@
+{ local ? false }:
+
 let
 
   fetchTarballFromGitHub =
@@ -14,6 +16,10 @@ in
 {
   _nixpkgs = fetchTarballFromGitHub (fromJSONFile ./nixpkgs.json);
 
-  _nur = fetchTarballFromGitHub (fromJSONFile ./nur.json);
+  _nur = if local
+           then ./local-nur.nix
+           else fetchTarballFromGitHub (fromJSONFile ./nur.json);
+
+  _nur-packages = fetchTarballFromGitHub (fromJSONFile ./nur-packages.json);
 
 }
