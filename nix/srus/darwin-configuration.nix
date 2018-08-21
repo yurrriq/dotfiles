@@ -1,22 +1,17 @@
 { config, lib, pkgs, ... }:
 
-with (import ./srcs { local = false; });
-
-let
-
-in
+with (import ./srcs { local = true; });
 
 {
   imports = [
     ./config/applications.nix
-    ./config/beam.nix
-    ./config/dhall.nix
-    ./config/gap.nix
+    # ./config/beam.nix
+    # ./config/dhall.nix
+    # ./config/gap.nix
     ./config/git.nix
     ./config/haskell.nix
-    ./config/java.nix
-    ./config/node.nix
     ./config/k8s.nix
+    # ./config/node.nix
     ./config/shell.nix
     ./config/system-defaults.nix
   ];
@@ -27,6 +22,7 @@ in
     emacs
     gcc
     graphviz
+    jdk
     ncurses
     nix
     nix-prefetch-git
@@ -40,9 +36,10 @@ in
       pywatchman
     ]) ++ (with pkgs.python35Packages; [
       pygments
+    ]) ++ (with (import _nur { inherit pkgs; }).repos.yurrriq.pkgs; [
+      lab
     ]);
 
-  # Recreate /run/current-system symlink after boot.
   services.activate-system.enable = true;
 
   services.nix-daemon = {
@@ -50,14 +47,10 @@ in
     tempDir = "/nix/tmp";
   };
 
-  environment.pathsToLink =
-    [ # "/bin"
-      "/lib/aspell"
-      # "/share/info"
-      # "/share/locale"
-      "/share/emacs"
-      # "/Applications"
-    ];
+  environment.pathsToLink = [
+    "/lib/aspell"
+    "/share/emacs"
+  ];
 
   nix = {
 

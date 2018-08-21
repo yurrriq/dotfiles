@@ -35,31 +35,32 @@
       autojump
       awscli
       coreutils
-      cowsay
+      # cowsay
       direnv
-      fortune
-      fpp
+      # fortune
+      # fpp
       gawk
       gnumake
       gnused
       gnutar
-      htop
+      # htop
       httpie
       # jid
       jq
       moreutils
       m-cli
       # mosh
-      pv
+      # pv
       ripgrep
       silver-searcher
       stow
       tree
       watch
-      watchman
-      wget
-      xorg.lndir
-      xz
+      # watchman
+      # wget
+      # xorg.lndir
+      # xz
+      yq
     ]) ++ (with pkgs.haskellPackages; [
       (pkgs.haskell.lib.justStaticExecutables ShellCheck)
     ]);
