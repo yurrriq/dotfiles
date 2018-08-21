@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 
-with (import ./srcs { local = true; });
+with (import ./srcs { local = false; });
 
 let
 
