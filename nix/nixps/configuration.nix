@@ -40,6 +40,7 @@ with import ./srcs;
   environment = {
     systemPackages = with pkgs; [
       nix
+      tellico
       xorg.xbacklight
     ];
   };
