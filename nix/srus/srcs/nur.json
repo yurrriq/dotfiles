@@ -1,7 +1,1 @@
-{
-  "owner": "nix-community",
-  "repo": "NUR",
-  "branch": "master",
-  "rev": "c3f5046f9767766f51001ae4ba66409e9e62b681",
-  "sha256": "0vih4wamjrbw91qshkzykljp3f42823czpihnngnfavam3r7wrwz"
-}
+../../common/srcs/nur.json

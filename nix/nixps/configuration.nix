@@ -2,12 +2,6 @@
 
 with import ./srcs;
 
-let
-
-  nur-no-pkgs = import _nur {};
-
-in
-
 {
   imports = [
     ./hardware-configuration.nix

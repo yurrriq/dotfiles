@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 
-with (import ./srcs { local = true; });
+with import ./srcs { local = false; };
 
 {
   imports = [
@@ -80,7 +80,7 @@ with (import ./srcs { local = true; });
       "darwin=$HOME/.nix-defexpr/channels/darwin"
       "darwin-config=$HOME/.nixpkgs/darwin-configuration.nix"
       "nixpkgs=${_nixpkgs}"
-      "nixpkgs-overlays=$HOME/.nixpkgs/overlays-compat/"
+      # FIXME: "nixpkgs-overlays=$HOME/.nixpkgs/overlays-compat/"
     ];
 
     trustedUsers = [ "root" "e.bailey" ];
