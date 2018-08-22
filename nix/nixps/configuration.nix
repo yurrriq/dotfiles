@@ -4,9 +4,7 @@ with import ./srcs;
 
 let
 
-  # FIXME: nur-no-pkgs = import _nur {};
-  # HACK
-  nur-no-pkgs = { repos.yurrriq = import ../../../nur-packages {}; };
+  nur-no-pkgs = import _nur {};
 
 in
 
@@ -87,7 +85,7 @@ in
     nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
       "nixpkgs=${_nixpkgs}"
-      "nixpkgs-overlays=/etc/nixos/overlays-compat/"
+      # FIXME: "nixpkgs-overlays=/etc/nixos/overlays-compat/"
     ];
 
     trustedUsers = [ "root" "yurrriq" ];
@@ -99,22 +97,11 @@ in
   nixpkgs.overlays = [
     nur-no-pkgs.repos.yurrriq.overlays.engraving
     nur-no-pkgs.repos.yurrriq.overlays.node
-    (self: super: rec {
-
-      nur = import _nur {
-        inherit pkgs;
-      };
-
-      inherit (nur.repos.yurrriq)
-        browserpass
-        erlang;
-
+    (self: super: { nur = import _nur { pkgs = super; }; })
+    (self: super: {
       gitAndTools = super.gitAndTools // {
-        inherit (nur.repos.yurrriq)
-          git-crypt
-          lab;
+        inherit (super.nur.repos.yurrriq.pkgs) git-crypt lab;
       };
-
     })
   ];
 

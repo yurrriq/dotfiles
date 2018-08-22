@@ -14,4 +14,4 @@ let
 
 in
 
-  foldl' (flip extends) (_: super) paths self
+  foldl' (flip extends) (_: super) [] self
