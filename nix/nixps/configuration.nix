@@ -95,15 +95,11 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.overlays = [
-    nur-no-pkgs.repos.yurrriq.overlays.engraving
-    nur-no-pkgs.repos.yurrriq.overlays.node
-    (self: super: { nur = import _nur { pkgs = super; }; })
-    (self: super: {
-      gitAndTools = super.gitAndTools // {
-        inherit (super.nur.repos.yurrriq.pkgs) git-crypt lab;
-      };
-    })
+  nixpkgs.overlays = with nur-no-pkgs.repos.yurrriq.overlays; [
+    nur
+    engraving
+    git
+    node
   ];
 
   programs.tomb = {
