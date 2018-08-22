@@ -12,6 +12,9 @@ in
   imports = [
     ./hardware-configuration.nix
   ] ++ [
+    ./modules/tomb.nix
+    ./modules/yubikey-gpg.nix
+  ] ++ [
     ./config/applications.nix
     ./config/beam.nix
     ./config/docker.nix
@@ -21,8 +24,6 @@ in
     ./config/pass.nix
     ./config/shell.nix
     ./config/theorem-proving.nix
-    ./modules/tomb.nix
-    ./modules/yubikey-gpg.nix
   ] ++ [
     ./config/clients/invisiblefriend.nix
     ./config/clients/yellowdig.nix
