@@ -20,9 +20,9 @@
       rgi = "rg -i";
       rgf = "rg -F";
       rgs = "rg -S";
-      e = "ec";
+      e = ''emacsclient -na ""'';
       ec = ''emacsclient -cna ""'';
-      et = ''emacsclient -cnw -a ""'';
+      et = ''emacsclient -nw -a ""'';
       gpg = "gpg2";
       k = "clear";
       kc = "kubectl";

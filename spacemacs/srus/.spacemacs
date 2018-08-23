@@ -375,4 +375,5 @@ you should place your code here."
                   paredit-mode
                   rainbow-delimiters-mode-enable))
     (add-hook 'emacs-lisp-mode-hook hook)
-    (add-hook 'json-mode-hook hook)))
+    (add-hook 'json-mode-hook hook))
+  (setq server-window 'pop-to-buffer-same-window))
