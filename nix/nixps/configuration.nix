@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 
-with import ./srcs;
+with import ./srcs { local = false; };
 
 {
   imports = [
