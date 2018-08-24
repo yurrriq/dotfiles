@@ -2,10 +2,12 @@
 #+AUTHOR: Eric Bailey
 #+EMAIL: e.bailey@sportradar.com
 #+DATE: <2018-08-14 Tue>
-#+PROPERTY: header-args:bash :padline no :tangle bin/git-crypt-users :shebang "#! /usr/bin/env nix-shell"
+#+PROPERTY: :header-args :padline yes
 
-* Fix SourceTree Preferences
-#+PROPERTY: header-args:sh :padline yes :tangle bin/fix-stree-prefs :shebang "#! /usr/bin/env sh"
+* Fix Sourcetree preferences
+  :PROPERTIES:
+  :header-args: :tangle bin/fix-stree-prefs :shebang "#! /usr/bin/env sh"
+  :END:
 
 Be safer.
 #+BEGIN_SRC sh
@@ -53,11 +55,11 @@ Use Nix's =gpg=.
 defaults_write gpgProgram          /run/current-system/sw/bin
 #+END_SRC
 
-# Local Variables:
-# org-src-preserve-indentation: t
-# End:
+* List =git-crypt= GPG users
+  :PROPERTIES:
+  :header-args: :padline no :tangle bin/git-crypt-users :shebang "#! /usr/bin/env nix-shell"
+  :END:
 
-* List =git-crypt= GPG Users
 Load the necessary packages, =bash=, =findutils= (for GNU find), and =gnupg=.
 #+BEGIN_SRC bash
 #! nix-shell --pure -i bash -p bash findutils gnupg
@@ -106,3 +108,8 @@ Sort the email list.
 #+BEGIN_SRC bash
     sort
 #+END_SRC
+
+
+# Local Variables:
+# org-src-preserve-indentation: t
+# End:
