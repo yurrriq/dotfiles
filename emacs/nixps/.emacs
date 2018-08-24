@@ -1,5 +1,10 @@
 (server-start)
+
+(setq server-window 'pop-to-buffer-same-window)
+
+
 (menu-bar-mode 0)
+
 (tool-bar-mode 0)
 
 (require 'package)

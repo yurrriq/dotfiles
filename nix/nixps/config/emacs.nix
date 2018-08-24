@@ -43,8 +43,8 @@ in
   environment = {
 
     shellAliases = {
-      e = ''emacsclient -cna ""'';
-      et  = ''emacsclient -cta ""'';
+      e = ''emacsclient -na ""'';
+      et  = ''emacsclient -ta ""'';
     };
 
     systemPackages = with pkgs; [
