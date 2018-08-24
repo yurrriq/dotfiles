@@ -1,0 +1,337 @@
+#+TITLE: Literate Emacs Config
+#+AUTHOR: Eric Bailey
+#+OPTIONS: toc:2
+#+HTML_DOCTYPE: html5
+#+HTML_HEAD: <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.min.css">
+#+HTML_MATHJAX: align:"left" scale:"100" mathml:t path:"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+#+INFOJS_OPT: path:org-info.js view:showall toc:nil ltoc:nil tdepth:2 mouse:#dddddd
+
+
+* Utils
+:PROPERTIES:
+:tangle: ~/.emacs.d/lisp/init-utils.el
+:END:
+#+BEGIN_SRC emacs-lisp :padline no :exports none
+;;; init-utils --- Global utility functions
+
+;;; Commentary:
+;; Based on https://github.com/purcell/emacs.d/blob/c60299cfdd799ccf81eefacb1a6fca1d9d703ff4/lisp/init-utils.el
+
+;;; Code:
+
+#+END_SRC
+
+** Auto-tangle this file
+To make the process of writing my Emacs config in a literate style a bit more
+pleasant, I add an ~after-save-hook~ to ~(org-babel-tangle)~ it.
+
+#+BEGIN_SRC emacs-lisp :exports code :results silent
+(declare-function org-babel-tangle "ob-tangle")
+
+(defun yurrriq/auto-tangle-literate-config ()
+  "Upon saving ~/.emacs.d/README.org, tangle it."
+  (when (file-equal-p buffer-file-name "~/.emacs.d/README.org")
+    (org-babel-tangle)))
+
+(add-hook 'after-save-hook 'yurrriq/auto-tangle-literate-config)
+#+END_SRC
+
+** Evaluating forms after a feature is loaded
+As with much of this config, I've taken some convenience functions and macros
+from [[http://www.sanityinc.com/about/][Steve Purcell]]'s [[https://github.com/purcell/emacs.d][Emacs config]].
+
+If ~with-eval-after-load~ is bound, we define an alias, ~after-load~, otherwise
+we define it as a macro.
+
+#+BEGIN_SRC emacs-lisp
+(if (fboundp 'with-eval-after-load)
+    (defalias 'after-load 'with-eval-after-load)
+  (defmacro after-load (feature &rest body)
+    "After FEATURE is loaded, evaluate BODY."
+    (declare (indent defun))
+    `(eval-after-load ,feature
+       '(progn ,@body))))
+#+END_SRC
+
+** Adding entries to ~auto-mode-alist~
+~add-auto-mode~ provides a handier way to add modes to ~auto-mode-alist~.
+#+BEGIN_SRC emacs-lisp :exports none
+;;----------------------------------------------------------------------------
+;; Handier way to add modes to auto-mode-alist
+;;----------------------------------------------------------------------------
+#+END_SRC
+#+BEGIN_SRC emacs-lisp 
+(defun add-auto-mode (mode &rest patterns)
+  "Add entries to `auto-mode-alist' to use `MODE' for all given file `PATTERNS'."
+  (dolist (pattern patterns)
+    (add-to-list 'auto-mode-alist (cons pattern mode))))
+#+END_SRC
+
+** Faster ~yes-or-no-p~
+I don't want to have to type =yes= or =no=, but rather =y= or =no=.
+#+BEGIN_SRC emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+** Toggle fullscreen/maximization
+#+BEGIN_SRC emacs-lisp
+;; ⌘⏎ ⇒ Toggle fullscreen. Like clicking the green circle.
+(global-set-key (kbd "<s-return>") 'toggle-frame-fullscreen)
+#+END_SRC
+#+BEGIN_SRC emacs-lisp
+;; ⌥⏎ ⇒ Toggle maximization state of the selected frame.
+(global-set-key (kbd "M-RET") 'toggle-frame-maximized)
+#+END_SRC
+
+** Browse URL at point
+#+BEGIN_SRC emacs-lisp
+;; ⌘ left click ⇒ Open the URL at or before the point in a browser.
+(global-set-key (kbd "<s-mouse-1>") 'browse-url-at-point)
+#+END_SRC
+
+** Multiple cursors
+#+BEGIN_SRC emacs-lisp
+;; multiple-cursors.el --- Multiple cursors for emacs.
+;; https://github.com/magnars/multiple-cursors.el
+(require-package 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+#+END_SRC
+
+** Renaming the current buffer and file it's visiting
+#+BEGIN_SRC emacs-lisp
+;; http://stackoverflow.com/a/25212377/1793234
+;; http://stackoverflow.com/a/384346/1793234
+;; http://steve.yegge.googlepages.com/my-dot-emacs-file
+(defun rename-file-and-buffer (new-name)
+  "Rename current buffer and file it is visiting to `NEW-NAME'."
+  (interactive "FNew name: ")           ; F -- Possibly nonexistent file name.
+  (let ((name     (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not (and filename (file-exists-p filename)))
+        (error "Buffer '%s' is not visiting a file!" name)
+      ;; let ((new-name (read-file-name "New name: " filename)))
+      (if (get-buffer new-name)
+          (error "A buffer named '%s' already exists!" new-name)
+        (rename-file filename new-name 1)
+        (rename-buffer new-name)
+        (set-visited-file-name new-name)
+        (set-buffer-modified-p nil)
+        (message "mv '%s' '%s'" name (file-name-nondirectory new-name))))))
+#+END_SRC
+
+Bind ~C-x C-r~ globally to ~rename-file-and-buffer~.
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-x C-r") 'rename-file-and-buffer)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :exports none
+(provide 'init-utils)
+;;; init-utils.el ends here
+#+END_SRC
+
+* ELPA
+:PROPERTIES:
+:tangle:   ~/.emacs.d/lisp/init-elpa.el
+:END:
+#+BEGIN_SRC emacs-lisp :padline no :exports none
+;;; init-elpa.pl -- (m)elpa config
+
+;;; Commentary:
+;; Includes portions of https://github.com/purcell/emacs.d/blob/8208151ab23cdcaa7b1027d16d8bd108a3b0dfd6/lisp/init-elpa.el
+
+;;; Code:
+#+END_SRC
+
+** Set up ~​'package-archives~
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("org" . "http://orgmode.org/elpa/") t)
+#+END_SRC
+
+** Helper functions
+TODO: Give credit.
+#+BEGIN_SRC emacs-lisp
+(defun require-package (package &optional min-version no-refresh)
+  "Install given `PACKAGE', optionally requiring `MIN-VERSION'.
+If `NO-REFRESH' is non-nil, the available package lists will not be
+re-downloaded in order to locate `PACKAGE'."
+  (or (package-installed-p package min-version)
+      (if (or (assoc package package-archive-contents) no-refresh)
+          (package-install package)
+        (progn (package-refresh-contents)
+               (require-package package min-version t)))))
+
+(defun maybe-require-package (package &optional min-version no-refresh)
+  "Try to install `PACKAGE', and return non-nil if successful.
+In the event of failure, return nil and print a warning message.
+Optionally require `MIN-VERSION'.  If `NO-REFRESH' is non-nil, the
+available package lists will not be re-downloaded in order to
+locate `PACKAGE'."
+  (condition-case err
+      (require-package package min-version no-refresh)
+    (error
+     (message "Couldn't install package `%s': %S" package err)
+     nil)))
+#+END_SRC
+
+** Other :shit:
+#+BEGIN_SRC emacs-lisp
+;; TODO: move this to the top?
+(setq package-enable-at-startup nil)
+(package-initialize)
+
+(require-package 'fullframe)
+(fullframe list-packages quit-window)
+
+(require-package 'cl-lib)
+#+END_SRC
+
+** Package menu
+#+BEGIN_SRC emacs-lisp
+(defun sanityinc/set-tabulated-list-column-width (col-name width)
+  "Set any column with name `COL-NAME' to the given `WIDTH'."
+  (cl-loop for column across tabulated-list-format
+           when (string= col-name (car column))
+           do (setf (elt column 1) width)))
+
+(defun sanityinc/maybe-widen-package-menu-columns ()
+  "Widen some columns of the package menu table to avoid truncation."
+  (when (boundp 'tabulated-list-format)
+    (sanityinc/set-tabulated-list-column-width "Version" 13)
+    (let ((longest-archive-name (apply 'max (mapcar 'length (mapcar 'car package-archives)))))
+      (sanityinc/set-tabulated-list-column-width "Archive" longest-archive-name))))
+
+(add-hook 'package-menu-mode-hook 'sanityinc/maybe-widen-package-menu-columns)
+#+END_SRC
+#+BEGIN_SRC emacs-lisp :exports none
+(provide 'init-elpa)
+;;; init-elpa.el ends here
+#+END_SRC
+
+* All together now
+  :PROPERTIES:
+  :tangle:   ~/.emacs.d/init.el
+  :END:
+#+BEGIN_SRC emacs-lisp :padline no :exports none
+;;; init.el --- Emacs config
+
+;;; Commentary:
+
+;;; Code:
+
+(package-initialize)
+#+END_SRC
+
+With everything set up to my liking, it's time to tie it all together ~init.el~.
+
+** Set up the load path
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+#+END_SRC
+
+** Require the previously created packages
+#+BEGIN_SRC emacs-lisp
+(require 'init-elpa)
+(require 'init-utils)
+#+END_SRC
+
+** Not yet literatized
+#+BEGIN_SRC emacs-lisp :exports none
+(require 'init-dash-at-point)
+;; (require 'init-exec-path)
+(require 'init-paradox)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(require 'init-themes)
+(require 'init-gui-frames)
+(require 'init-dired)
+(require 'init-flycheck)
+(require 'init-windows)
+;; (require 'init-sessions)
+(require 'init-fonts)
+;; (require 'init-mmm)
+(require 'init-multi-web-mode)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(require 'init-editing-utils)
+(require 'init-origami)
+(require 'init-paredit)
+(require 'init-lisp)
+;; (require 'init-quicklisp)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(require 'init-csv)
+(require 'init-css)
+(require 'init-html)
+(require 'init-markdown)
+(require 'init-org)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(require 'init-magit)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(require 'init-clojure)
+(require 'init-clojure-cider)
+(require 'init-erlang)
+(require 'init-frege)
+(require 'init-go)
+(require 'init-haskell)
+(require 'init-javascript)
+(require 'init-lfe)
+(require 'init-lilypond)
+;; (require 'init-lux)
+;; (require 'init-purescript)
+(require 'init-scheme)
+(require 'init-shen)
+(require 'init-swift)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(require-package 'nyan-mode)
+(require 'nyan-mode)
+(nyan-mode)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(global-unset-key (kbd "C-x C-c"))
+(global-unset-key (kbd "C-x C-z"))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+;; (global-set-key (kbd "s-r") 'helm-imenu-anywhere)
+;; (global-set-key (kbd "A-r") 'helm-imenu-anywhere)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(require 'ido)
+(ido-mode 'buffers)
+(setq ido-ignore-buffers '("^ " "*Completions*" "*Shell Command Output*"
+                           "*Messages*" "Async Shell Command"))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; (add-hook 'text-mode-hook '(lambda() (set-fill-column 80)))
+#+END_SRC
+
+** Custom file
+#+BEGIN_SRC emacs-lisp
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :exports none
+;;; init.el ends here
+#+END_SRC
