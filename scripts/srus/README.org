@@ -109,6 +109,52 @@ Sort the email list.
     sort
 #+END_SRC
 
+* Attach to a =tmux= session on the k8s bastion
+  :PROPERTIES:
+  :header-args: :tangle bin/attach :shebang "#! /usr/bin/env bash"
+  :END:
+
+This script is based on the one in Luke Sandell's blog post, [[https://luketopia.net/2013/11/02/seamless-ssh-with-tmux-and-kitty/][Seamless SSH with tmux and KiTTY]].
+
+Be safer.
+#+BEGIN_SRC bash
+set -eux
+#+END_SRC
+
+Use the current terminal as the session name, if unspecified.
+#+BEGIN_SRC bash
+if [ -z "${1:-}" ]; then
+    SESSION="$(tty)"
+else
+    SESSION="$1"
+fi
+#+END_SRC
+
+Use [[http://tldp.org/LDP/abs/html/refcards.html#AEN22828][parameter expansion]] to strip a prefix ~/dev/~ from =SESSION=.
+#+BEGIN_SRC bash
+SESSION="${SESSION#/dev/}"
+#+END_SRC
+
+Set =TERM= to ~xterm~ to avoid the following error when using [[https://sw.kovidgoyal.net/kitty/][KiTTY]].
+#+BEGIN_SRC bash
+TERM=xterm
+#+END_SRC
+
+#+BEGIN_QUOTE
+open terminal failed: missing or unsuitable terminal: xterm-kitty
+#+END_QUOTE
+
+Replace the current shell with a remote =tmux= session.
+#+BEGIN_SRC bash :exports none
+# shellcheck disable=SC2029
+#+END_SRC
+#+BEGIN_SRC bash :padline no
+if ssh bastion tmux has -t "$SESSION"; then
+    exec ssh bastion -t "tmux attach -t $SESSION"
+else
+    exec ssh bastion -t "tmux new -s $SESSION"
+fi
+#+END_SRC
 
 # Local Variables:
 # org-src-preserve-indentation: t
