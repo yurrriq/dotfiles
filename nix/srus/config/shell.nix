@@ -13,7 +13,7 @@
       "/share/cows"
     ];
 
-    shellAliases = {
+    shellAliases = rec {
       agn = "ag --nogroup";
       agq = "ag -Q";
       rgn = "rg --no-heading";
@@ -21,7 +21,7 @@
       rgf = "rg -F";
       rgs = "rg -S";
       e = ''emacsclient -na ""'';
-      ec = ''emacsclient -cna ""'';
+      ec = e + "-c";
       et = ''emacsclient -nw -a ""'';
       gpg = "gpg2";
       k = "clear";
