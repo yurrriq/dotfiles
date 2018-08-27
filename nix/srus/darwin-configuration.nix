@@ -6,6 +6,7 @@ with import ./srcs { local = false; };
   imports = [
     ./config/applications.nix
     # ./config/beam.nix
+    ./config/chunkwm.nix
     # ./config/dhall.nix
     # ./config/gap.nix
     ./config/git.nix
@@ -13,6 +14,7 @@ with import ./srcs { local = false; };
     ./config/k8s.nix
     # ./config/node.nix
     ./config/shell.nix
+    ./config/skhd.nix
     ./config/system-defaults.nix
   ];
 
@@ -89,10 +91,13 @@ with import ./srcs { local = false; };
 
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.overlays = with nur-no-pkgs.repos.yurrriq.overlays; [
+  nixpkgs.overlays = (with nur-no-pkgs.repos.yurrriq.overlays; [
     nur
     git
     node
+  ]) ++ [
+    (self: super: { nur = import _nur { pkgs = super; }; })
+    (self: super: { inherit (super.nur.repos.peel) chunkwm skhd; })
   ];
 
 }
