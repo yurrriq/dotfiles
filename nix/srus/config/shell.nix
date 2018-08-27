@@ -55,7 +55,7 @@
       # mosh
       # pv
       ripgrep
-      # silver-searcher
+      silver-searcher
       stow
       tree
       watch
