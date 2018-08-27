@@ -41,6 +41,7 @@
       direnv
       # fortune
       # fpp
+      fzf
       gawk
       gnumake
       gnused
