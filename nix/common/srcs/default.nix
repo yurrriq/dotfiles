@@ -19,8 +19,8 @@ rec {
   _nixpkgs = fetchTarballFromGitHub (fromJSONFile ./nixpkgs.json);
 
   _nur = if local
-           then fetchTarballFromGitHub (fromJSONFile ./nur.json)
-           else ./local-nur.nix;
+           then ./local-nur.nix
+           else fetchTarballFromGitHub (fromJSONFile ./nur.json);
 
   nur-no-pkgs = import _nur { };
 
