@@ -38,8 +38,6 @@ with import ./srcs { local = false; };
       pywatchman
     ]) ++ (with pkgs.python35Packages; [
       pygments
-    ]) ++ (with (import _nur { inherit pkgs; }).repos.yurrriq.pkgs; [
-      lab
     ]);
 
   services.activate-system.enable = true;
