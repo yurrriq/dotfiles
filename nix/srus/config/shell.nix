@@ -14,9 +14,11 @@
     ];
 
     shellAliases = rec {
-      agn = "ag --nogroup";
-      agq = "ag -Q";
+      ag = rgs;
+      agn = rgn; # "ag --nogroup";
+      agq = rgf; # "ag -Q";
       rgn = "rg --no-heading";
+      rga = "rg --hidden --iglob !.git";
       rgi = "rg -i";
       rgf = "rg -F";
       rgs = "rg -S";
@@ -52,7 +54,7 @@
       # mosh
       # pv
       ripgrep
-      silver-searcher
+      # silver-searcher
       stow
       tree
       watch
