@@ -16,6 +16,8 @@ in
 
 rec {
 
+  _darwin = fetchTarballFromGitHub (fromJSONFile ./darwin.json);
+
   _nixpkgs = fetchTarballFromGitHub (fromJSONFile ./nixpkgs.json);
 
   _nur = if local

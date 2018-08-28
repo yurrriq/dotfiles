@@ -60,7 +60,7 @@ with import ./srcs { local = false; };
     maxJobs = 8;
 
     nixPath = [
-      "darwin=$HOME/.nix-defexpr/channels/darwin"
+      "darwin=${_darwin}"
       "darwin-config=$HOME/.nixpkgs/darwin-configuration.nix"
       "nixpkgs=${_nixpkgs}"
       # FIXME: "nixpkgs-overlays=$HOME/.nixpkgs/overlays-compat/"
