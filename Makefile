@@ -20,7 +20,7 @@ ${configs}:: target=${HOME}
 
 ifeq (nixps,${profile})
 nix:: target=/etc/nixos
-else ifeq (srus,${profile})
+else ifneq (,$(findstring ${profile},hacktop srus))
 nix:: target=${HOME}/.nixpkgs
 endif
 
