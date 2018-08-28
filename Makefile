@@ -27,6 +27,9 @@ endif
 ${configs}::
 	@ if [ -d $@/${profile} ]; then \
 		if [ -d $@/common ]; then \
+			if [ -f $@/common/Makefile ]; then \
+				${MAKE} -C $@/common ; \
+			fi ; \
 			stow -Rvt $@/${profile} common -d $@ ; \
 		fi ; \
 		stow -Rvt ${target} ${profile} -d $@ ; \

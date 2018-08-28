@@ -3,18 +3,30 @@
   :header-args: :padline no :tangle .gitconfig
   :END:
 ** User
-Set my name and email for writing commits, and [[https://keybase.io/yurrriq/pgp_keys.asc?fingerprint%3D2f5fc34496e6da1115f7f5d31e374869a79b56b1][GPG key]] for signing them.
+Set my name and email for writing commits, and [[https://keybase.io/yurrriq/pgp_keys.asc?fingerprint=60f0aeb0d089c2911183caf9d2d7dfea3d4fb51c][GPG key]] for signing them.
 #+BEGIN_SRC ini
 [user]
 email = eric@ericb.me
 name = Eric Bailey
-signingkey = 0CBFCE8BC161F36E2E156A526E5EAB98B1F77A17
+signingkey = 60F0AEB0D089C2911183CAF9D2D7DFEA3D4FB51C
 #+END_SRC
 ** Core
 #+BEGIN_SRC ini
 [core]
 excludesfile = ~/.gitignore
 pager = diff-so-fancy | less --tabs=4 -RFX
+#+END_SRC
+** Diff Tool
+#+BEGIN_SRC ini
+[difftool "sourcetree"]
+cmd = kdiff3 \"$LOCAL\" \"$REMOTE\"
+path =
+#+END_SRC
+** Merge Tool
+#+BEGIN_SRC ini
+[mergetool "sourcetree"]
+cmd = /run/current-system/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+trustExitCode = true
 #+END_SRC
 ** Commit
 #+BEGIN_SRC ini
@@ -107,7 +119,9 @@ rh = reset --hard
 #+BEGIN_SRC ini
 sl = stash list
 sa = stash apply
+sk = stash --keep-index
 sp = stash pop
+spa = stash --patch
 ss = stash save
 #+END_SRC
 *** Status
@@ -124,4 +138,5 @@ rest = reset
   :END:
 #+BEGIN_SRC ini
 *~
+.DS_Store
 #+END_SRC
