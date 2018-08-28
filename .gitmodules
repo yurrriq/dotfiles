@@ -1,0 +1,6 @@
+[submodule "rebar3/hacktop/.config/rebar3/templates/rebar3_template_riak_core"]
+	path = rebar3/hacktop/.config/rebar3/templates/rebar3_template_riak_core
+	url = https://github.com/marianoguerra/rebar3_template_riak_core/
+[submodule "rebar3/hacktop/.config/rebar3/templates/erlang-template"]
+	path = rebar3/hacktop/.config/rebar3/templates/erlang-template
+	url = git@github.com:yurrriq/erlang-template.git
