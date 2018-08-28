@@ -71,6 +71,7 @@ with import ./srcs { local = false; };
 
   nixpkgs.config.allowUnfree = true;
 
+  # TODO: https://github.com/peel/dotfiles/blob/1e00dacf/nix/.config/nixpkgs/darwin/configuration.nix#L12-L18
   nixpkgs.overlays = (with nur-no-pkgs.repos.yurrriq.overlays; [
     nur
     engraving
