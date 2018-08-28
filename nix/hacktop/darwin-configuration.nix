@@ -6,6 +6,7 @@ with import ./srcs { local = false; };
   imports = [
     ./config/applications.nix
     ./config/c.nix
+    ./config/chunkwm.nix
     # ./config/clojure.nix
     # ./config/doc-prep.nix
     ./config/emacs.nix
@@ -19,6 +20,7 @@ with import ./srcs { local = false; };
     ./config/node.nix
     # ./config/scheme.nix
     ./config/shell.nix
+    ./config/skhd.nix
     ./config/system-defaults.nix
     # TODO: ./config/theorem-proving.nix
   ];
