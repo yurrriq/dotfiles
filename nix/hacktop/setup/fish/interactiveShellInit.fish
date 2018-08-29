@@ -8,7 +8,6 @@ function hicat -d 'Hackish hicat clone via pygments'
 end
 
 
-
 function playmidi
     fluidsynth -i ~/lib/arachno-soundfont/Arachno\ SoundFont\ -\ Version\ 1.0.sf2 $argv
 end
