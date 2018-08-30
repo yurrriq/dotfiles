@@ -13,9 +13,9 @@ function playmidi
 end
 
 
-set fish_path $HOME/.oh-my-fish
-set fish_theme yurrriq
-. $fish_path/oh-my-fish.fish
+# set fish_path $HOME/.oh-my-fish
+# set fish_theme yurrriq
+# . $fish_path/oh-my-fish.fish
 
 
 set fish_greeting

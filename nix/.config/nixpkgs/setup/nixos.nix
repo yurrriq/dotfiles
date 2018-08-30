@@ -9,4 +9,6 @@
   ];
 
   programs.browserpass.enable = true;
+
+  services.keybase.enable = true;
 }

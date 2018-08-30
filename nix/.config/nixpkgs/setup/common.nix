@@ -1,14 +1,9 @@
 { pkgs, ... }:
 
-let
-
-  gitGUI = with pkgs; if stdenv.isDarwin then sourcetree else git-cola;
-
-in
-
 {
 
   imports = [
+    ./emacs.nix
     ./fish.nix
     ./tmux.nix
   ];
@@ -28,9 +23,6 @@ in
       rgi = "rg -i";
       rgf = "rg -F";
       rgs = "rg -S";
-      e = ''emacsclient -na ""'';
-      ec = e + "-c";
-      et = ''emacsclient -nw -a ""'';
       gpg = "gpg2";
       k = "clear";
       kc = "kubectl";
@@ -56,11 +48,15 @@ in
     ];
   };
 
+  programs = {
 
+    bash.enableCompletion = true;
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+
   };
 
 }

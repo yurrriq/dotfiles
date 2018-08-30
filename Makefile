@@ -8,6 +8,13 @@ configs    = $(filter-out ${notconfigs},$(wildcard *))
 all: ${configs}
 
 
+.PHONY: new
+
+new:
+	@ stow -Rvt ~ nix
+
+
+
 ifneq (,$(findstring B,$(MAKEFLAGS)))
 ${configs}::
 	@ if [ -f $@/${profile}/Makefile ]; then \

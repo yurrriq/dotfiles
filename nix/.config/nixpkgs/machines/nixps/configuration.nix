@@ -1,28 +1,17 @@
 { config, pkgs, ... }:
 
-with import ./srcs { local = false; };
+with import <setup/srcs>  { local = false; };
 
 {
-  imports = [
+  imports = let nur-no-pkgs = (import <nur> {}); in [
     ./hardware-configuration.nix
-  ] ++ [
-    ./modules/tomb.nix
-    ./modules/yubikey-gpg.nix
-  ] ++ [
-    ./config/applications.nix
-    ./config/beam.nix
-    ./config/docker.nix
-    ./config/emacs.nix
-    ./config/engraving.nix
-    ./config/git.nix
-    ./config/pass.nix
-    ./config/shell.nix
-    ./config/theorem-proving.nix
-  ] ++ [
-    ./config/clients/invisiblefriend.nix
-    ./config/clients/yellowdig.nix
-    # ./config/clients/voicehive.nix
-  ];
+    <setup/common.nix>
+    <setup/nixos.nix>
+    <setup/packages.nix>
+  ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
+    tomb
+    yubikey-gpg
+  ]);
 
   boot.kernelPackages = pkgs.linuxPackages_4_9;
 
@@ -81,7 +70,9 @@ with import ./srcs { local = false; };
     nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
       "nixpkgs=${_nixpkgs}"
-      # FIXME: "nixpkgs-overlays=/etc/nixos/overlays-compat/"
+      "nixpkgs-overlays=$HOME/.config/nixpkgs/overlays"
+      "nur=${_nur}"
+      "setup=$HOME/.config/nixpkgs/setup"
     ];
 
     trustedUsers = [ "root" "yurrriq" ];
@@ -90,12 +81,18 @@ with import ./srcs { local = false; };
 
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.overlays = with nur-no-pkgs.repos.yurrriq.overlays; [
-    nur
-    engraving
-    git
-    node
-  ];
+  nixpkgs.overlays =
+    let path = <nixpkgs-overlays>; in with builtins;
+      map (n: import (path + ("/" + n)))
+          (filter (n: match ".*\\.nix" n != null ||
+                      pathExists (path + ("/" + n + "/default.nix")))
+                  (attrNames (readDir path)))
+    ++ (with (import <nur> {}).repos.yurrriq.overlays; [
+      nur
+      engraving
+      git
+      node
+    ]);
 
   programs.tomb = {
     enable = true;
@@ -204,13 +201,15 @@ with import ./srcs { local = false; };
     extraGroups = [
       "wheel" "disk" "audio" "video"
       "networkmanager" "systemd-journal"
-      "http"
+      "http" "docker"
     ];
     createHome = true;
     uid = 1000;
     home = "/home/yurrriq";
     shell = "/run/current-system/sw/bin/fish";
   };
+
+  virtualisation.docker.enable = true;
 
   yubikey-gpg.enable = true;
 }

@@ -1,14 +1,16 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; ([
+    aspell
+    aspellDicts.en
     autojump
     awscli
     clang
     coreutils
+    # TODO: coq
     curl
     direnv
-    erlang
     fzf
     gap
     gawk
@@ -21,12 +23,17 @@
     gnutar
     graphviz
     httpie
+    # TODO: http-promt
+    idris
     jq
+    # TODO: lean
     moreutils
+    # TODO: pup
     ripgrep
     rlwrap
-    silver-searcher
+    silver-searcher # TODO: find helm-rg solution
     sloccount
+    spotify
     stow
     tree
     watch
@@ -42,19 +49,28 @@
     json-minify
     node2nix
     vmd
-  ]) ++ (with python27Packages; [
+  ]) ++ (with python2Packages; [
     gap-pygments-lexer
     pygments
     pywatchman
-  ]) ++ (with python36Packages; [
+  ]) ++ (with python3Packages; [
     pygments
   ]) ++ lib.optionals stdenv.isDarwin [
     clementine
     diff-pdf
     sourcetree
     onyx
-    spotify
   ] ++ lib.optionals stdenv.isLinux [
+    google-chrome
+    libreoffice
+    keybase
+    noweb
+    psmisc
+    terminator
+    (texlive.combine {
+      inherit (texlive) scheme-full tufte-latex;
+    })
+    thunderbird
   ]);
 
 }
