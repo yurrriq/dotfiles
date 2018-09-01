@@ -61,6 +61,7 @@
     sourcetree
     onyx
   ] ++ lib.optionals stdenv.isLinux [
+    git-cola
     google-chrome
     libreoffice
     keybase
