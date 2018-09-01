@@ -2,6 +2,12 @@
 
 with import <setup/srcs>  { local = false; };
 
+let
+
+  username = "yurrriq";
+
+in
+
 {
   imports = let nur-no-pkgs = (import <nur> {}); in [
     ./hardware-configuration.nix
@@ -70,9 +76,9 @@ with import <setup/srcs>  { local = false; };
     nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
       "nixpkgs=${_nixpkgs}"
-      "nixpkgs-overlays=$HOME/.config/nixpkgs/overlays"
+      "nixpkgs-overlays=/home/${username}/.config/nixpkgs/overlays"
       "nur=${_nur}"
-      "setup=$HOME/.config/nixpkgs/setup"
+      "setup=/home/${username}/.config/nixpkgs/setup"
     ];
 
     trustedUsers = [ "root" "yurrriq" ];
@@ -101,7 +107,7 @@ with import <setup/srcs>  { local = false; };
   };
 
   security.sudo.extraConfig = ''
-    yurrriq ALL=(ALL) NOPASSWD: ALL
+    ${username} ALL=(ALL) NOPASSWD: ALL
   '';
 
   services = {
@@ -195,8 +201,8 @@ with import <setup/srcs>  { local = false; };
 
   time.timeZone = "America/Chicago";
 
-  users.extraUsers.yurrriq = {
-    name = "yurrriq";
+  users.extraUsers."${username}" = {
+    name = username;
     group = "users";
     extraGroups = [
       "wheel" "disk" "audio" "video"
@@ -205,7 +211,7 @@ with import <setup/srcs>  { local = false; };
     ];
     createHome = true;
     uid = 1000;
-    home = "/home/yurrriq";
+    home = "/home/${username}";
     shell = "/run/current-system/sw/bin/fish";
   };
 
