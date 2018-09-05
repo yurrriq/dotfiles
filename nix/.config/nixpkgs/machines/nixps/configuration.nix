@@ -111,8 +111,6 @@ in
   '';
 
   services = {
-    # openssh.enable = true;
-    # printing.enable = true;
 
     redshift = {
       enable = true;
@@ -125,13 +123,19 @@ in
       autorun = true;
 
       desktopManager = {
-        gnome3.enable = true;
+        gnome3.enable = false;
         xterm.enable = false;
         default = "none";
       };
 
       displayManager = {
-        lightdm.enable = true;
+        lightdm = {
+          autoLogin = {
+            enable = true;
+            user = username;
+          };
+          enable = true;
+        };
       };
 
       enable = true;
@@ -175,6 +179,7 @@ in
       # ];
 
       windowManager = {
+        default = "i3";
         i3.enable = true;
       };
 
