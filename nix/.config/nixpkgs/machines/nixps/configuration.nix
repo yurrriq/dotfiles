@@ -81,7 +81,7 @@ in
       "setup=/home/${username}/.config/nixpkgs/setup"
     ];
 
-    trustedUsers = [ "root" "yurrriq" ];
+    trustedUsers = [ "root" username ];
 
   };
 
