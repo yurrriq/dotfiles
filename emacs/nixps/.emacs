@@ -7,17 +7,21 @@
 
 (tool-bar-mode 0)
 
+
 (require 'package)
 
-(setq package-archives nil)
-(setq package-enable-at-startup nil)
-
-(setq load-path
-      (append (reverse (mapcar (lambda (x) (concat x "/share/emacs/site-lisp/"))
-			       (split-string (or (getenv "NIX_PROFILES") ""))))
-	      load-path))
+(setq-default package-archives nil
+	      package-enable-at-startup nil)
 
 (package-initialize)
+
+
+(eval-when-compile
+  (require 'use-package))
+
+(setq-default use-package-always-defer t
+	      use-package-always-ensure t)
+
 
 ;; https://stackoverflow.com/a/18330742
 
@@ -40,23 +44,22 @@
       auto-save-timeout         20
       auto-save-interval        200)
 
+
 (setq custom-file "~/.emacs.d/private/local/custom.el")
+
 
 (load-theme 'wombat)
 
 
-(setq c-default-style "k&r"
-      c-basic-offset 4)
+(global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 
 
-(require 'clojure-mode)
-
-(dolist (hook '(fci-mode paredit-mode rainbow-delimiters-mode))
-  (add-to-list 'clojure-mode-hook hook)
-  (add-to-list 'emacs-lisp-mode-hook hook))
-
-
-(setq js-indent-level 2)
+(setq c-default-style      "k&r"
+      c-basic-offset       4
+      emacs-lisp-mode-hook '(fci-mode paredit-mode
+			     rainbow-delimiters-mode)
+      js-indent-level      2
+      text-mode-hook       '(text-mode-hook-identify))
 
 
 (org-babel-do-load-languages
@@ -64,16 +67,63 @@
  '((sh . t)))
 
 
-(setq text-mode-hook '(text-mode-hook-identify))
+(use-package crux
+  :demand
+  :config (global-set-key (kbd "C-a") 'crux-move-beginning-of-line))
 
 
-(global-whitespace-cleanup-mode t)
+(use-package helm
+  :demand
+  :config (global-set-key (kbd "M-s-f") 'helm-do-grep-ag))
 
 
-(global-set-key (kbd "C-a") 'crux-move-beginning-of-line)
+(use-package hl-todo
+  :demand
+  :config (global-hl-todo-mode t))
 
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 
-(global-set-key (kbd "C-x C-k") 'kill-this-buffer)
+(use-package magit
+  :demand
+  :config (global-magit-file-mode t))
 
-(global-set-key (kbd "M-s-f") 'helm-do-grep-ag)
+
+(use-package multiple-cursors
+  :demand
+  :config (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines))
+
+
+(use-package whitespace-cleanup-mode
+  :demand
+  :config (global-whitespace-cleanup-mode t))
+
+
+(use-package clojure-mode
+  :mode ("\\.clj\\'")
+  :config
+  (dolist (hook emacs-lisp-mode-hook)
+    (add-to-list 'clojure-mode-hook hook)))
+
+
+;; TODO
+;; (use-package company-lsp
+;;   :init
+;;   (use-package lsp-mode)
+;;   (use-package lsp-ui)
+;;   :after (company lsp-mode)
+;;   :config
+;;   (push 'company-lsp company-backends))
+
+
+;; TODO
+;; (use-package haskell-mode
+;;   :diminish (haskell-mode . " ")
+;;   :init
+;;   ;; (use-package shm
+;;   ;;   :hook (haskell-mode . structured-haskell-mode))
+;;   (use-package hindent
+;;     :hook (haskell-mode . hindent-mode))
+;;   (use-package lsp-haskell))
+
+
+(use-package nix-mode
+  :mode "\\.nix\\'")

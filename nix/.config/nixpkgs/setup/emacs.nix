@@ -2,23 +2,23 @@
 
 {
 
-  environment = {
+  environment = rec {
 
     shellAliases = rec {
-      e = ''emacsclient -na ""'';
+      e = ''emacsclient -na \"\"'';
       ec = e + " -c";
-      et = ''emacsclient -nw -a ""'';
+      et = ''emacsclient -nw -a \"\"'';
     };
 
     systemPackages = [ pkgs.emacs ];
 
-    variables = rec {
-      EDITOR = "${pkgs.emacs}/bin/emacsclient -tc";
-      VISUAL = EDITOR;
-    };
+    variables = with shellAliases; {
+      EDITOR = et;
+      GIT_EDITOR = et;
+      VISUAL = ec;
+     };
 
   };
-
 
   services.emacs = {
     enable = true;
