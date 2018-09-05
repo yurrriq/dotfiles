@@ -6,7 +6,7 @@
 
     shellAliases = rec {
       e = ''emacsclient -na ""'';
-      ec = e + "-c";
+      ec = e + " -c";
       et = ''emacsclient -nw -a ""'';
     };
 
