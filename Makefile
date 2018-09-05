@@ -1,18 +1,17 @@
 profile   ?= srus
-notconfigs = Makefile README.org
+notconfigs = Makefile README.org nix
 configs    = $(filter-out ${notconfigs},$(wildcard *))
 
 
 .PHONY: all ${configs}
 
-all: ${configs}
+all: ${configs} nix
 
 
-.PHONY: new
+.PHONY: nix
 
-new:
+nix:
 	@ stow -Rvt ~ nix
-
 
 
 ifneq (,$(findstring B,$(MAKEFLAGS)))
@@ -24,14 +23,6 @@ endif
 
 
 ${configs}:: target=${HOME}
-
-ifeq (nixps,${profile})
-nix:: target=/etc/nixos
-else ifeq (srus,${profile})
-nix:: target=${HOME}/.nixpkgs
-else ifeq (hacktop,${profile})
-nix:: target=${HOME}/.config/nixpkgs
-endif
 
 ${configs}::
 	@ if [ -d $@/${profile} ]; then \

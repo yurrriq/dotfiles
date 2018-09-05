@@ -24,7 +24,7 @@
     graphviz
     httpie
     # TODO: http-promt
-    idris
+    # TODO: idris
     jq
     # TODO: lean
     moreutils
@@ -51,7 +51,6 @@
     vmd
   ]) ++ (with python2Packages; [
     gap-pygments-lexer
-    pygments
     pywatchman
   ]) ++ (with python3Packages; [
     pygments

@@ -11,8 +11,8 @@ all: $(wildcard *.json)
 %.json: sha256=$(shell nix-prefetch-url --unpack "https://github.com/${owner}/${repo}/tarball/${rev}")
 %.json: COMMIT_MSG_FILE=../../../../../.git/COMMIT_EDITMSG
 *.json:
-	@ printf "[nix/%s] $(patsubst %.json,%,$(notdir $@)): %s -> " \
-		"${profile}" $$(jq -r '.rev[:8]' "$@") \
+	@ printf "$(patsubst %.json,%,$(notdir $@)): %s -> " \
+		$$(jq -r '.rev[:8]' "$@") \
 		>${COMMIT_MSG_FILE}
 	@ jq '.rev = "${rev}" | .sha256 = "${sha256}"' "$@" | sponge "$@"
 	@ jq -r '.rev[:8]' "$@" >>${COMMIT_MSG_FILE}
