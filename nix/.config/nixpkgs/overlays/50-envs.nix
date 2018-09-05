@@ -32,6 +32,23 @@ self: super: {
     ]);
   };
 
+  haskellEnv = self.buildEnv {
+    name = "haskell";
+    paths = with self; ([
+      cabal-install
+      cabal2nix
+      ghc
+    ] ++ (with haskellPackages; [
+      hindent
+      hpack
+      # FIXME: hpack-convert
+      pointfree
+      pointful
+      styx
+      stylish-haskell
+    ]));
+  };
+
   yellowdigEnv = self.buildEnv {
     name = "yellowdig";
     paths = with self; [
