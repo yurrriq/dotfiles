@@ -129,6 +129,7 @@ in
       };
 
       displayManager = {
+
         lightdm = {
           autoLogin = {
             enable = true;
@@ -136,6 +137,12 @@ in
           };
           enable = true;
         };
+
+        # TODO:
+        # sessionCommands = ''
+        #   ${pkgs.xorg.xrdb}/bin/xrdb -merge <<<"Xcursor.size: 64"
+        # '';
+
       };
 
       enable = true;
