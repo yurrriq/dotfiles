@@ -2,21 +2,24 @@
 * dotfiles
 /Managed with [[https://www.gnu.org/software/stow][GNU Stow]]/
 
+** Nix
+/System-agnostic Nix config with pinned package sets/
+- [[./nix/.config/nixpkgs/machines][nix/.config/nixpkgs/machines]]: machine-specific configs
+- [[./nix/.config/nixpkgs/overlays][nix/.config/nixpkgs/overlays]]: shared overlays that don't belong in [[https://github.com/yurrriq/nur-packages/][nur-packages]]
+- [[./nix/.config/nixpkgs/setup][nix/.config/nixpkgs/setup]]: common config
+
 ** NiXPS
 /Config files for my [[https://www.dell.com/en-us/shop/dell-laptops/xps-15/spd/xps-15-9560-laptop][Dell XPS 15 9560]] running [[https://nixos.org/][NixOS]]/
 - [[./emacs/nixps][emacs/nixps]]: short and sweet [[https://www.gnu.org/software/emacs/][Emacs]] config
 - [[./git/nixps][git/nixps]]: [[https://git-scm.com/][Git]] config
 - [[./gnupg/nixps][gnupg/nixps]]: barebones [[https://gnupg.org/][GnuPG]] config (just [[./gnupg/srus/.gnupg/gpg.conf][gpg.conf]], for now)
 - [[./i3/nixps][i3/nixps]]: near-default [[https://i3wm.org/][i3]] config
-- [[./nix/nixps][nix/nixps]]: [[https://nixos.org/][NixOS]] config
 - [[./rebar3/srus][rebar3/srus]]: [[https://www.rebar3.org/][Rebar3]] config
 
 ** SRUS
 /Config files for my [[https://sportradar.us/][Sportradar]] [[https://www.apple.com/macbook-pro/][MacBook Pro]]/
 - [[./git/srus][git/srus]]: [[https://git-scm.com/][Git]] config
 - [[./gnupg/srus][gnupg/srus]]: barebones [[https://gnupg.org/][GnuPG]] config (just [[./gnupg/srus/.gnupg/gpg.conf][gpg.conf]], for now)
-- [[./nix/srus][nix/srus]]: [[https://nixos.org/nix/][Nix]] (well, [[https://github.com/LnL7/nix-darwin][nix-darwin]]) config
-- [[./nixpkgs/srus][nixpkgs/srus]]: stubbed [[https://nixos.org/nixpkgs/][Nixpkgs]] config
 - [[./rebar3/srus][rebar3/srus]]: [[https://www.rebar3.org/][Rebar3]] config
 - [[./scripts/srus][scripts/srus]]: useful little scripts
 - [[./slate/srus][slate/srus]]: [[https://github.com/jigish/slate][Slate]] config
