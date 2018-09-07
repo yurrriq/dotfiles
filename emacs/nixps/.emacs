@@ -74,7 +74,9 @@
 
 (use-package helm
   :demand
-  :config (global-set-key (kbd "M-s-f") 'helm-do-grep-ag))
+  :config
+  (global-set-key (kbd "M-s-f") 'helm-do-grep-ag)
+  (global-set-key (kbd "M-s-ƒ") 'helm-do-grep-ag))
 
 
 (use-package hl-todo

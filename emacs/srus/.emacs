@@ -1,0 +1,1 @@
+../nixps/.emacs
