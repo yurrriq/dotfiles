@@ -21,7 +21,7 @@
   };
 
   services.emacs = {
-    enable = true;
+    enable = ! pkgs.stdenv.isDarwin;
     package = pkgs.emacs;
   };
 
