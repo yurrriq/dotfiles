@@ -46,6 +46,7 @@ emacsWithPackages (epkgs: with {
   # TODO: company-lsp
   crux
   dhall-mode
+  dockerfile-mode
   erlang
   fill-column-indicator
   fish-mode
