@@ -24,6 +24,7 @@ in
     # ghc
     jdiskreport
     jdk
+    kompose
     kops
     kubectx
     kubernetes
