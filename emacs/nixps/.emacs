@@ -70,9 +70,36 @@
  '((sh . t)))
 
 
+(use-package clojure-mode
+  :mode ("\\.clj\\'")
+  :config
+  (dolist (hook emacs-lisp-mode-hook)
+    (add-to-list 'clojure-mode-hook hook)))
+
+;; TODO
+;; (use-package company-lsp
+;;   :init
+;;   (use-package lsp-mode)
+;;   (use-package lsp-ui)
+;;   :after (company lsp-mode)
+;;   :config
+;;   (push 'company-lsp company-backends))
+
+
 (use-package crux
   :demand
   :config (global-set-key (kbd "C-a") 'crux-move-beginning-of-line))
+
+
+;; TODO
+;; (use-package haskell-mode
+;;   :diminish (haskell-mode . " ")
+;;   :init
+;;   ;; (use-package shm
+;;   ;;   :hook (haskell-mode . structured-haskell-mode))
+;;   (use-package hindent
+;;     :hook (haskell-mode . hindent-mode))
+;;   (use-package lsp-haskell))
 
 
 (use-package helm
@@ -97,38 +124,10 @@
   :config (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines))
 
 
+(use-package nix-mode
+  :mode "\\.nix\\'")
+
+
 (use-package whitespace-cleanup-mode
   :demand
   :config (global-whitespace-cleanup-mode t))
-
-
-(use-package clojure-mode
-  :mode ("\\.clj\\'")
-  :config
-  (dolist (hook emacs-lisp-mode-hook)
-    (add-to-list 'clojure-mode-hook hook)))
-
-
-;; TODO
-;; (use-package company-lsp
-;;   :init
-;;   (use-package lsp-mode)
-;;   (use-package lsp-ui)
-;;   :after (company lsp-mode)
-;;   :config
-;;   (push 'company-lsp company-backends))
-
-
-;; TODO
-;; (use-package haskell-mode
-;;   :diminish (haskell-mode . " ")
-;;   :init
-;;   ;; (use-package shm
-;;   ;;   :hook (haskell-mode . structured-haskell-mode))
-;;   (use-package hindent
-;;     :hook (haskell-mode . hindent-mode))
-;;   (use-package lsp-haskell))
-
-
-(use-package nix-mode
-  :mode "\\.nix\\'")
