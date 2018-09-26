@@ -60,10 +60,12 @@ emacsWithPackages (epkgs: with {
   # TODO: lsp-mode
   # TODO: lsp-ui
   magit
+  markdown-mode
   multiple-cursors
   nix-mode
   paredit
   rainbow-delimiters
+  smex
   # TODO: structured-haskell-mode
   use-package
   whitespace-cleanup-mode
