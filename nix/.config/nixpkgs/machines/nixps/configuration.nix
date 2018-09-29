@@ -34,6 +34,7 @@ in
 
   environment = {
     systemPackages = with pkgs; [
+      exercism
       nix
       tellico
       xorg.xbacklight
