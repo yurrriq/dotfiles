@@ -18,7 +18,7 @@ in
   environment.systemPackages = with pkgs; ([
     aspell
     aspellDicts.en
-    # cabal2nix
+    cabal2nix
     dhall
     dhall-json
     # ghc
@@ -39,7 +39,7 @@ in
       # hindent
       # hpack
       # FIXME: hpack-convert
-      # stylish-haskell
+      stylish-haskell
     ]));
 
   environment.pathsToLink = [
