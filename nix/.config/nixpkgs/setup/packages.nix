@@ -12,7 +12,7 @@
     curl
     direnv
     fzf
-    gap
+    # gap
     gawk
     gcc
     git
@@ -51,7 +51,7 @@
     node2nix
     vmd
   ]) ++ (with python2Packages; [
-    gap-pygments-lexer
+    # gap-pygments-lexer
     pywatchman
   ]) ++ (with python3Packages; [
     pygments
