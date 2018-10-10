@@ -23,10 +23,9 @@ in
     cabal2nix
     dhall
     dhall-json
-    # ghc
+    ghc
     jdiskreport
     jdk
-    # kompose
     kops
     kubectx
     kubernetes
@@ -35,6 +34,7 @@ in
     nix
     nix-prefetch-git
     pandoc
+    yq
     vim
     ] ++ (with haskellPackages; [
       # FIXME: hadolint
