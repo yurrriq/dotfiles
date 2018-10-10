@@ -49,7 +49,6 @@
     diff-so-fancy
     json-minify
     node2nix
-    vmd
   ]) ++ (with python2Packages; [
     # gap-pygments-lexer
     pywatchman
