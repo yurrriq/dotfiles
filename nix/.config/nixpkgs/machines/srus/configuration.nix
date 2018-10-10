@@ -35,7 +35,6 @@ in
     nix
     nix-prefetch-git
     pandoc
-    shellcheck
     yq
     vim
     ] ++ (with haskellPackages; [

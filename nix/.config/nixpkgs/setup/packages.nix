@@ -31,6 +31,7 @@
     # TODO: pup
     ripgrep
     rlwrap
+    shellcheck
     shfmt
     silver-searcher # TODO: find helm-rg solution
     sloccount
