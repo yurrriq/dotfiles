@@ -96,7 +96,7 @@ in
       git
       node
     ]) ++ [
-      (self: super: { nur = import _nur { pkgs = super; }; })
+      (self: super: { nur = import <nur> { pkgs = super; }; })
       (self: super: { inherit (super.nur.repos.peel) chunkwm skhd; })
       (self: super: {
         inherit (import (fetchTarball {
