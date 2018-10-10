@@ -25,12 +25,14 @@ in
     dhall-json
     ghc
     gzip
+    helmfile
     jdiskreport
     jdk
     kops
     kubectx
     kubernetes
     kubernetes-helm
+    kubetail
     minikube
     nix
     nix-prefetch-git
