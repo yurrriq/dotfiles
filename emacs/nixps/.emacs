@@ -64,10 +64,10 @@
 
 (setq-default fill-column 80)
 
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((sh . t)))
+;; FIXME
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((sh . t)))
 
 
 (use-package clojure-mode
