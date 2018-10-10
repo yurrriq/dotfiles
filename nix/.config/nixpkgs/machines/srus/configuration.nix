@@ -4,6 +4,8 @@ with import <setup/srcs> { local = false; };
 
 let
 
+  inherit (nur-no-pkgs.repos.yurrriq.lib) pinnedNixpkgs;
+
   username = "e.bailey";
 
 in
@@ -99,10 +101,10 @@ in
       (self: super: { nur = import <nur> { pkgs = super; }; })
       (self: super: { inherit (super.nur.repos.peel) chunkwm skhd; })
       (self: super: {
-        inherit (import (fetchTarball {
-          url = https://github.com/NixOS/nixpkgs/tarball/ba278c3b87d9bd1941c51f8566c4972f30deefa7;
+        inherit (pinnedNixpkgs {
+          rev = "ba278c3b87d9bd1941c51f8566c4972f30deefa7";
           sha256 = "1xwa6c93j1fva48fnzcq0mnf4d6qz8r88y9sjs92pvr49nna5x56";
-        }) {}) minikube;
+        }) minikube;
       })
     ];
 
