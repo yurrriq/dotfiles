@@ -2,6 +2,6 @@
   "owner": "NixOS",
   "repo": "nixpkgs-channels",
   "branch": "nixpkgs-18.09-darwin",
-  "rev": "2cae2b9a84919052ec0d8eccbdccb3600c6d4a21",
-  "sha256": "0aqfyaamjlkw20dg3yfdcsh6130fblw87jfv99mp3bpq7gssj22q"
+  "rev": "d308e698f90634446a46acc2bcd369b81565d3a6",
+  "sha256": "09czz44hj9q27qcjkb65k2201br5ppwa4j82hjcdh2910f3nf3lb"
 }
