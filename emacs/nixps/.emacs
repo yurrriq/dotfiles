@@ -64,6 +64,7 @@
 
 (setq-default fill-column 80)
 
+
 ;; FIXME
 ;; (org-babel-do-load-languages
 ;;  'org-babel-load-languages
@@ -134,6 +135,10 @@
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
+
+
+(use-package tuareg
+  :mode ("\\.ml\\'" "\\.mli\\'"))
 
 
 (use-package whitespace-cleanup-mode

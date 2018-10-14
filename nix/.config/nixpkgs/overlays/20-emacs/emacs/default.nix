@@ -67,6 +67,7 @@ emacsWithPackages (epkgs: with {
   rainbow-delimiters
   smex
   # TODO: structured-haskell-mode
+  tuareg
   use-package
   whitespace-cleanup-mode
   yaml-mode
