@@ -12,7 +12,7 @@
     curl
     direnv
     fzf
-    gap
+    # gap
     gawk
     gcc
     git
@@ -31,6 +31,7 @@
     # TODO: pup
     ripgrep
     rlwrap
+    shellcheck
     shfmt
     silver-searcher # TODO: find helm-rg solution
     sloccount
@@ -49,9 +50,8 @@
     diff-so-fancy
     json-minify
     node2nix
-    vmd
   ]) ++ (with python2Packages; [
-    gap-pygments-lexer
+    # gap-pygments-lexer
     pywatchman
   ]) ++ (with python3Packages; [
     pygments
