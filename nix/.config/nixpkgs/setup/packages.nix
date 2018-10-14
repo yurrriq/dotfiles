@@ -66,6 +66,7 @@
     libreoffice
     keybase
     noweb
+    qpdfview
     psmisc
     terminator
     (texlive.combine {
