@@ -64,6 +64,7 @@
 
 (setq-default fill-column 80)
 
+
 ;; FIXME
 ;; (org-babel-do-load-languages
 ;;  'org-babel-load-languages
@@ -89,6 +90,10 @@
 (use-package crux
   :demand
   :config (global-set-key (kbd "C-a") 'crux-move-beginning-of-line))
+
+
+(use-package ess
+  :demand)
 
 
 ;; TODO
@@ -134,6 +139,10 @@
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
+
+
+(use-package tuareg
+  :mode ("\\.ml\\'" "\\.mli\\'"))
 
 
 (use-package whitespace-cleanup-mode

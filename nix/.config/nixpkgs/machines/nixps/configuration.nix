@@ -34,6 +34,7 @@ in
 
   environment = {
     systemPackages = with pkgs; [
+      exercism
       nix
       tellico
       xorg.xbacklight
@@ -209,7 +210,7 @@ in
     };
   };
 
-  system.stateVersion = "18.03";
+  system.stateVersion = "18.09";
 
   time.timeZone = "America/Chicago";
 

@@ -3,9 +3,7 @@
 {
 
   environment.systemPackages = with pkgs; [
-    (pass.override {
-      tombPluginSupport = true;
-    })
+    (pass.withExtensions (ext: [ ext.pass-tomb ]))
   ];
 
   programs.browserpass.enable = true;
