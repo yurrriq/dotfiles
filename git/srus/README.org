@@ -137,6 +137,11 @@ st = status -s
 #+BEGIN_SRC ini
 rest = reset
 #+END_SRC
+** Reuse Recorded Resolution
+#+BEGIN_SRC ini
+[rerere]
+enabled = true
+#+END_SRC
 * =.gitignore=
   :PROPERTIES:
   :header-args: :padline no :tangle .gitignore

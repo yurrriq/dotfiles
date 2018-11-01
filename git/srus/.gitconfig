@@ -70,3 +70,5 @@ spa = stash --patch
 ss = stash save
 st = status -s
 rest = reset
+[rerere]
+enabled = true
