@@ -33,6 +33,8 @@ added = green
 changed = yellow
 untracked = cyan
 [alias]
+bm = branch --merged
+bnm = branch --no-merged
 co = checkout
 cob = checkout -b
 ca = commit --amend

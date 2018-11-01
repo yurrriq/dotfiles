@@ -68,6 +68,11 @@ untracked = cyan
 #+BEGIN_SRC ini :exports none
 [alias]
 #+END_SRC
+*** Branch
+#+BEGIN_SRC ini
+bm = branch --merged
+bnm = branch --no-merged
+#+END_SRC
 *** Checkout
 #+BEGIN_SRC ini
 co = checkout
