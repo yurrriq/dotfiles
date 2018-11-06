@@ -1,5 +1,5 @@
 profile   ?= srus
-notconfigs = Makefile README.org nix
+notconfigs = Makefile README.org nix taskwarrior
 configs    = $(filter-out ${notconfigs},$(wildcard *))
 
 
@@ -8,10 +8,10 @@ configs    = $(filter-out ${notconfigs},$(wildcard *))
 all: ${configs} nix
 
 
-.PHONY: nix
+.PHONY: nix taskwarrior
 
-nix:
-	@ stow -Rvt ~ nix
+nix taskwarrior:
+	@ stow -Rvt ~ $@
 
 
 ifneq (,$(findstring B,$(MAKEFLAGS)))

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# api="${1#api:}"
+args="${2#args:}"
+command="${3#command:}"
+# rc="${4#rc:}"
+data="${5#data:}"
+# version="${6#version:}"
+
+_git() {
+    >/dev/null git -C "$data" "$@"
+}
+
+if _git diff --exit-code; then
+    echo 'No changes to commit'
+    exit 0
+fi
+
+
+if ! _git add .; then
+    echo 'Failed to add files to the index'
+    exit 100
+fi
+
+if ! _git commit -m "$command: ${args#task $command }"; then
+    echo 'Failed to record changes to the repository'
+    exit 101
+fi
+
+git log --oneline -1
