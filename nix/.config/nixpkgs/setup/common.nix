@@ -11,6 +11,7 @@
   environment = {
 
     pathsToLink = [
+      "/share/doc/task"
       "/share/gap"
     ];
 

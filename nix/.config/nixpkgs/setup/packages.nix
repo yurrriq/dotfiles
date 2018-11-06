@@ -37,6 +37,7 @@
     sloccount
     spotify
     stow
+    taskwarrior
     tree
     watch
   ] ++ (with beam.packages.erlangR20; [
