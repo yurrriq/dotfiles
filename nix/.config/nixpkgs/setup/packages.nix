@@ -6,6 +6,7 @@
     aspellDicts.en
     autojump
     awscli
+    bat
     clang
     coreutils
     # TODO: coq
