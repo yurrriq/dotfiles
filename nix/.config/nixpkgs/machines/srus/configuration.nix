@@ -51,6 +51,15 @@ in
     "/lib/aspell"
   ];
 
+  fonts = {
+    enableFontDir = true;
+    fonts = with pkgs; [
+      hack-font
+      hasklig
+      iosevka
+    ];
+   };
+
   nix = {
 
     binaryCaches = [
