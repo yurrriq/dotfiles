@@ -50,6 +50,7 @@ emacsWithPackages (epkgs: with {
   erlang
   fill-column-indicator
   fish-mode
+  go-mode
   haskell-mode
   helm-ag
   hindent
