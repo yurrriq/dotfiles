@@ -51,6 +51,7 @@ emacsWithPackages (epkgs: with {
   fill-column-indicator
   fish-mode
   go-mode
+  graphviz-dot-mode
   haskell-mode
   helm-ag
   hindent
