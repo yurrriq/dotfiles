@@ -29,6 +29,7 @@ in
     jdiskreport
     jdk
     kops
+    kube-prompt
     kubectx
     kubernetes
     kubernetes-helm
