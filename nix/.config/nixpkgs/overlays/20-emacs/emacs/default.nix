@@ -67,6 +67,7 @@ emacsWithPackages (epkgs: with {
   nix-mode
   paredit
   rainbow-delimiters
+  rust-mode
   smex
   # TODO: structured-haskell-mode
   tuareg
