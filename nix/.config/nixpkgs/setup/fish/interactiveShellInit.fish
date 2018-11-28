@@ -17,7 +17,7 @@ type -p kubectl >/dev/null 2>&1; and function kcexec
         set -l _flag_replica 0
     end
 
-    kubectl exec -it (kubectl get pod -o jsonpath="{.items[$_flag_replica].metadata.name}" -l app=$argv[1]) -c $argv[1] $argv[2..-1]
+    kubectl exec -it (kubectl get pod -o jsonpath="{.items[$_flag_replica].metadata.name}" -l app.kubernetes.io/name=$argv[1]) -c $argv[1] $argv[2..-1]
 end
 
 
@@ -31,5 +31,3 @@ functions rvm >/dev/null 2>&1; and rvm default
 set -x PATH ~/bin $PATH
 
 set fish_greeting
-
-
