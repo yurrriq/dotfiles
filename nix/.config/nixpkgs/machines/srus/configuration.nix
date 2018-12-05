@@ -112,7 +112,6 @@ in
       node
     ]) ++ [
       (self: super: { nur = import <nur> { pkgs = super; }; })
-      (self: super: { inherit (super.nur.repos.peel) chunkwm skhd; })
     ];
 
   services.activate-system.enable = true;
