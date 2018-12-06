@@ -48,6 +48,7 @@ emacsWithPackages (epkgs: with {
   dhall-mode
   dockerfile-mode
   erlang
+  elixir-mode
   fill-column-indicator
   fish-mode
   go-mode
