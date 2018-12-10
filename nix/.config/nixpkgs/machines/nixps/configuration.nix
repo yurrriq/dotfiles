@@ -35,6 +35,7 @@ in
   environment = {
     systemPackages = with pkgs; [
       exercism
+      libreoffice
       nix
       tellico
       xorg.xbacklight
