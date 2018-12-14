@@ -29,6 +29,7 @@
     jq
     # TODO: lean
     moreutils
+    pandoc
     # TODO: pup
     ripgrep
     rlwrap
