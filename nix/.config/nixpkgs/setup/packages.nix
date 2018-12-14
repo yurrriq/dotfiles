@@ -74,6 +74,7 @@
     terminator
     (texlive.combine {
       inherit (texlive) scheme-full tufte-latex;
+      inherit noweb;
     })
     thunderbird
   ]);
