@@ -39,6 +39,7 @@ emacsWithPackages (epkgs: with {
   melpaStable = epkgs.melpaStablePackages;
   org = epkgs.orgPackages;
 }; (with elpa; [
+  mmm-mode
 ]) ++ (with melpa; [
   better-defaults
   clj-refactor
