@@ -116,6 +116,10 @@ in
 
   services = {
 
+    logind = {
+      lidSwitch = "hybrid-sleep";
+    };
+
     redshift = {
       enable = true;
       latitude = "44.93";
