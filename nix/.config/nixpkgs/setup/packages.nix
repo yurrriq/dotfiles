@@ -29,6 +29,7 @@
     jq
     # TODO: lean
     moreutils
+    pandoc
     # TODO: pup
     ripgrep
     rlwrap
@@ -73,6 +74,8 @@
     terminator
     (texlive.combine {
       inherit (texlive) scheme-full tufte-latex;
+      # FIXME
+      # inherit noweb;
     })
     thunderbird
   ]);

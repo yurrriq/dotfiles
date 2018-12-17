@@ -43,6 +43,8 @@ in
   };
 
   fonts.fonts = with pkgs; [
+    fira-code
+    fira-code-symbols
     iosevka
   ];
 
@@ -113,6 +115,10 @@ in
   '';
 
   services = {
+
+    logind = {
+      lidSwitch = "hybrid-sleep";
+    };
 
     redshift = {
       enable = true;

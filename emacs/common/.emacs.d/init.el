@@ -8,7 +8,7 @@
 (tool-bar-mode 0)
 
 
-(let ((font "Iosevka-14"))
+(let ((font "Iosevka-12"))
   (set-face-attribute 'default t :font font)
   (set-frame-font font nil t))
 
