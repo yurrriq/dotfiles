@@ -7,6 +7,7 @@
     autojump
     awscli
     bat
+    cachix
     clang
     coreutils
     # TODO: coq
