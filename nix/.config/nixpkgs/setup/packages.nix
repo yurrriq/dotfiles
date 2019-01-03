@@ -38,7 +38,7 @@
     shfmt
     silver-searcher # TODO: find helm-rg solution
     sloccount
-    spotify
+    # FIXME: spotify
     stow
     taskwarrior
     tree
