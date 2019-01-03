@@ -81,7 +81,11 @@ in
 
     distributedBuilds = false;
 
-    gc.automatic = true;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 30d";
+      # user = username;
+    };
 
     maxJobs = 8;
 
