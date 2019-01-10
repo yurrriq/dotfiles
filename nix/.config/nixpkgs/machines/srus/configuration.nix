@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 with import <setup/srcs> { local = false; };
 
@@ -37,6 +37,7 @@ in
     minikube
     nix
     nix-prefetch-git
+    noweb
     pandoc
     yq
     vim
@@ -112,5 +113,8 @@ in
     enable = true;
     tempDir = "/nix/tmp";
   };
+
+  # FIXME workaround for https://github.com/NixOS/nix/issues/2523
+  launchd.daemons.nix-daemon.environment.OBJC_DISABLE_INITIALIZE_FORK_SAFETY = "YES";
 
 }
