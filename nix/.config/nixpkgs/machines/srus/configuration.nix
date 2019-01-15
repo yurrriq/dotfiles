@@ -37,7 +37,6 @@ in
     minikube
     nix
     nix-prefetch-git
-    noweb
     pandoc
     yq
     vim
