@@ -37,6 +37,7 @@ in
       exercism
       libreoffice
       nix
+      slack
       tellico
       xorg.xbacklight
     ];
