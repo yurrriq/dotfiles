@@ -103,7 +103,13 @@ in
       engraving
       git
       node
-    ]);
+    ]) ++ [
+      (self: super: {
+        noweb = super.noweb.override {
+          useIcon = false;
+        };
+      })
+    ];
 
   programs.tomb = {
     enable = true;
