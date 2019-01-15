@@ -30,6 +30,7 @@
     jq
     # TODO: lean
     moreutils
+    noweb
     pandoc
     # TODO: pup
     ripgrep
@@ -69,14 +70,12 @@
     google-chrome
     libreoffice
     keybase
-    noweb
     qpdfview
     psmisc
     terminator
     (texlive.combine {
       inherit (texlive) scheme-full tufte-latex;
-      # FIXME
-      # inherit noweb;
+      inherit noweb;
     })
     thunderbird
   ]);
