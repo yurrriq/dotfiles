@@ -37,6 +37,7 @@ in
       exercism
       libreoffice
       nix
+      slack
       tellico
       xorg.xbacklight
     ];
@@ -97,12 +98,18 @@ in
           (filter (n: match ".*\\.nix" n != null ||
                       pathExists (path + ("/" + n + "/default.nix")))
                   (attrNames (readDir path)))
-    ++ (with (import <nur> {}).repos.yurrriq.overlays; [
+    ++ (with nur-no-pkgs.repos.yurrriq.overlays; [
       nur
       engraving
       git
       node
-    ]);
+    ]) ++ [
+      (self: super: {
+        noweb = super.noweb.override {
+          useIcon = false;
+        };
+      })
+    ];
 
   programs.tomb = {
     enable = true;
