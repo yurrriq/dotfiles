@@ -38,14 +38,14 @@
 
     binaryCaches = [
       # "https://cache.nixos.org"
-      # FIXME: "https://yurrriq.cachix.org"
-      # FIXME: "https://yurrriq-nur-packages.cachix.org"
+      "https://yurrriq.cachix.org"
+      "https://yurrriq-nur-packages.cachix.org"
     ];
 
     binaryCachePublicKeys = [
       # "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      # FIXME: "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
-      # FIXME: "yurrriq-nur-packages.cachix.org-1:7kbjuGBUZcWf876g2cdelmIQXrXzOhpMVBqYOyyAv70="
+      "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
+      "yurrriq-nur-packages.cachix.org-1:7kbjuGBUZcWf876g2cdelmIQXrXzOhpMVBqYOyyAv70="
     ];
   };
 
