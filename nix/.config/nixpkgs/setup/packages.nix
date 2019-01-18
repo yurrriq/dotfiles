@@ -57,12 +57,17 @@
     pywatchman
   ]) ++ (with python3Packages; [
     pygments
-  ]) ++ lib.optionals stdenv.isDarwin [
+  ]) ++ lib.optionals stdenv.isDarwin ([
     clementine
     diff-pdf
+    m-cli
     sourcetree
     onyx
-  ] ++ lib.optionals stdenv.isLinux [
+  ] ++ (with chunkwm; [
+    core
+    ffm
+    tiling
+  ])) ++ lib.optionals stdenv.isLinux [
     git-cola
     google-chrome
     libreoffice

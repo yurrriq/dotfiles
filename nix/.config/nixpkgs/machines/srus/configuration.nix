@@ -30,7 +30,6 @@ in
     kubernetes-helm
     kubetail
     nix
-    pandoc
     yq
     vim
     ] ++ (with haskellPackages; [

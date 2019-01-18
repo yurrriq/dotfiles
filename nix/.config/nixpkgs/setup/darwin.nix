@@ -2,14 +2,6 @@
 
 {
 
-  environment.systemPackages = with pkgs; ([
-    m-cli
-  ] ++ (with chunkwm; [
-    core
-    ffm
-    tiling
-  ]));
-
   services.chunkwm = {
     enable = true;
     extraConfig = ''
