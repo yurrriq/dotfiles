@@ -34,7 +34,6 @@
     pandoc
     # TODO: pup
     ripgrep
-    rlwrap
     shellcheck
     shfmt
     silver-searcher # TODO: find helm-rg solution
@@ -53,8 +52,6 @@
     lab
   ]) ++ (with nodePackages; [
     diff-so-fancy
-    json-minify
-    node2nix
   ]) ++ (with python2Packages; [
     # gap-pygments-lexer
     pywatchman

@@ -21,11 +21,8 @@ in
     aspell
     aspellDicts.en
     cabal2nix
-    dhall
-    dhall-json
     ghc
     gzip
-    jdiskreport
     jdk
     kops
     kubectx
@@ -33,7 +30,6 @@ in
     kubernetes-helm
     kubetail
     nix
-    nix-prefetch-git
     pandoc
     yq
     vim
@@ -52,8 +48,6 @@ in
   fonts = {
     enableFontDir = true;
     fonts = with pkgs; [
-      hack-font
-      hasklig
       iosevka
     ];
    };
