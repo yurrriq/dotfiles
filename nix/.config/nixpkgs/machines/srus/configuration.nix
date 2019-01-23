@@ -94,6 +94,7 @@ in
       node
     ]) ++ [
       (self: super: { nur = import <nur> { pkgs = super; }; })
+      (self: super: { noweb = super.noweb.override { useIcon = false; }; })
     ];
 
   services.activate-system.enable = true;
