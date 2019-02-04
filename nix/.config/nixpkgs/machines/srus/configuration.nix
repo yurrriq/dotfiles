@@ -27,7 +27,7 @@ in
     kops
     kubectx
     kubernetes
-    kubernetes-helm
+    # FIXME: kubernetes-helm
     kubetail
     nix
     yq
