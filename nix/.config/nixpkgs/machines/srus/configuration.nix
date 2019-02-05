@@ -38,6 +38,8 @@ in
       # hpack
       # FIXME: hpack-convert
       stylish-haskell
+    ]) ++ (with nodePackages; [
+      aws-azure-login
     ]));
 
   environment.pathsToLink = [
