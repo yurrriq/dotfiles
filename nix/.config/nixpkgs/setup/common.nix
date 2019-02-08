@@ -27,6 +27,7 @@
       gpg = "gpg2";
       k = "clear";
       kc = "kubectl";
+      kt = "kubetail";
       l = "ls -Glah";
       ll = "ls -Glh";
       ls = "ls -G";
