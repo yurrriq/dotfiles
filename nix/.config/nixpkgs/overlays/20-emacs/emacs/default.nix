@@ -48,6 +48,7 @@ emacsWithPackages (epkgs: with {
   crux
   dhall-mode
   dockerfile-mode
+  editorconfig
   elixir-mode
   erlang
   fill-column-indicator

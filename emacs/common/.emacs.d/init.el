@@ -16,7 +16,7 @@
 (require 'package)
 
 (setq-default package-archives nil
-	      package-enable-at-startup nil)
+              package-enable-at-startup nil)
 
 (package-initialize)
 
@@ -25,7 +25,7 @@
   (require 'use-package))
 
 (setq-default use-package-always-defer t
-	      use-package-always-ensure t)
+              use-package-always-ensure t)
 
 
 ;; https://stackoverflow.com/a/18330742
@@ -62,7 +62,7 @@
 (setq c-default-style      "k&r"
       c-basic-offset       4
       emacs-lisp-mode-hook '(fci-mode paredit-mode
-			     rainbow-delimiters-mode)
+                             rainbow-delimiters-mode)
       js-indent-level      2
       text-mode-hook       '(text-mode-hook-identify))
 
@@ -94,6 +94,12 @@
 (use-package crux
   :demand
   :config (global-set-key (kbd "C-a") 'crux-move-beginning-of-line))
+
+
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 
 
 (use-package noweb-mode
