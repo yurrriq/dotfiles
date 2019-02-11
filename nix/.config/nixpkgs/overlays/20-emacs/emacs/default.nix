@@ -52,6 +52,7 @@ emacsWithPackages (epkgs: with {
   erlang
   fill-column-indicator
   fish-mode
+  gap-mode
   go-mode
   graphviz-dot-mode
   haskell-mode

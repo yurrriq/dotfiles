@@ -96,7 +96,8 @@
   :config (global-set-key (kbd "C-a") 'crux-move-beginning-of-line))
 
 
-(use-package ess
+(use-package noweb-mode
+  :mode ("\\.nw\\'")
   :demand)
 
 
