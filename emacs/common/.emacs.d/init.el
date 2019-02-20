@@ -8,7 +8,9 @@
 (tool-bar-mode 0)
 
 
-(let ((font "Iosevka-12"))
+(let ((font (if (eq system-type 'darwin)
+                "Iosevka-14"
+              "Iosevka-12")))
   (set-face-attribute 'default t :font font)
   (set-frame-font font nil t))
 
