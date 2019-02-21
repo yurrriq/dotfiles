@@ -37,6 +37,7 @@ in
       exercism
       libreoffice
       nix
+      gnome3.nautilus
       slack
       tellico
       xorg.xbacklight
