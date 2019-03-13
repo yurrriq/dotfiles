@@ -21,6 +21,18 @@ type -p kubectl >/dev/null 2>&1; and function kcexec
 end
 
 
+type -p kubectl >/dev/null 2>&1; and function kcnodepods -d 'List all pods on a given node'
+    argparse -N 1 -X 1 --name=kcnodepods 'n/namespace=?' -- $argv
+    or return
+
+    if not set -q _flag_namespace
+	kubectl get pods --all-namespaces --field-selector=spec.nodeName=$argv[1]
+    else
+	kubectl get pods --namespace=$_flag_namespace --field-selector=spec.nodeName=$argv[1]
+    end
+end
+
+
 # set fish_path $HOME/.oh-my-fish
 # set fish_theme yurrriq
 # . $fish_path/oh-my-fish.fish
