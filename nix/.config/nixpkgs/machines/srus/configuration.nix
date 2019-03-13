@@ -40,6 +40,7 @@ in
       stylish-haskell
     ]) ++ (with nodePackages; [
       aws-azure-login
+      nodePackages."mermaid.cli"
     ]));
 
   environment.pathsToLink = [
