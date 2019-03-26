@@ -32,6 +32,10 @@ type -p kubectl >/dev/null 2>&1; and function kcnodepods -d 'List all pods on a 
     end
 end
 
+function icat
+    kitty +kitten icat
+end
+
 
 # set fish_path $HOME/.oh-my-fish
 # set fish_theme yurrriq
