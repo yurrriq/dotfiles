@@ -8,7 +8,7 @@
     awscli
     bat
     # FIXME: cachix
-    clang
+    # FIXME: clang
     coreutils
     # TODO: coq
     curl
