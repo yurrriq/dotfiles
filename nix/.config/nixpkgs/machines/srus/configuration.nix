@@ -41,6 +41,7 @@ in
     ]) ++ (with nodePackages; [
       aws-azure-login
       nodePackages."mermaid.cli"
+      vmd
     ]));
 
   environment.pathsToLink = [
