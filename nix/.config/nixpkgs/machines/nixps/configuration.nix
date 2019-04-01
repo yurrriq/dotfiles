@@ -16,7 +16,7 @@ in
     <setup/packages.nix>
   ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
     tomb
-    yubikey-gpg
+    # FIXME: yubikey-gpg
   ]);
 
   boot.kernelPackages = pkgs.linuxPackages_4_9;
@@ -245,5 +245,5 @@ in
 
   virtualisation.docker.enable = true;
 
-  yubikey-gpg.enable = true;
+  # FIXME: yubikey-gpg.enable = true;
 }
