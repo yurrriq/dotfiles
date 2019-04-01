@@ -69,7 +69,7 @@
     tiling
   ])) ++ lib.optionals stdenv.isLinux [
     git-cola
-    google-chrome
+    google-chrome-dev
     libreoffice
     keybase
     qpdfview
