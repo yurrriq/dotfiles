@@ -84,9 +84,7 @@ function fish_right_prompt
     printf (yellow)"("(dim)$cwd(yellow)") "(off)
 
     command -sq kubectl; and begin
-        set -l k8s_namespace (k8s::current_namespace)
-        set -l k8s_context (string replace -r '^([^.]+).*' '$1' (k8s::current_context))
-        printf (cyan)"["(orange)"$k8s_context/$k8s_namespace"(cyan)"] "(off)
+        printf (cyan)"["(orange)(k8s::current_context)"/"(k8s::current_namespace)(cyan)"] "(off)
     end
 
     printf (dim)(date +%H(yellow):(dim)%M(yellow):(dim)%S)(off)
