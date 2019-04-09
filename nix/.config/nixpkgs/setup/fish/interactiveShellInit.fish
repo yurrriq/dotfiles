@@ -1,9 +1,14 @@
-type -p fluidsynth >/dev/null 2>&1; and function playmidi
+command -sq fluidsynth; and function playmidi
     fluidsynth -i ~/lib/arachno-soundfont/Arachno\ SoundFont\ -\ Version\ 1.0.sf2 $argv
 end
 
 
-type -p kubectl >/dev/null 2>&1; and function kcexec
+command -sq kitty; and function icat
+    kitty +kitten icat
+end
+
+
+command -sq kubectl; and function kcexec
     argparse -N 2 --name=kcexec 'r/replica=' -- $argv
     or return
 
@@ -15,7 +20,7 @@ type -p kubectl >/dev/null 2>&1; and function kcexec
 end
 
 
-type -p kubectl >/dev/null 2>&1; and function kcnodepods -d 'List all pods on a given node'
+command -sq kubectl; and function kcnodepods -d 'List all pods on a given node'
     argparse -N 1 -X 1 --name=kcnodepods 'n/namespace=?' -- $argv
     or return
 
@@ -26,12 +31,8 @@ type -p kubectl >/dev/null 2>&1; and function kcnodepods -d 'List all pods on a 
     end
 end
 
-function icat
-    kitty +kitten icat
-end
 
-
-type -p pygmentize >/dev/null 2>&1; and function pcat
+command -sq pygmentize; and function pcat
     pygmentize -f terminal -g $argv
 end; and function hicat -d 'Hackish hicat clone via pygments'
     pcat $argv | less -cR
