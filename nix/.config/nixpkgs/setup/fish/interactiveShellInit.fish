@@ -40,6 +40,5 @@ end
 
 functions rvm >/dev/null 2>&1; and rvm default
 
-set -x PATH ~/bin /run/current-system/sw/bin $PATH
 
 set fish_greeting
