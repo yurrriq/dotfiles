@@ -30,6 +30,7 @@ in
     # FIXME: kubernetes-helm
     kubetail
     nix
+    sops
     yq
     vim
     ] ++ (with haskellPackages; [
