@@ -1,6 +1,11 @@
 function fish_prompt
-    set -l symbol "λ "
     set -l code $status
+
+    if set -q IN_NIX_SHELL
+        set symbol "λΠ "
+    else
+        set symbol "λ "
+    end
 
     if git::is_repo
         set -l branch (git::branch_name ^/dev/null)
