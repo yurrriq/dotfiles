@@ -5,6 +5,18 @@ signingkey = 2E8D082C324D5F5459CD27E755BF5D49549F04AD
 [core]
 excludesfile = ~/.gitignore
 pager = diff-so-fancy | less --tabs=4 -RFX
+[diff]
+tool = kitty
+guitool = kitty.gui
+[diff "sopsdiffer"]
+textconv = sops -d
+[difftool]
+prompt = false
+trustExitCode = true
+[difftool "kitty"]
+cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 [difftool "sourcetree"]
 cmd = kdiff3 \"$LOCAL\" \"$REMOTE\"
 path =

@@ -18,6 +18,18 @@ pager = diff-so-fancy | less --tabs=4 -RFX
 #+END_SRC
 ** Diff Tool
 #+BEGIN_SRC ini
+[diff]
+tool = kitty
+guitool = kitty.gui
+[diff "sopsdiffer"]
+textconv = sops -d
+[difftool]
+prompt = false
+trustExitCode = true
+[difftool "kitty"]
+cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 [difftool "sourcetree"]
 cmd = kdiff3 \"$LOCAL\" \"$REMOTE\"
 path =
