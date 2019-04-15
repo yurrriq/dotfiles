@@ -24,11 +24,6 @@ in
     ghc
     gzip
     jdk
-    kops
-    kubectx
-    kubernetes
-    # FIXME: kubernetes-helm
-    kubetail
     nix
     sops
     yq
