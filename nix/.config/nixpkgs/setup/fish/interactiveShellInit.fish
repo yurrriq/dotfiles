@@ -40,13 +40,6 @@ command -sq kubectl; and begin
 end
 
 
-command -sq pygmentize; and function pcat
-    pygmentize -f terminal -g $argv
-end; and function hicat -d 'Hackish hicat clone via pygments'
-    pcat $argv | less -cR
-end
-
-
 functions rvm >/dev/null 2>&1; and rvm default
 
 
