@@ -72,9 +72,9 @@
 (setq-default fill-column 80)
 
 
-;; (org-babel-do-load-languages
-;;  'org-babel-load-languages
-;;  '((shell . t)))
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((shell . t)))
 
 
 (use-package clojure-mode
