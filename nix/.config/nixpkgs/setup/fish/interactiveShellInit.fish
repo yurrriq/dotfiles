@@ -43,4 +43,8 @@ end
 functions rvm >/dev/null 2>&1; and rvm default
 
 
-set fish_greeting
+if string match -r '.*k8s-\d+$' "$buildInputs"
+    set fish_greeting (k8senv)
+else
+    set fish_greeting
+end
