@@ -42,6 +42,7 @@ in
 
   environment.pathsToLink = [
     "/lib/aspell"
+    "/share/emacs/site-lisp"
   ];
 
   fonts = {
