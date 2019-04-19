@@ -2,14 +2,13 @@
 
 (setq server-window 'pop-to-buffer-same-window)
 
-
 (menu-bar-mode 0)
 
 (tool-bar-mode 0)
 
 
 (let ((font (if (eq system-type 'darwin)
-                "Iosevka-14"
+                "Iosevka-16"
               "Iosevka-12")))
   (set-face-attribute 'default t :font font)
   (set-frame-font font nil t))
