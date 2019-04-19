@@ -103,9 +103,10 @@
   (editorconfig-mode 1))
 
 
-;; (use-package noweb-mode
-;;   :mode ("\\.nw\\'")
-;;   :demand)
+(use-package noweb-mode
+  :load-path "/run/current-system/sw/share/emacs/site-lisp"
+  :mode ("\\.nw\\'")
+  :demand)
 
 
 ;; TODO
