@@ -6,6 +6,8 @@
 
 (tool-bar-mode 0)
 
+(setq indent-tabs-mode nil)
+
 
 (let ((font (if (eq system-type 'darwin)
                 "Iosevka-16"
