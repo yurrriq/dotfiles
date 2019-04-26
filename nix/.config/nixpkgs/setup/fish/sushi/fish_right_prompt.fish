@@ -59,6 +59,17 @@ function git::is_stashed
 end
 
 
+# ---------------------------------------------------------------------- [ AWS ]
+
+function aws::current_profile
+    if set -q AWS_PROFILE
+        printf "$AWS_PROFILE"
+    else if set -q AWS_DEFAULT_PROFILE
+        printf "$AWS_DEFAULT_PROFILE"
+    end
+end
+
+
 # --------------------------------------------------------------- [ Kubernetes ]
 
 function k8s::current_context
@@ -82,6 +93,13 @@ function fish_right_prompt
     end
 
     printf (yellow)"("(dim)$cwd(yellow)") "(off)
+
+    set -l aws_profile (aws::current_profile)
+    test -n "$aws_profile";
+    and printf (dim)"{"(yellow)(aws::current_profile)(dim)"} "(off)
+
+    command ifconfig utun1 >/dev/null 2>&1;
+    and printf (dim)"|vpn| "(off)
 
     command -sq kubectl; and begin
         printf (cyan)"["(orange)(k8s::current_context)"/"(k8s::current_namespace)(cyan)"] "(off)
