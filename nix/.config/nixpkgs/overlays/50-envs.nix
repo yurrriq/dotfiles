@@ -102,6 +102,22 @@ self: super: rec {
     };
   };
 
+  k8s-2 = let _nur = import <nur> { pkgs = self; }; in _nur.repos.yurrriq.pkgs.buildK8sEnv {
+    pkgs = _nur.repos.yurrriq.lib.pinnedNixpkgs {
+      rev = "e20ee8a710f3a8ea378bb664c2dbfa32dcf399a7";
+      sha256 = "0h063hhywrb4vj9g1lg9dp0r9h5i8b5n923iminnckkxxbr3iap1";
+    };
+
+    name = "k8s-2";
+    config = k8s-0.config // {
+      helm = {
+        flavor = "darwin-amd64";
+        version = "2.11.0";
+        sha256 = "1cxmmi7pwp0qrv34ini8gklf9kvqal778q38bkacdlqrnfj0zx05";
+      };
+    };
+  };
+
   yellowdigEnv = self.buildEnv {
     name = "yellowdig";
     paths = with self; [
