@@ -24,6 +24,7 @@ in
     ghc
     gzip
     jdk
+    kitty
     nix
     sops
     yq
