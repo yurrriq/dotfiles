@@ -80,6 +80,11 @@ function k8s::current_namespace
     command kubectl config view --minify -o jsonpath='{.contexts[0].context.namespace}'
 end
 
+function k8s::current_user
+    command kubectl config view --minify -o jsonpath='{.users[0].name}' \
+        | string replace "@sportradar.com" ""
+end
+
 
 # ------------------------------------------------------------- [ Right Prompt ]
 
@@ -102,7 +107,23 @@ function fish_right_prompt
     and printf (dim)"|vpn| "(off)
 
     command -sq kubectl; and begin
-        printf (cyan)"["(orange)(k8s::current_context)"/"(k8s::current_namespace)(cyan)"] "(off)
+        if [ "$USER" = (k8s::current_user) ]
+            printf (dim)"["(off)
+        else
+            printf (red)"["(off)
+        end
+
+        printf (yellow)(k8s::current_context)(off)
+
+        set -l k8s_namespace (k8s::current_namespace)
+        test -n "$k8s_namespace";
+        and printf (dim)"/"(yellow)"$k8s_namespace"(off)
+
+        if [ "$USER" = (k8s::current_user) ]
+            printf (dim)"] "(off)
+        else
+            printf (red)"] "(off)
+        end
     end
 
     printf (dim)(date +%H(yellow):(dim)%M(yellow):(dim)%S)(off)
