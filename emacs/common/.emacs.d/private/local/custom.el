@@ -8,7 +8,8 @@
  '(safe-local-variable-values
    (quote
     ((org-src-preserve-indentation . t)
-     (org-src-fontify-natively . t)))))
+     (org-src-fontify-natively . t))))
+ '(indent-tabs-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
