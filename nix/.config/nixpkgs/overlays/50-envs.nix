@@ -118,6 +118,18 @@ self: super: rec {
     };
   };
 
+  k8s-3 = let _nur = import <nur> { pkgs = self; }; in _nur.repos.yurrriq.pkgs.buildK8sEnv {
+    inherit (k8s-1) pkgs;
+
+    name = "k8s-3";
+    config = k8s-1.config // {
+      k8s = {
+        version = "1.11.9";
+        sha256 = "0v2d7dg5iw339jxr8dn5jm0kpdqcl82agqgaq8r80rvdl4yi6rwq";
+      };
+    };
+  };
+
   yellowdigEnv = self.buildEnv {
     name = "yellowdig";
     paths = with self; [
