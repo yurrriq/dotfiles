@@ -32,15 +32,11 @@
         chunkc set window_region_locked          1
       '';
     };
-
   };
 
   services.skhd = {
-
     enable = true;
-
     package =  pkgs.skhd;
-
     skhdConfig = ''
       alt - space : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 
@@ -54,6 +50,8 @@
       shift + alt + cmd - down  : chunkc tiling::window --focus south
       shift + alt + cmd - left  : chunkc tiling::window --focus west
 
+      ctrl + alt + cmd - e : chunkc tiling::desktop --equalize
+      ctrl + alt + cmd - f : chunkc tiling::window --toggle float
       ctrl + alt + cmd - m : chunkc tiling::window --toggle fullscreen
 
       shift + cmd - 1 : chunkc tiling::window --send-to-desktop 1
@@ -63,7 +61,6 @@
       shift + cmd - 5 : chunkc tiling::window --send-to-desktop 5
       shift + cmd - 6 : chunkc tiling::window --send-to-desktop 6
     '';
-
   };
 
   # TODO: dig through https://github.com/mathiasbynens/dotfiles/blob/master/.macos
