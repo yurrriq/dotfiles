@@ -69,7 +69,7 @@ in
 
     maxJobs = 8;
 
-    nixPath = [
+    nixPath = lib.mkForce [
       "darwin=${_darwin}"
       "darwin-config=$HOME/.config/nixpkgs/machines/srus/configuration.nix"
       "nixpkgs=${_nixpkgs}"
