@@ -28,6 +28,7 @@ in
     nix
     sops
     yq
+    vgo2nix
     vim
     ] ++ (with haskellPackages; [
       # FIXME: hadolint
