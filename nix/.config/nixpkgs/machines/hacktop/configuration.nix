@@ -34,7 +34,11 @@ with import ../srcs { local = false; };
 
     distributedBuilds = false;
 
-    gc.automatic = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
 
     maxJobs = 8;
 
