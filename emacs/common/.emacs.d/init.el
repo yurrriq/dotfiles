@@ -101,6 +101,21 @@
 ;;   :after (company lsp-mode)
 ;;   :config
 ;;   (push 'company-lsp company-backends))
+;;
+;;
+;; (defun cquery//enable ()
+;;   (condition-case nil
+;;       (lsp)
+;;     (user-error nil)))
+;;
+;;
+;; (setq cquery-executable "/run/current-system/sw/bin/cquery")
+;;
+;;
+;; (use-package cquery
+;;   :commands lsp
+;;   :init (add-hook 'c-mode-hook #'cquery//enable)
+;;	(add-hook 'c++-mode-hook #'cquery//enable))
 
 
 (use-package crux

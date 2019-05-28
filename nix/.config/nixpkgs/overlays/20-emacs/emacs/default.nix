@@ -46,6 +46,7 @@ emacsWithPackages (epkgs: with {
   clj-refactor
   clojure-mode
   # TODO: company-lsp
+  # TODO: cquery
   crux
   dhall-mode
   dockerfile-mode

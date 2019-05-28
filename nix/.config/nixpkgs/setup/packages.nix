@@ -11,6 +11,7 @@
     # FIXME: clang
     coreutils
     # TODO: coq
+    # TODO: cquery
     curl
     direnv
     fzf
