@@ -54,6 +54,7 @@
     hub
     lab
   ]) ++ (with nodePackages; [
+    # TODO: bash-language-server
     diff-so-fancy
   ]) ++ (with python2Packages; [
     # gap-pygments-lexer
