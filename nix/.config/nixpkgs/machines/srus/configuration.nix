@@ -25,9 +25,7 @@ in
     gzip
     jdk
     kitty
-    nix
     sops
-    yq
     vgo2nix
     vim
     ] ++ (with haskellPackages; [

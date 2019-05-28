@@ -30,6 +30,7 @@
     jq
     # TODO: lean
     moreutils
+    nix
     noweb
     pandoc
     # TODO: pup
@@ -43,6 +44,7 @@
     taskwarrior
     tree
     watch
+    yq
   ] ++ (with beam.packages.erlangR20; [
     rebar3-open
   ]) ++ (with gitAndTools; [
