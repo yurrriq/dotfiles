@@ -78,11 +78,20 @@
  '((shell . t)))
 
 
+(use-package avy
+  :demand
+  :config
+  (global-set-key (kbd "C-;") 'avy-goto-char)
+  (global-set-key (kbd "C-'") 'avy-goto-char-2)
+  (global-set-key (kbd "M-g f") 'avy-goto-line))
+
+
 (use-package clojure-mode
   :mode ("\\.clj\\'")
   :config
   (dolist (hook emacs-lisp-mode-hook)
     (add-to-list 'clojure-mode-hook hook)))
+
 
 ;; TODO
 ;; (use-package company-lsp
