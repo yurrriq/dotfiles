@@ -105,12 +105,6 @@
   (editorconfig-mode 1))
 
 
-(use-package noweb-mode
-  :load-path "/run/current-system/sw/share/emacs/site-lisp"
-  :mode ("\\.nw\\'")
-  :demand)
-
-
 ;; TODO
 ;; (use-package haskell-mode
 ;;   :diminish (haskell-mode . " ")
@@ -146,6 +140,12 @@
 
 (use-package nix-mode
   :mode "\\.nix\\'")
+
+
+(use-package noweb-mode
+  :load-path "/run/current-system/sw/share/emacs/site-lisp"
+  :mode ("\\.nw\\'")
+  :demand)
 
 
 (use-package smex
