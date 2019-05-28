@@ -34,12 +34,12 @@ in
 
   environment = {
     systemPackages = with pkgs; [
-      exercism
+      # exercism
       libreoffice
       nix
       gnome3.nautilus
       slack
-      tellico
+      # tellico
       xorg.xbacklight
     ];
   };
