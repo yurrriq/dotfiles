@@ -12,7 +12,7 @@
 
     pathsToLink = [
       "/share/doc/task"
-      "/share/gap"
+      # "/share/gap"
     ];
 
     shellAliases = rec {
@@ -51,7 +51,7 @@
 
     gc = {
       automatic = true;
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 45d";
     };
 
   };

@@ -19,7 +19,7 @@ in
     # FIXME: yubikey-gpg
   ]);
 
-  boot.kernelPackages = pkgs.linuxPackages_4_9;
+  boot.kernelPackages = pkgs.linuxPackages_4_19;
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -35,10 +35,8 @@ in
   environment = {
     systemPackages = with pkgs; [
       # exercism
-      libreoffice
-      nix
       gnome3.nautilus
-      slack
+      # slack
       # tellico
       xorg.xbacklight
     ];
@@ -205,7 +203,7 @@ in
     };
   };
 
-  system.stateVersion = "18.09";
+  system.stateVersion = "19.03";
 
   time.timeZone = "America/Chicago";
 

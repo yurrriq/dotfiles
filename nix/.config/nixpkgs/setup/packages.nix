@@ -19,7 +19,7 @@
     gawk
     gcc
     git
-    git-lfs
+    # git-lfs
     gnumake
     gnupg
     gnused
@@ -39,15 +39,16 @@
     shellcheck
     shfmt
     silver-searcher # TODO: find helm-rg solution
-    sloccount
+    # sloccount
     spotify
     stow
     taskwarrior
     tree
+    # vim
     watch
     yq
   ] ++ (with beam.packages.erlangR20; [
-    rebar3-open
+    # rebar3-open
   ]) ++ (with gitAndTools; [
     git-crypt
     gitflow
@@ -74,7 +75,7 @@
   ])) ++ lib.optionals stdenv.isLinux [
     git-cola
     google-chrome-dev
-    libreoffice
+    # libreoffice
     keybase
     qpdfview
     psmisc
@@ -83,7 +84,7 @@
       inherit (texlive) scheme-full tufte-latex;
       inherit noweb;
     })
-    thunderbird
+    # thunderbird
   ]);
 
 }
