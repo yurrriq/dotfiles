@@ -203,7 +203,7 @@ in
     };
   };
 
-  system.stateVersion = "19.03";
+  system.stateVersion = "18.09";
 
   time.timeZone = "America/Chicago";
 
