@@ -81,10 +81,6 @@ self: super: rec {
         version = "2.13.1";
         sha256 = "0a21xigcblhc9wikl7ilqvs7514ds4x71jz4yv2kvv1zjvdd9i8n";
       };
-      helmfile = {
-        version = "0.64.1";
-        sha256 = "1258c545fv4mcrzaw3z5gxl264fcahigaijgkjd4igh4pl0z0wxk";
-      };
     };
   };
 
