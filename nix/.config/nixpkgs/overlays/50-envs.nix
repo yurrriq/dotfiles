@@ -118,15 +118,4 @@ self: super: rec {
     };
   };
 
-  yellowdigEnv = self.buildEnv {
-    name = "yellowdig";
-    paths = with self; [
-      clojure
-      jdk8
-      maven
-      rlwrap
-      slack
-    ];
-  };
-
 }
