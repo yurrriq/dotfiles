@@ -25,9 +25,7 @@ in
     gzip
     jdk
     kitty
-    nix
     sops
-    yq
     vgo2nix
     vim
     ] ++ (with haskellPackages; [
@@ -63,8 +61,6 @@ in
     distributedBuilds = false;
 
     gc = {
-      automatic = true;
-      options = "--delete-older-than 30d";
       # user = username;
     };
 

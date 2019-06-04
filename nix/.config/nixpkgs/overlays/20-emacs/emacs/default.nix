@@ -41,10 +41,12 @@ emacsWithPackages (epkgs: with {
 }; (with elpa; [
   mmm-mode
 ]) ++ (with melpa; [
+  avy
   better-defaults
   clj-refactor
   clojure-mode
   # TODO: company-lsp
+  # TODO: cquery
   crux
   dhall-mode
   dockerfile-mode

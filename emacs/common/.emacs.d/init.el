@@ -78,11 +78,20 @@
  '((shell . t)))
 
 
+(use-package avy
+  :demand
+  :config
+  (global-set-key (kbd "C-;") 'avy-goto-char)
+  (global-set-key (kbd "C-'") 'avy-goto-char-2)
+  (global-set-key (kbd "M-g f") 'avy-goto-line))
+
+
 (use-package clojure-mode
   :mode ("\\.clj\\'")
   :config
   (dolist (hook emacs-lisp-mode-hook)
     (add-to-list 'clojure-mode-hook hook)))
+
 
 ;; TODO
 ;; (use-package company-lsp
@@ -92,6 +101,21 @@
 ;;   :after (company lsp-mode)
 ;;   :config
 ;;   (push 'company-lsp company-backends))
+;;
+;;
+;; (defun cquery//enable ()
+;;   (condition-case nil
+;;       (lsp)
+;;     (user-error nil)))
+;;
+;;
+;; (setq cquery-executable "/run/current-system/sw/bin/cquery")
+;;
+;;
+;; (use-package cquery
+;;   :commands lsp
+;;   :init (add-hook 'c-mode-hook #'cquery//enable)
+;;	(add-hook 'c++-mode-hook #'cquery//enable))
 
 
 (use-package crux
@@ -103,12 +127,6 @@
   :ensure t
   :config
   (editorconfig-mode 1))
-
-
-(use-package noweb-mode
-  :load-path "/run/current-system/sw/share/emacs/site-lisp"
-  :mode ("\\.nw\\'")
-  :demand)
 
 
 ;; TODO
@@ -146,6 +164,12 @@
 
 (use-package nix-mode
   :mode "\\.nix\\'")
+
+
+(use-package noweb-mode
+  :load-path "/run/current-system/sw/share/emacs/site-lisp"
+  :mode ("\\.nw\\'")
+  :demand)
 
 
 (use-package smex

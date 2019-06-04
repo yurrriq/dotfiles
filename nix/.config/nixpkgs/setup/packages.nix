@@ -11,6 +11,7 @@
     # FIXME: clang
     coreutils
     # TODO: coq
+    # TODO: cquery
     curl
     direnv
     fzf
@@ -18,7 +19,7 @@
     gawk
     gcc
     git
-    git-lfs
+    # git-lfs
     gnumake
     gnupg
     gnused
@@ -30,6 +31,7 @@
     jq
     # TODO: lean
     moreutils
+    nix
     noweb
     pandoc
     # TODO: pup
@@ -37,20 +39,23 @@
     shellcheck
     shfmt
     silver-searcher # TODO: find helm-rg solution
-    sloccount
+    # sloccount
     spotify
     stow
     taskwarrior
     tree
+    # vim
     watch
+    yq
   ] ++ (with beam.packages.erlangR20; [
-    rebar3-open
+    # rebar3-open
   ]) ++ (with gitAndTools; [
     git-crypt
     gitflow
     hub
     lab
   ]) ++ (with nodePackages; [
+    # TODO: bash-language-server
     diff-so-fancy
   ]) ++ (with python2Packages; [
     # gap-pygments-lexer
@@ -70,7 +75,7 @@
   ])) ++ lib.optionals stdenv.isLinux [
     git-cola
     google-chrome-dev
-    libreoffice
+    # libreoffice
     keybase
     qpdfview
     psmisc
@@ -79,7 +84,7 @@
       inherit (texlive) scheme-full tufte-latex;
       inherit noweb;
     })
-    thunderbird
+    # thunderbird
   ]);
 
 }
