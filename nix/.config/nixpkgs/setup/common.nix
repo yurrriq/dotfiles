@@ -24,6 +24,7 @@
       rgi = "rg -i";
       rgf = "rg -F";
       rgs = "rg -S";
+      g = "git";
       gpg = "gpg2";
       k = "clear";
       kc = "kubectl";
