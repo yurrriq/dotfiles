@@ -97,10 +97,10 @@ self: super: rec {
     };
   };
 
-  k8s-next = let _nur = import <nur> { pkgs = self; }; in _nur.repos.yurrriq.pkgs.buildK8sEnv {
+  k8s-dev = let _nur = import <nur> { pkgs = self; }; in _nur.repos.yurrriq.pkgs.buildK8sEnv {
     inherit (k8s-stable) pkgs;
 
-    name = "k8s-next";
+    name = "k8s-dev";
     config = k8s-stable.config // {
       helm = {
         flavor = "darwin-amd64";
@@ -111,6 +111,14 @@ self: super: rec {
         version = "1.11.9";
         sha256 = "0v2d7dg5iw339jxr8dn5jm0kpdqcl82agqgaq8r80rvdl4yi6rwq";
       };
+    };
+  };
+
+  k8s-next = let _nur = import <nur> { pkgs = self; }; in _nur.repos.yurrriq.pkgs.buildK8sEnv {
+    inherit (k8s-stable) pkgs;
+
+    name = "k8s-next";
+    config = k8s-dev.config // {
       kops = {
         version = "1.12.1";
         sha256 = "0jia8dhawh786grnbpn64hvsdm6wz5p7hqir01q5xxpd1psnzygj";
