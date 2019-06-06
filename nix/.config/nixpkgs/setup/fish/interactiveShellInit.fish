@@ -37,6 +37,21 @@ command -sq kubectl; and begin
         kubectl version --client --short
         helm version --client --short
     end
+
+    function cpo -d 'Get the name of the Cilium pod running on a given node'
+        command kubectl get pods \
+        --field-selector spec.nodeName=$argv[1] \
+        --namespace kube-system \
+        --output jsonpath='{.items[0].metadata.name}' \
+        --selector k8s-app=cilium
+    end
+
+    function cpods -d 'Get the name of every Cilium pod'
+        command kubectl get pods \
+        --namespace kube-system \
+        --output jsonpath='{range .items[*]}{@.metadata.name}{"\n"}' \
+        --selector k8s-app=cilium
+    end
 end
 
 
