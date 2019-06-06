@@ -26,7 +26,6 @@ in
     jdk
     kitty
     sops
-    vgo2nix
     vim
     ] ++ (with haskellPackages; [
       # FIXME: hadolint
