@@ -149,6 +149,7 @@ ss = stash save
 *** Status
 #+BEGIN_SRC ini
 st = status -s
+stat = status
 #+END_SRC
 *** Typos
 #+BEGIN_SRC ini

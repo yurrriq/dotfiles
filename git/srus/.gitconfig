@@ -83,6 +83,7 @@ sp = stash pop
 spa = stash --patch
 ss = stash save
 st = status -s
+stat = status
 rest = reset
 [rerere]
 enabled = true
