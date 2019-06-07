@@ -1,22 +1,23 @@
 { config, lib, pkgs, ... }:
 
-with import ../srcs { local = false; };
+with import <setup/srcs> { local = false; };
+
+let
+
+  inherit (nur-no-pkgs.repos.yurrriq.lib) pinnedNixpkgs;
+
+  username = "mohacker";
+
+in
 
 {
   imports = [
     <setup/common.nix>
     <setup/darwin.nix>
     <setup/packages.nix>
-    # ../config/clojure.nix
-    # ../config/doc-prep.nix
-    ../config/emacs.nix
-    # ../config/engraving.nix
-    ../config/haskell.nix
-    # ../config/lisp.nix
-    # ../config/ml.nix
-    # ../config/scheme.nix
-    # TODO: ../config/theorem-proving.nix
   ];
+
+  environment.darwinConfig = "$HOME/.config/nixpkgs/machines/hacktop/configuration.nix";
 
   services = {
     activate-system.enable = true;
@@ -34,19 +35,14 @@ with import ../srcs { local = false; };
 
     distributedBuilds = false;
 
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
-
     maxJobs = 8;
 
     nixPath = [
       "darwin=${_darwin}"
-      "darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix"
+      "darwin-config=$HOME/.config/nixpkgs/machines/hacktop/configuration.nix"
       "nixpkgs=${_nixpkgs}"
-      # FIXME: "nixpkgs-overlays=$HOME/config/.nixpkgs/overlays"
+      "nixpkgs-overlays=$HOME/.config/nixpkgs/overlays"
+      "nur=${_nur}"
       "setup=$HOME/.config/nixpkgs/setup"
     ];
 
@@ -56,25 +52,18 @@ with import ../srcs { local = false; };
   nixpkgs.config.allowUnfree = true;
 
   # TODO: https://github.com/peel/dotfiles/blob/1e00dacf/nix/.config/nixpkgs/darwin/configuration.nix#L12-L18
-  nixpkgs.overlays = (with nur-no-pkgs.repos.yurrriq.overlays; [
-    nur
-    engraving
-    git
-    hadolint
-    node
-  ]) ++ [
-    (self: super: { nur = import _nur { pkgs = super; }; })
-    (self: super: {
-      inherit (super.nur.repos.yurrriq.pkgs)
-        autojump
-        clementine
-        erlang
-        m-cli
-        musescore
-        onyx
-        skim
-        spotify;
-    })
-    (self: super: { inherit (super.nur.repos.peel) chunkwm skhd; })
-  ];
+  nixpkgs.overlays =
+    let path = <nixpkgs-overlays>; in with builtins;
+      map (n: import (path + ("/" + n)))
+          (filter (n: match ".*\\.nix" n != null ||
+                      pathExists (path + ("/" + n + "/default.nix")))
+                  (attrNames (readDir path))) ++
+    (with nur-no-pkgs.repos.yurrriq.overlays; [
+      nur
+      # engraving
+      git
+      # hadolint
+      node
+    ]);
+
 }
