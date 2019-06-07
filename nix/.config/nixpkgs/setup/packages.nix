@@ -65,6 +65,7 @@
   ]) ++ lib.optionals stdenv.isDarwin ([
     clementine
     diff-pdf
+    kitty
     m-cli
     sourcetree
     onyx

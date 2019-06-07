@@ -24,7 +24,6 @@ in
     ghc
     gzip
     jdk
-    kitty
     sops
     vim
     ] ++ (with haskellPackages; [
