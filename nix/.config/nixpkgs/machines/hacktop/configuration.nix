@@ -17,27 +17,49 @@ in
     <setup/packages.nix>
   ];
 
-  environment.darwinConfig = "$HOME/.config/nixpkgs/machines/hacktop/configuration.nix";
-
-  services = {
-    activate-system.enable = true;
-    nix-daemon = {
-      enable = true;
-      tempDir = "/nix/tmp";
-    };
+  environment = {
+    darwinConfig = "$HOME/.config/nixpkgs/machines/hacktop/configuration.nix";
+    pathsToLink = [
+      "/lib/aspell"
+      "/share/emacs/site-lisp"
+    ];
+    systemPackages = with pkgs; ([
+      cabal2nix
+      ghc
+    ] ++ (with haskellPackages; [
+      # FIXME: hadolint
+      # hindent
+      # hpack
+      # FIXME: hpack-convert
+      stylish-haskell
+    ]) ++ (with nodePackages; [
+      nodePackages."mermaid.cli"
+      vmd
+    ]));
   };
+
+  fonts = {
+    enableFontDir = true;
+    fonts = with pkgs; [
+      iosevka
+    ];
+   };
 
   nix = {
 
     buildCores = 8;
 
-    buildMachines = [];
+    # TODO: buildMachines = [];
 
     distributedBuilds = false;
 
+    gc = {
+      # user = username;
+    };
+
     maxJobs = 8;
 
-    nixPath = [
+    nixPath = lib.mkForce [
       "darwin=${_darwin}"
       "darwin-config=$HOME/.config/nixpkgs/machines/hacktop/configuration.nix"
       "nixpkgs=${_nixpkgs}"
@@ -46,12 +68,11 @@ in
       "setup=$HOME/.config/nixpkgs/setup"
     ];
 
-    trustedUsers = [ "root" "mohacker" ];
+    trustedUsers = [ "root" username ];
   };
 
   nixpkgs.config.allowUnfree = true;
 
-  # TODO: https://github.com/peel/dotfiles/blob/1e00dacf/nix/.config/nixpkgs/darwin/configuration.nix#L12-L18
   nixpkgs.overlays =
     let path = <nixpkgs-overlays>; in with builtins;
       map (n: import (path + ("/" + n)))
@@ -65,5 +86,13 @@ in
       # hadolint
       node
     ]);
+
+  services = {
+    activate-system.enable = true;
+    nix-daemon = {
+      enable = true;
+      tempDir = "/nix/tmp";
+    };
+  };
 
 }

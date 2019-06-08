@@ -25,6 +25,7 @@
     gnused
     gnutar
     graphviz
+    gzip
     httpie
     # TODO: http-promt
     # TODO: idris
@@ -44,7 +45,7 @@
     stow
     taskwarrior
     tree
-    # vim
+    vim
     watch
     yq
   ] ++ (with beam.packages.erlangR20; [

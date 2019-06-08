@@ -17,15 +17,17 @@ in
     <setup/packages.nix>
   ];
 
-  environment.systemPackages = with pkgs; ([
-    aspell
-    aspellDicts.en
-    cabal2nix
-    ghc
-    gzip
-    jdk
-    sops
-    vim
+  environment = {
+    darwinConfig = "$HOME/.config/nixpkgs/machines/srus/configuration.nix";
+    pathsToLink = [
+      "/lib/aspell"
+      "/share/emacs/site-lisp"
+    ];
+    systemPackages = with pkgs; ([
+      cabal2nix
+      ghc
+      jdk
+      sops
     ] ++ (with haskellPackages; [
       # FIXME: hadolint
       # hindent
@@ -37,11 +39,7 @@ in
       nodePackages."mermaid.cli"
       vmd
     ]));
-
-  environment.pathsToLink = [
-    "/lib/aspell"
-    "/share/emacs/site-lisp"
-  ];
+  };
 
   fonts = {
     enableFontDir = true;
@@ -91,11 +89,12 @@ in
       node
     ]);
 
-  services.activate-system.enable = true;
-
-  services.nix-daemon = {
-    enable = true;
-    tempDir = "/nix/tmp";
+  services = {
+    activate-system.enable = true;
+    nix-daemon = {
+      enable = true;
+      tempDir = "/nix/tmp";
+    };
   };
 
 }
