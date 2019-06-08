@@ -18,6 +18,18 @@ pager = diff-so-fancy | less --tabs=4 -RFX
 #+END_SRC
 ** Diff Tool
 #+BEGIN_SRC ini
+[diff]
+tool = kitty
+guitool = kitty.gui
+[diff "sopsdiffer"]
+textconv = sops -d
+[difftool]
+prompt = false
+trustExitCode = true
+[difftool "kitty"]
+cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 [difftool "sourcetree"]
 cmd = kdiff3 \"$LOCAL\" \"$REMOTE\"
 path =
@@ -68,6 +80,11 @@ untracked = cyan
 #+BEGIN_SRC ini :exports none
 [alias]
 #+END_SRC
+*** Branch
+#+BEGIN_SRC ini
+bm = branch --merged
+bnm = branch --no-merged
+#+END_SRC
 *** Checkout
 #+BEGIN_SRC ini
 co = checkout
@@ -89,6 +106,11 @@ csm = commit -S -m
 cs = crypt status
 cse = crypt status -e
 csu = crypt status -u
+#+END_SRC
+*** Diff
+#+BEGIN_SRC ini
+d = diff
+dc = diff --cached
 #+END_SRC
 *** =git-flow=
 #+BEGIN_SRC ini
@@ -127,10 +149,16 @@ ss = stash save
 *** Status
 #+BEGIN_SRC ini
 st = status -s
+stat = status
 #+END_SRC
 *** Typos
 #+BEGIN_SRC ini
 rest = reset
+#+END_SRC
+** Reuse Recorded Resolution
+#+BEGIN_SRC ini
+[rerere]
+enabled = true
 #+END_SRC
 * =.gitignore=
   :PROPERTIES:
