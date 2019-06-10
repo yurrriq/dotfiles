@@ -30,6 +30,7 @@
     # TODO: http-promt
     # TODO: idris
     jq
+    # kitty
     # TODO: lean
     moreutils
     nix
@@ -66,7 +67,6 @@
   ]) ++ lib.optionals stdenv.isDarwin ([
     clementine
     diff-pdf
-    kitty
     m-cli
     sourcetree
     onyx
