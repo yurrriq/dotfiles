@@ -5,6 +5,16 @@ signingkey = 0CBFCE8BC161F36E2E156A526E5EAB98B1F77A17
 [core]
 excludesfile = ~/.gitignore
 pager = diff-so-fancy | less --tabs=4 -RFX
+[diff]
+tool = kitty
+guitool = kitty.gui
+[difftool]
+prompt = false
+trustExitCode = true
+[difftool "kitty"]
+cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 [commit]
 gpgsign = false
 template = ~/.gitmessage
@@ -27,6 +37,8 @@ added = green
 changed = yellow
 untracked = cyan
 [alias]
+bm = branch --merged
+bnm = branch --no-merged
 co = checkout
 cob = checkout -b
 ca = commit --amend
@@ -40,6 +52,8 @@ csm = commit -S -m
 cs = crypt status
 cse = crypt status -e
 csu = crypt status -u
+d = diff
+dc = diff --cached
 ffco = flow feature checkout
 ffr = flow feature rebase
 ffs = flow feature start
@@ -56,7 +70,12 @@ r = reset
 rh = reset --hard
 sl = stash list
 sa = stash apply
+sk = stash --keep-index
 sp = stash pop
+spa = stash --patch
 ss = stash save
 st = status -s
+stat = status
 rest = reset
+[rerere]
+enabled = true
