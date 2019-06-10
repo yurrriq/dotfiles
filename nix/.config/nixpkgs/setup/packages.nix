@@ -30,7 +30,7 @@
     # TODO: http-promt
     # TODO: idris
     jq
-    # kitty
+    kitty
     # TODO: lean
     moreutils
     nix
@@ -81,11 +81,11 @@
     keybase
     qpdfview
     psmisc
-    terminator
     (texlive.combine {
       inherit (texlive) scheme-full tufte-latex;
       inherit noweb;
     })
+    # terminator
     # thunderbird
   ]);
 
