@@ -7,7 +7,7 @@
     autojump
     awscli
     bat
-    # FIXME: cachix
+    cachix
     # FIXME: clang
     coreutils
     # TODO: coq
