@@ -2,12 +2,11 @@
 
 (setq server-window 'pop-to-buffer-same-window)
 
+(column-number-mode 1)
+
 (menu-bar-mode 0)
 
 (tool-bar-mode 0)
-
-(setq indent-tabs-mode nil)
-
 
 (let ((font (if (eq system-type 'darwin)
                 "Iosevka-16"
@@ -18,7 +17,8 @@
 
 (require 'package)
 
-(setq-default package-archives nil
+(setq-default indent-tabs-mode nil
+              package-archives nil
               package-enable-at-startup nil)
 
 (package-initialize)
