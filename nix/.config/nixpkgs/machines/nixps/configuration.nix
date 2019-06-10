@@ -35,7 +35,7 @@ in
   environment = {
     systemPackages = with pkgs; [
       # exercism
-      gnome3.nautilus
+      # TODO: gnome3.nautilus
       # TODO: slack
       # FIXME: tellico
       xorg.xbacklight

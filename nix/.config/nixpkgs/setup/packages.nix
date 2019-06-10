@@ -55,7 +55,7 @@
   ] ++ (with beam.packages.erlangR20; [
     # rebar3-open
   ]) ++ (with gitAndTools; [
-    git-crypt
+    # FIXME: git-crypt # pango patch issue
     gitflow
     hub
     lab
