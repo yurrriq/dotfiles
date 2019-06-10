@@ -76,17 +76,22 @@ self: super: rec {
     name = "k8s-stable";
     config = {
       k8s = {
-        version = "1.11.7";
+        version = "1.11.7"; # TODO: 1.11.9
         sha256 = "03dq9p6nwkisd80f0r3sp82vqx2ac4ja6b2s55k1l8k89snfxavf";
       };
       kops = {
-        version = "1.11.1";
+        version = "1.11.1"; # TODO: 1.12.1
         sha256 = "0jia8dhawh786grnbpn64hvsdm6wz5p7hqir01q5xxpd1psnzygj";
       };
       helm = {
         flavor = "darwin-amd64";
         version = "2.13.1";
         sha256 = "0a21xigcblhc9wikl7ilqvs7514ds4x71jz4yv2kvv1zjvdd9i8n";
+      };
+      helmfile = {
+        version = "0.73.2";
+        sha256 = "19rz6fqqgyq4fxh454hricali93wicdmpvnwab67m3xp8xdz1wy4";
+        modSha256 = "1ksz1c4j7mhsbq6ifqab04588d48c9glyhr4d3d4jyvi19qhwx1d";
       };
     };
   };
@@ -111,11 +116,11 @@ self: super: rec {
     config = k8s-stable.config // {
       helm = {
         flavor = "darwin-amd64";
-        version = "2.14.0";
+        version = "2.14.1";
         sha256 = "11lflv9wwvazc3f105q79h84q7b4f9jann786yyplhy0a4kykjf9";
       };
       k8s = {
-        version = "1.11.9";
+        version = "1.11.9"; # TODO: 1.11.10
         sha256 = "0v2d7dg5iw339jxr8dn5jm0kpdqcl82agqgaq8r80rvdl4yi6rwq";
       };
     };
@@ -126,6 +131,10 @@ self: super: rec {
 
     name = "k8s-next";
     config = k8s-dev.config // {
+      k8s = {
+        version = "1.12.7"; # TODO: 1.12.9
+        sha256 = "004iclg7ra06qf6jnjlcagj8wbldbfdd610jsy4sn1h2svrq11z9";
+      };
       kops = {
         version = "1.12.1";
         sha256 = "0jia8dhawh786grnbpn64hvsdm6wz5p7hqir01q5xxpd1psnzygj";
