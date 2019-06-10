@@ -160,11 +160,3 @@ rest = reset
 [rerere]
 enabled = true
 #+END_SRC
-* =.gitignore=
-  :PROPERTIES:
-  :header-args: :padline no :tangle .gitignore
-  :END:
-#+BEGIN_SRC ini
-*~
-.DS_Store
-#+END_SRC
