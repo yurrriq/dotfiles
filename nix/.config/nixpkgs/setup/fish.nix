@@ -10,7 +10,7 @@
 
     variables = {
       SHELL = "${pkgs.fish}/bin/fish";
-      TERMINAL = "pkgs.kitty/bin/kitty";
+      TERMINAL = "${pkgs.kitty}/bin/kitty";
     };
 
   };
