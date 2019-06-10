@@ -132,7 +132,7 @@ in
           enable = true;
         };
 
-        # TODO:
+        # TODO
         # sessionCommands = ''
         #   ${pkgs.xorg.xrdb}/bin/xrdb -merge <<<"Xcursor.size: 64"
         # '';
@@ -174,10 +174,11 @@ in
       # '';
 
       # FIXME
-      # videoDrivers = [
-      #   "displaylink"
-      #   "modesetting"
-      # ];
+      videoDrivers = [
+        # "displaylink"
+        # "modesetting"
+        "intel"
+      ];
 
       windowManager = {
         default = "i3";
@@ -192,13 +193,13 @@ in
           output = "eDP1";
           primary = true;
           monitorConfig = ''
-            DisplaySize 406 228
+            DisplaySize 508 285
           '';
         }
       ];
       resolutions = [
-        { x = "3840"; y = "2160"; }
         # { x = "1080"; y = "1920"; }
+        { x = "3840"; y = "2160"; }
       ];
     };
   };
