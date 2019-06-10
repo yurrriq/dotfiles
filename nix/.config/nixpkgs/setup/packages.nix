@@ -27,6 +27,7 @@
     # graphviz
     gzip
     httpie
+    htop
     # TODO: http-promt
     # TODO: idris
     jq
@@ -34,6 +35,7 @@
     # TODO: lean
     moreutils
     nix
+    nix-prefetch-git
     noweb
     pandoc
     # TODO: pup
