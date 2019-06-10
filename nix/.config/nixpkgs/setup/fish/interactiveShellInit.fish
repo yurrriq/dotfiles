@@ -1,15 +1,14 @@
-type -p pygmentize >/dev/null 2>&1; and function pcat
-    pygmentize -f terminal -g $argv
-end; and function hicat -d 'Hackish hicat clone via pygments'
-    pcat $argv | less -cR
-end
-
-type -p fluidsynth >/dev/null 2>&1; and function playmidi
+command -sq fluidsynth; and function playmidi
     fluidsynth -i ~/lib/arachno-soundfont/Arachno\ SoundFont\ -\ Version\ 1.0.sf2 $argv
 end
 
 
-type -p kubectl >/dev/null 2>&1; and function kcexec
+command -sq kitty; and function icat
+    kitty +kitten icat
+end
+
+
+command -sq kubectl; and function kcexec
     argparse -N 2 --name=kcexec 'r/replica=' -- $argv
     or return
 
@@ -21,13 +20,46 @@ type -p kubectl >/dev/null 2>&1; and function kcexec
 end
 
 
-# set fish_path $HOME/.oh-my-fish
-# set fish_theme yurrriq
-# . $fish_path/oh-my-fish.fish
+command -sq kubectl; and begin
+    function kcnodepods -d 'List all pods on a given node'
+        argparse -N 1 -X 1 --name=kcnodepods 'n/namespace=?' -- $argv
+        or return
+
+        if not set -q _flag_namespace
+            kubectl get pods --all-namespaces --field-selector=spec.nodeName=$argv[1]
+        else
+            kubectl get pods --namespace=$_flag_namespace --field-selector=spec.nodeName=$argv[1]
+        end
+    end
+
+    function k8senv
+        kops version
+        kubectl version --client --short
+        helm version --client --short
+    end
+
+    function cpo -d 'Get the name of the Cilium pod running on a given node'
+        command kubectl get pods \
+        --field-selector spec.nodeName=$argv[1] \
+        --namespace kube-system \
+        --output jsonpath='{.items[0].metadata.name}' \
+        --selector k8s-app=cilium
+    end
+
+    function cpods -d 'Get the name of every Cilium pod'
+        command kubectl get pods \
+        --namespace kube-system \
+        --output jsonpath='{range .items[*]}{@.metadata.name}{"\n"}' \
+        --selector k8s-app=cilium
+    end
+end
 
 
 functions rvm >/dev/null 2>&1; and rvm default
 
-set -x PATH ~/bin $PATH
 
-set fish_greeting
+if string match -r '.*k8s-\d+$' "$buildInputs"
+    set fish_greeting (k8senv)
+else
+    set fish_greeting
+end

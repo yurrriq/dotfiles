@@ -16,10 +16,10 @@ in
     <setup/packages.nix>
   ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
     tomb
-    yubikey-gpg
+    # FIXME: yubikey-gpg
   ]);
 
-  boot.kernelPackages = pkgs.linuxPackages_4_9;
+  boot.kernelPackages = pkgs.linuxPackages_4_19;
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -34,14 +34,17 @@ in
 
   environment = {
     systemPackages = with pkgs; [
-      exercism
-      nix
-      tellico
+      # exercism
+      gnome3.nautilus
+      # TODO: slack
+      # FIXME: tellico
       xorg.xbacklight
     ];
   };
 
   fonts.fonts = with pkgs; [
+    fira-code
+    fira-code-symbols
     iosevka
   ];
 
@@ -58,21 +61,7 @@ in
 
   nix = {
 
-    binaryCaches = [
-      "https://cache.nixos.org"
-      "https://yurrriq.cachix.org"
-      "https://yurrriq-nur-packages.cachix.org"
-    ];
-
-    binaryCachePublicKeys = [
-      # "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
-      "yurrriq-nur-packages.cachix.org-1:7kbjuGBUZcWf876g2cdelmIQXrXzOhpMVBqYOyyAv70="
-    ];
-
     buildCores = 8;
-
-    gc.automatic = true;
 
     nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
@@ -94,7 +83,7 @@ in
           (filter (n: match ".*\\.nix" n != null ||
                       pathExists (path + ("/" + n + "/default.nix")))
                   (attrNames (readDir path)))
-    ++ (with (import <nur> {}).repos.yurrriq.overlays; [
+    ++ (with nur-no-pkgs.repos.yurrriq.overlays; [
       nur
       engraving
       git
@@ -112,6 +101,10 @@ in
   '';
 
   services = {
+
+    logind = {
+      lidSwitch = "hybrid-sleep";
+    };
 
     redshift = {
       enable = true;
@@ -139,7 +132,7 @@ in
           enable = true;
         };
 
-        # TODO:
+        # TODO
         # sessionCommands = ''
         #   ${pkgs.xorg.xrdb}/bin/xrdb -merge <<<"Xcursor.size: 64"
         # '';
@@ -181,10 +174,11 @@ in
       # '';
 
       # FIXME
-      # videoDrivers = [
-      #   "displaylink"
-      #   "modesetting"
-      # ];
+      videoDrivers = [
+        # "displaylink"
+        # "modesetting"
+        "intel"
+      ];
 
       windowManager = {
         default = "i3";
@@ -199,18 +193,18 @@ in
           output = "eDP1";
           primary = true;
           monitorConfig = ''
-            DisplaySize 406 228
+            DisplaySize 508 285
           '';
         }
       ];
       resolutions = [
-        { x = "3840"; y = "2160"; }
         # { x = "1080"; y = "1920"; }
+        { x = "3840"; y = "2160"; }
       ];
     };
   };
 
-  system.stateVersion = "18.09";
+  system.stateVersion = "19.03";
 
   time.timeZone = "America/Chicago";
 
@@ -228,7 +222,7 @@ in
     shell = "/run/current-system/sw/bin/fish";
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker.enable = false;
 
-  yubikey-gpg.enable = true;
+  # FIXME: yubikey-gpg.enable = true;
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 with import <setup/srcs> { local = false; };
 
@@ -17,63 +17,37 @@ in
     <setup/packages.nix>
   ];
 
-  environment.systemPackages = with pkgs; ([
-    aspell
-    aspellDicts.en
-    cabal2nix
-    dhall
-    dhall-json
-    ghc
-    gzip
-    helmfile
-    jdiskreport
-    jdk
-    kops
-    kube-prompt
-    kubectx
-    kubernetes
-    kubernetes-helm
-    kubetail
-    minikube
-    nix
-    nix-prefetch-git
-    pandoc
-    yq
-    vim
+  environment = {
+    darwinConfig = "$HOME/.config/nixpkgs/machines/srus/configuration.nix";
+    pathsToLink = [
+      "/lib/aspell"
+      "/share/emacs/site-lisp"
+    ];
+    systemPackages = with pkgs; ([
+      cabal2nix
+      ghc
+      jdk
     ] ++ (with haskellPackages; [
       # FIXME: hadolint
       # hindent
       # hpack
       # FIXME: hpack-convert
       stylish-haskell
+    ]) ++ (with nodePackages; [
+      aws-azure-login
+      nodePackages."mermaid.cli"
+      vmd
     ]));
-
-  environment.pathsToLink = [
-    "/lib/aspell"
-  ];
+  };
 
   fonts = {
     enableFontDir = true;
     fonts = with pkgs; [
-      hack-font
-      hasklig
       iosevka
     ];
    };
 
   nix = {
-
-    binaryCaches = [
-      # "https://cache.nixos.org"
-      "https://yurrriq.cachix.org"
-      "https://yurrriq-nur-packages.cachix.org"
-    ];
-
-    binaryCachePublicKeys = [
-      # "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
-      "yurrriq-nur-packages.cachix.org-1:7kbjuGBUZcWf876g2cdelmIQXrXzOhpMVBqYOyyAv70="
-    ];
 
     buildCores = 8;
 
@@ -81,11 +55,13 @@ in
 
     distributedBuilds = false;
 
-    gc.automatic = true;
+    gc = {
+      # user = username;
+    };
 
     maxJobs = 8;
 
-    nixPath = [
+    nixPath = lib.mkForce [
       "darwin=${_darwin}"
       "darwin-config=$HOME/.config/nixpkgs/machines/srus/configuration.nix"
       "nixpkgs=${_nixpkgs}"
@@ -110,15 +86,14 @@ in
       nur
       git
       node
-    ]) ++ [
-      (self: super: { nur = import <nur> { pkgs = super; }; })
-    ];
+    ]);
 
-  services.activate-system.enable = true;
-
-  services.nix-daemon = {
-    enable = true;
-    tempDir = "/nix/tmp";
+  services = {
+    activate-system.enable = true;
+    nix-daemon = {
+      enable = true;
+      tempDir = "/nix/tmp";
+    };
   };
 
 }

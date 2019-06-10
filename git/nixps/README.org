@@ -16,6 +16,19 @@ signingkey = 0CBFCE8BC161F36E2E156A526E5EAB98B1F77A17
 excludesfile = ~/.gitignore
 pager = diff-so-fancy | less --tabs=4 -RFX
 #+END_SRC
+** Diff Tool
+#+BEGIN_SRC ini
+[diff]
+tool = kitty
+guitool = kitty.gui
+[difftool]
+prompt = false
+trustExitCode = true
+[difftool "kitty"]
+cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+#+END_SRC
 ** Commit
 #+BEGIN_SRC ini
 [commit]
@@ -56,6 +69,11 @@ untracked = cyan
 #+BEGIN_SRC ini :exports none
 [alias]
 #+END_SRC
+*** Branch
+#+BEGIN_SRC ini
+bm = branch --merged
+bnm = branch --no-merged
+#+END_SRC
 *** Checkout
 #+BEGIN_SRC ini
 co = checkout
@@ -77,6 +95,11 @@ csm = commit -S -m
 cs = crypt status
 cse = crypt status -e
 csu = crypt status -u
+#+END_SRC
+*** Diff
+#+BEGIN_SRC ini
+d = diff
+dc = diff --cached
 #+END_SRC
 *** =git-flow=
 #+BEGIN_SRC ini
@@ -107,21 +130,22 @@ rh = reset --hard
 #+BEGIN_SRC ini
 sl = stash list
 sa = stash apply
+sk = stash --keep-index
 sp = stash pop
+spa = stash --patch
 ss = stash save
 #+END_SRC
 *** Status
 #+BEGIN_SRC ini
 st = status -s
+stat = status
 #+END_SRC
 *** Typos
 #+BEGIN_SRC ini
 rest = reset
 #+END_SRC
-* =.gitignore=
-  :PROPERTIES:
-  :header-args: :padline no :tangle .gitignore
-  :END:
+** Reuse Recorded Resolution
 #+BEGIN_SRC ini
-*~
+[rerere]
+enabled = true
 #+END_SRC

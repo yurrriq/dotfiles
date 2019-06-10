@@ -2,13 +2,16 @@
 
 (setq server-window 'pop-to-buffer-same-window)
 
-
 (menu-bar-mode 0)
 
 (tool-bar-mode 0)
 
+(setq indent-tabs-mode nil)
 
-(let ((font "Iosevka-14"))
+
+(let ((font (if (eq system-type 'darwin)
+                "Iosevka-16"
+              "Iosevka-12")))
   (set-face-attribute 'default t :font font)
   (set-frame-font font nil t))
 
@@ -16,7 +19,7 @@
 (require 'package)
 
 (setq-default package-archives nil
-	      package-enable-at-startup nil)
+              package-enable-at-startup nil)
 
 (package-initialize)
 
@@ -25,7 +28,7 @@
   (require 'use-package))
 
 (setq-default use-package-always-defer t
-	      use-package-always-ensure t)
+              use-package-always-ensure t)
 
 
 ;; https://stackoverflow.com/a/18330742
@@ -62,7 +65,7 @@
 (setq c-default-style      "k&r"
       c-basic-offset       4
       emacs-lisp-mode-hook '(fci-mode paredit-mode
-			     rainbow-delimiters-mode)
+                             rainbow-delimiters-mode)
       js-indent-level      2
       text-mode-hook       '(text-mode-hook-identify))
 
@@ -75,11 +78,20 @@
  '((shell . t)))
 
 
+(use-package avy
+  :demand
+  :config
+  (global-set-key (kbd "C-;") 'avy-goto-char)
+  (global-set-key (kbd "C-'") 'avy-goto-char-2)
+  (global-set-key (kbd "M-g f") 'avy-goto-line))
+
+
 (use-package clojure-mode
   :mode ("\\.clj\\'")
   :config
   (dolist (hook emacs-lisp-mode-hook)
     (add-to-list 'clojure-mode-hook hook)))
+
 
 ;; TODO
 ;; (use-package company-lsp
@@ -89,6 +101,21 @@
 ;;   :after (company lsp-mode)
 ;;   :config
 ;;   (push 'company-lsp company-backends))
+;;
+;;
+;; (defun cquery//enable ()
+;;   (condition-case nil
+;;       (lsp)
+;;     (user-error nil)))
+;;
+;;
+;; (setq cquery-executable "/run/current-system/sw/bin/cquery")
+;;
+;;
+;; (use-package cquery
+;;   :commands lsp
+;;   :init (add-hook 'c-mode-hook #'cquery//enable)
+;;	(add-hook 'c++-mode-hook #'cquery//enable))
 
 
 (use-package crux
@@ -96,8 +123,10 @@
   :config (global-set-key (kbd "C-a") 'crux-move-beginning-of-line))
 
 
-(use-package ess
-  :demand)
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 
 
 ;; TODO
@@ -135,6 +164,12 @@
 
 (use-package nix-mode
   :mode "\\.nix\\'")
+
+
+(use-package noweb-mode
+  :load-path "/run/current-system/sw/share/emacs/site-lisp"
+  :mode ("\\.nw\\'")
+  :demand)
 
 
 (use-package smex

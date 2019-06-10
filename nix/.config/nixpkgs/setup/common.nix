@@ -12,7 +12,7 @@
 
     pathsToLink = [
       "/share/doc/task"
-      "/share/gap"
+      # "/share/gap"
     ];
 
     shellAliases = rec {
@@ -24,9 +24,11 @@
       rgi = "rg -i";
       rgf = "rg -F";
       rgs = "rg -S";
+      g = "git";
       gpg = "gpg2";
       k = "clear";
       kc = "kubectl";
+      kt = "kubetail";
       l = "ls -Glah";
       ll = "ls -Glh";
       ls = "ls -G";
@@ -37,7 +39,7 @@
   nix = {
 
     binaryCaches = [
-     # "https://cache.nixos.org"
+      # "https://cache.nixos.org"
       "https://yurrriq.cachix.org"
       "https://yurrriq-nur-packages.cachix.org"
     ];
@@ -47,6 +49,12 @@
       "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
       "yurrriq-nur-packages.cachix.org-1:7kbjuGBUZcWf876g2cdelmIQXrXzOhpMVBqYOyyAv70="
     ];
+
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 45d";
+    };
+
   };
 
   programs = {

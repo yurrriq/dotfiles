@@ -4,7 +4,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(global-hl-todo-mode t)
- '(hl-todo-activate-in-modes (quote (prog-mode yaml-mode)))
+ '(hl-todo-activate-in-modes (quote (prog-mode text-mode yaml-mode)))
+ '(indent-tabs-mode nil)
  '(safe-local-variable-values
    (quote
     ((org-src-preserve-indentation . t)
@@ -15,3 +16,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; TODO: (add-to-list 'org-structure-template-alist '("n" "#+NAME: ?"))

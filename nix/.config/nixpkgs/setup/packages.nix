@@ -7,74 +7,88 @@
     autojump
     awscli
     bat
-    clang
+    # FIXME: cachix
+    # FIXME: clang
     coreutils
     # TODO: coq
+    # TODO: cquery
     curl
     direnv
-    fzf
+    # fzf
     # gap
     gawk
     gcc
     git
-    git-lfs
+    # git-lfs
     gnumake
     gnupg
     gnused
     gnutar
-    graphviz
+    # graphviz
+    gzip
     httpie
+    htop
     # TODO: http-promt
     # TODO: idris
     jq
+    kitty
     # TODO: lean
     moreutils
+    nix
+    nix-prefetch-git
+    noweb
+    pandoc
     # TODO: pup
     ripgrep
-    rlwrap
     shellcheck
     shfmt
     silver-searcher # TODO: find helm-rg solution
-    sloccount
+    # sloccount
+    sops
     spotify
     stow
     taskwarrior
     tree
+    vim
     watch
+    yq
   ] ++ (with beam.packages.erlangR20; [
-    rebar3-open
+    # rebar3-open
   ]) ++ (with gitAndTools; [
     git-crypt
     gitflow
     hub
     lab
   ]) ++ (with nodePackages; [
+    # TODO: bash-language-server
     diff-so-fancy
-    json-minify
-    node2nix
   ]) ++ (with python2Packages; [
     # gap-pygments-lexer
-    pywatchman
+    # pywatchman
   ]) ++ (with python3Packages; [
     pygments
-  ]) ++ lib.optionals stdenv.isDarwin [
+  ]) ++ lib.optionals stdenv.isDarwin ([
     clementine
     diff-pdf
+    m-cli
     sourcetree
     onyx
-  ] ++ lib.optionals stdenv.isLinux [
-    git-cola
-    google-chrome
-    libreoffice
+  ] ++ (with chunkwm; [
+    core
+    ffm
+    tiling
+  ])) ++ lib.optionals stdenv.isLinux [
+    # git-cola
+    # libreoffice
     keybase
-    noweb
     qpdfview
     psmisc
-    terminator
     (texlive.combine {
       inherit (texlive) scheme-full tufte-latex;
+      inherit noweb;
     })
-    thunderbird
+    # thunderbird
+    vivaldi
   ]);
 
 }

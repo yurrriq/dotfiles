@@ -39,18 +39,23 @@ emacsWithPackages (epkgs: with {
   melpaStable = epkgs.melpaStablePackages;
   org = epkgs.orgPackages;
 }; (with elpa; [
+  mmm-mode
 ]) ++ (with melpa; [
+  avy
   better-defaults
   clj-refactor
   clojure-mode
   # TODO: company-lsp
+  # TODO: cquery
   crux
   dhall-mode
   dockerfile-mode
-  erlang
+  editorconfig
   elixir-mode
+  erlang
   fill-column-indicator
   fish-mode
+  gap-mode
   go-mode
   graphviz-dot-mode
   haskell-mode
