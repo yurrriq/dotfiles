@@ -20,6 +20,13 @@ self: super: rec {
     ];
   };
 
+  elixirEnv = self.buildEnv {
+    name = "elixir";
+    paths = with self; [
+      elixir_1_8
+    ];
+  };
+
   engravingEnv = self.buildEnv {
     name = "engraving";
     paths = with self; ([
