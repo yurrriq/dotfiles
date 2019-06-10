@@ -14,7 +14,7 @@
     # TODO: cquery
     curl
     direnv
-    fzf
+    # fzf
     # gap
     gawk
     gcc
@@ -24,7 +24,7 @@
     gnupg
     gnused
     gnutar
-    graphviz
+    # graphviz
     gzip
     httpie
     # TODO: http-promt
@@ -61,7 +61,7 @@
     diff-so-fancy
   ]) ++ (with python2Packages; [
     # gap-pygments-lexer
-    pywatchman
+    # pywatchman
   ]) ++ (with python3Packages; [
     pygments
   ]) ++ lib.optionals stdenv.isDarwin ([
@@ -75,8 +75,7 @@
     ffm
     tiling
   ])) ++ lib.optionals stdenv.isLinux [
-    git-cola
-    google-chrome-dev
+    # git-cola
     # libreoffice
     keybase
     qpdfview
@@ -85,8 +84,8 @@
       inherit (texlive) scheme-full tufte-latex;
       inherit noweb;
     })
-    # terminator
     # thunderbird
+    vivaldi
   ]);
 
 }

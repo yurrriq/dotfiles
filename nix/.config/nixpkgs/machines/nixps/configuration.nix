@@ -222,7 +222,7 @@ in
     shell = "/run/current-system/sw/bin/fish";
   };
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker.enable = false;
 
   # FIXME: yubikey-gpg.enable = true;
 }
