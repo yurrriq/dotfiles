@@ -62,6 +62,7 @@ cse = crypt status -e
 csu = crypt status -u
 d = diff
 dc = diff --cached
+ds = diff --stat
 ffco = flow feature checkout
 ffr = flow feature rebase
 ffs = flow feature start

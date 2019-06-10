@@ -111,6 +111,7 @@ csu = crypt status -u
 #+BEGIN_SRC ini
 d = diff
 dc = diff --cached
+ds = diff --stat
 #+END_SRC
 *** =git-flow=
 #+BEGIN_SRC ini
