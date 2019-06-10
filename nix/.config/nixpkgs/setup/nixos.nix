@@ -10,8 +10,8 @@
   programs.browserpass.enable = false;
 
   services = {
-     kbfs.enable = false;
-     keybase.enable = false;
+    kbfs.enable = false;
+    keybase.enable = false;
   };
 
 }
