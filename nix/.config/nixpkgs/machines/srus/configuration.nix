@@ -27,7 +27,6 @@ in
       cabal2nix
       ghc
       jdk
-      sops
     ] ++ (with haskellPackages; [
       # FIXME: hadolint
       # hindent

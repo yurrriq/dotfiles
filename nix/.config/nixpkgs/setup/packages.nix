@@ -42,6 +42,7 @@
     shfmt
     silver-searcher # TODO: find helm-rg solution
     # sloccount
+    sops
     spotify
     stow
     taskwarrior
