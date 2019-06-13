@@ -26,6 +26,7 @@ in
     systemPackages = with pkgs; ([
       cabal2nix
       ghc
+      ispell
       jdk
     ] ++ (with haskellPackages; [
       # FIXME: hadolint
