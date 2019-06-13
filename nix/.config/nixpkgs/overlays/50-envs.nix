@@ -89,8 +89,8 @@ self: super: rec {
         sha256 = "0a21xigcblhc9wikl7ilqvs7514ds4x71jz4yv2kvv1zjvdd9i8n";
       };
       helmfile = {
-        version = "0.73.2";
-        sha256 = "19rz6fqqgyq4fxh454hricali93wicdmpvnwab67m3xp8xdz1wy4";
+        version = "0.73.3";
+        sha256 = "1br9d0fq5dncvz6ypzwflr7bscyjryvyqjyf7jvyf36ibl8x8gy8";
         modSha256 = "1ksz1c4j7mhsbq6ifqab04588d48c9glyhr4d3d4jyvi19qhwx1d";
       };
     };
