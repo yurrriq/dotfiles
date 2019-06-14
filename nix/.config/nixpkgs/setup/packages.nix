@@ -34,6 +34,7 @@
     moreutils
     nix
     nix-prefetch-git
+    nix-prefetch-github
     noweb
     pandoc
     ripgrep
