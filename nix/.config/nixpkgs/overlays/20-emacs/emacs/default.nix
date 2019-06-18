@@ -49,6 +49,7 @@ emacsWithPackages (epkgs: with {
   # TODO: cquery
   crux
   dhall-mode
+  direnv
   dockerfile-mode
   editorconfig
   elixir-mode
