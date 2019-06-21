@@ -117,7 +117,7 @@ self: super: rec {
       helm = {
         flavor = "darwin-amd64";
         version = "2.14.1";
-        sha256 = "11lflv9wwvazc3f105q79h84q7b4f9jann786yyplhy0a4kykjf9";
+        sha256 = "0n5zmp9vwn1yy84h7qkm7s2lrcb3z8q1wdsbd7j48cr5d90si055";
       };
       k8s = {
         version = "1.11.9"; # TODO: 1.11.10
@@ -131,9 +131,14 @@ self: super: rec {
 
     name = "k8s-next";
     config = k8s-dev.config // {
+      helm = {
+        flavor = "darwin-amd64";
+        version = "2.14.1";
+        sha256 = "0n5zmp9vwn1yy84h7qkm7s2lrcb3z8q1wdsbd7j48cr5d90si055";
+      };
       k8s = {
-        version = "1.12.7"; # TODO: 1.12.9
-        sha256 = "004iclg7ra06qf6jnjlcagj8wbldbfdd610jsy4sn1h2svrq11z9";
+        version = "1.12.9";
+        sha256 = "0fxrvwl60wmj30azaw5ws8ilm62fmabz1l9ixpxq3lbrmkzhvx0m";
       };
       kops = {
         version = "1.12.1";
