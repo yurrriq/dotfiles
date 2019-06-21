@@ -57,6 +57,12 @@ command -sq kubectl; and begin
 end
 
 
+function vpn-restart
+    sudo launchctl stop me.ericb.openconnect
+    and sudo launchctl start me.ericb.openconnect
+end
+
+
 functions rvm >/dev/null 2>&1; and rvm default
 
 
