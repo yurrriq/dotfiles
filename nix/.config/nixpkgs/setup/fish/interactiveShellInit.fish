@@ -32,12 +32,6 @@ command -sq kubectl; and begin
         end
     end
 
-    function k8senv
-        kops version
-        kubectl version --client --short
-        helm version --client --short
-    end
-
     function cpo -d 'Get the name of the Cilium pod running on a given node'
         command kubectl get pods \
         --field-selector spec.nodeName=$argv[1] \
@@ -51,6 +45,14 @@ command -sq kubectl; and begin
         --namespace kube-system \
         --output jsonpath='{range .items[*]}{@.metadata.name}{"\n"}' \
         --selector k8s-app=cilium
+    end
+
+    # TODO: Add option to print server versions too.
+    function k8s::versions
+        printf "kubectl %s\n" (command kubectl version --client --short)
+        printf "helm %s\n" (command helm version --client --short)
+        command helmfile --version
+        printf "kops %s\n" (command kops version)
     end
 end
 
