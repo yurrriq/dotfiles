@@ -75,6 +75,10 @@ self: super: rec {
 
     name = "k8s-stable";
     config = {
+      eksctl = {
+        version = "0.1.38";
+        sha256 = "1nhsy4d1a1vh7g2ibcxnzgxnldfyh51hiq4v4vy123487b6ndqd0";
+      };
       k8s = {
         version = "1.11.7"; # TODO: 1.11.9
         sha256 = "03dq9p6nwkisd80f0r3sp82vqx2ac4ja6b2s55k1l8k89snfxavf";
