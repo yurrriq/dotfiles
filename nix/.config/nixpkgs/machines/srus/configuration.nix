@@ -28,6 +28,7 @@ in
       ghc
       ispell
       jdk
+      pv
     ] ++ (with haskellPackages; [
       # FIXME: hadolint
       # hindent
