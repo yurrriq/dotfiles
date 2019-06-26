@@ -37,6 +37,7 @@ in
       stylish-haskell
     ]) ++ (with nodePackages; [
       aws-azure-login
+      codeowners
       nodePackages."mermaid.cli"
       vmd
     ]));
