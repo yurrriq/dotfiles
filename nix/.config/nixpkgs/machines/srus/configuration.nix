@@ -39,6 +39,7 @@ in
     ]) ++ (with nodePackages; [
       aws-azure-login
       codeowners
+      dispatch-proxy
       nodePackages."mermaid.cli"
       vmd
     ]));
