@@ -65,6 +65,7 @@ emacsWithPackages (epkgs: with {
   hl-todo
   htmlize
   idris-mode
+  kubernetes-tramp
   # TODO: lsp-haskell
   # TODO: lsp-mode
   # TODO: lsp-ui
