@@ -26,6 +26,8 @@ textconv = sops -d
 [difftool]
 prompt = false
 trustExitCode = true
+[difftool "pdfdiffer"]
+cmd = diff-pdf --view \"$LOCAL\" \"$REMOTE\"
 [difftool "kitty"]
 cmd = kitty +kitten diff $LOCAL $REMOTE
 [difftool "kitty.gui"]
