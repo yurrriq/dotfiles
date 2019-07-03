@@ -141,8 +141,10 @@ self: super: rec {
         sha256 = "0n5zmp9vwn1yy84h7qkm7s2lrcb3z8q1wdsbd7j48cr5d90si055";
       };
       k8s = {
-        version = "1.12.9";
-        sha256 = "0fxrvwl60wmj30azaw5ws8ilm62fmabz1l9ixpxq3lbrmkzhvx0m";
+        # version = "1.12.9";
+        # sha256 = "0fxrvwl60wmj30azaw5ws8ilm62fmabz1l9ixpxq3lbrmkzhvx0m";
+        version = "1.12.8";
+        sha256 = "164g1i3cvdk39n294c9i1vy633xisxlcr4qb57p0q1px1fsbs50c";
       };
       kops = {
         version = "1.12.1";
