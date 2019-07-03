@@ -24,6 +24,7 @@ in
       "/share/emacs/site-lisp"
     ];
     systemPackages = with pkgs; ([
+      aws-iam-authenticator
       cabal2nix
       ghc
       ispell
