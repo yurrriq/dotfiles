@@ -67,8 +67,8 @@ self: super: rec {
 
   k8s-stable = let _nur = import <nur> { pkgs = self; }; in _nur.repos.yurrriq.lib.buildK8sEnv {
     pkgs = import (_nur.repos.yurrriq.lib.fetchNixpkgs {
-      rev = "19436d38d1ec697a861a537870fb6b06d5aa87c8";
-      sha256 = "1ylx7vw2vj3n65mlx7d5w0hi6cwc22caqclj5brvpw9p5idbc0kw";
+      rev = "ed952d43b9caaf7563a615166d4b83d451f91c86";
+      sha256 = "0mj3lb64k4ikv47nbglk25zvkc46a33gyz1rfbxvbs1kv4718g5s";
     }) {
       overlays = [ ((import <nur> {}).repos.yurrriq.overlays.nur) ];
     };
