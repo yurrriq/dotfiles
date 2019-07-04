@@ -53,6 +53,7 @@ emacsWithPackages (epkgs: with {
   dockerfile-mode
   editorconfig
   elixir-mode
+  enh-ruby-mode
   # erlang
   fill-column-indicator
   fish-mode
@@ -75,7 +76,9 @@ emacsWithPackages (epkgs: with {
   nix-mode
   paredit
   rainbow-delimiters
+  robe
   rust-mode
+  rvm
   smex
   # TODO: structured-haskell-mode
   tuareg

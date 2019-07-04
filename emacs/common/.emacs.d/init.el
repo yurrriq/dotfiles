@@ -172,6 +172,16 @@
   :demand)
 
 
+(use-package robe
+  :mode ("\\.rb\\'")
+  :config
+  (global-robe-mode))
+
+
+(use-package rvm
+  :ensure t)
+
+
 (use-package smex
   :demand
   :config
