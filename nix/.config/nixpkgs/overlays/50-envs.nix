@@ -80,11 +80,11 @@ self: super: rec {
         sha256 = "1nhsy4d1a1vh7g2ibcxnzgxnldfyh51hiq4v4vy123487b6ndqd0";
       };
       k8s = {
-        version = "1.11.7"; # TODO: 1.11.9
+        version = "1.11.7"; # TODO: 1.11.10
         sha256 = "03dq9p6nwkisd80f0r3sp82vqx2ac4ja6b2s55k1l8k89snfxavf";
       };
       kops = {
-        version = "1.11.1"; # TODO: 1.12.1
+        version = "1.11.1"; # TODO: 1.12.2
         sha256 = "0jia8dhawh786grnbpn64hvsdm6wz5p7hqir01q5xxpd1psnzygj";
       };
       helm = {
@@ -93,6 +93,9 @@ self: super: rec {
         sha256 = "0a21xigcblhc9wikl7ilqvs7514ds4x71jz4yv2kvv1zjvdd9i8n";
       };
       helmfile = {
+        # TODO
+        # version = "0.79.3";
+        # sha256 = "0wgfpidpqyvh41dnw351v91z4szi1s6lqak9li2pmddz1rdkx66v";
         version = "0.73.3";
         sha256 = "1br9d0fq5dncvz6ypzwflr7bscyjryvyqjyf7jvyf36ibl8x8gy8";
         modSha256 = "1ksz1c4j7mhsbq6ifqab04588d48c9glyhr4d3d4jyvi19qhwx1d";
@@ -141,6 +144,7 @@ self: super: rec {
         sha256 = "0n5zmp9vwn1yy84h7qkm7s2lrcb3z8q1wdsbd7j48cr5d90si055";
       };
       k8s = {
+        # TODO
         # version = "1.12.9";
         # sha256 = "0fxrvwl60wmj30azaw5ws8ilm62fmabz1l9ixpxq3lbrmkzhvx0m";
         version = "1.12.8";
