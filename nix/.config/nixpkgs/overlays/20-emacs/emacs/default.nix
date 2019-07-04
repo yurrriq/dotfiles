@@ -53,10 +53,10 @@ emacsWithPackages (epkgs: with {
   dockerfile-mode
   editorconfig
   elixir-mode
-  erlang
+  # erlang
   fill-column-indicator
   fish-mode
-  gap-mode
+  # gap-mode
   go-mode
   graphviz-dot-mode
   haskell-mode
