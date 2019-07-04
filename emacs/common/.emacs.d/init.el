@@ -4,6 +4,8 @@
 
 (column-number-mode 1)
 
+(add-to-list 'exec-path "/run/current-system/sw/bin")
+
 (menu-bar-mode 0)
 
 (tool-bar-mode 0)
@@ -163,7 +165,7 @@
 
 
 (use-package nix-mode
-  :mode "\\.nix\\'")
+  :mode ("\\.nix\\'"))
 
 
 (use-package noweb-mode
