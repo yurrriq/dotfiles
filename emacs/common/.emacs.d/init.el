@@ -175,9 +175,8 @@
 
 
 (use-package robe
-  :mode ("\\.rb\\'")
-  :config
-  (global-robe-mode))
+  :demand
+  :mode ("\\.rb\\'"))
 
 
 (use-package rvm
