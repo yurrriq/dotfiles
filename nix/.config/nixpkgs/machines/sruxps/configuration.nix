@@ -1,14 +1,24 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+{ config, lib, pkgs, ... }:
 
-{ config, pkgs, ... }:
+with import <setup/srcs> { local = false; };
+
+let
+
+  inherit (nur-no-pkgs.repos.yurrriq.lib) pinnedNixpkgs;
+
+  username = "yurrriq";
+
+in
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-    ];
+      <setup/common.nix>
+      <setup/nixos.nix>
+      <setup/packages.nix>
+    ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
+    ]);
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -22,6 +32,38 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  fonts = {
+    enableFontDir = true;
+    fonts = with pkgs; [
+      iosevka
+    ];
+   };
+
+  nix = {
+    nixPath = [
+      "nixos-config=/etc/nixos/configuration.nix"
+      "nixpkgs=${_nixpkgs}"
+      "nixpkgs-overlays=/home/${username}/.config/nixpkgs/overlays"
+      "nur=${_nur}"
+      "setup=/home/${username}/.config/nixpkgs/setup"
+    ];
+    trustedUsers = [ username ];
+  };
+
+  nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.overlays =
+    let path = <nixpkgs-overlays>; in with builtins;
+      map (n: import (path + ("/" + n)))
+          (filter (n: match ".*\\.nix" n != null ||
+	              pathExists (path + "/" + n + "/default.nix"))
+		  (attrNames (readDir path)))
+    ++ (with nur-no-pkgs.repos.yurrriq.overlays; [
+      nur
+      git
+      node
+    ]);
+
   # Select internationalisation properties.
   i18n = {
     consoleFont = "latarcyrheb-sun32";
@@ -32,23 +74,7 @@
   powerManagement.cpuFreqGovernor = "powersave";
 
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    emacs
-    fish
-    git    
-    kitty
-    nix
-  ];
-
-  programs.fish = {
-    enable = true;
-    vendor.completions.enable = true;
-  };
-
+  time.timeZone = "America/Chicago";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -73,12 +99,29 @@
   # sound.enable = true;
   # hardware.pulseaudio.enable = true;
 
+  security.sudo = {
+    enable = true;
+    extraConfig = ''
+      ${username} ALL=(ALL) NOPASSWD: ALL
+    '';
+  };
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     autorun = true;
     # Enable touchpad support.
-    libinput.enable = true;
+    libinput = {
+      enable = true;
+      naturalScrolling = false;
+      tapping = true;
+      disableWhileTyping = true;
+    };
+    multitouch = {
+      enable = true;
+      invertScroll = true;
+      ignorePalm = true;
+    };
     desktopManager = {
       gnome3.enable = false;
       xterm.enable = false;
@@ -95,15 +138,13 @@
     xkbOptions = "ctrl:nocaps";
   };
 
-  # services.xserver.libinput.enable = true;
-
   # Enable the KDE Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers."yurrriq" = {
-    name = "yurrriq";
+  users.extraUsers."${username}" = {
+    name = username;
     group = "users";
     extraGroups = [
       "wheel" "disk" "audio" "video"
@@ -112,7 +153,7 @@
     ];
     createHome = true;
     uid = 1000;
-    home = "/home/yurrriq";
+    home = "/home/${username}";
     shell = "/run/current-system/sw/bin/fish";
   };
 
