@@ -1,4 +1,4 @@
-profile   ?= srus
+profile   ?= sruxps
 notconfigs = Makefile README.org nix taskwarrior
 configs    = $(filter-out ${notconfigs},$(wildcard *))
 
