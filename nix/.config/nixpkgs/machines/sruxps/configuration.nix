@@ -132,9 +132,9 @@ in
       default = "i3";
       i3.enable = true;
     };
-    # monitorSection = ''
-    #   DisplaySize 406 228
-    # '';
+    monitorSection = ''
+      DisplaySize 406 228
+    '';
     xkbOptions = "ctrl:nocaps";
   };
 
