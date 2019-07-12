@@ -15,12 +15,12 @@ emacsWithPackages (epkgs: with {
 ]) ++ (with melpa; [
   avy
   better-defaults
-  clj-refactor
-  clojure-mode
+  # clj-refactor
+  # clojure-mode
   # TODO: company-lsp
   # TODO: cquery
   crux
-  dhall-mode
+  # dhall-mode
   direnv
   dockerfile-mode
   editorconfig
