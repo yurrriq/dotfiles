@@ -78,15 +78,15 @@
     ffm
     tiling
   ])) ++ lib.optionals stdenv.isLinux [
-    # git-cola
+    git-cola
     # libreoffice
-    keybase
-    qpdfview
+    # keybase
+    # qpdfview
     psmisc
-    (texlive.combine {
-      inherit (texlive) scheme-full tufte-latex;
-      inherit noweb;
-    })
+    # (texlive.combine {
+    #   inherit (texlive) scheme-full tufte-latex;
+    #   inherit noweb;
+    # })
     # thunderbird
     vivaldi
   ]);

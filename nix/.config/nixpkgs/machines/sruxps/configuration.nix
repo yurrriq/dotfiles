@@ -4,33 +4,34 @@ with import <setup/srcs> { local = false; };
 
 let
 
-  inherit (nur-no-pkgs.repos.yurrriq.lib) pinnedNixpkgs;
-
   username = "yurrriq";
 
 in
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      <setup/common.nix>
-      <setup/nixos.nix>
-      <setup/packages.nix>
-    ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
-    ]);
+  imports = [
+    ./hardware-configuration.nix
+    <setup/common.nix>
+    <setup/nixos.nix>
+    <setup/packages.nix>
+  ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  environment = {
+    pathsToLink = [
+      "/lib/aspell"
+      "/share/emacs/site-lisp"
+    ];
+    systemPackages = with pkgs; [
+      slack
+      xclip
+      xorg.xbacklight
+    ];
+  };
 
   fonts = {
     enableFontDir = true;
@@ -38,6 +39,15 @@ in
       iosevka
     ];
    };
+
+  i18n = {
+    consoleFont = "latarcyrheb-sun32";
+    consoleKeyMap = "us";
+    defaultLocale = "en_US.UTF-8";
+  };
+
+  networking.hostName = "sruxps"; # Define your hostname.
+  networking.networkmanager.enable = true;
 
   nix = {
     nixPath = [
@@ -47,7 +57,7 @@ in
       "nur=${_nur}"
       "setup=/home/${username}/.config/nixpkgs/setup"
     ];
-    trustedUsers = [ username ];
+    trustedUsers = [ "root" username ];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -56,48 +66,13 @@ in
     let path = <nixpkgs-overlays>; in with builtins;
       map (n: import (path + ("/" + n)))
           (filter (n: match ".*\\.nix" n != null ||
-	              pathExists (path + "/" + n + "/default.nix"))
-		  (attrNames (readDir path)))
+                      pathExists (path + ("/" + n + "/default.nix")))
+                  (attrNames (readDir path)))
     ++ (with nur-no-pkgs.repos.yurrriq.overlays; [
       nur
       git
       node
     ]);
-
-  # Select internationalisation properties.
-  i18n = {
-    consoleFont = "latarcyrheb-sun32";
-    consoleKeyMap = "us";
-    # defaultLocale = "en_US.UTF-8";
-  };
-
-  powerManagement.cpuFreqGovernor = "powersave";
-
-  # Set your time zone.
-  time.timeZone = "America/Chicago";
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
 
   security.sudo = {
     enable = true;
@@ -106,43 +81,79 @@ in
     '';
   };
 
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    autorun = true;
-    # Enable touchpad support.
-    libinput = {
+  services = {
+    logind = {
+      lidSwitch = "hybrid-sleep";
+    };
+
+    redshift = {
       enable = true;
-      naturalScrolling = false;
-      tapping = true;
-      disableWhileTyping = true;
+      latitude = "44.93";
+      longitude = "-93.24";
+      temperature.night = 2300;
     };
-    multitouch = {
+
+    xserver = {
       enable = true;
-      invertScroll = true;
-      ignorePalm = true;
+
+      autorun = true;
+
+      desktopManager = {
+        gnome3.enable = false;
+        xterm.enable = false;
+        default = "none";
+      };
+
+      displayManager.lightdm.enable = true;
+
+      inputClassSections = [
+        ''
+          Identifier "touchpad"
+          Driver "libinput"
+          MatchIsTouchpad "on"
+          Option "AccelSpeed" "1.0"
+        ''
+      ];
+
+      layout = "us";
+
+      libinput = {
+        enable = true;
+        naturalScrolling = false;
+        tapping = true;
+        disableWhileTyping = true;
+      };
+
+      monitorSection = ''
+        DisplaySize 406 228
+      '';
+
+      multitouch = {
+        enable = true;
+        invertScroll = true;
+        ignorePalm = true;
+      };
+
+      videoDrivers = [
+        "intel"
+      ];
+
+      windowManager = {
+        default = "i3";
+        i3.enable = true;
+      };
+
+      xkbOptions = "ctrl:nocaps";
     };
-    desktopManager = {
-      gnome3.enable = false;
-      xterm.enable = false;
-      default = "none";
-    };
-    displayManager.lightdm.enable = true;
-    windowManager = {
-      default = "i3";
-      i3.enable = true;
-    };
-    monitorSection = ''
-      DisplaySize 406 228
-    '';
-    xkbOptions = "ctrl:nocaps";
   };
 
-  # Enable the KDE Desktop Environment.
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  system.stateVersion = "19.03"; # Did you read the comment?
+
+  time.timeZone = "America/Chicago";
+
   users.extraUsers."${username}" = {
     name = username;
     group = "users";
@@ -156,11 +167,5 @@ in
     home = "/home/${username}";
     shell = "/run/current-system/sw/bin/fish";
   };
-
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "19.03"; # Did you read the comment?
 
 }
