@@ -11,8 +11,7 @@
   environment = {
 
     pathsToLink = [
-      "/share/doc/task"
-      # "/share/gap"
+     "/share/doc/task"
     ];
 
     shellAliases = rec {
