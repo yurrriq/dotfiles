@@ -88,11 +88,11 @@
   (global-set-key (kbd "M-g f") 'avy-goto-line))
 
 
-(use-package clojure-mode
-  :mode ("\\.clj\\'")
-  :config
-  (dolist (hook emacs-lisp-mode-hook)
-    (add-to-list 'clojure-mode-hook hook)))
+;; (use-package clojure-mode
+;;   :mode ("\\.clj\\'")
+;;   :config
+;;   (dolist (hook emacs-lisp-mode-hook)
+;;     (add-to-list 'clojure-mode-hook hook)))
 
 
 ;; TODO

@@ -32,9 +32,9 @@ emacsWithPackages (epkgs: with {
   # gap-mode
   go-mode
   graphviz-dot-mode
-  haskell-mode
+  # TODO: haskell-mode
   helm-ag
-  hindent
+  # TODO: hindent
   hl-todo
   htmlize
   idris-mode
