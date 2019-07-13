@@ -14,8 +14,6 @@
     # TODO: cquery
     curl
     direnv
-    # fzf
-    # gap
     gawk
     gcc
     git
@@ -43,7 +41,6 @@
     shellcheck
     shfmt
     silver-searcher # TODO: find helm-rg solution
-    # sloccount
     sops
     spotify
     stow
@@ -52,8 +49,6 @@
     vim
     watch
     yq
-  ] ++ (with beam.packages.erlangR20; [
-    # rebar3-open
   ]) ++ (with gitAndTools; [
     git-crypt
     gitflow
@@ -63,7 +58,6 @@
     # TODO: bash-language-server
     diff-so-fancy
   ]) ++ (with python2Packages; [
-    # gap-pygments-lexer
     # pywatchman
   ]) ++ (with python3Packages; [
     pygments
@@ -86,7 +80,6 @@
     #   inherit (texlive) scheme-full tufte-latex;
     #   inherit noweb;
     # })
-    # thunderbird
     vivaldi
   ];
 }
