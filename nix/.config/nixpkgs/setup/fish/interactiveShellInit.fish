@@ -63,7 +63,7 @@ function vpn-restart
 end
 
 
-functions rvm >/dev/null 2>&1; and rvm default
+# FIXME: functions rvm >/dev/null 2>&1; and rvm default
 
 
 if string match -r '.*k8s-\d+$' "$buildInputs"

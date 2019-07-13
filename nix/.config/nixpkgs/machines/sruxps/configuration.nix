@@ -30,6 +30,8 @@ in
       "/share/emacs/site-lisp"
     ];
     systemPackages = with pkgs; [
+      jdk
+      jruby
       slack
       xclip
       xorg.xbacklight
