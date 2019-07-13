@@ -48,6 +48,7 @@
     tree
     vim
     watch
+    wipe
     yq
   ]) ++ (with gitAndTools; [
     git-crypt
