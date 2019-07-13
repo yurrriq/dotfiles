@@ -11,10 +11,13 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ./secrets
     <setup/common.nix>
     <setup/nixos.nix>
     <setup/packages.nix>
-  ];
+  ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
+    tomb
+  ]);
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -73,6 +76,12 @@ in
       git
       node
     ]);
+
+   programs.tomb = {
+    enable = true;
+    resize = true;
+    slam = true;
+  };
 
   security.sudo = {
     enable = true;
@@ -154,7 +163,8 @@ in
 
   time.timeZone = "America/Chicago";
 
-  users.extraUsers."${username}" = {
+  users.mutableUsers = false;
+  users.users."${username}" = {
     name = username;
     group = "users";
     extraGroups = [

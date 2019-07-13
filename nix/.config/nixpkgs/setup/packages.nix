@@ -19,7 +19,7 @@
     gawk
     gcc
     git
-    # git-lfs
+    git-lfs
     gnumake
     gnupg
     gnused
@@ -80,7 +80,6 @@
   ])) ++ lib.optionals stdenv.isLinux [
     git-cola
     # libreoffice
-    # keybase
     # qpdfview
     psmisc
     # (texlive.combine {
@@ -89,6 +88,5 @@
     # })
     # thunderbird
     vivaldi
-  ]);
-
+  ];
 }

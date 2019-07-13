@@ -3,15 +3,15 @@
 {
 
   environment.systemPackages = with pkgs; [
-    # keybase-gui
-    # (pass.withExtensions (ext: [ ext.pass-tomb ]))
+    keybase-gui
+    (pass.withExtensions (exts: with exts; [
+      pass-tomb
+      pass-otp
+    ]))
   ];
 
   programs.browserpass.enable = false;
 
-  services = {
-    kbfs.enable = false;
-    keybase.enable = false;
-  };
+  services.kbfs.enable = true;
 
 }

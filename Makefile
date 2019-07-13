@@ -39,3 +39,7 @@ ${configs}::
 .envrc:
 	@ echo 'export profile=${profile}' >$@
 	@ direnv allow
+
+
+sruxps-switch:
+	@ ${MAKE} -C nix/.config/nixpkgs/machines/sruxps switch
