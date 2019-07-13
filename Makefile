@@ -40,6 +40,14 @@ ${configs}::
 	@ echo 'export profile=${profile}' >$@
 	@ direnv allow
 
+dry-build:
+	@ ${MAKE} -C nix/.config/nixpkgs/machines/${profile} dry-build
 
-sruxps-switch:
-	@ ${MAKE} -C nix/.config/nixpkgs/machines/sruxps switch
+switch:
+	@ ${MAKE} -C nix/.config/nixpkgs/machines/${profile} switch
+
+open-secrets:
+	@ ${MAKE} -C nix/.config/nixpkgs/machines/${profile} open-secrets
+
+close-secrets:
+	@ ${MAKE} -C nix/.config/nixpkgs/machines/${profile} open-secrets
