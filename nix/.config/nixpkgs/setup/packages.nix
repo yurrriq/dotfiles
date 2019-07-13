@@ -10,7 +10,7 @@
     cachix
     # FIXME: clang
     coreutils
-    # TODO: coq
+    # coq
     # TODO: cquery
     curl
     direnv
