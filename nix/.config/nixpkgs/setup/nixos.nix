@@ -10,7 +10,7 @@
     ]))
   ];
 
-  programs.browserpass.enable = false;
+  programs.browserpass.enable = true;
 
   services.kbfs.enable = true;
 
