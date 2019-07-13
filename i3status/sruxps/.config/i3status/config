@@ -1,0 +1,24 @@
+# -*- coding: utf-8 -*-
+
+general {
+    colors = true
+    interval = 5
+}
+
+order += "load"
+
+load {
+    format = "%1min %5min %15min"
+}
+
+order += "battery all"
+
+battery all {
+    format = "%status %percentage %remaining"
+}
+
+order += "tztime local"
+
+tztime local {
+    format = "%a %d.%m %H:%M:%S"
+}

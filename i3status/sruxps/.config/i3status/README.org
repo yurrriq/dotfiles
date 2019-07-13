@@ -1,0 +1,84 @@
+* i3status config
+  :PROPERTIES:
+  :header-args: :tangle config
+  :END:
+
+** General
+Make sure the file encoding is UTF-8.
+#+BEGIN_SRC conf
+# -*- coding: utf-8 -*-
+#+END_SRC
+
+Use colors and update every five seconds.
+#+BEGIN_SRC conf
+general {
+    colors = true
+    interval = 5
+}
+#+END_SRC
+
+** Load
+#+BEGIN_SRC conf
+order += "load"
+
+load {
+    format = "%1min %5min %15min"
+}
+#+END_SRC
+
+** Disk
+   :PROPERTIES:
+   :header-args: :tangle no
+   :END:
+#+BEGIN_SRC conf
+order += "disk /"
+
+disk "/" {
+    format = "%avail"
+}
+#+END_SRC
+
+** Wireless
+   :PROPERTIES:
+   :header-args: :tangle no
+   :END:
+#+BEGIN_SRC conf
+order += "wireless _first_"
+
+wireless _first_ {
+    # format_up = "W: (%quality at %essid) %ip"
+    format_up = "%essid"
+    format_down = "W: down"
+}
+#+END_SRC
+
+** Ethernet
+   :PROPERTIES:
+   :header-args: :tangle no
+   :END:
+#+BEGIN_SRC conf
+order += "ethernet _first_"
+
+ethernet _first_ {
+    format_up = "E: %ip (%speed)"
+    format_down = "E: down"
+}
+#+END_SRC
+
+** Battery
+#+BEGIN_SRC conf
+order += "battery all"
+
+battery all {
+    format = "%status %percentage %remaining"
+}
+#+END_SRC
+
+** Time
+#+BEGIN_SRC conf
+order += "tztime local"
+
+tztime local {
+    format = "%a %d.%m %H:%M:%S"
+}
+#+END_SRC
