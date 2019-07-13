@@ -30,8 +30,11 @@ in
       "/share/emacs/site-lisp"
     ];
     systemPackages = with pkgs; [
+      gnome3.networkmanagerapplet
       jdk
       jruby
+      networkmanager-openconnect
+      openconnect
     ];
   };
 
