@@ -8,7 +8,7 @@ Set my name and email for writing commits, and [[https://keybase.io/yurrriq/pgp_
 [user]
 email = e.bailey@sportradar.com
 name = Eric Bailey
-signingkey = 2E8D082C324D5F5459CD27E755BF5D49549F04AD
+signingkey = EFD6F1EDC84D2FA935E38570462054AB8B682702
 #+END_SRC
 ** Core
 #+BEGIN_SRC ini
