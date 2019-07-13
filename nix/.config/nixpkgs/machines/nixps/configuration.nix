@@ -36,9 +36,7 @@ in
     systemPackages = with pkgs; [
       # exercism
       # TODO: gnome3.nautilus
-      # TODO: slack
       # FIXME: tellico
-      xorg.xbacklight
     ];
   };
 

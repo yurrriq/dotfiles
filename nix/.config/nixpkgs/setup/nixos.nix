@@ -8,6 +8,8 @@
       pass-tomb
       pass-otp
     ]))
+    xclip
+    xorg.xbacklight
   ];
 
   programs.browserpass.enable = true;

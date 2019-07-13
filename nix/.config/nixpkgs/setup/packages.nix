@@ -7,6 +7,7 @@
     autojump
     awscli
     bat
+    bind
     # FIXME: cachix
     # FIXME: clang
     coreutils
@@ -41,6 +42,7 @@
     shellcheck
     shfmt
     silver-searcher # TODO: find helm-rg solution
+    slack
     sops
     spotify
     stow

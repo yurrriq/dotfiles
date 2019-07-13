@@ -32,9 +32,6 @@ in
     systemPackages = with pkgs; [
       jdk
       jruby
-      slack
-      xclip
-      xorg.xbacklight
     ];
   };
 
