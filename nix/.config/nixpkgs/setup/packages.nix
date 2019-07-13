@@ -74,7 +74,7 @@
     tiling
   ])) ++ lib.optionals stdenv.isLinux [
     git-cola
-    # libreoffice
+    # TODO: libreoffice
     # qpdfview
     psmisc
     # (texlive.combine {
