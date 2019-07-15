@@ -30,7 +30,6 @@ in
       "/share/emacs/site-lisp"
     ];
     systemPackages = with pkgs; [
-      apfs-fuse
       gnome3.networkmanagerapplet
       jdk
       jruby
