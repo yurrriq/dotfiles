@@ -38,6 +38,7 @@ in
       openconnect
     ] ++ (with nodePackages; [
       aws-azure-login
+      codeowners
     ]));
   };
 
