@@ -30,6 +30,7 @@
     # TODO: http-promt
     # TODO: idris
     jq
+    kdiff3
     kitty
     # TODO: lean
     moreutils
