@@ -103,8 +103,9 @@ function fish_right_prompt
     test -n "$aws_profile";
     and printf (dim)"{"(yellow)(aws::current_profile)(dim)"} "(off)
 
-    command ifconfig utun1 >/dev/null 2>&1;
-    and printf (dim)"|vpn| "(off)
+    # NOTE: Only on Darwin.
+    # command ifconfig utun1 >/dev/null 2>&1;
+    # and printf (dim)"|vpn| "(off)
 
     command -sq kubectl; and begin
         if [ "$USER" = (k8s::current_user) ]
