@@ -51,8 +51,10 @@ in
     defaultLocale = "en_US.UTF-8";
   };
 
-  networking.hostName = "sruxps"; # Define your hostname.
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "sruxps";
+    networkmanager.enable = true;
+  };
 
   nix = {
     nixPath = [
@@ -161,7 +163,7 @@ in
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  system.stateVersion = "19.03"; # Did you read the comment?
+  system.stateVersion = "19.03";
 
   time.timeZone = "America/Chicago";
 
