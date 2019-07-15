@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 general {
+    output_format = "i3bar"
     colors = true
     interval = 5
 }
@@ -14,6 +15,10 @@ load {
 order += "battery all"
 
 battery all {
+    status_chr = "⚡"
+    status_bat = "↯"
+    status_unk = "‽"
+    status_full = ""
     format = "%status %percentage %remaining"
 }
 

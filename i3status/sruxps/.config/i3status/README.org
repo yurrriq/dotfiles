@@ -1,23 +1,30 @@
+#+TITLE: i3status config
+#+DATE: [2019-07-13 Sat]
+#+AUTHOR: Eric Bailey
+#+EMAIL: e.bailey@sportradar.com
+#+LANGUAGE: en
+#+CREATOR: Emacs 26.1 (Org mode 9.1.9)
+
 * i3status config
   :PROPERTIES:
   :header-args: :tangle config
   :END:
-
 ** General
 Make sure the file encoding is UTF-8.
 #+BEGIN_SRC conf
 # -*- coding: utf-8 -*-
 #+END_SRC
 
-Use colors and update every five seconds.
+Use colors, update every five seconds, and format output for =i3bar=.
 #+BEGIN_SRC conf
 general {
     colors = true
     interval = 5
+    output_format = "i3bar"
 }
 #+END_SRC
-
 ** Load
+Show the 1, 5, and 15 minute load.
 #+BEGIN_SRC conf
 order += "load"
 
@@ -25,11 +32,13 @@ load {
     format = "%1min %5min %15min"
 }
 #+END_SRC
-
 ** Disk
    :PROPERTIES:
    :header-args: :tangle no
    :END:
+/Currently unused./
+
+Show the available disk space.
 #+BEGIN_SRC conf
 order += "disk /"
 
@@ -37,11 +46,13 @@ disk "/" {
     format = "%avail"
 }
 #+END_SRC
-
 ** Wireless
    :PROPERTIES:
    :header-args: :tangle no
    :END:
+/Currently unused./
+
+Show the currently connected SSID.
 #+BEGIN_SRC conf
 order += "wireless _first_"
 
@@ -51,34 +62,40 @@ wireless _first_ {
     format_down = "W: down"
 }
 #+END_SRC
-
-** Ethernet
-   :PROPERTIES:
-   :header-args: :tangle no
-   :END:
-#+BEGIN_SRC conf
-order += "ethernet _first_"
-
-ethernet _first_ {
-    format_up = "E: %ip (%speed)"
-    format_down = "E: down"
-}
-#+END_SRC
-
 ** Battery
+Show the battery status, percent charged, and time to empty or charged. Use
+custom characters to show status.
 #+BEGIN_SRC conf
 order += "battery all"
 
 battery all {
+    status_chr = "⚡"
+    status_bat = "↯"
+    status_unk = "‽"
+    status_full = ""
     format = "%status %percentage %remaining"
 }
 #+END_SRC
-
 ** Time
+Show the current abbreviated day, DD.MM, and 24-hour time with seconds.
 #+BEGIN_SRC conf
 order += "tztime local"
 
 tztime local {
     format = "%a %d.%m %H:%M:%S"
+}
+#+END_SRC
+** VPN
+   :PROPERTIES:
+   :header-args: :tangle no
+   :END:
+/Currently unused./
+
+Show whether currently connected to a VPN.
+#+BEGIN_SRC conf
+order += "path_exists VPN"
+
+path_exists VPN {
+    path = "/proc/sys/net/ipv4/conf/tun0"
 }
 #+END_SRC
