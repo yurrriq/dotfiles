@@ -9,9 +9,7 @@
     bat
     bind
     # FIXME: cachix
-    # FIXME: clang
     coreutils
-    # coq
     # TODO: cquery
     curl
     direnv
@@ -32,7 +30,6 @@
     jq
     kdiff3
     kitty
-    # TODO: lean
     moreutils
     nix
     nix-prefetch-git
