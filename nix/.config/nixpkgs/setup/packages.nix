@@ -75,7 +75,7 @@
   ])) ++ lib.optionals stdenv.isLinux [
     git-cola
     # TODO: libreoffice
-    # qpdfview
+    qpdfview
     psmisc
     # (texlive.combine {
     #   inherit (texlive) scheme-full tufte-latex;
