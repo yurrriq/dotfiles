@@ -29,13 +29,16 @@ in
       "/lib/aspell"
       "/share/emacs/site-lisp"
     ];
-    systemPackages = with pkgs; [
+    systemPackages = with pkgs; ([
+      aws-iam-authenticator
       gnome3.networkmanagerapplet
       jdk
       jruby
       networkmanager-openconnect
       openconnect
-    ];
+    ] ++ (with nodePackages; [
+      aws-azure-login
+    ]));
   };
 
   fonts = {
