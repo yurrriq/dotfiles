@@ -33,7 +33,6 @@ in
       aws-iam-authenticator
       gnome3.networkmanagerapplet
       jdk
-      jruby
       networkmanager-openconnect
       openconnect
     ] ++ (with nodePackages; [

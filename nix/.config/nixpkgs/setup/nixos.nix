@@ -3,7 +3,7 @@
 {
 
   environment.systemPackages = with pkgs; [
-    keybase-gui
+    # keybase-gui
     (pass.withExtensions (exts: with exts; [
       pass-tomb
       pass-otp

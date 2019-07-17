@@ -8,7 +8,7 @@
     awscli
     bat
     bind
-    # FIXME: cachix
+    # cachix # FIXME: servant has mismatch
     coreutils
     # TODO: cquery
     curl
@@ -28,7 +28,7 @@
     # TODO: http-promt
     # TODO: idris
     jq
-    kdiff3
+    # kdiff3
     kitty
     moreutils
     nix
@@ -73,9 +73,9 @@
     ffm
     tiling
   ])) ++ lib.optionals stdenv.isLinux [
-    git-cola
+    # git-cola
     # TODO: libreoffice
-    qpdfview
+    # qpdfview
     psmisc
     # (texlive.combine {
     #   inherit (texlive) scheme-full tufte-latex;
