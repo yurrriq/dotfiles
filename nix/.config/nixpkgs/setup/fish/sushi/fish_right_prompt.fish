@@ -108,7 +108,7 @@ function fish_right_prompt
     # and printf (dim)"|vpn| "(off)
 
     command -sq kubectl; and begin
-        if [ "$USER" = (k8s::current_user) ]
+        if [ "e.bailey" = (k8s::current_user) ]
             printf (dim)"["(off)
         else
             printf (red)"["(off)
@@ -120,7 +120,7 @@ function fish_right_prompt
         test -n "$k8s_namespace";
         and printf (dim)"/"(yellow)"$k8s_namespace"(off)
 
-        if [ "$USER" = (k8s::current_user) ]
+        if [ "e.bailey" = (k8s::current_user) ]
             printf (dim)"] "(off)
         else
             printf (red)"] "(off)
