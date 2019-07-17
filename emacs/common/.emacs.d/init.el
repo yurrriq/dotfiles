@@ -12,7 +12,7 @@
 
 (let ((font (if (eq system-type 'darwin)
                 "Iosevka-16"
-              "Iosevka-12")))
+              "Iosevka-10")))
   (set-face-attribute 'default t :font font)
   (set-frame-font font nil t))
 
