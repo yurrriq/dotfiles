@@ -63,6 +63,8 @@
 
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 
+(global-set-key (kbd "s-u") 'revert-buffer)
+
 
 (setq c-default-style      "k&r"
       c-basic-offset       4
