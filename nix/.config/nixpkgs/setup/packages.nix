@@ -28,7 +28,7 @@
     # TODO: http-promt
     # TODO: idris
     jq
-    # kdiff3
+    kdiff3
     kitty
     moreutils
     nix
