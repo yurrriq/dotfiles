@@ -146,8 +146,8 @@ self: super: rec {
         sha256 = "164g1i3cvdk39n294c9i1vy633xisxlcr4qb57p0q1px1fsbs50c";
       };
       kops = {
-        version = "1.12.1";
-        sha256 = "0jia8dhawh786grnbpn64hvsdm6wz5p7hqir01q5xxpd1psnzygj";
+        version = "1.12.2";
+        sha256 = "0937crwifnld7r5pf5gvab9ibmf8k44dafr9y3hld2p01ijrari1";
       };
     };
   };
