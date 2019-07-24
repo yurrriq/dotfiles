@@ -8,6 +8,7 @@
       pass-tomb
       pass-otp
     ]))
+    gitAndTools.pass-git-helper
     xclip
     xorg.xbacklight
   ];
