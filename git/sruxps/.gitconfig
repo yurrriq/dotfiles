@@ -95,3 +95,6 @@ smudge = git-lfs smudge -- %f
 process = git-lfs filter-process
 required = true
 clean = git-lfs clean -- %f
+[credential]
+helper = /run/current-system/sw/bin/pass-git-helper
+useHttpPath = true

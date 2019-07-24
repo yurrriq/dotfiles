@@ -171,3 +171,10 @@ process = git-lfs filter-process
 required = true
 clean = git-lfs clean -- %f
 #+END_SRC
+** Credential Helper
+Configure [[https://github.com/languitar/pass-git-helper][pass-git-helper]] as git credential helper, and enable path matching.
+#+BEGIN_SRC ini
+[credential]
+helper = /run/current-system/sw/bin/pass-git-helper
+useHttpPath = true
+#+END_SRC
