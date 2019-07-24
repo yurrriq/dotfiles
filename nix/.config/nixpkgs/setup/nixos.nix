@@ -9,6 +9,9 @@
       pass-otp
     ]))
     gitAndTools.pass-git-helper
+    (signal-desktop.override {
+      spellcheckerLanguage = "en_US";
+    })
     xclip
     xorg.xbacklight
   ];
