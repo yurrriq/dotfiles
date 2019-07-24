@@ -109,10 +109,15 @@ self: super: rec {
     name = "k8s-legacy";
     config = k8s-stable.config // {
       helm = {
-        flavor = "darwin-amd64";
+        flavor = "linux-amd64";
         version = "2.11.0";
-        sha256 = "1cxmmi7pwp0qrv34ini8gklf9kvqal778q38bkacdlqrnfj0zx05";
+        sha256 = "14ap6wm7g9fr1yjx6n382rmnhyn5rf12rxmv7dyypcd2h92cjm8a";
       };
+      kops = {
+        version = "1.11.0";
+        sha256 = "1z67jl66g79q6v5kjy9qxx2xp656ybv5hrc10h3wmzy0b0n30s4n";
+      };
+
     };
   };
 
