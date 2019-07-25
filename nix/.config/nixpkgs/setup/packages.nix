@@ -16,7 +16,7 @@
     gawk
     gcc
     git
-    # git-lfs
+    git-lfs
     gnumake
     gnupg
     gnused
