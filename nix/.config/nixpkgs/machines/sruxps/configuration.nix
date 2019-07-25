@@ -31,6 +31,7 @@ in
     ];
     systemPackages = with pkgs; ([
       aws-iam-authenticator
+      docker-compose
       ghc
       gnome3.networkmanagerapplet
       jdk
