@@ -37,7 +37,10 @@ in
       jdk
       networkmanager-openconnect
       openconnect
-    ] ++ (with nodePackages; [
+    ] ++ (with haskellPackages; [
+      cabal-install
+      hpack
+    ]) ++ (with nodePackages; [
       aws-azure-login
       codeowners
     ]));
