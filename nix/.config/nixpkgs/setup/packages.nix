@@ -72,13 +72,14 @@
     tiling
   ])) ++ lib.optionals stdenv.isLinux [
     # git-cola
-    # TODO: libreoffice
+    # FIXME: libreoffice
     # qpdfview
     psmisc
     # (texlive.combine {
     #   inherit (texlive) scheme-full tufte-latex;
     #   inherit noweb;
     # })
+    thunderbird
     vivaldi
   ];
 }
