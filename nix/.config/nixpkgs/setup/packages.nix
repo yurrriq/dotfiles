@@ -16,7 +16,7 @@
     gawk
     gcc
     git
-    git-lfs
+    # git-lfs
     gnumake
     gnupg
     gnused
@@ -48,18 +48,16 @@
     tree
     vim
     watch
-    wipe
+    # wipe
     yq
   ]) ++ (with gitAndTools; [
     git-crypt
-    gitflow
+    # gitflow
     hub
     lab
   ]) ++ (with nodePackages; [
     # TODO: bash-language-server
     diff-so-fancy
-  ]) ++ (with python2Packages; [
-    # pywatchman
   ]) ++ (with python3Packages; [
     pygments
   ]) ++ lib.optionals stdenv.isDarwin ([
