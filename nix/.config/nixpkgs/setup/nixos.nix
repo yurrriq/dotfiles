@@ -2,13 +2,13 @@
 
 {
 
+  imports = (with (import <nur> {}).repos.yurrriq.modules; [
+    pass
+    tomb
+  ]);
+
   environment.systemPackages = with pkgs; [
     # keybase-gui
-    (pass.withExtensions (exts: with exts; [
-      pass-tomb
-      pass-otp
-    ]))
-    gitAndTools.pass-git-helper
     (signal-desktop.override {
       spellcheckerLanguage = "en_US";
     })
@@ -16,7 +16,15 @@
     xorg.xbacklight
   ];
 
-  programs.browserpass.enable = true;
+  programs = {
+    browserpass.enable = true;
+    pass = {
+      enable = true;
+      git-helper = true;
+      otp = true;
+    };
+    tomb.enable = true;
+  };
 
   services.kbfs.enable = true;
 

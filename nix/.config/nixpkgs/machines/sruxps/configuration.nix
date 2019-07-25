@@ -15,9 +15,7 @@ in
     <setup/common.nix>
     <setup/nixos.nix>
     <setup/packages.nix>
-  ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
-    tomb
-  ]);
+  ];
 
   boot.loader = {
     systemd-boot.enable = true;
