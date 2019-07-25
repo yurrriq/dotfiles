@@ -36,7 +36,6 @@ in
       jdk
       networkmanager-openconnect
       openconnect
-      gnome3.evolution
     ] ++ (with nodePackages; [
       aws-azure-login
       codeowners
