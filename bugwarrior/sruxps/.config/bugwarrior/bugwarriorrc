@@ -1,0 +1,35 @@
+# -*- mode: conf -*-
+
+[general]
+targets = sportradar_jira
+# taskrc = /home/yurrriq/.taskrc
+inline_links = False
+annotation_links = True
+annotation_comments = True
+legacy_matching = False
+log.level = DEBUG
+log.file = /home/yurrriq/log/bugwarrior.log
+annotation_length = 80
+
+
+[hooks]
+# pre_import = /home/someuser/backup.sh, /home/someuser/sometask.sh
+
+
+[notifications]
+# notifications = True
+# backend = gobject
+# finished_querying_sticky = False
+# task_crud_sticky = True
+# only_on_new_tasks = True
+
+
+[sportradar_jira]
+service = jira
+jira.base_uri = https://jira.sportradar.ag
+jira.username = e.bailey
+jira.password = @oracle:eval:pass jira.sportradar.ag
+jira.query = assignee = e.bailey and resolution = unresolved
+jira.version = 8
+jira.add_tags = work
+jira.description_template = {{jiraid}}: {{jirasummary}}

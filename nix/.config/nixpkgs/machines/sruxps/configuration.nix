@@ -41,6 +41,8 @@ in
     ]) ++ (with nodePackages; [
       aws-azure-login
       codeowners
+    ]) ++ (with python35Packages; [
+      bugwarrior
     ]));
   };
 
