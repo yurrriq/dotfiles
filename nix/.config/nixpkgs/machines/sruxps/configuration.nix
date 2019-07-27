@@ -61,7 +61,7 @@ in
   };
 
   networking = {
-    hostName = "sruxps";
+    hostName = "MSP-EBAILEY01";
     networkmanager.enable = true;
   };
 
