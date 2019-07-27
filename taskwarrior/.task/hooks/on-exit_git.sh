@@ -13,16 +13,16 @@ if git -C "$data" -C "$data" diff --quiet; then
     exit 0
 fi
 
-if ! git -C "$data" -C "$data" add --all; then
+if ! git -C "$data" -C "$data" add -A; then
     echo 'Failed to add files to the index'
     exit 100
 fi
 
-if ! git -C "$data" -C "$data" commit --quiet --message="$command: ${args#task $command }"; then
+if ! git -C "$data" -C "$data" commit -qm "$command: ${args#task $command }"; then
     echo 'Failed to record changes to the repository'
     exit 101
 fi
 
 if [ -n "${DEBUG:-}" ]; then
-    git -C "$data" -C "$data" log --oneline --max-count=1
+    git -C "$data" -C "$data" log --oneline -1
 fi

@@ -1,0 +1,3 @@
+# -*- mode: perl -*-
+$pdflatex = q/xelatex %O -interaction=nonstopmode -shell-escape %S/;
+push @generated_exts, 'tdo';
