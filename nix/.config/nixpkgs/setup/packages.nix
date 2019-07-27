@@ -45,6 +45,7 @@
     spotify
     stow
     taskwarrior
+    tasknc
     tree
     vim
     watch
