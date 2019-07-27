@@ -46,6 +46,24 @@
     stow
     taskwarrior
     tasknc
+    (texlive.combine {
+      inherit (texlive) scheme-small
+        datetime
+        dirtytalk
+        fmtcount
+        framed
+        fvextra
+        hardwrap
+        ifplatform
+        latexmk
+        minted
+        titlesec
+        todonotes
+        tufte-latex
+        xetex
+        xstring;
+      inherit noweb;
+    })
     tree
     vim
     watch
@@ -76,10 +94,6 @@
     # FIXME: libreoffice
     # qpdfview
     psmisc
-    # (texlive.combine {
-    #   inherit (texlive) scheme-full tufte-latex;
-    #   inherit noweb;
-    # })
     thunderbird
     vivaldi
   ];
