@@ -92,7 +92,7 @@
   ])) ++ lib.optionals stdenv.isLinux [
     # git-cola
     # FIXME: libreoffice
-    # qpdfview
+    qpdfview
     psmisc
     thunderbird
     vivaldi
