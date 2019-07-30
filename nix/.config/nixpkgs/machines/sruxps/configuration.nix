@@ -105,7 +105,7 @@ in
 
   services = {
     logind = {
-      lidSwitch = "hybrid-sleep";
+      lidSwitch = "hibernate";
     };
 
     redshift = {
