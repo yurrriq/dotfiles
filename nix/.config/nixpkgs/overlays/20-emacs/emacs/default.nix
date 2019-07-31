@@ -32,7 +32,7 @@ emacsWithPackages (epkgs: with {
   # gap-mode
   go-mode
   graphviz-dot-mode
-  # TODO: haskell-mode
+  haskell-mode
   helm-ag
   # TODO: hindent
   hl-todo
