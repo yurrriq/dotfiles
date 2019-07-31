@@ -20,7 +20,7 @@ emacsWithPackages (epkgs: with {
   # TODO: company-lsp
   # TODO: cquery
   crux
-  # dhall-mode
+  dhall-mode
   direnv
   dockerfile-mode
   editorconfig

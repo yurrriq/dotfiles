@@ -30,6 +30,8 @@ in
     systemPackages = with pkgs; ([
       aws-iam-authenticator
       cifs-utils
+      dhall
+      dhall-json
       docker-compose
       ghc
       gnome3.networkmanagerapplet
