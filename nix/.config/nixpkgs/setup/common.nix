@@ -31,6 +31,14 @@
       l = "ls -Glah";
       ll = "ls -Glh";
       ls = "ls -G";
+      # Taskwarrior aliases
+      p = "task list";
+      pp = tbd;
+      t = "task";
+      ta = "task add";
+      tbd = "task burndown.daily";
+      te = "task edit";
+      tm = "task mod";
     };
 
   };
