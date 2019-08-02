@@ -33,6 +33,7 @@ in
       dhall
       dhall-json
       docker-compose
+      fzf
       ghc
       gnome3.networkmanagerapplet
       jdk
@@ -40,7 +41,9 @@ in
       openconnect
     ] ++ (with haskellPackages; [
       cabal-install
+      cabal2nix
       hpack
+      stylish-haskell
     ]) ++ (with nodePackages; [
       aws-azure-login
       codeowners
