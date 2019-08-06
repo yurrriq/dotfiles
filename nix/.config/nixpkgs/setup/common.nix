@@ -37,7 +37,7 @@
       t = "task";
       ta = "task add";
       tbd = "task burndown.daily";
-      te = "task edit";
+      te = "env VISUAL=$EDITOR task edit";
       tm = "task mod";
     };
 
