@@ -34,6 +34,7 @@
       l = "ls -Glah";
       ll = "ls -Glh";
       ls = "ls -G";
+      nb = "nix build -f '<nixpkgs>' --no-link";
       # Taskwarrior aliases
       p = "task list";
       pp = tbd;
