@@ -24,7 +24,10 @@
       rgf = "rg -F";
       rgs = "rg -S";
       g = "git";
+      gd = "${g} d";
+      gdc = "${g} dc";
       gpg = "gpg2";
+      gs = "${g} s";
       k = "clear";
       kc = "kubectl";
       kt = "kubetail";
