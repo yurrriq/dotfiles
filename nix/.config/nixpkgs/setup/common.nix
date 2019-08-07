@@ -27,7 +27,7 @@
       gd = "${g} d";
       gdc = "${g} dc";
       gpg = "gpg2";
-      gs = "${g} s";
+      gs = "${g} st";
       k = "clear";
       kc = "kubectl";
       kt = "kubetail";
