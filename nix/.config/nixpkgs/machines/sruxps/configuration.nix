@@ -33,6 +33,7 @@ in
       dhall
       dhall-json
       docker-compose
+      firefox
       fzf
       ghc
       gnome3.networkmanagerapplet
