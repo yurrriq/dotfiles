@@ -118,6 +118,7 @@ in
       enable = true;
       latitude = "44.93";
       longitude = "-93.24";
+      provider = "manual";
       temperature.night = 2300;
     };
 
