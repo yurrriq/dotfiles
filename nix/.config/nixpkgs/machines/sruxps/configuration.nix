@@ -194,7 +194,7 @@ in
 
   system.stateVersion = "19.03";
 
-  time.timeZone = "America/Chicago";
+  time.timeZone = "Europe/Oslo";
 
   users.mutableUsers = false;
   users.users."${username}" = {
