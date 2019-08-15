@@ -72,6 +72,19 @@ in
   };
 
   nix = {
+    buildMachines = [
+      {
+        hostName = "nix-builder-0";
+        sshKey = "/root/.ssh/nix-builder-0.pem";
+        sshUser = "root";
+        system = "x86_64-linux";
+        maxJobs = 2;
+      }
+    ];
+    distributedBuilds = true;
+    extraOptions = ''
+      builders-use-substitutes = true
+    '';
     nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
       "nixpkgs=${_nixpkgs}"
