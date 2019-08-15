@@ -129,10 +129,11 @@ in
 
     redshift = {
       enable = true;
-      latitude = "44.93";
-      longitude = "-93.24";
-      provider = "manual";
-      temperature.night = 2300;
+      # latitude = "44.93";
+      # longitude = "-93.24";
+      # provider = "manual";
+      provider = "geoclue2";
+      temperature.night = 2200;
     };
 
     xserver = {
