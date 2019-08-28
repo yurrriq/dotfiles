@@ -40,6 +40,7 @@ in
       jdk
       networkmanager-openconnect
       openconnect
+      renderizer
     ] ++ (with haskellPackages; [
       cabal-install
       cabal2nix
