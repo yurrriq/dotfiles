@@ -130,10 +130,14 @@ in
 
     redshift = {
       enable = true;
-      # latitude = "44.93";
-      # longitude = "-93.24";
-      # provider = "manual";
-      provider = "geoclue2";
+      # NOTE: MSP
+      latitude = "44.93";
+      longitude = "-93.24";
+      # NOTE: LJU
+      # latitude = "46.09";
+      # longitude = "14.55";
+      provider = "manual";
+      # provider = "geoclue2";
       temperature.night = 2200;
     };
 
@@ -196,7 +200,8 @@ in
 
   system.stateVersion = "19.03";
 
-  time.timeZone = "Europe/Oslo";
+  # time.timeZone = "Europe/Oslo";
+  time.timeZone = "America/Chicago";
 
   users.mutableUsers = false;
   users.users."${username}" = {
