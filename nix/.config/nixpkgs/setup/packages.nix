@@ -8,7 +8,7 @@
     awscli
     bat
     bind
-    # cachix # FIXME: servant has mismatch
+    # cachix # FIXME: servant hash mismatch
     coreutils
     # TODO: cquery
     curl
@@ -21,11 +21,11 @@
     gnupg
     gnused
     gnutar
-    # graphviz
+    # FIXME: graphviz
     gzip
     httpie
     htop
-    # TODO: http-promt
+    # TODO: http-prompt
     # TODO: idris
     jq
     kdiff3
@@ -91,10 +91,16 @@
     tiling
   ])) ++ lib.optionals stdenv.isLinux [
     # git-cola
+    # keybase-gui
     # FIXME: libreoffice
     qpdfview
     psmisc
+    (signal-desktop.override {
+      spellcheckerLanguage = "en_US";
+    })
     thunderbird
     vivaldi
+    xclip
+    xorg.xbacklight
   ];
 }

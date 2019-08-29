@@ -7,15 +7,6 @@
     tomb
   ]);
 
-  environment.systemPackages = with pkgs; [
-    # keybase-gui
-    (signal-desktop.override {
-      spellcheckerLanguage = "en_US";
-    })
-    xclip
-    xorg.xbacklight
-  ];
-
   programs = {
     browserpass.enable = true;
     pass = {

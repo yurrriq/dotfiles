@@ -29,10 +29,9 @@ in
     ];
     systemPackages = with pkgs; ([
       aws-iam-authenticator
-      cifs-utils
-      dhall
-      dhall-json
-      docker-compose
+      # dhall
+      # dhall-json
+      # docker-compose
       firefox
       fzf
       ghc
