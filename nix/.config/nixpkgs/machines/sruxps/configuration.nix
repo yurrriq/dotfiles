@@ -39,6 +39,7 @@ in
       jdk
       networkmanager-openconnect
       openconnect
+      prettyping
       renderizer
     ] ++ (with haskellPackages; [
       cabal-install
