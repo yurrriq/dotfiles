@@ -99,7 +99,6 @@
       spellcheckerLanguage = "en_US";
     })
     thunderbird
-    vivaldi
     xclip
     xorg.xbacklight
   ];
