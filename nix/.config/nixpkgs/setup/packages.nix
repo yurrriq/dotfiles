@@ -94,6 +94,7 @@
     # keybase-gui
     # FIXME: libreoffice
     qpdfview
+    playerctl
     psmisc
     (signal-desktop.override {
       spellcheckerLanguage = "en_US";
