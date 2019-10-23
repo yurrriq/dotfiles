@@ -38,7 +38,7 @@ in
       gnome3.networkmanagerapplet
       jdk
       networkmanager-openconnect
-      next
+      # next
       openconnect
       prettyping
       renderizer
