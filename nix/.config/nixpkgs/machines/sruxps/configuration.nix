@@ -122,12 +122,6 @@ in
       node
     ]);
 
-   programs.tomb = {
-    enable = true;
-    resize = true;
-    slam = true;
-  };
-
   security.sudo = {
     enable = true;
     extraConfig = ''

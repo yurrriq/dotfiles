@@ -14,7 +14,11 @@
       git-helper = true;
       otp = true;
     };
-    tomb.enable = true;
+    tomb = {
+      enable = true;
+      resize = true;
+      slam = true;
+    };
   };
 
   services.kbfs.enable = true;
