@@ -68,6 +68,17 @@ in
     defaultLocale = "en_US.UTF-8";
   };
 
+  location = {
+    # NOTE: MSP
+    latitude = 44.93;
+    longitude = -93.24;
+    # NOTE: LJU
+    # latitude = 46.09;
+    # longitude = 14.55;
+    provider = "manual";
+    # provider = "geoclue2";
+  };
+
   networking = {
     hostName = "MSP-EBAILEY01";
     networkmanager.enable = true;
@@ -131,14 +142,6 @@ in
 
     redshift = {
       enable = true;
-      # NOTE: MSP
-      latitude = "44.93";
-      longitude = "-93.24";
-      # NOTE: LJU
-      # latitude = "46.09";
-      # longitude = "14.55";
-      provider = "manual";
-      # provider = "geoclue2";
       temperature.night = 2200;
     };
 
@@ -199,7 +202,7 @@ in
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  system.stateVersion = "19.03";
+  system.stateVersion = "19.09";
 
   time.timeZone = "America/Chicago";
   # time.timeZone = "Europe/London";
