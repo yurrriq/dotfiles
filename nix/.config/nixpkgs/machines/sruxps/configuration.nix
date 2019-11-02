@@ -93,6 +93,13 @@ in
         system = "x86_64-linux";
         maxJobs = 2;
       }
+      {
+        hostName = "nix-builder-1";
+        sshKey = "/root/.ssh/nix-builder-0.pem";
+        sshUser = "root";
+        system = "x86_64-linux";
+        maxJobs = 48;
+      }
     ];
     distributedBuilds = true;
     extraOptions = ''
