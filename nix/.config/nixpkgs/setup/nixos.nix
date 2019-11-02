@@ -7,6 +7,14 @@
     tomb
   ]);
 
+  environment = {
+    shellAliases = rec {
+      # Old Darwin habits
+      pbcopy = "xclip -sel clipboard";
+      pbpaste = "${pbcopy} -o";
+    };
+  };
+
   programs = {
     browserpass.enable = true;
     pass = {
