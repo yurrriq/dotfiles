@@ -26,10 +26,10 @@ emacsWithPackages (epkgs: with {
   editorconfig
   elixir-mode
   enh-ruby-mode
-  # erlang
+  erlang
   fill-column-indicator
   fish-mode
-  # gap-mode
+  gap-mode
   go-mode
   graphviz-dot-mode
   haskell-mode
