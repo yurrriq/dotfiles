@@ -38,6 +38,7 @@ emacsWithPackages (epkgs: with {
   hl-todo
   htmlize
   idris-mode
+  j-mode
   kubernetes-tramp
   # TODO: lsp-haskell
   # TODO: lsp-mode
