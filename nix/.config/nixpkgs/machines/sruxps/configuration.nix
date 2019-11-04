@@ -60,7 +60,7 @@ in
     fonts = with pkgs; [
       iosevka
     ];
-   };
+  };
 
   i18n = {
     consoleFont = "latarcyrheb-sun32";
