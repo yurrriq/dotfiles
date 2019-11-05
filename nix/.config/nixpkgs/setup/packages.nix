@@ -90,6 +90,8 @@
     ffm
     tiling
   ])) ++ lib.optionals stdenv.isLinux [
+    # NOTE: https://blorg.ericb.me/2019/10/browserpass-on-nixos/
+    browserpass
     # git-cola
     # keybase-gui
     # FIXME: libreoffice
