@@ -101,7 +101,7 @@
     (signal-desktop.override {
       spellcheckerLanguage = "en_US";
     })
-    thunderbird
+    # FIXME: thunderbird
     xclip
     xorg.xbacklight
   ];
