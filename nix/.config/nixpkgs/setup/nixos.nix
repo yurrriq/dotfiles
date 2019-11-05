@@ -13,6 +13,10 @@
       pbcopy = "xclip -sel clipboard";
       pbpaste = "${pbcopy} -o";
     };
+    systemPackages = [
+      # NOTE: https://blorg.ericb.me/2019/10/browserpass-on-nixos/
+      pkgs.browserpass
+    ];
   };
 
   programs = {
