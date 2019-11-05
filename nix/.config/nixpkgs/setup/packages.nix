@@ -8,7 +8,7 @@
     awscli
     # bat
     bind
-    # cachix # FIXME: servant hash mismatch
+    cachix
     coreutils
     # TODO: cquery
     curl
@@ -101,7 +101,7 @@
     (signal-desktop.override {
       spellcheckerLanguage = "en_US";
     })
-    # FIXME: thunderbird
+    thunderbird
     xclip
     xorg.xbacklight
   ];
