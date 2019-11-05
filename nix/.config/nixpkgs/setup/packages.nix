@@ -92,7 +92,7 @@
   ])) ++ lib.optionals stdenv.isLinux [
     # git-cola
     # keybase-gui
-    # FIXME: libreoffice
+    libreoffice
     qpdfview
     playerctl
     psmisc
