@@ -6,7 +6,7 @@
     aspellDicts.en
     autojump
     awscli
-    # bat
+    bat
     bind
     cachix
     coreutils
