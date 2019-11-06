@@ -40,14 +40,6 @@ ${configs}::
 	@ echo 'export profile=${profile}' >$@
 	@ direnv allow
 
-dry-build:
-	@ ${MAKE} -C nix/.config/nixpkgs/machines/${profile} dry-build
 
-switch:
-	@ ${MAKE} -C nix/.config/nixpkgs/machines/${profile} switch
-
-open-secrets:
-	@ ${MAKE} -C nix/.config/nixpkgs/machines/${profile} open-secrets
-
-close-secrets:
-	@ ${MAKE} -C nix/.config/nixpkgs/machines/${profile} open-secrets
+dry-build switch open-secrets close-secrets:
+	@ ${MAKE} -C nix/.config/nixpkgs/machines/${profile} $@
