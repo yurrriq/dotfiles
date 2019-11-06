@@ -10,7 +10,11 @@ all: ${configs} nix
 
 .PHONY: nix taskwarrior
 
-nix taskwarrior:
+nix:
+	@ stow -Rvt ~ $@
+
+taskwarrior:
+	@ ${MAKE} -C $@
 	@ stow -Rvt ~ $@
 
 

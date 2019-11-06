@@ -16,7 +16,8 @@
 
 
 \usepackage{noweb}
-\noweboptions{smallcode,longxref,longchunks,english}
+%% \noweboptions{smallcode,longxref,longchunks,english}
+\noweboptions{smallcode,longxref,hideunuseddefs,noidentxref,nomargintag}
 
 \usepackage{color}
 %% NOTE: https://commons.wikimedia.org/wiki/File:Erlang_logo.svg
@@ -29,6 +30,10 @@
 \usepackage{minted}
 \newmintinline[bash]{bash}{}
 \newmintedfile[inputbash]{bash}{linenos,fontsize=\small}
+
+
+\usepackage{datetime}
+
 
 \usepackage{hyperref}
 
