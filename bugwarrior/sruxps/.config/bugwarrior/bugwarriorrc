@@ -2,13 +2,13 @@
 
 [general]
 targets = sportradar_jira
-# taskrc = /home/yurrriq/.taskrc
+# taskrc = /home/e.bailey/.taskrc
 inline_links = False
 annotation_links = True
 annotation_comments = True
 legacy_matching = False
 log.level = DEBUG
-log.file = /home/yurrriq/log/bugwarrior.log
+log.file = /home/e.bailey/log/bugwarrior.log
 annotation_length = 80
 
 
