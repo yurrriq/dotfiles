@@ -12,6 +12,7 @@
     coreutils
     # TODO: cquery
     curl
+    diff-pdf
     direnv
     gawk
     gcc
