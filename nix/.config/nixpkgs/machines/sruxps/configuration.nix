@@ -4,8 +4,7 @@ with import <setup/srcs> { local = false; };
 
 let
 
-  # TODO: username = "e.bailey";
-  username = "yurrriq";
+  username = "e.bailey";
 
 in
 
@@ -213,7 +212,7 @@ in
       "http" "docker"
     ];
     createHome = true;
-    uid = 1000;
+    uid = 1001;
     home = "/home/${username}";
     shell = "/run/current-system/sw/bin/fish";
   };
