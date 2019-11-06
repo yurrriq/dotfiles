@@ -21,7 +21,7 @@
     gnupg
     gnused
     gnutar
-    # FIXME: graphviz
+    # TODO: graphviz
     gzip
     httpie
     htop
@@ -35,7 +35,6 @@
     nix-prefetch-git
     noweb
     pandoc
-    # TODO: pup
     ripgrep
     shellcheck
     shfmt
@@ -92,7 +91,7 @@
   ])) ++ lib.optionals stdenv.isLinux [
     # git-cola
     # keybase-gui
-    libreoffice
+    # TODO: libreoffice
     qpdfview
     playerctl
     psmisc
