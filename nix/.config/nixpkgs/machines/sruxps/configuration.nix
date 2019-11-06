@@ -4,6 +4,7 @@ with import <setup/srcs> { local = false; };
 
 let
 
+  # TODO: username = "e.bailey";
   username = "yurrriq";
 
 in
