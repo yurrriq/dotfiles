@@ -9,17 +9,14 @@ let
 in
 
 {
-  imports = let nur-no-pkgs = (import <nur> {}); in [
+  imports = [
     ./hardware-configuration.nix
     <setup/common.nix>
     <setup/nixos.nix>
     <setup/packages.nix>
   ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
-    tomb
     # FIXME: yubikey-gpg
   ]);
-
-  boot.kernelPackages = pkgs.linuxPackages_4_19;
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -34,9 +31,7 @@ in
 
   environment = {
     systemPackages = with pkgs; [
-      # exercism
       # TODO: gnome3.nautilus
-      # FIXME: tellico
     ];
   };
 
@@ -51,6 +46,13 @@ in
     consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
   };
+
+  # FIXME
+  # location = {
+  #   latitude = 44.93;
+  #   longitude = -93.24;
+  #   provider = "manual";
+  # };
 
   networking = {
     hostName = "nixps";
@@ -88,12 +90,6 @@ in
       node
     ]);
 
-  programs.tomb = {
-    enable = true;
-    resize = true;
-    slam = true;
-  };
-
   security.sudo.extraConfig = ''
     ${username} ALL=(ALL) NOPASSWD: ALL
   '';
@@ -104,14 +100,15 @@ in
       lidSwitch = "hybrid-sleep";
     };
 
-    redshift = {
-      enable = true;
-      latitude = "44.93";
-      longitude = "-93.24";
-      temperature.night = 2300;
-    };
+    # FIXME:
+    # redshift = {
+    #   enable = true;
+    #   temperature.night = 2300;
+    # };
 
     xserver = {
+      enable = true;
+
       autorun = true;
 
       desktopManager = {
@@ -136,8 +133,6 @@ in
         # '';
 
       };
-
-      enable = true;
 
       inputClassSections = [
         ''
@@ -167,14 +162,7 @@ in
         ignorePalm = true;
       };
 
-      # screenSection = ''
-      #   Option "RandRRotation" "on"
-      # '';
-
-      # FIXME
       videoDrivers = [
-        # "displaylink"
-        # "modesetting"
         "intel"
       ];
 
@@ -183,7 +171,7 @@ in
         i3.enable = true;
       };
 
-      xkbOptions = "ctrl:nocaps";
+      xkbOptions = "ctrl:nocaps,compose:ralt";
 
       xrandrHeads = [
         # "HDMI1"
@@ -202,11 +190,17 @@ in
     };
   };
 
-  system.stateVersion = "19.03";
+  # TODO
+  # sound.enable = true;
+  # hardware.pulseaudio.enable = true;
+
+  system.stateVersion = "19.09";
 
   time.timeZone = "America/Chicago";
 
-  users.extraUsers."${username}" = {
+  # TODO: users.mutableUsers = false;
+
+  users.users."${username}" = {
     name = username;
     group = "users";
     extraGroups = [
@@ -220,7 +214,7 @@ in
     shell = "/run/current-system/sw/bin/fish";
   };
 
-  virtualisation.docker.enable = false;
+  # TODO: virtualisation.docker.enable = true;
 
   # FIXME: yubikey-gpg.enable = true;
 }
