@@ -22,14 +22,28 @@ end
 
 command -sq kubectl; and begin
     function kcnodepods -d 'List all pods on a given node'
-        argparse -N 1 -X 1 --name=kcnodepods 'n/namespace=?' -- $argv
+        argparse --name=kcnodepods \
+        -N 1 -X 1 \
+        'n/namespace=?' \
+        'w/watch' \
+        -- $argv
         or return
 
-        if not set -q _flag_namespace
-            kubectl get pods --all-namespaces --field-selector=spec.nodeName=$argv[1]
+        set -l kubectl_flags
+
+        if set -q _flag_namespace
+            set kubectl_flags $kubectl_flags --namespace=$_flag_namespace
         else
-            kubectl get pods --namespace=$_flag_namespace --field-selector=spec.nodeName=$argv[1]
+            set kubectl_flags $kubectl_flags --all-namespaces
         end
+
+        if set -q _flag_watch
+            set kubectl_flags $kubectl_flags --watch
+        end
+
+        set kubectl_flags $kubectl_flags --field-selector=spec.nodeName=$argv[1]
+
+        eval kubectl get pods $kubectl_flags
     end
 
     function cpo -d 'Get the name of the Cilium pod running on a given node'
