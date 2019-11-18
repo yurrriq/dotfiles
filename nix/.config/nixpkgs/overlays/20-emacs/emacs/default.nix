@@ -26,7 +26,7 @@ emacsWithPackages (epkgs: with {
   editorconfig
   elixir-mode
   enh-ruby-mode
-  erlang
+  # FIXME: erlang
   fill-column-indicator
   fish-mode
   gap-mode
