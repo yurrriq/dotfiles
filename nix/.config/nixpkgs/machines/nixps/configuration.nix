@@ -47,12 +47,11 @@ in
     defaultLocale = "en_US.UTF-8";
   };
 
-  # FIXME
-  # location = {
-  #   latitude = 44.93;
-  #   longitude = -93.24;
-  #   provider = "manual";
-  # };
+  location = {
+    latitude = 44.93;
+    longitude = -93.24;
+    provider = "manual";
+  };
 
   networking = {
     hostName = "nixps";
@@ -100,11 +99,10 @@ in
       lidSwitch = "hybrid-sleep";
     };
 
-    # FIXME:
-    # redshift = {
-    #   enable = true;
-    #   temperature.night = 2300;
-    # };
+    redshift = {
+      enable = true;
+      temperature.night = 2300;
+    };
 
     xserver = {
       enable = true;
