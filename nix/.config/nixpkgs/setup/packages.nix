@@ -14,6 +14,7 @@
     curl
     diff-pdf
     direnv
+    fzf
     gawk
     gcc
     git
@@ -91,7 +92,9 @@
     ffm
     tiling
   ])) ++ lib.optionals stdenv.isLinux [
+    firefox
     # git-cola
+    gnome3.networkmanagerapplet
     # keybase-gui
     # TODO: libreoffice
     qpdfview

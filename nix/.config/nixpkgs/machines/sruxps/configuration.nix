@@ -32,10 +32,7 @@ in
       # dhall
       # dhall-json
       # docker-compose
-      firefox
-      fzf
       ghc
-      gnome3.networkmanagerapplet
       jdk
       networkmanager-openconnect
       # next
