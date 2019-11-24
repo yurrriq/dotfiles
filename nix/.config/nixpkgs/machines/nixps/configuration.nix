@@ -15,7 +15,7 @@ in
     <setup/nixos.nix>
     <setup/packages.nix>
   ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
-    # FIXME: yubikey-gpg
+    yubikey-gpg
   ]);
 
   boot.loader = {
@@ -214,5 +214,5 @@ in
 
   # TODO: virtualisation.docker.enable = true;
 
-  # FIXME: yubikey-gpg.enable = true;
+  yubikey-gpg.enable = true;
 }
