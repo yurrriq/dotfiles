@@ -33,6 +33,7 @@ in
       # dhall-json
       # docker-compose
       ghc
+      hicolor-icon-theme
       jdk
       networkmanager-openconnect
       # next
