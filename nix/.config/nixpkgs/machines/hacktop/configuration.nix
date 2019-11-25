@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 
-with import <setup/srcs> { local = false; };
+with import <setup/nix> { local = false; };
 
 let
 
