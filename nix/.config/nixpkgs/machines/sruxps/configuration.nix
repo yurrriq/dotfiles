@@ -39,6 +39,7 @@ in
       openconnect
       prettyping
       renderizer
+      volumeicon
     ] ++ (with haskellPackages; [
       cabal-install
       cabal2nix
