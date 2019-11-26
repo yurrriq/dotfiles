@@ -24,3 +24,6 @@ uda.jiradescription.label=Jira Description
 uda.jiracreatedts.type=date
 uda.jiracreatedts.label=Created At
 # END Bugwarrior UDAs
+context.work=jiraurl.any:
+context.other=jiraurl.none:
+context=work
