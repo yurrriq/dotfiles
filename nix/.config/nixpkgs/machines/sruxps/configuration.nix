@@ -69,11 +69,11 @@ in
 
   location = {
     # NOTE: MSP
-    # latitude = 44.93;
-    # longitude = -93.24;
+    latitude = 44.93;
+    longitude = -93.24;
     # NOTE: LJU
-    latitude = 46.09;
-    longitude = 14.55;
+    # latitude = 46.09;
+    # longitude = 14.55;
     provider = "manual";
     # provider = "geoclue2";
   };
@@ -197,8 +197,8 @@ in
 
   system.stateVersion = "19.09";
 
-  # time.timeZone = "America/Chicago";
-  time.timeZone = "Europe/Ljubljana";
+  time.timeZone = "America/Chicago";
+  # time.timeZone = "Europe/Ljubljana";
   # time.timeZone = "Europe/London";
   # time.timeZone = "Europe/Oslo";
 
