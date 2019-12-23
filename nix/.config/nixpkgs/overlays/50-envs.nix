@@ -39,14 +39,14 @@ self: super: rec {
     ]);
   };
 
-  fsharpEnv = self.buildEnv {
-    name = "fsharp";
-    paths = with self; [
-      fsharp
-      mono58
-      vscode-with-extensions
-    ];
-  };
+  # fsharpEnv = self.buildEnv {
+  #   name = "fsharp";
+  #   paths = with self; [
+  #     fsharp
+  #     mono58
+  #     vscode-with-extensions
+  #   ];
+  # };
 
   haskellEnv = self.buildEnv {
     name = "haskell";
