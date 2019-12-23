@@ -14,6 +14,7 @@
     curl
     diff-pdf
     direnv
+    expect
     fzf
     gawk
     gcc
@@ -67,6 +68,7 @@
       inherit noweb;
     })
     tree
+    unzip
     vim
     watch
     # wipe
@@ -96,7 +98,7 @@
     # git-cola
     gnome3.networkmanagerapplet
     # keybase-gui
-    # TODO: libreoffice
+    libreoffice
     qpdfview
     playerctl
     psmisc
