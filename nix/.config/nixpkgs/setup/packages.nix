@@ -38,6 +38,7 @@
     nix-prefetch-github
     noweb
     pandoc
+    prettyping
     ripgrep
     shellcheck
     shfmt
@@ -76,8 +77,14 @@
     # gitflow
     hub
     lab
+  ]) ++ (with haskellPackages; [
+      cabal-install
+      cabal2nix
+      hpack
+      stylish-haskell
   ]) ++ (with nodePackages; [
     # TODO: bash-language-server
+    codeowners
     diff-so-fancy
   ]) ++ (with python3Packages; [
     pygments
@@ -95,6 +102,7 @@
     firefox
     # git-cola
     gnome3.networkmanagerapplet
+    hicolor-icon-theme
     # keybase-gui
     # TODO: libreoffice
     qpdfview
@@ -104,7 +112,9 @@
       spellcheckerLanguage = "en_US";
     })
     thunderbird
+    volumeicon
     xclip
     xorg.xbacklight
   ];
+
 }

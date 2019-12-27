@@ -31,14 +31,12 @@ in
 
   environment = {
     systemPackages = with pkgs; [
-      # TODO: gnome3.nautilus
     ];
   };
 
   fonts.fonts = with pkgs; [
     fira-code
     fira-code-symbols
-    iosevka
   ];
 
   i18n = {

@@ -19,6 +19,19 @@
     ];
   };
 
+  fonts = {
+    enableFontDir = true;
+    fonts = with pkgs; [
+      iosevka
+    ];
+  };
+
+  i18n = {
+    consoleFont = "latarcyrheb-sun32";
+    consoleKeyMap = "us";
+    defaultLocale = "en_US.UTF-8";
+  };
+
   programs = {
     browserpass.enable = true;
     pass = {

@@ -33,38 +33,16 @@ in
       # dhall-json
       # docker-compose
       ghc
-      hicolor-icon-theme
       jdk
       networkmanager-openconnect
       # next
       openconnect
-      prettyping
       renderizer
-      volumeicon
-    ] ++ (with haskellPackages; [
-      cabal-install
-      cabal2nix
-      hpack
-      stylish-haskell
     ]) ++ (with nodePackages; [
       aws-azure-login
-      codeowners
     ]) ++ (with python35Packages; [
       bugwarrior
     ]));
-  };
-
-  fonts = {
-    enableFontDir = true;
-    fonts = with pkgs; [
-      iosevka
-    ];
-  };
-
-  i18n = {
-    consoleFont = "latarcyrheb-sun32";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
   };
 
   location = {
