@@ -11,6 +11,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ./secrets
     <setup/common.nix>
     <setup/nixos.nix>
     <setup/packages.nix>
@@ -114,7 +115,7 @@ in
 
   time.timeZone = "America/Chicago";
 
-  # TODO: users.mutableUsers = false;
+  users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
     group = "users";
