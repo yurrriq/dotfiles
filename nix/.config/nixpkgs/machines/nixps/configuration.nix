@@ -80,37 +80,36 @@ in
     '';
   };
 
-  services = {
-
-    xserver = {
-      displayManager = {
-        lightdm.autoLogin = {
-          enable = true;
-          user = username;
-        };
-
-        # TODO
-        # sessionCommands = ''
-        #   ${pkgs.xorg.xrdb}/bin/xrdb -merge <<<"Xcursor.size: 64"
-        # '';
+  services.xserver = {
+    displayManager = {
+      lightdm.autoLogin = {
+        enable = true;
+        user = username;
       };
 
-      resolutions = [
-        # { x = "1080"; y = "1920"; }
-        { x = "3840"; y = "2160"; }
-      ];
-
-      xrandrHeads = [
-        # "HDMI1"
-        {
-          output = "eDP1";
-          primary = true;
-          monitorConfig = ''
-            DisplaySize 508 285
-          '';
-        }
-      ];
+      # TODO
+      # sessionCommands = ''
+      #   ${pkgs.xorg.xrdb}/bin/xrdb -merge <<<"Xcursor.size: 64"
+      # '';
     };
+
+    dpi = 120;
+
+    # resolutions = [
+    #   # { x = "1080"; y = "1920"; }
+    #   { x = "3840"; y = "2160"; }
+    # ];
+
+    # xrandrHeads = [
+    #   # "HDMI1"
+    #   {
+    #     output = "eDP1";
+    #     primary = true;
+    #     monitorConfig = ''
+    #       DisplaySize 508 285
+    #     '';
+    #   }
+    # ];
   };
 
   time.timeZone = "America/Chicago";

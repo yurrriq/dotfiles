@@ -82,22 +82,14 @@
 
       displayManager.lightdm.enable = true;
 
-      inputClassSections = [
-        ''
-          Identifier "touchpad"
-          Driver "libinput"
-          MatchIsTouchpad "on"
-          Option "AccelSpeed" "1.0"
-        ''
-      ];
-
       layout = "us";
 
       libinput = {
         enable = true;
+        accelSpeed = "1.0";
+        disableWhileTyping = true;
         naturalScrolling = false;
         tapping = true;
-        disableWhileTyping = true;
       };
 
       multitouch = {
