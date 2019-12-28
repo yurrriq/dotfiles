@@ -27,6 +27,7 @@ in
 
   environment = {
     systemPackages = with pkgs; [
+      carla
       reaper
     ];
   };
