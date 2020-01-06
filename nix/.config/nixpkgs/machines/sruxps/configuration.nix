@@ -42,11 +42,11 @@ in
 
   location = {
     # NOTE: MSP
-    # latitude = 44.93;
-    # longitude = -93.24;
+    latitude = 44.93;
+    longitude = -93.24;
     # NOTE: ATL
-    latitude = 33.76;
-    longitude = -84.3;
+    # latitude = 33.76;
+    # longitude = -84.3;
     # NOTE: LJU
     # latitude = 46.09;
     # longitude = 14.55;
@@ -103,8 +103,8 @@ in
     DisplaySize 406 228
   '';
 
-  # time.timeZone = "America/Chicago";
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Chicago";
+  # time.timeZone = "America/New_York";
   # time.timeZone = "Europe/Ljubljana";
   # time.timeZone = "Europe/London";
   # time.timeZone = "Europe/Oslo";
