@@ -13,6 +13,7 @@ in
     ./hardware-configuration.nix
     ./secrets
     <setup/common.nix>
+    <setup/location/msp.nix>
     <setup/nixos.nix>
     <setup/packages.nix>
   ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
@@ -36,12 +37,6 @@ in
     fira-code
     fira-code-symbols
   ];
-
-  location = {
-    latitude = 44.93;
-    longitude = -93.24;
-    provider = "manual";
-  };
 
   networking.hostName = "nixps";
 
@@ -112,8 +107,6 @@ in
     #   }
     # ];
   };
-
-  time.timeZone = "America/Chicago";
 
   users.mutableUsers = false;
   users.users."${username}" = {

@@ -38,6 +38,8 @@
     defaultLocale = "en_US.UTF-8";
   };
 
+  location.provider = "manual";
+
   networking = {
     networkmanager.enable = true;
   };
