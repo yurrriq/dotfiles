@@ -35,7 +35,7 @@ in
       renderizer
     ] ++ (with nodePackages; [
       aws-azure-login
-    ]) ++ (with python35Packages; [
+    ]) ++ (with python38Packages; [
       bugwarrior
     ]));
   };
