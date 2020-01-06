@@ -17,11 +17,6 @@ in
     <setup/packages.nix>
   ];
 
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
-
   environment = {
     pathsToLink = [
       "/lib/aspell"
@@ -33,38 +28,16 @@ in
       # dhall-json
       # docker-compose
       ghc
-      hicolor-icon-theme
       jdk
       networkmanager-openconnect
       # next
       openconnect
-      prettyping
       renderizer
-      volumeicon
-    ] ++ (with haskellPackages; [
-      cabal-install
-      cabal2nix
-      hpack
-      stylish-haskell
     ]) ++ (with nodePackages; [
       aws-azure-login
-      codeowners
     ]) ++ (with python35Packages; [
       bugwarrior
     ]));
-  };
-
-  fonts = {
-    enableFontDir = true;
-    fonts = with pkgs; [
-      iosevka
-    ];
-  };
-
-  i18n = {
-    consoleFont = "latarcyrheb-sun32";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
   };
 
   location = {
@@ -81,10 +54,7 @@ in
     # provider = "geoclue2";
   };
 
-  networking = {
-    hostName = "MSP-EBAILEY01";
-    networkmanager.enable = true;
-  };
+  networking.hostName = "MSP-EBAILEY01";
 
   nix = {
     buildMachines = [
@@ -110,8 +80,6 @@ in
     trustedUsers = [ "root" username ];
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   nixpkgs.overlays =
     let path = <nixpkgs-overlays>; in with builtins;
       map (n: import (path + ("/" + n)))
@@ -131,74 +99,9 @@ in
     '';
   };
 
-  services = {
-    logind = {
-      lidSwitch = "hibernate";
-    };
-
-    redshift = {
-      enable = true;
-      temperature.night = 2200;
-    };
-
-    xserver = {
-      enable = true;
-
-      autorun = true;
-
-      desktopManager = {
-        gnome3.enable = false;
-        xterm.enable = false;
-        default = "none";
-      };
-
-      displayManager.lightdm.enable = true;
-
-      inputClassSections = [
-        ''
-          Identifier "touchpad"
-          Driver "libinput"
-          MatchIsTouchpad "on"
-          Option "AccelSpeed" "1.0"
-        ''
-      ];
-
-      layout = "us";
-
-      libinput = {
-        enable = true;
-        naturalScrolling = false;
-        tapping = true;
-        disableWhileTyping = true;
-      };
-
-      monitorSection = ''
-        DisplaySize 406 228
-      '';
-
-      multitouch = {
-        enable = true;
-        invertScroll = true;
-        ignorePalm = true;
-      };
-
-      videoDrivers = [
-        "intel"
-      ];
-
-      windowManager = {
-        default = "i3";
-        i3.enable = true;
-      };
-
-      xkbOptions = "ctrl:nocaps,compose:ralt";
-    };
-  };
-
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
-  system.stateVersion = "19.09";
+  services.xserver.monitorSection = ''
+    DisplaySize 406 228
+  '';
 
   # time.timeZone = "America/Chicago";
   time.timeZone = "America/New_York";

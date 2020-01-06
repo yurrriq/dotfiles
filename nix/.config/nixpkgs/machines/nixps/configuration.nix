@@ -11,17 +11,13 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ./secrets
     <setup/common.nix>
     <setup/nixos.nix>
     <setup/packages.nix>
   ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
     yubikey-gpg
   ]);
-
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
 
   boot.initrd.luks.devices = {
     root = {
@@ -31,21 +27,15 @@ in
 
   environment = {
     systemPackages = with pkgs; [
-      # TODO: gnome3.nautilus
+      carla
+      reaper
     ];
   };
 
   fonts.fonts = with pkgs; [
     fira-code
     fira-code-symbols
-    iosevka
   ];
-
-  i18n = {
-    consoleFont = "latarcyrheb-sun32";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
-  };
 
   location = {
     latitude = 44.93;
@@ -53,10 +43,7 @@ in
     provider = "manual";
   };
 
-  networking = {
-    hostName = "nixps";
-    networkmanager.enable = true;
-  };
+  networking.hostName = "nixps";
 
   nix = {
 
@@ -74,8 +61,6 @@ in
 
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   nixpkgs.overlays =
     let path = <nixpkgs-overlays>; in with builtins;
       map (n: import (path + ("/" + n)))
@@ -89,115 +74,48 @@ in
       node
     ]);
 
-  security.sudo.extraConfig = ''
-    ${username} ALL=(ALL) NOPASSWD: ALL
-  '';
-
-  services = {
-
-    logind = {
-      lidSwitch = "hibernate";
-    };
-
-    redshift = {
-      enable = true;
-      temperature.night = 2300;
-    };
-
-    xserver = {
-      enable = true;
-
-      autorun = true;
-
-      desktopManager = {
-        gnome3.enable = false;
-        xterm.enable = false;
-        default = "none";
-      };
-
-      displayManager = {
-
-        lightdm = {
-          autoLogin = {
-            enable = true;
-            user = username;
-          };
-          enable = true;
-        };
-
-        # TODO
-        # sessionCommands = ''
-        #   ${pkgs.xorg.xrdb}/bin/xrdb -merge <<<"Xcursor.size: 64"
-        # '';
-
-      };
-
-      inputClassSections = [
-        ''
-          Identifier "touchpad"
-          Driver "libinput"
-          MatchIsTouchpad "on"
-          Option "AccelSpeed" "1.0"
-        ''
-      ];
-
-      layout = "us";
-
-      libinput = {
-        enable = true;
-        naturalScrolling = false;
-        tapping = true;
-        disableWhileTyping = true;
-      };
-
-      # monitorSection = ''
-      #   DisplaySize 406 228
-      # '';
-
-      multitouch = {
-        enable = true;
-        invertScroll = true;
-        ignorePalm = true;
-      };
-
-      videoDrivers = [
-        "intel"
-      ];
-
-      windowManager = {
-        default = "i3";
-        i3.enable = true;
-      };
-
-      xkbOptions = "ctrl:nocaps,compose:ralt";
-
-      xrandrHeads = [
-        # "HDMI1"
-        {
-          output = "eDP1";
-          primary = true;
-          monitorConfig = ''
-            DisplaySize 508 285
-          '';
-        }
-      ];
-      resolutions = [
-        # { x = "1080"; y = "1920"; }
-        { x = "3840"; y = "2160"; }
-      ];
-    };
+  security.sudo = {
+    enable = true;
+    extraConfig = ''
+      ${username} ALL=(ALL) NOPASSWD: ALL
+    '';
   };
 
-  # TODO
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
+  services.xserver = {
+    displayManager = {
+      lightdm.autoLogin = {
+        enable = true;
+        user = username;
+      };
 
-  system.stateVersion = "19.09";
+      # TODO
+      # sessionCommands = ''
+      #   ${pkgs.xorg.xrdb}/bin/xrdb -merge <<<"Xcursor.size: 64"
+      # '';
+    };
+
+    dpi = 180;
+
+    # resolutions = [
+    #   # { x = "1080"; y = "1920"; }
+    #   { x = "3840"; y = "2160"; }
+    # ];
+
+    # xrandrHeads = [
+    #   # "HDMI1"
+    #   {
+    #     output = "eDP1";
+    #     primary = true;
+    #     monitorConfig = ''
+    #       DisplaySize 508 285
+    #     '';
+    #   }
+    # ];
+  };
 
   time.timeZone = "America/Chicago";
 
-  # TODO: users.mutableUsers = false;
-
+  users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
     group = "users";
