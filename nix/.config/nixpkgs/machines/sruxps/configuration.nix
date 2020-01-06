@@ -33,7 +33,7 @@ in
       # next
       openconnect
       renderizer
-    ]) ++ (with nodePackages; [
+    ] ++ (with nodePackages; [
       aws-azure-login
     ]) ++ (with python35Packages; [
       bugwarrior
