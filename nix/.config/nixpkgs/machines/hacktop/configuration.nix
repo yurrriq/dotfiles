@@ -65,6 +65,7 @@ in
       "nixpkgs=${_nixpkgs}"
       "nixpkgs-overlays=$HOME/.config/nixpkgs/overlays"
       "nur=${_nur}"
+      "nurpkgs=$HOME/.config/nurpkgs"
       "setup=$HOME/.config/nixpkgs/setup"
     ];
 
