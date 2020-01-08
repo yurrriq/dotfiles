@@ -61,7 +61,7 @@ in
       "nixpkgs=${_nixpkgs}"
       "nixpkgs-overlays=/home/${username}/.config/nixpkgs/overlays"
       "nur=${_nur}"
-      "nurpkgs/home/${username}/.config/nurpkgs"
+      "nurpkgs=/home/${username}/.config/nurpkgs"
       "setup=/home/${username}/.config/nixpkgs/setup"
     ];
     trustedUsers = [ "root" username ];
