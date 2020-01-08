@@ -31,6 +31,7 @@ in
       # docker-compose
       ghc
       jdk
+      naal
       networkmanager-openconnect
       # next
       openconnect
