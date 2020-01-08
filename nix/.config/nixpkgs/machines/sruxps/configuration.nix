@@ -25,6 +25,7 @@ in
     ];
     systemPackages = with pkgs; ([
       aws-iam-authenticator
+      bugwarrior
       # dhall
       # dhall-json
       # docker-compose
@@ -36,8 +37,6 @@ in
       renderizer
     ] ++ (with nodePackages; [
       aws-azure-login
-    ]) ++ (with python38Packages; [
-      bugwarrior
     ]));
   };
 
