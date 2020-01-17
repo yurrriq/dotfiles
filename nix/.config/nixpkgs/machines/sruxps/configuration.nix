@@ -26,6 +26,7 @@ in
     systemPackages = with pkgs; ([
       aws-iam-authenticator
       bugwarrior
+      ec2instanceconnectcli
       # dhall
       # dhall-json
       # docker-compose
