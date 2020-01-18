@@ -19,7 +19,6 @@
     git
     git-lfs
     gnumake
-    gnupg
     gnused
     gnutar
     # TODO: graphviz
