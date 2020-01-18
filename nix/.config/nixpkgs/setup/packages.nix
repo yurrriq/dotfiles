@@ -12,7 +12,6 @@
     # TODO: cquery
     curl
     diff-pdf
-    direnv
     expect
     fzf
     gawk
