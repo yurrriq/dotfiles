@@ -3,9 +3,9 @@ cpif ?= | cpif
 NW_SRCS := \
 src/bash/on-exit-git.nw
 
-BASH_SRCS := $(patsubst src/bash/%.nw,.task/hooks/%.sh,$(filter src/bash/%.nw,${NW_SRCS}))
+BASH_SRCS := $(patsubst src/bash/%.nw,.local/share/task/hooks/%.sh,$(filter src/bash/%.nw,${NW_SRCS}))
 
-PDF_SRCS := $(patsubst .task/hooks/%.sh,src/tex/%.pdf,${BASH_SRCS})
+PDF_SRCS := $(patsubst .local/share/task/hooks/%.sh,src/tex/%.pdf,${BASH_SRCS})
 
 ifneq (,$(findstring B,$(MAKEFLAGS)))
 latexmk_flags = -gg
@@ -34,7 +34,7 @@ src/tex/%.pdf: src/tex/%.tex src/tex/preamble.tex src/tex/postamble.tex
 	latexmk $(latexmk_flags) $<
 
 
-.task/hooks/%.sh: src/bash/%.nw
+.local/share/task/hooks/%.sh: src/bash/%.nw
 	notangle $< ${cpif} $@
 	@ shellcheck $@
 	@ shfmt -d -i 4 $@

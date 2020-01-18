@@ -6,7 +6,6 @@
     aspellDicts.en
     autojump
     awscli
-    bat
     bind
     cachix
     coreutils
@@ -48,7 +47,6 @@
     sops
     spotify
     stow
-    taskwarrior
     tasknc
     (texlive.combine {
       inherit (texlive) scheme-small
