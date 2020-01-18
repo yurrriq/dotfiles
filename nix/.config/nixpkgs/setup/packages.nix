@@ -26,7 +26,6 @@
     httpie
     # TODO: http-prompt
     # TODO: idris
-    jq
     kdiff3
     kitty
     moreutils
@@ -96,7 +95,6 @@
     ffm
     tiling
   ])) ++ lib.optionals stdenv.isLinux [
-    firefox
     # git-cola
     gnome3.networkmanagerapplet
     hicolor-icon-theme
