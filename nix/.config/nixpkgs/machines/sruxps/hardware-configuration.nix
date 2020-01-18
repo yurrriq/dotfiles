@@ -46,12 +46,25 @@
     };
   };
 
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/cae2164d-72b5-4f60-b369-e845606d03be"; }
-  ];
+  hardware.bluetooth = {
+    enable = true;
+    extraConfig = ''
+      [General]
+      Enable=Source,Sink,Media,Socket
+    '';
+  };
+
+  hardware.pulseaudio = {
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+    package = pkgs.pulseaudioFull;
+  };
 
   nix.maxJobs = lib.mkDefault 8;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/cae2164d-72b5-4f60-b369-e845606d03be"; }
+  ];
 
 }

@@ -26,6 +26,7 @@ in
     systemPackages = with pkgs; ([
       aws-iam-authenticator
       bugwarrior
+      ec2instanceconnectcli
       # dhall
       # dhall-json
       # docker-compose
@@ -35,6 +36,7 @@ in
       networkmanager-openconnect
       # next
       openconnect
+      pavucontrol
       renderizer
     ] ++ (with nodePackages; [
       aws-azure-login
@@ -86,6 +88,8 @@ in
       ${username} ALL=(ALL) NOPASSWD: ALL
     '';
   };
+
+  services.blueman.enable = true;
 
   services.xserver.monitorSection = ''
     DisplaySize 406 228

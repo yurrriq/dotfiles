@@ -105,7 +105,7 @@
     # git-cola
     gnome3.networkmanagerapplet
     hicolor-icon-theme
-    # keybase-gui
+    keybase-gui
     libreoffice
     qpdfview
     playerctl
