@@ -8,6 +8,7 @@
     <setup/config/bat.nix>
     <setup/config/direnv.nix>
     <setup/config/git.nix>
+    <setup/config/htop.nix>
     <setup/config/i3.nix>
     <setup/config/taskwarrior.nix>
   ];

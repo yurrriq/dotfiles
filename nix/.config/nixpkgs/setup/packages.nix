@@ -25,7 +25,6 @@
     # TODO: graphviz
     gzip
     httpie
-    htop
     # TODO: http-prompt
     # TODO: idris
     jq
