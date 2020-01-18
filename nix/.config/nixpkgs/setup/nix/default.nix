@@ -17,18 +17,20 @@ in
 
 (rec {
 
-  _nur = if local then ./local-nur.nix else sources.nur;
+  inherit (sources) home-manager;
 
-  nur-no-pkgs = import _nur { };
+  nur = if local then ./local-nur.nix else sources.nur;
+
+  nur-no-pkgs = import nur { };
 
 }) // (if seemsDarwin then {
 
-  _darwin = fetchTarballFromGitHub (fromJSONFile ./darwin.json);
+  inherit (sources) darwin;
 
-  _nixpkgs = fetchTarballFromGitHub (fromJSONFile ./nixpkgs-darwin.json);
+  nixpkgs = sources.nixpkgs-darwin;
 
 } else {
 
-  _nixpkgs = sources.nixpkgs;
+  inherit (sources) nixpkgs;
 
 })

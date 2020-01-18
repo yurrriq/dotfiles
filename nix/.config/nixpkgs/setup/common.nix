@@ -5,7 +5,6 @@
   imports = [
     ./emacs.nix
     ./fish.nix
-    ./tmux.nix
   ];
 
   environment = {

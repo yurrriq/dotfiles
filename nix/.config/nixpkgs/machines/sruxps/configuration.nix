@@ -16,6 +16,7 @@ in
     <setup/location/msp.nix>
     <setup/nixos.nix>
     <setup/packages.nix>
+    "${home-manager}/nixos"
   ];
 
   environment = {
@@ -43,6 +44,10 @@ in
     ]));
   };
 
+  home-manager.useUserPackages = true;
+  home-manager.users."${username}" = args:
+    import ./home.nix (args // { inherit pkgs; });
+
   networking.hostName = "MSP-EBAILEY01";
 
   nix = {
@@ -61,9 +66,9 @@ in
     '';
     nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
-      "nixpkgs=${_nixpkgs}"
+      "nixpkgs=${nixpkgs}"
       "nixpkgs-overlays=/home/${username}/.config/nixpkgs/overlays"
-      "nur=${_nur}"
+      "nur=${nur}"
       "nurpkgs=/home/${username}/.config/nurpkgs"
       "setup=/home/${username}/.config/nixpkgs/setup"
     ];
@@ -91,6 +96,8 @@ in
 
   services.blueman.enable = true;
 
+  # TODO: services.lorri.enable = true;
+
   services.xserver.monitorSection = ''
     DisplaySize 406 228
   '';
@@ -107,7 +114,7 @@ in
     createHome = true;
     uid = 1001;
     home = "/home/${username}";
-    shell = "/run/current-system/sw/bin/fish";
+    shell = "${pkgs.fish}/bin/fish";
   };
 
   virtualisation.docker.enable = true;

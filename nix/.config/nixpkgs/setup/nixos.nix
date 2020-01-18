@@ -71,6 +71,14 @@
       temperature.night = 2300;
     };
 
+    unclutter = {
+      enable = true;
+      extraOptions = [ "exclude-root" "ignore-scrolling" ];
+      # FIXME
+      threeshold = 1;
+      timeout = 1;
+    };
+
     xserver = {
       enable = true;
 
