@@ -112,4 +112,19 @@
 
   };
 
+  xdg.configFile.pass-git-helper = {
+    target = "pass-git-helper/git-pass-mapping.ini";
+    text = ''
+      [DEFAULT]
+      line_username=1
+      skip_username=10
+
+      [github.com/sportradar/*]
+      target=github.com/token/Sportradar
+
+      [github.com*]
+      target=github.com/token/hub
+    '';
+  };
+
 }
