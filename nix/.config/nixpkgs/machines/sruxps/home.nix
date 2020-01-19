@@ -17,6 +17,7 @@
     <setup/config/jq.nix>
     <setup/config/kitty.nix>
     <setup/config/man.nix>
+    <setup/config/rebar3.nix>
     <setup/config/taskwarrior.nix>
   ];
 
