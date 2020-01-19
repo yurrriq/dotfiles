@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
 
@@ -35,6 +35,10 @@
     '';
   };
 
+  xdg.dataFile = {
+    "i3/matrix.png".source = ./matrix.png;
+  };
+
   xsession.enable = true;
 
   xsession.windowManager.i3 = {
@@ -52,7 +56,7 @@
         "XF86AudioPlay" = "exec playerctl play-pause";
         # "XF86AudioPause" = "exec playerctl play-pause";
         "XF86AudioNext" = "exec playerctl next";
-        "${modifier}+Escape" = "exec i3lock -i ~/.config/i3/matrix.png";
+        "${modifier}+Escape" = "exec i3lock -i ${config.xdg.dataHome}/i3/matrix.png";
         "${modifier}+Shift+minus" = "move scratchpad";
         "${modifier}+minus" = "scratchpad show";
       };
