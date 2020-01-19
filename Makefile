@@ -14,8 +14,7 @@ nix:
 	@ stow -Rvt ~ $@
 
 taskwarrior:
-	@ ${MAKE} -C $@
-	@ stow -Rvt ~ $@
+	$(error "taskwarrior configure is managed by home-manager now")
 
 
 ifneq (,$(findstring B,$(MAKEFLAGS)))
