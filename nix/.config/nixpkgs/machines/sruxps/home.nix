@@ -15,6 +15,7 @@
     <setup/config/htop.nix>
     <setup/config/i3>
     <setup/config/jq.nix>
+    <setup/config/kitty.nix>
     <setup/config/man.nix>
     <setup/config/taskwarrior.nix>
   ];
