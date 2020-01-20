@@ -1,3 +1,5 @@
 /.envrc
 /result*
 secrets/
+
+*/nixpkgs/config.nix
