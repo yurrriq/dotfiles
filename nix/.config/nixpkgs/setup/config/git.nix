@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 
 {
 
@@ -72,7 +72,7 @@
           untracked = "cyan";
         };
       };
-      # TODO: commit.template = "~/.gitmessage";
+      commit.template = "${config.xdg.dataHome}/git/commit.template";
       core.pager = "diff-so-fancy | less --tabs=4 -RFX";
       credential = {
         helper = "pass-git-helper";
@@ -124,6 +124,21 @@
 
       [github.com*]
       target=github.com/token/hub
+    '';
+  };
+
+  xdg.dataFile.gitmessage = {
+    target = "git/commit.template";
+    text = ''
+      # If applied, this commit will...
+
+      # Why is this change needed?
+      Prior to this change,
+
+      # How does it address the issue?
+      This change
+
+      # Provide links to any relevant tickets, articles or other resources
     '';
   };
 
