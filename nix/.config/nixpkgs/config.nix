@@ -1,5 +1,1 @@
-{
-  allowBroken = false;
-  allowUnfree = true;
-  allowUnsupportedSystem = false;
-}
+/nix/store/lw01raapnanllp3hs6w008aa1dpckhiq-home-manager-files/.config/nixpkgs/config.nix
