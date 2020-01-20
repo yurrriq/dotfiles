@@ -23,6 +23,7 @@ in
     pathsToLink = [
       "/lib/aspell"
       "/share/emacs/site-lisp"
+      "/share/fish"
     ];
     systemPackages = with pkgs; ([
       aws-iam-authenticator

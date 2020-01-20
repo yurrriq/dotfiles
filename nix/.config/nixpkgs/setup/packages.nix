@@ -4,7 +4,6 @@
   environment.systemPackages = with pkgs; ([
     aspell
     aspellDicts.en
-    autojump
     awscli
     bind
     cachix

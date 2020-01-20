@@ -2,9 +2,14 @@
 
 {
 
-  home.sessionVariables = {
-    SHELL = "fish";
-    TERMINAL = "kitty";
+  home = {
+    packages = with pkgs; [
+      autojump
+    ];
+    sessionVariables = {
+      SHELL = "fish";
+      TERMINAL = "kitty";
+    };
   };
 
   programs.fish = let inherit (lib.strings) fileContents; in {
