@@ -66,6 +66,8 @@
       tbd = "task burndown.daily";
       te = "env VISUAL=$EDITOR task edit";
       tm = "task mod";
+
+      trea = "tree -a";
     };
 
     shellInit = fileContents ./shellInit.fish;
