@@ -1,11 +1,19 @@
 machine   ?= sruxps
 nixos_dir ?= /etc/nixos
 
+stow_flags := -R
+ifneq (,$(findstring trace,$(MAKEFLAGS)))
+stow_flags += -v
+endif
+stow = stow ${stow_flags}
+
 
 .PHONY: all
 all: .stow-local-ignore
-	@ stow -Rvt ${nixos_dir} .
-	@ stow -Rvt ${nixos_dir} -d machines ${machine}
+	@ sudo ${stow} -t ${nixos_dir} .
+	@ sudo ${stow} -t ${nixos_dir} -d machines ${machine}
+	@ mkdir -p ~/.config/cachix
+	@ ${stow} -t ~/.config/cachix cachix
 
 
 .PHONY: .envrc
