@@ -1,0 +1,11 @@
+cachix
+.editorconfig
+.envrc
+.git
+.gitattributes
+.git-crypt
+.gitignore
+machines
+Makefile
+.stow-local-ignore
+_todo

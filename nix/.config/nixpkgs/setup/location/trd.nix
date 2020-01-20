@@ -1,5 +1,0 @@
-{
-
-  time.timeZone = "Europe/Oslo";
-
-}
