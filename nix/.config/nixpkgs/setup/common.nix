@@ -2,50 +2,6 @@
 
 {
 
-  imports = [
-    ./emacs.nix
-    ./fish.nix
-  ];
-
-  environment = {
-
-    pathsToLink = [
-     "/share/doc/task"
-    ];
-
-    shellAliases = rec {
-      ag = rgs;
-      agn = rgn; # "ag --nogroup";
-      agq = rgf; # "ag -Q";
-      rgn = "rg --no-heading";
-      rga = "rg --hidden --iglob !.git";
-      rgi = "rg -i";
-      rgf = "rg -F";
-      rgs = "rg -S";
-      g = "git";
-      gd = "${g} d";
-      gdc = "${g} dc";
-      gpg = "gpg2";
-      gs = "${g} st";
-      k = "clear";
-      kc = "kubectl";
-      kt = "kubetail";
-      l = "ls -Glah";
-      ll = "ls -Glh";
-      ls = "ls -G";
-      nb = "nix build -f '<nixpkgs>' --no-link";
-      # Taskwarrior aliases
-      p = "task list";
-      pp = tbd;
-      t = "task";
-      ta = "task add";
-      tbd = "task burndown.daily";
-      te = "env VISUAL=$EDITOR task edit";
-      tm = "task mod";
-    };
-
-  };
-
   nix = {
 
     binaryCaches = [

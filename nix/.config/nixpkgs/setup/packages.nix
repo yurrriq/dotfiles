@@ -13,7 +13,6 @@
     curl
     diff-pdf
     expect
-    fzf
     gawk
     gcc
     git

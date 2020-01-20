@@ -113,7 +113,7 @@ in
     createHome = true;
     uid = 1001;
     home = "/home/${username}";
-    shell = "${pkgs.fish}/bin/fish";
+    shell = "/etc/profiles/per-user/${username}/bin/fish";
   };
 
   virtualisation.docker.enable = true;

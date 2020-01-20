@@ -12,14 +12,6 @@
     efi.canTouchEfiVariables = true;
   };
 
-  environment = {
-    shellAliases = rec {
-      # Old Darwin habits
-      pbcopy = "xclip -sel clipboard";
-      pbpaste = "${pbcopy} -o";
-    };
-  };
-
   fonts = {
     enableFontDir = true;
     fonts = with pkgs; [

@@ -2,22 +2,23 @@
 
 {
 
+  home.sessionVariables = {
+    SHELL = "fish";
+    TERMINAL = "kitty";
+  };
+
   programs.fish = let inherit (lib.strings) fileContents; in {
     enable = true;
 
-    interactiveShellInit = fileContents ./fish/interactiveShellInit.fish;
+    interactiveShellInit = fileContents ./interactiveShellInit.fish;
 
     promptInit = ''
-      ${fileContents ./fish/sushi/fish_prompt.fish}
+      ${fileContents ./sushi/fish_prompt.fish}
 
-      ${fileContents ./fish/sushi/fish_right_prompt.fish}
+      ${fileContents ./sushi/fish_right_prompt.fish}
     '';
 
     shellAliases = rec {
-      # ag = rgs;
-      # agn = rgn; # "ag --nogroup";
-      # agq = rgf; # "ag -Q";
-
       e = "emacsclient -na \"\"";
       ec = e + " -c";
       et = "emacsclient -nw -a \"\"";
@@ -29,11 +30,13 @@
       l = "ls -Glah";
       ll = "ls -Glh";
       ls = "ls -G";
-
-      # nb = "nix build -f '<nixpkgs>' --no-link";
     };
 
     shellAbbrs = rec {
+      # Old Darwin habits
+      pbcopy = "xclip -sel clipboard";
+      pbpaste = "${pbcopy} -o";
+
       # Git
       g = "git";
       gd = "${g} d";
@@ -43,6 +46,10 @@
       # Kubernetes
       kc = "kubectl";
       kt = "kubetail";
+
+      # Nix
+      nb = "nix build";
+      nbn = "${nb} --no-link";
 
       # ripgrep
       rga = "rg --hidden --iglob !.git";
@@ -61,7 +68,7 @@
       tm = "task mod";
     };
 
-    shellInit = fileContents ./fish/shellInit.fish;
+    shellInit = fileContents ./shellInit.fish;
   };
 
 }
