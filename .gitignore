@@ -2,4 +2,4 @@
 /result*
 secrets/
 
-*/nixpkgs/config.nix
+nix/.config/nixpkgs/config.nix
