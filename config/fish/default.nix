@@ -50,6 +50,7 @@
 
       # Kubernetes
       kc = "kubectl";
+      kns = "kubens";
       kt = "kubetail";
 
       # Nix
