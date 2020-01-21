@@ -1,21 +1,23 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
-with import <setup/nix>  { local = false; };
+with import ../../modules/nix { local = false; };
 
 let
 
   username = "yurrriq";
+
+  airportCode = "MSP";
 
 in
 
 {
   imports = [
     ./hardware-configuration.nix
-    ./secrets
-    <setup/common.nix>
-    <setup/location/msp.nix>
-    <setup/nixos.nix>
-    <setup/packages.nix>
+    ../../modules/common.nix
+    (import ../../modules/location.nix { inherit lib airportCode; })
+    ../../modules/nixos.nix
+    ../../modules/packages.nix
+    "${home-manager}/nixos"
   ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
     yubikey-gpg
   ]);
@@ -26,17 +28,23 @@ in
     };
   };
 
-  environment = {
-    systemPackages = with pkgs; [
-      carla
-      reaper
-    ];
-  };
+  environment.pathsToLink = [
+    "/lib/aspell"
+    "/share/emacs/site-lisp"
+    "/share/fish"
+  ];
+
+  environment.systemPackages = with pkgs; [
+  ];
 
   fonts.fonts = with pkgs; [
     fira-code
     fira-code-symbols
   ];
+
+  home-manager.useUserPackages = true;
+  home-manager.users."${username}" = args:
+    import ./home.nix (args // { inherit pkgs; });
 
   networking.hostName = "nixps";
 
@@ -46,11 +54,9 @@ in
 
     nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
-      "nixpkgs=${_nixpkgs}"
-      "nixpkgs-overlays=/home/${username}/.config/nixpkgs/overlays"
-      "nur=${_nur}"
-      "nurpkgs=/home/${username}/.config/nurpkgs"
-      "setup=/home/${username}/.config/nixpkgs/setup"
+      "nixpkgs=${nixpkgs}"
+      "nixpkgs-overlays=/etc/nixos//overlays"
+      "nur=${nur}"
     ];
 
     trustedUsers = [ "root" username ];
@@ -112,6 +118,7 @@ in
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
+    hashedPassword = lib.fileContents (./. + "/secrets/${username}.hashedPassword");
     group = "users";
     extraGroups = [
       "wheel" "disk" "audio" "video"
@@ -121,10 +128,10 @@ in
     createHome = true;
     uid = 1000;
     home = "/home/${username}";
-    shell = "/run/current-system/sw/bin/fish";
+    shell = "/run/profiles/per-user/${username}/bin/fish";
   };
 
-  # TODO: virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
 
   yubikey-gpg.enable = true;
 }

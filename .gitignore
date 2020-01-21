@@ -1,4 +1,2 @@
 /.envrc
 /result*
-secrets/
-!/machines/sruxps/secrets
