@@ -10,8 +10,8 @@
     enable = true;
     colorTheme = "solarized-dark-256";
     config = {
-      context.work = "jiraurl.any or +work";
       context.other = "jiraurl.none or -work";
+      context.work = "jiraurl.any or +work";
       uda = {
         jiracreatedts = {
           label = "Created At";
