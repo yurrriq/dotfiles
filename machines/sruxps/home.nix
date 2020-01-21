@@ -1,5 +1,11 @@
 { lib, pkgs, ... }:
 
+let
+
+  gpgKey  = "EFD6F1EDC84D2FA935E38570462054AB8B682702";
+
+in
+
 {
 
   imports = [
@@ -12,7 +18,7 @@
     ../../config/fish
     ../../config/fzf.nix
     ../../config/git
-    ../../config/gpg.nix
+    (import ../../config/gpg.nix { inherit gpgKey; })
     ../../config/htop.nix
     ../../config/i3
     ../../config/jq.nix
@@ -23,6 +29,7 @@
     ../../config/taskwarrior
     # TODO: ../../config/vim.nix
   ];
+
 
   home.packages = with pkgs; ([
     aws-iam-authenticator
