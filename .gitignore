@@ -1,5 +1,4 @@
 /.envrc
 /result*
 secrets/
-
-nix/.config/nixpkgs/config.nix
+!/machines/sruxps/secrets

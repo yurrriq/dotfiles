@@ -8,8 +8,8 @@ endif
 stow = stow ${stow_flags}
 
 
-.PHONY: all
-all: .stow-local-ignore
+.PHONY: stow
+stow: .stow-local-ignore
 	@ sudo ${stow} -t ${nixos_dir} .
 	@ sudo ${stow} -t ${nixos_dir} -d machines ${machine}
 	@ mkdir -p ~/.config/cachix
@@ -27,6 +27,6 @@ all: .stow-local-ignore
 	@ ls -A1 | sed '/^\(config\|modules\|overlays\)$$/d' >$@
 
 
-.PHONY: close-secrets dry-build open-secrets switch
-close-secrets dry-build open-secrets switch:
-	@ ${MAKE} -C machines/${machine} $@
+.PHONY: build dry-build switch
+build dry-build switch: stow
+	@ sudo nixos-rebuild $@

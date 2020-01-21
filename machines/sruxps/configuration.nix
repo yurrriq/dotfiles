@@ -13,7 +13,6 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ./secrets
     ../../modules/common.nix
     (import ../../modules/location.nix { inherit lib airportCode; })
     ../../modules/nixos.nix
@@ -93,6 +92,7 @@ in
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
+    hashedPassword = lib.fileContents "./secrets/${username}.hashedPassword";
     group = "users";
     extraGroups = [
       "wheel" "disk" "audio" "video"
