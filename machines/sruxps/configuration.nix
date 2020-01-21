@@ -92,7 +92,7 @@ in
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
-    hashedPassword = lib.fileContents "./secrets/${username}.hashedPassword";
+    hashedPassword = lib.fileContents (./. + "/secrets/${username}.hashedPassword");
     group = "users";
     extraGroups = [
       "wheel" "disk" "audio" "video"

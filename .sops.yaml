@@ -1,10 +1,7 @@
 ---
 creation_rules:
-- path_regex: cachix.dhall
+- path_regex: .*\.enc$
   key_groups:
-  - pgp: &pgp_keys
+  - pgp:
     - EFD6F1EDC84D2FA935E38570462054AB8B682702
     - 2E8D082C324D5F5459CD27E755BF5D49549F04AD
-- path_regex: .*\.hashedPassword
-  key_groups:
-  - pgp: *pgp_keys

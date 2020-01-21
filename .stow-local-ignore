@@ -3,9 +3,9 @@ cachix
 .envrc
 .git
 .gitattributes
-.git-crypt
 .gitignore
 machines
 Makefile
+.sops.yaml
 .stow-local-ignore
 _todo
