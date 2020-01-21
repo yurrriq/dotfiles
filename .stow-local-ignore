@@ -9,4 +9,3 @@ Makefile
 shell.nix
 .sops.yaml
 .stow-local-ignore
-_todo
