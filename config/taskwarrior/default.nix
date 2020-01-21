@@ -12,7 +12,6 @@
     config = {
       context.work = "jiraurl.any or +work";
       context.other = "jiraurl.none or -work";
-      # context = "work";
       uda = {
         jiracreatedts = {
           label = "Created At";

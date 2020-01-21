@@ -2,37 +2,7 @@
 
 {
 
-  xdg.configFile."i3status/config" = {
-    text = ''
-      general {
-          output_format = "i3bar"
-          colors = true
-          interval = 5
-      }
-
-      order += "load"
-
-      load {
-          format = "%1min %5min %15min"
-      }
-
-      order += "battery all"
-
-      battery all {
-          status_chr = "⚡"
-          status_bat = "↯"
-          status_unk = "‽"
-          status_full = ""
-          format = "%status %percentage %remaining"
-      }
-
-      order += "tztime local"
-
-      tztime local {
-          format = "%a %d.%m %H:%M:%S"
-      }
-    '';
-  };
+  xdg.configFile."i3status/config".source = ../i3status/config;
 
   xdg.dataFile."i3/matrix.png".source = ./matrix.png;
 

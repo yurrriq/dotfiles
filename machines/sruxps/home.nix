@@ -5,7 +5,7 @@
   imports = [
     ../../config/bat.nix
     ../../config/browserpass.nix
-    ../../config/bugwarrior.nix
+    ../../config/bugwarrior
     ../../config/direnv.nix
     ../../config/emacs
     ../../config/firefox.nix
@@ -16,7 +16,7 @@
     ../../config/htop.nix
     ../../config/i3
     ../../config/jq.nix
-    ../../config/kitty.nix
+    ../../config/kitty
     ../../config/man.nix
     ../../config/nixpkgs
     ../../config/rebar3.nix
