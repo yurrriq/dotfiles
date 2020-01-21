@@ -1,20 +1,22 @@
 { config, lib, pkgs, ... }:
 
-with import <setup/nix> { local = false; };
+with import ../../modules/nix { local = false; };
 
 let
 
-  inherit (nur-no-pkgs.repos.yurrriq.lib) pinnedNixpkgs;
-
   username = "mohacker";
+
+  airportCode = "MSP";
 
 in
 
 {
   imports = [
-    <setup/common.nix>
-    <setup/darwin.nix>
-    <setup/packages.nix>
+    ../../modules/common.nix
+    ../../modules/darwin.nix
+    (import ../../modules/location.nix { inherit lib airportCode; })
+    ../../modules/packages.nix
+    "${home-manager}/nix-darwin"
   ];
 
   environment = {
@@ -22,6 +24,7 @@ in
     pathsToLink = [
       "/lib/aspell"
       "/share/emacs/site-lisp"
+      "/share/fish"
     ];
     systemPackages = with pkgs; ([
       cabal2nix
@@ -43,7 +46,12 @@ in
     fonts = with pkgs; [
       iosevka
     ];
-   };
+  };
+
+  home-manager.useUserPackages = true;
+  home-manager.users."${username}" = args:
+    import ./home.nix (args // { inherit pkgs; });
+
 
   nix = {
 
@@ -60,13 +68,11 @@ in
     maxJobs = 8;
 
     nixPath = lib.mkForce [
-      "darwin=${_darwin}"
-      "darwin-config=$HOME/.config/nixpkgs/machines/hacktop/configuration.nix"
-      "nixpkgs=${_nixpkgs}"
-      "nixpkgs-overlays=$HOME/.config/nixpkgs/overlays"
-      "nur=${_nur}"
-      "nurpkgs=$HOME/.config/nurpkgs"
-      "setup=$HOME/.config/nixpkgs/setup"
+      "darwin=${darwin}"
+      "darwin-config=/etc/nixos/configuration.nix"
+      "nixpkgs=${nixpkgs}"
+      "nixpkgs-overlays=/etc/nixos/overlays"
+      "nur=${nur}"
     ];
 
     trustedUsers = [ "root" username ];

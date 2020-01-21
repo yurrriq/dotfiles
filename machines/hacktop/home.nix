@@ -10,16 +10,14 @@ in
 
   imports = [
     ../../config/bat.nix
-    ../../config/browserpass.nix
     ../../config/direnv.nix
     ../../config/emacs
-    ../../config/firefox.nix
+    # TODO: ../../config/firefox.nix
     ../../config/fish
     ../../config/fzf.nix
     ../../config/git
     (import ../../config/gpg.nix { inherit gpgKey; })
     ../../config/htop.nix
-    ../../config/i3
     ../../config/jq.nix
     ../../config/kitty
     ../../config/man.nix
