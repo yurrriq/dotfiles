@@ -11,7 +11,7 @@ in
   imports = [
     ../../config/bat.nix
     ../../config/browserpass.nix
-    ../../config/bugwarrior
+    ../../config/bugwarrior.nix
     ../../config/direnv.nix
     ../../config/emacs
     ../../config/firefox.nix

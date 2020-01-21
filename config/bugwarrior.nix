@@ -8,7 +8,7 @@
   ];
 
   imports = [
-    ../taskwarrior
+    ./taskwarrior
   ];
 
   xdg.configFile."bugwarrior/bugwarriorrc".text = ''
