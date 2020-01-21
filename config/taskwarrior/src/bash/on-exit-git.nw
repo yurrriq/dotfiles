@@ -79,11 +79,11 @@ fi
   the name of the argument, and \bash{bar} is the value.%
 }
 
-Ignore the [[api]] version, [[rc]] file, or Taskwarrior [[version]].
+Don't include the [[api]] version, [[rc]] file, or Taskwarrior [[version]].
 <<extraneous information>>=
-# api="${1#api:}"
-# rc="${4#rc:}"
-# version="${6#version:}"
+api="${1#api:}"
+rc="${4#rc:}"
+version="${6#version:}"
 @ %def api
 @ %def rc
 @ %def version

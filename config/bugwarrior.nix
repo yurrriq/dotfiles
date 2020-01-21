@@ -8,7 +8,7 @@
   ];
 
   imports = [
-    ./taskwarrior.nix
+    ./taskwarrior
   ];
 
   xdg.configFile.bugwarrior = {

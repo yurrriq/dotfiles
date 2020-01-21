@@ -20,7 +20,7 @@
     ../../config/man.nix
     ../../config/nixpkgs
     ../../config/rebar3.nix
-    ../../config/taskwarrior.nix
+    ../../config/taskwarrior
     # TODO: ../../config/vim.nix
   ];
 

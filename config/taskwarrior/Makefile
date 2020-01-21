@@ -34,7 +34,7 @@ src/tex/%.pdf: src/tex/%.tex src/tex/preamble.tex src/tex/postamble.tex
 	latexmk $(latexmk_flags) $<
 
 
-.local/share/task/hooks/%.sh: src/bash/%.nw
+%.sh: src/bash/%.nw
 	notangle $< ${cpif} $@
 	@ shellcheck $@
 	@ shfmt -d -i 4 $@
