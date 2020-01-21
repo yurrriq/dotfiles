@@ -2,8 +2,7 @@
 
 {
 
-  xdg.configFile.i3status = {
-    target = "i3status/config";
+  xdg.configFile."i3status/config" = {
     text = ''
       general {
           output_format = "i3bar"
@@ -35,9 +34,7 @@
     '';
   };
 
-  xdg.dataFile = {
-    "i3/matrix.png".source = ./matrix.png;
-  };
+  xdg.dataFile."i3/matrix.png".source = ./matrix.png;
 
   xsession.enable = true;
 
