@@ -12,8 +12,13 @@ stow       := stow ${stow_flags}
 
 .PHONY: .envrc
 .envrc:
-	@ echo 'export profile=${profile}' >$@
+	$(file >$@,${envrc_text})
 	@ direnv allow
+
+define envrc_text
+export machine=${machine}
+eval "$$(lorri direnv)"
+endef
 
 
 .PHONY: .stow-local-ignore
