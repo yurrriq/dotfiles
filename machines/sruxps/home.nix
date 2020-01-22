@@ -45,6 +45,7 @@ in
     openconnect
     pavucontrol
     renderizer
+    zoom-us
   ] ++ (with nodePackages; [
     aws-azure-login
   ]));
