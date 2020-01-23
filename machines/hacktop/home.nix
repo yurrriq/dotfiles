@@ -22,8 +22,10 @@
   ];
 
   accounts.email.accounts.primary = {
+    address = "eric@ericb.me";
     gpg.key = "60F0AEB0D089C2911183CAF9D2D7DFEA3D4FB51C";
     primary = true;
+    realName = "Eric Bailey";
   };
 
   home.packages = with pkgs; [

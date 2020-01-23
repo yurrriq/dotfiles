@@ -25,8 +25,10 @@
   ];
 
   accounts.email.accounts.primary = {
+    address = "e.bailey@sportradar.com";
     gpg.key = "EFD6F1EDC84D2FA935E38570462054AB8B682702";
     primary = true;
+    realName = "Eric Bailey";
   };
 
   home.packages = with pkgs; ([
