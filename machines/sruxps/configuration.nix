@@ -17,7 +17,7 @@ in
     (import ../../modules/location.nix { inherit lib airportCode; })
     ../../modules/nixos.nix
     ../../modules/packages.nix
-    "${home-manager}/nixos"
+    <home-manager/nixos>
   ];
 
   environment.pathsToLink = [
@@ -46,7 +46,8 @@ in
     extraOptions = ''
       builders-use-substitutes = true
     '';
-    nixPath = [
+    nixPath = lib.mkForce [
+      "home-manager=${home-manager}"
       "nixos-config=/etc/nixos/configuration.nix"
       "nixpkgs=${nixpkgs}"
       "nixpkgs-overlays=/etc/nixos/overlays"
