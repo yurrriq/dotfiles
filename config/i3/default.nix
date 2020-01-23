@@ -2,6 +2,10 @@
 
 {
 
+  home.packages = with pkgs; [
+    i3lock
+  ];
+
   xdg.configFile."i3status/config".source = ../i3status/config;
 
   xdg.dataFile."i3/matrix.png".source = ./matrix.png;
