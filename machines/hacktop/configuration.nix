@@ -6,18 +6,18 @@ let
 
   username = "mohacker";
 
-  airportCode = "MSP";
-
 in
 
 {
   imports = [
     ../../modules/common.nix
     ../../modules/darwin.nix
-    (import ../../modules/location.nix { inherit lib airportCode; })
+    ../../modules/location.nix
     ../../modules/packages.nix
     "${home-manager}/nix-darwin"
   ];
+
+  airportCode = "MSP";
 
   environment = {
     darwinConfig = "$HOME/.config/nixpkgs/machines/hacktop/configuration.nix";

@@ -6,21 +6,21 @@ let
 
   username = "yurrriq";
 
-  airportCode = "MSP";
-
 in
 
 {
   imports = [
     ./hardware-configuration.nix
     ../../modules/common.nix
-    (import ../../modules/location.nix { inherit lib airportCode; })
+    ../../modules/location.nix
     ../../modules/nixos.nix
     ../../modules/packages.nix
     "${home-manager}/nixos"
   ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
     yubikey-gpg
   ]);
+
+  airportCode = "MSP";
 
   boot.initrd.luks.devices = {
     root = {

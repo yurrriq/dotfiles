@@ -6,19 +6,19 @@ let
 
   username = "e.bailey";
 
-  airportCode = "MSP";
-
 in
 
 {
   imports = [
     ./hardware-configuration.nix
     ../../modules/common.nix
-    (import ../../modules/location.nix { inherit lib airportCode; })
+    ../../modules/location.nix
     ../../modules/nixos.nix
     ../../modules/packages.nix
     <home-manager/nixos>
   ];
+
+  airportCode = "MSP";
 
   environment.pathsToLink = [
     "/lib/aspell"
