@@ -1,11 +1,5 @@
 { lib, pkgs, ... }:
 
-let
-
-  gpgKey  = "EFD6F1EDC84D2FA935E38570462054AB8B682702";
-
-in
-
 {
 
   imports = [
@@ -18,7 +12,7 @@ in
     ../../config/fish
     ../../config/fzf.nix
     ../../config/git
-    (import ../../config/gpg.nix { inherit gpgKey; })
+    ../../config/gpg.nix
     ../../config/htop.nix
     ../../config/i3
     ../../config/jq.nix
@@ -30,6 +24,10 @@ in
     # TODO: ../../config/vim.nix
   ];
 
+  accounts.email.accounts.primary = {
+    gpg.key = "EFD6F1EDC84D2FA935E38570462054AB8B682702";
+    primary = true;
+  };
 
   home.packages = with pkgs; ([
     aws-iam-authenticator

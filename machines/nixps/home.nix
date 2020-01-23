@@ -1,11 +1,5 @@
 { lib, pkgs, ... }:
 
-let
-
-  gpgKey = "0CBFCE8BC161F36E2E156A526E5EAB98B1F77A17";
-
-in
-
 {
 
   imports = [
@@ -17,7 +11,7 @@ in
     ../../config/fish
     ../../config/fzf.nix
     ../../config/git
-    (import ../../config/gpg.nix { inherit gpgKey; })
+    ../../config/gpg.nix
     ../../config/htop.nix
     ../../config/i3
     ../../config/jq.nix
@@ -28,6 +22,11 @@ in
     # TODO: ../../config/taskwarrior
     # TODO: ../../config/vim.nix
   ];
+
+  accounts.email.accounts.primary = {
+    gpg.key = "0CBFCE8BC161F36E2E156A526E5EAB98B1F77A17";
+    primary = true;
+  };
 
   home.packages = with pkgs; [
     carla
