@@ -100,11 +100,6 @@
         "intel"
       ];
 
-      windowManager = {
-        default = "i3";
-        i3.enable = true;
-      };
-
       xkbOptions = "ctrl:nocaps,compose:ralt";
     };
 
@@ -116,7 +111,6 @@
     package = pkgs.pulseaudioFull;
   };
   sound.enable = true;
-
 
   system.stateVersion = "19.09";
 
