@@ -1,10 +1,21 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
 
   home.packages = with pkgs; [
     tasknc
   ];
+
+  programs.fish.shellAliases = lib.mkIf (config.programs.fish.enable) rec {
+    p = "task ls limit:(math (tput lines)-6)";
+    pp = tbd;
+    t = "task";
+    ta = "task add";
+    tbd = "task burndown.daily";
+    te = "env VISUAL=$EDITOR task edit";
+    tl = "task list";
+    tm = "task mod";
+  };
 
   programs.taskwarrior = {
     enable = true;

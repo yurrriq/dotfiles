@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
 
@@ -71,6 +71,12 @@
       ess
     ]) ++ (with org; [
     ]);
+  };
+
+  programs.fish.shellAliases = lib.mkIf (config.programs.fish.enable) rec {
+    e = "emacsclient -na \"\"";
+    ec = e + " -c";
+    et = "emacsclient -nw -a \"\"";
   };
 
   services.emacs.enable = ! pkgs.stdenv.isDarwin;
