@@ -11,4 +11,11 @@
     };
   };
 
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 600;
+    enableSshSupport = true;
+    maxCacheTtl = 3600;
+  };
+
 }
