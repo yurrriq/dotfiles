@@ -23,7 +23,7 @@ endef
 
 .PHONY: .stow-local-ignore
 .stow-local-ignore:
-	@ ls -A1 | sed '/^\(config\|modules\|overlays\)$$/d' >$@
+	@ ls -A1 | sed '/^\(config\|modules\|nix\|overlays\)$$/d' >$@
 
 
 %: %.enc
@@ -51,3 +51,15 @@ secrets: $(patsubst %.enc,%,$(wildcard machines/${machine}/secrets/*.enc))
 stow: .stow-local-ignore cachix secrets
 	@ sudo ${stow} -t ${nixos_dir} .
 	@ sudo ${stow} -t ${nixos_dir} -d machines ${machine}
+
+
+.PHONY: update
+update: package ?= nixpkgs
+update: sources := nix/sources.json
+update: rev = $(shell jq -r '.["${package}"].rev[:8]' ${sources})
+update: COMMIT_MSG_FILE = .git/COMMIT_EDITMSG
+update:
+	@ niv update ${package}
+	@ git add ${sources}
+	@ jq '"[nix/${package}]: ${rev} -> \(.["${package}"].rev[:8])"' \
+	${sources} | xargs git commit -m

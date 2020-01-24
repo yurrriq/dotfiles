@@ -1,12 +1,9 @@
 { config, lib, ... }:
 
 let
-  # mkLocation = locations:
-  #   assert (lib.assertMsg (lib.hasAttr airportCode locations)
-  #     "Unknown location: ${airportCode}");
-  #   lib.getAttr airportCode locations;
 
   airportCode = config.airportCode;
+
 in
 
 {

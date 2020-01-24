@@ -16,7 +16,7 @@ in
     ../../modules/nixos.nix
     ../../modules/packages.nix
     "${home-manager}/nixos"
-  ] ++ (with (import <nur> {}).repos.yurrriq.modules; [
+  ] ++ (with (import <nurpkgs> {}).modules; [
     yubikey-gpg
   ]);
 
@@ -66,7 +66,7 @@ in
           (filter (n: match ".*\\.nix" n != null ||
                       pathExists (path + ("/" + n + "/default.nix")))
                   (attrNames (readDir path)))
-    ++ (with nur-no-pkgs.repos.yurrriq.overlays; [
+    ++ (with (import <nurpkgs> {}).overlays; [
       nur
       engraving
       git

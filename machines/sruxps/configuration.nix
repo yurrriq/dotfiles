@@ -1,7 +1,5 @@
 { config, lib, pkgs, ... }:
 
-with import ../../modules/nix { local = false; };
-
 let
 
   username = "e.bailey";
@@ -9,8 +7,10 @@ let
 in
 
 {
+
   imports = [
     ./hardware-configuration.nix
+    ../../nix
     ../../modules/common.nix
     ../../modules/location.nix
     ../../modules/nixos.nix
@@ -19,6 +19,9 @@ in
   ];
 
   airportCode = "MSP";
+
+  # nurpkgs = fetchTarball "https://github.com/yurrriq/nur-packages/tarball/6490d8f536fc7c2c1947a40aa875a9764cc867ee";
+  # nurpkgs = "/home/${username}/src/github.com/yurrriq/nur-packages";
 
   environment.pathsToLink = [
     "/lib/aspell"
@@ -46,12 +49,9 @@ in
     extraOptions = ''
       builders-use-substitutes = true
     '';
-    nixPath = lib.mkForce [
-      "home-manager=${home-manager}"
+    nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
-      "nixpkgs=${nixpkgs}"
       "nixpkgs-overlays=/etc/nixos/overlays"
-      "nur=${nur}"
     ];
     trustedUsers = [ "root" username ];
   };
@@ -62,7 +62,7 @@ in
           (filter (n: match ".*\\.nix" n != null ||
                       pathExists (path + ("/" + n + "/default.nix")))
                   (attrNames (readDir path)))
-    ++ (with nur-no-pkgs.repos.yurrriq.overlays; [
+    ++ (with (import <nurpkgs> {}).overlays; [
       nur
       git
       node

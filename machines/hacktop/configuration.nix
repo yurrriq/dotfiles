@@ -86,7 +86,7 @@ in
           (filter (n: match ".*\\.nix" n != null ||
                       pathExists (path + ("/" + n + "/default.nix")))
                   (attrNames (readDir path))) ++
-    (with nur-no-pkgs.repos.yurrriq.overlays; [
+    (with (import <nurpkgs> {}).overlays; [
       nur
       # engraving
       git

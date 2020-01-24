@@ -2,10 +2,10 @@
 
 {
 
-  imports = (with (import <nur> {}).repos.yurrriq.modules; [
+  imports = with (import <nurpkgs> {}).modules; [
     pass
     tomb
-  ]);
+  ];
 
   boot = {
     cleanTmpDir = true;
@@ -38,8 +38,10 @@
   programs = {
     pass = {
       enable = true;
+      genphrase = true;
       git-helper = true;
       otp = true;
+      update = true;
     };
     tomb = {
       enable = true;
