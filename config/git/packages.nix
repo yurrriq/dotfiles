@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; ([
+    diff-pdf
     git
     git-lfs
     kdiff3
