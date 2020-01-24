@@ -3,6 +3,7 @@
 {
 
   imports = [
+    ../../config/bash.nix
     ../../config/bat.nix
     ../../config/browserpass.nix
     ../../config/bugwarrior.nix
