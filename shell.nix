@@ -1,4 +1,4 @@
-{ sources ? import ./modules/nix {}
+{ sources ? import ./nix/sources.nix {}
 , pkgs ? import sources.nixpkgs {}
 }:
 
@@ -7,6 +7,7 @@ pkgs.mkShell {
     git
     gnumake
     gnupg
+    mkpasswd
     sops
     stow
   ];

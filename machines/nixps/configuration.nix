@@ -1,7 +1,5 @@
 { config, lib, pkgs, ... }:
 
-with import ../../modules/nix { local = false; };
-
 let
 
   username = "yurrriq";
@@ -11,13 +9,14 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ../../nix
     ../../modules/common.nix
     ../../modules/location.nix
     ../../modules/nixos.nix
     ../../modules/packages.nix
-    "${home-manager}/nixos"
+    <home-manager/nixos>
   ] ++ (with (import <nurpkgs> {}).modules; [
-    yubikey-gpg
+    # yubikey-gpg
   ]);
 
   airportCode = "MSP";
@@ -51,9 +50,7 @@ in
 
     nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
-      "nixpkgs=${nixpkgs}"
-      "nixpkgs-overlays=/etc/nixos//overlays"
-      "nur=${nur}"
+      "nixpkgs-overlays=/etc/nixos/overlays"
     ];
 
     trustedUsers = [ "root" username ];
@@ -125,10 +122,10 @@ in
     createHome = true;
     uid = 1000;
     home = "/home/${username}";
-    shell = "/run/profiles/per-user/${username}/bin/fish";
+    shell = "/etc/profiles/per-user/${username}/bin/fish";
   };
 
   virtualisation.docker.enable = true;
 
-  yubikey-gpg.enable = true;
+  # yubikey-gpg.enable = true;
 }

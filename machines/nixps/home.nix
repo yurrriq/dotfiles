@@ -25,7 +25,8 @@
 
   accounts.email.accounts.primary = {
     address = "eric@ericb.me";
-    gpg.key = "0CBFCE8BC161F36E2E156A526E5EAB98B1F77A17";
+    gpg.key = "F88372B24A806FF23BCB3A4E2DDDF8606958B3F9";
+    # gpg.key = "0CBFCE8BC161F36E2E156A526E5EAB98B1F77A17";
     primary = true;
     realName = "Eric Bailey";
   };
