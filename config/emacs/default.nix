@@ -6,9 +6,9 @@
     file.".emacs.d/init.el".source = ./init.el;
 
     sessionVariables = rec {
-      EDITOR = "emacsclient -nw -a \"\"";
+      EDITOR = ''emacsclient -nw -a \"\"'';
       GIT_EDITOR = EDITOR;
-      VISUAL = "emacsclient -na \"\" -c";
+      VISUAL = ''emacsclient -cna \"\"'';
     };
   };
 
