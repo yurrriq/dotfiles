@@ -1,27 +1,54 @@
 general {
-    output_format = "i3bar"
     colors = true
     interval = 5
+    output_format = "i3bar"
+}
+
+order += "path_exists VPN"
+
+path_exists VPN {
+    format = "🔒"
+    format_down = ""
+    path = "/proc/sys/net/ipv4/conf/tun0"
+}
+
+order += "wireless wlp1s0"
+
+wireless wlp1s0 {
+    format_up = "%essid"
 }
 
 order += "load"
 
 load {
     format = "%1min %5min %15min"
+    format_above_threshold = "🔥 %1min %5min %15min 🔥"
+    max_threshold = 9
 }
 
 order += "battery all"
 
 battery all {
-    status_chr = "⚡"
-    status_bat = "↯"
-    status_unk = "‽"
-    status_full = ""
     format = "%status %percentage %remaining"
+    low_threshold = 10
+    status_bat = "🔋"
+    status_chr = "⚡"
+    status_full = "🔌"
+    status_unk = "😖"
+    threshold_type = "time"
+}
+
+order += "tztime trondheim"
+
+tztime trondheim {
+    format = "🇳🇴 %a %H:%M"
+    hide_if_equals_localtime = true
+    locale = "nb_NO.UTF-8"
+    timezone = "Europe/Oslo"
 }
 
 order += "tztime local"
 
 tztime local {
-    format = "%a %d.%m %H:%M:%S"
+    format = "📍 %a %d.%m %H:%M:%S"
 }
