@@ -7,9 +7,9 @@
   ];
 
   programs.fish.shellAliases = lib.mkIf (config.programs.fish.enable) rec {
-    p = "task ls limit:(math (tput lines)-6)";
+    p = "task ls limit:page";
     pp = tbd;
-    t = "task";
+    t = "task limit:page";
     ta = "task add";
     tbd = "task burndown.daily";
     te = "env VISUAL=$EDITOR task edit";
