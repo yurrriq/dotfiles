@@ -124,3 +124,10 @@ if string match -r '.*k8s-\d+$' "$buildInputs"
 else
     set fish_greeting
 end
+
+
+command -sq task; and command -sq jq; and function tj \
+  -d 'Open the Jira ticket associated with a Taskwarrior task'
+  test (count $argv) -ne 1; and return
+  open (task $argv[1] export | jq -r '.[0].jiraurl')
+end
