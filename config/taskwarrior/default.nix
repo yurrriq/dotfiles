@@ -2,10 +2,6 @@
 
 {
 
-  home.packages = with pkgs; [
-    tasknc
-  ];
-
   programs.fish.shellAliases = lib.mkIf (config.programs.fish.enable) rec {
     p = "task ls limit:page";
     pp = tbd;
