@@ -1,5 +1,14 @@
 machine    ?= sruxps
 nixos_dir  ?= /etc/nixos
+cpif   ?= | cpif
+
+
+ifneq (,$(findstring B,$(MAKEFLAGS)))
+latexmk_flags = -gg
+endif
+latexmk_flags += -cd -shell-escape -xelatex
+
+
 stow_flags := -R
 ifneq (,$(findstring trace,$(MAKEFLAGS)))
 stow_flags += -v
@@ -7,7 +16,27 @@ endif
 stow       := stow ${stow_flags}
 
 
-.DEFAULT_GOAL := switch
+.PHONY: all
+all: $(patsubst src/%.nw,%.nix,$(shell find src -name '*.nw')) docs/dotfiles.pdf
+
+
+.PHONY: install
+install: all
+	@ cp -vr docs ${PREFIX}
+
+
+docs/%.pdf: export TZ='America/Chicago'
+docs/%.pdf: src/%.tex src/preamble.tex $(patsubst src/%.nw,src/%.tex,$(shell find src -name '*.nw'))
+	@ mkdir -p $(@D)
+	@ latexmk $(latexmk_flags) -outdir=../$(@D) $<
+
+
+src/%.tex: src/%.nw
+	noweave -n -index $^ ${cpif} $@
+
+
+machines/%/hardware-configuration.nix: src/machines/%/hardware-configuration.nw
+	notangle -R$@ $< ${cpif} $@
 
 
 .PHONY: .envrc

@@ -1,0 +1,40 @@
+\documentclass[a4paper,noglossary,titlepage,xelatex]{tufte-book}
+\input{preamble}
+\title{dotfiles}
+\date{%
+  January 30, 2020
+  \thanks{Last updated \today}
+}
+\setcounter{tocdepth}{2}
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+\mainmatter
+
+\newpage
+\chapter{Hardware configuration}
+\input{machines/sruxps/hardware-configuration}
+
+\backmatter
+\newpage
+%% \chapter*{Chunks}
+\begin{multicols}{2}[\chapter*{Chunks}]
+  \nowebchunks
+\end{multicols}
+
+%% \chapter*{Index}
+%% \begin{multicols}{2}[\chapter*{Index}]
+%%   \nowebindex
+%% \end{multicols}
+
+%% \nocite{*}
+\bibliographystyle{plainnat}
+\bibliography{dotfiles}
+
+%% \phantomsection
+%% \printglossaries
+
+\newpage
+\listoftodos[To-Do]
+\end{document}

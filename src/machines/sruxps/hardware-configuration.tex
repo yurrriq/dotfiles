@@ -1,0 +1,123 @@
+\nwfilename{src/machines/sruxps/hardware-configuration.nw}\nwbegindocs{0}\section{sruxps}% ===> this file was generated automatically by noweave --- better not edit it
+
+The hardware configuration module is a function that takes, at least,
+\nix{config}, \nix{lib}, and \nix{pkgs} as arguments.
+
+\nwenddocs{}\nwbegincode{1}\sublabel{NW246TuH-2fwA4h-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW246TuH-2fwA4h-1}}}\moddef{machines/sruxps/hardware-configuration.nix~{\nwtagstyle{}\subpageref{NW246TuH-2fwA4h-1}}}\endmoddef\nwstartdeflinemarkup\nwenddeflinemarkup
+\{ config, lib, pkgs, ... \}:
+
+\{
+
+  \LA{}sruxps: imports~{\nwtagstyle{}\subpageref{NW246TuH-qAtuM-1}}\RA{}
+
+  \LA{}sruxps: kernel modules~{\nwtagstyle{}\subpageref{NW246TuH-3Z1Ezw-1}}\RA{}
+
+  \LA{}sruxps: luks setup~{\nwtagstyle{}\subpageref{NW246TuH-4d7fjb-1}}\RA{}
+
+  \LA{}sruxps: file system~{\nwtagstyle{}\subpageref{NW246TuH-33GdWg-1}}\RA{}
+
+  \LA{}sruxps: nix~{\nwtagstyle{}\subpageref{NW246TuH-33mfHt-1}}\RA{}
+
+  \LA{}sruxps: power management~{\nwtagstyle{}\subpageref{NW246TuH-G7aU2-1}}\RA{}
+
+\}
+\nwnotused{machines/sruxps/hardware-configuration.nix}\nwendcode{}\nwbegindocs{2}\nwdocspar
+
+\subsection{Imports}
+
+\todor{Describe this import}
+
+\nwenddocs{}\nwbegincode{3}\sublabel{NW246TuH-qAtuM-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW246TuH-qAtuM-1}}}\moddef{sruxps: imports~{\nwtagstyle{}\subpageref{NW246TuH-qAtuM-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW246TuH-2fwA4h-1}}\nwenddeflinemarkup
+imports = [
+  <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+];
+\nwused{\\{NW246TuH-2fwA4h-1}}\nwendcode{}\nwbegindocs{4}\nwdocspar
+
+\subsection{Kernel modules}
+
+Configure the kernel modules.
+\todoo{Sidenote link to docs}
+
+\nwenddocs{}\nwbegincode{5}\sublabel{NW246TuH-3Z1Ezw-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW246TuH-3Z1Ezw-1}}}\moddef{sruxps: kernel modules~{\nwtagstyle{}\subpageref{NW246TuH-3Z1Ezw-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW246TuH-2fwA4h-1}}\nwenddeflinemarkup
+boot.initrd.availableKernelModules = [
+  "nvme"
+  "rtsx_pci_sdmmc"
+  "sd_mod"
+  "usb_storage"
+  "xhci_pci"
+];
+
+boot.kernelModules = [ "kvm-intel" ];
+\nwused{\\{NW246TuH-2fwA4h-1}}\nwendcode{}\nwbegindocs{6}\nwdocspar
+
+\subsection{luks}
+
+\todor{Describe luks setup}
+
+\nwenddocs{}\nwbegincode{7}\sublabel{NW246TuH-4d7fjb-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW246TuH-4d7fjb-1}}}\moddef{sruxps: luks setup~{\nwtagstyle{}\subpageref{NW246TuH-4d7fjb-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW246TuH-2fwA4h-1}}\nwenddeflinemarkup
+boot.initrd.luks.devices = \{
+  cryptkey = \{
+    device = "/dev/disk/by-uuid/603b64c6-8544-4b43-9b6a-7d8a08091514";
+  \};
+
+  cryptroot = \{
+    device = "/dev/disk/by-uuid/a81783fe-31ec-4762-a845-4b5be1900e61";
+    keyFile = "/dev/mapper/cryptkey";
+  \};
+
+  cryptswap = \{
+    device = "/dev/disk/by-uuid/565c0358-110e-4279-ba59-619cb2cc1ebf";
+    keyFile = "/dev/mapper/cryptkey";
+  \};
+\};
+\nwused{\\{NW246TuH-2fwA4h-1}}\nwendcode{}\nwbegindocs{8}\nwdocspar
+
+\subsection{File system}
+
+\todor{Describe file system setup}
+
+\nwenddocs{}\nwbegincode{9}\sublabel{NW246TuH-33GdWg-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW246TuH-33GdWg-1}}}\moddef{sruxps: file system~{\nwtagstyle{}\subpageref{NW246TuH-33GdWg-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW246TuH-2fwA4h-1}}\nwenddeflinemarkup
+fileSystems = \{
+  "/boot" = \{
+    device = "/dev/disk/by-uuid/3898-907E";
+    fsType = "vfat";
+  \};
+
+  "/" = \{
+    device = "/dev/disk/by-uuid/3e6e5ef8-7c9d-4759-94bd-44ac093add8a";
+    fsType = "ext4";
+  \};
+\};
+
+swapDevices = [
+  \{ device = "/dev/disk/by-uuid/cae2164d-72b5-4f60-b369-e845606d03be"; \}
+];
+\nwused{\\{NW246TuH-2fwA4h-1}}\nwendcode{}\nwbegindocs{10}\nwdocspar
+
+\subsection{Nix}
+
+Set the default \nix{maxJobs} to \nix{8}, the number of cores.
+
+\todoo{Link to maxJobs documentation}
+
+\nwenddocs{}\nwbegincode{11}\sublabel{NW246TuH-33mfHt-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW246TuH-33mfHt-1}}}\moddef{sruxps: nix~{\nwtagstyle{}\subpageref{NW246TuH-33mfHt-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW246TuH-2fwA4h-1}}\nwenddeflinemarkup
+nix.maxJobs = lib.mkDefault 8;
+\nwused{\\{NW246TuH-2fwA4h-1}}\nwendcode{}\nwbegindocs{12}\nwdocspar
+
+\subsection{Power management}
+
+\todor{Describe this option}
+
+\nwenddocs{}\nwbegincode{13}\sublabel{NW246TuH-G7aU2-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW246TuH-G7aU2-1}}}\moddef{sruxps: power management~{\nwtagstyle{}\subpageref{NW246TuH-G7aU2-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW246TuH-2fwA4h-1}}\nwenddeflinemarkup
+powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+\nwused{\\{NW246TuH-2fwA4h-1}}\nwendcode{}\nwbegindocs{14}\nwdocspar
+\nwenddocs{}
+
+\nwixlogsorted{c}{{machines/sruxps/hardware-configuration.nix}{NW246TuH-2fwA4h-1}{\nwixd{NW246TuH-2fwA4h-1}}}%
+\nwixlogsorted{c}{{sruxps: file system}{NW246TuH-33GdWg-1}{\nwixu{NW246TuH-2fwA4h-1}\nwixd{NW246TuH-33GdWg-1}}}%
+\nwixlogsorted{c}{{sruxps: imports}{NW246TuH-qAtuM-1}{\nwixu{NW246TuH-2fwA4h-1}\nwixd{NW246TuH-qAtuM-1}}}%
+\nwixlogsorted{c}{{sruxps: kernel modules}{NW246TuH-3Z1Ezw-1}{\nwixu{NW246TuH-2fwA4h-1}\nwixd{NW246TuH-3Z1Ezw-1}}}%
+\nwixlogsorted{c}{{sruxps: luks setup}{NW246TuH-4d7fjb-1}{\nwixu{NW246TuH-2fwA4h-1}\nwixd{NW246TuH-4d7fjb-1}}}%
+\nwixlogsorted{c}{{sruxps: nix}{NW246TuH-33mfHt-1}{\nwixu{NW246TuH-2fwA4h-1}\nwixd{NW246TuH-33mfHt-1}}}%
+\nwixlogsorted{c}{{sruxps: power management}{NW246TuH-G7aU2-1}{\nwixu{NW246TuH-2fwA4h-1}\nwixd{NW246TuH-G7aU2-1}}}%
+

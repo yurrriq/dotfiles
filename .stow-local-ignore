@@ -1,11 +1,16 @@
 cachix
+default.nix
+docs
 .editorconfig
 .envrc
 .git
 .gitattributes
 .gitignore
+latexmkrc
 machines
 Makefile
 shell.nix
 .sops.yaml
+src
 .stow-local-ignore
+VERSION
