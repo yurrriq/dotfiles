@@ -5,6 +5,7 @@
     diff-pdf
     git
     git-lfs
+    github-cli
     kdiff3
     nix-prefetch-git
     nix-prefetch-github
