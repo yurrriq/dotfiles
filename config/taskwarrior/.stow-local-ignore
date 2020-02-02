@@ -1,7 +1,0 @@
-(?:default|shell)\.nix
-\.envrc
-docs
-latexmkrc
-src
-Makefile
-VERSION

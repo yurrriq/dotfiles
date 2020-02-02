@@ -16,8 +16,20 @@ endif
 stow       := stow ${stow_flags}
 
 
+NIX_SRCS := \
+machines/sruxps/hardware-configuration.nix \
+config/taskwarrior/default.nix
+
+SH_SRCS := \
+config/taskwarrior/on-exit-git.sh
+
+NW_SRCS := \
+$(patsubst %.nix,src/%.nw,${NIX_SRCS})
+$(patsubst %.sh,src/%.nw,${NISH_SRCS})
+
+
 .PHONY: all
-all: $(patsubst src/%.nw,%.nix,$(shell find src -name '*.nw')) docs/dotfiles.pdf
+all: ${NIX_SRCS} ${SH_SRC} docs/dotfiles.pdf
 
 
 .PHONY: install
@@ -35,8 +47,14 @@ src/%.tex: src/%.nw
 	noweave -n -index $^ ${cpif} $@
 
 
-machines/%/hardware-configuration.nix: src/machines/%/hardware-configuration.nw
-	notangle -R$@ $< ${cpif} $@
+# TODO: be lazier/smarter about these rules
+
+${NIX_SRCS}:
+	notangle -R$@ src/${@:.nix=.nw} ${cpif} $@
+
+${SH_SRCS}:
+	notangle -R$@ src/${@:.sh=.nw} ${cpif} $@
+	chmod a+x $@
 
 
 .PHONY: .envrc

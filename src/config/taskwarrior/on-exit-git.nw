@@ -1,61 +1,16 @@
-\documentclass[a4paper,nobib]{tufte-handout}
+\subsection{on-exit Git hook}
 
-\input{preamble}
-
-\title{\sc Taskwarrior: Git Integration}
-
-\makeatletter
-\hypersetup{
-  pdffitwindow=true,
-  pdfstartview={FitH},
-  pdftitle={Taskwarrior: Git Integration},
-  pdfsubject={Git integration for Taskwarrior via on-exit hook},
-  pdfkeywords={Taskwarrior, git, bash},
-  pdfinfo={
-    CreationDate={D:20190727081600},
-    ModificationDate={D:\pdfdate},
-  },
-  colorlinks=true,
-  linkcolor=ErlangRed,
-  urlcolor=ErlangRed
-}
-\makeatother
-
-\date{%
-  July 27, 2019
-  \thanks{Last updated \today}
-}
-
-\begin{document}
-\maketitle
-@
-
-%% \listoftodos[To-Do]
-
-\vfill
-\begin{abstract}
-  Taskwarrior's hook
-  system\thanks{\url{https://taskwarrior.org/docs/hooks.html}} provides the
-  means to run other programs at certain points in its execution, potentially
-  affecting processing. What follows is an \bash{on-exit} hook, which is
-  triggered after all processing, but before output is displayed.
-\end{abstract}
-
-\vfill
-\section{\sc Shebang}
-
-First, use a fairly portable Bash shebang, and be safe.\footnote{%
+\newthought{First}, use a fairly portable Bash shebang, and be safe.\footnote{%
   \bash{-e}xit immediately upon failure, treat \bash{-u}nset variables as an
   error, disable \bash{-f}ile globbing, and fail if any part of a pipeline fails
   (\bash{-o pipefail}).%
 }
-<<*>>=
+<<config/taskwarrior/on-exit-git.sh>>=
 #! /usr/bin/env bash
 
 set -eufo pipefail
 @
 
-\vfill
 Echo commands if running [[<<in debug mode>>]].
 \begin{marginfigure}[2em]
   Run [[<<in debug mode>>]] if the environment variable \bash{DEBUG} is
@@ -64,22 +19,19 @@ Echo commands if running [[<<in debug mode>>]].
 [ -n "${DEBUG:-}" ]
 @
 \end{marginfigure}
-<<*>>=
+<<config/taskwarrior/on-exit-git.sh>>=
 if <<in debug mode>>; then
     set -x
 fi
 @
 
 
-\vfill
-\section{\sc Argument parsing}
-
-\marginnote{%
+\newthought{Don't include} the [[api]] version, [[rc]] file,
+or Taskwarrior [[version]].\marginnote{%
   N.B. The positional arguments are formatted as \bash{foo:bar}, where \bash{foo} is
   the name of the argument, and \bash{bar} is the value.%
 }
 
-Don't include the [[api]] version, [[rc]] file, or Taskwarrior [[version]].
 <<extraneous information>>=
 api="${1#api:}"
 rc="${4#rc:}"
@@ -88,10 +40,9 @@ version="${6#version:}"
 @ %def rc
 @ %def version
 
-\vfill
 Parse and store the values of the arguments, [[args]], [[command]], and [[data]]
 directory.
-<<*>>=
+<<config/taskwarrior/on-exit-git.sh>>=
 args="${2#args:}"
 command="${3#command:}"
 data="${5#data:}"
@@ -101,12 +52,8 @@ data="${5#data:}"
 @ %def data
 
 
-\section{\sc Git integration}
-
-%% \newthought{
-Throughout this script, run [[<<git>>]] as if it were started in the Taskwarrior
-[[data]] directory.
-%% }
+\newthought{Throughout this script}, run [[<<git>>]] as if it were started in
+the Taskwarrior [[data]] directory.
 \begin{marginfigure}[-1.5em]
 <<git>>=
 git -C "$data"
@@ -123,7 +70,7 @@ informative message if running in debug mode.
 <<git>> diff --quiet
 @
 \end{marginfigure}
-<<*>>=
+<<config/taskwarrior/on-exit-git.sh>>=
 if <<there are no changes>>; then
     if <<in debug mode>>; then
         echo 'No changes to commit'
@@ -131,38 +78,29 @@ if <<there are no changes>>; then
     exit 0
 @
 
-\vfill
 If present, stage the changes or die trying.
-<<*>>=
+<<config/taskwarrior/on-exit-git.sh>>=
 elif ! <<git>> add -A; then
     echo 'Failed to add files to the index'
     exit 100
 @
 
-\vfill
 Try to [[<<commit the changes>>]], or else.
-<<*>>=
+<<config/taskwarrior/on-exit-git.sh>>=
 elif ! <<commit the changes>>; then
     echo 'Failed to record changes to the repository'
     exit 101
 @
 
-\vfill
 Quietly store the current contents of the index in a new commit along with a log message describing the changes.
 <<commit the changes>>=
 <<git>> commit -qm "$command: ${args#task $command}"
 @
 %% \todoir{Teach \bash{finduses} how to parse parameter expansions.}
 
-\vfill
 If running [[<<in debug mode>>]], print a brief summary of the commit.
-<<*>>=
+<<config/taskwarrior/on-exit-git.sh>>=
 elif <<in debug mode>>; then
     <<git>> log --oneline -1
 fi
 @
-
-\vfill
-\input{postamble}
-
-\end{document}

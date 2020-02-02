@@ -1,0 +1,93 @@
+\subsection{Config}
+
+<<config/taskwarrior/default.nix>>=
+{ config, lib, pkgs, ... }:
+
+{
+
+  <<Define short Taskwarrior shell aliases>>
+
+  <<Configure Taskwarrior>>
+
+  <<Configure the on-exit Git Hook>>
+
+}
+@
+
+
+\newthought{Define} short Taskwarrior shell aliases.
+
+<<Define short Taskwarrior shell aliases>>=
+programs.fish.shellAliases = lib.mkIf (config.programs.fish.enable) rec {
+  p = "task ls limit:page";
+  pp = tbd;
+  t = "task limit:page";
+  ta = "task add";
+  tbd = "task burndown.daily";
+  te = "env VISUAL=$EDITOR task edit";
+  tl = "task list";
+  tm = "task mod";
+};
+@
+
+
+\newthought{Configure Taswarrior}, using home-manager.\todoo{link}
+
+<<Configure Taskwarrior>>=
+programs.taskwarrior = {
+  enable = true;
+  colorTheme = "solarized-dark-256";
+  config = {
+    context.other = "jiraurl.none or -work";
+    context.work = "jiraurl.any or +work";
+    uda = {
+      jiracreatedts = {
+        label = "Created At";
+        type = "date";
+      };
+      jiradescription = {
+        label = "Jira Description";
+        type = "string";
+      };
+      jiraestimate = {
+        label = "Estimate";
+        type = "numeric";
+      };
+      jirafixversion = {
+        label = "Fix Version";
+        type = "string";
+      };
+      jiraid = {
+        label = "Jira Issue ID";
+        type = "string";
+      };
+      jiraissuetype = {
+        label = "Issue Type";
+        type = "string";
+      };
+      jirastatus = {
+        label = "Jira Status";
+        type = "string";
+      };
+      jirasummary = {
+        label = "Jira Summary";
+        type = "string";
+      };
+      jiraurl = {
+        label = "Jira URL";
+        type = "string";
+      };
+    };
+  };
+};
+@
+
+
+\newthought{Link} the \bash{on-exit} Git hook.\todoo{ref section}
+
+<<Configure the on-exit Git Hook>>=
+xdg.dataFile."task/hooks/on-exit-git.sh" = {
+  executable = true;
+  source = ./on-exit-git.sh;
+};
+@

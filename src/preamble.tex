@@ -26,7 +26,10 @@
 
 \usepackage[outputdir=../docs]{minted}
 \setminted{autogobble,baselinestretch=1,fontsize=\small}
+\newmintedfile[inputbash]{bash}{linenos,fontsize=\small}
+\newmintinline[bash]{bash}{}
 \newmintinline[nix]{nix}{}
+
 
 %% HACK: https://tex.stackexchange.com/a/200725/45537
 \usepackage{ifxetex}
