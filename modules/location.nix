@@ -10,7 +10,7 @@ in
 
   options.airportCode = lib.mkOption {
     default = "MSP";
-    type = lib.types.enum [ "ATL" /* "LHR" */ "LJU" "MSP" /* "TRD" */ ];
+    type = lib.types.enum [ "ATL" /* "LHR" */ "LJU" "MSP" "TRD" ];
   };
 
   config = lib.mkMerge [
@@ -38,9 +38,13 @@ in
       };
       time.timeZone = "Europe/Ljubljana";
     })
-    # (lib.mkIf (airportCode == "TRD") {
-    #   time.timeZone = "Europe/Oslo";
-    # })
+    (lib.mkIf (airportCode == "TRD") {
+      location = {
+        latitude = 63.43;
+        longitude = 10.40;
+      };
+      time.timeZone = "Europe/Oslo";
+    })
   ];
 
 }

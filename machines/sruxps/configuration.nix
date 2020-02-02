@@ -18,7 +18,7 @@ in
     <home-manager/nixos>
   ];
 
-  airportCode = "MSP";
+  airportCode = "TRD";
 
   # nurpkgs = fetchTarball "https://github.com/yurrriq/nur-packages/tarball/6490d8f536fc7c2c1947a40aa875a9764cc867ee";
   # nurpkgs = "/home/${username}/src/github.com/yurrriq/nur-packages";
