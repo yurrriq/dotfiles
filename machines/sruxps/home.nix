@@ -39,6 +39,7 @@
     # dhall-json
     # docker-compose
     ghc
+    iw
     jdk
     naal
     networkmanager-openconnect
@@ -47,6 +48,7 @@
     pavucontrol
     renderizer
     scc
+    wirelesstools
     zoom-us
   ] ++ (with nodePackages; [
     aws-azure-login
