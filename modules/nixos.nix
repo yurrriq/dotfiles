@@ -62,7 +62,7 @@
     };
 
     unclutter = {
-      enable = true;
+      enable = false; # FIXME
       extraOptions = [ "exclude-root" "ignore-scrolling" ];
       # FIXME
       threeshold = 1;
