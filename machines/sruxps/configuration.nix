@@ -9,6 +9,7 @@ in
 {
 
   imports = [
+    <nixos-hardware/dell/xps/13-9380>
     ./hardware-configuration.nix
     ../../nix
     ../../modules/common.nix
