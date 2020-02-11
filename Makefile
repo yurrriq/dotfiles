@@ -17,6 +17,7 @@ stow       := stow ${stow_flags}
 
 
 NIX_SRCS := \
+config/bash.nix \
 config/taskwarrior/default.nix
 
 SH_SRCS := \
