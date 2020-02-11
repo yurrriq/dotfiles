@@ -1,6 +1,6 @@
 \nwfilename{src/machines/sruxps/hardware-configuration.nw}\nwbegindocs{0}\section{sruxps}% ===> this file was generated automatically by noweave --- better not edit it
 
-The hardware configuration module is a function that takes, at least,
+The hardware configuration \gls{module} is a function that takes, at least,
 \nix{config}, \nix{lib}, and \nix{pkgs} as arguments.
 
 \nwenddocs{}\nwbegincode{1}\sublabel{NW246TuH-2fwA4h-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW246TuH-2fwA4h-1}}}\moddef{machines/sruxps/hardware-configuration.nix~{\nwtagstyle{}\subpageref{NW246TuH-2fwA4h-1}}}\endmoddef\nwstartdeflinemarkup\nwenddeflinemarkup
@@ -96,9 +96,9 @@ swapDevices = [
 
 \subsection{Nix}
 
-Set the default \nix{maxJobs} to \nix{8}, the number of cores.
-
-\todoo{Link to maxJobs documentation}
+Set the default
+\hrefootnote{https://nixos.org/nixos/manual/options.html\#opt-nix.maxJobs}{\nix{maxJobs}}
+to \nix{8}, the number of cores in \hrefootnote{https://www.dell.com/en-us/shop/dell-laptops/xps-13-laptop/spd/xps-13-9380-laptop}{this machine}.
 
 \nwenddocs{}\nwbegincode{11}\sublabel{NW246TuH-33mfHt-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW246TuH-33mfHt-1}}}\moddef{sruxps: nix~{\nwtagstyle{}\subpageref{NW246TuH-33mfHt-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW246TuH-2fwA4h-1}}\nwenddeflinemarkup
 nix.maxJobs = lib.mkDefault 8;
@@ -106,7 +106,11 @@ nix.maxJobs = lib.mkDefault 8;
 
 \subsection{Power management}
 
-\todor{Describe this option}
+Use the
+\hrefootnote{https://nixos.org/nixos/manual/options.html\#opt-powerManagement.cpuFreqGovernor}{\nix{powerManagement.cpuFreqGovernor}
+  option} to attach the
+\hrefootnote{https://www.kernel.org/doc/html/v4.19/admin-guide/pm/cpufreq.html\#powersave}{\nix{powersave}}
+\gls{cpufreq} governor.
 
 \nwenddocs{}\nwbegincode{13}\sublabel{NW246TuH-G7aU2-1}\nwmargintag{{\nwtagstyle{}\subpageref{NW246TuH-G7aU2-1}}}\moddef{sruxps: power management~{\nwtagstyle{}\subpageref{NW246TuH-G7aU2-1}}}\endmoddef\nwstartdeflinemarkup\nwusesondefline{\\{NW246TuH-2fwA4h-1}}\nwenddeflinemarkup
 powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

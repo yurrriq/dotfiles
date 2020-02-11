@@ -38,7 +38,7 @@ install: all
 
 
 docs/%.pdf: export TZ='America/Chicago'
-docs/%.pdf: src/%.tex src/preamble.tex $(patsubst src/%.nw,src/%.tex,$(shell find src -name '*.nw'))
+docs/%.pdf: src/%.tex src/preamble.tex src/glossary.tex src/%.bib $(patsubst src/%.nw,src/%.tex,$(shell find src -name '*.nw'))
 	@ mkdir -p $(@D)
 	@ latexmk $(latexmk_flags) -outdir=../$(@D) $<
 

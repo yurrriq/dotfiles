@@ -1,4 +1,4 @@
-\documentclass[a4paper,noglossary,titlepage,xelatex]{tufte-book}
+\documentclass[a4paper,titlepage,xelatex]{tufte-book}
 \input{preamble}
 \title{dotfiles}
 \date{%
@@ -33,12 +33,12 @@
 %%   \nowebindex
 %% \end{multicols}
 
-%% \nocite{*}
+\phantomsection
+\printglossaries
+
+\nocite{*}
 \bibliographystyle{plainnat}
 \bibliography{dotfiles}
-
-%% \phantomsection
-%% \printglossaries
 
 \newpage
 \listoftodos[To-Do]

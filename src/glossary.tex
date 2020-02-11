@@ -1,0 +1,25 @@
+\newglossaryentry{cpufreq}{
+  name={CPUFreq},
+  description={%
+    \glsentrylong{cpufreq}, managed using governors.
+    \\
+    \say{%
+      Scaling governors implement algorithms to estimate the required CPU
+      capacity. As a rule, each governor implements one, possibly
+      parametrized, scaling algorithm.%
+    }\cite{wysocki_2017}%
+  },
+  first={\glsentryname{cpufreq} (\glsentrylong{cpufreq})},
+  long={CPU Frequency scaling}
+}
+
+\newglossaryentry{module}{
+  name={module},
+  description={%
+    \say{%
+      Each NixOS module is a file that handles one logical aspect of the
+      configuration, such as a specific kind of hardware, a service, or network
+      settings.%
+    }\footnote{\url{https://nixos.org/nixos/manual/index.html\#sec-writing-modules}}%
+  }
+}
