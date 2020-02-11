@@ -1,6 +1,7 @@
 # -*- mode: perl -*-
 
-$clean_ext .= ' %R.ist %R.xdy';
+$bibtex_use = 2;
+$clean_ext .= ' %R.ist %R.xdy %R.xdv';
 $pdflatex = q/xelatex %O -interaction=nonstopmode -shell-escape %S/;
 
 add_cus_dep('glo', 'gls', 0, 'run_makeglossaries');

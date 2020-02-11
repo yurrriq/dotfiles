@@ -1,10 +1,4 @@
-{ sources ? import ./nix/sources.nix {}
-, pkgs ? import sources.nixpkgs {
-    overlays = [
-      (import ./nix/overlay.nix)
-    ];
-  }
-}:
+{ pkgs ? import ./nix/nixpkgs.nix }:
 let
   pkg = import ./. { inherit pkgs; };
 in
@@ -20,6 +14,7 @@ pkgs.mkShell {
         gnupg
         mkpasswd
         shellcheck
+        shfmt
         sops
         stow
       ]

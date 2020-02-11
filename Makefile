@@ -31,9 +31,19 @@ $(patsubst %.sh,src/%.nw,${NISH_SRCS})
 all: ${NIX_SRCS} ${SH_SRC} docs/dotfiles.pdf
 
 
+.PHONY: clean
+clean:
+	@ latexmk $(latexmk_flags) -c -f docs/dotfiles.pdf
+	@ rm -fr docs/_minted-dotfiles
+
+.PHONY: clobber
+clobber:
+	@ rm -fr docs
+
+
 .PHONY: install
-install: all
-	@ cp -vr docs ${PREFIX}
+install: all clean
+	@ cp -vr docs/* ${PREFIX}
 
 
 docs/%.pdf: export TZ='America/Chicago'
