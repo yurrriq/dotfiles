@@ -1,11 +1,7 @@
 { config, lib, pkgs, ... }:
-
 let
-
   username = "yurrriq";
-
 in
-
 {
   imports = [
     ./hardware-configuration.nix
@@ -15,9 +11,11 @@ in
     ../../modules/nixos.nix
     ../../modules/packages.nix
     <home-manager/nixos>
-  ] ++ (with (import <nurpkgs> {}).modules; [
-    # yubikey-gpg
-  ]);
+  ] ++ (
+    with (import <nurpkgs> {}).modules; [
+      # yubikey-gpg
+    ]
+  );
 
   airportCode = "MSP";
 
@@ -59,16 +57,22 @@ in
 
   nixpkgs.overlays =
     let path = <nixpkgs-overlays>; in with builtins;
-      map (n: import (path + ("/" + n)))
-          (filter (n: match ".*\\.nix" n != null ||
-                      pathExists (path + ("/" + n + "/default.nix")))
-                  (attrNames (readDir path)))
-    ++ (with (import <nurpkgs> {}).overlays; [
-      nur
-      engraving
-      git
-      node
-    ]);
+    map (n: import (path + ("/" + n)))
+      (
+        filter (
+          n: match ".*\\.nix" n != null
+          || pathExists (path + ("/" + n + "/default.nix"))
+        )
+          (attrNames (readDir path))
+      )
+    ++ (
+      with (import <nurpkgs> {}).overlays; [
+        nur
+        engraving
+        git
+        node
+      ]
+    );
 
   security.sudo = {
     enable = true;
@@ -115,9 +119,14 @@ in
     hashedPassword = lib.fileContents (./. + "/secrets/${username}.hashedPassword");
     group = "users";
     extraGroups = [
-      "wheel" "disk" "audio" "video"
-      "networkmanager" "systemd-journal"
-      "http" "docker"
+      "audio"
+      "disk"
+      "docker"
+      "http"
+      "networkmanager"
+      "systemd-journal"
+      "video"
+      "wheel"
     ];
     createHome = true;
     uid = 1000;

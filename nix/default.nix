@@ -1,7 +1,5 @@
 { config, lib, ... }:
-
 let
-
   sources = import ./sources.nix;
 
   inherit (sources) darwin home-manager nixos-hardware nur;
@@ -12,7 +10,6 @@ let
 
   inherit (config) nurpkgs;
 in
-
 {
 
   options.nurpkgs = lib.mkOption {

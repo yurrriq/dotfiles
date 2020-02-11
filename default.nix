@@ -1,6 +1,5 @@
-{
-  pkgs ? import ./nix/nixpkgs.nix,
-  src ? pkgs.nix-gitignore.gitignoreSource [".git/" "docs" ] ./.
+{ pkgs ? import ./nix/nixpkgs.nix
+, src ? pkgs.nix-gitignore.gitignoreSource [ ".git/" "docs" ] ./.
 }:
 
 pkgs.stdenv.mkDerivation rec {

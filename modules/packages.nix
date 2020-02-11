@@ -1,82 +1,96 @@
 { lib, pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; ([
-    aspell
-    aspellDicts.en
-    awscli
-    bind
-    cachix
-    coreutils
-    # TODO: cquery
-    curl
-    expect
-    gawk
-    gcc
-    gnumake
-    gnused
-    gnutar
-    # TODO: graphviz
-    gzip
-    httpie
-    # TODO: http-prompt
-    # TODO: idris
-    kitty
-    moreutils
-    nix
-    noweb
-    pandoc
-    prettyping
-    ripgrep
-    shellcheck
-    shfmt
-    silver-searcher # TODO: find helm-rg solution
-    slack
-    spotify
-    stow
-    (texlive.combine {
-      inherit (texlive) scheme-small
-        datetime
-        dirtytalk
-        fmtcount
-        framed
-        fvextra
-        hardwrap
-        ifplatform
-        latexmk
-        minted
-        titlesec
-        todonotes
-        tufte-latex
-        xetex
-        xstring;
-      inherit noweb;
-    })
-    tree
-    unzip
-    vim
-    watch
-    # wipe
-    yq
-  ]) ++ (with haskellPackages; [
+  environment.systemPackages = with pkgs; (
+    [
+      aspell
+      aspellDicts.en
+      awscli
+      bind
+      cachix
+      coreutils
+      # TODO: cquery
+      curl
+      expect
+      gawk
+      gcc
+      gnumake
+      gnused
+      gnutar
+      # TODO: graphviz
+      gzip
+      httpie
+      # TODO: http-prompt
+      # TODO: idris
+      kitty
+      moreutils
+      nix
+      noweb
+      pandoc
+      prettyping
+      ripgrep
+      shellcheck
+      shfmt
+      silver-searcher # TODO: find helm-rg solution
+      slack
+      spotify
+      stow
+      (
+        texlive.combine {
+          inherit (texlive) scheme-small
+            datetime
+            dirtytalk
+            fmtcount
+            framed
+            fvextra
+            hardwrap
+            ifplatform
+            latexmk
+            minted
+            titlesec
+            todonotes
+            tufte-latex
+            xetex
+            xstring;
+          inherit noweb;
+        }
+      )
+      tree
+      unzip
+      vim
+      watch
+      # wipe
+      yq
+    ]
+  ) ++ (
+    with haskellPackages; [
       cabal-install
       cabal2nix
       hpack
       stylish-haskell
-  ]) ++ (with nodePackages; [
-    # TODO: bash-language-server
-  ]) ++ (with python3Packages; [
-    pygments
-  ]) ++ lib.optionals stdenv.isDarwin ([
-    clementine
-    m-cli
-    sourcetree
-    onyx
-  ] ++ (with chunkwm; [
-    core
-    ffm
-    tiling
-  ])) ++ lib.optionals stdenv.isLinux [
+    ]
+  ) ++ (
+    with nodePackages; [
+      # TODO: bash-language-server
+    ]
+  ) ++ (
+    with python3Packages; [
+      pygments
+    ]
+  ) ++ lib.optionals stdenv.isDarwin (
+    [
+      clementine
+      m-cli
+      sourcetree
+      onyx
+    ] ++ (
+      with chunkwm; [
+        core
+        ffm
+        tiling
+      ]
+    )
+  ) ++ lib.optionals stdenv.isLinux [
     gnome3.networkmanagerapplet
     hicolor-icon-theme
     keybase-gui
@@ -84,9 +98,11 @@
     qpdfview
     playerctl
     psmisc
-    (signal-desktop.override {
-      spellcheckerLanguage = "en_US";
-    })
+    (
+      signal-desktop.override {
+        spellcheckerLanguage = "en_US";
+      }
+    )
     thunderbird
     volumeicon
     xclip

@@ -1,11 +1,7 @@
 { config, lib, pkgs, ... }:
-
 let
-
   username = "e.bailey";
-
 in
-
 {
 
   imports = [
@@ -68,15 +64,21 @@ in
 
   nixpkgs.overlays =
     let path = <nixpkgs-overlays>; in with builtins;
-      map (n: import (path + ("/" + n)))
-          (filter (n: match ".*\\.nix" n != null ||
-                      pathExists (path + ("/" + n + "/default.nix")))
-                  (attrNames (readDir path)))
-    ++ (with (import <nurpkgs> {}).overlays; [
-      nur
-      git
-      node
-    ]);
+    map (n: import (path + ("/" + n)))
+      (
+        filter (
+          n: match ".*\\.nix" n != null
+          || pathExists (path + ("/" + n + "/default.nix"))
+        )
+          (attrNames (readDir path))
+      )
+    ++ (
+      with (import <nurpkgs> {}).overlays; [
+        nur
+        git
+        node
+      ]
+    );
 
   security.sudo = {
     enable = true;
@@ -106,9 +108,14 @@ in
     hashedPassword = lib.fileContents (./. + "/secrets/${username}.hashedPassword");
     group = "users";
     extraGroups = [
-      "wheel" "disk" "audio" "video"
-      "networkmanager" "systemd-journal"
-      "http" "docker"
+      "audio"
+      "disk"
+      "docker"
+      "http"
+      "networkmanager"
+      "systemd-journal"
+      "video"
+      "wheel"
     ];
     createHome = true;
     uid = 1001;

@@ -1,13 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with import ../../modules/nix { local = false; };
-
 let
-
   username = "mohacker";
-
 in
-
 {
   imports = [
     ../../modules/common.nix
@@ -26,19 +22,25 @@ in
       "/share/emacs/site-lisp"
       "/share/fish"
     ];
-    systemPackages = with pkgs; ([
-      cabal2nix
-      ghc
-    ] ++ (with haskellPackages; [
-      # FIXME: hadolint
-      # hindent
-      # hpack
-      # FIXME: hpack-convert
-      stylish-haskell
-    ]) ++ (with nodePackages; [
-      nodePackages."mermaid.cli"
-      vmd
-    ]));
+    systemPackages = with pkgs; (
+      [
+        cabal2nix
+        ghc
+      ] ++ (
+        with haskellPackages; [
+          # FIXME: hadolint
+          # hindent
+          # hpack
+          # FIXME: hpack-convert
+          stylish-haskell
+        ]
+      ) ++ (
+        with nodePackages; [
+          nodePackages."mermaid.cli"
+          vmd
+        ]
+      )
+    );
   };
 
   fonts = {
@@ -82,17 +84,23 @@ in
 
   nixpkgs.overlays =
     let path = <nixpkgs-overlays>; in with builtins;
-      map (n: import (path + ("/" + n)))
-          (filter (n: match ".*\\.nix" n != null ||
-                      pathExists (path + ("/" + n + "/default.nix")))
-                  (attrNames (readDir path))) ++
-    (with (import <nurpkgs> {}).overlays; [
-      nur
-      # engraving
-      git
-      # hadolint
-      node
-    ]);
+    map (n: import (path + ("/" + n)))
+      (
+        filter (
+          n: match ".*\\.nix" n != null
+          || pathExists (path + ("/" + n + "/default.nix"))
+        )
+          (attrNames (readDir path))
+      )
+    ++ (
+      with (import <nurpkgs> {}).overlays; [
+        nur
+        # engraving
+        git
+        # hadolint
+        node
+      ]
+    );
 
   services = {
     activate-system.enable = true;

@@ -32,27 +32,31 @@
     realName = "Eric Bailey";
   };
 
-  home.packages = with pkgs; ([
-    aws-iam-authenticator
-    ec2instanceconnectcli
-    # dhall
-    # dhall-json
-    # docker-compose
-    ghc
-    iw
-    jdk
-    naal
-    networkmanager-openconnect
-    # next
-    openconnect
-    pavucontrol
-    renderizer
-    scc
-    wirelesstools
-    zoom-us
-  ] ++ (with nodePackages; [
-    aws-azure-login
-  ]));
+  home.packages = with pkgs; (
+    [
+      aws-iam-authenticator
+      ec2instanceconnectcli
+      # dhall
+      # dhall-json
+      # docker-compose
+      ghc
+      iw
+      jdk
+      naal
+      networkmanager-openconnect
+      # next
+      openconnect
+      pavucontrol
+      renderizer
+      scc
+      wirelesstools
+      zoom-us
+    ] ++ (
+      with nodePackages; [
+        aws-azure-login
+      ]
+    )
+  );
 
   _module.args.pkgs = lib.mkForce pkgs;
 

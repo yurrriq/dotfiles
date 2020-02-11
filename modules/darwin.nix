@@ -12,7 +12,7 @@
     '';
     package = pkgs.chunkwm.core;
     plugins = {
-      dir  = "/run/current-system/sw/bin/chunkwm-plugins/";
+      dir = "/run/current-system/sw/bin/chunkwm-plugins/";
       list = [ "ffm" "tiling" ];
       "tiling".config = ''
         chunkc set desktop_padding_step_size     0
@@ -36,7 +36,7 @@
 
   services.skhd = {
     enable = true;
-    package =  pkgs.skhd;
+    package = pkgs.skhd;
     skhdConfig = ''
       alt - space : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 

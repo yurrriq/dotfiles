@@ -20,7 +20,7 @@
   xsession.windowManager.i3 = {
     enable = true;
     config = let modifier = "Mod4"; in {
-      fonts = ["Iosevka 12"];
+      fonts = [ "Iosevka 12" ];
       keybindings = lib.mkOptionDefault {
         "XF86MonBrightnessDown" = "exec xbacklight -dec 10";
         "XF86MonBrightnessUp" = "exec xbacklight -inc 10";
