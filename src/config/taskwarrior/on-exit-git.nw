@@ -96,7 +96,7 @@ Quietly store the current contents of the index in a new commit along with a log
 <<commit the changes>>=
 <<git>> commit -qm "$command: ${args#task $command}"
 @
-%% \todoir{Teach \bash{finduses} how to parse parameter expansions.}
+%% \todor{Teach \bash{finduses} how to parse parameter expansions.}
 
 If running [[<<in debug mode>>]], print a brief summary of the commit.
 <<config/taskwarrior/on-exit-git.sh>>=

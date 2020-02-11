@@ -5,6 +5,8 @@
 
 {
 
+  <<Workaround to enable Taskwarrior contexts>>
+
   <<Define short Taskwarrior shell aliases>>
 
   <<Configure Taskwarrior>>
@@ -12,6 +14,20 @@
   <<Configure the on-exit Git Hook>>
 
 }
+@
+
+
+\newthought{Since home-manager generates a read-only \bash{.taskrc} file}, and
+using \hrefootnote{https://taskwarrior.org/docs/context.html}{contexts} requires
+Taskwarrior to be able to modify the it, use the following hacky workaround.
+
+Set \bash{$TASKRC} to \bash{~/.taskrc-dirty}, which must contain at least
+\ini{include ~/.taskrc}.
+
+<<Workaround to enable Taskwarrior contexts>>=
+home.sessionVariables = {
+  TASKRC = "~/.taskrc-dirty";
+};
 @
 
 
@@ -31,7 +47,8 @@ programs.fish.shellAliases = lib.mkIf (config.programs.fish.enable) rec {
 @
 
 
-\newthought{Configure Taswarrior}, using home-manager.\todoo{link}
+\newthought{Configure Taskwarrior}, using
+\hrefootnote{https://github.com/rycee/home-manager}{home-manager}.
 
 <<Configure Taskwarrior>>=
 programs.taskwarrior = {
