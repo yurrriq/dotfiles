@@ -4,6 +4,8 @@
 
   home.packages = with pkgs; [
     i3lock
+    rofi
+    rofi-pass
   ];
 
   xdg.configFile."i3status/config".source = ../i3status/config;
@@ -32,6 +34,9 @@
         '';
         "${modifier}+Shift+minus" = "move scratchpad";
         "${modifier}+minus" = "scratchpad show";
+        "${modifier}+space" = ''
+          exec --no-startup-id "rofi -combi-modi run,drun,window -show combi"
+        '';
       };
       inherit modifier;
     };
