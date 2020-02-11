@@ -3,7 +3,7 @@
 {
 
   home.packages = with pkgs; [
-    albert
+    # albert
     flameshot
     i3lock
     rofi
@@ -42,7 +42,10 @@
         "${modifier}+d" = ''
           exec --no-startup-id "rofi -combi-modi run,window,drun -show combi -modi combi"
         '';
-        "${modifier}+space" = "exec --no-startup-id albert toggle";
+        # "${modifier}+space" = "exec --no-startup-id albert toggle";
+        "${modifier}+space" = ''
+          exec --no-startup-id "rofi -combi-modi run,window,drun -show combi -modi combi"
+        '';
         "Print" = "exec flameshot gui";
       };
       inherit modifier;
