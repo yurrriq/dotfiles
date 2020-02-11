@@ -9,8 +9,12 @@ docs
 latexmkrc
 machines
 Makefile
+.pre-commit-config.yaml
+scripts
 shell.nix
 .sops.yaml
 src
 .stow-local-ignore
+.travis.yml
 VERSION
+.yamllint
