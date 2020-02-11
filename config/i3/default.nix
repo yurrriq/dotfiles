@@ -3,10 +3,13 @@
 {
 
   home.packages = with pkgs; [
+    albert
     i3lock
     rofi
     rofi-pass
   ];
+
+  services.compton.enable = true;
 
   xdg.configFile."i3status/config".source = ../i3status/config;
 
@@ -34,9 +37,11 @@
         '';
         "${modifier}+Shift+minus" = "move scratchpad";
         "${modifier}+minus" = "scratchpad show";
-        "${modifier}+space" = ''
-          exec --no-startup-id "rofi -combi-modi run,drun,window -show combi"
+        "${modifier}+Tab" = "exec --no-startup-id rofi -show window";
+        "${modifier}+d" = ''
+          exec --no-startup-id "rofi -combi-modi run,window,drun -show combi -modi combi"
         '';
+        "${modifier}+space" = "exec --no-startup-id albert toggle";
       };
       inherit modifier;
     };
