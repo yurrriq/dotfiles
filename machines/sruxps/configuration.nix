@@ -20,6 +20,15 @@ in
 
   airportCode = "MSP";
 
+  boot.initrd.luks.devices = {
+    cryptkey.device = "/dev/disk/by-uuid/603b64c6-8544-4b43-9b6a-7d8a08091514";
+    cryptroot.keyFile = "/dev/mapper/cryptkey";
+    cryptswap = {
+      device = "/dev/disk/by-uuid/565c0358-110e-4279-ba59-619cb2cc1ebf";
+      keyFile = "/dev/mapper/cryptkey";
+    };
+  };
+
   # nurpkgs = fetchTarball "https://github.com/yurrriq/nur-packages/tarball/6490d8f536fc7c2c1947a40aa875a9764cc867ee";
   # nurpkgs = "/home/${username}/src/github.com/yurrriq/nur-packages";
 
