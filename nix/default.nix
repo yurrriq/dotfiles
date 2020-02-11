@@ -4,7 +4,7 @@ let
 
   sources = import ./sources.nix;
 
-  inherit (sources) darwin home-manager nur;
+  inherit (sources) darwin home-manager nixos-hardware nur;
 
   seemsDarwin = null != builtins.match ".*darwin$" builtins.currentSystem;
 
@@ -23,6 +23,7 @@ in
   config = {
     nix.nixPath = [
       "home-manager=${home-manager}"
+      "nixos-hardware=${nixos-hardware}"
       "nixpkgs=${nixpkgs}"
       "nur=${nur}"
       "nurpkgs=${nurpkgs}"
