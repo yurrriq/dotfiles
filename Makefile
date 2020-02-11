@@ -17,7 +17,6 @@ stow       := stow ${stow_flags}
 
 
 NIX_SRCS := \
-machines/sruxps/hardware-configuration.nix \
 config/taskwarrior/default.nix
 
 SH_SRCS := \
