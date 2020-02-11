@@ -1,5 +1,18 @@
 repos:
 - hooks:
+  - id: check-hooks-apply
+  - id: check-useless-excludes
+  repo: meta
+- hooks:
+  - id: trailing-whitespace
+  - exclude: ^VERSION$
+    id: end-of-file-fixer
+  - files: ^.pre-commit-config.yaml$
+    id: check-yaml
+    name: Check pre-commit config
+  repo: git://github.com/pre-commit/pre-commit-hooks
+  rev: v2.4.0
+- hooks:
   - args: ["--format=colored"]
     files: ^.pre-commit-config.yaml$
     id: yamllint
@@ -16,17 +29,17 @@ repos:
     id: shell-lint
   repo: git://github.com/detailyang/pre-commit-shell
   rev: v1.0.6
-# FIXME: Adds two trailing newlines
-# - hooks:
-#   - id: biber-autoformat
-#   repo: git://github.com/katrielalex/biber-formatter
-#   rev: v1
 - hooks:
-  - id: trailing-whitespace
-  - exclude: ^VERSION$
-    id: end-of-file-fixer
-  - files: ^.pre-commit-config.yaml$
-    id: check-yaml
-    name: Check pre-commit config
-  repo: git://github.com/pre-commit/pre-commit-hooks
-  rev: v2.4.0
+  - description: Use Biber to format .bib files
+    entry: scripts/format-biber.sh
+    files: '.+\.bib$'
+    id: biber-format
+    language: script
+    name: Format .bib files
+  - description: Use shfmt to format .sh files
+    entry: scripts/format-scripts.sh
+    files: '.+\.sh$'
+    id: shfmt
+    language: script
+    name: Format .sh files
+  repo: local
