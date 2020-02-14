@@ -54,7 +54,7 @@ docs/%.pdf: src/%.tex src/preamble.tex src/glossary.tex src/%.bib $(patsubst src
 
 
 src/%.tex: src/%.nw
-	noweave -n -index $^ ${cpif} $@
+	noweave -filter noweb-minted -delay -latex $^ ${cpif} $@
 
 
 # TODO: be lazier/smarter about these rules

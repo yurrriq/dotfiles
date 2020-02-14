@@ -1,20 +1,16 @@
 \section{Bash}
 
+Enable the Bash module, as well as autojump.
+
 <<config/bash.nix>>=
 { ... }:
 
 {
 
-  <<Configure Bash>>
+  programs.bash = {
+    enable = true;
+    enableAutojump = true;
+  };
 
 }
-@
-
-Enable the Bash module, as well as autojump.
-
-<<Configure Bash>>=
-programs.bash = {
-  enable = true;
-  enableAutojump = true;
-};
 @
