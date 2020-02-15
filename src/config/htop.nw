@@ -1,3 +1,6 @@
+\section{htop}
+
+<<config/htop.nix>>=
 { ... }:
 
 {
@@ -5,3 +8,4 @@
   programs.htop.enable = true;
 
 }
+@

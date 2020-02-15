@@ -1,0 +1,13 @@
+\section{rebar3}
+
+<<config/rebar3.nix>>=
+{ ... }:
+
+{
+
+  xdg.configFile."rebar3/rebar.config".text = ''
+    {plugins, [rebar3_hex]}.
+  '';
+
+}
+@

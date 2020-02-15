@@ -1,0 +1,38 @@
+\section{bat}
+
+Enable the \hrefootnote{https://github.com/sharkdp/bat}{bat} module.
+
+<<config/bat.nix>>=
+{ ... }:
+
+{
+
+  programs.bat = {
+    enable = true;
+    config = {
+@
+
+For the pager, use \bash{less}.
+
+<<config/bat.nix>>=
+      pager = "less -FR";
+@
+
+Set the style to \bash{changes}.
+
+<<config/bat.nix>>=
+      style = "changes";
+@
+
+Use the Monokai Extended theme.
+
+<<config/bat.nix>>=
+      theme = "Monokai Extended";
+@
+
+<<config/bat.nix>>=
+    };
+  };
+
+}
+@

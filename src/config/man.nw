@@ -1,0 +1,11 @@
+\section{man}
+
+<<config/man.nix>>=
+{ ... }:
+
+{
+
+  programs.man.enable = true;
+
+}
+@

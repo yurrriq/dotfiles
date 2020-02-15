@@ -1,0 +1,14 @@
+\section{direnv}
+
+<<config/direnv.nix>>=
+{ ... }:
+
+{
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = false;
+  };
+
+}
+@

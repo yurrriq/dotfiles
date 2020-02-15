@@ -1,3 +1,6 @@
+\section{jq}
+
+<<config/jq.nix>>=
 { ... }:
 
 {
@@ -5,3 +8,4 @@
   programs.jq.enable = true;
 
 }
+@

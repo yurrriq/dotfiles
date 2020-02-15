@@ -6,7 +6,7 @@ cpif   ?= | cpif
 ifneq (,$(findstring B,$(MAKEFLAGS)))
 latexmk_flags = -gg
 endif
-latexmk_flags += -cd -shell-escape -xelatex
+latexmk_flags += -cd -shell-escape -use-make -xelatex
 
 
 stow_flags := -R
@@ -16,20 +16,35 @@ endif
 stow       := stow ${stow_flags}
 
 
-NIX_SRCS := \
-config/bash.nix \
-config/taskwarrior/default.nix
+NIX_SRCS := $(addprefix config/,$(addsuffix .nix,\
+bash \
+bat \
+browserpass \
+bugwarrior \
+direnv \
+firefox \
+fzf \
+gpg \
+htop \
+jq \
+man \
+rebar3 \
+taskwarrior/default \
+))
 
 SH_SRCS := \
 config/taskwarrior/on-exit-git.sh
 
-NW_SRCS := \
-$(patsubst %.nix,src/%.nw,${NIX_SRCS})
-$(patsubst %.sh,src/%.nw,${NISH_SRCS})
+OTHER_SRCS := \
+config/i3status/config
 
+# NW_SRCS := \
+# $(patsubst %.nix,src/%.nw,${NIX_SRCS}) \
+# $(patsubst %.sh,src/%.nw,${SH_SRCS})
+NW_SRCS := $(shell find src -name '*.nw')
 
 .PHONY: all
-all: ${NIX_SRCS} ${SH_SRC} docs/dotfiles.pdf
+all: ${NIX_SRCS} ${SH_SRC} ${OTHER_SRCS} docs/dotfiles.pdf
 
 
 .PHONY: clean
@@ -48,16 +63,30 @@ install: all clean
 
 
 docs/%.pdf: export TZ='America/Chicago'
-docs/%.pdf: src/%.tex src/preamble.tex src/glossary.tex src/%.bib $(patsubst src/%.nw,src/%.tex,$(shell find src -name '*.nw'))
+docs/%.pdf: src/%.tex src/preamble.tex src/glossary.tex src/%.bib $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
 	@ mkdir -p $(@D)
+	@ latexmk $(latexmk_flags) -outdir=../$(@D) $<
+	@ noindex src/dotfiles
 	@ latexmk $(latexmk_flags) -outdir=../$(@D) $<
 
 
-src/%.tex: src/%.nw
-	noweave -filter noweb-minted -delay -latex $^ ${cpif} $@
+src/%.defs: src/%.nw
+	nodefs $< >$@
 
+
+src/all.defs: $(patsubst src/%.nw,src/%.defs,${NW_SRCS})
+	sort -u $^ ${cpif} $@
+
+
+
+src/%.tex: src/%.nw # src/all.defs
+	noweave -delay -latex -n -filter noweb-minted $^ ${cpif} $@
+# noweave -delay -indexfrom src/all.defs -latex -n -filter noweb-minted $^ ${cpif} $@
 
 # TODO: be lazier/smarter about these rules
+
+${OTHER_SRCS}:
+	notangle -R$@ src/$@.nw ${cpif} $@
 
 ${NIX_SRCS}:
 	notangle -R$@ src/${@:.nix=.nw} ${cpif} $@

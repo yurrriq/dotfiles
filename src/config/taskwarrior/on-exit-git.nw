@@ -23,13 +23,15 @@ fi
 @
 
 
-\newthought{Don't include} the [[api]] version, [[rc]] file,
-or Taskwarrior [[version]].\marginnote{%
-  N.B. The positional arguments are formatted as \bash{foo:bar}, where \bash{foo} is
-  the name of the argument, and \bash{bar} is the value.%
+\newthought{Parse} the command line arguments.
+
+Don't include the [[api]] version, [[rc]] file, or Taskwarrior [[version]].
+\marginnote{%
+  N.B. The positional arguments are formatted as \bash{foo:bar}, where
+  \bash{foo} is the name of the argument, and \bash{bar} is the value.%
 }
 
-\begin{minted}{bash}
+\begin{minted}[gobble=2]{bash}
   api="${1#api:}"
   rc="${4#rc:}"
   version="${6#version:}"
@@ -48,12 +50,7 @@ data="${5#data:}"
 
 
 \newthought{Throughout this script}, run \bash{git} as if it were started in
-the Taskwarrior [[data]] directory.
-\begin{marginfigure}
-  \begin{minted}{bash}
-    git -C "$data"
-  \end{minted}
-\end{marginfigure}
+the Taskwarrior [[data]] directory, i.e. \bash{git -C "$data"}.
 
 \marginnote{%
   If there are no changes, \bash{exit} successfully,

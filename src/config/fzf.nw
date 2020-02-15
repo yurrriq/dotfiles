@@ -1,0 +1,14 @@
+\section{fzf}
+
+<<config/fzf.nix>>=
+{ ... }:
+
+{
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = false;
+  };
+
+}
+@
