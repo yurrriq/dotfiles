@@ -4,6 +4,7 @@ let
 in
 {
   imports = [
+    <nixos-hardware/dell/xps/15-9550>
     ./hardware-configuration.nix
     ../../nix
     ../../modules/common.nix
