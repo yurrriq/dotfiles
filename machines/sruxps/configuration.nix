@@ -35,6 +35,14 @@ in
     "/share/fish"
   ];
 
+  hardware.bluetooth = {
+    enable = true;
+    extraConfig = ''
+      [General]
+      Enable=Source,Sink,Media,Socket
+    '';
+  };
+
   home-manager.useUserPackages = true;
   home-manager.users."${username}" = args:
     import ./home.nix (args // { inherit pkgs; });
@@ -87,13 +95,6 @@ in
     '';
   };
 
-  hardware.bluetooth = {
-    enable = true;
-    extraConfig = ''
-      [General]
-      Enable=Source,Sink,Media,Socket
-    '';
-  };
   services.blueman.enable = true;
 
   services.fwupd.enable = true;
@@ -125,5 +126,4 @@ in
     shell = "/etc/profiles/per-user/${username}/bin/fish";
   };
 
-  virtualisation.docker.enable = true;
 }

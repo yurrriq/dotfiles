@@ -134,7 +134,5 @@ in
     shell = "/etc/profiles/per-user/${username}/bin/fish";
   };
 
-  virtualisation.docker.enable = true;
-
   # yubikey-gpg.enable = true;
 }

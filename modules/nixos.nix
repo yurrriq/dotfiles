@@ -122,4 +122,6 @@
 
   system.stateVersion = "19.09";
 
+  virtualisation.docker.enable = true;
+
 }
