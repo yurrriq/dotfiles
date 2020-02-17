@@ -67,6 +67,8 @@ TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
 .PHONY: all
 all: ${NIX_SRCS} ${SH_SRCS} ${OTHER_SRCS} docs/dotfiles.pdf
 
+
+.PHONY: tex
 tex: ${TEX_SRCS}
 
 
@@ -84,6 +86,9 @@ clobber:
 .PHONY: install
 install: all clean
 	@ cp -vr docs/* ${PREFIX}
+	@ echo "theme: jekyll-theme-hacker" >${PREFIX}/_config.yml
+	@ echo "[PDF](./${PDF})" >${PREFIX}/index.md
+
 
 
 # @ noindex src/dotfiles

@@ -1,0 +1,19 @@
+os:
+- linux
+language: nix
+
+script:
+- nix-env -iA cachix -f https://cachix.org/api/v1/install
+- cachix use yurrriq
+# - cachix push yurrriq --watch-store&
+- nix-build -o site
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  target_branch: gh-pages
+  local_dir: site
+  on:
+    branch: master
