@@ -1,0 +1,41 @@
+#!/bin/bash
+
+gawk '
+/^@file.*/ {echo = 1}
+
+/^@begin code*/ {beginCode = $0; echo = 0; next}
+
+/@defn.*/ {
+   isCCode = match($0,/^@defn ([^\.]*)\.(.*)/, ary1);
+   if (isCCode == 0) {
+     print beginCode; print; echo = 1; next;
+   }
+   else {
+     print; print "@nl";
+     cmd = "guessPygmentizeLexer.py "ary1[2]
+     print cmd
+     cmd | getline var
+     print "@text \\begin{minted}[mathescape]{"var"}";
+     echo = 1;  
+     next; 
+   }
+}
+
+/^@end code*/ {
+   if (isCCode == 0) { 
+      print; next;
+   }
+   else {
+      echo = 1;
+      print "@nl";
+      print "@text \\end{minted}";
+      print "@nl";
+      isCCode = 0;
+      next
+   }
+}
+
+/^@.*/ {if (echo == 1) { print }}
+'
+
+$*

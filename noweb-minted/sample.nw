@@ -1,0 +1,60 @@
+\documentclass{article}
+
+\usepackage{noweb}
+\usepackage{minted}
+
+\begin{document}
+
+This is a sample file for the [[noweb-minted]] filter. The filter uses
+the pygments library to guess the correct lexer based on the extension
+of the file given in a code chunk. If no lexer is detected, the
+``text'' lexer is used, which performs no pretty printing. For now,
+the filter only puts the {\tt mathescape} option into the minted
+environment. I think the right way to do it is to externally set the
+correct parameters using {\tt \textbackslash{setminted}} and related
+commands. Examples:
+
+\begin{itemize}
+\item C
+
+<<hello.c>>=
+#include <stdio.h>
+
+int main() {
+  printf("Hello, World!\n");
+  return 0;    
+}
+@
+
+\item Haskell
+
+<<hello.hs>>=
+main :: IO ()
+main =  putStrLn "Hello, world\n"
+@
+
+\item Coq
+
+<<hello.v>>=
+Require Import CoqIO.IO.
+Require Import ExtLib.Programming.Show.
+
+Import ShowNotation.
+Local Open Scope show_scope.
+
+Definition main : IO unit :=
+  runShow (M := ShowScheme_Std StdOut) 
+          (show_exact "Hello world!" << Char.chr_newline).
+@
+
+\item No lexer
+
+<<hello.foobar>>=
+int main () {
+  printFoo(Bar);
+}
+@
+
+\end{itemize}
+
+\end{document}
