@@ -28,6 +28,7 @@ gpg \
 htop \
 i3/default \
 jq \
+kitty/default \
 man \
 rebar3 \
 taskwarrior/default \
@@ -38,7 +39,8 @@ config/taskwarrior/on-exit-git.sh
 
 OTHER_SRCS := \
 config/i3status/config \
-config/emacs/init.el
+config/emacs/init.el \
+config/kitty/kitty.conf
 
 # NW_SRCS := \
 # $(patsubst %.nix,src/%.nw,${NIX_SRCS}) \
