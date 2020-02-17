@@ -6,7 +6,7 @@
     elpa = epkgs.elpaPackages;
     melpa = epkgs.melpaPackages;
     melpaStable = epkgs.melpaStablePackages;
-    org = epkgs.orgPackages;
+    # org = epkgs.orgPackages;
   }; (
     with elpa; [
       mmm-mode
@@ -62,8 +62,6 @@
     with melpaStable; [
       ess
     ]
-  ) ++ (
-    with org; []
   );
 
 }

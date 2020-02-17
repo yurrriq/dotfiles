@@ -6,7 +6,7 @@ cpif   ?= | cpif
 ifneq (,$(findstring B,$(MAKEFLAGS)))
 latexmk_flags = -gg
 endif
-latexmk_flags += -cd -shell-escape -use-make -xelatex
+latexmk_flags += -cd -shell-escape -xelatex
 
 
 stow_flags := -R
@@ -22,11 +22,17 @@ bat \
 browserpass \
 bugwarrior \
 direnv \
+emacs/default \
+emacs/packages \
 firefox \
 fish/abbrs \
 fish/aliases \
 fish/default \
 fzf \
+git/aliases \
+git/config \
+git/default \
+git/packages \
 gpg \
 htop \
 i3/default \
@@ -59,7 +65,7 @@ NW_SRCS := $(shell find src -name '*.nw')
 TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
 
 .PHONY: all
-all: ${NIX_SRCS} ${SH_SRC} ${OTHER_SRCS} docs/dotfiles.pdf
+all: ${NIX_SRCS} ${SH_SRCS} ${OTHER_SRCS} docs/dotfiles.pdf
 
 tex: ${TEX_SRCS}
 
@@ -97,12 +103,13 @@ src/all.defs: $(patsubst src/%.nw,src/%.defs,${NW_SRCS})
 
 # .INTERMEDIATE: ${TEX_SRCS}
 src/%.tex: src/%.nw # src/all.defs
-	noweave -delay -latex -n -filter ./fix-underscores -filter noweb-minted $^ ${cpif} $@
+	noweave -delay -latex -n -filter fix-underscores -filter noweb-minted $^ ${cpif} $@
 # noweave -delay -indexfrom src/all.defs -latex -n -filter noweb-minted $^ ${cpif} $@
 
 # TODO: be lazier/smarter about these rules
 
 ${NIX_SRCS} ${OTHER_SRCS} ${SH_SRCS}::
+	@ mkdir -p $(@D)
 	notangle -R$@ src/$(basename $@).nw ${cpif} $@
 
 
