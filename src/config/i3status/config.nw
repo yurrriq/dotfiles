@@ -15,9 +15,9 @@ path_exists VPN {
     path = "/proc/sys/net/ipv4/conf/tun0"
 }
 
-order += "wireless wlp1s0"
+order += "wireless _first_"
 
-wireless wlp1s0 {
+wireless _first_ {
     format_up = "%essid"
 }
 
