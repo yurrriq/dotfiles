@@ -1,9 +1,10 @@
+\section{i3}
+<<config/i3/default.nix>>=
 { config, lib, pkgs, ... }:
 
 {
 
   home.packages = with pkgs; [
-    # albert
     flameshot
     i3lock
     rofi
@@ -52,3 +53,4 @@
   };
 
 }
+@

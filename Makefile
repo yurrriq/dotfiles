@@ -26,6 +26,7 @@ firefox \
 fzf \
 gpg \
 htop \
+i3/default \
 jq \
 man \
 rebar3 \
