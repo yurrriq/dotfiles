@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 gawk '
 /^@file.*/ {echo = 1}
@@ -13,7 +13,6 @@ gawk '
    else {
      print; print "@nl";
      cmd = "guessPygmentizeLexer.py "ary1[2]
-     print cmd
      cmd | getline var
      print "@text \\begin{minted}[mathescape]{"var"}";
      echo = 1;  
