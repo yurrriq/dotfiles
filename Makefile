@@ -36,19 +36,25 @@ SH_SRCS := \
 config/taskwarrior/on-exit-git.sh
 
 OTHER_SRCS := \
-config/i3status/config
+config/i3status/config \
+config/emacs/init.el
 
 # NW_SRCS := \
 # $(patsubst %.nix,src/%.nw,${NIX_SRCS}) \
 # $(patsubst %.sh,src/%.nw,${SH_SRCS})
 NW_SRCS := $(shell find src -name '*.nw')
 
+TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
+
 .PHONY: all
 all: ${NIX_SRCS} ${SH_SRC} ${OTHER_SRCS} docs/dotfiles.pdf
+
+tex: ${TEX_SRCS}
 
 
 .PHONY: clean
 clean:
+	@ rm -f ${TEX_SRCS}
 	@ latexmk $(latexmk_flags) -c -f docs/dotfiles.pdf
 	@ rm -fr docs/_minted-dotfiles
 
@@ -62,11 +68,10 @@ install: all clean
 	@ cp -vr docs/* ${PREFIX}
 
 
+# @ noindex src/dotfiles
 docs/%.pdf: export TZ='America/Chicago'
-docs/%.pdf: src/%.tex src/preamble.tex src/glossary.tex src/%.bib $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
+docs/%.pdf: src/%.tex src/preamble.tex src/glossary.tex src/%.bib ${TEX_SRCS}
 	@ mkdir -p $(@D)
-	@ latexmk $(latexmk_flags) -outdir=../$(@D) $<
-	@ noindex src/dotfiles
 	@ latexmk $(latexmk_flags) -outdir=../$(@D) $<
 
 
@@ -78,7 +83,6 @@ src/all.defs: $(patsubst src/%.nw,src/%.defs,${NW_SRCS})
 	sort -u $^ ${cpif} $@
 
 
-
 src/%.tex: src/%.nw # src/all.defs
 	noweave -delay -latex -n -filter noweb-minted $^ ${cpif} $@
 # noweave -delay -indexfrom src/all.defs -latex -n -filter noweb-minted $^ ${cpif} $@
@@ -86,7 +90,7 @@ src/%.tex: src/%.nw # src/all.defs
 # TODO: be lazier/smarter about these rules
 
 ${OTHER_SRCS}:
-	notangle -R$@ src/$@.nw ${cpif} $@
+	notangle -R$@ src/$(basename $@).nw ${cpif} $@
 
 ${NIX_SRCS}:
 	notangle -R$@ src/${@:.nix=.nw} ${cpif} $@

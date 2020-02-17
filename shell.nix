@@ -12,6 +12,7 @@ pkgs.mkShell {
         git
         gnumake
         gnupg
+        python3
         mkpasswd
         shellcheck
         shfmt
@@ -21,6 +22,7 @@ pkgs.mkShell {
     ) ++ (
       with python3Packages; [
         pre-commit
+        pygments
         yamllint
       ]
     )

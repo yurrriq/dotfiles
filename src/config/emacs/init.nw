@@ -1,19 +1,47 @@
+\subsection{Init File}
+
+<<config/emacs/init.el>>=
 (server-start)
+@
+
+<<config/emacs/init.el>>=
 (setq server-window 'pop-to-buffer-same-window)
+@
+
+<<config/emacs/init.el>>=
 (column-number-mode 1)
+@
+
+<<config/emacs/init.el>>=
 (add-to-list 'exec-path "/run/current-system/sw/bin")
+@
+
+<<config/emacs/init.el>>=
 (menu-bar-mode 0)
 
 (tool-bar-mode 0)
+@
+
+<<config/emacs/init.el>>=
 (let ((font (if (eq system-type 'darwin)
                 "Iosevka-16"
               "Iosevka-10")))
   (set-face-attribute 'default t :font font)
   (set-frame-font font nil t))
+@
+
+<<config/emacs/init.el>>=
 (require 'package)
+@
+
+<<config/emacs/init.el>>=
 (setq-default indent-tabs-mode nil
               package-archives nil
               package-enable-at-startup nil)
+@
+@
+
+<<config/emacs/init.el>>=
 (package-initialize)
 
 (eval-when-compile
@@ -21,7 +49,13 @@
 
 (setq-default use-package-always-defer t
               use-package-always-ensure t)
+@
+
+<<config/emacs/init.el>>=
 ;; https://stackoverflow.com/a/18330742
+@
+
+<<config/emacs/init.el>>=
 (defvar --backup-directory
   (concat user-emacs-directory "backups"))
 
@@ -40,11 +74,24 @@
       auto-save-default         t
       auto-save-timeout         20
       auto-save-interval        200)
+@
 
+<<config/emacs/init.el>>=
+
+<<config/emacs/init.el>>=
 (setq custom-file "~/.emacs.d/private/local/custom.el")
+@
+
+<<config/emacs/init.el>>=
 (load-theme 'wombat)
+@
+
+<<config/emacs/init.el>>=
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "s-u") 'revert-buffer)
+@
+
+<<config/emacs/init.el>>=
 (setq c-default-style      "k&r"
       c-basic-offset       4
       emacs-lisp-mode-hook '(fci-mode paredit-mode
@@ -52,56 +99,105 @@
       js-indent-level      2
       text-mode-hook       '(text-mode-hook-identify))
 
+@
+
+<<config/emacs/init.el>>=
 (setq-default fill-column 80)
+@
+
+<<config/emacs/init.el>>=
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((shell . t)))
+@
+
+<<config/emacs/init.el>>=
 (use-package avy
   :demand
   :config
   (global-set-key (kbd "C-;") 'avy-goto-char)
   (global-set-key (kbd "C-'") 'avy-goto-char-2)
   (global-set-key (kbd "M-g f") 'avy-goto-line))
+@
+
+<<config/emacs/init.el>>=
 (use-package crux
   :demand
   :config (global-set-key (kbd "C-a") 'crux-move-beginning-of-line))
+@
+
+<<config/emacs/init.el>>=
 (use-package editorconfig
   :ensure t
   :config
   (editorconfig-mode 1))
+@
+
+<<config/emacs/init.el>>=
 (use-package helm
   :demand
   :config
   (global-set-key (kbd "M-s-f") 'helm-do-grep-ag)
   (global-set-key (kbd "M-s-ƒ") 'helm-do-grep-ag))
+@
+
+<<config/emacs/init.el>>=
 (use-package hl-todo
   :demand
   :config (global-hl-todo-mode t))
+@
+
+<<config/emacs/init.el>>=
 (use-package magit
   :demand
   :config (global-magit-file-mode t))
+@
+
+<<config/emacs/init.el>>=
 (use-package multiple-cursors
   :demand
   :config (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines))
+@
+
+<<config/emacs/init.el>>=
 (use-package nix-mode
   :mode ("\\.nix\\'"))
+@
+
+<<config/emacs/init.el>>=
 (use-package noweb-mode
   :load-path "/run/current-system/sw/share/emacs/site-lisp"
   :mode ("\\.nw\\'")
   :demand)
+@
+
+<<config/emacs/init.el>>=
 (use-package robe
   :demand
   :mode ("\\.rb\\'"))
+@
+
+<<config/emacs/init.el>>=
 (use-package rvm
   :ensure t)
+@
+
+<<config/emacs/init.el>>=
 (use-package smex
   :demand
   :config
   (global-set-key (kbd "M-x") 'smex)
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
+@
+
+<<config/emacs/init.el>>=
 (use-package tuareg
   :mode ("\\.ml\\'" "\\.mli\\'"))
+@
+
+<<config/emacs/init.el>>=
 (use-package whitespace-cleanup-mode
   :demand
   :config (global-whitespace-cleanup-mode t))
+@

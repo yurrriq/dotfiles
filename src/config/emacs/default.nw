@@ -1,3 +1,4 @@
+<<config/emacs/default.nix>>=
 { config, lib, pkgs, ... }:
 
 {
@@ -25,3 +26,4 @@
   services.emacs.enable = ! pkgs.stdenv.isDarwin;
 
 }
+@
