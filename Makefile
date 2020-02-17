@@ -23,6 +23,9 @@ browserpass \
 bugwarrior \
 direnv \
 firefox \
+fish/abbrs \
+fish/aliases \
+fish/default \
 fzf \
 gpg \
 htop \
@@ -30,6 +33,8 @@ i3/default \
 jq \
 kitty/default \
 man \
+nixpkgs/default \
+nixpkgs/nixpkgs-config \
 rebar3 \
 taskwarrior/default \
 ))
@@ -40,6 +45,10 @@ config/taskwarrior/on-exit-git.sh
 OTHER_SRCS := \
 config/i3status/config \
 config/emacs/init.el \
+config/fish/interactiveShellInit.fish \
+config/fish/shellInit.fish \
+config/fish/sushi/fish_prompt.fish \
+config/fish/sushi/fish_right_prompt.fish \
 config/kitty/kitty.conf
 
 # NW_SRCS := \
@@ -86,20 +95,18 @@ src/all.defs: $(patsubst src/%.nw,src/%.defs,${NW_SRCS})
 	sort -u $^ ${cpif} $@
 
 
+# .INTERMEDIATE: ${TEX_SRCS}
 src/%.tex: src/%.nw # src/all.defs
-	noweave -delay -latex -n -filter noweb-minted $^ ${cpif} $@
+	noweave -delay -latex -n -filter ./fix-underscores -filter noweb-minted $^ ${cpif} $@
 # noweave -delay -indexfrom src/all.defs -latex -n -filter noweb-minted $^ ${cpif} $@
 
 # TODO: be lazier/smarter about these rules
 
-${OTHER_SRCS}:
+${NIX_SRCS} ${OTHER_SRCS} ${SH_SRCS}::
 	notangle -R$@ src/$(basename $@).nw ${cpif} $@
 
-${NIX_SRCS}:
-	notangle -R$@ src/${@:.nix=.nw} ${cpif} $@
 
-${SH_SRCS}:
-	notangle -R$@ src/${@:.sh=.nw} ${cpif} $@
+${SH_SRCS}::
 	chmod a+x $@
 
 

@@ -1,0 +1,9 @@
+#! /usr/bin/env -S gawk -f
+
+/@(defn|file) .*/ {
+    gsub("_", "\\_", $0);
+    print;
+    next;
+}
+
+/^@.*/ { print }

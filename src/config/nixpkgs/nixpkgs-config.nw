@@ -1,0 +1,7 @@
+<<config/nixpkgs/nixpkgs-config.nix>>=
+{
+  allowBroken = false;
+  allowUnfree = true;
+  allowUnsupportedSystem = false;
+}
+@

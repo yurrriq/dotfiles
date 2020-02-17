@@ -3,7 +3,6 @@
 {
 
   home.packages = with pkgs; [
-    # albert
     flameshot
     i3lock
     rofi
