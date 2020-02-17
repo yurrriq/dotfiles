@@ -5,6 +5,6 @@ import sys
 
 try:
     filename = "FOO." + str(sys.argv[1])
-    print get_lexer_for_filename(filename).name
+    print(get_lexer_for_filename(filename).name.replace('EmacsLisp', 'elisp'))
 except:
-    print "text"
+    print("text")
