@@ -10,6 +10,7 @@
   }; (
     with elpa; [
       mmm-mode
+      rainbow-mode
     ]
   ) ++ (
     with melpa; [
