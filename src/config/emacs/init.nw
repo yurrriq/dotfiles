@@ -39,7 +39,6 @@
               package-archives nil
               package-enable-at-startup nil)
 @
-@
 
 <<config/emacs/init.el>>=
 (package-initialize)
@@ -75,8 +74,6 @@
       auto-save-timeout         20
       auto-save-interval        200)
 @
-
-<<config/emacs/init.el>>=
 
 <<config/emacs/init.el>>=
 (setq custom-file "~/.emacs.d/private/local/custom.el")
