@@ -69,6 +69,11 @@
   :ensure t
   :config
   (editorconfig-mode 1))
+(use-package emojify-mode
+  :demand
+  :config
+  (global-emojify-mode)
+  (global-emojify-mode-line-mode))
 (use-package helm
   :demand
   :config

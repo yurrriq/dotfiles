@@ -26,6 +26,7 @@
       dockerfile-mode
       editorconfig
       elixir-mode
+      emojify
       enh-ruby-mode
       # FIXME: erlang
       fill-column-indicator

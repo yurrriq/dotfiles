@@ -131,6 +131,14 @@
 @
 
 <<config/emacs/init.el>>=
+(use-package emojify-mode
+  :demand
+  :config
+  (global-emojify-mode)
+  (global-emojify-mode-line-mode))
+@
+
+<<config/emacs/init.el>>=
 (use-package helm
   :demand
   :config
