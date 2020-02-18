@@ -1,12 +1,22 @@
 \section{i3status}
 
+Use some Solarized Dark colors for good, bad, anddegraded.\footnote{%
+  \url{https://github.com/tobiaszwaszak/i3wm/blob/9c097f3/i3status.conf}%
+}
+
 <<config/i3status/config>>=
 general {
     colors = true
+    color_good = "#859900"
+    color_bad = "#dc322f"
+    color_degraded = "#cb4b16"
     interval = 5
     output_format = "i3bar"
 }
 
+@
+
+<<config/i3status/config>>=
 order += "path_exists VPN"
 
 path_exists VPN {
@@ -33,6 +43,23 @@ order += "battery all"
 
 battery all {
     format = "%status %percentage %remaining"
+@
+
+Show the battery percentage without decimals.
+
+<<config/i3status/config>>=
+    integer_battery_capacity = true
+@
+
+Use the last full capacity, instead of the design capacity. Refer to the
+\hrefootnote{https://i3wm.org/i3status/manpage.html\#\_battery}{man page} for
+more details.
+
+<<config/i3status/config>>=
+    last_full_capacity = true
+@
+
+<<config/i3status/config>>=
     low_threshold = 10
     status_bat = "🔋"
     status_chr = "⚡"

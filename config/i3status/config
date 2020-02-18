@@ -1,5 +1,8 @@
 general {
     colors = true
+    color_good = "#859900"
+    color_bad = "#dc322f"
+    color_degraded = "#cb4b16"
     interval = 5
     output_format = "i3bar"
 }
@@ -30,6 +33,8 @@ order += "battery all"
 
 battery all {
     format = "%status %percentage %remaining"
+    integer_battery_capacity = true
+    last_full_capacity = true
     low_threshold = 10
     status_bat = "🔋"
     status_chr = "⚡"

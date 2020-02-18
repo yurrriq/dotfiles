@@ -1,0 +1,54 @@
+icons = "awesome"
+
+[theme]
+name = "modern"
+[theme.overrides]
+separator = ""
+
+[[block]]
+block = "custom"
+command = "test -f /proc/sys/net/ipv4/conf/tun0 && echo '🔒'"
+interval = 30
+
+[[block]]
+block = "net"
+device = "wlp2s0"
+ssid = true
+# signal_strength = true
+# ip = true
+speed_up = false
+speed_down = false
+# graph_up = true
+# graph_down = true
+interval = 5
+# use_bits = false
+
+# NOTE: https://openweathermap.org/api
+# [[block]]
+# block = "weather"
+# format = "{weather} ({location}) {temp}°, {wind} m/s {direction}"
+# service = { name = "openweathermap", api_key = "XXX", city_id = "5037649", units = "metric" }
+
+[[block]]
+block = "load"
+interval = 1
+format = "{1m} {5m} {15m}"
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "battery"
+interval = 10
+format = "{percentage}% {time}"
+
+[[block]]
+block = "time"
+interval = 30
+format = "%a %H:%M"
+timezone = "Europe/Oslo"
+
+[[block]]
+block = "time"
+interval = 5
+format = "%a %d.%m %H:%M:%S"
