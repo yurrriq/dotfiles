@@ -24,6 +24,7 @@
       # TODO: idris
       kitty
       moreutils
+      neofetch
       nix
       noweb
       pandoc
