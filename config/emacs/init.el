@@ -21,25 +21,51 @@
 
 (setq-default use-package-always-defer t
               use-package-always-ensure t)
-;; https://stackoverflow.com/a/18330742
-(defvar --backup-directory
-  (concat user-emacs-directory "backups"))
+(let ((backup-directory (concat user-emacs-directory "backup")))
+  (unless (file-exists-p backup-directory)
+    (make-directory backup-directory t))
+  (setq backup-directory-alist `(("" . ,backup-directory))))
 
-(unless (file-exists-p --backup-directory)
-  (make-directory --backup-directory t))
-
-(add-to-list 'backup-directory-alist `("." . ,--backup-directory))
-
-(setq make-backup-files         t
-      backup-by-copying         t
-      version-control           t
-      delete-old-versions       t
-      delete-by-moving-to-trash t
-      kept-old-versions         2
-      kept-new-versions         6
-      auto-save-default         t
+(setq auto-save-default         t
+      auto-save-interval        200
       auto-save-timeout         20
-      auto-save-interval        200)
+      backup-by-copying         t
+      delete-by-moving-to-trash t
+      delete-old-versions       t
+      kept-new-versions         6
+      kept-old-versions         2
+      make-backup-files         t
+      vc-make-backup-files      t
+      version-control           t)
+
+(define-minor-mode sensitive-mode
+  "For sensitive files like password lists.
+It disables backup creation and auto saving.
+
+With no argument, this command toggles the mode.
+Non-null prefix argument turns on the mode.
+Null prefix argument turns off the mode."
+  ;; The initial value.
+  nil
+  ;; The indicator for the mode line.
+  " 🔒"
+  ;; The minor mode bindings.
+  nil
+  (if (symbol-value sensitive-mode)
+      (progn
+        ;; disable backups
+        (set (make-local-variable 'backup-inhibited) t)
+        ;; disable auto-save
+        (if auto-save-default
+            (auto-save-mode -1)))
+    ;; resort to default value of backup-inhibited
+    (kill-local-variable 'backup-inhibited)
+    ;; resort to default auto save setting
+    (if auto-save-default
+        (auto-save-mode 1))))
+(dolist (pattern '("^\\(/dev/shm/\\|/tmp/\\)"
+                   "\\.\\(enc\\|gpg\\|hashedPassword\\)$"))
+  (add-to-list 'auto-mode-alist (cons pattern 'sensitive-mode)))
 
 (setq custom-file "~/.emacs.d/private/local/custom.el")
 (load-theme 'wombat)
