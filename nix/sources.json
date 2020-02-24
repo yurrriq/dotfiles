@@ -77,10 +77,10 @@
         "homepage": "https://github.com/nix-community/NUR",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "f32b9d0e8f56957a18c95c09c013d87ab3146e6e",
-        "sha256": "1dlr62s6kkb22cysagdqnind0jjqwnfcbxsqgjls5f3b0qwn71hb",
+        "rev": "bf2c776f8ad1d074b4a83a8ab9bd9e30480ef4cc",
+        "sha256": "14a2ah1jgdbck38phzmin05icyr8608j0kii8l852p5sw5468nsk",
         "type": "tarball",
-        "url": "https://github.com/nix-community/NUR/archive/f32b9d0e8f56957a18c95c09c013d87ab3146e6e.tar.gz",
+        "url": "https://github.com/nix-community/NUR/archive/bf2c776f8ad1d074b4a83a8ab9bd9e30480ef4cc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
