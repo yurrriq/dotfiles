@@ -1,7 +1,11 @@
+<<machines/hacktop/home.nix>>=
 { lib, pkgs, ... }:
 
 {
 
+@
+
+<<machines/hacktop/home.nix>>=
   imports = [
     ../../config/bat.nix
     ../../config/direnv.nix
@@ -21,6 +25,9 @@
     # TODO: ../../config/vim.nix
   ];
 
+@
+
+<<machines/hacktop/home.nix>>=
   accounts.email.accounts.primary = {
     address = "eric@ericb.me";
     gpg.key = "60F0AEB0D089C2911183CAF9D2D7DFEA3D4FB51C";
@@ -28,6 +35,9 @@
     realName = "Eric Bailey";
   };
 
+@
+
+<<machines/hacktop/home.nix>>=
   home.packages = with pkgs; (
     [
       carla
@@ -41,6 +51,13 @@
     )
   );
 
+@
+
+<<machines/hacktop/home.nix>>=
   _module.args.pkgs = lib.mkForce pkgs;
 
+@
+
+<<machines/hacktop/home.nix>>=
 }
+@

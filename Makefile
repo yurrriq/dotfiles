@@ -46,6 +46,8 @@ rebar3 \
 taskwarrior/default \
 )\
 $(addprefix machines/,\
+hacktop/configuration \
+hacktop/home \
 nixps/configuration \
 nixps/home \
 sruxps/configuration \

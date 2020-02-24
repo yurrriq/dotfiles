@@ -1,9 +1,16 @@
+<<machines/hacktop/configuration.nix>>=
 { config, lib, pkgs, ... }:
+@
+
+<<machines/hacktop/configuration.nix>>=
 let
   username = "mohacker";
 in
 {
 
+@
+
+<<machines/hacktop/configuration.nix>>=
   imports = [
     ../../nix
     ../../modules/common.nix
@@ -13,20 +20,35 @@ in
     <home-manager/nix-darwin>
   ];
 
+@
+
+<<machines/hacktop/configuration.nix>>=
   airportCode = "MSP";
 
+@
+
+<<machines/hacktop/configuration.nix>>=
   environment.darwinConfig = "$HOME/.config/nixpkgs/machines/hacktop/configuration.nix";
 
+@
+
+<<machines/hacktop/configuration.nix>>=
   environment.pathsToLink = [
     "/lib/aspell"
     "/share/emacs/site-lisp"
     "/share/fish"
   ];
 
+@
+
+<<machines/hacktop/configuration.nix>>=
   home-manager.useUserPackages = true;
   home-manager.users."${username}" = args:
     import ./home.nix (args // { inherit pkgs; });
 
+@
+
+<<machines/hacktop/configuration.nix>>=
   nix = {
     buildCores = 8;
 
@@ -47,6 +69,9 @@ in
     trustedUsers = [ "root" username ];
   };
 
+@
+
+<<machines/hacktop/configuration.nix>>=
   nixpkgs.overlays =
     let
       path = <nixpkgs-overlays>;
@@ -68,6 +93,9 @@ in
         ]
       );
 
+@
+
+<<machines/hacktop/configuration.nix>>=
   services = {
     activate-system.enable = true;
     nix-daemon = {
@@ -76,4 +104,8 @@ in
     };
   };
 
+@
+
+<<machines/hacktop/configuration.nix>>=
 }
+@
