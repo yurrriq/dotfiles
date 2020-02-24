@@ -28,7 +28,7 @@
     jira.base_uri = https://jira.sportradar.ag
     jira.username = e.bailey
     jira.password = @oracle:eval:pass jira.sportradar.ag
-    jira.query = assignee = e.bailey and resolution = unresolved
+    jira.query = ((assignee = e.bailey OR reporter = e.bailey) OR (summary ~ e.baley OR description ~ e.bailey OR comment ~ e.bailey)) AND resolution = Unresolved
     jira.version = 8
     jira.add_tags = work
     jira.description_template = {{jiraid}}: {{jirasummary}}

@@ -5,15 +5,24 @@
 
 {
 
+@
+
+<<config/bugwarrior.nix>>=
   home.packages = with pkgs; [
     bugwarrior
     pass
   ];
 
+@
+
+<<config/bugwarrior.nix>>=
   imports = [
     ./taskwarrior
   ];
 
+@
+
+<<config/bugwarrior.nix>>=
   xdg.configFile."bugwarrior/bugwarriorrc".text = ''
     [general]
     targets = sportradar_jira
@@ -31,11 +40,18 @@
     jira.base_uri = https://jira.sportradar.ag
     jira.username = e.bailey
     jira.password = @oracle:eval:pass jira.sportradar.ag
-    jira.query = assignee = e.bailey and resolution = unresolved
+    jira.query = ((assignee = e.bailey OR reporter = e.bailey) OR (summary ~ e.baley OR description ~ e.bailey OR comment ~ e.bailey)) AND resolution = Unresolved
     jira.version = 8
     jira.add_tags = work
     jira.description_template = {{jiraid}}: {{jirasummary}}
   '';
 
+@
+
+<<config/bugwarrior.nix>>=
 }
 @
+
+%% Local Variables:
+%% noweb-code-mode: nix-mode
+%% End:
