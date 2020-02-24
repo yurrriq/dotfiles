@@ -57,23 +57,26 @@ in
   };
 
   nixpkgs.overlays =
-    let path = <nixpkgs-overlays>; in with builtins;
-    map (n: import (path + ("/" + n)))
-      (
-        filter (
-          n: match ".*\\.nix" n != null
-          || pathExists (path + ("/" + n + "/default.nix"))
+    let
+      path = <nixpkgs-overlays>;
+    in
+      with builtins;
+      map (n: import (path + ("/" + n)))
+        (
+          filter (
+            n: match ".*\\.nix" n != null
+            || pathExists (path + ("/" + n + "/default.nix"))
+          )
+            (attrNames (readDir path))
         )
-          (attrNames (readDir path))
-      )
-    ++ (
-      with (import <nurpkgs> {}).overlays; [
-        nur
-        engraving
-        git
-        node
-      ]
-    );
+      ++ (
+        with (import <nurpkgs> {}).overlays; [
+          nur
+          engraving
+          git
+          node
+        ]
+      );
 
   security.sudo = {
     enable = true;
