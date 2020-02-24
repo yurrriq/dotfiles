@@ -77,6 +77,11 @@ all: generate-config nix-srcs ${SH_SRCS} ${OTHER_SRCS} docs/dotfiles.pdf
 nix-srcs: ${NIX_SRCS}
 
 
+.PHONY: nixpkgs-fmt
+nixpkgs-fmt: nix-srcs
+	nixpkgs-fmt ${NIX_SRCS}
+
+
 .PHONY: tex
 tex: ${TEX_SRCS}
 
