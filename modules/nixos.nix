@@ -15,13 +15,6 @@
     };
   };
 
-  fonts = {
-    enableFontDir = true;
-    fonts = with pkgs; [
-      iosevka
-    ];
-  };
-
   i18n = {
     # consoleFont = "latarcyrheb-sun32";
     consoleFont = "Lat2-Terminus16";

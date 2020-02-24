@@ -23,10 +23,13 @@
 
   };
 
-  programs = {
-
-    bash.enableCompletion = true;
-
+  fonts = {
+    enableFontDir = true;
+    fonts = with pkgs; [
+      iosevka
+    ];
   };
+
+  programs.bash.enableCompletion = true;
 
 }

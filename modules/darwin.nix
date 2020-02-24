@@ -2,6 +2,8 @@
 
 {
 
+  nixpkgs.config.allowUnfree = true;
+
   services.chunkwm = {
     enable = true;
     extraConfig = ''
