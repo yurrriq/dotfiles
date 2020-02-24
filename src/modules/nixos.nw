@@ -1,12 +1,21 @@
+\section{NixOS}
+
+<<modules/nixos.nix>>=
 { pkgs, ... }:
 
 {
 
+@
+
+<<modules/nixos.nix>>=
   imports = with (import <nurpkgs> {}).modules; [
     pass
     tomb
   ];
 
+@
+
+<<modules/nixos.nix>>=
   boot = {
     cleanTmpDir = true;
     loader = {
@@ -15,6 +24,9 @@
     };
   };
 
+@
+
+<<modules/nixos.nix>>=
   i18n = {
     # consoleFont = "latarcyrheb-sun32";
     consoleFont = "Lat2-Terminus16";
@@ -22,12 +34,24 @@
     defaultLocale = "en_US.UTF-8";
   };
 
+@
+
+<<modules/nixos.nix>>=
   location.provider = "manual";
 
+@
+
+<<modules/nixos.nix>>=
   networking.networkmanager.enable = true;
 
+@
+
+<<modules/nixos.nix>>=
   nixpkgs.config.allowUnfree = true;
 
+@
+
+<<modules/nixos.nix>>=
   programs = {
     pass = {
       enable = true;
@@ -43,6 +67,9 @@
     };
   };
 
+@
+
+<<modules/nixos.nix>>=
   services = {
     logind.lidSwitch = "hibernate";
 
@@ -61,6 +88,9 @@
       timeout = 1;
     };
 
+@
+
+<<modules/nixos.nix>>=
     xserver = {
       enable = true;
 
@@ -103,6 +133,9 @@
     };
   };
 
+@
+
+<<modules/nixos.nix>>=
   hardware.pulseaudio = {
     enable = true;
     extraModules = [ pkgs.pulseaudio-modules-bt ];
@@ -110,8 +143,22 @@
   };
   sound.enable = true;
 
+@
+
+<<modules/nixos.nix>>=
   system.stateVersion = "19.09";
 
+@
+
+<<modules/nixos.nix>>=
   virtualisation.docker.enable = true;
 
+@
+
+<<modules/nixos.nix>>=
 }
+@
+
+%% Local Variables:
+%% noweb-code-mode: nix-mode
+%% End:

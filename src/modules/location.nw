@@ -1,16 +1,33 @@
+\section{Location}
+
+<<modules/location.nix>>=
 { config, lib, ... }:
+@
+
+<<modules/location.nix>>=
 let
   airportCode = config.airportCode;
 in
 {
 
+@
+
+<<modules/location.nix>>=
   options.airportCode = lib.mkOption {
     default = "MSP";
     type = lib.types.enum [ "ATL" /* "LHR" */ "LJU" "MSP" "TRD" ];
   };
 
+@
+
+<<modules/location.nix>>=
   config = lib.mkMerge [
 
+@
+
+The Sportradar office in Minneapolis.
+
+<<modules/location.nix>>=
     (
       lib.mkIf (airportCode == "MSP") {
         location = {
@@ -20,6 +37,11 @@ in
         time.timeZone = "America/Chicago";
       }
     )
+@
+
+Cook Out on Ponce de Leon Ave.
+
+<<modules/location.nix>>=
     (
       lib.mkIf (airportCode == "ATL") {
         location = {
@@ -29,6 +51,11 @@ in
         time.timeZone = "America/New_York";
       }
     )
+@
+
+The Sportradar office in London.
+
+<<modules/location.nix>>=
     (
       lib.mkIf (airportCode == "LHR") {
         location = {
@@ -38,6 +65,11 @@ in
         time.timeZone = "Europe/London";
       }
     )
+@
+
+The Sportradar office in Ljubljana.
+
+<<modules/location.nix>>=
     (
       lib.mkIf (airportCode == "LJU") {
         location = {
@@ -47,6 +79,11 @@ in
         time.timeZone = "Europe/Ljubljana";
       }
     )
+@
+
+The Sportradar office in Trondheim.
+
+<<modules/location.nix>>=
     (
       lib.mkIf (airportCode == "TRD") {
         location = {
@@ -56,6 +93,14 @@ in
         time.timeZone = "Europe/Oslo";
       }
     )
+@
+
+<<modules/location.nix>>=
   ];
 
 }
+@
+
+%% Local Variables:
+%% noweb-code-mode: nix-mode
+%% End:

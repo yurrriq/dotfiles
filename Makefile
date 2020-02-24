@@ -52,6 +52,13 @@ nixps/configuration \
 nixps/home \
 sruxps/configuration \
 sruxps/home \
+)\
+$(addprefix modules/,\
+common \
+darwin \
+location \
+nixos \
+packages \
 ))
 
 SH_SRCS := \

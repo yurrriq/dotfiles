@@ -1,9 +1,17 @@
+\section{Darwin}
+<<modules/darwin.nix>>=
 { pkgs, ... }:
 
 {
 
+@
+
+<<modules/darwin.nix>>=
   nixpkgs.config.allowUnfree = true;
 
+@
+
+<<modules/darwin.nix>>=
   services.chunkwm = {
     enable = true;
     extraConfig = ''
@@ -36,6 +44,9 @@
     };
   };
 
+@
+
+<<modules/darwin.nix>>=
   services.skhd = {
     enable = true;
     package = pkgs.skhd;
@@ -65,6 +76,16 @@
     '';
   };
 
+@
+
+\todo[backgroundcolor=orange!50,bordercolor=orange,linecolor=orange]{%
+  Dig through \url{https://github.com/mathiasbynens/dotfiles/blob/master/.macos}%
+}
+
+Set \nix{AppleKeyboardUIMode = 3} to enable full keyboard access, e.g. tab in
+dialogs. Disable press-and-hold, in favor of key repeat.
+
+<<modules/darwin.nix>>=
   system.defaults.NSGlobalDomain = {
     AppleKeyboardUIMode = 3;
 
@@ -80,6 +101,9 @@
     NSNavPanelExpandedStateForSaveMode2 = true;
   };
 
+@
+
+<<modules/darwin.nix>>=
   system.defaults.dock = {
     autohide = true;
     mru-spaces = false;
@@ -87,12 +111,22 @@
     showhidden = true;
   };
 
+@
+
+<<modules/darwin.nix>>=
   system.defaults.finder = {
     AppleShowAllExtensions = true;
     FXEnableExtensionChangeWarning = false;
     QuitMenuItem = true;
   };
 
+@
+
+<<modules/darwin.nix>>=
   system.defaults.trackpad.Clicking = true;
 
+@
+
+<<modules/darwin.nix>>=
 }
+@

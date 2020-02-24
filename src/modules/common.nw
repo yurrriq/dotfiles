@@ -1,7 +1,13 @@
+\section{Common}
+
+<<modules/common.nix>>=
 { pkgs, ... }:
 
 {
 
+@
+
+<<modules/common.nix>>=
   nix = {
     binaryCaches = [
       # "https://cache.nixos.org"
@@ -19,6 +25,9 @@
     };
   };
 
+@
+
+<<modules/common.nix>>=
   fonts = {
     enableFontDir = true;
     fonts = with pkgs; [
@@ -26,6 +35,13 @@
     ];
   };
 
+@
+
+<<modules/common.nix>>=
   programs.bash.enableCompletion = true;
 
+@
+
+<<modules/common.nix>>=
 }
+@
