@@ -1,0 +1,58 @@
+<<machines/nixps/home.nix>>=
+{ lib, pkgs, ... }:
+
+{
+
+@
+
+<<machines/nixps/home.nix>>=
+  imports = [
+    ../../config/bat.nix
+    ../../config/browserpass.nix
+    ../../config/direnv.nix
+    ../../config/emacs
+    ../../config/firefox.nix
+    ../../config/fish
+    ../../config/fzf.nix
+    ../../config/git
+    ../../config/gpg.nix
+    ../../config/htop.nix
+    ../../config/i3
+    ../../config/jq.nix
+    ../../config/kitty
+    ../../config/man.nix
+    ../../config/nixpkgs
+    ../../config/rebar3.nix
+    # TODO: ../../config/taskwarrior
+    # TODO: ../../config/vim.nix
+  ];
+
+@
+
+<<machines/nixps/home.nix>>=
+  accounts.email.accounts.primary = {
+    address = "eric@ericb.me";
+    gpg.key = "F88372B24A806FF23BCB3A4E2DDDF8606958B3F9";
+    # gpg.key = "0CBFCE8BC161F36E2E156A526E5EAB98B1F77A17";
+    primary = true;
+    realName = "Eric Bailey";
+  };
+
+@
+
+<<machines/nixps/home.nix>>=
+  home.packages = with pkgs; [
+    carla
+    reaper
+  ];
+
+@
+
+<<machines/nixps/home.nix>>=
+  _module.args.pkgs = lib.mkForce pkgs;
+
+@
+
+<<machines/nixps/home.nix>>=
+}
+@

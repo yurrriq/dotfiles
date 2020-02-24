@@ -1,8 +1,15 @@
+<<machines/nixps/configuration.nix>>=
 { config, lib, pkgs, ... }:
+@
+
+<<machines/nixps/configuration.nix>>=
 let
   username = "yurrriq";
 in
 {
+@
+
+<<machines/nixps/configuration.nix>>=
   imports = [
     <nixos-hardware/dell/xps/15-9550>
     ./hardware-configuration.nix
@@ -14,31 +21,52 @@ in
     <home-manager/nixos>
   ];
 
+@
+
+<<machines/nixps/configuration.nix>>=
   airportCode = "MSP";
 
+@
+
+<<machines/nixps/configuration.nix>>=
   boot.initrd.luks.devices = {
     root = {
       device = "/dev/nvme0n1p2";
     };
   };
 
+@
+
+<<machines/nixps/configuration.nix>>=
   environment.pathsToLink = [
     "/lib/aspell"
     "/share/emacs/site-lisp"
     "/share/fish"
   ];
 
+@
+
+<<machines/nixps/configuration.nix>>=
   fonts.fonts = with pkgs; [
     fira-code
     fira-code-symbols
   ];
 
+@
+
+<<machines/nixps/configuration.nix>>=
   home-manager.useUserPackages = true;
   home-manager.users."${username}" = args:
     import ./home.nix (args // { inherit pkgs; });
 
+@
+
+<<machines/nixps/configuration.nix>>=
   networking.hostName = "nixps";
 
+@
+
+<<machines/nixps/configuration.nix>>=
   nix = {
 
     buildCores = 8;
@@ -52,6 +80,9 @@ in
 
   };
 
+@
+
+<<machines/nixps/configuration.nix>>=
   nixpkgs.overlays =
     let
       path = <nixpkgs-overlays>;
@@ -74,6 +105,9 @@ in
         ]
       );
 
+@
+
+<<machines/nixps/configuration.nix>>=
   security.sudo = {
     enable = true;
     extraConfig = ''
@@ -81,6 +115,9 @@ in
     '';
   };
 
+@
+
+<<machines/nixps/configuration.nix>>=
   services.xserver.displayManager.lightdm.autoLogin = {
     enable = true;
     user = username;
@@ -88,6 +125,9 @@ in
 
   services.xserver.dpi = 180;
 
+@
+
+<<machines/nixps/configuration.nix>>=
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
@@ -109,4 +149,8 @@ in
     shell = "/etc/profiles/per-user/${username}/bin/fish";
   };
 
+@
+
+<<machines/nixps/configuration.nix>>=
 }
+@
