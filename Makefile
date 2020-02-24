@@ -16,7 +16,8 @@ endif
 stow       := stow ${stow_flags}
 
 
-NIX_SRCS := $(addprefix config/,$(addsuffix .nix,\
+NIX_SRCS := $(addsuffix .nix,\
+$(addprefix config/,\
 bash \
 bat \
 browserpass \
@@ -43,6 +44,10 @@ nixpkgs/default \
 nixpkgs/nixpkgs-config \
 rebar3 \
 taskwarrior/default \
+)\
+$(addprefix machines/,\
+sruxps/configuration \
+sruxps/home \
 ))
 
 SH_SRCS := \

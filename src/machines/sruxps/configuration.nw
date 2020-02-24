@@ -1,9 +1,26 @@
+\subsection{NixOS configuration}
+\begin{marginfigure}
+<<machines/sruxps/configuration.nix>>=
 { config, lib, pkgs, ... }:
+
+@
+\end{marginfigure}
+
+<<machines/sruxps/configuration.nix>>=
 let
   username = "e.bailey";
 in
+
+@
+
+\begin{marginfigure}
+<<machines/sruxps/configuration.nix>>=
 {
 
+@
+\end{marginfigure}
+
+<<machines/sruxps/configuration.nix>>=
   imports = [
     <nixos-hardware/dell/xps/13-9380>
     ./hardware-configuration.nix
@@ -15,8 +32,14 @@ in
     <home-manager/nixos>
   ];
 
+@
+
+<<machines/sruxps/configuration.nix>>=
   airportCode = "MSP";
 
+@
+
+<<machines/sruxps/configuration.nix>>=
   boot.initrd.luks.devices = {
     cryptkey.device = "/dev/disk/by-uuid/603b64c6-8544-4b43-9b6a-7d8a08091514";
     cryptroot.keyFile = "/dev/mapper/cryptkey";
@@ -26,12 +49,18 @@ in
     };
   };
 
+@
+
+<<machines/sruxps/configuration.nix>>=
   environment.pathsToLink = [
     "/lib/aspell"
     "/share/emacs/site-lisp"
     "/share/fish"
   ];
 
+@
+
+<<machines/sruxps/configuration.nix>>=
   hardware.bluetooth = {
     enable = true;
     extraConfig = ''
@@ -40,12 +69,21 @@ in
     '';
   };
 
+@
+
+<<machines/sruxps/configuration.nix>>=
   home-manager.useUserPackages = true;
   home-manager.users."${username}" = args:
     import ./home.nix (args // { inherit pkgs; });
 
+@
+
+<<machines/sruxps/configuration.nix>>=
   networking.hostName = "MSP-EBAILEY01";
 
+@
+
+<<machines/sruxps/configuration.nix>>=
   nix = {
     buildMachines = [
       {
@@ -67,6 +105,9 @@ in
     trustedUsers = [ "root" username ];
   };
 
+@
+
+<<machines/sruxps/configuration.nix>>=
   nixpkgs.overlays =
     let path = <nixpkgs-overlays>; in with builtins;
     map (n: import (path + ("/" + n)))
@@ -85,6 +126,9 @@ in
       ]
     );
 
+@
+
+<<machines/sruxps/configuration.nix>>=
   security.sudo = {
     enable = true;
     extraConfig = ''
@@ -92,6 +136,9 @@ in
     '';
   };
 
+@
+
+<<machines/sruxps/configuration.nix>>=
   services.blueman.enable = true;
 
   services.fwupd.enable = true;
@@ -102,6 +149,9 @@ in
     DisplaySize 406 228
   '';
 
+@
+
+<<machines/sruxps/configuration.nix>>=
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
@@ -123,4 +173,10 @@ in
     shell = "/etc/profiles/per-user/${username}/bin/fish";
   };
 
+@
+
+\begin{marginfigure}
+<<machines/sruxps/configuration.nix>>=
 }
+@
+\end{marginfigure}
