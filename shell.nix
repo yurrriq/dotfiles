@@ -4,7 +4,7 @@ let
 in
 pkgs.mkShell {
   inherit (pkg) FONTCONFIG_FILE;
-  buildInputs = pkg.buildInputs ++ (
+  buildInputs = pkg.nativeBuildInputs ++ (
     with pkgs; (
       [
         biber
