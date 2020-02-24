@@ -70,7 +70,11 @@ NW_SRCS := $(shell find src -name '*.nw')
 TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
 
 .PHONY: all
-all: generate-config ${NIX_SRCS} ${SH_SRCS} ${OTHER_SRCS} docs/dotfiles.pdf
+all: generate-config nix-srcs ${SH_SRCS} ${OTHER_SRCS} docs/dotfiles.pdf
+
+
+.PHONY: nix-srcs
+nix-srcs: ${NIX_SRCS}
 
 
 .PHONY: tex
