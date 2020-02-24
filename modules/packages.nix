@@ -52,7 +52,8 @@
             todonotes
             tufte-latex
             xetex
-            xstring;
+            xstring
+            ;
           inherit noweb;
         }
       )
