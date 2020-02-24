@@ -15,13 +15,13 @@ gawk '
      cmd = "guessPygmentizeLexer.py "ary1[2]
      cmd | getline var
      print "@text \\begin{minted}[mathescape]{"var"}";
-     echo = 1;  
-     next; 
+     echo = 1;
+     next;
    }
 }
 
 /^@end code*/ {
-   if (isCCode == 0) { 
+   if (isCCode == 0) {
       print; next;
    }
    else {
@@ -37,4 +37,4 @@ gawk '
 /^@.*/ {if (echo == 1) { print }}
 '
 
-$*
+"$@"
