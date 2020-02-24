@@ -70,7 +70,7 @@ NW_SRCS := $(shell find src -name '*.nw')
 TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
 
 .PHONY: all
-all: ${NIX_SRCS} ${SH_SRCS} ${OTHER_SRCS} docs/dotfiles.pdf
+all: generate-config ${NIX_SRCS} ${SH_SRCS} ${OTHER_SRCS} docs/dotfiles.pdf
 
 
 .PHONY: tex
@@ -180,3 +180,11 @@ update:
 	@ git add ${sources}
 	@ jq '"[nix/${package}]: ${rev} -> \(.["${package}"].rev[:8])"' \
 	${sources} | xargs git commit -m
+
+
+.PHONY: generate-config
+generate-config: machines/${machine}/hardware-configuration.nix
+
+machines/${machine}/hardware-configuration.nix:
+	nixos-generate-config --root ${PWD} --dir /$(@D)
+	nixpkgs-fmt $@
