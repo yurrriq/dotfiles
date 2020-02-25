@@ -1,11 +1,21 @@
 \section{Common}
 
+This module is a lambda that takes at least \nix{pkgs} in its arguments.
+
 <<modules/common.nix>>=
 { pkgs, ... }:
 
 {
 
 @
+
+Configure garbage collection (\nix{gc}) and my personal
+\hrefootnote{https://cachix.org}{Cachix}-based \nix{binaryCaches}.
+
+\begin{itemize}
+  \item \url{https://yurrriq.cachix.org}
+  \item \url{https://yurrriq-nur-packages.cachix.org}
+\end{itemize}
 
 <<modules/common.nix>>=
   nix = {
@@ -25,6 +35,9 @@
 
 @
 
+Installed the Nerd Fonts\todoo{Add Nerd Fonts link} patched
+Iosevka\todoo{Add Iosevka link}.
+
 <<modules/common.nix>>=
   fonts = {
     enableFontDir = true;
@@ -34,6 +47,8 @@
   };
 
 @
+
+Enable system-wide Bash completion.
 
 <<modules/common.nix>>=
   programs.bash.enableCompletion = true;
