@@ -95,7 +95,7 @@ Null prefix argument turns off the mode."
   :ensure t
   :config
   (editorconfig-mode 1))
-(use-package emojify-mode
+(use-package emojify
   :demand
   :config
   (global-emojify-mode)

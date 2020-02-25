@@ -167,7 +167,7 @@ Null prefix argument turns off the mode."
 @
 
 <<config/emacs/init.el>>=
-(use-package emojify-mode
+(use-package emojify
   :demand
   :config
   (global-emojify-mode)
