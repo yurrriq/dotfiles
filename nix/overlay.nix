@@ -1,5 +1,7 @@
 self: super: rec {
 
+  inherit (import (import ./sources.nix).niv { pkgs = super; }) niv;
+
   noweb = super.noweb.override {
     icon-lang = super.icon-lang.override {
       withGraphics = false;

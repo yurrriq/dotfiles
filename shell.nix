@@ -14,6 +14,7 @@ pkgs.mkShell {
         gnupg
         python3
         mkpasswd
+        niv
         shellcheck
         shfmt
         sops
