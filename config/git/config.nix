@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
 
@@ -31,7 +31,7 @@
     core.pager = "diff-so-fancy | less --tabs=4 -RFX";
 
     credential = {
-      helper = "pass-git-helper";
+      helper = "${pkgs.gitAndTools.pass-git-helper}/bin/pass-git-helper";
       useHttpPath = true;
     };
 
