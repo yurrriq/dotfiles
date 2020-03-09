@@ -80,6 +80,8 @@ NW_SRCS := $(shell find src -name '*.nw')
 
 TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
 
+DEFS := $(patsubst src/%.nw,src/%.defs,${NW_SRCS}) src/all.defs
+
 .PHONY: all
 all: generate-config nix-srcs ${SH_SRCS} ${OTHER_SRCS} docs/dotfiles.pdf
 
@@ -99,9 +101,10 @@ tex: ${TEX_SRCS}
 
 .PHONY: clean
 clean:
-	@ rm -f ${TEX_SRCS}
+	@ rm -f ${TEX_SRCS} ${DEFS}
 	@ latexmk $(latexmk_flags) -c -f docs/dotfiles.pdf
 	@ rm -fr docs/_minted-dotfiles
+
 
 .PHONY: clobber
 clobber:
@@ -115,11 +118,11 @@ install: all clean
 	@ echo "[PDF](./${PDF})" >${PREFIX}/index.md
 
 
-
-# @ noindex src/dotfiles
 docs/%.pdf: export TZ='America/Chicago'
 docs/%.pdf: src/%.tex src/preamble.tex src/glossary.tex src/%.bib ${TEX_SRCS}
 	@ mkdir -p $(@D)
+	@ latexmk $(latexmk_flags) -outdir=../$(@D) $<
+	@ noindex src/dotfiles
 	@ latexmk $(latexmk_flags) -outdir=../$(@D) $<
 
 
@@ -127,14 +130,14 @@ src/%.defs: src/%.nw
 	nodefs $< >$@
 
 
-src/all.defs: $(patsubst src/%.nw,src/%.defs,${NW_SRCS})
+src/all.defs: ${DEFS}
 	sort -u $^ ${cpif} $@
 
 
 # .INTERMEDIATE: ${TEX_SRCS}
-src/%.tex: src/%.nw # src/all.defs
-	noweave -delay -latex -n -filter fix-underscores -filter noweb-minted $^ ${cpif} $@
-# noweave -delay -indexfrom src/all.defs -latex -n -filter noweb-minted $^ ${cpif} $@
+src/%.tex: src/%.nw src/all.defs
+	noweave -delay -indexfrom src/all.defs -latex -n -filter fix-underscores $^ ${cpif} $@
+
 
 # TODO: be lazier/smarter about these rules
 
