@@ -101,7 +101,7 @@ tex: ${TEX_SRCS}
 
 .PHONY: clean
 clean:
-	@ rm -f ${TEX_SRCS} ${DEFS}
+	@ rm -f ${TEX_SRCS} ${DEFS} src/dotfiles.nwi
 	@ latexmk $(latexmk_flags) -c -f docs/dotfiles.pdf
 	@ rm -fr docs/_minted-dotfiles
 
