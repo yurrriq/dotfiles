@@ -22,7 +22,6 @@
     ../../config/nixpkgs
     ../../config/rebar3.nix
     ../../config/taskwarrior
-    # TODO: ../../config/vim.nix
   ];
 
   accounts.email.accounts.primary = {
@@ -36,15 +35,11 @@
     [
       aws-iam-authenticator
       ec2instanceconnectcli
-      # dhall
-      # dhall-json
-      # docker-compose
       ghc
       iw
       jdk
       naal
       networkmanager-openconnect
-      # next
       openconnect
       pavucontrol
       renderizer
