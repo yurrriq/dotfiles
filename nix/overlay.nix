@@ -17,6 +17,7 @@ self: super: rec {
       dirtytalk
       fmtcount
       framed
+      frankenstein
       fvextra
       glossaries
       glossaries-extra
