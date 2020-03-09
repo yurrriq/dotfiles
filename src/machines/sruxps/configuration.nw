@@ -1,197 +1,197 @@
 \subsection{NixOS configuration}
-\begin{marginfigure}
-<<machines/sruxps/configuration.nix>>=
-{ config, lib, pkgs, ... }:
-@
-\end{marginfigure}
+
+The SRUXPS configuration is an expression that takes, at least, \nix{config},
+\nix{lib}, and \nix{pkgs}.
 
 <<machines/sruxps/configuration.nix>>=
+{ config, lib, pkgs, ... }:
 let
   username = "e.bailey";
 in
-@
-
-\begin{marginfigure}
-<<machines/sruxps/configuration.nix>>=
 {
 
-@
-\end{marginfigure}
+  <<Import hardware config and modules>>
 
-<<machines/sruxps/configuration.nix>>=
-  imports = [
-    <nixos-hardware/dell/xps/13-9380>
-    ./hardware-configuration.nix
-    ../../nix
-    ../../modules/common.nix
-    ../../modules/location.nix
-    ../../modules/nixos.nix
-    ../../modules/packages.nix
-    <home-manager/nixos>
-  ];
+  <<Set the location to MSP>>
 
-@
+  <<Configure the LUKS devices>>
 
-<<machines/sruxps/configuration.nix>>=
-  airportCode = "MSP";
+  <<Link some extra paths>>
 
-@
+  <<Configure the file systems>>
 
-<<machines/sruxps/configuration.nix>>=
-  boot.initrd.luks.devices = {
-    cryptkey.device = "/dev/disk/by-uuid/603b64c6-8544-4b43-9b6a-7d8a08091514";
-    cryptroot.device = "/dev/disk/by-uuid/a81783fe-31ec-4762-a845-4b5be1900e61";
-    cryptroot.keyFile = "/dev/mapper/cryptkey";
-    cryptswap = {
-      device = "/dev/disk/by-uuid/565c0358-110e-4279-ba59-619cb2cc1ebf";
-      keyFile = "/dev/mapper/cryptkey";
-    };
-  };
+  <<Configure Bluetooth>>
 
-@
+  <<Configure home-manager>>
 
-<<machines/sruxps/configuration.nix>>=
-  environment.pathsToLink = [
-    "/lib/aspell"
-    "/share/emacs/site-lisp"
-    "/share/fish"
-  ];
+  <<Configure networking>>
 
-@
+  <<Configure Nix>>
 
-<<machines/sruxps/configuration.nix>>=
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/3e6e5ef8-7c9d-4759-94bd-44ac093add8a";
-    fsType = "ext4";
-  };
+  <<Configure overlays>>
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/3898-907E";
-    fsType = "vfat";
-  };
+  <<Configure sudo>>
 
-@
+  <<Configure services>>
 
-<<machines/sruxps/configuration.nix>>=
-  hardware.bluetooth = {
-    enable = true;
-    extraConfig = ''
-      [General]
-      Enable=Source,Sink,Media,Socket
-    '';
-  };
+  <<Configure user>>
 
-@
-
-<<machines/sruxps/configuration.nix>>=
-  home-manager.useUserPackages = true;
-  home-manager.users."${username}" = args:
-    import ./home.nix (args // { inherit pkgs; });
-
-@
-
-<<machines/sruxps/configuration.nix>>=
-  networking.hostName = "MSP-EBAILEY01";
-
-@
-
-<<machines/sruxps/configuration.nix>>=
-  nix = {
-    buildMachines = [
-      {
-        hostName = "nix-builder-0";
-        sshKey = "/root/.ssh/nix-builder-0.pem";
-        sshUser = "root";
-        system = "x86_64-linux";
-        maxJobs = 2;
-      }
-    ];
-    distributedBuilds = true;
-    extraOptions = ''
-      builders-use-substitutes = true
-    '';
-    nixPath = [
-      "nixos-config=/etc/nixos/configuration.nix"
-      "nixpkgs-overlays=/etc/nixos/overlays"
-    ];
-    trustedUsers = [ "root" username ];
-  };
-
-@
-
-<<machines/sruxps/configuration.nix>>=
-  nixpkgs.overlays =
-    let
-      path = <nixpkgs-overlays>;
-    in
-      with builtins;
-      map (n: import (path + ("/" + n)))
-        (
-          filter (
-            n: match ".*\\.nix" n != null
-            || pathExists (path + ("/" + n + "/default.nix"))
-          )
-            (attrNames (readDir path))
-        )
-      ++ (
-        with (import <nurpkgs> {}).overlays; [
-          nur
-          git
-          node
-        ]
-      );
-
-@
-
-<<machines/sruxps/configuration.nix>>=
-  security.sudo = {
-    enable = true;
-    extraConfig = ''
-      ${username} ALL=(ALL) NOPASSWD: ALL
-    '';
-  };
-
-@
-
-<<machines/sruxps/configuration.nix>>=
-  services.blueman.enable = true;
-
-  services.fwupd.enable = true;
-
-  # TODO: services.lorri.enable = true;
-
-  services.xserver.monitorSection = ''
-    DisplaySize 406 228
-  '';
-
-@
-
-<<machines/sruxps/configuration.nix>>=
-  users.mutableUsers = false;
-  users.users."${username}" = {
-    name = username;
-    hashedPassword = lib.fileContents (./. + "/secrets/${username}.hashedPassword");
-    group = "users";
-    extraGroups = [
-      "audio"
-      "disk"
-      "docker"
-      "http"
-      "networkmanager"
-      "systemd-journal"
-      "video"
-      "wheel"
-    ];
-    createHome = true;
-    uid = 1001;
-    home = "/home/${username}";
-    shell = "/etc/profiles/per-user/${username}/bin/fish";
-  };
-
-@
-
-\begin{marginfigure}
-<<machines/sruxps/configuration.nix>>=
 }
 @
-\end{marginfigure}
+
+Import the hardware config and other Nix \glspl{module}.
+
+<<Import hardware config and modules>>=
+imports = [
+  <nixos-hardware/dell/xps/13-9380>
+  ./hardware-configuration.nix
+  ../../nix
+  ../../modules/common.nix
+  ../../modules/location.nix
+  ../../modules/nixos.nix
+  ../../modules/packages.nix
+  <home-manager/nixos>
+];
+@
+
+\todoo{Describe the location module}
+
+<<Set the location to MSP>>=
+airportCode = "MSP";
+@
+
+Configure the \href{https://gitlab.com/cryptsetup/cryptsetup/}{\acrshort{luks}}
+devices.
+
+<<Configure the LUKS devices>>=
+boot.initrd.luks.devices = {
+  cryptkey.device = "/dev/disk/by-uuid/603b64c6-8544-4b43-9b6a-7d8a08091514";
+  cryptroot.device = "/dev/disk/by-uuid/a81783fe-31ec-4762-a845-4b5be1900e61";
+  cryptroot.keyFile = "/dev/mapper/cryptkey";
+  cryptswap = {
+    device = "/dev/disk/by-uuid/565c0358-110e-4279-ba59-619cb2cc1ebf";
+    keyFile = "/dev/mapper/cryptkey";
+  };
+};
+@
+
+<<Link some extra paths>>=
+environment.pathsToLink = [
+  "/lib/aspell"
+  "/share/emacs/site-lisp"
+  "/share/fish"
+];
+@
+
+<<Configure the file systems>>=
+fileSystems."/" = {
+  device = "/dev/disk/by-uuid/3e6e5ef8-7c9d-4759-94bd-44ac093add8a";
+  fsType = "ext4";
+};
+
+fileSystems."/boot" = {
+  device = "/dev/disk/by-uuid/3898-907E";
+  fsType = "vfat";
+};
+@
+
+<<Configure Bluetooth>>=
+hardware.bluetooth = {
+  enable = true;
+  extraConfig = ''
+    [General]
+    Enable=Source,Sink,Media,Socket
+  '';
+};
+@
+
+<<Configure home-manager>>=
+home-manager.useUserPackages = true;
+home-manager.users."${username}" = args:
+  import ./home.nix (args // { inherit pkgs; });
+@
+
+<<Configure networking>>=
+networking.hostName = "MSP-EBAILEY01";
+@
+
+<<Configure Nix>>=
+nix = {
+  nixPath = [
+    "nixos-config=/etc/nixos/configuration.nix"
+    "nixpkgs-overlays=/etc/nixos/overlays"
+  ];
+  trustedUsers = [ "root" username ];
+};
+@
+
+<<Configure overlays>>=
+nixpkgs.overlays =
+  let
+    path = <nixpkgs-overlays>;
+  in
+    with builtins;
+    map (n: import (path + ("/" + n)))
+      (
+        filter (
+          n: match ".*\\.nix" n != null
+          || pathExists (path + ("/" + n + "/default.nix"))
+        )
+          (attrNames (readDir path))
+      )
+    ++ (
+      with (import <nurpkgs> {}).overlays; [
+        nur
+        git
+        node
+      ]
+    );
+@
+
+<<Configure sudo>>=
+security.sudo = {
+  enable = true;
+  extraConfig = ''
+    ${username} ALL=(ALL) NOPASSWD: ALL
+  '';
+};
+@
+
+<<Configure services>>=
+services.blueman.enable = true;
+
+services.fwupd.enable = true;
+
+# TODO: services.lorri.enable = true;
+
+services.xserver.monitorSection = ''
+  DisplaySize 406 228
+'';
+@
+
+<<Configure user>>=
+users.mutableUsers = false;
+users.users."${username}" = {
+  name = username;
+  hashedPassword = lib.fileContents (./. + "/secrets/${username}.hashedPassword");
+  group = "users";
+  extraGroups = [
+    "audio"
+    "disk"
+    "docker"
+    "http"
+    "networkmanager"
+    "systemd-journal"
+    "video"
+    "wheel"
+  ];
+  createHome = true;
+  uid = 1001;
+  home = "/home/${username}";
+  shell = "/etc/profiles/per-user/${username}/bin/fish";
+};
+@
+
+%% Local Variables:
+%% noweb-code-mode: nix-mode
+%% End:
