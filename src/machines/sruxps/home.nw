@@ -57,6 +57,13 @@ home.packages = with pkgs; (
     ec2instanceconnectcli
 @
 
+\hrefootnote{https://www.clementine-player.org/}{Clementine} is a great music
+player.
+
+<<Install some user packages>>=
+    clementine
+@
+
 I haven't used Dhall in a while, but it's still interesting.
 
 <<*>>=

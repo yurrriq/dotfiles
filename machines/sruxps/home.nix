@@ -35,6 +35,7 @@
     [
       aws-iam-authenticator
       ec2instanceconnectcli
+      clementine
       ghc
       iw
       jdk
