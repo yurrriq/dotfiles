@@ -43,6 +43,7 @@
 <<machines/nixps/home.nix>>=
   home.packages = with pkgs; [
     carla
+    clementine
     reaper
   ];
 

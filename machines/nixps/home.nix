@@ -33,6 +33,7 @@
 
   home.packages = with pkgs; [
     carla
+    clementine
     reaper
   ];
 
