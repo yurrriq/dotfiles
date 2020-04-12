@@ -1,7 +1,6 @@
 { config, lib, ... }:
 
 with (import ./sources.nix);
-
 let
   inherit (config) nurpkgs;
   inherit ((import nurpkgs {}).lib) seemsDarwin;
