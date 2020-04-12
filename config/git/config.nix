@@ -39,11 +39,9 @@
       sopsdiffer = {
         textconv = "sops -d";
       };
-      tool = "kitty";
     };
 
     difftool = {
-      kitty.cmd = "kitty +kitten diff $LOCAL $REMOTE";
       pdfdiffer.cmd = "diff-pdf --view \"$LOCAL\" \"$REMOTE\"";
       prompt = false;
       trustExitCode = true;

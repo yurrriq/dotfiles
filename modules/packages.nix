@@ -22,7 +22,6 @@
       httpie
       # TODO: http-prompt
       # TODO: idris
-      kitty
       moreutils
       neofetch
       nix

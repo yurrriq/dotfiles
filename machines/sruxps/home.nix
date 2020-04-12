@@ -2,7 +2,7 @@
 
 {
 
-  imports = [
+  imports = (import <nurpkgs> {}).home-manager.modules ++ [
     ../../config/bash.nix
     ../../config/bat.nix
     ../../config/browserpass.nix

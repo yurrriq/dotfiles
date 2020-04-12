@@ -3,11 +3,14 @@
 
 {
 
-  xdg.configFile."kitty/kitty.conf".source = ./kitty.conf;
-
-  xdg.configFile."kitty/diff.conf".text = ''
-    pygments_style monokai
-  '';
+  programs.kitty = {
+    enable = true;
+    config = {
+      editor = ''emacsclient -nw -a ""'';
+      scrollbackLines = -1;
+      term = "xterm";
+    };
+  };
 
 }
 @
