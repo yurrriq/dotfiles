@@ -1,14 +1,10 @@
 { config, lib, ... }:
+
+with (import ./sources.nix);
+
 let
-  sources = import ./sources.nix;
-
-  inherit (sources) darwin home-manager nixos-hardware nur;
-
-  seemsDarwin = null != builtins.match ".*darwin$" builtins.currentSystem;
-
-  nixpkgs = if seemsDarwin then sources.nixpkgs-darwin else sources.nixpkgs;
-
   inherit (config) nurpkgs;
+  inherit ((import nurpkgs {}).lib) seemsDarwin;
 in
 {
 
@@ -21,7 +17,7 @@ in
     nix.nixPath = [
       "home-manager=${home-manager}"
       "nixos-hardware=${nixos-hardware}"
-      "nixpkgs=${nixpkgs}"
+      "nixpkgs=${if seemsDarwin then nixpkgs-darwin else nixpkgs}"
       "nur=${nur}"
       "nurpkgs=${nurpkgs}"
     ] ++ lib.optional seemsDarwin "darwin=${darwin}";
