@@ -8,9 +8,9 @@
 
     k = "clear";
 
-    l = "ls -Glah";
-    ll = "ls -Glh";
-    ls = "ls -G";
+    l = "ls --color=auto -Glah";
+    ll = "ls --color=auto -Glh";
+    ls = "ls --color=auto -G";
 
     # Old Darwin habits
     pbcopy = "xclip -sel clipboard";
