@@ -53,7 +53,7 @@ end
 
 <<config/fish/interactiveShellInit.fish>>=
 command -sq kitty; and function icat
-    kitty +kitten icat
+    kitty +kitten icat $argv
 end
 @
 

@@ -43,7 +43,7 @@ command -sq fluidsynth; and function playmidi
     fluidsynth -i ~/lib/arachno-soundfont/Arachno\ SoundFont\ -\ Version\ 1.0.sf2 $argv
 end
 command -sq kitty; and function icat
-    kitty +kitten icat
+    kitty +kitten icat $argv
 end
 command -sq kubectl; and begin
     # TODO: Add option to print server versions too.
