@@ -26,10 +26,11 @@
 
 \usepackage[outputdir=../docs]{minted}
 \usemintedstyle{tango}
-\setminted{baselinestretch=1,fontsize=\small}
+\setminted{baselinestretch=1,fontsize=\small,autogobble}
 
 \newmintedfile[inputbash]{bash}{linenos,fontsize=\small}
 \newmintinline[bash]{bash}{}
+\newmintinline[fish]{fish}{}
 \newmintinline[ini]{ini}{}
 \newmintinline[nix]{nix}{}
 

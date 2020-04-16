@@ -1,3 +1,15 @@
+\subsection{Fish abbreviations}
+
+\say{%
+  \fish{abbr} manages abbreviations - user-defined words that are replaced with
+  longer phrases after they are entered.
+
+  For example, a frequently-run command like \fish{git checkout} can be
+  abbreviated to \fish{gco}. After entering \fish{gco} and pressing
+  \texttt{Space} or \texttt{Enter}, the full text \fish{git checkout} will
+  appear in the command line.%
+}\cite{fish_abbr}
+
 <<config/fish/abbrs.nix>>=
 { ... }:
 
@@ -12,6 +24,10 @@
 }
 @
 
+\newthought{\fish{kubectl} is very cumbersome} to type all the time.
+Using fish abbrevations, save some precious keystrokes.
+It's definitely \href{https://xkcd.com/1205/}{worth the time}.
+
 <<Kubernetes fish abbreviations>>=
 kc = "kubectl";
 kcd = "kubectl drain --delete-local-data --ignore-daemonsets";
@@ -22,6 +38,9 @@ kt = "kubetail";
 kx = "kubectx";
 @
 
+\newthought{It's useful to run \fish{nix build}} with various flags.
+Why not save some keystrokes for those tasks, too?
+
 <<Nix fish abbreviations>>=
 nb = "nix build";
 nbd = "nix build --dry-run";
@@ -29,10 +48,49 @@ nbn = "nix build --no-link";
 nbo = "nix build -o";
 @
 
+\newthought{I'm not quite used to} all the \fish{ripgrep} flags yet.
+I'm also a lazy typist, so define some memorable abbreviations.
+
+\say{%
+  Searches case insensitively if the pattern is all lowercase.
+  Search case sensitively otherwise.%
+}\cite{ripgrep}
+
+<<ripgrep fish abbreviations>>=
+rg = "rg -S";
+@
+
 <<ripgrep fish abbreviations>>=
 rga = "rg --hidden --iglob !.git";
 rgf = "rg -F";
-rgi = "rg -i";
+@
+
+\say{Never print the file path with the matched lines}, and
+\say{[s]uppress line numbers.}\cite{ripgrep}
+
+<<ripgrep fish abbreviations>>=
+rgin = "rg -IN";
+@
+
+\begin{minted}{fish}
+  λ rg -IN name: helmfile.d/*.yaml | sort -u
+  - name: cert-manager
+  - name: cluster-autoscaler
+  - name: elastalert
+  - name: elasticsearch-client
+  - name: elasticsearch-curator
+  - name: elasticsearch-exporter
+  - name: elasticsearch-master
+  - name: external-dns
+  - name: fluentd-elasticsearch
+  - name: hubble
+  - name: kibana
+  - name: kube-resource-report
+  - name: metrics-server
+  - name: nginx-ingress-core
+  - name: prometheus-operator
+\end{minted}
+
+<<ripgrep fish abbreviations>>=
 rgn = "rg --no-heading";
-rgs = "rg -S";
 @

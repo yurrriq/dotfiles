@@ -14,11 +14,11 @@
     nbd = "nix build --dry-run";
     nbn = "nix build --no-link";
     nbo = "nix build -o";
+    rg = "rg -S";
     rga = "rg --hidden --iglob !.git";
     rgf = "rg -F";
-    rgi = "rg -i";
+    rgin = "rg -IN";
     rgn = "rg --no-heading";
-    rgs = "rg -S";
   };
 
 }
