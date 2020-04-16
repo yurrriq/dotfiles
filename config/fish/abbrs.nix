@@ -6,8 +6,10 @@
     kc = "kubectl";
     kcd = "kubectl drain --delete-local-data --ignore-daemonsets";
     kcnp = "kubectl get pods --field-selector=spec.nodeName=";
+    kn = "kubens";
     kns = "kubens";
     kt = "kubetail";
+    kx = "kubectx";
     nb = "nix build";
     nbd = "nix build --dry-run";
     nbn = "nix build --no-link";
