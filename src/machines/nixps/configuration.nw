@@ -11,7 +11,8 @@ in
 
 <<machines/nixps/configuration.nix>>=
   imports = [
-    <nixos-hardware/dell/xps/15-9550>
+    <nixos-hardware/dell/xps/15-9560/intel>
+    <nixos-hardware/common/pc/laptop/ssd>
     ./hardware-configuration.nix
     ../../nix
     ../../modules/common.nix
@@ -25,6 +26,11 @@ in
 
 <<machines/nixps/configuration.nix>>=
   airportCode = "MSP";
+
+@
+
+<<machines/nixps/configuration.nix>>=
+  boot.blacklistedKernelModules = [ "nouveau" "nvidia" "psmouse" ];
 
 @
 
@@ -47,11 +53,59 @@ in
 @
 
 <<machines/nixps/configuration.nix>>=
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/024a1168-9949-4cb2-bbd1-4b19a9d49ef2";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/7574-B246";
+    fsType = "vfat";
+  };
+
+  fileSystems."/var/lib/docker/plugins" = {
+    device = "/var/lib/docker/plugins";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/var/lib/docker/overlay2" = {
+    device = "/var/lib/docker/overlay2";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+@
+
+<<machines/nixps/configuration.nix>>=
   fonts.fonts = with pkgs; [
     fira-code
     fira-code-symbols
   ];
 
+@
+
+\todoo{Figure out wtf is going on here}%
+\hrefootnote{https://github.com/NixOS/nixpkgs/issues/24711}
+
+\begin{minted}{nix}
+  hardware.bumblebee.enable = true;
+  hardware.bumblebee.connectDisplay = true;
+  hardware.bumblebee.pmMethod = "bbswitch";
+  hardware.opengl.driSupport32Bit = true;
+  hardware.nvidia = {
+    modesetting.enable = true;
+    optimus_prime = {
+      enable = true;
+      nvidiaBusId = "PCI:1:0:0";
+      intelBusId = "PCI:0:2:0";
+    };
+  };
+\end{minted}
+
+<<machines/nixps/configuration.nix>>=
+  hardware.bumblebee.enable = false;
+  hardware.nvidiaOptimus.disable = false;
 @
 
 <<machines/nixps/configuration.nix>>=
@@ -104,6 +158,11 @@ in
           node
         ]
       );
+
+@
+
+<<machines/nixps/configuration.nix>>=
+  powerManagement.cpuFreqGovernor = "powersave";
 
 @
 

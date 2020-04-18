@@ -4,7 +4,8 @@ let
 in
 {
   imports = [
-    <nixos-hardware/dell/xps/15-9550>
+    <nixos-hardware/dell/xps/15-9560/intel>
+    <nixos-hardware/common/pc/laptop/ssd>
     ./hardware-configuration.nix
     ../../nix
     ../../modules/common.nix
@@ -15,6 +16,8 @@ in
   ];
 
   airportCode = "MSP";
+
+  boot.blacklistedKernelModules = [ "nouveau" "nvidia" "psmouse" ];
 
   boot.initrd.luks.devices = {
     root = {
@@ -28,11 +31,35 @@ in
     "/share/fish"
   ];
 
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/024a1168-9949-4cb2-bbd1-4b19a9d49ef2";
+    fsType = "ext4";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/7574-B246";
+    fsType = "vfat";
+  };
+
+  fileSystems."/var/lib/docker/plugins" = {
+    device = "/var/lib/docker/plugins";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/var/lib/docker/overlay2" = {
+    device = "/var/lib/docker/overlay2";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
   fonts.fonts = with pkgs; [
     fira-code
     fira-code-symbols
   ];
 
+  hardware.bumblebee.enable = false;
+  hardware.nvidiaOptimus.disable = false;
   home-manager.useUserPackages = true;
   home-manager.users."${username}" = args:
     import ./home.nix (args // { inherit pkgs; });
@@ -73,6 +100,8 @@ in
           node
         ]
       );
+
+  powerManagement.cpuFreqGovernor = "powersave";
 
   security.sudo = {
     enable = true;
