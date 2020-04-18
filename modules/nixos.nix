@@ -84,12 +84,6 @@
         tapping = true;
       };
 
-      multitouch = {
-        enable = true;
-        ignorePalm = true;
-        invertScroll = true;
-      };
-
       videoDrivers = [
         "intel"
       ];
