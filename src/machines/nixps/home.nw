@@ -23,7 +23,7 @@
     ../../config/man.nix
     ../../config/nixpkgs
     ../../config/rebar3.nix
-    # TODO: ../../config/taskwarrior
+    ../../config/taskwarrior
     # TODO: ../../config/vim.nix
   ];
 
