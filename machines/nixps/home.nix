@@ -34,6 +34,7 @@
   home.packages = with pkgs; [
     carla
     clementine
+    gnucash
     reaper
   ];
 
