@@ -68,7 +68,7 @@
       cabal-install
       cabal2nix
       hpack
-      stylish-haskell
+      # FIXME: stylish-haskell
     ]
   ) ++ (
     with nodePackages; [

@@ -9,7 +9,7 @@
     rofi-pass
   ];
 
-  services.compton.enable = true;
+  services.picom.enable = true;
 
   xdg.configFile."i3status/config".source = ../i3status/config;
 
@@ -22,33 +22,33 @@
     config =
       let
         colors = rec {
-          background = "#002b36";
+          background = "#001e26"; # "#002b36";
           focused = {
-            border = "#002b36";
+            border = "#001e26"; # "#002b36";
             background = "#586e75";
             text = "#fdf6e3";
             indicator = "#268bd2";
             childBorder = ""; # "#285577";
           };
           focusedInactive = {
-            border = "#002b36";
+            border = "#001e26"; # "#002b36";
             background = "#073642";
             text = "#839496";
             indicator = "#073642";
             childBorder = ""; # "#5f676a";
           };
           unfocused = {
-            border = "#002b36";
+            border = "#001e26"; # "#002b36";
             background = "#073642";
             text = "#839496";
             indicator = "#073642";
             childBorder = ""; # "#222222";
           };
           urgent = {
-            border = "#002b36";
+            border = "#001e26"; # "#002b36";
             background = "#dc322f";
             text = "#fdf6e3";
-            indicator = "#002b36";
+            indicator = "#001e26"; # "#002b36";
             childBorder = ""; # "#900000";
           };
         };
@@ -57,11 +57,11 @@
           focusedWorkspace = {
             border = "#b58900";
             background = "#b58900";
-            text = "#002b36";
+            text = "#001e26"; # "#002b36";
           };
           inactiveWorkspace = {
             border = "#073642";
-            background = "#002b36";
+            background = "#001e26"; # "#002b36";
             text = "#839496";
           };
           separator = "#586e75";
@@ -77,7 +77,7 @@
         {
           bars = [
             {
-              fonts = [ "Iosevka" ];
+              fonts = [ "Iosevka Term" ];
               statusCommand = "${pkgs.i3status}/bin/i3status";
               colors = barColors;
             }

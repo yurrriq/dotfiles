@@ -27,6 +27,7 @@ in
     };
   };
 
+  environment.homeBinInPath = true;
   environment.pathsToLink = [
     "/lib/aspell"
     "/share/emacs/site-lisp"
@@ -45,10 +46,11 @@ in
 
   hardware.bluetooth = {
     enable = true;
-    extraConfig = ''
-      [General]
-      Enable=Source,Sink,Media,Socket
-    '';
+    config = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
   };
 
   home-manager.useUserPackages = true;

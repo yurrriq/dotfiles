@@ -15,12 +15,10 @@
     };
   };
 
-  i18n = {
-    # consoleFont = "latarcyrheb-sun32";
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
-  };
+  # console.font = "latarcyrheb-sun32";
+  console.font = "Lat2-Terminus16";
+  console.keyMap = "us";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   location.provider = "manual";
 
@@ -56,8 +54,7 @@
     unclutter = {
       enable = false; # FIXME
       extraOptions = [ "exclude-root" "ignore-scrolling" ];
-      # FIXME
-      threeshold = 1;
+      threshold = 1;
       timeout = 1;
     };
 
@@ -69,9 +66,9 @@
       desktopManager = {
         gnome3.enable = false;
         xterm.enable = false;
-        default = "none";
       };
 
+      displayManager.defaultSession = "none+i3";
       displayManager.lightdm.enable = true;
 
       layout = "us";
@@ -88,10 +85,7 @@
         "intel"
       ];
 
-      windowManager = {
-        default = "i3";
-        i3.enable = true;
-      };
+      windowManager.i3.enable = true;
 
       xkbOptions = "ctrl:nocaps,compose:ralt";
     };
@@ -104,7 +98,7 @@
   };
   sound.enable = true;
 
-  system.stateVersion = "19.09";
+  system.stateVersion = "20.03";
 
   virtualisation.docker.enable = true;
 
