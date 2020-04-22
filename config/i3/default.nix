@@ -110,6 +110,12 @@
             "Print" = "exec flameshot gui";
           };
           inherit modifier;
+          startup = [
+            {
+              command = "volumeicon";
+              notification = false;
+            }
+          ];
         };
   };
 

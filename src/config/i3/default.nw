@@ -151,6 +151,12 @@ Use Solarized Dark \nix{colors}\hrefootnote{https://github.com/tobiaszwaszak/i3w
             "Print" = "exec flameshot gui";
           };
           inherit modifier;
+          startup = [
+            {
+              command = "volumeicon";
+              notification = false;
+            }
+          ];
         };
   };
 
