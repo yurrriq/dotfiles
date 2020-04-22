@@ -38,7 +38,7 @@ gpg \
 htop \
 i3/default \
 jq \
-kitty/default \
+kitty \
 man \
 nixpkgs/default \
 nixpkgs/nixpkgs-config \
@@ -79,7 +79,7 @@ NW_SRCS := $(shell find src -name '*.nw')
 
 TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
 
-DEFS := $(patsubst src/%.nw,src/%.defs,${NW_SRCS}) src/all.defs
+DEFS := $(patsubst src/%.nw,src/%.defs,${NW_SRCS})
 
 .PHONY: all
 all: generate-config nix-srcs ${SH_SRCS} ${OTHER_SRCS} docs/dotfiles.pdf
@@ -100,7 +100,7 @@ tex: ${TEX_SRCS}
 
 .PHONY: clean
 clean:
-	@ rm -f ${TEX_SRCS} ${DEFS} src/dotfiles.nwi
+	@ rm -f ${TEX_SRCS} ${DEFS} src/all.defs src/dotfiles.nwi
 	@ latexmk $(latexmk_flags) -c -f docs/dotfiles.pdf
 	@ rm -fr docs/_minted-dotfiles
 

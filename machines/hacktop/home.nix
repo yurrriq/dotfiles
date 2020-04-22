@@ -13,7 +13,7 @@
     ../../config/gpg.nix
     ../../config/htop.nix
     ../../config/jq.nix
-    ../../config/kitty
+    ../../config/kitty.nix
     ../../config/man.nix
     ../../config/nixpkgs
     ../../config/rebar3.nix

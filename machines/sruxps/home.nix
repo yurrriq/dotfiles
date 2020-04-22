@@ -17,7 +17,7 @@
     ../../config/htop.nix
     ../../config/i3
     ../../config/jq.nix
-    ../../config/kitty
+    ../../config/kitty.nix
     ../../config/man.nix
     ../../config/nixpkgs
     ../../config/rebar3.nix

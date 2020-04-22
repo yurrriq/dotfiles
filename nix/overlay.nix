@@ -12,6 +12,7 @@ self: super: rec {
     inherit noweb;
     inherit (super.texlive) scheme-small
       braket
+      catchfile
       datatool
       datetime
       dirtytalk

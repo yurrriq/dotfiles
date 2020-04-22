@@ -56,7 +56,7 @@
 @
 
 Use Solarized Dark \nix{colors}\hrefootnote{https://github.com/tobiaszwaszak/i3wm/blob/9c097f3/config}.
-\hrefootnote{https://github.com/dexpota/kitty-themes/blob/c4bee86/themes/Solarized_Dark.conf}
+%% FIXME: \hrefootnote{https://github.com/dexpota/kitty-themes/blob/c4bee86/themes/Solarized_Dark.conf}
 
 <<config/i3/default.nix>>=
         colors = rec {
