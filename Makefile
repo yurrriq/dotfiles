@@ -174,6 +174,17 @@ build dry-build switch: stow
 	@ sudo nixos-rebuild $@
 
 
+bootstrap: command=build
+bootstrap:
+	@ sudo nixos-rebuild ${command} \
+	-I home-manager=$$(jq -r '."home-manager".url' nix/sources.json) \
+	-I niv=$$(jq -r '.niv.url' nix/sources.json) \
+	-I nixos-hardware=$$(jq -r '."nixos-hardware".url' nix/sources.json) \
+	-I nixpkgs=$$(jq -r '.nixpkgs.url' nix/sources.json) \
+	-I nur=$$(jq -r '.nur.url' nix/sources.json) \
+	--show-trace
+
+
 .PHONY: cachix
 cachix: cachix/cachix.dhall
 	@ mkdir -p ~/.config/$@ $@
