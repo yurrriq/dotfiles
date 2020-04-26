@@ -25,6 +25,8 @@ in
     };
   };
 
+  environment.homeBinInPath = true;
+
   environment.pathsToLink = [
     "/lib/aspell"
     "/share/emacs/site-lisp"
@@ -57,6 +59,15 @@ in
     fira-code
     fira-code-symbols
   ];
+
+  hardware.bluetooth = {
+    enable = true;
+    config = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
+    };
+  };
 
   hardware.bumblebee.enable = false;
   hardware.nvidiaOptimus.disable = false;
