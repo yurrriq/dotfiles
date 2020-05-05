@@ -46,7 +46,7 @@
       renderizer
       scc
       wirelesstools
-      zoom-us
+      (import (import ../../nix/sources.nix).nixpkgs-unstable {}).zoom-us
     ] ++ (
       with nodePackages; [
         aws-azure-login

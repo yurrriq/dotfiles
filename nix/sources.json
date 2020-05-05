@@ -71,6 +71,18 @@
         "url": "https://github.com/NixOS/nixpkgs-channels/archive/e6fe2df74ff30df952f418453ad046cb0126df38.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nixpkgs-unstable": {
+        "branch": "master",
+        "description": "Nix Packages collection",
+        "homepage": null,
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "19d2c0601bfdf9aec5636c79b0ed49672c0325b3",
+        "sha256": "0i6vsz17glzgzbqfmv7wv6bm7b2snkinblz49nh0slvss516j7wa",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/19d2c0601bfdf9aec5636c79b0ed49672c0325b3.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nur": {
         "branch": "master",
         "description": "Nix User Repository: User contributed nix packages [maintainer=@Mic92]",
