@@ -39,6 +39,12 @@ function latest -d 'Print the latest tag (on GitHub) for a given user and repo.'
     http https://api.github.com/repos/$user/$repo/tags | jq '.[0].name'
   end
 end
+command -sq aws; and command -sq jq; and \
+function describe-cert -d 'List the domains for a given ACM certificate'
+    test (count $argv) -ne 1; and return
+    aws acm describe-certificate --certificate-arn $argv[1] |
+    jq -r '.Certificate | .SubjectAlternativeNames[]'
+end
 command -sq fluidsynth; and function playmidi
     fluidsynth -i ~/lib/arachno-soundfont/Arachno\ SoundFont\ -\ Version\ 1.0.sf2 $argv
 end
@@ -52,6 +58,13 @@ command -sq kubectl; and begin
         printf "helm %s\n" (command helm version --client --short)
         command helmfile --version
         printf "kops %s\n" (command kops version)
+    end
+
+    function kcterm -d 'Terminate a Kubernetes node'
+        test (count $argv) -ne 1; and return
+        kubectl get node -o jsonpath='{.spec.providerID}' $argv[1] |
+        cut -d'/' -f5 |
+        xargs aws ec2 terminate-instances --instance-ids
     end
 end
 # FIXME: functions rvm >/dev/null 2>&1; and rvm default
