@@ -90,6 +90,12 @@ useful for troubleshooting wireless issues, like in Trondheim.
     jdk
 @
 
+\url{https://github.com/Azure/kubelogin}
+
+<<Install some user packages>>=
+    kubelogin
+@
+
 \hrefootnote{https://github.com/yurrriq/naal}{naal} is my tool for
 non-interactive AWS Azure login.
 

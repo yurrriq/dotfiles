@@ -39,6 +39,7 @@
       ghc
       iw
       jdk
+      kubelogin
       naal
       networkmanager-openconnect
       openconnect
