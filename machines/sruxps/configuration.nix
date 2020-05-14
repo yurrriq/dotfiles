@@ -31,6 +31,10 @@ in
     };
   };
 
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 1;
+  };
+
   environment.homeBinInPath = true;
   environment.pathsToLink = [
     "/lib/aspell"

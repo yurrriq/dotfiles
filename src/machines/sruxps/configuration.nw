@@ -16,6 +16,8 @@ in
 
   <<Configure the LUKS devices>>
 
+  <<Configure vm.swappiness>>
+
   <<Link some extra paths>>
 
   <<Configure the file systems>>
@@ -76,6 +78,14 @@ boot.initrd.luks.devices = {
     device = "/dev/disk/by-uuid/565c0358-110e-4279-ba59-619cb2cc1ebf";
     keyFile = "/dev/mapper/cryptkey";
   };
+};
+@
+
+\url{https://docs.oracle.com/en/operating-systems/oracle-linux/7/admin/section_h4v_3yt_tr.html}
+
+<<Configure vm.swappiness>>=
+boot.kernel.sysctl = {
+  "vm.swappiness" = 1;
 };
 @
 
