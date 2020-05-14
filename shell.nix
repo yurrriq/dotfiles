@@ -15,6 +15,7 @@ pkgs.mkShell {
         python3
         mkpasswd
         niv
+        nixpkgs-fmt
         shellcheck
         shfmt
         sops
