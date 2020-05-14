@@ -174,14 +174,16 @@ build dry-build switch: stow
 	@ sudo nixos-rebuild $@
 
 
-bootstrap: command=build
+bootstrap: command=nixos-rebuild build
 bootstrap:
-	@ sudo nixos-rebuild ${command} \
+	@ sudo ${command} \
 	-I home-manager=$$(jq -r '."home-manager".url' nix/sources.json) \
 	-I niv=$$(jq -r '.niv.url' nix/sources.json) \
 	-I nixos-hardware=$$(jq -r '."nixos-hardware".url' nix/sources.json) \
 	-I nixpkgs=$$(jq -r '.nixpkgs.url' nix/sources.json) \
+	-I nixpkgs-overlays=/etc/nixos/overlays \
 	-I nur=$$(jq -r '.nur.url' nix/sources.json) \
+	-I nurpkgs=/etc/nixos/nix/nurpkgs.nix \
 	--show-trace
 
 
