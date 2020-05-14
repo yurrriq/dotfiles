@@ -9,14 +9,14 @@
       <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [];
 
   swapDevices =
     [
-      { device = "/dev/disk/by-uuid/cae2164d-72b5-4f60-b369-e845606d03be"; }
+      { device = "/dev/disk/by-uuid/3992eb2a-d93a-41be-b0a4-9026d7425b43"; }
     ];
 
   nix.maxJobs = lib.mkDefault 8;

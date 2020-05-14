@@ -46,7 +46,11 @@
       renderizer
       scc
       wirelesstools
-      (import (import ../../nix/sources.nix).nixpkgs-unstable {}).zoom-us
+      (
+        import (import ../../nix/sources.nix).nixpkgs-unstable {
+          config.allowUnfree = true;
+        }
+      ).zoom-us
     ] ++ (
       with nodePackages; [
         aws-azure-login
