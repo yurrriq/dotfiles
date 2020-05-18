@@ -6,6 +6,7 @@
     kc = "kubectl";
     kcd = "kubectl drain --delete-local-data --ignore-daemonsets";
     kcnp = "kubectl get pods --field-selector=spec.nodeName=";
+    kcx = "kubectl --context";
     kn = "kubens";
     kns = "kubens";
     kt = "kubetail";
