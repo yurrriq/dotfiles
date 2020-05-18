@@ -42,10 +42,6 @@ in
     "/share/fish"
   ];
 
-  # https://raw.githubusercontent.com/johnae/nixos-configuration/92e3cbc102222869d523fc386f7839b37b98b913/installer/install.sh
-  # https://raw.githubusercontent.com/johnae/nixos-configuration/92e3cbc102222869d523fc386f7839b37b98b913/modules/cleanboot.nix
-  # https://raw.githubusercontent.com/johnae/nixos-configuration/master/machines/europa/hardware-configuration.nix
-
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/71cfcb8a-13a9-49f0-b034-a9c8841be07b";
     fsType = "btrfs";
