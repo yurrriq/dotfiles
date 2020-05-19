@@ -69,7 +69,7 @@ home.packages = with pkgs; (
 player.
 
 <<Install some user packages>>=
-    clementine
+    clementineUnfree
 @
 
 I haven't used Dhall in a while, but it's still interesting.

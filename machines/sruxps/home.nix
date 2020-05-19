@@ -40,7 +40,7 @@
       lorri
       progress
       pv
-      clementine
+      clementineUnfree
       ghc
       iw
       jdk
