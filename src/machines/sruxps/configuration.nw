@@ -98,10 +98,7 @@ environment.pathsToLink = [
 ];
 @
 
-
-\href{https://raw.githubusercontent.com/johnae/nixos-configuration/92e3cbc102222869d523fc386f7839b37b98b913/installer/install.sh}
-
-\href{https://raw.githubusercontent.com/johnae/nixos-configuration/92e3cbc102222869d523fc386f7839b37b98b913/modules/cleanboot.nix}
+\todoo{btrfs clean boot?}
 
 <<Configure the file systems>>=
 fileSystems."/" = {
