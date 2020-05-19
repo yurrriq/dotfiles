@@ -74,7 +74,7 @@ in
   fileSystems."/mnt/music" = {
     device = "192.168.1.147:/volume1/homes/eric/music";
     fsType = "nfs";
-    options = [ "x-systemd.automount" "noatime" "noauto" "nolock" "rw" ];
+    options = [ "noatime" "noauto" "rw" "x-systemd.automount" ];
   };
 
   hardware.bluetooth = {
