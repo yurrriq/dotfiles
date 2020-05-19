@@ -69,7 +69,11 @@ home.packages = with pkgs; (
 player.
 
 <<Install some user packages>>=
-    clementineUnfree
+    (
+      import (import ../../nix/sources.nix).nixpkgs-unstable {
+        config.allowUnfree = true;
+      }
+    ).clementineUnfree
 @
 
 I haven't used Dhall in a while, but it's still interesting.
@@ -82,7 +86,7 @@ I haven't used Dhall in a while, but it's still interesting.
 I might need \hrefootnote{https://docs.docker.com/compose/}{Docker Compose}
 again someday, but not lately.
 
-<<*>>=
+<<Install some user packages>>=
     docker-compose
 @
 

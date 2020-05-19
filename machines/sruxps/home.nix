@@ -40,7 +40,12 @@
       lorri
       progress
       pv
-      clementineUnfree
+      (
+        import (import ../../nix/sources.nix).nixpkgs-unstable {
+          config.allowUnfree = true;
+        }
+      ).clementineUnfree
+      docker-compose
       ghc
       iw
       jdk
