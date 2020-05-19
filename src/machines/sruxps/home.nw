@@ -57,6 +57,14 @@ home.packages = with pkgs; (
     ec2instanceconnectcli
 @
 
+<<Install some user packages>>=
+    clac
+    dolphin
+    lorri
+    progress
+    pv
+@
+
 \hrefootnote{https://www.clementine-player.org/}{Clementine} is a great music
 player.
 
@@ -94,6 +102,7 @@ useful for troubleshooting wireless issues, like in Trondheim.
 
 <<Install some user packages>>=
     kubelogin
+    k9s
 @
 
 \hrefootnote{https://github.com/yurrriq/naal}{naal} is my tool for

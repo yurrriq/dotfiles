@@ -35,11 +35,17 @@
     [
       aws-iam-authenticator
       ec2instanceconnectcli
+      clac
+      dolphin
+      lorri
+      progress
+      pv
       clementine
       ghc
       iw
       jdk
       kubelogin
+      k9s
       naal
       networkmanager-openconnect
       openconnect
