@@ -98,7 +98,9 @@
             "${modifier}+Escape" = ''
               exec i3lock -i ${config.xdg.dataHome}/i3/matrix.png
             '';
+            "${modifier}+Shift+grave" = "move scratchpad";
             "${modifier}+Shift+minus" = "move scratchpad";
+            "${modifier}+grave" = "scratchpad show";
             "${modifier}+minus" = "scratchpad show";
             "${modifier}+Tab" = "exec --no-startup-id rofi -show window";
             "${modifier}+d" = ''
