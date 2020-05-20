@@ -137,6 +137,11 @@ in
 
   # TODO: services.lorri.enable = true;
 
+  services.xserver.displayManager.lightdm.autoLogin = {
+    enable = true;
+    user = username;
+  };
+
   services.xserver.monitorSection = ''
     DisplaySize 406 228
   '';
