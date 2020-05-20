@@ -133,7 +133,7 @@ in
 
   services.blueman.enable = true;
 
-  services.fwupd.enable = false;
+  services.fwupd.enable = true;
 
   # TODO: services.lorri.enable = true;
 
