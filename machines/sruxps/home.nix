@@ -38,6 +38,7 @@
       clac
       dolphin
       lorri
+      mtr
       progress
       pv
       (
