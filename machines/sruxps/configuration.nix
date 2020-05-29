@@ -35,6 +35,10 @@ in
     "vm.swappiness" = 1;
   };
 
+  boot.kernelModules = [
+    "coretemp"
+  ];
+
   environment.homeBinInPath = true;
   environment.pathsToLink = [
     "/lib/aspell"

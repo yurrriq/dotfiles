@@ -18,6 +18,8 @@ in
 
   <<Configure vm.swappiness>>
 
+  <<Add the coretemp kernel module>>
+
   <<Link some extra paths>>
 
   <<Configure the file systems>>
@@ -87,6 +89,12 @@ boot.initrd.luks.devices = {
 boot.kernel.sysctl = {
   "vm.swappiness" = 1;
 };
+@
+
+<<Add the coretemp kernel module>>=
+boot.kernelModules = [
+  "coretemp"
+];
 @
 
 <<Link some extra paths>>=
