@@ -2,7 +2,11 @@
 
 <<machines/sruxps/home.nix>>=
 { lib, pkgs, ... }:
-
+let
+  nixpkgs-unstable = import (import ../../nix/sources.nix).nixpkgs-unstable {
+    config.allowUnfree = true;
+  };
+in
 {
 
   <<Import various program configs>>
@@ -70,11 +74,7 @@ home.packages = with pkgs; (
 player.
 
 <<Install some user packages>>=
-    (
-      import (import ../../nix/sources.nix).nixpkgs-unstable {
-        config.allowUnfree = true;
-      }
-    ).clementineUnfree
+    nixpkgs-unstable.clementineUnfree
 @
 
 I haven't used Dhall in a while, but it's still interesting.
@@ -142,11 +142,7 @@ More Trondheim wireless debugging...
 
 <<Install some user packages>>=
     wirelesstools
-    (
-      import (import ../../nix/sources.nix).nixpkgs-unstable {
-        config.allowUnfree = true;
-      }
-    ).zoom-us
+    nixpkgs-unstable.zoom-us
   ] ++ (
     with nodePackages; [
       aws-azure-login

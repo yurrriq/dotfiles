@@ -1,5 +1,9 @@
 { lib, pkgs, ... }:
-
+let
+  nixpkgs-unstable = import (import ../../nix/sources.nix).nixpkgs-unstable {
+    config.allowUnfree = true;
+  };
+in
 {
 
   imports = [
@@ -41,11 +45,7 @@
       mtr
       progress
       pv
-      (
-        import (import ../../nix/sources.nix).nixpkgs-unstable {
-          config.allowUnfree = true;
-        }
-      ).clementineUnfree
+      nixpkgs-unstable.clementineUnfree
       docker-compose
       ghc
       iw
@@ -59,11 +59,7 @@
       renderizer
       scc
       wirelesstools
-      (
-        import (import ../../nix/sources.nix).nixpkgs-unstable {
-          config.allowUnfree = true;
-        }
-      ).zoom-us
+      nixpkgs-unstable.zoom-us
     ] ++ (
       with nodePackages; [
         aws-azure-login
