@@ -106,6 +106,7 @@ useful for troubleshooting wireless issues, like in Trondheim.
 \url{https://github.com/Azure/kubelogin}
 
 <<Install some user packages>>=
+    nixpkgs-unstable.kubectx
     kubelogin
     k9s
 @

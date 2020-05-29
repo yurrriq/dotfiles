@@ -50,6 +50,7 @@ in
       ghc
       iw
       jdk
+      nixpkgs-unstable.kubectx
       kubelogin
       k9s
       naal
