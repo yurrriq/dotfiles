@@ -59,6 +59,8 @@ in
       pavucontrol
       renderizer
       scc
+      lm_sensors
+      nfs-utils
       wirelesstools
       nixpkgs-unstable.zoom-us
     ] ++ (

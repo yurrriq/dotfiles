@@ -137,6 +137,8 @@ is useful for configuring Bluetooth audio.
     pavucontrol
     renderizer
     scc
+    lm_sensors
+    nfs-utils
 @
 
 More Trondheim wireless debugging...
