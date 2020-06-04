@@ -16,6 +16,7 @@
 {
 
   programs.fish.shellAbbrs = {
+    <<AWS Azure login abbreviation>>
     <<Kubernetes fish abbreviations>>
     <<Nix fish abbreviations>>
     <<ripgrep fish abbreviations>>
@@ -23,6 +24,16 @@
 
 }
 @
+
+\newthought{\hrefootnote{https://github.com/yurrriq/naal}{naal} is cool and all, but...}
+
+... it's a bad habit too. the \fish{aal} abbeviation makes being not so sneaky a
+bit less annoying.
+
+<<AWS Azure login abbreviation>>=
+aal = "aws-azure-login --no-prompt";
+@
+
 
 \newthought{\fish{kubectl} is very cumbersome} to type all the time.
 Using fish abbrevations, save some precious keystrokes.

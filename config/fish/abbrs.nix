@@ -3,6 +3,7 @@
 {
 
   programs.fish.shellAbbrs = {
+    aal = "aws-azure-login --no-prompt";
     kc = "kubectl";
     kcd = "kubectl drain --delete-local-data --ignore-daemonsets";
     kcnp = "kubectl get pods --field-selector=spec.nodeName=";
