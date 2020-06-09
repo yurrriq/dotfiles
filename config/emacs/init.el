@@ -5,9 +5,7 @@
 (menu-bar-mode 0)
 
 (tool-bar-mode 0)
-(let ((font (if (eq system-type 'darwin)
-                "Iosevka-16"
-              "Iosevka-11")))
+(let ((font "Iosevka-10"))
   (set-face-attribute 'default t :font font)
   (set-frame-font font nil t))
 (require 'package)
