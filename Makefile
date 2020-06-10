@@ -23,6 +23,7 @@ bat \
 browserpass \
 bugwarrior \
 direnv \
+dunst/default \
 emacs/default \
 emacs/packages \
 firefox \
@@ -65,12 +66,13 @@ SH_SRCS := \
 config/taskwarrior/on-exit-git.sh
 
 OTHER_SRCS := \
-config/i3status/config \
+config/dunst/dunstrc \
 config/emacs/init.el \
 config/fish/interactiveShellInit.fish \
 config/fish/shellInit.fish \
 config/fish/sushi/fish_prompt.fish \
-config/fish/sushi/fish_right_prompt.fish
+config/fish/sushi/fish_right_prompt.fish \
+config/i3status/config
 
 # NW_SRCS := \
 # $(patsubst %.nix,src/%.nw,${NIX_SRCS}) \

@@ -12,6 +12,7 @@ in
     ../../config/browserpass.nix
     ../../config/bugwarrior.nix
     ../../config/direnv.nix
+    ../../config/dunst
     ../../config/emacs
     ../../config/firefox.nix
     ../../config/fish
@@ -61,6 +62,9 @@ in
       scc
       lm_sensors
       nfs-utils
+      libnotify
+      dunst
+      paper-icon-theme
       wirelesstools
       nixpkgs-unstable.zoom-us
     ] ++ (
