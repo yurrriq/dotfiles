@@ -65,6 +65,7 @@ in
       libnotify
       dunst
       paper-icon-theme
+      powertop
       wirelesstools
       nixpkgs-unstable.zoom-us
     ] ++ (

@@ -145,6 +145,12 @@ is useful for configuring Bluetooth audio.
     paper-icon-theme
 @
 
+Try to improve battery life.
+
+<<Install some user packages>>=
+    powertop
+@
+
 More Trondheim wireless debugging...
 
 <<Install some user packages>>=

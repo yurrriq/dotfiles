@@ -142,6 +142,8 @@ in
 
   # TODO: services.lorri.enable = true;
 
+  services.tlp.enable = true;
+
   services.xserver.displayManager.lightdm.autoLogin = {
     enable = true;
     user = username;
