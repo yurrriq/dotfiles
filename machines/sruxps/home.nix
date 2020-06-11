@@ -46,7 +46,7 @@ in
       mtr
       progress
       pv
-      nixpkgs-unstable.clementineUnfree
+      clementine # FIXME: Unfree
       docker-compose
       ghc
       iw

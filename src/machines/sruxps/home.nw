@@ -75,7 +75,7 @@ home.packages = with pkgs; (
 player.
 
 <<Install some user packages>>=
-    nixpkgs-unstable.clementineUnfree
+    clementine # FIXME: Unfree
 @
 
 I haven't used Dhall in a while, but it's still interesting.

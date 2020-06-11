@@ -44,7 +44,7 @@ in
     "/lib/aspell"
     "/share/emacs/site-lisp"
     "/share/fish"
-    "/share/icons"
+    # FIXME: "/share/icons"
   ];
 
   fileSystems."/" = {
