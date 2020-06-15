@@ -110,6 +110,7 @@ useful for troubleshooting wireless issues, like in Trondheim.
     nixpkgs-unstable.kubectx
     kubelogin
     k9s
+    stern
 @
 
 \hrefootnote{https://github.com/yurrriq/naal}{naal} is my tool for

@@ -46,7 +46,7 @@ kcnp = "kubectl get pods --field-selector=spec.nodeName=";
 kcx = "kubectl --context";
 kn = "kubens";
 kns = "kubens";
-kt = "kubetail";
+kt = "stern";
 kx = "kubectx";
 @
 

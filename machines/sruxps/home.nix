@@ -54,6 +54,7 @@ in
       nixpkgs-unstable.kubectx
       kubelogin
       k9s
+      stern
       naal
       networkmanager-openconnect
       openconnect

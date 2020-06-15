@@ -10,7 +10,7 @@
     kcx = "kubectl --context";
     kn = "kubens";
     kns = "kubens";
-    kt = "kubetail";
+    kt = "stern";
     kx = "kubectx";
     nb = "nix build";
     nbd = "nix build --dry-run";
