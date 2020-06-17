@@ -46,9 +46,10 @@ i3status | while :; do
                     sed 's/^/,/'
                 continue
                 ;;
-            *)
-                echo -n "$line"
-                ;;
+            *) ;;
+
         esac
+    else
+        echo -n "$line"
     fi
 done
