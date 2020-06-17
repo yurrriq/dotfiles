@@ -8,6 +8,9 @@
 @
 
 <<config/i3/default.nix>>=
+  home.file.".local/bin/i3status".source = ./i3status;
+
+<<config/i3/default.nix>>=
   home.packages = with pkgs; [
     flameshot
     i3lock
@@ -119,7 +122,7 @@ Use Solarized Dark \nix{colors}\hrefootnote{https://github.com/tobiaszwaszak/i3w
           bars = [
             {
               fonts = [ "Iosevka Term" ];
-              statusCommand = "${pkgs.i3status}/bin/i3status";
+              statusCommand = "${config.home.homeDirectory}/.local/bin/i3status";
               colors = barColors;
             }
           ];

@@ -1,0 +1,54 @@
+#! /usr/bin/env bash
+
+set -eufo pipefail
+
+_spotify_get() {
+    dbus-send \
+        --print-reply \
+        --session \
+        --dest=org.mpris.MediaPlayer2.spotify \
+        /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get \
+        string:'org.mpris.MediaPlayer2.Player' \
+        string:"$1"
+}
+
+_spotify_xesam_string() {
+    sed -n '/string "xesam:'"$1"'"/,/)/p' |
+        sed '/string/!d; /xesam/d; s/^.*"\(.*\)".*/\1/'
+}
+
+spotify_artist() {
+    _spotify_get 'Metadata' | _spotify_xesam_string 'artist'
+}
+
+spotify_status() {
+    _spotify_get 'PlaybackStatus' |
+        tail -n1 |
+        cut -d'"' -f2
+}
+
+spotify_title() {
+    _spotify_get 'Metadata' | _spotify_xesam_string 'title'
+}
+
+i3status | while :; do
+    read -r line
+
+    if spotify_status | rg -q Playing; then
+        case "$line" in
+            ,[*)
+                echo -n "$line" |
+                    sed 's/^,//' |
+                    jq -M -c \
+                        --arg title "$(spotify_title)" \
+                        --arg artist "$(spotify_artist)" \
+                        '[{name: "spotify", full_text: "🎧 \($title) - \($artist)"}] + .' |
+                    sed 's/^/,/'
+                continue
+                ;;
+            *)
+                echo -n "$line"
+                ;;
+        esac
+    fi
+done
