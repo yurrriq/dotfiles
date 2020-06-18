@@ -1,12 +1,13 @@
-#! /usr/bin/env bash
+#! /run/current-system/sw/bin/bash
+#! nix-shell --pure -i bash -p bash dbus gnused i3status jq
 
 set -eufo pipefail
 
 _spotify_get() {
     dbus-send \
+        --dest=org.mpris.MediaPlayer2.spotify \
         --print-reply \
         --session \
-        --dest=org.mpris.MediaPlayer2.spotify \
         /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get \
         string:'org.mpris.MediaPlayer2.Player' \
         string:"$1"
@@ -21,6 +22,10 @@ spotify_artist() {
     _spotify_get 'Metadata' | _spotify_xesam_string 'artist'
 }
 
+spotify_is_playing() {
+    spotify_status | grep -q Playing
+}
+
 spotify_status() {
     _spotify_get 'PlaybackStatus' |
         tail -n1 |
@@ -33,23 +38,19 @@ spotify_title() {
 
 i3status | while :; do
     read -r line
-
-    if spotify_status | rg -q Playing; then
-        case "$line" in
-            ,[*)
-                echo -n "$line" |
-                    sed 's/^,//' |
-                    jq -M -c \
-                        --arg title "$(spotify_title)" \
-                        --arg artist "$(spotify_artist)" \
-                        '[{name: "spotify", full_text: "🎧 \($title) - \($artist)"}] + .' |
-                    sed 's/^/,/'
-                continue
-                ;;
-            *) ;;
-
-        esac
+    if [[ $line == ",["* ]] && spotify_is_playing; then
+        jq -M -c \
+            --arg artist "$(spotify_artist)" \
+            --arg title "$(spotify_title)" \
+            '[{name: "spotify", full_text: "🎧 \($title) - \($artist)"}] + .' \
+            <<<"${line#,}" |
+            sed 's/^/,/'
     else
-        echo -n "$line"
+        echo "$line"
     fi
 done
+
+# Local Variables:
+# mode: sh
+# sh-shell: "bash"
+# End:
