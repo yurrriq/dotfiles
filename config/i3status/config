@@ -43,6 +43,15 @@ battery all {
     threshold_type = "time"
 }
 
+order += "tztime singapore"
+
+tztime singapore {
+    format = "🇸🇬 %a %H:%M"
+    hide_if_equals_localtime = true
+    locale = "en_SG.utf8"
+    timezone = "Asia/Singapore"
+}
+
 order += "tztime trondheim"
 
 tztime trondheim {

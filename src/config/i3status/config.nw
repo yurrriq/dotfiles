@@ -68,6 +68,33 @@ more details.
     threshold_type = "time"
 }
 
+@
+
+<<config/i3status/config>>=
+order += "tztime singapore"
+
+tztime singapore {
+    format = "🇸🇬 %a %H:%M"
+    hide_if_equals_localtime = true
+    locale = "en_SG.utf8"
+    timezone = "Asia/Singapore"
+}
+
+@
+
+\begin{minted}{nix}
+order += "tztime london"
+
+tztime london {
+    format = "🇬🇧 %a %H:%M"
+    hide_if_equals_localtime = true
+    locale = "en_GB.utf8"
+    timezone = "Europe/London"
+}
+
+\end{minted}
+
+<<config/i3status/config>>=
 order += "tztime trondheim"
 
 tztime trondheim {
@@ -77,6 +104,9 @@ tztime trondheim {
     timezone = "Europe/Oslo"
 }
 
+@
+
+<<config/i3status/config>>=
 order += "tztime local"
 
 tztime local {
