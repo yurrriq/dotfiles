@@ -28,7 +28,7 @@
       elixir-mode
       emojify
       enh-ruby-mode
-      # FIXME: erlang
+      erlang
       fill-column-indicator
       fish-mode
       gap-mode
