@@ -1,5 +1,9 @@
 { lib, pkgs, ... }:
-
+let
+  nixpkgs-unstable = import (import ../nix/sources.nix).nixpkgs-unstable {
+    config.allowUnfree = true;
+  };
+in
 {
   environment.systemPackages = with pkgs; (
     [
@@ -100,7 +104,7 @@
     playerctl
     psmisc
     (
-      signal-desktop.override {
+      nixpkgs-unstable.signal-desktop.override {
         spellcheckerLanguage = "en_US";
       }
     )

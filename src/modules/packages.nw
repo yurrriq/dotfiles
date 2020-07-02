@@ -2,7 +2,11 @@
 
 <<modules/packages.nix>>=
 { lib, pkgs, ... }:
-
+let
+  nixpkgs-unstable = import (import ../nix/sources.nix).nixpkgs-unstable {
+    config.allowUnfree = true;
+  };
+in
 {
 @
 
@@ -130,7 +134,7 @@
 
 <<modules/packages.nix>>=
     (
-      signal-desktop.override {
+      nixpkgs-unstable.signal-desktop.override {
         spellcheckerLanguage = "en_US";
       }
     )
