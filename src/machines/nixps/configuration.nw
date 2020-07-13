@@ -175,10 +175,6 @@ in
 
 @
 
-<<machines/nixps/configuration.nix>>=
-  powerManagement.cpuFreqGovernor = "powersave";
-
-@
 
 <<machines/nixps/configuration.nix>>=
   security.sudo = {

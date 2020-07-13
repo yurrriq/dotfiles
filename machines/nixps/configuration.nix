@@ -112,8 +112,6 @@ in
         ]
       );
 
-  powerManagement.cpuFreqGovernor = "powersave";
-
   security.sudo = {
     enable = true;
     extraConfig = ''
