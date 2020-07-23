@@ -11,7 +11,6 @@ docs
 latexmkrc
 machines
 Makefile
-noweb-minted
 .pre-commit-config.yaml
 scripts
 shell.nix
