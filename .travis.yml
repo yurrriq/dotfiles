@@ -3,8 +3,10 @@ os:
 language: nix
 
 script:
-- nix-env -iA cachix -f https://cachix.org/api/v1/install
-- cachix use yurrriq
+# FIXME
+# - nix-env -iA cachix -f https://cachix.org/api/v1/install
+# - cachix use yurrriq
+# TODO
 # - cachix push yurrriq --watch-store&
 - nix-build -o site
 
