@@ -8,6 +8,7 @@
     kcd = "kubectl drain --delete-local-data --ignore-daemonsets";
     kcnp = "kubectl get pods --field-selector=spec.nodeName=";
     kcx = "kubectl --context";
+    kgno = "kubectl get nodes";
     kn = "kubens";
     kns = "kubens";
     kt = "stern";
