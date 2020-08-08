@@ -41,6 +41,7 @@
       htmlize
       idris-mode
       j-mode
+      lfe-mode
       kubernetes-tramp
       # TODO: lsp-haskell
       # TODO: lsp-mode
