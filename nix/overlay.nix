@@ -2,6 +2,8 @@ self: super: rec {
 
   inherit (import (import ./sources.nix).niv { pkgs = super; }) niv;
 
+  inherit (import (import ./sources.nix).nixpkgs-unstable { }) nixpkgs-fmt;
+
   noweb = super.noweb.override {
     icon-lang = super.icon-lang.override {
       withGraphics = false;

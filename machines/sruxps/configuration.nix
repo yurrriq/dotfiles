@@ -112,22 +112,24 @@ in
     let
       path = <nixpkgs-overlays>;
     in
-      with builtins;
-      map (n: import (path + ("/" + n)))
-        (
-          filter (
+    with builtins;
+    map
+      (n: import (path + ("/" + n)))
+      (
+        filter
+          (
             n: match ".*\\.nix" n != null
             || pathExists (path + ("/" + n + "/default.nix"))
           )
-            (attrNames (readDir path))
-        )
-      ++ (
-        with (import <nurpkgs> {}).overlays; [
-          nur
-          git
-          node
-        ]
-      );
+          (attrNames (readDir path))
+      )
+    ++ (
+      with (import <nurpkgs> { }).overlays; [
+        nur
+        git
+        node
+      ]
+    );
 
   security.sudo = {
     enable = true;

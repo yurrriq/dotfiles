@@ -1,3 +1,3 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
-(import <nur> {}).repos.yurrriq
+(import <nur> { }).repos.yurrriq

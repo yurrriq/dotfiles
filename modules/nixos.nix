@@ -2,7 +2,7 @@
 
 {
 
-  imports = with (import <nurpkgs> {}).modules; [
+  imports = with (import <nurpkgs> { }).modules; [
     pass
     tomb
   ];

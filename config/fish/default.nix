@@ -17,9 +17,10 @@
     };
   };
 
-  programs.fish = let
-    inherit (lib.strings) fileContents;
-  in
+  programs.fish =
+    let
+      inherit (lib.strings) fileContents;
+    in
     {
       enable = true;
       interactiveShellInit = fileContents ./interactiveShellInit.fish;
