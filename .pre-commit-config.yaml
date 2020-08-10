@@ -11,14 +11,14 @@ repos:
     id: check-yaml
     name: Check pre-commit config
   repo: git://github.com/pre-commit/pre-commit-hooks
-  rev: v2.4.0
+  rev: v3.2.0
 - hooks:
   - args: ["--format=colored"]
     files: ^.pre-commit-config.yaml$
     id: yamllint
     name: Lint pre-commit config
   repo: git://github.com/adrienverge/yamllint.git
-  rev: v1.17.0
+  rev: v1.24.2
 - hooks:
   - id: nixpkgs-fmt
     name: Format .nix files
