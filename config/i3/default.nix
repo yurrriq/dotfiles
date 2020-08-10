@@ -2,8 +2,6 @@
 
 {
 
-  home.file.".local/bin/i3status".source = ./i3status;
-
   home.packages = with pkgs; [
     flameshot
     i3lock
@@ -80,7 +78,7 @@
         bars = [
           {
             fonts = [ "Iosevka Term" ];
-            statusCommand = "${config.home.homeDirectory}/.local/bin/i3status";
+            statusCommand = "${pkgs.i3status}/bin/i3status";
             colors = barColors;
           }
         ];

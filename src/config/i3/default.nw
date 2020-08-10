@@ -8,9 +8,6 @@
 @
 
 <<config/i3/default.nix>>=
-  home.file.".local/bin/i3status".source = ./i3status;
-
-<<config/i3/default.nix>>=
   home.packages = with pkgs; [
     flameshot
     i3lock
@@ -19,29 +16,48 @@
   ];
 
 @
-\begin{marginnote}
-  To use \href{https://github.com/greshake/i3status-rust}{i3status-rust}:
-  \begin{minted}[gobble=4]{Nix}
-    { pkgs, ... }:
 
-    {
+To use \href{https://github.com/greshake/i3status-rust}{i3status-rust}:
+\begin{minted}{Nix}
+  { pkgs, ... }:
 
-      home.packages = with pkgs; [
-        font-awesome-ttf
-        i3status-rust
-      ];
+  {
 
-      xsession.windowManager.i3.bars = [
-        {
-          fonts = [ "Iosevka" "FontAwesome 12" ];
-          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${config.xdg.configHome}/i3/status.toml";
-          # colors = { ... };
-        }
-      ];
+    home.packages = with pkgs; [
+      font-awesome-ttf
+      i3status-rust
+    ];
 
-    }
-  \end{minted}
-\end{marginnote}
+    xsession.windowManager.i3.bars = [
+      {
+        fonts = [ "Iosevka" "FontAwesome 12" ];
+        statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${config.xdg.configHome}/i3/status.toml";
+        # colors = { ... };
+      }
+    ];
+
+  }
+\end{minted}
+
+
+To use the custom status bar with Spotify metadata\todoo{link}:
+\begin{minted}{nix}
+  { pkgs, ... }:
+
+  {
+
+    home.file.".local/bin/i3status".source = ./i3status;
+
+    xsession.windowManager.i3.bars = [
+      {
+        # fonts = [ ... ];
+        statusCommand = "${config.home.homeDirectory}/.local/bin/i3status";
+        # colors = { ... };
+      }
+    ];
+  }
+\end{minted}
+
 
 <<config/i3/default.nix>>=
   services.picom.enable = true;
@@ -122,7 +138,7 @@ Use Solarized Dark \nix{colors}\hrefootnote{https://github.com/tobiaszwaszak/i3w
         bars = [
           {
             fonts = [ "Iosevka Term" ];
-            statusCommand = "${config.home.homeDirectory}/.local/bin/i3status";
+            statusCommand = "${pkgs.i3status}/bin/i3status";
             colors = barColors;
           }
         ];
