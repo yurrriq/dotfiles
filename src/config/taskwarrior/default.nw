@@ -94,7 +94,8 @@ Set \bash{$TASKRC} to \bash{~/.taskrc-dirty}, which must contain at least
 @
 
 
-\newthought{Link} the \bash{on-exit} Git hook.\todoo{ref section}
+\newthought{Link} the \nameref{subsec:on-exit-git-hook}.
+\footnote{See next subssection.}
 
 <<config/taskwarrior/default.nix>>=
   xdg.dataFile."task/hooks/on-exit-git.sh" = {

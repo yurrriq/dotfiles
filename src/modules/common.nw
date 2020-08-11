@@ -35,8 +35,8 @@ Configure garbage collection (\nix{gc}) and my personal
 
 @
 
-Installed the Nerd Fonts\todoo{Add Nerd Fonts link} patched
-Iosevka\todoo{Add Iosevka link}.
+Install the \hrefootnote{https://www.nerdfonts.com}{Nerd Fonts} patched
+\hrefootnote{http://be5invis.github.io/Iosevka}{Iosevka}.
 
 <<modules/common.nix>>=
   fonts = {

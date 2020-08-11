@@ -1,4 +1,4 @@
-\subsection{on-exit Git hook}
+\subsection{on-exit Git hook}\label{subsec:on-exit-git-hook}
 
 \newthought{First}, use a fairly portable Bash shebang, and be safe.\footnote{%
   \bash{-e}xit immediately upon failure, treat \bash{-u}nset variables as an
