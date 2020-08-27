@@ -15,12 +15,6 @@ path_exists VPN {
     path = "/proc/sys/net/ipv4/conf/tun0"
 }
 
-order += "wireless _first_"
-
-wireless _first_ {
-    format_up = "%essid"
-}
-
 order += "load"
 
 load {
@@ -41,15 +35,6 @@ battery all {
     status_full = "🔌"
     status_unk = "😖"
     threshold_type = "time"
-}
-
-order += "tztime singapore"
-
-tztime singapore {
-    format = "🇸🇬 %a %H:%M"
-    hide_if_equals_localtime = true
-    locale = "en_SG.utf8"
-    timezone = "Asia/Singapore"
 }
 
 order += "tztime trondheim"

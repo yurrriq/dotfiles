@@ -25,12 +25,19 @@ path_exists VPN {
     path = "/proc/sys/net/ipv4/conf/tun0"
 }
 
+@
+
+I usually don't care about SSID.
+
+\begin{minted}{nix}
 order += "wireless _first_"
 
 wireless _first_ {
     format_up = "%essid"
 }
+\end{minted}
 
+<<config/i3status/config>>=
 order += "load"
 
 load {
@@ -70,7 +77,7 @@ more details.
 
 @
 
-<<config/i3status/config>>=
+\begin{minted}{nix}
 order += "tztime singapore"
 
 tztime singapore {
@@ -79,8 +86,7 @@ tztime singapore {
     locale = "en_SG.utf8"
     timezone = "Asia/Singapore"
 }
-
-@
+\end{minted}
 
 \begin{minted}{nix}
 order += "tztime london"
@@ -91,7 +97,6 @@ tztime london {
     locale = "en_GB.utf8"
     timezone = "Europe/London"
 }
-
 \end{minted}
 
 <<config/i3status/config>>=
