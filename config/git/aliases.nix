@@ -10,6 +10,7 @@
   };
 
   programs.git.aliases = rec {
+    ap = "add -p";
     bm = "branch --merged";
     bnm = "branch --no-merged";
     ca = "commit --amend";
@@ -19,6 +20,7 @@
     cas = "${ca} -S";
     casm = "${cas} -m";
     cm = "commit -m";
+    cnm = "commit -nm";
     co = "checkout";
     cob = "${co} -b";
     cs = "crypt status";
