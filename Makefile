@@ -140,8 +140,6 @@ src/%.tex: src/%.nw src/all.defs
 	noweave -delay -indexfrom src/all.defs -latex -n -filter fix-underscores $^ ${cpif} $@
 
 
-# TODO: be lazier/smarter about these rules
-
 ${NIX_SRCS} ${OTHER_SRCS} ${SH_SRCS}::
 	@ mkdir -p $(@D)
 	notangle -R$@ src/$(basename $@).nw ${cpif} $@
