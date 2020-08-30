@@ -116,7 +116,7 @@ clobber:
 install: all clean
 	@ cp -vr docs/* ${PREFIX}
 	@ echo "theme: jekyll-theme-hacker" >${PREFIX}/_config.yml
-	@ echo "[PDF](./${PDF})" >${PREFIX}/index.md
+	@ echo "[PDF](./dotfiles.pdf)" >${PREFIX}/index.md
 
 
 docs/%.pdf: export TZ='America/Chicago'
