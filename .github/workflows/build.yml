@@ -1,0 +1,29 @@
+name: Publish PDF to site
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install Nix
+      uses: cachix/install-nix-action@v8
+    - name: Clone gh-pages branch
+      run: |
+        git clone --quiet --branch gh-pages --depth 1 https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY".git site
+        git -C site config user.name github-actions
+        git -C site config user.email github-actions@users.noreply.github.com
+    - name: Build PDF
+      run: cp -vr $(nix-build --no-out-link)/* site/
+    - name: Publish to GitHub Pages
+      run: |
+        git -C site add --all .
+        git -C site commit -m 'Publish to GitHub Pages'
+        git -C site push --quiet https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY".git gh-pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
