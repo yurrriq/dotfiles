@@ -47,6 +47,8 @@
       trustExitCode = true;
     };
 
+    pull.ff = "only";
+
     rerere.enabled = true;
 
     ui.color = true;
