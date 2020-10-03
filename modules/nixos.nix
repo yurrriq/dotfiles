@@ -42,6 +42,8 @@
   };
 
   services = {
+    fstrim.enable = true;
+
     logind.lidSwitch = "hibernate";
 
     kbfs.enable = true;
