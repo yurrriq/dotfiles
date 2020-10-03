@@ -45,6 +45,7 @@ nixpkgs/default \
 nixpkgs/nixpkgs-config \
 rebar3 \
 taskwarrior/default \
+xmonad/default \
 )\
 $(addprefix machines/,\
 hacktop/configuration \

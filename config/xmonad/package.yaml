@@ -1,0 +1,21 @@
+name: my-xmonad
+version: 0.0.0.1
+
+dependencies:
+- base
+- containers
+- xmonad
+- xmonad-contrib
+- xmonad-extras
+# - X11
+# - X11-xft
+
+ghc-options:
+- -Wall
+- -Werror
+
+executable:
+  main: xmonad.hs
+  ghc-options:
+  - -O0
+  - -threaded

@@ -2,11 +2,11 @@ bin
 cachix
 default.nix
 .dir-locals.el
-docs
 .editorconfig
 .envrc
 .git
 .gitattributes
+.github
 .gitignore
 latexmkrc
 machines
@@ -17,6 +17,5 @@ shell.nix
 .sops.yaml
 src
 .stow-local-ignore
-.travis.yml
 VERSION
 .yamllint
