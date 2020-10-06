@@ -28,7 +28,7 @@
   services.picom.enable = true;
 
   services.stalonetray = {
-    enable = true;
+    enable = false;
     config = {
       background = "#001e26";
       decorations = "none";
