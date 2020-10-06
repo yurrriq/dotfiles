@@ -89,9 +89,9 @@ myManageHook :: ManageHook
 myManageHook =
   composeAll
     [ className =? "Slack" --> doShift (myWorkspaces !! 4),
-      -- TODO: className =? "Zoom" --> doShift (myWorkspaces !! 6),
+      className =? "zoom" --> doShift (myWorkspaces !! 5),
       className =? "Signal" --> doShift (myWorkspaces !! 7)
-      -- FIXME: className =? "Spotify" --> doShift (myWorkspaces !! 8)
+      -- FIXME: className =? "Spotify" --> doShift (myWorkspaces !! 8),
       -- FIXME: className =? "Mail" --> doShift (myWorkspaces !! 9)
     ]
 
