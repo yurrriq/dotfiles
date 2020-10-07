@@ -60,6 +60,8 @@ in
     fira-code-symbols
   ];
 
+  services.blueman.enable = true;
+
   hardware.bluetooth = {
     enable = true;
     config = {

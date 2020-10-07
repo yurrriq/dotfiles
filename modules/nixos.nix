@@ -42,6 +42,8 @@
   };
 
   services = {
+    fstrim.enable = true;
+
     logind.lidSwitch = "hibernate";
 
     kbfs.enable = true;
@@ -63,13 +65,19 @@
 
       autorun = true;
 
-      desktopManager = {
-        gnome3.enable = false;
-        xterm.enable = false;
+      displayManager = {
+        lightdm.enable = true;
+        session = [
+          {
+            name = "home-manager";
+            manage = "window";
+            start = ''
+              ${pkgs.runtimeShell} $HOME/.hm-xsession &
+              waitPID=$!
+            '';
+          }
+        ];
       };
-
-      displayManager.defaultSession = "none+i3";
-      displayManager.lightdm.enable = true;
 
       layout = "us";
 
@@ -84,8 +92,6 @@
       videoDrivers = [
         "intel"
       ];
-
-      windowManager.i3.enable = true;
 
       xkbOptions = "ctrl:nocaps,compose:ralt";
     };

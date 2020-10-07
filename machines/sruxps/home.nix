@@ -20,13 +20,14 @@ in
     ../../config/git
     ../../config/gpg.nix
     ../../config/htop.nix
-    ../../config/i3
+    # ../../config/i3
     ../../config/jq.nix
     ../../config/kitty.nix
     ../../config/man.nix
     ../../config/nixpkgs
     ../../config/rebar3.nix
     ../../config/taskwarrior
+    ../../config/xmonad
   ];
 
   accounts.email.accounts.primary = {

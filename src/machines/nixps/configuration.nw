@@ -109,6 +109,8 @@ in
 \end{minted}
 
 <<machines/nixps/configuration.nix>>=
+  services.blueman.enable = true;
+
   hardware.bluetooth = {
     enable = true;
     config = {
