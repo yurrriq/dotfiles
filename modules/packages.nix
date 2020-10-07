@@ -65,7 +65,7 @@ in
       vim
       watch
       # wipe
-      yq
+      nixpkgs-unstable.yq
     ]
   ) ++ (
     with haskellPackages; [
