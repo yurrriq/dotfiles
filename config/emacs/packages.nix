@@ -31,6 +31,7 @@
       erlang
       fill-column-indicator
       fish-mode
+      frames-only-mode
       gap-mode
       go-mode
       graphviz-dot-mode

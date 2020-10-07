@@ -9,7 +9,8 @@
   (set-face-attribute 'default t :font font)
   (set-frame-font font nil t))
 (require 'package)
-(setq-default indent-tabs-mode nil
+(setq-default frames-only-mode t
+              indent-tabs-mode nil
               package-archives nil
               package-enable-at-startup nil)
 (package-initialize)
