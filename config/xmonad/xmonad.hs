@@ -39,16 +39,16 @@ myConfig =
     False
     $ ewmh
       def
-        { borderWidth = 3,
+        { borderWidth = 0,
           focusFollowsMouse = True,
-          focusedBorderColor = "#7BB6B3",
+          -- focusedBorderColor = "#7BB6B3",
           handleEventHook = handleEventHook def <+> docksEventHook,
           keys = myKeys,
           layoutHook = myLayout,
           -- TODO: namedScratchpadManageHook scratchpads,
           manageHook = manageScratchPad <+> myManageHook,
           modMask = mod4Mask,
-          normalBorderColor = "#967bb6",
+          -- normalBorderColor = "#967bb6",
           terminal = "kitty",
           workspaces = myWorkspaces
         }
