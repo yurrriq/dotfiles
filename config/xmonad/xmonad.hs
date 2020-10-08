@@ -12,6 +12,7 @@ import Data.Maybe (catMaybes)
 import XMonad hiding ((|||))
 import XMonad.Actions.CopyWindow (runOrCopy)
 import XMonad.Actions.Navigation2D
+import XMonad.Actions.RotSlaves
 import XMonad.Actions.Warp
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
@@ -137,6 +138,8 @@ myKeys cfg =
       ("M-e", sendMessage (JumpToLayout "Tall")),
       ("M-f", sendMessage (JumpToLayout "Full")),
       ("M-h", sendMessage (JumpToLayout "Mirror Tall")),
+      ("M-j", rotSlavesDown),
+      ("M-k", rotSlavesUp),
       ("M-m", windows W.focusMaster),
       ("M-w", sendMessage (JumpToLayout "TwoPane")),
       ("M1-<Space>", spawn "rofi -modi combi,window -show combi -combi-modi run,drun"),
