@@ -12,6 +12,7 @@ import Data.Maybe (catMaybes)
 import XMonad hiding ((|||))
 import XMonad.Actions.CopyWindow (runOrCopy)
 import XMonad.Actions.Navigation2D
+import XMonad.Actions.Warp
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
@@ -35,7 +36,7 @@ myConfig =
   navigation2DP
     def
     ("<U>", "<L>", "<D>", "<R>")
-    [("M-", windowGo), ("M-S-", windowSwap)]
+    [("M-", bringMouse windowGo), ("M-S-", windowSwap)]
     False
     $ ewmh
       def
@@ -52,6 +53,9 @@ myConfig =
           terminal = "kitty",
           workspaces = myWorkspaces
         }
+
+bringMouse :: (Direction2D -> Bool -> X ()) -> (Direction2D -> Bool -> X ())
+bringMouse windowAction dir wrap = windowAction dir wrap >> warpToWindow (1 / 2) (1 / 2)
 
 myLayout =
   avoidStruts $
