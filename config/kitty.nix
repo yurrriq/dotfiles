@@ -24,6 +24,7 @@
       scrollback_lines = -1;
       shell = ".";
       term = "xterm";
+      window_border_width = 0;
     };
   };
 
