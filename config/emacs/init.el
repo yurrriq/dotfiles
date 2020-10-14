@@ -1,9 +1,10 @@
-(server-start)
+(when (display-graphic-p)
+  (server-start))
 (setq server-window 'pop-to-buffer-same-window)
 (column-number-mode 1)
 (add-to-list 'exec-path "/run/current-system/sw/bin")
 (menu-bar-mode 0)
-
+(scroll-bar-mode 0)
 (tool-bar-mode 0)
 (let ((font "Iosevka-10"))
   (set-face-attribute 'default t :font font)
@@ -78,6 +79,7 @@ Null prefix argument turns off the mode."
       text-mode-hook       '(text-mode-hook-identify))
 
 (setq-default fill-column 80)
+(global-visual-line-mode 1)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((shell . t)))
@@ -94,11 +96,7 @@ Null prefix argument turns off the mode."
   :ensure t
   :config
   (editorconfig-mode 1))
-(use-package emojify
-  :demand
-  :config
-  (global-emojify-mode)
-  (global-emojify-mode-line-mode))
+(use-package emojify)
 (use-package helm
   :demand
   :config

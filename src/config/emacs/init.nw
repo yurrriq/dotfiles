@@ -2,7 +2,8 @@
 \subsection{Init File}
 
 <<config/emacs/init.el>>=
-(server-start)
+(when (display-graphic-p)
+  (server-start))
 @
 
 <<config/emacs/init.el>>=
@@ -19,7 +20,7 @@
 
 <<config/emacs/init.el>>=
 (menu-bar-mode 0)
-
+(scroll-bar-mode 0)
 (tool-bar-mode 0)
 @
 
@@ -135,6 +136,7 @@ Null prefix argument turns off the mode."
 
 <<config/emacs/init.el>>=
 (setq-default fill-column 80)
+(global-visual-line-mode 1)
 @
 
 <<config/emacs/init.el>>=
@@ -166,11 +168,7 @@ Null prefix argument turns off the mode."
 @
 
 <<config/emacs/init.el>>=
-(use-package emojify
-  :demand
-  :config
-  (global-emojify-mode)
-  (global-emojify-mode-line-mode))
+(use-package emojify)
 @
 
 <<config/emacs/init.el>>=
