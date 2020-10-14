@@ -51,6 +51,7 @@
       markdown-mode
       multiple-cursors
       nix-mode
+      nyan-mode
       paredit
       rainbow-delimiters
       robe

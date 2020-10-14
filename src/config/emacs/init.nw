@@ -212,6 +212,12 @@ Null prefix argument turns off the mode."
 @
 
 <<config/emacs/init.el>>=
+(use-package nyan-mode
+  :demand
+  :config (nyan-mode 1))
+@
+
+<<config/emacs/init.el>>=
 (use-package robe
   :demand
   :mode ("\\.rb\\'"))

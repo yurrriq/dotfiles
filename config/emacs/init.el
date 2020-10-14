@@ -119,6 +119,9 @@ Null prefix argument turns off the mode."
   :load-path "/run/current-system/sw/share/emacs/site-lisp"
   :mode ("\\.nw\\'")
   :demand)
+(use-package nyan-mode
+  :demand
+  :config (nyan-mode 1))
 (use-package robe
   :demand
   :mode ("\\.rb\\'"))
