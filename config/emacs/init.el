@@ -1,5 +1,4 @@
-(when (display-graphic-p)
-  (server-start))
+(server-start)
 (setq server-window 'pop-to-buffer-same-window)
 (column-number-mode 1)
 (add-to-list 'exec-path "/run/current-system/sw/bin")

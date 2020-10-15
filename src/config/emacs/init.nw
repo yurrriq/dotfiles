@@ -2,8 +2,7 @@
 \subsection{Init File}
 
 <<config/emacs/init.el>>=
-(when (display-graphic-p)
-  (server-start))
+(server-start)
 @
 
 <<config/emacs/init.el>>=
