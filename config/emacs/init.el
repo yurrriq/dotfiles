@@ -78,7 +78,6 @@ Null prefix argument turns off the mode."
       text-mode-hook       '(text-mode-hook-identify))
 
 (setq-default fill-column 80)
-(global-visual-line-mode 1)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((shell . t)))

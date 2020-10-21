@@ -135,7 +135,6 @@ Null prefix argument turns off the mode."
 
 <<config/emacs/init.el>>=
 (setq-default fill-column 80)
-(global-visual-line-mode 1)
 @
 
 <<config/emacs/init.el>>=
