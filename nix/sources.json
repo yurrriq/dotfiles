@@ -41,10 +41,10 @@
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "684eaddf74109b2bedb8b585a25714eb9ea5c54e",
-        "sha256": "1f6vi1jg8kdq0dk0kjkj1q401c21g4bblhq4r56wwfvndh0z3wx3",
+        "rev": "3cffbd596197a99d10d8113860c9ddf5566c2ef3",
+        "sha256": "0bgk09ggvq3psx3f6kl9cvfv8ng54gjvddwmfii2k6zy934rg042",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixos-hardware/archive/684eaddf74109b2bedb8b585a25714eb9ea5c54e.tar.gz",
+        "url": "https://github.com/NixOS/nixos-hardware/archive/3cffbd596197a99d10d8113860c9ddf5566c2ef3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
@@ -52,11 +52,11 @@
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
         "homepage": "https://github.com/NixOS/nixpkgs",
         "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "7c2a362b58a1c2ba72d24aa3869da3b1a91d39e1",
-        "sha256": "0gl4xndyahasa9dv5mi3x9w8s457wl2xh9lcldizcn1irjvkrzs4",
+        "repo": "nixpkgs-channels",
+        "rev": "a26e92a67d884db696792d25dcc44c466a1bc8b4",
+        "sha256": "0w4sp4cgncr62vgzknny76whlansab94dq2lx27if77ir3zpfiia",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/7c2a362b58a1c2ba72d24aa3869da3b1a91d39e1.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs-channels/archive/a26e92a67d884db696792d25dcc44c466a1bc8b4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs-darwin": {
@@ -64,23 +64,23 @@
         "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
         "homepage": "https://github.com/NixOS/nixpkgs",
         "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "34c7eb7545d155cc5b6f499b23a7cb1c96ab4d59",
-        "sha256": "11z6ajj108fy2q5g8y4higlcaqncrbjm3dnv17pvif6avagw4mcb",
+        "repo": "nixpkgs-channels",
+        "rev": "e6fe2df74ff30df952f418453ad046cb0126df38",
+        "sha256": "08k9xy7vchvm1xps4hmsik62l9xyqqpxvpv7rqvks2k0ldngjsh5",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/34c7eb7545d155cc5b6f499b23a7cb1c96ab4d59.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs-channels/archive/e6fe2df74ff30df952f418453ad046cb0126df38.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs-unstable": {
         "branch": "master",
         "description": "Nix Packages collection",
-        "homepage": "",
+        "homepage": null,
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4b3e97daa4869541938b4dad6448dc660625fa21",
-        "sha256": "0lnbj914qwgykpnq8ccvrbwc5mxraaz7ndnyqf2zd5frg07gmvyq",
+        "rev": "0b8a6e787cb4fd45731781d78ac0f4a21f4e9543",
+        "sha256": "15m7pma60inl5aqypkvp3ypbw109sfqp5djpd1976znzfjpj86r6",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/4b3e97daa4869541938b4dad6448dc660625fa21.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/0b8a6e787cb4fd45731781d78ac0f4a21f4e9543.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nur": {
@@ -89,10 +89,10 @@
         "homepage": "https://github.com/nix-community/NUR",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "7abaa51d9d1ec2b2207b680cf0f54b2a1ed24607",
-        "sha256": "0zqayqiib7x08vpgmqd156c1cwfcsybwq4wfb6sqyh0l4gigx4hz",
+        "rev": "2c7ca9ac16f505d802099c4dfb1c2f02191ca349",
+        "sha256": "1gs8vpbxsz0zq6c5mayczb3mjiw5daxl0dn8ppaxazs4sxh7lpzm",
         "type": "tarball",
-        "url": "https://github.com/nix-community/NUR/archive/7abaa51d9d1ec2b2207b680cf0f54b2a1ed24607.tar.gz",
+        "url": "https://github.com/nix-community/NUR/archive/2c7ca9ac16f505d802099c4dfb1c2f02191ca349.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
