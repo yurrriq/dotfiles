@@ -84,7 +84,7 @@
   };
   sound.enable = true;
 
-  system.stateVersion = "20.03";
+  system.stateVersion = "20.09";
 
   virtualisation.docker.enable = true;
 

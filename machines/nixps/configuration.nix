@@ -123,7 +123,7 @@ in
     '';
   };
 
-  services.xserver.displayManager.lightdm.autoLogin = {
+  services.xserver.displayManager.autoLogin = {
     enable = true;
     user = username;
   };

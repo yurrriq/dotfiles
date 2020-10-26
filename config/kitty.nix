@@ -9,7 +9,7 @@
     '';
     font = {
       name = "Iosevka Term";
-      package = (pkgs.nerdfonts.override { withFont = "Iosevka"; });
+      package = (pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; });
     };
     keybindings = {
       "kitty_mod+enter" = "new_window_with_cwd";

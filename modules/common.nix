@@ -20,7 +20,7 @@
   fonts = {
     enableFontDir = true;
     fonts = with pkgs; [
-      (nerdfonts.override { withFont = "Iosevka"; })
+      (nerdfonts.override { fonts = [ "Iosevka" ]; })
     ];
   };
 

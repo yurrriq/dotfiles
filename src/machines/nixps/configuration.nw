@@ -191,7 +191,7 @@ in
 @
 
 <<machines/nixps/configuration.nix>>=
-  services.xserver.displayManager.lightdm.autoLogin = {
+  services.xserver.displayManager.autoLogin = {
     enable = true;
     user = username;
   };

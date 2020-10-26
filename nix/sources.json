@@ -12,15 +12,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
-        "branch": "release-20.03",
+        "branch": "release-20.09",
         "description": "Manage a user environment using Nix",
         "homepage": "",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "e6f96b6aa3e99495f9f6f3488ecf78dd316e5bec",
-        "sha256": "1xvxqw5cldlhcl7xsbw11n2s3x1h2vmbm1b9b69a641rzj3srg11",
+        "rev": "7339784e07217ed0232e08d1ea33b610c94657d8",
+        "sha256": "0fjisa71cjagckj1ba7nn6wb11sdp2m43y36w5pwja456ii1i7si",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/e6f96b6aa3e99495f9f6f3488ecf78dd316e5bec.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/7339784e07217ed0232e08d1ea33b610c94657d8.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -48,15 +48,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
-        "branch": "nixos-20.03",
+        "branch": "release-20.09",
         "description": "Nix Packages collection",
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a26e92a67d884db696792d25dcc44c466a1bc8b4",
-        "sha256": "0w4sp4cgncr62vgzknny76whlansab94dq2lx27if77ir3zpfiia",
+        "rev": "9f5b72bfd78066510f9ef2d3548dc44a74188dae",
+        "sha256": "00pbdannvjiksyav7v2wh5sr53k62w0v7gz2f7vfgbhjvwhwa55b",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/a26e92a67d884db696792d25dcc44c466a1bc8b4.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/9f5b72bfd78066510f9ef2d3548dc44a74188dae.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs-darwin": {
