@@ -61,14 +61,14 @@
     },
     "nixpkgs-darwin": {
         "branch": "nixpkgs-19.03-darwin",
-        "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
-        "homepage": "https://github.com/NixOS/nixpkgs",
+        "description": "Nix Packages collection",
+        "homepage": "",
         "owner": "NixOS",
-        "repo": "nixpkgs-channels",
-        "rev": "e6fe2df74ff30df952f418453ad046cb0126df38",
-        "sha256": "08k9xy7vchvm1xps4hmsik62l9xyqqpxvpv7rqvks2k0ldngjsh5",
+        "repo": "nixpkgs",
+        "rev": "34c7eb7545d155cc5b6f499b23a7cb1c96ab4d59",
+        "sha256": "11z6ajj108fy2q5g8y4higlcaqncrbjm3dnv17pvif6avagw4mcb",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs-channels/archive/e6fe2df74ff30df952f418453ad046cb0126df38.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/34c7eb7545d155cc5b6f499b23a7cb1c96ab4d59.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs-unstable": {
