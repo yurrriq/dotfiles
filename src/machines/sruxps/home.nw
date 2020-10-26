@@ -40,6 +40,7 @@ imports = [
   ../../config/kitty.nix
   ../../config/man.nix
   ../../config/nixpkgs
+  ../../config/password-store.nix
   ../../config/rebar3.nix
   ../../config/taskwarrior
   ../../config/xmonad
@@ -151,6 +152,15 @@ Try to improve battery life.
 
 <<Install some user packages>>=
     powertop
+@
+
+Install \hrefootnote{https://www.dyne.org/software/tomb/}{Tomb} and
+related packages.
+
+<<Install some user packages>>=
+    tomb
+    file
+    lsof
 @
 
 More Trondheim wireless debugging...

@@ -43,6 +43,7 @@ kitty \
 man \
 nixpkgs/default \
 nixpkgs/nixpkgs-config \
+password-store \
 rebar3 \
 taskwarrior/default \
 xmonad/default \

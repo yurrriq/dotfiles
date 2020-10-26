@@ -8,14 +8,6 @@
 @
 
 <<modules/nixos.nix>>=
-  imports = with (import <nurpkgs> { }).modules; [
-    pass
-    tomb
-  ];
-
-@
-
-<<modules/nixos.nix>>=
   boot = {
     cleanTmpDir = true;
     loader = {
@@ -46,24 +38,6 @@
 
 <<modules/nixos.nix>>=
   nixpkgs.config.allowUnfree = true;
-
-@
-
-<<modules/nixos.nix>>=
-  programs = {
-    pass = {
-      enable = true;
-      genphrase = true;
-      git-helper = true;
-      otp = true;
-      update = true;
-    };
-    tomb = {
-      enable = true;
-      resize = true;
-      slam = true;
-    };
-  };
 
 @
 

@@ -25,6 +25,7 @@ in
     ../../config/kitty.nix
     ../../config/man.nix
     ../../config/nixpkgs
+    ../../config/password-store.nix
     ../../config/rebar3.nix
     ../../config/taskwarrior
     ../../config/xmonad
@@ -68,6 +69,9 @@ in
       dunst
       paper-icon-theme
       powertop
+      tomb
+      file
+      lsof
       wirelesstools
       nixpkgs-unstable.zoom-us
     ] ++ (

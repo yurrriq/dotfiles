@@ -18,6 +18,7 @@
     ../../config/kitty.nix
     ../../config/man.nix
     ../../config/nixpkgs
+    ../../config/password-store.nix
     ../../config/rebar3.nix
     ../../config/taskwarrior
     ../../config/xmonad
@@ -37,6 +38,9 @@
     clementine
     gnucash
     reaper
+    tomb
+    file
+    lsof
   ];
 
   _module.args.pkgs = lib.mkForce pkgs;

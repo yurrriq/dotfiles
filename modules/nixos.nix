@@ -2,11 +2,6 @@
 
 {
 
-  imports = with (import <nurpkgs> { }).modules; [
-    pass
-    tomb
-  ];
-
   boot = {
     cleanTmpDir = true;
     loader = {
@@ -25,21 +20,6 @@
   networking.networkmanager.enable = true;
 
   nixpkgs.config.allowUnfree = true;
-
-  programs = {
-    pass = {
-      enable = true;
-      genphrase = true;
-      git-helper = true;
-      otp = true;
-      update = true;
-    };
-    tomb = {
-      enable = true;
-      resize = true;
-      slam = true;
-    };
-  };
 
   services = {
     fstrim.enable = true;
