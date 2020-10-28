@@ -125,6 +125,11 @@ in
 @
 
 <<machines/nixps/configuration.nix>>=
+  hardware.pulseaudio.support32Bit = true;
+  hardware.opengl.driSupport32Bit = true;
+@
+
+<<machines/nixps/configuration.nix>>=
   home-manager.useUserPackages = true;
   home-manager.users."${username}" = args:
     import ./home.nix (args // { inherit pkgs; });

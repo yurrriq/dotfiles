@@ -38,6 +38,7 @@
     clementine
     gnucash
     reaper
+    steam
     tomb
     file
     lsof
