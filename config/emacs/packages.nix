@@ -58,6 +58,7 @@
       rust-mode
       rvm
       smex
+      terraform-mode
       tuareg
       use-package
       whitespace-cleanup-mode
