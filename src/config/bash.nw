@@ -7,10 +7,9 @@ Enable the Bash module, as well as autojump.
 
 {
 
-  programs.bash = {
-    enable = true;
-    enableAutojump = true;
-  };
+  programs.autojump.enable = true;
+
+  programs.bash.enable = true;
 
 }
 @

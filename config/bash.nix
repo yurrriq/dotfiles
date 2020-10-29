@@ -2,9 +2,8 @@
 
 {
 
-  programs.bash = {
-    enable = true;
-    enableAutojump = true;
-  };
+  programs.autojump.enable = true;
+
+  programs.bash.enable = true;
 
 }
