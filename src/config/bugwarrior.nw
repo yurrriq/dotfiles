@@ -10,13 +10,13 @@
 <<config/bugwarrior.nix>>=
   home.packages = with pkgs; [
     bugwarrior
-    pass
   ];
 
 @
 
 <<config/bugwarrior.nix>>=
   imports = [
+    ./password-store.nix
     ./taskwarrior
   ];
 

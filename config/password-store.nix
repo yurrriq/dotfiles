@@ -10,6 +10,7 @@
     package = pkgs.pass.withExtensions (exts: with exts; [
       pass-genphrase
       pass-otp
+      pass-tomb
       pass-update
     ]);
     settings = {

@@ -4,10 +4,10 @@
 
   home.packages = with pkgs; [
     bugwarrior
-    pass
   ];
 
   imports = [
+    ./password-store.nix
     ./taskwarrior
   ];
 
