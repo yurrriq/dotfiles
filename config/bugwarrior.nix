@@ -9,6 +9,7 @@
   imports = [
     ./password-store.nix
     ./taskwarrior
+    ./password-store.nix
   ];
 
   xdg.configFile."bugwarrior/bugwarriorrc".text = ''
