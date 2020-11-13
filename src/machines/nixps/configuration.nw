@@ -97,7 +97,7 @@ fileSystems."/var/lib/docker/overlay2" = {
 @
 
 \todoo{Figure out wtf is going on here}%
-\hrefootnote{https://github.com/NixOS/nixpkgs/issues/24711}
+\hrefootnote{https://github.com/NixOS/nixpkgs/issues/24711}{NixOS/nixpkgs\#24711}
 
 <<Tweak hardware config>>=
 hardware.bumblebee.enable = false;
