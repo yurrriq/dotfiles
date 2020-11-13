@@ -8,6 +8,7 @@
     gd = "git d";
     gdc = "git dc";
     gs = "git st";
+    gt = "git tree";
   };
 
   programs.git.aliases = rec {
