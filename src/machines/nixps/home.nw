@@ -1,8 +1,11 @@
 <<machines/nixps/home.nix>>=
 { lib, pkgs, ... }:
-
+let
+  nixpkgs-unstable = import (import ../../nix/sources.nix).nixpkgs-unstable {
+    config.allowUnfree = true;
+  };
+in
 {
-
 @
 
 <<machines/nixps/home.nix>>=
@@ -64,5 +67,21 @@
 @
 
 <<machines/nixps/home.nix>>=
+  programs.starship = {
+    enable = true;
+    package = nixpkgs-unstable.starship;
+    settings = {
+      add_newline = false;
+      character.symbol = "λ";
+      # line_break.disabled = true;
+      nix_shell = {
+        impure_msg = ""; # "😈";
+        # pure_msg = "👼";
+      };
+      stats.disabled = false;
+      time.disabled = false;
+
+    };
+  };
 }
 @

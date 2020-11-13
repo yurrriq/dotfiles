@@ -1,7 +1,10 @@
 { lib, pkgs, ... }:
-
+let
+  nixpkgs-unstable = import (import ../../nix/sources.nix).nixpkgs-unstable {
+    config.allowUnfree = true;
+  };
+in
 {
-
   imports = (import <nurpkgs> { }).home-manager.modules ++ [
     ../../config/bat.nix
     ../../config/browserpass.nix
@@ -48,4 +51,20 @@
 
   _module.args.pkgs = lib.mkForce pkgs;
 
+  programs.starship = {
+    enable = true;
+    package = nixpkgs-unstable.starship;
+    settings = {
+      add_newline = false;
+      character.symbol = "λ";
+      # line_break.disabled = true;
+      nix_shell = {
+        impure_msg = ""; # "😈";
+        # pure_msg = "👼";
+      };
+      stats.disabled = false;
+      time.disabled = false;
+
+    };
+  };
 }
