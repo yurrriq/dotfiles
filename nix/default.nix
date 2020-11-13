@@ -17,6 +17,7 @@ in
       "home-manager=${home-manager}"
       "nixos-hardware=${nixos-hardware}"
       "nixpkgs=${if seemsDarwin then nixpkgs-darwin else nixpkgs}"
+      "nixpkgs-unstable=${nixpkgs-unstable}"
       "nur=${nur}"
       "nurpkgs=${nurpkgs}"
     ] ++ lib.optional seemsDarwin "darwin=${darwin}";

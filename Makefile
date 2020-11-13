@@ -184,6 +184,7 @@ bootstrap:
 	-I nixos-hardware=$$(jq -r '."nixos-hardware".url' nix/sources.json) \
 	-I nixpkgs=$$(jq -r '.nixpkgs.url' nix/sources.json) \
 	-I nixpkgs-overlays=/etc/nixos/overlays \
+	-I nixpkgs-unstable=$$(jq -r '."nixpkgs-unstable".url' nix/sources.json) \
 	-I nur=$$(jq -r '.nur.url' nix/sources.json) \
 	-I nurpkgs=/etc/nixos/nix/nurpkgs.nix \
 	--show-trace

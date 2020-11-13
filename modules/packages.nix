@@ -1,9 +1,5 @@
 { lib, pkgs, ... }:
-let
-  nixpkgs-unstable = import (import ../nix/sources.nix).nixpkgs-unstable {
-    config.allowUnfree = true;
-  };
-in
+
 {
   environment.systemPackages = with pkgs; (
     [
@@ -65,7 +61,7 @@ in
       vim
       watch
       # wipe
-      nixpkgs-unstable.yq
+      (import <nixpkgs-unstable> { }).yq
     ]
   ) ++ (
     with haskellPackages; [
@@ -104,7 +100,7 @@ in
     playerctl
     psmisc
     (
-      nixpkgs-unstable.signal-desktop.override {
+      (import <nixpkgs-unstable> { config.allowUnfree = true; }).signal-desktop.override {
         spellcheckerLanguage = "en_US";
       }
     )

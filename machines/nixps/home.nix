@@ -1,9 +1,5 @@
 { lib, pkgs, ... }:
-let
-  nixpkgs-unstable = import (import ../../nix/sources.nix).nixpkgs-unstable {
-    config.allowUnfree = true;
-  };
-in
+
 {
   imports = (import <nurpkgs> { }).home-manager.modules ++ [
     ../../config/bat.nix
