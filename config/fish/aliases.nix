@@ -7,9 +7,8 @@
 
     k = "clear";
 
-    l = "ls --color=auto -Glah";
-    ll = "ls --color=auto -Glh";
-    ls = "ls --color=auto -G";
+    l = "exa --color=auto -G";
+    ll = "exa --color=auto -Gla";
 
     # Old Darwin habits
     pbcopy = "xclip -sel clipboard";

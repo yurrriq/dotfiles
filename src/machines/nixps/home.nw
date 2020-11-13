@@ -52,6 +52,8 @@
     tomb
     file
     lsof
+    fd
+    exa
   ];
 
 @

@@ -42,6 +42,8 @@
     tomb
     file
     lsof
+    fd
+    exa
   ];
 
   _module.args.pkgs = lib.mkForce pkgs;
