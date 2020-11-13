@@ -73,8 +73,8 @@ config/emacs/init.el \
 config/fish/interactiveShellInit.fish \
 config/fish/shellInit.fish \
 config/fish/sushi/fish_prompt.fish \
-config/fish/sushi/fish_right_prompt.fish \
-config/i3status/config
+config/fish/sushi/fish_right_prompt.fish
+# config/i3status/config
 
 # NW_SRCS := \
 # $(patsubst %.nix,src/%.nw,${NIX_SRCS}) \

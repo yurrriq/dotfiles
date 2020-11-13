@@ -101,14 +101,10 @@ in
   networking.useDHCP = false; # NOTE: Deprecated, so set it false.
 
   nix = {
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
     nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
       "nixpkgs-overlays=/etc/nixos/overlays"
     ];
-    package = pkgs.nixUnstable;
     trustedUsers = [ "root" username ];
   };
 

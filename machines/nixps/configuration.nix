@@ -14,25 +14,15 @@ in
     ../../modules/packages.nix
     <home-manager/nixos>
   ];
-
   airportCode = "MSP";
-
   boot.blacklistedKernelModules = [ "nouveau" "nvidia" "psmouse" ];
-
-  boot.initrd.luks.devices = {
-    root = {
-      device = "/dev/nvme0n1p2";
-    };
-  };
-
+  boot.initrd.luks.devices.root.device = "/dev/nvme0n1p2";
   environment.homeBinInPath = true;
-
   environment.pathsToLink = [
     "/lib/aspell"
     "/share/emacs/site-lisp"
     "/share/fish"
   ];
-
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/024a1168-9949-4cb2-bbd1-4b19a9d49ef2";
     fsType = "ext4";
@@ -55,13 +45,9 @@ in
     options = [ "bind" ];
   };
 
-  fonts.fonts = with pkgs; [
-    fira-code
-    fira-code-symbols
-  ];
-
+  hardware.bumblebee.enable = false;
+  hardware.nvidiaOptimus.disable = false;
   services.blueman.enable = true;
-
   hardware.bluetooth = {
     enable = true;
     config = {
@@ -70,30 +56,20 @@ in
       };
     };
   };
-
-  hardware.bumblebee.enable = false;
-  hardware.nvidiaOptimus.disable = false;
   hardware.pulseaudio.support32Bit = true;
   hardware.opengl.driSupport32Bit = true;
   home-manager.useUserPackages = true;
   home-manager.users."${username}" = args:
     import ./home.nix (args // { inherit pkgs; });
-
   networking.hostName = "nixps";
-
   nix = {
-
     buildCores = 8;
-
     nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
       "nixpkgs-overlays=/etc/nixos/overlays"
     ];
-
     trustedUsers = [ "root" username ];
-
   };
-
   nixpkgs.overlays =
     let
       path = <nixpkgs-overlays>;
@@ -117,21 +93,19 @@ in
         node
       ]
     );
-
   security.sudo = {
     enable = true;
     extraConfig = ''
       ${username} ALL=(ALL) NOPASSWD: ALL
     '';
   };
-
-  services.xserver.displayManager.autoLogin = {
-    enable = true;
-    user = username;
+  services.xserver = {
+    displayManager.autoLogin = {
+      enable = true;
+      user = username;
+    };
+    dpi = 180;
   };
-
-  services.xserver.dpi = 180;
-
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
@@ -152,5 +126,4 @@ in
     home = "/home/${username}";
     shell = "/etc/profiles/per-user/${username}/bin/fish";
   };
-
 }

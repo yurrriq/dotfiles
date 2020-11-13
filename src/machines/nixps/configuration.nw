@@ -1,97 +1,108 @@
-<<machines/nixps/configuration.nix>>=
-{ config, lib, pkgs, ... }:
-@
+\subsection{NixOS configuration}
+
+The NixPS configuration is an expression that taks, at least, \nix{config},
+\nix{lib}, and \nix{pkgs}.
 
 <<machines/nixps/configuration.nix>>=
+{ config, lib, pkgs, ... }:
 let
   username = "yurrriq";
 in
 {
+  <<Import hardware config and modules>>
+  <<Set the location to MSP>>
+  <<Blacklist a few kernel modules>>
+  <<Configure the LUKS device>>
+  <<Configure the environment>>
+  <<Configure the file systems>>
+  <<Tweak hardware config>>
+  <<Configure Bluetooth>>
+  <<Configure PulseAudio and OpenGL>>
+  <<Configure home-manager>>
+  <<Configure networking>>
+  <<Configure Nix>>
+  <<Configure overlays>>
+  <<Configure sudo>>
+  <<Configure X Server>>
+  <<<Configure user>>
+}
 @
 
-<<machines/nixps/configuration.nix>>=
-  imports = [
-    <nixos-hardware/dell/xps/15-9560/intel>
-    <nixos-hardware/common/pc/laptop/ssd>
-    ./hardware-configuration.nix
-    ../../nix
-    ../../modules/common.nix
-    ../../modules/location.nix
-    ../../modules/nixos.nix
-    ../../modules/packages.nix
-    <home-manager/nixos>
-  ];
+Import the hardware config and other Nix \glspl{module}.
 
+<<Import hardware config and modules>>=
+imports = [
+  <nixos-hardware/dell/xps/15-9560/intel>
+  <nixos-hardware/common/pc/laptop/ssd>
+  ./hardware-configuration.nix
+  ../../nix
+  ../../modules/common.nix
+  ../../modules/location.nix
+  ../../modules/nixos.nix
+  ../../modules/packages.nix
+  <home-manager/nixos>
+];
 @
 
-<<machines/nixps/configuration.nix>>=
-  airportCode = "MSP";
 
+\todoo{Describe the location module}
+
+<<Set the location to MSP>>=
+airportCode = "MSP";
 @
 
-<<machines/nixps/configuration.nix>>=
-  boot.blacklistedKernelModules = [ "nouveau" "nvidia" "psmouse" ];
-
+<<Blacklist a few kernel modules>>=
+boot.blacklistedKernelModules = [ "nouveau" "nvidia" "psmouse" ];
 @
 
-<<machines/nixps/configuration.nix>>=
-  boot.initrd.luks.devices = {
-    root = {
-      device = "/dev/nvme0n1p2";
-    };
-  };
+Configure the \href{https://gitlab.com/cryptsetup/cryptsetup/}{\acrshort{luks}}
+devices.
 
+<<Configure the LUKS device>>=
+boot.initrd.luks.devices.root.device = "/dev/nvme0n1p2";
 @
 
-<<machines/nixps/configuration.nix>>=
-  environment.homeBinInPath = true;
-
+<<Configure the environment>>=
+environment.homeBinInPath = true;
+environment.pathsToLink = [
+  "/lib/aspell"
+  "/share/emacs/site-lisp"
+  "/share/fish"
+];
 @
 
-<<machines/nixps/configuration.nix>>=
-  environment.pathsToLink = [
-    "/lib/aspell"
-    "/share/emacs/site-lisp"
-    "/share/fish"
-  ];
+<<Configure the file systems>>=
+fileSystems."/" = {
+  device = "/dev/disk/by-uuid/024a1168-9949-4cb2-bbd1-4b19a9d49ef2";
+  fsType = "ext4";
+};
 
-@
+fileSystems."/boot" = {
+  device = "/dev/disk/by-uuid/7574-B246";
+  fsType = "vfat";
+};
 
-<<machines/nixps/configuration.nix>>=
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/024a1168-9949-4cb2-bbd1-4b19a9d49ef2";
-    fsType = "ext4";
-  };
+fileSystems."/var/lib/docker/plugins" = {
+  device = "/var/lib/docker/plugins";
+  fsType = "none";
+  options = [ "bind" ];
+};
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/7574-B246";
-    fsType = "vfat";
-  };
-
-  fileSystems."/var/lib/docker/plugins" = {
-    device = "/var/lib/docker/plugins";
-    fsType = "none";
-    options = [ "bind" ];
-  };
-
-  fileSystems."/var/lib/docker/overlay2" = {
-    device = "/var/lib/docker/overlay2";
-    fsType = "none";
-    options = [ "bind" ];
-  };
-
-@
-
-<<machines/nixps/configuration.nix>>=
-  fonts.fonts = with pkgs; [
-    fira-code
-    fira-code-symbols
-  ];
+fileSystems."/var/lib/docker/overlay2" = {
+  device = "/var/lib/docker/overlay2";
+  fsType = "none";
+  options = [ "bind" ];
+};
 
 @
 
 \todoo{Figure out wtf is going on here}%
 \hrefootnote{https://github.com/NixOS/nixpkgs/issues/24711}
+
+<<Tweak hardware config>>=
+hardware.bumblebee.enable = false;
+hardware.nvidiaOptimus.disable = false;
+@
 
 \begin{minted}{nix}
   hardware.bumblebee.enable = true;
@@ -108,127 +119,114 @@ in
   };
 \end{minted}
 
-<<machines/nixps/configuration.nix>>=
-  services.blueman.enable = true;
-
-  hardware.bluetooth = {
-    enable = true;
-    config = {
-      General = {
-        Enable = "Source,Sink,Media,Socket";
-      };
+<<Configure Bluetooth>>=
+services.blueman.enable = true;
+hardware.bluetooth = {
+  enable = true;
+  config = {
+    General = {
+      Enable = "Source,Sink,Media,Socket";
     };
   };
-
-  hardware.bumblebee.enable = false;
-  hardware.nvidiaOptimus.disable = false;
+};
 @
 
-<<machines/nixps/configuration.nix>>=
-  hardware.pulseaudio.support32Bit = true;
-  hardware.opengl.driSupport32Bit = true;
+Tweak PulseAudio and OpenGL settings for Steam.
+
+<<Configure PulseAudio and OpenGL>>=
+hardware.pulseaudio.support32Bit = true;
+hardware.opengl.driSupport32Bit = true;
 @
 
-<<machines/nixps/configuration.nix>>=
-  home-manager.useUserPackages = true;
-  home-manager.users."${username}" = args:
-    import ./home.nix (args // { inherit pkgs; });
-
+<<Configure home-manager>>=
+home-manager.useUserPackages = true;
+home-manager.users."${username}" = args:
+  import ./home.nix (args // { inherit pkgs; });
 @
 
-<<machines/nixps/configuration.nix>>=
-  networking.hostName = "nixps";
-
+<<Configure networking>>=
+networking.hostName = "nixps";
 @
 
-<<machines/nixps/configuration.nix>>=
-  nix = {
-
-    buildCores = 8;
-
-    nixPath = [
-      "nixos-config=/etc/nixos/configuration.nix"
-      "nixpkgs-overlays=/etc/nixos/overlays"
-    ];
-
-    trustedUsers = [ "root" username ];
-
-  };
-
+<<Configure Nix>>=
+nix = {
+  buildCores = 8;
+  nixPath = [
+    "nixos-config=/etc/nixos/configuration.nix"
+    "nixpkgs-overlays=/etc/nixos/overlays"
+  ];
+  trustedUsers = [ "root" username ];
+};
 @
 
-<<machines/nixps/configuration.nix>>=
-  nixpkgs.overlays =
-    let
-      path = <nixpkgs-overlays>;
-    in
-    with builtins;
-    map
-      (n: import (path + ("/" + n)))
-      (
-        filter
-          (
-            n: match ".*\\.nix" n != null
-            || pathExists (path + ("/" + n + "/default.nix"))
-          )
-          (attrNames (readDir path))
-      )
-    ++ (
-      with (import <nurpkgs> { }).overlays; [
-        nur
-        engraving
-        git
-        node
-      ]
-    );
-
+<<Configure overlays>>=
+nixpkgs.overlays =
+  let
+    path = <nixpkgs-overlays>;
+  in
+  with builtins;
+  map
+    (n: import (path + ("/" + n)))
+    (
+      filter
+        (
+          n: match ".*\\.nix" n != null
+          || pathExists (path + ("/" + n + "/default.nix"))
+        )
+        (attrNames (readDir path))
+    )
+  ++ (
+    with (import <nurpkgs> { }).overlays; [
+      nur
+      engraving
+      git
+      node
+    ]
+  );
 @
 
-
-<<machines/nixps/configuration.nix>>=
-  security.sudo = {
-    enable = true;
-    extraConfig = ''
-      ${username} ALL=(ALL) NOPASSWD: ALL
-    '';
-  };
-
+<<Configure sudo>>=
+security.sudo = {
+  enable = true;
+  extraConfig = ''
+    ${username} ALL=(ALL) NOPASSWD: ALL
+  '';
+};
 @
 
-<<machines/nixps/configuration.nix>>=
-  services.xserver.displayManager.autoLogin = {
+<<Configure X Server>>=
+services.xserver = {
+  displayManager.autoLogin = {
     enable = true;
     user = username;
   };
-
-  services.xserver.dpi = 180;
-
+  dpi = 180;
+};
 @
 
-<<machines/nixps/configuration.nix>>=
-  users.mutableUsers = false;
-  users.users."${username}" = {
-    name = username;
-    hashedPassword = lib.fileContents (./. + "/secrets/${username}.hashedPassword");
-    group = "users";
-    extraGroups = [
-      "audio"
-      "disk"
-      "docker"
-      "http"
-      "networkmanager"
-      "systemd-journal"
-      "video"
-      "wheel"
-    ];
-    createHome = true;
-    uid = 1000;
-    home = "/home/${username}";
-    shell = "/etc/profiles/per-user/${username}/bin/fish";
-  };
-
+<<<Configure user>>=
+users.mutableUsers = false;
+users.users."${username}" = {
+  name = username;
+  hashedPassword = lib.fileContents (./. + "/secrets/${username}.hashedPassword");
+  group = "users";
+  extraGroups = [
+    "audio"
+    "disk"
+    "docker"
+    "http"
+    "networkmanager"
+    "systemd-journal"
+    "video"
+    "wheel"
+  ];
+  createHome = true;
+  uid = 1000;
+  home = "/home/${username}";
+  shell = "/etc/profiles/per-user/${username}/bin/fish";
+};
 @
 
-<<machines/nixps/configuration.nix>>=
-}
-@
+%% Local Variables:
+%% noweb-code-mode: nix-mode
+%% End:
