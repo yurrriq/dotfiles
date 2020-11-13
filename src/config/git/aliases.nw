@@ -7,6 +7,7 @@
     g = "git";
     gd = "git d";
     gdc = "git dc";
+    gm = "git merge";
     gs = "git st";
     gt = "git tree";
   };
