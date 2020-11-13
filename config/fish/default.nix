@@ -9,7 +9,6 @@
 
   home = {
     packages = with pkgs; [
-      autojump
       exa
     ];
     sessionVariables = {
@@ -17,6 +16,8 @@
       TERMINAL = "kitty";
     };
   };
+
+  programs.autojump.enable = true;
 
   programs.fish =
     let
