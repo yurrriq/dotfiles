@@ -10,6 +10,7 @@
   home = {
     packages = with pkgs; [
       autojump
+      exa
     ];
     sessionVariables = {
       SHELL = "fish";

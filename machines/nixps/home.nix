@@ -32,7 +32,6 @@
     realName = "Eric Bailey";
   };
   home.packages = with pkgs; [
-    exa
     fd
 
     # carla

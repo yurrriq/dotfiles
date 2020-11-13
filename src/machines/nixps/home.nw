@@ -47,7 +47,6 @@ accounts.email.accounts.primary = {
 
 <<Add some more user packages>>=
 home.packages = with pkgs; [
-  exa
   fd
 
   # carla
