@@ -27,6 +27,7 @@ in
     ../../config/nixpkgs
     ../../config/password-store.nix
     ../../config/rebar3.nix
+    ../../config/starship.nix
     ../../config/taskwarrior
     ../../config/xmonad
   ];

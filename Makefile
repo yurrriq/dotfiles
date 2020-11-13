@@ -45,6 +45,7 @@ nixpkgs/default \
 nixpkgs/nixpkgs-config \
 password-store \
 rebar3 \
+starship \
 taskwarrior/default \
 xmonad/default \
 )\
