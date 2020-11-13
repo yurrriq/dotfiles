@@ -61,7 +61,7 @@
       vim
       watch
       # wipe
-      (import <nixpkgs-unstable> { }).yq
+      yq
     ]
   ) ++ (
     with haskellPackages; [
