@@ -43,6 +43,8 @@
     file
     lsof
     tomb
+
+    tellico
   ];
   _module.args.pkgs = lib.mkForce pkgs;
 }
