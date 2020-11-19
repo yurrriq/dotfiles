@@ -174,7 +174,31 @@ networking.useDHCP = false; # NOTE: Deprecated, so set it false.
 @
 
 <<Configure Nix>>=
+programs.ssh.extraConfig = ''
+  Host eu.nixbuild.net
+      PubkeyAcceptedKeyTypes ssh-ed25519
+      IdentityFile /root/.ssh/nixbuild
+'';
+@
+
+<<Configure Nix>>=
 nix = {
+  buildMachines = [
+    {
+      hostName = "eu.nixbuild.net";
+      system = "x86_64-linux";
+      maxJobs = 100;
+      speedFactor = 1;
+      supportedFeatures = [
+        "benchmark"
+        "big-parallel"
+      ];
+    }
+  ];
+  distributedBuilds = true;
+  extraOptions = ''
+    builders-use-substitutes = true
+  '';
   nixPath = [
     "nixos-config=/etc/nixos/configuration.nix"
     "nixpkgs-overlays=/etc/nixos/overlays"

@@ -100,7 +100,28 @@ in
   networking.interfaces.wlp1s0.useDHCP = true;
   networking.useDHCP = false; # NOTE: Deprecated, so set it false.
 
+  programs.ssh.extraConfig = ''
+    Host eu.nixbuild.net
+        PubkeyAcceptedKeyTypes ssh-ed25519
+        IdentityFile /root/.ssh/nixbuild
+  '';
   nix = {
+    buildMachines = [
+      {
+        hostName = "eu.nixbuild.net";
+        system = "x86_64-linux";
+        maxJobs = 100;
+        speedFactor = 1;
+        supportedFeatures = [
+          "benchmark"
+          "big-parallel"
+        ];
+      }
+    ];
+    distributedBuilds = true;
+    extraOptions = ''
+      builders-use-substitutes = true
+    '';
     nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
       "nixpkgs-overlays=/etc/nixos/overlays"
