@@ -23,7 +23,7 @@ bat \
 browserpass \
 bugwarrior \
 direnv \
-dunst/default \
+dunst \
 emacs/default \
 emacs/packages \
 firefox \
@@ -69,7 +69,6 @@ SH_SRCS := \
 config/taskwarrior/on-exit-git.sh
 
 OTHER_SRCS := \
-config/dunst/dunstrc \
 config/emacs/init.el \
 config/fish/interactiveShellInit.fish \
 config/fish/shellInit.fish \

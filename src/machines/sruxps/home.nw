@@ -27,7 +27,7 @@ imports = [
   ../../config/browserpass.nix
   ../../config/bugwarrior.nix
   ../../config/direnv.nix
-  ../../config/dunst
+  ../../config/dunst.nix
   ../../config/emacs
   ../../config/firefox.nix
   ../../config/fish
@@ -145,7 +145,6 @@ is useful for configuring Bluetooth audio.
     lm_sensors
     nfs-utils
     libnotify
-    dunst
     paper-icon-theme
 @
 

@@ -12,7 +12,7 @@ in
     ../../config/browserpass.nix
     ../../config/bugwarrior.nix
     ../../config/direnv.nix
-    ../../config/dunst
+    ../../config/dunst.nix
     ../../config/emacs
     ../../config/firefox.nix
     ../../config/fish
@@ -67,7 +67,6 @@ in
       lm_sensors
       nfs-utils
       libnotify
-      dunst
       paper-icon-theme
       powertop
       tomb
