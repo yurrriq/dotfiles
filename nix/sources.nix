@@ -49,11 +49,10 @@ let
   # https://github.com/NixOS/nixpkgs/pull/83241/files#diff-c6f540a4f3bfa4b0e8b6bafd4cd54e8bR695
   sanitizeName = name:
     (
-      concatMapStrings
-        (s: if builtins.isList s then "-" else s)
+      concatMapStrings (s: if builtins.isList s then "-" else s)
         (
           builtins.split "[^[:alnum:]+._?=-]+"
-            ( (x: builtins.elemAt (builtins.match "\\.*(.*)" x) 0) name)
+            ((x: builtins.elemAt (builtins.match "\\.*(.*)" x) 0) name)
         )
     );
 
@@ -97,7 +96,10 @@ let
       saneName = stringAsChars (c: if isNull (builtins.match "[a-zA-Z0-9]" c) then "_" else c) name;
       ersatz = builtins.getEnv "NIV_OVERRIDE_${saneName}";
     in
-    if ersatz == "" then drv else ersatz;
+    if ersatz == "" then drv else
+      # this turns the string into an actual Nix path (for both absolute and
+      # relative paths)
+    if builtins.substring 0 1 ersatz == "/" then /. + ersatz else /. + builtins.getEnv "PWD" + "/${ersatz}";
 
   # Ports of functions for older nix versions
 
