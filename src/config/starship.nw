@@ -73,6 +73,7 @@
         diverged = ''⇕⇡''${ahead_count}⇣''${behind_count}'';
         staged = "+$count";
       };
+      kubernetes.disabled = false;
       nix_shell = {
         format = "via [$symbol$state( \\($name\\))]($style) ";
         impure_msg = "ι";
