@@ -1,3 +1,6 @@
+\section{Starship}
+\hrefootnote{https://starship.rs}
+
 <<config/starship.nix>>=
 { lib, ... }:
 {
