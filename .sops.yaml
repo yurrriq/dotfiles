@@ -5,7 +5,9 @@ creation_rules:
 - path_regex: .*/machines/nixps/.*\.enc$
   pgp: F88372B24A806FF23BCB3A4E2DDDF8606958B3F9
 - path_regex: machines/sruxps/.*\.enc$
-  pgp: EFD6F1EDC84D2FA935E38570462054AB8B682702
+  pgp: &sruxps_pgp EFD6F1EDC84D2FA935E38570462054AB8B682702
+- path_regex: modules/gitlab-runner/gitlab-runner-registration.enc
+  pgp: *sruxps_pgp
 - path_regex: cachix/.*\.enc$
   pgp: >-
     2E8D082C324D5F5459CD27E755BF5D49549F04AD,
