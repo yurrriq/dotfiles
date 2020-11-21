@@ -74,7 +74,7 @@
       };
       kubernetes.disabled = false;
       nix_shell = {
-        format = "via [$symbol$state( \\($name\\))]($style) ";
+        format = "via [$symbol$state]($style) ";
         impure_msg = "ι";
         pure_msg = "﻿ρ";
         symbol = "❄️";
