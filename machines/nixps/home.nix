@@ -49,7 +49,10 @@ in
     tomb
 
     tellico
+
     nixpkgs-unstable.zoom-us
+
+    openscad
   ];
   _module.args.pkgs = lib.mkForce pkgs;
 }

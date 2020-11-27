@@ -64,6 +64,9 @@ home.packages = with pkgs; [
   tomb
 
   tellico
+
   nixpkgs-unstable.zoom-us
+
+  openscad
 ];
 @
