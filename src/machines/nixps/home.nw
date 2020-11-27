@@ -1,6 +1,10 @@
 <<machines/nixps/home.nix>>=
 { lib, pkgs, ... }:
-
+let
+  nixpkgs-unstable = import (import ../../nix/sources.nix).nixpkgs-unstable {
+    config.allowUnfree = true;
+  };
+in
 {
   <<Import some modules>>
   <<Configure account>>
@@ -60,5 +64,6 @@ home.packages = with pkgs; [
   tomb
 
   tellico
+  nixpkgs-unstable.zoom-us
 ];
 @

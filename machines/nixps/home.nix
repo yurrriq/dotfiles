@@ -1,5 +1,9 @@
 { lib, pkgs, ... }:
-
+let
+  nixpkgs-unstable = import (import ../../nix/sources.nix).nixpkgs-unstable {
+    config.allowUnfree = true;
+  };
+in
 {
   imports = [
     ../../config/bat.nix
@@ -45,6 +49,7 @@
     tomb
 
     tellico
+    nixpkgs-unstable.zoom-us
   ];
   _module.args.pkgs = lib.mkForce pkgs;
 }
