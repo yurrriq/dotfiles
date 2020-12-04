@@ -1,4 +1,4 @@
-\section{Location}
+\section{Location} \label{sec:location}
 
 <<modules/location.nix>>=
 { config, lib, ... }:

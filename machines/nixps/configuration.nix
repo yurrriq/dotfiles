@@ -66,33 +66,15 @@ in
     buildCores = 8;
     nixPath = [
       "nixos-config=/etc/nixos/configuration.nix"
-      "nixpkgs-overlays=/etc/nixos/overlays"
     ];
     trustedUsers = [ "root" username ];
   };
-  nixpkgs.overlays =
-    let
-      path = <nixpkgs-overlays>;
-    in
-    with builtins;
-    map
-      (n: import (path + ("/" + n)))
-      (
-        filter
-          (
-            n: match ".*\\.nix" n != null
-            || pathExists (path + ("/" + n + "/default.nix"))
-          )
-          (attrNames (readDir path))
-      )
-    ++ (
-      with (import <nurpkgs> { }).overlays; [
-        nur
-        engraving
-        git
-        node
-      ]
-    );
+  nixpkgs.overlays = with (import <nurpkgs> { }).overlays; [
+    nur
+    engraving
+    git
+    node
+  ];
   security.sudo = {
     enable = true;
     extraConfig = ''

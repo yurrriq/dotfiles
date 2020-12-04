@@ -1,6 +1,6 @@
 \subsection{NixOS configuration}
 
-The NixPS configuration is an expression that taks, at least, \nix{config},
+The NiXPS configuration is an expression that takes, at least, \nix{config},
 \nix{lib}, and \nix{pkgs}.
 
 <<machines/nixps/configuration.nix>>=
@@ -24,11 +24,12 @@ in
   <<Configure overlays>>
   <<Configure sudo>>
   <<Configure X Server>>
-  <<<Configure user>>
+  <<Configure user>>
 }
 @
 
-Import the hardware config and other Nix \glspl{module}.
+
+Use the \href{https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/15-9560}{community-curated optimizations} for \href{https://www.dell.com/support/home/en-us/product-support/product/xps-15-9560-laptop/docs}{XPS 15 9560}, the \href{https://github.com/yurrriq/dotfiles/blob/main/machines/nixps/hardware-configuration.nix}{generated hardware config}, my custom \glspl{module}, and the \href{https://nix-community.github.io/home-manager/index.html\#sec-install-nixos-module}{home-manager} \gls{module}.
 
 <<Import hardware config and modules>>=
 imports = [
@@ -45,7 +46,7 @@ imports = [
 @
 
 
-\todoo{Describe the location module}
+Configure the \ref{sec:location}\todor{FIXME} \gls{module}.
 
 <<Set the location to MSP>>=
 airportCode = "MSP";
@@ -55,8 +56,7 @@ airportCode = "MSP";
 boot.blacklistedKernelModules = [ "nouveau" "nvidia" "psmouse" ];
 @
 
-Configure the \href{https://gitlab.com/cryptsetup/cryptsetup/}{\acrshort{luks}}
-devices.
+Configure the \acrshort{luks}\footnote{\href{https://gitlab.com/cryptsetup/cryptsetup/}} devices.
 
 <<Configure the LUKS device>>=
 boot.initrd.luks.devices.root.device = "/dev/nvme0n1p2";
@@ -153,36 +153,18 @@ nix = {
   buildCores = 8;
   nixPath = [
     "nixos-config=/etc/nixos/configuration.nix"
-    "nixpkgs-overlays=/etc/nixos/overlays"
   ];
   trustedUsers = [ "root" username ];
 };
 @
 
 <<Configure overlays>>=
-nixpkgs.overlays =
-  let
-    path = <nixpkgs-overlays>;
-  in
-  with builtins;
-  map
-    (n: import (path + ("/" + n)))
-    (
-      filter
-        (
-          n: match ".*\\.nix" n != null
-          || pathExists (path + ("/" + n + "/default.nix"))
-        )
-        (attrNames (readDir path))
-    )
-  ++ (
-    with (import <nurpkgs> { }).overlays; [
-      nur
-      engraving
-      git
-      node
-    ]
-  );
+nixpkgs.overlays = with (import <nurpkgs> { }).overlays; [
+  nur
+  engraving
+  git
+  node
+];
 @
 
 <<Configure sudo>>=
@@ -204,7 +186,7 @@ services.xserver = {
 };
 @
 
-<<<Configure user>>=
+<<Configure user>>=
 users.mutableUsers = false;
 users.users."${username}" = {
   name = username;
