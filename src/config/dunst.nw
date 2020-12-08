@@ -44,7 +44,7 @@
         icon_position = "left";
         max_icon_size = 80;
         # icon_path = "/run/current-system/sw/share/icons/Paper/16x16/mimetypes/:/run-current-system/sw/share/icons/Paper/48x48/status/:/run/current-system/sw/share/icons/Paper/16x16/devices/:/run/current-system/sw/share/icons/Paper/48x48/notifications/:/run/current-system/sw/share/icons/Paper/48x48/emblems/";
-        frame_width = 3;
+        frame_width = 0;
         frame_color = "#8EC07C";
       };
       shortcuts = {
@@ -72,13 +72,13 @@
         background = "#191311";
         timeout = 8;
       };
-      # slack = {
-      #   appname = "Slack";
-      #   body = "*critical*";
-      #   foreground = "#B7472A";
-      #   background = "#191311";
-      #   urgency = "critical";
-      # };
+      slack = {
+        appname = "Slack";
+        body = "*critical*";
+        foreground = "#B7472A";
+        background = "#191311";
+        urgency = "critical";
+      };
     };
   };
 }
