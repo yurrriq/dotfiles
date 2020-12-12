@@ -87,5 +87,9 @@ related packages.
 @
 
 <<Add some more user packages>>=
+  appimage-run
+@
+
+<<Add some more user packages>>=
 ];
 @

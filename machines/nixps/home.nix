@@ -55,6 +55,7 @@ in
     lsof
     tomb
     nixpkgs-unstable.zoom-us
+    appimage-run
   ];
   _module.args.pkgs = lib.mkForce pkgs;
 }
