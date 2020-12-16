@@ -6,9 +6,11 @@ let
 in
 {
   imports = [
+    ../../config/bash.nix
     ../../config/bat.nix
     ../../config/browserpass.nix
     ../../config/direnv.nix
+    ../../config/dunst.nix
     ../../config/emacs
     ../../config/firefox.nix
     ../../config/fish

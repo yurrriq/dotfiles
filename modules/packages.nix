@@ -8,6 +8,8 @@
       awscli
       bind
       cachix
+      clac
+      clementine
       coreutils
       # TODO: cquery
       curl
@@ -22,6 +24,7 @@
       httpie
       # TODO: http-prompt
       # TODO: idris
+      lorri
       moreutils
       neofetch
       nix
@@ -64,23 +67,11 @@
       yq
     ]
   ) ++ (
-    with haskellPackages; [
-      cabal-install
-      cabal2nix
-      hpack
-      # FIXME: stylish-haskell
-    ]
-  ) ++ (
-    with nodePackages; [
-      # TODO: bash-language-server
-    ]
-  ) ++ (
     with python3Packages; [
       pygments
     ]
   ) ++ lib.optionals stdenv.isDarwin (
     [
-      clementine
       m-cli
       sourcetree
       onyx
@@ -92,13 +83,26 @@
       ]
     )
   ) ++ lib.optionals stdenv.isLinux [
-    gnome3.networkmanagerapplet
+    dolphin
     hicolor-icon-theme
     keybase-gui
+    libnotify
     libreoffice
-    qpdfview
+    lm_sensors
+    mtr
+    networkmanager-openconnect
+    nfs-utils
+    openconnect
+    paper-icon-theme
+    pavucontrol
     playerctl
     psmisc
+    pv
+    qpdfview
+    wirelesstools
+    file
+    lsof
+    tomb
     (
       (import <nixpkgs-unstable> { config.allowUnfree = true; }).signal-desktop.override {
         spellcheckerLanguage = "en_US";

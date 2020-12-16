@@ -35,7 +35,6 @@ imports = [
   ../../config/git
   ../../config/gpg.nix
   ../../config/htop.nix
-  # ../../config/i3
   ../../config/jq.nix
   ../../config/kitty.nix
   ../../config/man.nix
@@ -66,20 +65,11 @@ home.packages = with pkgs; (
 @
 
 <<Install some user packages>>=
-    clac
-    dolphin
-    lorri
-    mtr
     progress
-    pv
 @
 
 \hrefootnote{https://www.clementine-player.org/}{Clementine} is a great music
 player.
-
-<<Install some user packages>>=
-    clementine # FIXME: Unfree
-@
 
 I haven't used Dhall in a while, but it's still interesting.
 
@@ -93,10 +83,6 @@ again someday, but not lately.
 
 <<Install some user packages>>=
     docker-compose
-@
-
-<<Install some user packages>>=
-    ghc
 @
 
 \hrefootnote{https://wireless.wiki.kernel.org/en/users/documentation/iw}{iw} is
@@ -121,7 +107,6 @@ non-interactive AWS Azure login.
 
 <<Install some user packages>>=
     naal
-    networkmanager-openconnect
 @
 
 It would be cool to play with \hrefootnote{https://next.atlas.engineer/}{Next}
@@ -131,21 +116,12 @@ some lazy day.
     next
 @
 
-<<Install some user packages>>=
-    openconnect
-@
-
 \hrefootnote{https://freedesktop.org/software/pulseaudio/pavucontrol/}{PulseAudio Volume Control}
 is useful for configuring Bluetooth audio.
 
 <<Install some user packages>>=
-    pavucontrol
     renderizer
     scc
-    lm_sensors
-    nfs-utils
-    libnotify
-    paper-icon-theme
 @
 
 Try to improve battery life.
@@ -154,19 +130,7 @@ Try to improve battery life.
     powertop
 @
 
-Install \hrefootnote{https://www.dyne.org/software/tomb/}{Tomb} and
-related packages.
-
 <<Install some user packages>>=
-    tomb
-    file
-    lsof
-@
-
-More Trondheim wireless debugging...
-
-<<Install some user packages>>=
-    wirelesstools
     nixpkgs-unstable.zoom-us
   ] ++ (
     with nodePackages; [

@@ -14,6 +14,8 @@
       awscli
       bind
       cachix
+      clac
+      clementine
       coreutils
       # TODO: cquery
       curl
@@ -28,6 +30,7 @@
       httpie
       # TODO: http-prompt
       # TODO: idris
+      lorri
       moreutils
       neofetch
       nix
@@ -79,23 +82,6 @@
 
 <<modules/packages.nix>>=
   ) ++ (
-    with haskellPackages; [
-      cabal-install
-      cabal2nix
-      hpack
-      # FIXME: stylish-haskell
-    ]
-@
-
-<<modules/packages.nix>>=
-  ) ++ (
-    with nodePackages; [
-      # TODO: bash-language-server
-    ]
-@
-
-<<modules/packages.nix>>=
-  ) ++ (
     with python3Packages; [
       pygments
     ]
@@ -104,7 +90,6 @@
 <<modules/packages.nix>>=
   ) ++ lib.optionals stdenv.isDarwin (
     [
-      clementine
       m-cli
       sourcetree
       onyx
@@ -119,13 +104,32 @@
 
 <<modules/packages.nix>>=
   ) ++ lib.optionals stdenv.isLinux [
-    gnome3.networkmanagerapplet
+    dolphin
     hicolor-icon-theme
     keybase-gui
+    libnotify
     libreoffice
-    qpdfview
+    lm_sensors
+    mtr
+    networkmanager-openconnect
+    nfs-utils
+    openconnect
+    paper-icon-theme
+    pavucontrol
     playerctl
     psmisc
+    pv
+    qpdfview
+    wirelesstools
+@
+
+Install \hrefootnote{https://www.dyne.org/software/tomb/}{Tomb} and
+related packages.
+
+<<modules/packages.nix>>=
+    file
+    lsof
+    tomb
 @
 
 <<modules/packages.nix>>=

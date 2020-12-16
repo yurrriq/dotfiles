@@ -20,7 +20,6 @@ in
     ../../config/git
     ../../config/gpg.nix
     ../../config/htop.nix
-    # ../../config/i3
     ../../config/jq.nix
     ../../config/kitty.nix
     ../../config/man.nix
@@ -43,15 +42,8 @@ in
     [
       aws-iam-authenticator
       ec2instanceconnectcli
-      clac
-      dolphin
-      lorri
-      mtr
       progress
-      pv
-      clementine # FIXME: Unfree
       docker-compose
-      ghc
       iw
       jdk
       nixpkgs-unstable.kubectx
@@ -59,20 +51,9 @@ in
       k9s
       stern
       naal
-      networkmanager-openconnect
-      openconnect
-      pavucontrol
       renderizer
       scc
-      lm_sensors
-      nfs-utils
-      libnotify
-      paper-icon-theme
       powertop
-      tomb
-      file
-      lsof
-      wirelesstools
       nixpkgs-unstable.zoom-us
     ] ++ (
       with nodePackages; [
