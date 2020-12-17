@@ -52,46 +52,15 @@ accounts.email.accounts.primary = {
 
 <<Add some more user packages>>=
 home.packages = with pkgs; [
-@
-
-<<Add some more user packages>>=
-  clementine
-  dolphin
-  dunst
+  appimage-run
   fd
-  libnotify
-  lm_sensors
-  lorri
-  mtr
-  nfs-utils
+  frescobaldi
+  musescore
   openscad
-  paper-icon-theme
-  pavucontrol
   powertop
-  pv
   reaper
   steam
   tellico
-  wirelesstools
-@
-
-Install \hrefootnote{https://www.dyne.org/software/tomb/}{Tomb} and
-related packages.
-
-<<Add some more user packages>>=
-  file
-  lsof
-  tomb
-@
-
-<<Add some more user packages>>=
   nixpkgs-unstable.zoom-us
-@
-
-<<Add some more user packages>>=
-  appimage-run
-@
-
-<<Add some more user packages>>=
 ];
 @

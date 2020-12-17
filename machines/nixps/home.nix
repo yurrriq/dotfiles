@@ -35,29 +35,16 @@ in
     realName = "Eric Bailey";
   };
   home.packages = with pkgs; [
-    clementine
-    dolphin
-    dunst
+    appimage-run
     fd
-    libnotify
-    lm_sensors
-    lorri
-    mtr
-    nfs-utils
+    frescobaldi
+    musescore
     openscad
-    paper-icon-theme
-    pavucontrol
     powertop
-    pv
     reaper
     steam
     tellico
-    wirelesstools
-    file
-    lsof
-    tomb
     nixpkgs-unstable.zoom-us
-    appimage-run
   ];
   _module.args.pkgs = lib.mkForce pkgs;
 }
