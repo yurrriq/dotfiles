@@ -53,6 +53,7 @@ accounts.email.accounts.primary = {
 <<Add some more user packages>>=
 home.packages = with pkgs; [
   appimage-run
+  calibre
   fd
   frescobaldi
   musescore

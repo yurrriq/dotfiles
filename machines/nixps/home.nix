@@ -36,6 +36,7 @@ in
   };
   home.packages = with pkgs; [
     appimage-run
+    calibre
     fd
     frescobaldi
     musescore
