@@ -214,17 +214,6 @@ Null prefix argument turns off the mode."
 @
 
 <<config/emacs/init.el>>=
-(use-package robe
-  :demand
-  :mode ("\\.rb\\'"))
-@
-
-<<config/emacs/init.el>>=
-(use-package rvm
-  :ensure t)
-@
-
-<<config/emacs/init.el>>=
 (use-package smex
   :demand
   :config

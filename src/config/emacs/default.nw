@@ -1,3 +1,5 @@
+%% -*- noweb-code-mode: nix-mode -*-
+
 <<config/emacs/default.nix>>=
 { config, lib, pkgs, ... }:
 

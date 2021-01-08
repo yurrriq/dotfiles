@@ -1,19 +1,19 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
 
-  programs.emacs.extraPackages = epkgs: with {
-    elpa = epkgs.elpaPackages;
-    melpa = epkgs.melpaPackages;
-    melpaStable = epkgs.melpaStablePackages;
-    # org = epkgs.orgPackages;
-  }; (
-    with elpa; [
+  home.packages = with pkgs; [
+    graphviz
+    sqlite
+  ];
+
+  programs.emacs.extraPackages = epkgs: (
+    with epkgs.elpaPackages; [
       mmm-mode
       rainbow-mode
     ]
   ) ++ (
-    with melpa; [
+    with epkgs.melpaPackages; [
       avy
       better-defaults
       clj-refactor
@@ -21,13 +21,13 @@
       # TODO: company-lsp
       # TODO: cquery
       crux
-      dhall-mode
+      # dhall-mode
       direnv
       dockerfile-mode
       editorconfig
       elixir-mode
       emojify
-      enh-ruby-mode
+      # enh-ruby-mode
       erlang
       fill-column-indicator
       fish-mode
@@ -52,21 +52,23 @@
       multiple-cursors
       nix-mode
       nyan-mode
+      org-roam
+      dash
+      f
+      s
+      emacsql
+      emacsql-sqlite3
       paredit
       rainbow-delimiters
-      robe
+      # robe
       rust-mode
-      rvm
+      # rvm
       smex
       terraform-mode
       tuareg
       use-package
       whitespace-cleanup-mode
       yaml-mode
-    ]
-  ) ++ (
-    with melpaStable; [
-      ess
     ]
   );
 

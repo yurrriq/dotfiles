@@ -118,11 +118,6 @@ Null prefix argument turns off the mode."
 (use-package nyan-mode
   :demand
   :config (nyan-mode 1))
-(use-package robe
-  :demand
-  :mode ("\\.rb\\'"))
-(use-package rvm
-  :ensure t)
 (use-package smex
   :demand
   :config
