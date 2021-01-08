@@ -145,6 +145,13 @@ home-manager.users."${username}" = args:
 @
 
 <<Configure networking>>=
+networking.firewall = {
+  enable = true;
+  allowedTCPPortRanges = [
+    # { from = 8000; to = 8000; }
+  ];
+};
+
 networking.hostName = "nixps";
 @
 

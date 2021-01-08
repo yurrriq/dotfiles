@@ -61,6 +61,13 @@ in
   home-manager.useUserPackages = true;
   home-manager.users."${username}" = args:
     import ./home.nix (args // { inherit pkgs; });
+  networking.firewall = {
+    enable = true;
+    allowedTCPPortRanges = [
+      # { from = 8000; to = 8000; }
+    ];
+  };
+
   networking.hostName = "nixps";
   nix = {
     buildCores = 8;
