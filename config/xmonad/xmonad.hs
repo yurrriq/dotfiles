@@ -117,13 +117,14 @@ manageScratchPad =
 myKeys :: XConfig l -> Map (KeyMask, KeySym) (X ())
 myKeys cfg =
   mkKeymap cfg $
-    [ ("<Print>", spawn "flameshot gui"),
-      ("<XF86AudioLowerVolume>", spawn "amixer sset Master 5%-"),
-      ("<XF86AudioMute>", spawn "amixer sset Master toggle"),
+    [ ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SNK@ toggle"),
+      ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%"),
+      ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%"),
       ("<XF86AudioPrev>", spawn "playerctl previous"),
-      ("<XF86AudioRaiseVolume>", spawn "amixer sset Master 5%+"),
+      ("<XF86AudioNext>", spawn "playerctl next"),
       ("<XF86MonBrightnessDown>", spawn "xbacklight -10"),
       ("<XF86MonBrightnessUp>", spawn "xbacklight +10"),
+      ("<Print>", spawn "flameshot gui"),
       -- TODO: ("M--", namedScratchpadAction scratchpads "kitty"),
       ("M--", scratchpadSpawnActionCustom "kitty --name=scratchpad"),
       ("M-<Esc>", getXMonadDataDir >>= spawn . wrap "i3lock -i " "/matrix.png"),
@@ -142,8 +143,7 @@ myKeys cfg =
       ("M-k", rotSlavesUp),
       ("M-m", windows W.focusMaster),
       ("M-w", sendMessage (JumpToLayout "TwoPane")),
-      ("M1-<Space>", spawn "rofi -modi combi,window -show combi -combi-modi run,drun"),
-      ("XF86AudioNext>", spawn "playerctl next")
+      ("M1-<Space>", spawn "rofi -modi combi,window -show combi -combi-modi run,drun")
     ]
       ++ [ ( intercalate "-" (catMaybes [Just "M", maybeShift, Just key]),
              windows (f workspace)
