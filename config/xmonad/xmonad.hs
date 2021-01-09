@@ -117,7 +117,7 @@ manageScratchPad =
 myKeys :: XConfig l -> Map (KeyMask, KeySym) (X ())
 myKeys cfg =
   mkKeymap cfg $
-    [ ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SNK@ toggle"),
+    [ ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),
       ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%"),
       ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%"),
       ("<XF86AudioPrev>", spawn "playerctl previous"),
