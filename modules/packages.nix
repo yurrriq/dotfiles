@@ -6,7 +6,7 @@
       aspell
       aspellDicts.en
       awscli
-      bind
+      # bind
       cachix
       clac
       clementine
@@ -15,11 +15,11 @@
       curl
       expect
       gawk
-      gcc
+      # gcc
       gnumake
       gnused
       gnutar
-      # TODO: graphviz
+      # graphviz
       gzip
       httpie
       # TODO: http-prompt
@@ -30,7 +30,7 @@
       nixUnstable
       noweb
       pandoc
-      prettyping
+      # prettyping
       ripgrep
       shellcheck
       shfmt
@@ -84,10 +84,10 @@
     )
   ) ++ lib.optionals stdenv.isLinux [
     dolphin
-    hicolor-icon-theme
-    keybase-gui
+    # hicolor-icon-theme
+    # keybase-gui
     libnotify
-    libreoffice
+    # libreoffice
     lm_sensors
     mtr
     networkmanager-openconnect
@@ -96,8 +96,8 @@
     paper-icon-theme
     pavucontrol
     playerctl
-    psmisc
-    pv
+    # psmisc
+    # pv
     qpdfview
     wirelesstools
     file
