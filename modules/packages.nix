@@ -103,11 +103,7 @@
     file
     lsof
     tomb
-    (
-      signal-desktop.override {
-        spellcheckerLanguage = "en_US";
-      }
-    )
+    (signal-desktop.override { spellcheckerLanguage = "en_US"; })
     thunderbird
     # volumeicon
     xclip

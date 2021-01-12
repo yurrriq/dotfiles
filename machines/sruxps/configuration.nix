@@ -89,13 +89,7 @@ in
   networking.interfaces.wlp1s0.useDHCP = true;
   networking.useDHCP = false; # NOTE: Deprecated, so set it false.
 
-  nix = {
-    nixPath = [
-      "nixos-config=/etc/nixos/configuration.nix"
-      "nixpkgs-overlays=/etc/nixos/overlays"
-    ];
-    trustedUsers = [ "root" username ];
-  };
+  nix.trustedUsers = [ "root" username ];
 
   security.sudo = {
     enable = true;
@@ -108,7 +102,7 @@ in
 
   services.fwupd.enable = true;
 
-  # TODO: services.lorri.enable = true;
+  services.lorri.enable = false;
 
   services.tlp.enable = true;
 
