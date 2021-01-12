@@ -1,8 +1,6 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, ... }@args:
 let
-  nixpkgs-unstable = import (import ../../nix/sources.nix).nixpkgs-unstable {
-    config.allowUnfree = true;
-  };
+  die = throw args;
 in
 {
 
@@ -46,15 +44,15 @@ in
       docker-compose
       iw
       jdk
-      nixpkgs-unstable.kubectx
+      kubectx
       kubelogin
       k9s
       stern
-      naal
+      # FIXME: naal
       renderizer
       scc
       powertop
-      nixpkgs-unstable.zoom-us
+      zoom-us
     ] ++ (
       with nodePackages; [
         aws-azure-login

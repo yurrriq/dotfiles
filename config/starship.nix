@@ -2,7 +2,6 @@
 {
   programs.starship = {
     enable = true;
-    package = (import <nixpkgs-unstable> { }).starship;
     settings = {
       add_newline = false;
       character = {

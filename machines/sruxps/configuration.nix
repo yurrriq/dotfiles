@@ -4,17 +4,6 @@ let
 in
 {
 
-  imports = [
-    <nixos-hardware/dell/xps/13-9380>
-    ./hardware-configuration.nix
-    ../../nix
-    ../../modules/common.nix
-    ../../modules/location.nix
-    ../../modules/nixos.nix
-    ../../modules/packages.nix
-    <home-manager/nixos>
-  ];
-
   airportCode = "MSP";
 
   boot.initrd.luks.devices = {
@@ -107,29 +96,6 @@ in
     ];
     trustedUsers = [ "root" username ];
   };
-
-  nixpkgs.overlays =
-    let
-      path = <nixpkgs-overlays>;
-    in
-    with builtins;
-    map
-      (n: import (path + ("/" + n)))
-      (
-        filter
-          (
-            n: match ".*\\.nix" n != null
-            || pathExists (path + ("/" + n + "/default.nix"))
-          )
-          (attrNames (readDir path))
-      )
-    ++ (
-      with (import <nurpkgs> { }).overlays; [
-        nur
-        git
-        node
-      ]
-    );
 
   security.sudo = {
     enable = true;

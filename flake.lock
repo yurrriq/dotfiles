@@ -1,0 +1,97 @@
+{
+  "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1609010567,
+        "narHash": "sha256-N6WslRAtrvCPCpQnxQqo+VlSivX/KylL9Xy/OZr0kMg=",
+        "owner": "rycee",
+        "repo": "home-manager",
+        "rev": "22f6736e628958f05222ddaadd7df7818fe8f59d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rycee",
+        "ref": "release-20.09",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1610430373,
+        "narHash": "sha256-2sTBiGl0z0B3VD2qMHIJtOGxOuftR0iiBSv30AhVWIw=",
+        "owner": "nixos",
+        "repo": "nixos-hardware",
+        "rev": "874830945a65ad1134aff3a5aea0cdd2e1d914ab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1610451792,
+        "narHash": "sha256-CNMF39UpBJh9eP0kEOyMaCHJNBqVpAPnQMCqie70Wtg=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "0fc18629dd52ea84d9b49504b7389dc54cf4a432",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "release-20.09",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1610476600,
+        "narHash": "sha256-XiviBSxJdzJffmaKT7PVKHWYkYcpa7uA8o+S+nAuWas=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "e350b35cceb44bb17a44ac3f5a9d5704329214f6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nur": {
+      "locked": {
+        "lastModified": 1610476473,
+        "narHash": "sha256-n/l8O5xcB8Bab3bXUDWoziWzeDq9/YOiqt/bX0hletc=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "4a11b49670386aeb8ab36c95ba11f5efc467757d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixos-hardware": "nixos-hardware",
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nur": "nur"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

@@ -46,16 +46,16 @@ in
 Import the hardware config and other Nix \glspl{module}.
 
 <<Import hardware config and modules>>=
-imports = [
-  <nixos-hardware/dell/xps/13-9380>
-  ./hardware-configuration.nix
-  ../../nix
-  ../../modules/common.nix
-  ../../modules/location.nix
-  ../../modules/nixos.nix
-  ../../modules/packages.nix
-  <home-manager/nixos>
-];
+# imports = [
+#   <nixos-hardware/dell/xps/13-9380>
+#   ./hardware-configuration.nix
+#   ../../nix
+#   ../../modules/common.nix
+#   ../../modules/location.nix
+#   ../../modules/nixos.nix
+#   ../../modules/packages.nix
+#   <home-manager/nixos>
+# ];
 @
 
 \todoo{Describe the location module}
@@ -184,28 +184,12 @@ nix = {
 @
 
 <<Configure overlays>>=
-nixpkgs.overlays =
-  let
-    path = <nixpkgs-overlays>;
-  in
-  with builtins;
-  map
-    (n: import (path + ("/" + n)))
-    (
-      filter
-        (
-          n: match ".*\\.nix" n != null
-          || pathExists (path + ("/" + n + "/default.nix"))
-        )
-        (attrNames (readDir path))
-    )
-  ++ (
-    with (import <nurpkgs> { }).overlays; [
-      nur
-      git
-      node
-    ]
-  );
+# FIXME
+# nixpkgs.overlays = with (import <nurpkgs> { }).overlays; [
+#   nur
+#   git
+#   node
+# ];
 @
 
 <<Configure sudo>>=

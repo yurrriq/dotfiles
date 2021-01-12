@@ -104,12 +104,12 @@
     lsof
     tomb
     (
-      (import <nixpkgs-unstable> { config.allowUnfree = true; }).signal-desktop.override {
+      signal-desktop.override {
         spellcheckerLanguage = "en_US";
       }
     )
     thunderbird
-    volumeicon
+    # volumeicon
     xclip
     xorg.xbacklight
   ];
