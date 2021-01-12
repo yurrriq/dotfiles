@@ -86,6 +86,12 @@
 
   system.stateVersion = "20.09";
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker.enable = false;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+    };
+  };
 
 }
