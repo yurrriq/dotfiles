@@ -27,7 +27,7 @@
       lorri
       moreutils
       neofetch
-      nix
+      nixUnstable
       noweb
       pandoc
       prettyping
