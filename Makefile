@@ -190,6 +190,13 @@ bootstrap:
 	--show-trace
 
 
+flake: command=build
+flake:
+	@ make -B $(wildcard machines/${machine}/secrets/*.hashedPassword)
+	@ sudo nixos-rebuild --flake . ${command} --show-trace
+	@ git checkout machines/${machine}/secrets
+
+
 .PHONY: cachix
 cachix: cachix/cachix.dhall
 	@ mkdir -p ~/.config/$@ $@

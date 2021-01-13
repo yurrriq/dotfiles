@@ -1,7 +1,5 @@
 { lib, pkgs, ... }@args:
-let
-  die = throw args;
-in
+
 {
 
   imports = [

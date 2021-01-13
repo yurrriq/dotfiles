@@ -1,24 +1,78 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-20.09";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs";
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-    nur.url = "github:nix-community/NUR";
     home-manager = {
       url = "github:rycee/home-manager/release-20.09";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # TODO: naal.url = "github:yurrriq/naal";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixpkgs.url = "github:nixos/nixpkgs/release-20.09";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs";
+    nur.url = "github:nix-community/NUR";
+    # TODO
+    # sops-nix.url = "github:Mic92/sops-nix";
+    # sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = { self, ... }@inputs:
     let
-      system = "x86_64-linux";
+      pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
       unstable-pkgs = import inputs.nixpkgs-unstable {
-        inherit system;
+        system = "x86_64-linux";
         config.allowUnfree = true;
       };
     in
     {
+      devShell.x86_64-linux = import ./shell.nix { inherit pkgs; };
+      nixosConfigurations."nixps" = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          {
+            nixpkgs.overlays = [
+              inputs.nur.overlay
+              (
+                _: _: {
+                  inherit (unstable-pkgs)
+                    autojump
+                    browserpass
+                    pass
+                    ripgrep
+                    scc
+                    signal-desktop
+                    sops
+                    starship
+                    tomb
+                    yq
+                    zoom-us
+                    ;
+                  noweb = unstable-pkgs.noweb.override {
+                    icon-lang = unstable-pkgs.icon-lang.override {
+                      withGraphics = false;
+                    };
+                  };
+                }
+              )
+              (
+                self: super: rec {
+                  nodePackages = super.nodePackages // super.callPackage ./pkgs/development/node-packages {
+                    inherit (super) pkgs nodejs;
+                  };
+                }
+              )
+            ];
+          }
+          inputs.nixos-hardware.nixosModules.dell-xps-15-9560-intel
+          inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
+          ./machines/nixps/hardware-configuration.nix
+          inputs.home-manager.nixosModules.home-manager
+          # TODO: inputs.sops-nix.nixosModules.sops
+          ./modules/common.nix
+          ./modules/location.nix
+          ./modules/nixos.nix
+          ./modules/packages.nix
+          ./machines/nixps/configuration.nix
+        ];
+      };
+
       nixosConfigurations."MSP-EBAILEY01" = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -76,13 +130,13 @@
             ];
           }
           inputs.nixos-hardware.nixosModules.dell-xps-13-9380
-          ./machines/sruxps/configuration.nix
           ./machines/sruxps/hardware-configuration.nix
+          inputs.home-manager.nixosModules.home-manager
           ./modules/common.nix
           ./modules/location.nix
           ./modules/nixos.nix
           ./modules/packages.nix
-          inputs.home-manager.nixosModules.home-manager
+          ./machines/sruxps/configuration.nix
         ];
       };
     };

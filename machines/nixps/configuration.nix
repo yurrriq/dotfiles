@@ -3,17 +3,6 @@ let
   username = "yurrriq";
 in
 {
-  imports = [
-    <nixos-hardware/dell/xps/15-9560/intel>
-    <nixos-hardware/common/pc/laptop/ssd>
-    ./hardware-configuration.nix
-    ../../nix
-    ../../modules/common.nix
-    ../../modules/location.nix
-    ../../modules/nixos.nix
-    ../../modules/packages.nix
-    <home-manager/nixos>
-  ];
   airportCode = "MSP";
   boot.blacklistedKernelModules = [ "nouveau" "nvidia" "psmouse" ];
   boot.initrd.luks.devices.root.device = "/dev/nvme0n1p2";
@@ -69,19 +58,9 @@ in
   };
 
   networking.hostName = "nixps";
-  nix = {
-    buildCores = 8;
-    nixPath = [
-      "nixos-config=/etc/nixos/configuration.nix"
-    ];
-    trustedUsers = [ "root" username ];
-  };
-  nixpkgs.overlays = with (import <nurpkgs> { }).overlays; [
-    nur
-    engraving
-    git
-    node
-  ];
+
+  nix.trustedUsers = [ "root" username ];
+
   security.sudo = {
     enable = true;
     extraConfig = ''
@@ -95,10 +74,22 @@ in
     };
     dpi = 180;
   };
+
+  # FIXME
+  # sops = {
+  #   gnupgHome = "/home/yurrriq/.gnupg";
+  #   secrets."${username}.hashedPassword" = {
+  #     format = "binary";
+  #     sopsFile = ./. + "/secrets/${username}.hashedPassword.enc";
+  #   };
+  #   sshKeyPaths = [];
+  # };
+
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
     hashedPassword = lib.fileContents (./. + "/secrets/${username}.hashedPassword");
+    # FIXME: hashedPassword = lib.fileContents config.sops.secrets."${username}.hashedPassword".path;
     group = "users";
     extraGroups = [
       "audio"
