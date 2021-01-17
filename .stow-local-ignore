@@ -1,6 +1,7 @@
 bin
 cachix
 default.nix
+.direnv
 .dir-locals.el
 .editorconfig
 .envrc
