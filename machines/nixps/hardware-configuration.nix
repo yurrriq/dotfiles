@@ -15,9 +15,7 @@
   boot.extraModulePackages = [ ];
 
   swapDevices =
-    [
-      { device = "/dev/disk/by-uuid/86e29ab0-7bd5-470a-959d-75067973a9a3"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/86e29ab0-7bd5-470a-959d-75067973a9a3"; }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   # high-resolution display
