@@ -164,7 +164,7 @@ endef
 
 .PHONY: .stow-local-ignore
 .stow-local-ignore:
-	@ ls -A1 | sed '/^\(config\|modules\|nix\|overlays\)$$/d' >$@
+	@ ls -A1 | sed '/^\(config\|flake\.\(nix\|lock\)\|modules\|nix\|overlays\|pkgs\)$$/d' >$@
 
 
 %: %.enc
@@ -173,27 +173,8 @@ endef
 
 .PHONY: build dry-build switch
 build dry-build switch: stow
-	@ sudo nixos-rebuild $@
-
-
-bootstrap: command=nixos-rebuild build
-bootstrap:
-	@ sudo ${command} \
-	-I home-manager=$$(jq -r '."home-manager".url' nix/sources.json) \
-	-I niv=$$(jq -r '.niv.url' nix/sources.json) \
-	-I nixos-hardware=$$(jq -r '."nixos-hardware".url' nix/sources.json) \
-	-I nixpkgs=$$(jq -r '.nixpkgs.url' nix/sources.json) \
-	-I nixpkgs-overlays=/etc/nixos/overlays \
-	-I nixpkgs-unstable=$$(jq -r '."nixpkgs-unstable".url' nix/sources.json) \
-	-I nur=$$(jq -r '.nur.url' nix/sources.json) \
-	-I nurpkgs=/etc/nixos/nix/nurpkgs.nix \
-	--show-trace
-
-
-flake: command=build
-flake:
 	@ make -B $(wildcard machines/${machine}/secrets/*.hashedPassword)
-	@ sudo nixos-rebuild --flake . ${command} --show-trace
+	@ sudo nixos-rebuild --flake . $@
 	@ git checkout machines/${machine}/secrets
 
 
@@ -213,18 +194,6 @@ secrets: $(patsubst %.enc,%,$(wildcard machines/${machine}/secrets/*.enc))
 stow: .stow-local-ignore cachix secrets
 	@ sudo ${stow} -t ${nixos_dir} .
 	@ sudo ${stow} -t ${nixos_dir} -d machines ${machine}
-
-
-.PHONY: update
-update: package ?= nixpkgs
-update: sources := nix/sources.json
-update: rev = $(shell jq -r '.["${package}"].rev[:8]' ${sources})
-update: COMMIT_MSG_FILE = .git/COMMIT_EDITMSG
-update:
-	@ niv update ${package}
-	@ git add ${sources}
-	@ jq '"${package}: ${rev} -> \(.["${package}"].rev[:8])"' \
-	${sources} | xargs git commit -m
 
 
 .PHONY: generate-config
