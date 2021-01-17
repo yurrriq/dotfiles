@@ -60,6 +60,7 @@
               )
             ];
           }
+          # Use the \href{https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/15-9560}{community-curated optimizations} for \href{https://www.dell.com/support/home/en-us/product-support/product/xps-15-9560-laptop/docs}{XPS 15 9560}, the \href{https://github.com/yurrriq/dotfiles/blob/main/machines/nixps/hardware-configuration.nix}{generated hardware config}, my custom \glspl{module}, and the \href{https://nix-community.github.io/home-manager/index.html\#sec-install-nixos-module}{home-manager} \gls{module}.
           inputs.nixos-hardware.nixosModules.dell-xps-15-9560-intel
           inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
           ./machines/nixps/hardware-configuration.nix

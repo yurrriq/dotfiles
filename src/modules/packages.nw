@@ -25,7 +25,6 @@
       gnumake
       gnused
       gnutar
-      # TODO: graphviz
       gzip
       httpie
       # TODO: http-prompt
@@ -105,8 +104,6 @@
 <<modules/packages.nix>>=
   ) ++ lib.optionals stdenv.isLinux [
     dolphin
-    hicolor-icon-theme
-    keybase-gui
     libnotify
     libreoffice
     lm_sensors
@@ -117,8 +114,8 @@
     paper-icon-theme
     pavucontrol
     playerctl
-    psmisc
-    pv
+    # psmisc
+    # pv
     qpdfview
     wirelesstools
 @
@@ -133,16 +130,11 @@ related packages.
 @
 
 <<modules/packages.nix>>=
-    (
-      (import <nixpkgs-unstable> { config.allowUnfree = true; }).signal-desktop.override {
-        spellcheckerLanguage = "en_US";
-      }
-    )
+    (signal-desktop.override { spellcheckerLanguage = "en_US"; })
 @
 
 <<modules/packages.nix>>=
     thunderbird
-    volumeicon
     xclip
     xorg.xbacklight
   ];

@@ -4,127 +4,128 @@
 { pkgs, ... }:
 
 {
-
-@
-
-<<modules/nixos.nix>>=
-  boot = {
-    cleanTmpDir = true;
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-  };
-
-@
-
-<<modules/nixos.nix>>=
-  # console.font = "latarcyrheb-sun32";
-  console.font = "Lat2-Terminus16";
-  console.keyMap = "us";
-  i18n.defaultLocale = "en_US.UTF-8";
-
-@
-
-<<modules/nixos.nix>>=
-  location.provider = "manual";
-
-@
-
-<<modules/nixos.nix>>=
-  networking.networkmanager.enable = true;
-
-@
-
-<<modules/nixos.nix>>=
-  nixpkgs.config.allowUnfree = true;
-
-@
-
-<<modules/nixos.nix>>=
-  services = {
-    fstrim.enable = true;
-
-    logind.lidSwitch = "hibernate";
-
-    kbfs.enable = true;
-
-    redshift = {
-      enable = true;
-      temperature.night = 2300;
-    };
-
-    unclutter = {
-      enable = false; # FIXME
-      extraOptions = [ "exclude-root" "ignore-scrolling" ];
-      threshold = 1;
-      timeout = 1;
-    };
-
-@
-
-<<modules/nixos.nix>>=
-    xserver = {
-      enable = true;
-
-      autorun = true;
-
-      displayManager = {
-        lightdm.enable = true;
-        session = [
-          {
-            name = "home-manager";
-            manage = "window";
-            start = ''
-              ${pkgs.runtimeShell} $HOME/.hm-xsession &
-              waitPID=$!
-            '';
-          }
-        ];
-      };
-
-      layout = "us";
-
-      libinput = {
-        enable = true;
-        accelSpeed = "1.0";
-        disableWhileTyping = true;
-        naturalScrolling = false;
-        tapping = true;
-      };
-
-      videoDrivers = [
-        "intel"
-      ];
-
-      xkbOptions = "ctrl:nocaps,compose:ralt";
-    };
-  };
-
-@
-
-<<modules/nixos.nix>>=
-  hardware.pulseaudio = {
-    enable = true;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
-    package = pkgs.pulseaudioFull;
-  };
-  sound.enable = true;
-
-@
-
-<<modules/nixos.nix>>=
+  <<Configure boot loader>>
+  <<Configure fonts, keyboard, and locale>>
+  <<Configure location>>
+  <<Enable networkmanager>>
+  <<Allow unfree packages>>
+  <<Configure services>>
+  <<Configure audio>>
   system.stateVersion = "20.09";
-
-@
-
-<<modules/nixos.nix>>=
-  virtualisation.docker.enable = true;
-
-@
-
-<<modules/nixos.nix>>=
+  <<Configure virtualisation>>
 }
+@
+
+<<Configure boot loader>>=
+boot = {
+  cleanTmpDir = true;
+  loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+};
+@
+
+<<Configure fonts, keyboard, and locale>>=
+console.font = "Lat2-Terminus16";
+console.keyMap = "us";
+i18n.defaultLocale = "en_US.UTF-8";
+@
+
+\todoo{Link/document this}
+<<Configure location>>=
+location.provider = "manual";
+@
+
+<<Enable networkmanager>>=
+networking.networkmanager.enable = true;
+@
+
+<<Allow unfree packages>>=
+nixpkgs.config.allowUnfree = true;
+@
+
+<<Configure services>>=
+services = {
+  fstrim.enable = true;
+
+  logind.lidSwitch = "hibernate";
+
+  kbfs.enable = true;
+
+  redshift = {
+    enable = true;
+    temperature.night = 2300;
+  };
+
+  unclutter = {
+    enable = false; # FIXME
+    extraOptions = [ "exclude-root" "ignore-scrolling" ];
+    threshold = 1;
+    timeout = 1;
+  };
+
+  <<Configure Xserver>>
+};
+@
+
+<<Configure Xserver>>=
+xserver = {
+  enable = true;
+
+  autorun = true;
+
+  displayManager = {
+    lightdm.enable = true;
+    session = [
+      {
+        name = "home-manager";
+        manage = "window";
+        start = ''
+          ${pkgs.runtimeShell} $HOME/.hm-xsession &
+          waitPID=$!
+        '';
+      }
+    ];
+  };
+
+  layout = "us";
+
+  libinput = {
+    enable = true;
+    accelSpeed = "1.0";
+    disableWhileTyping = true;
+    naturalScrolling = false;
+    tapping = true;
+  };
+
+  videoDrivers = [
+    "intel"
+  ];
+
+  xkbOptions = "ctrl:nocaps,compose:ralt";
+};
+@
+
+<<Configure audio>>=
+hardware.pulseaudio = {
+  enable = true;
+  extraModules = [ pkgs.pulseaudio-modules-bt ];
+  package = pkgs.pulseaudioFull;
+};
+sound.enable = true;
+@
+
+\todoo{Document podman vs dockerd}
+\todor{Fix rootless podman}
+<<Configure virtualisation>>=
+virtualisation = {
+  docker.enable = false;
+  podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+};
 @
 
 %% Local Variables:

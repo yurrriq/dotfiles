@@ -3,9 +3,7 @@ let
   username = "e.bailey";
 in
 {
-
   airportCode = "MSP";
-
   boot.initrd.luks.devices = {
     cryptkey.device = "/dev/disk/by-uuid/603b64c6-8544-4b43-9b6a-7d8a08091514";
 
@@ -19,15 +17,12 @@ in
       keyFile = "/dev/mapper/cryptkey";
     };
   };
-
   boot.kernel.sysctl = {
     "vm.swappiness" = 1;
   };
-
   boot.kernelModules = [
     "coretemp"
   ];
-
   environment.homeBinInPath = true;
   environment.pathsToLink = [
     "/lib/aspell"
@@ -35,7 +30,6 @@ in
     "/share/fish"
     # FIXME: "/share/icons"
   ];
-
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/71cfcb8a-13a9-49f0-b034-a9c8841be07b";
     fsType = "btrfs";
@@ -70,7 +64,6 @@ in
     fsType = "nfs";
     options = [ "noatime" "noauto" "rw" "x-systemd.automount" ];
   };
-
   hardware.bluetooth = {
     enable = true;
     config = {
@@ -79,25 +72,20 @@ in
       };
     };
   };
-
   home-manager.useUserPackages = true;
   home-manager.users."${username}" = args:
     import ./home.nix (args // { inherit pkgs; });
-
   networking.hostName = "MSP-EBAILEY01";
 
   networking.interfaces.wlp1s0.useDHCP = true;
   networking.useDHCP = false; # NOTE: Deprecated, so set it false.
-
   nix.trustedUsers = [ "root" username ];
-
   security.sudo = {
     enable = true;
     extraConfig = ''
       ${username} ALL=(ALL) NOPASSWD: ALL
     '';
   };
-
   services.blueman.enable = true;
 
   services.fwupd.enable = true;
@@ -114,7 +102,6 @@ in
   services.xserver.monitorSection = ''
     DisplaySize 406 228
   '';
-
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
@@ -135,5 +122,4 @@ in
     home = "/home/${username}";
     shell = "/etc/profiles/per-user/${username}/bin/fish";
   };
-
 }

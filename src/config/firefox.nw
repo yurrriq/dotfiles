@@ -7,7 +7,7 @@
 
   programs.firefox = {
     enable = true;
-    extensions = with (import <nur> { inherit pkgs; }).repos.rycee.firefox-addons; [
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       browserpass
       browserpass-otp
       darkreader

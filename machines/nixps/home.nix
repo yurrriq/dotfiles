@@ -1,5 +1,4 @@
 { lib, pkgs, ... }:
-
 {
   imports = [
     ../../config/bash.nix

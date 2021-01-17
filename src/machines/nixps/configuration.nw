@@ -9,7 +9,6 @@ let
   username = "yurrriq";
 in
 {
-  <<Import hardware config and modules>>
   <<Set the location to MSP>>
   <<Blacklist a few kernel modules>>
   <<Configure the LUKS device>>
@@ -21,30 +20,12 @@ in
   <<Configure home-manager>>
   <<Configure networking>>
   <<Configure Nix>>
-  <<Configure overlays>>
   <<Configure sudo>>
   <<Configure X Server>>
+  <<Configure sops-nix>>
   <<Configure user>>
 }
 @
-
-
-Use the \href{https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/15-9560}{community-curated optimizations} for \href{https://www.dell.com/support/home/en-us/product-support/product/xps-15-9560-laptop/docs}{XPS 15 9560}, the \href{https://github.com/yurrriq/dotfiles/blob/main/machines/nixps/hardware-configuration.nix}{generated hardware config}, my custom \glspl{module}, and the \href{https://nix-community.github.io/home-manager/index.html\#sec-install-nixos-module}{home-manager} \gls{module}.
-
-<<Import hardware config and modules>>=
-imports = [
-  <nixos-hardware/dell/xps/15-9560/intel>
-  <nixos-hardware/common/pc/laptop/ssd>
-  ./hardware-configuration.nix
-  ../../nix
-  ../../modules/common.nix
-  ../../modules/location.nix
-  ../../modules/nixos.nix
-  ../../modules/packages.nix
-  <home-manager/nixos>
-];
-@
-
 
 Configure the \ref{sec:location}\todor{FIXME} \gls{module}.
 
@@ -158,20 +139,8 @@ networking.hostName = "nixps";
 <<Configure Nix>>=
 nix = {
   buildCores = 8;
-  nixPath = [
-    "nixos-config=/etc/nixos/configuration.nix"
-  ];
   trustedUsers = [ "root" username ];
 };
-@
-
-<<Configure overlays>>=
-nixpkgs.overlays = with (import <nurpkgs> { }).overlays; [
-  nur
-  engraving
-  git
-  node
-];
 @
 
 <<Configure sudo>>=
@@ -193,11 +162,25 @@ services.xserver = {
 };
 @
 
+\todor{adopt sops-nix}
+<<Configure sops-nix>>=
+# FIXME
+# sops = {
+#   gnupgHome = "/home/yurrriq/.gnupg";
+#   secrets."${username}.hashedPassword" = {
+#     format = "binary";
+#     sopsFile = ./. + "/secrets/${username}.hashedPassword.enc";
+#   };
+#   sshKeyPaths = [];
+# };
+@
+
 <<Configure user>>=
 users.mutableUsers = false;
 users.users."${username}" = {
   name = username;
   hashedPassword = lib.fileContents (./. + "/secrets/${username}.hashedPassword");
+  # FIXME: hashedPassword = lib.fileContents config.sops.secrets."${username}.hashedPassword".path;
   group = "users";
   extraGroups = [
     "audio"

@@ -58,9 +58,10 @@ in
   };
 
   networking.hostName = "nixps";
-
-  nix.trustedUsers = [ "root" username ];
-
+  nix = {
+    buildCores = 8;
+    trustedUsers = [ "root" username ];
+  };
   security.sudo = {
     enable = true;
     extraConfig = ''
@@ -74,7 +75,6 @@ in
     };
     dpi = 180;
   };
-
   # FIXME
   # sops = {
   #   gnupgHome = "/home/yurrriq/.gnupg";
@@ -84,7 +84,6 @@ in
   #   };
   #   sshKeyPaths = [];
   # };
-
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;

@@ -6,7 +6,7 @@
       aspell
       aspellDicts.en
       awscli
-      # bind
+      bind
       cachix
       clac
       clementine
@@ -15,11 +15,10 @@
       curl
       expect
       gawk
-      # gcc
+      gcc
       gnumake
       gnused
       gnutar
-      # graphviz
       gzip
       httpie
       # TODO: http-prompt
@@ -30,7 +29,7 @@
       nixUnstable
       noweb
       pandoc
-      # prettyping
+      prettyping
       ripgrep
       shellcheck
       shfmt
@@ -84,10 +83,8 @@
     )
   ) ++ lib.optionals stdenv.isLinux [
     dolphin
-    # hicolor-icon-theme
-    # keybase-gui
     libnotify
-    # libreoffice
+    libreoffice
     lm_sensors
     mtr
     networkmanager-openconnect
@@ -105,7 +102,6 @@
     tomb
     (signal-desktop.override { spellcheckerLanguage = "en_US"; })
     thunderbird
-    # volumeicon
     xclip
     xorg.xbacklight
   ];

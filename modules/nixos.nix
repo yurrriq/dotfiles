@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 {
-
   boot = {
     cleanTmpDir = true;
     loader = {
@@ -9,18 +8,12 @@
       efi.canTouchEfiVariables = true;
     };
   };
-
-  # console.font = "latarcyrheb-sun32";
   console.font = "Lat2-Terminus16";
   console.keyMap = "us";
   i18n.defaultLocale = "en_US.UTF-8";
-
   location.provider = "manual";
-
   networking.networkmanager.enable = true;
-
   nixpkgs.config.allowUnfree = true;
-
   services = {
     fstrim.enable = true;
 
@@ -76,16 +69,13 @@
       xkbOptions = "ctrl:nocaps,compose:ralt";
     };
   };
-
   hardware.pulseaudio = {
     enable = true;
     extraModules = [ pkgs.pulseaudio-modules-bt ];
     package = pkgs.pulseaudioFull;
   };
   sound.enable = true;
-
   system.stateVersion = "20.09";
-
   virtualisation = {
     docker.enable = false;
     podman = {
@@ -93,5 +83,4 @@
       dockerCompat = true;
     };
   };
-
 }

@@ -9,53 +9,20 @@ let
   username = "e.bailey";
 in
 {
-
-  <<Import hardware config and modules>>
-
   <<Set the location to MSP>>
-
   <<Configure the LUKS devices>>
-
   <<Configure vm.swappiness>>
-
   <<Add the coretemp kernel module>>
-
   <<Link some extra paths>>
-
   <<Configure the file systems>>
-
   <<Configure Bluetooth>>
-
   <<Configure home-manager>>
-
   <<Configure networking>>
-
   <<Configure Nix>>
-
-  <<Configure overlays>>
-
   <<Configure sudo>>
-
   <<Configure services>>
-
   <<Configure user>>
-
 }
-@
-
-Import the hardware config and other Nix \glspl{module}.
-
-<<Import hardware config and modules>>=
-# imports = [
-#   <nixos-hardware/dell/xps/13-9380>
-#   ./hardware-configuration.nix
-#   ../../nix
-#   ../../modules/common.nix
-#   ../../modules/location.nix
-#   ../../modules/nixos.nix
-#   ../../modules/packages.nix
-#   <home-manager/nixos>
-# ];
 @
 
 \todoo{Describe the location module}
@@ -174,22 +141,7 @@ networking.useDHCP = false; # NOTE: Deprecated, so set it false.
 @
 
 <<Configure Nix>>=
-nix = {
-  nixPath = [
-    "nixos-config=/etc/nixos/configuration.nix"
-    "nixpkgs-overlays=/etc/nixos/overlays"
-  ];
-  trustedUsers = [ "root" username ];
-};
-@
-
-<<Configure overlays>>=
-# FIXME
-# nixpkgs.overlays = with (import <nurpkgs> { }).overlays; [
-#   nur
-#   git
-#   node
-# ];
+nix.trustedUsers = [ "root" username ];
 @
 
 <<Configure sudo>>=
@@ -206,7 +158,7 @@ services.blueman.enable = true;
 
 services.fwupd.enable = true;
 
-# TODO: services.lorri.enable = true;
+services.lorri.enable = false;
 
 services.tlp.enable = true;
 

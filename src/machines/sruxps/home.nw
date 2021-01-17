@@ -2,11 +2,6 @@
 
 <<machines/sruxps/home.nix>>=
 { lib, pkgs, ... }:
-let
-  nixpkgs-unstable = import (import ../../nix/sources.nix).nixpkgs-unstable {
-    config.allowUnfree = true;
-  };
-in
 {
 
   <<Import various program configs>>
@@ -96,7 +91,7 @@ useful for troubleshooting wireless issues, like in Trondheim.
 \url{https://github.com/Azure/kubelogin}
 
 <<Install some user packages>>=
-    nixpkgs-unstable.kubectx
+    kubectx
     kubelogin
     k9s
     stern
@@ -106,7 +101,7 @@ useful for troubleshooting wireless issues, like in Trondheim.
 non-interactive AWS Azure login.
 
 <<Install some user packages>>=
-    naal
+    # FIXME: naal
 @
 
 It would be cool to play with \hrefootnote{https://next.atlas.engineer/}{Next}
@@ -131,7 +126,7 @@ Try to improve battery life.
 @
 
 <<Install some user packages>>=
-    nixpkgs-unstable.zoom-us
+    zoom-us
   ] ++ (
     with nodePackages; [
       aws-azure-login
