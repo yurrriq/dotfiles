@@ -20,9 +20,15 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
+      yurrriq-dotfiles = pkgs.callPackage ./. {
+        inherit pkgs;
+        src = self;
+      };
     in
     {
       devShell.x86_64-linux = import ./shell.nix { inherit pkgs; };
+      packages.x86_64-linux.yurrriq-dotfiles = yurrriq-dotfiles;
+      defaultPackage.x86_64-linux = yurrriq-dotfiles;
       nixosConfigurations."nixps" = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [

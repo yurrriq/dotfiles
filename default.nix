@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs>
+{ pkgs ? import <nixpkgs> { }
 , src ? pkgs.nix-gitignore.gitignoreSource [ ".git/" "docs" "result" ] ./.
 }:
 
