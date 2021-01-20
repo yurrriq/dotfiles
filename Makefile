@@ -170,7 +170,7 @@ endef
 
 
 .PHONY: build dry-build switch
-build dry-build switch: stow
+build dry-build switch test: stow
 	@ make -B $(wildcard machines/${machine}/secrets/*.hashedPassword)
 	@ sudo nixos-rebuild --flake . $@
 	@ git checkout machines/${machine}/secrets
