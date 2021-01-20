@@ -1,5 +1,7 @@
 \section{Starship}
-\hrefootnote{https://starship.rs}
+
+\hrefootnote{https://starship.rs}{Starship} is the minimal, blazing-fast, and
+infinitely customizable prompt for any shell!
 
 <<config/starship.nix>>=
 { lib, ... }:
