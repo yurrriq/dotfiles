@@ -18,6 +18,10 @@ jobs:
         extra_nix_config: |
           experimental-features = nix-command flakes
         nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/tarball/master
+    - uses: cachix/cachix-action@v8
+      with:
+        name: yurrriq
+        skipPush: true
     - name: Clone gh-pages branch
       run: |
         git clone --quiet --branch gh-pages --depth 1 https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY".git site
