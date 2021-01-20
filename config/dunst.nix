@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   services.dunst = {
@@ -27,22 +27,15 @@
         shrink = "no";
         transparency = 15;
         idle_threshold = 0;
-        # monitor = 0;
         follow = "keyboard";
         sticky_history = "yes";
         history_length = 15;
         show_indicators = "no";
-        # line_height = 3;
-        # separator_height = 0;
-        # padding = 6;
-        # horizontal_padding = 6;
-        # separator_color = "frame";
         startup_notification = false;
         dmenu = "/run/current-system/sw/bin/dmenu -p dunst:";
         browser = "/etc/profiles/per-user/e.bailey/bin/firefox -new-tab";
         icon_position = "left";
         max_icon_size = 80;
-        # icon_path = "/run/current-system/sw/share/icons/Paper/16x16/mimetypes/:/run-current-system/sw/share/icons/Paper/48x48/status/:/run/current-system/sw/share/icons/Paper/16x16/devices/:/run/current-system/sw/share/icons/Paper/48x48/notifications/:/run/current-system/sw/share/icons/Paper/48x48/emblems/";
         frame_width = 0;
         frame_color = "#8EC07C";
       };
@@ -50,7 +43,6 @@
         close = "mod1+space";
         close_all = "mod4+mod1+space";
         history = "ctrl+grave";
-        # context = "ctrl+shift+period";
       };
       urgency_low = {
         frame_color = "#3B7C87";
@@ -64,7 +56,6 @@
         background = "#2B313C";
         timeout = 6;
       };
-
       urgency_critical = {
         frame_color = "#B7472A";
         foreground = "#B7472A";
@@ -74,6 +65,7 @@
       slack = {
         appname = "Slack";
         body = "*critical*";
+        frame_color = "#B7472A";
         foreground = "#B7472A";
         background = "#191311";
         urgency = "critical";
