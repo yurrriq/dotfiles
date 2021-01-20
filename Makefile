@@ -37,7 +37,6 @@ git/default \
 git/packages \
 gpg \
 htop \
-i3/default \
 jq \
 kitty \
 man \
@@ -74,7 +73,6 @@ config/fish/interactiveShellInit.fish \
 config/fish/shellInit.fish \
 config/fish/sushi/fish_prompt.fish \
 config/fish/sushi/fish_right_prompt.fish
-# config/i3status/config
 
 # NW_SRCS := \
 # $(patsubst %.nix,src/%.nw,${NIX_SRCS}) \
