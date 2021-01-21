@@ -11,13 +11,16 @@
     flameshot
     # font-awesome_4
     i3lock
-    rofi-pass # https://github.com/nix-community/home-manager/pull/1427
     haskellPackages.xmobar
   ];
 
   programs.rofi = {
     enable = true;
     font = "Iosevka Term 18";
+    pass = {
+      enable = true;
+      stores = [ "~/.password-store" ];
+    };
     theme = "purple";
   };
 
