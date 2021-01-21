@@ -6,7 +6,6 @@
     enable = true;
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       browserpass
-      browserpass-otp
       darkreader
       https-everywhere
       lastpass-password-manager
