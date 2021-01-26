@@ -25,6 +25,9 @@
     cnm = "commit -nm";
     co = "checkout";
     cob = "${co} -b";
+    cp = "cherry-pick";
+    cpa = "${cp} --abort";
+    cpc = "${cp} --continue";
     cs = "crypt status";
     cse = "crypt status -e";
     csm = "commit -S -m";
