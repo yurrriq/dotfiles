@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   boot = {
@@ -77,10 +77,13 @@
   sound.enable = true;
   system.stateVersion = "20.09";
   virtualisation = {
-    docker.enable = false;
+    docker = {
+      enable = lib.mkDefault false;
+      liveRestore = lib.mkDefault false;
+    };
     podman = {
-      enable = true;
-      dockerCompat = true;
+      enable = lib.mkDefault (!config.virtualisation.docker.enable);
+      dockerCompat = lib.mkDefault true;
     };
   };
 }

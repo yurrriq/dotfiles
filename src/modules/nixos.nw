@@ -1,7 +1,7 @@
 \section{NixOS}
 
 <<modules/nixos.nix>>=
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   <<Configure boot loader>>
@@ -120,10 +120,13 @@ sound.enable = true;
 \todor{Fix rootless podman}
 <<Configure virtualisation>>=
 virtualisation = {
-  docker.enable = false;
+  docker = {
+    enable = lib.mkDefault false;
+    liveRestore = lib.mkDefault false;
+  };
   podman = {
-    enable = true;
-    dockerCompat = true;
+    enable = lib.mkDefault (!config.virtualisation.docker.enable);
+    dockerCompat = lib.mkDefault true;
   };
 };
 @
