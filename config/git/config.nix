@@ -53,6 +53,9 @@
 
     ui.color = true;
 
+    url."git@gitlab.sportradar.ag:" = {
+      insteadOf = "https://gitlab.sportradar.ag/";
+    };
   };
 
   xdg.configFile."pass-git-helper/git-pass-mapping.ini" = {
