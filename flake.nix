@@ -106,8 +106,9 @@
                     yq
                     zoom-us
                     ;
-                  bugwarrior = unstable-pkgs.python38Packages.bugwarrior;
-                  ec2instanceconnectcli = unstable-pkgs.python38Packages.callPackage ./pkgs/development/tools/ec2instanceconnectcli { };
+                  inherit (unstable-pkgs.python3Packages)
+                    bugwarrior
+                    ec2instanceconnectcli;
                   noweb = unstable-pkgs.noweb.override {
                     icon-lang = unstable-pkgs.icon-lang.override {
                       withGraphics = false;
