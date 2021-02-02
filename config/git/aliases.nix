@@ -33,6 +33,7 @@
     csm = "commit -S -m";
     csu = "crypt status -u";
     d = "diff";
+    dad = "add";
     dc = "diff --cached";
     ds = "diff --stat";
     ffco = "flow feature checkout";
