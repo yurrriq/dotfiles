@@ -73,4 +73,25 @@
     source = ./on-exit-git.sh;
   };
 
+  xdg.dataFile."task/hooks/on-modify.timewarrior" = {
+    executable = true;
+    source = let inherit (pkgs.timewarrior) version; in
+      with pkgs; stdenv.mkDerivation {
+        pname = "taskwarrior-on-modify.timewarrior";
+        inherit version;
+        nativeBuildInputs = [ makeWrapper ];
+        src = fetchurl {
+          url = "https://raw.githubusercontent.com/GothenburgBitFactory/timewarrior/v${version}/ext/on-modify.timewarrior";
+          sha512 = "sha512-CaaELr0JaDJ/LNvwUGDQUQPoKEOapGkJMycD9ujv0DWgfTQzoYkw/JCDPChreT4xCEJ303sAx4NpUqb+260orw==";
+        };
+        dontUnpack = true;
+        installPhase = ''
+          cp $src $out
+        '';
+        postInstall = ''
+          wrapProgram $out --prefix PATH : ${lib.makeBinPath [ python3 ]}
+        '';
+      };
+  };
+
 }
