@@ -2,6 +2,10 @@
 
 {
 
+  home.packages = with pkgs; [
+    timewarrior
+  ];
+
   home.sessionVariables = {
     TASKRC = "~/.taskrc-dirty";
   };

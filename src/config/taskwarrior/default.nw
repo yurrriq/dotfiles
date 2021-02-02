@@ -7,6 +7,15 @@
 
 @
 
+Install \hrefootnote{https://timewarrior.net}{Timewarrior}.
+
+<<config/taskwarrior/default.nix>>=
+  home.packages = with pkgs; [
+    timewarrior
+  ];
+
+@
+
 
 \newthought{Since home-manager generates a read-only \bash{.taskrc} file}, and
 using \hrefootnote{https://taskwarrior.org/docs/context.html}{contexts} requires
