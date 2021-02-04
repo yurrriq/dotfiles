@@ -86,10 +86,8 @@
         };
         dontUnpack = true;
         installPhase = ''
-          cp $src $out
-        '';
-        postInstall = ''
-          wrapProgram $out --prefix PATH : ${lib.makeBinPath [ python3 ]}
+          install -m755 $src $out
+          substituteInPlace $out --replace "/usr/bin/env " ${python3}/bin/
         '';
       };
   };
