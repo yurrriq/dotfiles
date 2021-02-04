@@ -12,6 +12,7 @@
 
   programs.fish.shellAliases = lib.mkIf (config.programs.fish.enable) rec {
     p = "task ls limit:page";
+    po = "timew summary :week";
     pp = tbd;
     t = "task limit:page";
     ta = "task add";
@@ -19,6 +20,7 @@
     te = "env VISUAL=$EDITOR task edit";
     tl = "task list";
     tm = "task mod";
+    tw = "timew";
   };
 
   programs.taskwarrior = {

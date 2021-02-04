@@ -37,6 +37,7 @@ Set \bash{$TASKRC} to \bash{~/.taskrc-dirty}, which must contain at least
 <<config/taskwarrior/default.nix>>=
   programs.fish.shellAliases = lib.mkIf (config.programs.fish.enable) rec {
     p = "task ls limit:page";
+    po = "timew summary :week";
     pp = tbd;
     t = "task limit:page";
     ta = "task add";
@@ -44,6 +45,7 @@ Set \bash{$TASKRC} to \bash{~/.taskrc-dirty}, which must contain at least
     te = "env VISUAL=$EDITOR task edit";
     tl = "task list";
     tm = "task mod";
+    tw = "timew";
   };
 
 @
