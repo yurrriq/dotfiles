@@ -121,6 +121,7 @@ myKeys cfg =
       ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%"),
       ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%"),
       ("<XF86AudioPrev>", spawn "playerctl previous"),
+      ("<XF86AudioPlay>", spawn "playerctl play-pause"),
       ("<XF86AudioNext>", spawn "playerctl next"),
       ("<XF86MonBrightnessDown>", spawn "xbacklight -10"),
       ("<XF86MonBrightnessUp>", spawn "xbacklight +10"),
