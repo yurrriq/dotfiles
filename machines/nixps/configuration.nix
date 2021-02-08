@@ -33,7 +33,11 @@ in
     fsType = "none";
     options = [ "bind" ];
   };
-
+  fileSystems."/mnt/music" = {
+    device = "192.168.1.147:/volume1/homes/eric/music";
+    fsType = "nfs";
+    options = [ "noatime" "noauto" "rw" "x-systemd.automount" ];
+  };
   hardware.bumblebee.enable = false;
   hardware.nvidiaOptimus.disable = false;
   services.blueman.enable = true;
