@@ -144,7 +144,8 @@ myKeys cfg =
       ("M-k", rotSlavesUp),
       ("M-m", windows W.focusMaster),
       ("M-w", sendMessage (JumpToLayout "TwoPane")),
-      ("M1-<Space>", spawn "rofi -modi combi,window -show combi -combi-modi run,drun")
+      ("M1-<Space>", spawn "rofi -modi combi,window -show combi -combi-modi run,drun"),
+      ("C-M-M1-x", spawn "xmonad --restart")
     ]
       ++ [ ( intercalate "-" (catMaybes [Just "M", maybeShift, Just key]),
              windows (f workspace)
