@@ -18,7 +18,6 @@
   imports = [
     ./password-store.nix
     ./taskwarrior
-    ./password-store.nix
   ];
 
 @

@@ -82,6 +82,7 @@
         pname = "taskwarrior-on-modify.timewarrior";
         inherit version;
         nativeBuildInputs = [ makeWrapper ];
+        buildInputs = [ python3 ];
         src = fetchurl {
           url = "https://raw.githubusercontent.com/GothenburgBitFactory/timewarrior/v${version}/ext/on-modify.timewarrior";
           sha512 = "sha512-CaaELr0JaDJ/LNvwUGDQUQPoKEOapGkJMycD9ujv0DWgfTQzoYkw/JCDPChreT4xCEJ303sAx4NpUqb+260orw==";
