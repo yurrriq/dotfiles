@@ -137,14 +137,14 @@
               )
             ];
           }
-          inputs.nixos-hardware.nixosModules.dell-xps-13-9380
-          ./machines/sruxps/hardware-configuration.nix
+          inputs.nixos-hardware.nixosModules.dell-xps-13-7390
+          ./machines/srnewxps/hardware-configuration.nix
           inputs.home-manager.nixosModules.home-manager
           ./modules/common.nix
           ./modules/location.nix
           ./modules/nixos.nix
           ./modules/packages.nix
-          ./machines/sruxps/configuration.nix
+          ./machines/srnewxps/configuration.nix
         ];
       };
     };
