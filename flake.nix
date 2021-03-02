@@ -1,7 +1,7 @@
 {
   inputs = {
     home-manager = {
-      url = "github:rycee/home-manager/release-20.09";
+      url = "github:nix-community/home-manager/release-20.09";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # TODO: naal.url = "github:yurrriq/naal";

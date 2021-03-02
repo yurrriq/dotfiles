@@ -8,29 +8,41 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "aes_x86_64" "aesni_intel" "cryptd" "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/a0766676-d779-49df-9e4e-c7732a386425";
+    { device = "/dev/disk/by-uuid/0d1dbc68-7db1-4dc4-ab42-743a82b1caa2";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/e4487dc2-63a7-4a5e-8b64-e6f6320f41d3";
+  boot.initrd.luks.devices = {
+    cryptkey = {
+      device = "/dev/disk/by-uuid/ed7a10f2-d674-41e0-9a90-0b55b55459d7";
+    };
+    cryptroot = {
+      device = "/dev/disk/by-uuid/638d6b94-a52e-4840-ac1b-a42877a4fc23";
+      keyFile = "/dev/mapper/cryptkey";
+    };
+    cryptswap = {
+      device = "/dev/disk/by-uuid/e9787457-a322-470a-836e-266831ea1405";
+      keyFile = "/dev/mapper/cryptkey";
+    };
+  };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/2A3B-F3E2";
+    { device = "/dev/disk/by-uuid/EEAB-CEBD";
       fsType = "vfat";
     };
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 20000;
-    }
-  ];
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/f77fb8a3-5e36-472c-a92e-02a6e907f270"; }
+    ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   # high-resolution display

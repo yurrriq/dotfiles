@@ -36,7 +36,7 @@ in
     import ./home.nix (args // { inherit pkgs; });
   networking.hostName = "MSP-EBAILEY01";
 
-  networking.interfaces.wlp2s0.useDHCP = true;
+  networking.interfaces.wlp1s0.useDHCP = true;
   networking.useDHCP = false; # NOTE: Deprecated, so set it false.
   nix.trustedUsers = [ "root" username ];
   security.sudo = {
