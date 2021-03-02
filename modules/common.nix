@@ -5,21 +5,21 @@
   nix = {
     binaryCaches = [
       "https://yurrriq.cachix.org"
-      "https://yurrriq-nur-packages.cachix.org"
+      "https://sportradar.cachix.org" # TODO
     ];
     binaryCachePublicKeys = [
       "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
-      "yurrriq-nur-packages.cachix.org-1:7kbjuGBUZcWf876g2cdelmIQXrXzOhpMVBqYOyyAv70="
+      # "sportradar.cachix.org-1:FIXME"
     ];
     # TODO: daemonNiceLevel = 19;
     extraOptions = ''
       experimental-features = flakes nix-command
     '';
     gc = {
-      automatic = true;
+      automatic = false; # TODO
       options = "--delete-older-than 30d";
     };
-    optimise.automatic = true;
+    optimise.automatic = false; # TODO
     package = pkgs.nixUnstable;
   };
 

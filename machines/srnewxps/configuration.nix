@@ -4,12 +4,28 @@ let
 in
 {
   airportCode = "MSP";
+
+  boot.initrd.luks.devices = {
+    cryptkey = {
+      device = "/dev/disk/by-uuid/ed7a10f2-d674-41e0-9a90-0b55b55459d7";
+    };
+    cryptroot = {
+      device = "/dev/disk/by-uuid/638d6b94-a52e-4840-ac1b-a42877a4fc23";
+      keyFile = "/dev/mapper/cryptkey";
+    };
+    cryptswap = {
+      device = "/dev/disk/by-uuid/e9787457-a322-470a-836e-266831ea1405";
+      keyFile = "/dev/mapper/cryptkey";
+    };
+  };
+
   boot.kernel.sysctl = {
     "vm.swappiness" = 1;
   };
   boot.kernelModules = [
     "coretemp"
   ];
+
   environment.homeBinInPath = true;
   environment.pathsToLink = [
     "/lib/aspell"
@@ -17,6 +33,17 @@ in
     "/share/fish"
     # FIXME: "/share/icons"
   ];
+
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/0d1dbc68-7db1-4dc4-ab42-743a82b1caa2";
+      fsType = "ext4";
+    };
+
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/EEAB-CEBD";
+      fsType = "vfat";
+    };
 
   fileSystems."/mnt/music" = {
     device = "192.168.1.147:/volume1/homes/eric/music";
@@ -61,6 +88,7 @@ in
   services.xserver.monitorSection = ''
     DisplaySize 406 228
   '';
+
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;

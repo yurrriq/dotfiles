@@ -23,7 +23,7 @@
       httpie
       # TODO: http-prompt
       # TODO: idris
-      lorri
+      lorri # TODO: remove
       moreutils
       neofetch
       nixUnstable
