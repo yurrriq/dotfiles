@@ -160,7 +160,7 @@ services.xserver.monitorSection = ''
   DisplaySize 406 228
 '';
 
-services.xserver.videoDrivers = [ "modesetting" ];
+# services.xserver.videoDrivers = [ "modesetting" ];
 @
 
 <<Configure user>>=

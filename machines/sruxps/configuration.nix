@@ -87,7 +87,7 @@ in
     DisplaySize 406 228
   '';
 
-  services.xserver.videoDrivers = [ "modesetting" ];
+  # services.xserver.videoDrivers = [ "modesetting" ];
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
