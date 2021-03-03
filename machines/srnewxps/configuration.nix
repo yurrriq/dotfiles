@@ -37,6 +37,7 @@ in
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/0d1dbc68-7db1-4dc4-ab42-743a82b1caa2";
       fsType = "ext4";
+      options = [ "noatime" "nodiratime" "discard" ];
     };
 
 
