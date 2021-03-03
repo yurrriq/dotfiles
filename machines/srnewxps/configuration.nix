@@ -24,6 +24,7 @@ in
   };
   boot.kernelModules = [
     "coretemp"
+    "i915.enable_psr=0"
   ];
 
   environment.homeBinInPath = true;
@@ -59,6 +60,7 @@ in
       };
     };
   };
+  hardware.opengl.enable = true;
   home-manager.useUserPackages = true;
   home-manager.users."${username}" = args:
     import ./home.nix (args // { inherit pkgs; });
@@ -89,6 +91,7 @@ in
   services.xserver.monitorSection = ''
     DisplaySize 406 228
   '';
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   users.mutableUsers = false;
   users.users."${username}" = {

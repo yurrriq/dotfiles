@@ -62,7 +62,7 @@
         tapping = true;
       };
 
-      videoDrivers = [
+      videoDrivers = lib.mkDefault [
         "intel"
       ];
 

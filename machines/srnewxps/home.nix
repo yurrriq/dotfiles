@@ -57,6 +57,12 @@
     )
   );
 
+  services.picom = {
+    backend = "xrender";
+    refreshRate = 60;
+    vSync = true;
+  };
+
   _module.args.pkgs = lib.mkForce pkgs;
 
 }
