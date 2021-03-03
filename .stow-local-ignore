@@ -12,7 +12,6 @@ default.nix
 latexmkrc
 machines
 Makefile
-_old
 .pre-commit-config.yaml
 scripts
 shell.nix

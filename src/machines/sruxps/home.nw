@@ -10,6 +10,8 @@
 
   <<Install some user packages>>
 
+  <<Configure picom>>
+
   _module.args.pkgs = lib.mkForce pkgs;
 
 }
@@ -62,9 +64,6 @@ home.packages = with pkgs; (
 <<Install some user packages>>=
     progress
 @
-
-\hrefootnote{https://www.clementine-player.org/}{Clementine} is a great music
-player.
 
 I haven't used Dhall in a while, but it's still interesting.
 
@@ -133,4 +132,13 @@ Try to improve battery life.
     ]
   )
 );
+@
+
+
+<<Configure picom>>=
+services.picom = {
+  backend = "xrender";
+  refreshRate = 60;
+  vSync = true;
+};
 @

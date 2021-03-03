@@ -5,15 +5,15 @@ in
 {
   airportCode = "MSP";
   boot.initrd.luks.devices = {
-    cryptkey.device = "/dev/disk/by-uuid/603b64c6-8544-4b43-9b6a-7d8a08091514";
+    cryptkey.device = "/dev/disk/by-uuid/ed7a10f2-d674-41e0-9a90-0b55b55459d7";
 
     cryptroot = {
-      device = "/dev/disk/by-uuid/c4e26a93-c0c9-4680-bb79-8c0ca47df96c";
+      device = "/dev/disk/by-uuid/638d6b94-a52e-4840-ac1b-a42877a4fc23";
       keyFile = "/dev/mapper/cryptkey";
     };
 
     cryptswap = {
-      device = "/dev/disk/by-uuid/565c0358-110e-4279-ba59-619cb2cc1ebf";
+      device = "/dev/disk/by-uuid/e9787457-a322-470a-836e-266831ea1405";
       keyFile = "/dev/mapper/cryptkey";
     };
   };
@@ -22,6 +22,7 @@ in
   };
   boot.kernelModules = [
     "coretemp"
+    "i915.enable_psr=0"
   ];
   environment.homeBinInPath = true;
   environment.pathsToLink = [
@@ -31,31 +32,13 @@ in
     # FIXME: "/share/icons"
   ];
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/71cfcb8a-13a9-49f0-b034-a9c8841be07b";
-    fsType = "btrfs";
-    options = [ "subvol=@" "rw" "noatime" "compress=zstd" "ssd" "space_cache" ];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/71cfcb8a-13a9-49f0-b034-a9c8841be07b";
-    fsType = "btrfs";
-    options = [ "subvol=@home" "rw" "noatime" "compress=zstd" "ssd" "space_cache" ];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/71cfcb8a-13a9-49f0-b034-a9c8841be07b";
-    fsType = "btrfs";
-    options = [ "subvol=@nix" "rw" "noatime" "compress=zstd" "ssd" "space_cache" ];
-  };
-
-  fileSystems."/var" = {
-    device = "/dev/disk/by-uuid/71cfcb8a-13a9-49f0-b034-a9c8841be07b";
-    fsType = "btrfs";
-    options = [ "subvol=@var" "rw" "noatime" "compress=zstd" "ssd" "space_cache" ];
+    device = "/dev/disk/by-uuid/0d1dbc68-7db1-4dc4-ab42-743a82b1caa2";
+    fsType = "ext4";
+    options = [ "noatime" "nodiratime" "discard" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/54D0-C859";
+    device = "/dev/disk/by-uuid/EEAB-CEBD";
     fsType = "vfat";
   };
 
@@ -72,6 +55,7 @@ in
       };
     };
   };
+  hardware.opengl.enable = true;
   home-manager.useUserPackages = true;
   home-manager.users."${username}" = args:
     import ./home.nix (args // { inherit pkgs; });
@@ -102,6 +86,8 @@ in
   services.xserver.monitorSection = ''
     DisplaySize 406 228
   '';
+
+  services.xserver.videoDrivers = [ "modesetting" ];
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
