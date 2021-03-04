@@ -33,6 +33,23 @@
     realName = "Eric Bailey";
   };
 
+  home.file."src/gitlab.sportradar.ag/.envrc".text = ''
+    case $(kubectl config current-context) in
+        *k8s.srus*)
+            export AWS_PROFILE=msp-admin
+            ;;
+        *) ;;
+    esac
+
+    export CI_SERVER_HOST=gitlab.sportradar.ag
+    export CI_REGISTRY="$CI_SERVER_HOST":4567 \
+           CI_REGISTRY_USER=gitlab-ci-token \
+           CI_REGISTRY_PASSWORD=$(pass "$CI_SERVER_HOST"/token/registry) \
+           CI_JOB_TOKEN=$(pass "$CI_SERVER_HOST"/token/api)
+    export GITLAB_TOKEN="$CI_JOB_TOKEN" \
+           GITLAB_REGISTRY_ACCESS_TOKEN="$CI_REGISTRY_PASSWORD"
+  '';
+
   home.packages = with pkgs; (
     [
       aws-iam-authenticator
