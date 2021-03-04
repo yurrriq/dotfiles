@@ -9,7 +9,7 @@
     };
   };
   console.font = "Lat2-Terminus16";
-  console.keyMap = "us";
+  console.useXkbConfig = true;
   i18n.defaultLocale = "en_US.UTF-8";
   location.provider = "manual";
   networking.networkmanager.enable = true;
