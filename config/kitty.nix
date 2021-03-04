@@ -28,9 +28,12 @@
     };
   };
 
-  xdg.configFile."kitty/theme.conf".source = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/dexpota/kitty-themes/c4bee86ce8372d3426620e27086d6afa6873a98c/themes/Solarized_Dark.conf";
-    sha256 = "0vwjcyd0asqrbs4437k2b80lqlanl79q03kk4pjnfdf379jklrm4";
+  xdg.configFile."kitty/theme.conf".source = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/dexpota/kitty-themes/c4bee86c/themes/Solarized_Dark.conf";
+    hash = "sha256-jkB5Oat50iTnmNDMbbNzAI6IWKFP+U44K6IC8GZIcHY=";
+    postFetch = ''
+      sed -E -i 's/^(selection_background) #002731$/\1 #708183/' $out
+    '';
   };
 
 }

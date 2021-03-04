@@ -1,3 +1,5 @@
+\section{kitty}
+
 <<config/kitty.nix>>=
 { pkgs, ... }:
 
@@ -29,10 +31,28 @@
     };
   };
 
-  xdg.configFile."kitty/theme.conf".source = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/dexpota/kitty-themes/c4bee86ce8372d3426620e27086d6afa6873a98c/themes/Solarized_Dark.conf";
-    sha256 = "0vwjcyd0asqrbs4437k2b80lqlanl79q03kk4pjnfdf379jklrm4";
-  };
+  <<Configure the theme>>
 
 }
+@
+
+\subsection{Theme}
+
+Download and patch a \hrefootnote{https://github.com/dexpota/kitty-themes/\#solarized-dark}{Solarized Dark theme}.
+
+<<Configure the theme>>=
+xdg.configFile."kitty/theme.conf".source = pkgs.fetchurl {
+  url = "https://raw.githubusercontent.com/dexpota/kitty-themes/c4bee86c/themes/Solarized_Dark.conf";
+  hash = "sha256-jkB5Oat50iTnmNDMbbNzAI6IWKFP+U44K6IC8GZIcHY=";
+  postFetch = ''
+    <<Fix selection background color>>
+  '';
+};
+@
+
+The upstream selection background color is way too similar to the selection
+foreground color, so use the normal foregound color instead.
+
+<<Fix selection background color>>=
+sed -E -i 's/^(selection_background) #002731$/\1 #708183/' $out
 @
