@@ -79,20 +79,10 @@ in
     };
     dpi = 180;
   };
-  # FIXME
-  # sops = {
-  #   gnupgHome = "/home/yurrriq/.gnupg";
-  #   secrets."${username}.hashedPassword" = {
-  #     format = "binary";
-  #     sopsFile = ./. + "/secrets/${username}.hashedPassword.enc";
-  #   };
-  #   sshKeyPaths = [];
-  # };
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;
-    hashedPassword = lib.fileContents (./. + "/secrets/${username}.hashedPassword");
-    # FIXME: hashedPassword = lib.fileContents config.sops.secrets."${username}.hashedPassword".path;
+    hashedPassword = lib.fileContents "/etc/nixos/secrets/${username}.hashedPassword";
     group = "users";
     extraGroups = [
       "audio"

@@ -22,7 +22,6 @@ in
   <<Configure Nix>>
   <<Configure sudo>>
   <<Configure X Server>>
-  <<Configure sops-nix>>
   <<Configure user>>
 }
 @
@@ -169,25 +168,11 @@ services.xserver = {
 };
 @
 
-\todor{adopt sops-nix}
-<<Configure sops-nix>>=
-# FIXME
-# sops = {
-#   gnupgHome = "/home/yurrriq/.gnupg";
-#   secrets."${username}.hashedPassword" = {
-#     format = "binary";
-#     sopsFile = ./. + "/secrets/${username}.hashedPassword.enc";
-#   };
-#   sshKeyPaths = [];
-# };
-@
-
 <<Configure user>>=
 users.mutableUsers = false;
 users.users."${username}" = {
   name = username;
-  hashedPassword = lib.fileContents (./. + "/secrets/${username}.hashedPassword");
-  # FIXME: hashedPassword = lib.fileContents config.sops.secrets."${username}.hashedPassword".path;
+  hashedPassword = lib.fileContents "/etc/nixos/secrets/${username}.hashedPassword";
   group = "users";
   extraGroups = [
     "audio"
