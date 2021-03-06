@@ -12,8 +12,6 @@
 
   <<Install some user packages>>
 
-  <<Configure picom>>
-
   _module.args.pkgs = lib.mkForce pkgs;
 
 }
@@ -153,13 +151,4 @@ Try to improve battery life.
     ]
   )
 );
-@
-
-
-<<Configure picom>>=
-services.picom = {
-  backend = "xrender";
-  refreshRate = 60;
-  vSync = true;
-};
 @

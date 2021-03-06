@@ -137,7 +137,10 @@ Null prefix argument turns off the mode."
 (setq-default fill-column 80)
 @
 
+%% https://orgmode.org/manual/Structure-Templates.html
 <<config/emacs/init.el>>=
+(require 'org-tempo)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((shell . t)))
