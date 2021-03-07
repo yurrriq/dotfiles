@@ -16,6 +16,7 @@ pkgs.mkShell {
         mkpasswd
         niv
         nixpkgs-fmt
+        nodePackages.node2nix
         shellcheck
         shfmt
         sops
