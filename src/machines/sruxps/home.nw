@@ -104,13 +104,7 @@ useful for troubleshooting wireless issues, like in Trondheim.
 <<Install some user packages>>=
     iw
     jdk
-@
-
-\url{https://github.com/Azure/kubelogin}
-
-<<Install some user packages>>=
     kubectx
-    kubelogin
     k9s
     stern
 @

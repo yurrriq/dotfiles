@@ -14,6 +14,7 @@ in
   <<Configure vm.swappiness>>
   <<Add the coretemp kernel module>>
   <<Link some extra paths>>
+  <<Install system-wide packages>>
   <<Configure the file systems>>
   <<Configure Bluetooth>>
   <<Configure home-manager>>
@@ -72,6 +73,12 @@ environment.pathsToLink = [
   "/share/emacs/site-lisp"
   "/share/fish"
   # FIXME: "/share/icons"
+];
+@
+
+<<Install system-wide packages>>=
+environment.systemPackages = with pkgs; [
+  kubelogin
 ];
 @
 

@@ -59,7 +59,6 @@
       iw
       jdk
       kubectx
-      kubelogin
       k9s
       stern
       # FIXME: naal

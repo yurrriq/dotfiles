@@ -30,6 +30,9 @@ in
     "/share/fish"
     # FIXME: "/share/icons"
   ];
+  environment.systemPackages = with pkgs; [
+    kubelogin
+  ];
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/71cfcb8a-13a9-49f0-b034-a9c8841be07b";
     fsType = "btrfs";
