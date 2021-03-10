@@ -171,7 +171,7 @@ endef
 
 .PHONY: build dry-build switch
 build dry-build switch test: stow
-	@ sudo nixos-rebuild --impure --flake . $@
+	@ sudo nixos-rebuild --option pure-eval false $@
 
 
 .PHONY: cachix
