@@ -18,23 +18,21 @@ jobs:
         extra_nix_config: |
           experimental-features = nix-command flakes
         nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/tarball/master
+    - run: nix flake check
     - uses: cachix/cachix-action@v8
       with:
         name: yurrriq
         skipPush: true
-    - name: Clone gh-pages branch
-      run: |
-        git clone --quiet --branch gh-pages --depth 1 https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY".git site
-        git -C site config user.name github-actions
-        git -C site config user.email github-actions@users.noreply.github.com
     - name: Build PDF
       run: |
-        nix-env -i jq -f '<nixpkgs>'
-        cp -rv $(nix build --no-link --json | jq -r '.[0].outputs.out')/* site/
-    - name: Publish to GitHub Pages
-      run: |
-        git -C site add --all .
-        git -C site commit -m 'Publish to GitHub Pages'
-        git -C site push --quiet https://x-access-token:"$GITHUB_TOKEN"@github.com/"$GITHUB_REPOSITORY".git gh-pages
+        nix build
+        mkdir site
+        cp -rv result/* site/
+    - name: Deploy to GitHub Pages
+      if: success()
+      uses: crazy-max/ghaction-github-pages@v2
+      with:
+        target_branch: gh-pages
+        build_dir: site
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
