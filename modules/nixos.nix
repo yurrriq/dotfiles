@@ -76,6 +76,9 @@
   };
   sound.enable = true;
   system.stateVersion = "20.09";
+  # WARN[0000] Found default OCIruntime /nix/store/.../bin/crun path which is missing from [engine.runtimes] in containers.conf
+  environment.systemPackages = lib.optionals config.virtualisation.podman.enable [ pkgs.crun ];
+
   virtualisation = {
     docker = {
       enable = lib.mkDefault false;

@@ -23,7 +23,6 @@ in
   <<Configure sudo>>
   <<Configure services>>
   <<Configure user>>
-  virtualisation.docker.enable = true;
 }
 @
 

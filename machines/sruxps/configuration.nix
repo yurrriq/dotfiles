@@ -125,5 +125,4 @@ in
     home = "/home/${username}";
     shell = "/etc/profiles/per-user/${username}/bin/fish";
   };
-  virtualisation.docker.enable = true;
 }
