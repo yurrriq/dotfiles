@@ -82,6 +82,8 @@ home.packages = with pkgs; (
 @
 
 <<Install some user packages>>=
+    bpytop
+    fd
     progress
 @
 
@@ -95,7 +97,7 @@ I haven't used Dhall in a while, but it's still interesting.
 I might need \hrefootnote{https://docs.docker.com/compose/}{Docker Compose}
 again someday, but not lately.
 
-<<Install some user packages>>=
+<<*>>=
     docker-compose
 @
 
@@ -123,9 +125,6 @@ some lazy day.
 <<*>>=
     next
 @
-
-\hrefootnote{https://freedesktop.org/software/pulseaudio/pavucontrol/}{PulseAudio Volume Control}
-is useful for configuring Bluetooth audio.
 
 <<Install some user packages>>=
     renderizer

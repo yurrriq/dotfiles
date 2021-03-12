@@ -27,7 +27,7 @@ player.
       curl
       expect
       gawk
-      gcc
+      # gcc
       gnumake
       gnused
       gnutar
@@ -37,18 +37,18 @@ player.
       # TODO: idris
       lorri # TODO: remove
       moreutils
-      neofetch
+      # neofetch
       nixUnstable
       noweb
-      pandoc
-      prettyping
+      # pandoc
+      # prettyping
       ripgrep
       shellcheck
       shfmt
       silver-searcher # TODO: find helm-rg solution
       slack
       spotify
-      stow
+      # stow
 @
 
 <<modules/packages.nix>>=
@@ -92,7 +92,7 @@ player.
     ]
 @
 
-<<modules/packages.nix>>=
+<<*>>=
   ) ++ lib.optionals stdenv.isDarwin (
     [
       m-cli
@@ -117,7 +117,12 @@ player.
     networkmanager-openconnect
     nfs-utils
     openconnect
-    paper-icon-theme
+@
+
+\hrefootnote{https://freedesktop.org/software/pulseaudio/pavucontrol/}{PulseAudio Volume Control}
+is useful for configuring Bluetooth audio.
+
+<<modules/pacakges.nix>>=
     pavucontrol
     playerctl
     # psmisc
@@ -140,7 +145,6 @@ related packages.
 @
 
 <<modules/packages.nix>>=
-    thunderbird
     xclip
     xorg.xbacklight
   ];

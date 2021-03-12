@@ -15,7 +15,7 @@
       curl
       expect
       gawk
-      gcc
+      # gcc
       gnumake
       gnused
       gnutar
@@ -25,18 +25,18 @@
       # TODO: idris
       lorri # TODO: remove
       moreutils
-      neofetch
+      # neofetch
       nixUnstable
       noweb
-      pandoc
-      prettyping
+      # pandoc
+      # prettyping
       ripgrep
       shellcheck
       shfmt
       silver-searcher # TODO: find helm-rg solution
       slack
       spotify
-      stow
+      # stow
       (
         texlive.combine {
           inherit (texlive) scheme-small
@@ -69,18 +69,6 @@
     with python3Packages; [
       pygments
     ]
-  ) ++ lib.optionals stdenv.isDarwin (
-    [
-      m-cli
-      sourcetree
-      onyx
-    ] ++ (
-      with chunkwm; [
-        core
-        ffm
-        tiling
-      ]
-    )
   ) ++ lib.optionals stdenv.isLinux [
     dolphin
     libnotify
@@ -90,18 +78,10 @@
     networkmanager-openconnect
     nfs-utils
     openconnect
-    paper-icon-theme
-    pavucontrol
-    playerctl
-    # psmisc
-    # pv
-    qpdfview
-    wirelesstools
     file
     lsof
     tomb
     (signal-desktop.override { spellcheckerLanguage = "en_US"; })
-    thunderbird
     xclip
     xorg.xbacklight
   ];

@@ -55,8 +55,9 @@
     [
       aws-iam-authenticator
       ec2instanceconnectcli
+      bpytop
+      fd
       progress
-      docker-compose
       iw
       jdk
       kubectx
