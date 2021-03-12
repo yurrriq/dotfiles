@@ -5,7 +5,17 @@
 
 {
 
-  programs.htop.enable = true;
+  programs.htop = {
+    enable = true;
+    colorScheme = 6;
+    cpuCountFromZero = true;
+    showCpuUsage = true;
+    highlightBaseName = true;
+  };
 
 }
 @
+
+%% Local Variables:
+%% noweb-code-mode: nix-mode
+%% End:
