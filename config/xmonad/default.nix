@@ -35,7 +35,7 @@
     scriptPath = ".hm-xsession";
     windowManager.xmonad = {
       enable = true;
-      enableContribAndExtras = true;
+      extraPackages = hpkgs: [ hpkgs.xmonad-contrib ];
       config = ./xmonad.hs;
     };
   };

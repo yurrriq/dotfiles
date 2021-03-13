@@ -6,9 +6,6 @@ dependencies:
 - containers
 - xmonad
 - xmonad-contrib
-- xmonad-extras
-# - X11
-# - X11-xft
 
 ghc-options:
 - -Wall
