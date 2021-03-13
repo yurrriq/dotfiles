@@ -10,7 +10,6 @@ import Data.List (intercalate)
 import Data.Map (Map)
 import Data.Maybe (catMaybes)
 import XMonad hiding ((|||))
-import XMonad.Actions.CopyWindow (runOrCopy)
 import XMonad.Actions.Navigation2D
 import XMonad.Actions.RotSlaves
 import XMonad.Actions.Warp
@@ -104,15 +103,19 @@ manageScratchPad :: ManageHook
 manageScratchPad =
   scratchpadManageHook (W.RationalRect (1 / 6) (1 / 6) (2 / 3) (2 / 3))
 
--- TODO
--- scratchpads :: [NamedScratchpad]
--- scratchpads =
---   [ NS
---       "kitty"
---       "kitty --title=Scratchpad"
---       (title =? "Scratchpad")
---       (customFloating $ W.RationalRect (1 / 6) (1 / 6) (2 / 3) (2 / 3)),
---   ]
+scratchpads :: [NamedScratchpad]
+scratchpads =
+  [ NS
+      "emacs"
+      "emacsclient -a '' -nc -F '((name . \"emacs-scratch\"))'"
+      (title =? "emacs-scratch")
+      (customFloating $ W.RationalRect (1 / 6) (1 / 6) (2 / 3) (2 / 3)),
+    NS
+      "kitty"
+      "kitty --name=scratchpad"
+      (resource =? "scratchpad")
+      (customFloating $ W.RationalRect (1 / 6) (1 / 6) (2 / 3) (2 / 3))
+  ]
 
 myKeys :: XConfig l -> Map (KeyMask, KeySym) (X ())
 myKeys cfg =
@@ -126,8 +129,9 @@ myKeys cfg =
       ("<XF86MonBrightnessDown>", spawn "xbacklight -10"),
       ("<XF86MonBrightnessUp>", spawn "xbacklight +10"),
       ("<Print>", spawn "flameshot gui"),
-      -- TODO: ("M--", namedScratchpadAction scratchpads "kitty"),
-      ("M--", scratchpadSpawnActionCustom "kitty --name=scratchpad"),
+      ("M-S--", namedScratchpadAction scratchpads "emacs"),
+      -- ("M--", scratchpadSpawnActionCustom "kitty --name=scratchpad"),
+      ("M--", namedScratchpadAction scratchpads "kitty"),
       ("M-<Esc>", getXMonadDataDir >>= spawn . wrap "i3lock -i " "/matrix.png"),
       ("M-<Return>", spawn (terminal cfg)),
       ("M-<Tab>", spawn "rofi -show window"),
