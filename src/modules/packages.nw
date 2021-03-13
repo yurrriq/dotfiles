@@ -122,7 +122,7 @@ player.
 \hrefootnote{https://freedesktop.org/software/pulseaudio/pavucontrol/}{PulseAudio Volume Control}
 is useful for configuring Bluetooth audio.
 
-<<modules/pacakges.nix>>=
+<<modules/packages.nix>>=
     pavucontrol
     playerctl
     # psmisc

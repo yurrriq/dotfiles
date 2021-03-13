@@ -78,6 +78,12 @@
     networkmanager-openconnect
     nfs-utils
     openconnect
+    pavucontrol
+    playerctl
+    # psmisc
+    # pv
+    qpdfview
+    wirelesstools
     file
     lsof
     tomb
