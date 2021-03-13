@@ -91,13 +91,15 @@ myPP =
 
 myManageHook :: ManageHook
 myManageHook =
-  composeAll
-    [ className =? "Slack" --> doShift (myWorkspaces !! 4),
-      className =? "zoom" --> doShift (myWorkspaces !! 5),
-      className =? "Signal" --> doShift (myWorkspaces !! 7)
-      -- FIXME: className =? "Spotify" --> doShift (myWorkspaces !! 8),
-      -- FIXME: className =? "Mail" --> doShift (myWorkspaces !! 9)
-    ]
+  composeAll $
+    concatMap
+      (\(n, klasses) -> [className =? klass --> doShift (nthWorkspace n) | klass <- klasses])
+      [ (1, ["Firefox"]),
+        (5, ["Slack"]),
+        (6, ["zoom"]),
+        (8, ["Signal"]),
+        (9, ["Clementine", "Spotify", "spotify"])
+      ]
 
 manageScratchPad :: ManageHook
 manageScratchPad =
@@ -160,6 +162,9 @@ myKeys cfg =
                [(W.greedyView, Nothing), (W.shift, Just "S")]
          ]
 
+nthWorkspace :: Int -> String
+nthWorkspace = (myWorkspaces !!) . subtract 1
+
 myWorkspaces :: [String]
 myWorkspaces =
   [ "<fn=1>🌐</fn>",
@@ -170,6 +175,6 @@ myWorkspaces =
     "<fn=1>🏎</fn>",
     "7",
     "<fn=1>🗨</fn>",
-    "<fn=1>🎶</fn>",
-    "<fn=1>📬</fn>"
+    "<fn=1>🎶</fn>"
+    -- , "<fn=1>📬</fn>"
   ]
