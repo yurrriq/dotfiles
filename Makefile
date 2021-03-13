@@ -169,9 +169,16 @@ endef
 	@ sops -d $< >${@:.enc=}
 
 
-.PHONY: build dry-build switch
-build dry-build switch test: stow
+.PHONY: build diff dry-build switch test
+
+build dry-build: stow
+	@ nixos-rebuild --option pure-eval false $@
+
+switch test: stow
 	@ sudo nixos-rebuild --option pure-eval false $@
+
+diff: build
+	@ nix store diff-closures /run/current-system ./result
 
 
 .PHONY: cachix
