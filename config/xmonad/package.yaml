@@ -1,5 +1,10 @@
 name: my-xmonad
-version: 0.0.0.1
+version: 0.0.1.0
+synopsis: My XMonad config
+author: Eric Bailey
+maintainer: eric@ericb.me
+github: yurrriq/dotfiles
+license: Unlicense
 
 dependencies:
 - base
