@@ -139,7 +139,7 @@ myKeys cfg =
       ("M-<Tab>", spawn "rofi -show window"),
       ("M-S-<Space>", withFocused (windows . W.sink)),
       ("M-S-b", sendMessage (JumpToLayout "BSP")),
-      ("M-S-e", runOrCopy "emacsclient -c" (className =? "Emacs")),
+      ("M-S-e", spawn "emacsclient -nc -e '(switch-to-buffer nil)'"),
       ("M-S-l", sendMessage NextLayout),
       ("M-S-p", spawn "rofi-pass"),
       ("M-S-q", kill),
