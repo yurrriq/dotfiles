@@ -1,3 +1,5 @@
+PATH := $(PWD)/bin:$(PATH)
+
 machine    ?= sruxps
 nixos_dir  ?= /etc/nixos
 cpif   ?= | cpif

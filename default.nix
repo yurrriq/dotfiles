@@ -12,10 +12,8 @@ pkgs.stdenv.mkDerivation rec {
   };
 
   configurePhase = ''
-    sed -i '0,/-S gawk -f/s//gawk/' ./bin/fix-underscores
-    patchShebangs ./bin/fix-underscores ./noweb-minted/
-    sed -i '0,/gawk$/s//gawk -f/' ./bin/fix-underscores
-    export PATH=$PWD/bin:$PATH
+    substituteInPlace ./bin/fix-underscores \
+        --replace '/usr/bin/env -S gawk' '${pkgs.gawk}/bin/gawk'
   '';
 
   nativeBuildInputs = with pkgs; [
