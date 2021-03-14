@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
 
@@ -23,7 +23,16 @@
 
   services.picom.enable = true;
 
-  xdg.configFile."xmobar/xmobarrc".source = ../xmobar/xmobarrc;
+  xdg.configFile."xmobar/xmobarrc" = {
+    source = ../xmobar/xmobarrc;
+    # NOTE: https://github.com/nix-community/home-manager/issues/1399
+    onChange = ''
+      if [[ -v DISPLAY ]]; then
+          echo "Restarting xmonad"
+          $DRY_RUN_CMD ${config.xsession.windowManager.command} --restart
+      fi
+    '';
+  };
 
   xsession = {
     enable = true;
