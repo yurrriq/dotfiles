@@ -1,27 +1,23 @@
-{ pkgs ? import <nixpkgs> { }
-, src ? pkgs.nix-gitignore.gitignoreSource [ ".git/" "docs" "result" ] ./.
-}:
-
-pkgs.stdenv.mkDerivation rec {
+{ pkgs ? import <nixpkgs> { } }:
+with pkgs;
+stdenv.mkDerivation rec {
   pname = "yurrriq-dotfiles";
   version = builtins.readFile ./VERSION;
-  inherit src;
+  src = nix-gitignore.gitignoreSource [ ".git/" "docs" "result" "machines/*/secrets/" ] ./.;
 
-  FONTCONFIG_FILE = pkgs.makeFontsConf {
-    fontDirectories = [ pkgs.iosevka ];
+  FONTCONFIG_FILE = makeFontsConf {
+    fontDirectories = [ iosevka ];
   };
 
   configurePhase = ''
     substituteInPlace ./bin/fix-underscores \
-        --replace '/usr/bin/env -S gawk' '${pkgs.gawk}/bin/gawk'
+        --replace '/usr/bin/env -S gawk' '${gawk}/bin/gawk'
   '';
 
-  nativeBuildInputs = with pkgs; [
+  nativeBuildInputs = [
     gawk
     noweb
     python3Packages.pygments
-    python3
-    which
     (
       texlive.combine {
         inherit noweb;
@@ -54,9 +50,11 @@ pkgs.stdenv.mkDerivation rec {
           ;
       }
     )
+    which
   ];
 
   makeFlags = [
     "PREFIX=${placeholder "out"}"
   ];
+
 }

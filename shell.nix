@@ -1,33 +1,22 @@
-{ pkgs ? import <nixpkgs> }:
-let
-  pkg = import ./. { inherit pkgs; };
-in
-pkgs.mkShell {
-  inherit (pkg) FONTCONFIG_FILE;
-  buildInputs = pkg.nativeBuildInputs ++ (
-    with pkgs; (
-      [
-        biber
-        cargo
-        git
-        gnumake
-        gnupg
-        python3
-        mkpasswd
-        niv
-        nixpkgs-fmt
-        nodePackages.node2nix
-        shellcheck
-        shfmt
-        sops
-        stow
-      ]
-    ) ++ (
-      with python3Packages; [
-        pre-commit
-        pygments
-        yamllint
-      ]
-    )
-  );
+{ pkgs ? import <nixpkgs> { }, yurrriq-dotfiles ? pkgs.callPackage ./. { } }:
+with pkgs;
+mkShell {
+  inherit (yurrriq-dotfiles) FONTCONFIG_FILE;
+  buildInputs = yurrriq-dotfiles.nativeBuildInputs ++ [
+    biber
+    cargo
+    git
+    gitAndTools.pre-commit
+    gnumake
+    gnupg
+    mkpasswd
+    nixpkgs-fmt
+    nodePackages.node2nix
+    python3Packages.pygments
+    python3Packages.yamllint
+    shellcheck
+    shfmt
+    sops
+    stow
+  ];
 }

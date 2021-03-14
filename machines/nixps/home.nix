@@ -16,7 +16,6 @@
     ../../config/jq.nix
     ../../config/kitty.nix
     ../../config/man.nix
-    ../../config/nixpkgs
     ../../config/password-store.nix
     ../../config/rebar3.nix
     ../../config/starship.nix
@@ -42,5 +41,4 @@
     tellico
     zoom-us
   ];
-  _module.args.pkgs = lib.mkForce pkgs;
 }

@@ -51,9 +51,7 @@ in
   };
   hardware.pulseaudio.support32Bit = true;
   hardware.opengl.driSupport32Bit = true;
-  home-manager.useUserPackages = true;
-  home-manager.users."${username}" = args:
-    import ./home.nix (args // { inherit pkgs; });
+  home-manager.users."${username}" = import ./home.nix;
   networking.firewall = {
     enable = true;
     allowedTCPPortRanges = [

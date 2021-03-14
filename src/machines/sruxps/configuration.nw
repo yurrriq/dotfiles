@@ -135,9 +135,7 @@ hardware.bluetooth = {
 @
 
 <<Configure home-manager>>=
-home-manager.useUserPackages = true;
-home-manager.users."${username}" = args:
-  import ./home.nix (args // { inherit pkgs; });
+home-manager.users."${username}" = import ./home.nix;
 @
 
 <<Configure networking>>=

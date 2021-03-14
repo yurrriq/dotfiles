@@ -18,72 +18,16 @@ endif
 stow       := stow ${stow_flags}
 
 
-NIX_SRCS := $(addsuffix .nix,\
-$(addprefix config/,\
-bash \
-bat \
-browserpass \
-bugwarrior \
-direnv \
-dunst \
-emacs/default \
-emacs/packages \
-firefox \
-fish/abbrs \
-fish/aliases \
-fish/default \
-fzf \
-git/aliases \
-git/config \
-git/default \
-git/packages \
-gpg \
-htop \
-jq \
-kitty \
-man \
-nixpkgs/default \
-nixpkgs/nixpkgs-config \
-password-store \
-rebar3 \
-starship \
-taskwarrior/default \
-xmonad/default \
-)\
-$(addprefix machines/,\
-hacktop/configuration \
-hacktop/home \
-nixps/configuration \
-nixps/home \
-sruxps/configuration \
-sruxps/home \
-)\
-$(addprefix modules/,\
-common \
-darwin \
-location \
-nixos \
-packages \
-))
-
-SH_SRCS := \
-config/taskwarrior/on-exit-git.sh
-
-OTHER_SRCS := \
-config/emacs/init.el \
-config/fish/interactiveShellInit.fish \
-config/fish/shellInit.fish \
-config/fish/sushi/fish_prompt.fish \
-config/fish/sushi/fish_right_prompt.fish
-
-# NW_SRCS := \
-# $(patsubst %.nix,src/%.nw,${NIX_SRCS}) \
-# $(patsubst %.sh,src/%.nw,${SH_SRCS})
 NW_SRCS := $(shell find src -name '*.nw')
 
+SRCS := $(shell awk '/<<[^ *]+\.\w+>>=$$/{ gsub(/(<<|>>=)/, ""); print $$0 }' ${NW_SRCS} | sort -u)
+NIX_SRCS := $(filter %.nix, ${SRCS})
+SH_SRCS := $(filter %.sh, ${SRCS})
+OTHER_SRCS := $(filter-out ${NIX_SRCS} ${SH_SRCS} ${TEX_SRCS}, ${SRCS})
 TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
 
 DEFS := $(patsubst src/%.nw,src/%.defs,${NW_SRCS})
+
 
 .PHONY: all
 all: generate-config nix-srcs ${SH_SRCS} ${OTHER_SRCS} docs/dotfiles.pdf
@@ -142,7 +86,7 @@ src/%.tex: src/%.nw src/all.defs
 	noweave -delay -indexfrom src/all.defs -latex -n -filter fix-underscores $^ ${cpif} $@
 
 
-${NIX_SRCS} ${OTHER_SRCS} ${SH_SRCS}::
+${SRCS}::
 	@ mkdir -p $(@D)
 	notangle -R$@ src/$(basename $@).nw ${cpif} $@
 

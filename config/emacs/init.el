@@ -78,6 +78,8 @@ Null prefix argument turns off the mode."
       text-mode-hook       '(text-mode-hook-identify))
 
 (setq-default fill-column 80)
+(require 'org-tempo)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((shell . t)))

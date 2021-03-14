@@ -75,9 +75,7 @@ in
       };
     };
   };
-  home-manager.useUserPackages = true;
-  home-manager.users."${username}" = args:
-    import ./home.nix (args // { inherit pkgs; });
+  home-manager.users."${username}" = import ./home.nix;
   networking.hostName = "MSP-EBAILEY01";
 
   networking.interfaces.wlp1s0.useDHCP = true;

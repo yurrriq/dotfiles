@@ -12,14 +12,41 @@
   };
   outputs = { self, ... }@inputs:
     let
-      pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-      unstable-pkgs = import inputs.nixpkgs-unstable {
+      mkSystem = name: machine: inputs.nixpkgs.lib.nixosSystem {
+        modules = [
+          (./machines + "/${name}/hardware-configuration.nix")
+          inputs.nixos-hardware.nixosModules.${machine}
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              verbose = true;
+            };
+          }
+          self.nixosModules.common
+          self.nixosModules.location
+          self.nixosModules.nix
+          self.nixosModules.nixos
+          self.nixosModules.nixpkgs
+          self.nixosModules.packages
+          (./machines + "/${name}/configuration.nix")
+        ];
         system = "x86_64-linux";
-        config.allowUnfree = true;
       };
-      yurrriq-dotfiles = pkgs.callPackage ./. {
-        inherit pkgs;
-        src = self;
+      pkgs = import inputs.nixpkgs {
+        overlays = [
+          self.overlays.noweb
+          self.overlays.unstable
+        ];
+        system = "x86_64-linux";
+      };
+      unstable-pkgs = import inputs.nixpkgs-unstable {
+        config.allowUnfreePredicate =
+          pkg: builtins.elem (builtins.getAttr "pname" pkg) [
+            "zoom"
+          ];
+        system = "x86_64-linux";
       };
     in
     {
@@ -77,9 +104,14 @@
         };
       };
 
-      devShell.x86_64-linux = import ./shell.nix { inherit pkgs; };
-      packages.x86_64-linux.yurrriq-dotfiles = yurrriq-dotfiles;
-      defaultPackage.x86_64-linux = yurrriq-dotfiles;
+      devShell.x86_64-linux = pkgs.callPackage ./shell.nix {
+        inherit pkgs;
+        yurrriq-dotfiles = self.defaultPackage.x86_64-linux;
+      };
+      packages.x86_64-linux.yurrriq-dotfiles = self.defaultPackage.x86_64-linux;
+      defaultPackage.x86_64-linux = pkgs.callPackage ./default.nix {
+        inherit pkgs;
+      };
       nixosModules = {
         common = import ./modules/common.nix;
         location = import ./modules/location.nix;
@@ -110,38 +142,9 @@
         packages = import ./modules/packages.nix;
       };
 
-      nixosConfigurations."nixps" = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          # Use the \href{https://github.com/NixOS/nixos-hardware/tree/master/dell/xps/15-9560}{community-curated optimizations} for \href{https://www.dell.com/support/home/en-us/product-support/product/xps-15-9560-laptop/docs}{XPS 15 9560}, the \href{https://github.com/yurrriq/dotfiles/blob/main/machines/nixps/hardware-configuration.nix}{generated hardware config}, my custom \glspl{module}, and the \href{https://nix-community.github.io/home-manager/index.html\#sec-install-nixos-module}{home-manager} \gls{module}.
-          inputs.nixos-hardware.nixosModules.dell-xps-15-9560-intel
-          inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
-          ./machines/nixps/hardware-configuration.nix
-          inputs.home-manager.nixosModules.home-manager
-          self.nixosModules.common
-          self.nixosModules.location
-          self.nixosModules.nix
-          self.nixosModules.nixos
-          self.nixosModules.nixpkgs
-          self.nixosModules.packages
-          ./machines/nixps/configuration.nix
-        ];
-      };
-
-      nixosConfigurations."MSP-EBAILEY01" = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          inputs.nixos-hardware.nixosModules.dell-xps-13-9380
-          ./machines/sruxps/hardware-configuration.nix
-          inputs.home-manager.nixosModules.home-manager
-          self.nixosModules.common
-          self.nixosModules.location
-          self.nixosModules.nix
-          self.nixosModules.nixos
-          self.nixosModules.nixpkgs
-          self.nixosModules.packages
-          ./machines/sruxps/configuration.nix
-        ];
+      nixosConfigurations = {
+        "nixps" = mkSystem "nixps" "dell-xps-15-9560-intel";
+        "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-9380";
       };
     };
 }
