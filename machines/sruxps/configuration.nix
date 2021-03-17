@@ -107,7 +107,7 @@ in
   users.users."${username}" = {
     name = username;
     hashedPassword = lib.fileContents "/etc/nixos/secrets/${username}.hashedPassword";
-    group = "users";
+    isNormalUser = true;
     extraGroups = [
       "audio"
       "disk"
@@ -118,9 +118,7 @@ in
       "video"
       "wheel"
     ];
-    createHome = true;
     uid = 1001;
-    home = "/home/${username}";
     shell = "/etc/profiles/per-user/${username}/bin/fish";
   };
 }
