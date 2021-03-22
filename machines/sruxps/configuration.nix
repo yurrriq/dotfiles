@@ -63,9 +63,19 @@ in
   };
 
   fileSystems."/mnt/music" = {
-    device = "192.168.1.147:/volume1/homes/eric/music";
-    fsType = "nfs";
-    options = [ "noatime" "noauto" "rw" "x-systemd.automount" ];
+    device = "//192.168.1.147/homes/eric/music";
+    fsType = "cifs";
+    options = [
+      "credentials=/etc/nixos/secrets/bootyjams.club"
+      "gid=${toString config.ids.gids.users}"
+      "noauto"
+      "rw"
+      "uid=${toString config.users.users."${username}".uid}"
+      "vers=2.0"
+      # "x-systemd.device-timeout=5s"
+      "x-systemd.idle-timeout=600"
+      "x-systemd.mount-timeout=5s"
+    ];
   };
   hardware.bluetooth = {
     enable = true;

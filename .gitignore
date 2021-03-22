@@ -1,2 +1,3 @@
+/machines/*/secrets/*
+!/machines/*/secrets/*.enc
 /result*
-*.hashedPassword
