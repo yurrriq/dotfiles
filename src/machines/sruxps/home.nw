@@ -124,6 +124,7 @@ some lazy day.
 @
 
 <<Install some user packages>>=
+    gitAndTools.gita
     renderizer
     scc
 @

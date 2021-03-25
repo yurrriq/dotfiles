@@ -63,6 +63,7 @@
       k9s
       stern
       # FIXME: naal
+      gitAndTools.gita
       renderizer
       scc
       powertop
