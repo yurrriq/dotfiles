@@ -42,14 +42,12 @@ myConfig =
       def
         { borderWidth = 0,
           focusFollowsMouse = True,
-          -- focusedBorderColor = "#7BB6B3",
           handleEventHook = handleEventHook def <+> docksEventHook,
           keys = myKeys,
           layoutHook = myLayout,
           -- TODO: namedScratchpadManageHook scratchpads,
           manageHook = manageScratchPad <+> myManageHook,
           modMask = mod4Mask,
-          -- normalBorderColor = "#967bb6",
           terminal = "kitty",
           workspaces = myWorkspaces
         }
@@ -132,7 +130,6 @@ myKeys cfg =
       ("<XF86MonBrightnessUp>", spawn "xbacklight +10"),
       ("<Print>", spawn "flameshot gui"),
       ("M-S--", namedScratchpadAction scratchpads "emacs"),
-      -- ("M--", scratchpadSpawnActionCustom "kitty --name=scratchpad"),
       ("M--", namedScratchpadAction scratchpads "kitty"),
       ("M-<Esc>", getXMonadDataDir >>= spawn . wrap "i3lock -i " "/matrix.png"),
       ("M-<Return>", spawn (terminal cfg)),
