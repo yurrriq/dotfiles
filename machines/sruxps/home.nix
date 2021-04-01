@@ -32,6 +32,15 @@
     realName = "Eric Bailey";
   };
 
+  home.file.".docker/config.json".text = ''
+    {
+        "credHelpers": {
+            "docker.io": "pass",
+            "gitlab.sportradar.ag:4567": "pass"
+        }
+    }
+  '';
+
   home.file."src/gitlab.sportradar.ag/.envrc".text = ''
     case $(kubectl config current-context) in
         *k8s.srus*|sapi*nov1*)
@@ -55,6 +64,7 @@
       aws-iam-authenticator
       ec2instanceconnectcli
       bpytop
+      docker-credential-helpers
       fd
       progress
       iw

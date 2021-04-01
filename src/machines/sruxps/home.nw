@@ -8,6 +8,8 @@
 
   <<Configure the primary email account>>
 
+  <<Configure Docker credentials>>
+
   <<Configure a convenient high-level .envrc>>
 
   <<Install some user packages>>
@@ -51,6 +53,17 @@ accounts.email.accounts.primary = {
 };
 @
 
+<<Configure Docker credentials>>=
+home.file.".docker/config.json".text = ''
+  {
+      "credHelpers": {
+          "docker.io": "pass",
+          "gitlab.sportradar.ag:4567": "pass"
+      }
+  }
+'';
+@
+
 <<Configure a convenient high-level .envrc>>=
 home.file."src/gitlab.sportradar.ag/.envrc".text = ''
   case $(kubectl config current-context) in
@@ -80,6 +93,7 @@ home.packages = with pkgs; (
 
 <<Install some user packages>>=
     bpytop
+    docker-credential-helpers
     fd
     progress
 @
