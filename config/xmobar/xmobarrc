@@ -1,31 +1,13 @@
 Config
   { font = "xft:Iosevka:size=12",
-    additionalFonts = ["xft:Noto Color Emoji:size=12"], -- "xft:FontAwesome:size=12"],
+    additionalFonts = ["xft:Noto Color Emoji:size=12"],
     allDesktops = True,
     bgColor = "#242424",
     fgColor = "#f6f3e8",
     position = Bottom,
     commands =
-      [ -- Run
-        --   Cpu
-        --   [ "--template",
-        --     -- "<fn=2>\xf2db</fn> <total>%",
-        --     "<total>%",
-        --     "--Low",
-        --     "3",
-        --     "--High",
-        --     "50",
-        --     "--low",
-        --     "#859900",
-        --     "--normal",
-        --     "#859900",
-        --     "--high",
-        --     "#dc322f"
-        --   ]
-        --   50,
-        -- Run DateZone "<fn=1>🇳🇴</fn> %a %H:%M" "nb_NO.UTF-8" "Europe/Oslo" "nodate" 50,
+      [
         Run DateZone "%a %H:%M" "nb_NO.UTF-8" "Europe/Oslo" "nodate" 50,
-        -- Run Date "<fn=1>📍</fn> %a %d.%m %H:%M:%S" "date" 50,
         Run Date "%a %d.%m %H:%M:%S" "date" 50,
         Run
           BatteryP
@@ -33,9 +15,9 @@ Config
           [ "--template",
             "<acstatus>",
             "--Low",
-            "10", -- units: %
+            "10",
             "--High",
-            "80", -- units: %
+            "80",
             "--low",
             "#ff605a",
             "--normal",
