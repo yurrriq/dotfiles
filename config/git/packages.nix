@@ -18,6 +18,7 @@
     ) ++ (
       with gitAndTools; [
         git-extras
+        gita
         # gitflow
         hub
         lab

@@ -3,22 +3,18 @@
 <<machines/sruxps/home.nix>>=
 { lib, pkgs, ... }:
 {
-
   <<Import various program configs>>
-
   <<Configure the primary email account>>
-
   <<Configure Docker credentials>>
-
   <<Configure a convenient high-level .envrc>>
-
-  <<Install some user packages>>
-
+  home.packages = with pkgs; [
+    <<Install some user packages>>
+  ];
   <<Configure picom>>
-
 }
 @
 
+\todoo{Consider looping here or something}
 <<Import various program configs>>=
 imports = [
   ../../config/bash.nix
@@ -44,7 +40,6 @@ imports = [
   ../../config/xmonad
 ];
 @
-\todoo{Configure Vim}
 
 <<Configure the primary email account>>=
 accounts.email.accounts.primary = {
@@ -86,80 +81,86 @@ home.file."src/gitlab.sportradar.ag/.envrc".text = ''
 '';
 @
 
-<<Install some user packages>>=
-home.packages = with pkgs; (
-  [
-    aws-iam-authenticator
-    awscli
-    ec2instanceconnectcli
-@
+\newthought{Install some tools for authenticating} with AWS and Azure.
 
-<<Install some user packages>>=
-    bpytop
-    docker-credential-helpers
-    fd
-    progress
-@
-
-I haven't used Dhall in a while, but it's still interesting.
-
-<<*>>=
-    dhall
-    dhall-json
-@
-
-I might need \hrefootnote{https://docs.docker.com/compose/}{Docker Compose}
-again someday, but not lately.
-
-<<*>>=
-    docker-compose
-@
-
-\hrefootnote{https://wireless.wiki.kernel.org/en/users/documentation/iw}{iw} is
-useful for troubleshooting wireless issues, like in Trondheim.
-
-<<Install some user packages>>=
-    iw
-    jdk
-    kubectx
-    k9s
-    stern
-@
-
-\hrefootnote{https://github.com/yurrriq/naal}{naal} is my tool for
+\begin{itemize}
+\item The AWS IAM Authenticator is used for interacting with EKS clusters.
+\item EC2 Instance Connect allows you to use your AWS CLI credentials to SSH
+  into EC2 instances.
+\item AWS Azure Login ...
+\item \hrefootnote{https://github.com/yurrriq/naal}{naal} is my tool for
 non-interactive AWS Azure login.
+\end{itemize}
 
 <<Install some user packages>>=
-    # FIXME: naal
+aws-iam-authenticator
+awscli
+ec2instanceconnectcli
+nodePackages.aws-azure-login
+# FIXME: naal
 @
 
-It would be cool to play with \hrefootnote{https://next.atlas.engineer/}{Next}
-some lazy day.
+\newthough{Install some miscellaneous tools.}
+
+\begin{itemize}
+\item ...
+\item powertop might improve battery life.
+\item I haven't used Dhall in a while, but it's still interesting.
+\item
+  \hrefootnote{https://wireless.wiki.kernel.org/en/users/documentation/iw}{iw}
+  is useful for troubleshooting wireless issues, like in Trondheim.
+\end{itemize}
+
+<<Install some user packages>>=
+bpytop
+fd
+powertop
+progress
+renderizer
+scc
+@
 
 <<*>>=
-    next
+dhall
+dhall-json
+iw
 @
 
+\newthought{Install some Docker tools.}
+\begin{itemize}
+\item \fish{docker-credential-pass} for store Docker credentials with \fish{pass}.
+\item I might need \hrefootnote{https://docs.docker.com/compose/}{Docker
+  Compose} again someday, but not lately. Plus, it doesn't (currently) work with
+  Podman.
+\end{itemize}
 <<Install some user packages>>=
-    gitAndTools.gita
-    renderizer
-    scc
+docker-credential-helpers
 @
 
-Try to improve battery life.
-
-<<Install some user packages>>=
-    powertop
+<<*>>=
+docker-compose
 @
 
+\newthought{Install some convenient Kubernetes tools.}
+
 <<Install some user packages>>=
-    zoom-us
-  ] ++ (
-    with nodePackages; [
-      aws-azure-login
-    ]
-  )
-);
+kubectx
+stern
+@
+
+\newthought{Install some miscellaneous GUI programs.}
+\begin{itemize}
+\item Zoom is annoying but useful.
+\item It would be cool to play with \hrefootnote{https://nyxt.atlas.engineer/}{Nyxt}
+  some lazy day.
+\end{itemize}
+
+<<Install some user packages>>=
+zoom-us
+@
+
+<<*>>=
+nyxt
 @
 
 <<Configure picom>>=
