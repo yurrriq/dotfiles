@@ -2,8 +2,8 @@ Config
   { font = "xft:Iosevka:size=12",
     additionalFonts = ["xft:Noto Color Emoji:size=12"], -- "xft:FontAwesome:size=12"],
     allDesktops = True,
-    bgColor = "#001e26",
-    fgColor = "#839496",
+    bgColor = "#242424",
+    fgColor = "#f6f3e8",
     position = Bottom,
     commands =
       [ -- Run
@@ -37,11 +37,11 @@ Config
             "--High",
             "80", -- units: %
             "--low",
-            "#dc322f",
+            "#ff605a",
             "--normal",
             "#fdf6e3",
             "--high",
-            "#859900",
+            "#b1e869",
             "--",
             "-o",
             "<fn=1>🔋</fn> <left>% (<timeleft>)",

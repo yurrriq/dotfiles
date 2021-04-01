@@ -74,7 +74,7 @@ myLayout =
 myPP :: PP
 myPP =
   def
-    { ppCurrent = xmobarColor "#b58900" "" . wrap "(" ")",
+    { ppCurrent = xmobarColor "#656565" "" . wrap "(" ")",
       ppLayout = \case
         "Tall" -> "<fn=1>🗼</fn>"
         "TwoPane" -> "<fn=1>👬</fn>"
@@ -85,8 +85,8 @@ myPP =
         layout -> layout,
       ppSep = " ",
       ppSort = (. namedScratchpadFilterOutWorkspace) <$> ppSort def,
-      ppTitle = xmobarColor "#839496" "" . shorten 80,
-      ppUrgent = xmobarColor "#fdf6e3" "#dc322f"
+      ppTitle = xmobarColor "#fdf6e3" "" . shorten 80,
+      ppUrgent = xmobarColor "#ff605a" ""
     }
 
 myManageHook :: ManageHook

@@ -29,10 +29,19 @@
   };
 
   xdg.configFile."kitty/theme.conf".source = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/dexpota/kitty-themes/c4bee86c/themes/Solarized_Dark.conf";
-    hash = "sha256-jkB5Oat50iTnmNDMbbNzAI6IWKFP+U44K6IC8GZIcHY=";
+    url = "https://raw.githubusercontent.com/dexpota/kitty-themes/c4bee86c/themes/Wombat.conf";
+    hash = "sha256-macm9bb/9zWLeFANXqiYPc5IS40A7ZbhXr/DooJARsQ=";
     postFetch = ''
-      sed -E -i 's/^(selection_background) #002731$/\1 #708183/' $out
+      ${pkgs.gawk}/bin/gawk -i inplace '
+          /^background/           { sub($2, "#242424") }
+          /^foreground/           { sub($2, "#f6f3e8") }
+          /^cursor/               { sub($2, "#656565") }
+          /^selection_background/ { sub($2, "#444444") }
+          /^color0/               { sub($2, "#242424") }
+          /^color8/               { sub($2, "#303030") }
+          /^selection_foreground/ { sub($2, "#f6f3e8") }
+          { print }
+      ' $out
     '';
   };
 
