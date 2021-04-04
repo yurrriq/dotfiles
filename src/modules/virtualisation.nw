@@ -28,7 +28,7 @@ It seems there is a bug in podman such that it doesn't properly handle \bash{~/.
 
 \begin{minted}{text}
   WARN[0000] Found default OCIruntime /nix/store/.../bin/crun path which is missing from [engine.runtimes] in containers.conf
-\end{minuted}
+\end{minted}
 
 <<Install crun>>=
 environment.systemPackages = lib.optionals config.virtualisation.podman.enable [ pkgs.crun ];

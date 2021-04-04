@@ -16,7 +16,7 @@
 @
 
 
-Install \hrefootnote{https://cachix.org}{Cachix} and configure \hrefootnote{https://yurrriq.cachix.org}}{my personal binary cache}.
+Install \hrefootnote{https://cachix.org}{Cachix} and configure \hrefootnote{https://yurrriq.cachix.org}{my personal binary cache}.
 
 <<Install Cachix>>=
 environment.systemPackages = with pkgs; [
