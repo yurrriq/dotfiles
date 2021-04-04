@@ -3,24 +3,21 @@
 {
   boot = {
     cleanTmpDir = true;
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
+    loader.systemd-boot.enable = lib.mkDefault true;
+    loader.efi.canTouchEfiVariables = lib.mkDefault true;
   };
   console.font = "Lat2-Terminus16";
   console.useXkbConfig = true;
-  i18n.defaultLocale = "en_US.UTF-8";
   location.provider = "manual";
   networking.networkmanager.enable = true;
   services = {
-    fstrim.enable = true;
     logind.lidSwitch = "hibernate";
     kbfs.enable = true;
     redshift = {
       enable = true;
       temperature.night = 2300;
     };
+    thermald.enable = lib.mkDefault true;
     xserver = {
       enable = true;
 
@@ -40,8 +37,6 @@
         ];
       };
 
-      layout = "us";
-
       libinput = {
         enable = true;
         accelSpeed = "1.0";
@@ -50,9 +45,7 @@
         tapping = true;
       };
 
-      videoDrivers = lib.mkDefault [
-        "intel"
-      ];
+      videoDrivers = lib.mkDefault [ "intel" ];
 
       xkbOptions = "ctrl:nocaps,compose:ralt";
     };

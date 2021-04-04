@@ -1,6 +1,6 @@
 \section{Common}
 
-This module is a lambda that takes at least \nix{pkgs} in its arguments.
+This cross-platform module configures fonts, for now just \hrefootnote{https://be5invis.github.io/Iosevka/}{Iosevka}, and enables completion for all interactive Bash shells.
 
 <<modules/common.nix>>=
 { pkgs, ... }:
@@ -11,8 +11,7 @@ This module is a lambda that takes at least \nix{pkgs} in its arguments.
 @
 
 
-Install the \hrefootnote{https://www.nerdfonts.com}{Nerd Fonts} patched
-\hrefootnote{http://be5invis.github.io/Iosevka}{Iosevka}.
+Install the \hrefootnote{https://www.nerdfonts.com}{Nerd Fonts} patched \hrefootnote{https://be5invis.github.io/Iosevka/}{Iosevka}.
 
 <<Configure fonts>>=
 fonts = {
@@ -23,6 +22,7 @@ fonts = {
 };
 @
 
+Enable completion for all interactive Bash shells.
 
 <<Enable system-wide Bash completion>>=
 programs.bash.enableCompletion = true;

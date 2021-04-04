@@ -11,10 +11,6 @@
     [
       <<Install some Linux applications>>
     ]
-  ) ++ lib.optionals stdenv.isDarwin (
-    [
-      <<Install some Darwin applications>>
-    ]
   );
 }
 @
@@ -22,36 +18,35 @@
 
 \subsection{Cross-platform applications}
 
-\hrefootnote{https://www.clementine-player.org}{Clementine} is a great music player.
+Install some cross-platform applications:
+\begin{itemize}
+\item \hrefootnote{https://www.clementine-player.org}{Clementine} is a great music player
+\item \hrefootnote{https://freedesktop.org/software/pulseaudio/pavucontrol/}{PulseAudio Volume Control} is useful for configuring Bluetooth audio
+\end{itemize}
 
-\hrefootnote{https://freedesktop.org/software/pulseaudio/pavucontrol/}{PulseAudio Volume Control} is useful for configuring Bluetooth audio.
+Install Slack and Spotify, too.
 
 <<Install some cross-platform applications>>=
 clementine
 pavucontrol
+slack
 spotify
 @
 
 
-<<Install some cross-platform applications>>=
-slack
-@
-
-
 \subsection{Linux applications}
+
+Install some Linux-specific applications:
+\begin{itemize}
+\item Dolphin is a convenient graphical file manager
+\item Libreoffice is ``a free and open-source office productivity software suite''
+\item qpdfivew is a nice, lightweight PDF reader
+\item Signal is a ``simple, powerful, and secure messenger''
+\end{itemize}
 
 <<Install some Linux applications>>=
 dolphin
 libreoffice
 qpdfview
 (signal-desktop.override { spellcheckerLanguage = "en_US"; })
-@
-
-
-\subsection{Darwin applications}
-
-<<Install some Darwin applications>>=
-m-cli
-onyx
-sourcetree
 @

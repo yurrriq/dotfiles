@@ -17,6 +17,7 @@
         modules = [
           (./machines + "/${name}/hardware-configuration.nix")
           inputs.nixos-hardware.nixosModules.${machine}
+          inputs.nixos-hardware.nixosModules.ssd
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {

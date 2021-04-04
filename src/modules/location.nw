@@ -2,104 +2,99 @@
 
 <<modules/location.nix>>=
 { config, lib, ... }:
-@
-
-<<modules/location.nix>>=
 let
   airportCode = config.airportCode;
 in
 {
-
-@
-
-<<modules/location.nix>>=
-  options.airportCode = lib.mkOption {
-    default = "MSP";
-    type = lib.types.enum [ "ATL" /* "LHR" */ "LJU" "MSP" "TRD" ];
-  };
-
-@
-
-<<modules/location.nix>>=
+  <<Airport codes>>
   config = lib.mkMerge [
-
-@
-
-The Sportradar office in Minneapolis.
-
-<<modules/location.nix>>=
-    (
-      lib.mkIf (airportCode == "MSP") {
-        location = {
-          latitude = 44.98;
-          longitude = -93.27;
-        };
-        time.timeZone = "America/Chicago";
-      }
-    )
-@
-
-Cook Out on Ponce de Leon Ave.
-
-<<modules/location.nix>>=
-    (
-      lib.mkIf (airportCode == "ATL") {
-        location = {
-          latitude = 33.77;
-          longitude = -84.37;
-        };
-        time.timeZone = "America/New_York";
-      }
-    )
-@
-
-The Sportradar office in London.
-
-<<modules/location.nix>>=
-    (
-      lib.mkIf (airportCode == "LHR") {
-        location = {
-          latitude = 51.51;
-          longitude = -0.09;
-        };
-        time.timeZone = "Europe/London";
-      }
-    )
-@
-
-The Sportradar office in Ljubljana.
-
-<<modules/location.nix>>=
-    (
-      lib.mkIf (airportCode == "LJU") {
-        location = {
-          latitude = 46.09;
-          longitude = 14.55;
-        };
-        time.timeZone = "Europe/Ljubljana";
-      }
-    )
-@
-
-The Sportradar office in Trondheim.
-
-<<modules/location.nix>>=
-    (
-      lib.mkIf (airportCode == "TRD") {
-        location = {
-          latitude = 63.43;
-          longitude = 10.40;
-        };
-        time.timeZone = "Europe/Oslo";
-      }
-    )
-@
-
-<<modules/location.nix>>=
+    <<Configure the location>>
   ];
-
 }
 @
+
+Configure the list of airport codes for places I tend to work.
+The default is \nix{"MSP"}, since that's where I live.
+
+<<Airport codes>>=
+options.airportCode = lib.mkOption {
+  default = "MSP";
+  type = lib.types.enum [ "ATL" "LHR" "LJU" "MSP" "TRD" ];
+};
+@
+
+When I'm in Minneapolis I usually\footnote{always during a pandemic} work from home,
+but sometimes I work from the Sportradar office in Minneapolis.
+
+<<Configure the location>>=
+(
+  lib.mkIf (airportCode == "MSP") {
+    location = {
+      latitude = 44.98;
+      longitude = -93.27;
+    };
+    time.timeZone = "America/Chicago";
+  }
+)
+@
+
+Obviously I don't actually work from the Cook Out on Ponce de Leon Ave in Atlanta,
+but I do sometimes work from Dunwoody, Decatur, or the ATL airport,
+and this is close enough for time zones.
+
+<<Configure the location>>=
+(
+  lib.mkIf (airportCode == "ATL") {
+    location = {
+      latitude = 33.77;
+      longitude = -84.37;
+    };
+    time.timeZone = "America/New_York";
+  }
+)
+@
+
+Sometimes I visit the Sportradar office in London, UK.
+
+<<Configure the location>>=
+(
+  lib.mkIf (airportCode == "LHR") {
+    location = {
+      latitude = 51.51;
+      longitude = -0.09;
+    };
+    time.timeZone = "Europe/London";
+  }
+)
+@
+
+Sometimes I visit the Sportradar office in Ljubljana, Slovenia.
+
+<<Configure the location>>=
+(
+  lib.mkIf (airportCode == "LJU") {
+    location = {
+      latitude = 46.09;
+      longitude = 14.55;
+    };
+    time.timeZone = "Europe/Ljubljana";
+  }
+)
+@
+
+Sometimes I visit the Sportradar office in Trondheim, Norway.
+<<Configure the location>>=
+(
+  lib.mkIf (airportCode == "TRD") {
+    location = {
+      latitude = 63.43;
+      longitude = 10.40;
+    };
+    time.timeZone = "Europe/Oslo";
+  }
+)
+@
+
 
 %% Local Variables:
 %% noweb-code-mode: nix-mode

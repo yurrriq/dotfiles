@@ -1,11 +1,13 @@
 \section{NixOS}
 
+This modules manages some common configuration on NixOS systems.
+
 <<modules/nixos.nix>>=
 { config, lib, pkgs, ... }:
 
 {
   <<Configure boot loader>>
-  <<Configure fonts, keyboard, and locale>>
+  <<Configure the console font and keyboard settings>>
   <<Configure location>>
   <<Enable networkmanager>>
   <<Configure services>>
@@ -14,20 +16,22 @@
 }
 @
 
+Delete all files in \bash{/tmp} during boot, and steal some useful bits from \href{https://github.com/NixOS/nixos-hardware/blob/master/dell/xps/15-9560/xps-common.nix}{\bash{xps-common.nix}}.
+
 <<Configure boot loader>>=
 boot = {
   cleanTmpDir = true;
-  loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-  };
+  loader.systemd-boot.enable = lib.mkDefault true;
+  loader.efi.canTouchEfiVariables = lib.mkDefault true;
 };
 @
 
-<<Configure fonts, keyboard, and locale>>=
+Configure the console to use a more legible font, and to use the keymap from the X server keyboard settings.
+Notably this means caps lock will behave as I expect (remapped to control).
+
+<<Configure the console font and keyboard settings>>=
 console.font = "Lat2-Terminus16";
 console.useXkbConfig = true;
-i18n.defaultLocale = "en_US.UTF-8";
 @
 
 \todoo{Link/document this}
@@ -35,60 +39,82 @@ i18n.defaultLocale = "en_US.UTF-8";
 location.provider = "manual";
 @
 
+Use NetworkManager (intead of WPA Supplicant).
+
 <<Enable networkmanager>>=
 networking.networkmanager.enable = true;
 @
 
+
+Hibernate when the laptop lid is closed, mount the Keybase filesystem, enable Redshift, and configure the X server.
+
 <<Configure services>>=
 services = {
-  fstrim.enable = true;
   logind.lidSwitch = "hibernate";
   kbfs.enable = true;
   redshift = {
     enable = true;
     temperature.night = 2300;
   };
-  <<Configure Xserver>>
+  thermald.enable = lib.mkDefault true;
+  <<Configure the X server>>
 };
 @
 
-<<Configure Xserver>>=
+Enable the X server, start it automatically,
+
+<<Configure the X server>>=
 xserver = {
   enable = true;
 
   autorun = true;
 
-  displayManager = {
-    lightdm.enable = true;
-    session = [
-      {
-        name = "home-manager";
-        manage = "window";
-        start = ''
-          ${pkgs.runtimeShell} $HOME/.hm-xsession &
-          waitPID=$!
-        '';
-      }
-    ];
-  };
+  <<Configure the display manager>>
 
-  layout = "us";
+  <<Configure libinput>>
 
-  libinput = {
-    enable = true;
-    accelSpeed = "1.0";
-    disableWhileTyping = true;
-    naturalScrolling = false;
-    tapping = true;
-  };
-
-  videoDrivers = lib.mkDefault [
-    "intel"
-  ];
+  videoDrivers = lib.mkDefault [ "intel" ];
 
   xkbOptions = "ctrl:nocaps,compose:ralt";
 };
 @
+
+Enable lightdm as the display manager.
+
+<<Configure the display manager>>=
+displayManager = {
+  lightdm.enable = true;
+  session = [
+    <<Configure xmonad as the window manager>>
+  ];
+};
+@
+
+Use \href{https://discourse.nixos.org/t/opening-i3-from-home-manager-automatically/4849}{the workaround described on Discourse} to run xmonad from home-manager.
+
+<<Configure xmonad as the window manager>>=
+{
+  name = "home-manager";
+  manage = "window";
+  start = ''
+    ${pkgs.runtimeShell} $HOME/.hm-xsession &
+    waitPID=$!
+  '';
+}
+@
+
+<<Configure libinput>>=
+libinput = {
+  enable = true;
+  accelSpeed = "1.0";
+  disableWhileTyping = true;
+  naturalScrolling = false;
+  tapping = true;
+};
+@
+
+Enable the PulseAudio soudn server, including extra Bluetooth modules.
+Also enable ALSA sound.
 
 <<Configure audio>>=
 hardware.pulseaudio = {
@@ -98,6 +124,7 @@ hardware.pulseaudio = {
 };
 sound.enable = true;
 @
+
 
 %% Local Variables:
 %% noweb-code-mode: nix-mode

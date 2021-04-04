@@ -15,6 +15,8 @@
 
 \subsection{Docker}
 
+Prefer to disable the Docker daemon.
+
 <<Configure Docker>>=
 docker = {
   enable = lib.mkDefault false;
@@ -24,7 +26,8 @@ docker = {
 
 \subsection{Podman}
 
-It seems there is a bug in podman such that it doesn't properly handle \bash{~/.config/containers/containers.conf}.
+It seems there is a bug in podman such that it doesn't properly handle
+\bash{~/.config/containers/containers.conf}, so install \bash{crun} system-wide.
 
 \begin{minted}{text}
   WARN[0000] Found default OCIruntime /nix/store/.../bin/crun path which is missing from [engine.runtimes] in containers.conf
@@ -33,6 +36,8 @@ It seems there is a bug in podman such that it doesn't properly handle \bash{~/.
 <<Install crun>>=
 environment.systemPackages = lib.optionals config.virtualisation.podman.enable [ pkgs.crun ];
 @
+
+Install Podman by default, if the Docker daemon is disabled.
 
 <<Configure Podman>>=
 podman = {

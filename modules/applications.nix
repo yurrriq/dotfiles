@@ -4,8 +4,8 @@
     [
       clementine
       pavucontrol
-      spotify
       slack
+      spotify
     ]
   ) ++ lib.optionals stdenv.isLinux (
     [
@@ -13,12 +13,6 @@
       libreoffice
       qpdfview
       (signal-desktop.override { spellcheckerLanguage = "en_US"; })
-    ]
-  ) ++ lib.optionals stdenv.isDarwin (
-    [
-      m-cli
-      onyx
-      sourcetree
     ]
   );
 }

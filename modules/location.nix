@@ -3,14 +3,11 @@ let
   airportCode = config.airportCode;
 in
 {
-
   options.airportCode = lib.mkOption {
     default = "MSP";
-    type = lib.types.enum [ "ATL" /* "LHR" */ "LJU" "MSP" "TRD" ];
+    type = lib.types.enum [ "ATL" "LHR" "LJU" "MSP" "TRD" ];
   };
-
   config = lib.mkMerge [
-
     (
       lib.mkIf (airportCode == "MSP") {
         location = {
@@ -57,5 +54,4 @@ in
       }
     )
   ];
-
 }
