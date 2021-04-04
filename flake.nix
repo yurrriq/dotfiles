@@ -12,7 +12,8 @@
   };
   outputs = { self, ... }@inputs:
     let
-      mkSystem = name: machine: inputs.nixpkgs.lib.nixosSystem {
+      inherit (inputs.nixpkgs) lib;
+      mkSystem = name: machine: lib.nixosSystem {
         modules = [
           (./machines + "/${name}/hardware-configuration.nix")
           inputs.nixos-hardware.nixosModules.${machine}
@@ -27,10 +28,14 @@
           self.nixosModules.common
           self.nixosModules.location
           self.nixosModules.nix
+          self.nixosModules.nixPath
+          self.nixosModules.nixRegistry
           self.nixosModules.nixos
           self.nixosModules.nixpkgs
           self.nixosModules.bootyjams
-          self.nixosModules.packages
+          self.nixosModules.clis
+          self.nixosModules.applications
+          self.nixosModules.virtualisation
           (./machines + "/${name}/configuration.nix")
         ];
         system = "x86_64-linux";
@@ -43,8 +48,8 @@
         system = "x86_64-linux";
       };
       unstable-pkgs = import inputs.nixpkgs-unstable {
-        config.allowUnfreePredicate =
-          pkg: builtins.elem (builtins.getAttr "pname" pkg) [
+        config.allowUnfreePredicate = pkg:
+          builtins.elem (builtins.getAttr "pname" pkg) [
             "zoom"
           ];
         system = "x86_64-linux";
@@ -114,10 +119,13 @@
         inherit pkgs;
       };
       nixosModules = {
+        applications = import ./modules/applications.nix;
         bootyjams = import ./modules/bootyjams.nix;
+        clis = import ./modules/clis.nix;
         common = import ./modules/common.nix;
         location = import ./modules/location.nix;
-        nix = {
+        nix = import ./modules/nix.nix;
+        nixPath = {
           # TODO: consider mapAttrs
           nix.nixPath = [
             "home-manager=${inputs.home-manager}"
@@ -125,6 +133,8 @@
             "nixpkgs-unstable=${inputs.nixpkgs-unstable}"
             "nur=${inputs.nur}"
           ];
+        };
+        nixRegistry = {
           nix.registry = {
             home-manager.flake = inputs.home-manager;
             nixpkgs.flake = inputs.nixpkgs;
@@ -134,14 +144,25 @@
         };
         nixos = import ./modules/nixos.nix;
         nixpkgs = {
-          nixpkgs.overlays = [
-            self.overlays.nodePackages
-            self.overlays.noweb
-            self.overlays.unstable
+          # FIXME: steam
+          nixpkgs.config.allowUnfreePredicate = pkg: (
+            builtins.hasAttr "pname" pkg &&
+              builtins.elem pkg.pname [
+                "reaper"
+                "slack"
+                "spotify"
+              ]
+          ) || (
+            builtins.hasAttr "name" pkg &&
+              lib.any (prefix: lib.hasPrefix prefix pkg.name) [
+                "lastpass-password-manager"
+              ]
+          );
+          nixpkgs.overlays = lib.attrValues self.overlays ++ [
             inputs.nur.overlay
           ];
         };
-        packages = import ./modules/packages.nix;
+        virtualisation = import ./modules/virtualisation.nix;
       };
 
       nixosConfigurations = {

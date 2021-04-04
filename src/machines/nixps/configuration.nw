@@ -36,14 +36,21 @@ airportCode = "MSP";
 boot.blacklistedKernelModules = [ "nouveau" "nvidia" "psmouse" ];
 @
 
-Configure the \acrshort{luks}\footnote{\href{https://gitlab.com/cryptsetup/cryptsetup/}} devices.
+Configure the \hrefootnote{https://gitlab.com/cryptsetup/cryptsetup/}{\acrshort{luks}} devices.
 
 <<Configure the LUKS device>>=
 boot.initrd.luks.devices.root.device = "/dev/nvme0n1p2";
 @
 
+Include \bash{~/bin/} in \bash{$PATH}.
+
 <<Configure the environment>>=
 environment.homeBinInPath = true;
+@
+
+Link some extra paths.
+
+<<Configure the environment>>=
 environment.pathsToLink = [
   "/lib/aspell"
   "/share/emacs/site-lisp"
@@ -110,7 +117,7 @@ hardware.bluetooth = {
 };
 @
 
-Tweak PulseAudio and OpenGL settings for Steam.
+Tweak PulseAudio and OpenGL settings for \hrefootnote{https://store.steampowered.com/linux}{Steam}.
 
 <<Configure PulseAudio and OpenGL>>=
 hardware.pulseaudio.support32Bit = true;

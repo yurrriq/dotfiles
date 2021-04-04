@@ -1,0 +1,84 @@
+\section{Command-line tools}
+
+<<modules/clis.nix>>=
+{ pkgs, ... }:
+{
+  environment.systemPackages = with pkgs; (
+    [
+      <<Install some cross-platform command-line tools>>
+    ]
+  ) ++ lib.optionals stdenv.isLinux [
+    <<Install some Linux command-line tools>>
+  ];
+}
+@
+
+
+\subsection{Cross-platform command-line tools}
+
+<<Install some cross-platform command-line tools>>=
+(aspellWithDicts (dicts: [ dicts.en dicts.es dicts.nb dicts.sv ]))
+@
+
+
+<<Install some cross-platform command-line tools>>=
+bind
+curl
+httpie
+@
+
+
+<<Install some cross-platform command-line tools>>=
+cachix
+nixUnstable
+@
+
+
+<<Install some cross-platform command-line tools>>=
+gnutar
+gzip
+unzip
+@
+
+
+<<Install some cross-platform command-line tools>>=
+clac
+coreutils
+expect
+gawk
+gnumake
+gnused
+moreutils
+ripgrep
+shellcheck
+shfmt
+silver-searcher # TODO: find helm-rg solution
+tree
+watch
+xclip
+xorg.xbacklight
+yq
+@
+
+
+<<Install some cross-platform command-line tools>>=
+playerctl
+@
+
+
+<<Install some cross-platform command-line tools>>=
+wirelesstools
+@
+
+
+<<Install some Linux command-line tools>>=
+libnotify
+lm_sensors
+@
+
+
+<<Install some Linux command-line tools>>=
+mtr
+networkmanager-openconnect
+openconnect
+@

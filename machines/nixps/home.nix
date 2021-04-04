@@ -37,7 +37,7 @@
     openscad
     powertop
     reaper
-    steam
+    # FIXME: steam
     tellico
     zoom-us
   ];

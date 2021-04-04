@@ -13,26 +13,14 @@
   i18n.defaultLocale = "en_US.UTF-8";
   location.provider = "manual";
   networking.networkmanager.enable = true;
-  nixpkgs.config.allowUnfree = true;
   services = {
     fstrim.enable = true;
-
     logind.lidSwitch = "hibernate";
-
     kbfs.enable = true;
-
     redshift = {
       enable = true;
       temperature.night = 2300;
     };
-
-    unclutter = {
-      enable = false; # FIXME
-      extraOptions = [ "exclude-root" "ignore-scrolling" ];
-      threshold = 1;
-      timeout = 1;
-    };
-
     xserver = {
       enable = true;
 
@@ -76,18 +64,4 @@
   };
   sound.enable = true;
   system.stateVersion = "20.09";
-  # WARN[0000] Found default OCIruntime /nix/store/.../bin/crun path which is missing from [engine.runtimes] in containers.conf
-  # NOTE: Seems like a bug in podman that it doesn't properly handle ~/.config/containers/containers.conf
-  environment.systemPackages = lib.optionals config.virtualisation.podman.enable [ pkgs.crun ];
-
-  virtualisation = {
-    docker = {
-      enable = lib.mkDefault false;
-      liveRestore = lib.mkDefault false;
-    };
-    podman = {
-      enable = lib.mkDefault (!config.virtualisation.docker.enable);
-      dockerCompat = lib.mkDefault true;
-    };
-  };
 }

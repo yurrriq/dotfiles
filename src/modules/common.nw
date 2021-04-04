@@ -4,63 +4,26 @@ This module is a lambda that takes at least \nix{pkgs} in its arguments.
 
 <<modules/common.nix>>=
 { pkgs, ... }:
-
 {
-
+  <<Configure fonts>>
+  <<Enable system-wide Bash completion>>
+}
 @
 
-Configure garbage collection (\nix{gc}) and my personal
-\hrefootnote{https://cachix.org}{Cachix}-based \nix{binaryCaches}.
-
-\begin{itemize}
-  \item \url{https://yurrriq.cachix.org}
-  \item \url{https://yurrriq-nur-packages.cachix.org}
-\end{itemize}
-
-<<modules/common.nix>>=
-  nix = {
-    binaryCaches = [
-      # TODO: "https://sportradar.cachix.org"
-      "https://yurrriq.cachix.org"
-    ];
-    binaryCachePublicKeys = [
-      # TODO: "sportradar.cachix.org-1:TODO"
-      "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
-    ];
-    # TODO: daemonNiceLevel = 19;
-    extraOptions = ''
-      experimental-features = flakes nix-command
-    '';
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 30d";
-    };
-    optimise.automatic = true;
-    package = pkgs.nixUnstable;
-  };
-
-@
 
 Install the \hrefootnote{https://www.nerdfonts.com}{Nerd Fonts} patched
 \hrefootnote{http://be5invis.github.io/Iosevka}{Iosevka}.
 
-<<modules/common.nix>>=
-  fonts = {
-    enableFontDir = true;
-    fonts = with pkgs; [
-      (nerdfonts.override { fonts = [ "Iosevka" ]; })
-    ];
-  };
-
+<<Configure fonts>>=
+fonts = {
+  enableFontDir = true;
+  fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "Iosevka" ]; })
+  ];
+};
 @
 
-Enable system-wide Bash completion.
 
-<<modules/common.nix>>=
-  programs.bash.enableCompletion = true;
-
-@
-
-<<modules/common.nix>>=
-}
+<<Enable system-wide Bash completion>>=
+programs.bash.enableCompletion = true;
 @

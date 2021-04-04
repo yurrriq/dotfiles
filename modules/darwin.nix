@@ -1,9 +1,6 @@
 { pkgs, ... }:
 
 {
-
-  nixpkgs.config.allowUnfree = true;
-
   services.chunkwm = {
     enable = true;
     extraConfig = ''
@@ -35,7 +32,6 @@
       '';
     };
   };
-
   services.skhd = {
     enable = true;
     package = pkgs.skhd;
@@ -64,35 +60,32 @@
       shift + cmd - 6 : chunkc tiling::window --send-to-desktop 6
     '';
   };
+  system.defaults = {
+    NSGlobalDomain = {
+      AppleKeyboardUIMode = 3;
 
-  system.defaults.NSGlobalDomain = {
-    AppleKeyboardUIMode = 3;
+      ApplePressAndHoldEnabled = false;
+      InitialKeyRepeat = 10;
+      KeyRepeat = 1;
 
-    ApplePressAndHoldEnabled = false;
-    InitialKeyRepeat = 10;
-    KeyRepeat = 1;
+      NSAutomaticDashSubstitutionEnabled = false;
+      NSAutomaticQuoteSubstitutionEnabled = false;
+      NSAutomaticSpellingCorrectionEnabled = true;
 
-    NSAutomaticDashSubstitutionEnabled = false;
-    NSAutomaticQuoteSubstitutionEnabled = false;
-    NSAutomaticSpellingCorrectionEnabled = true;
-
-    NSNavPanelExpandedStateForSaveMode = true;
-    NSNavPanelExpandedStateForSaveMode2 = true;
+      NSNavPanelExpandedStateForSaveMode = true;
+      NSNavPanelExpandedStateForSaveMode2 = true;
+    };
+    dock = {
+      autohide = true;
+      mru-spaces = false;
+      orientation = "right";
+      showhidden = true;
+    };
+    finder = {
+      AppleShowAllExtensions = true;
+      FXEnableExtensionChangeWarning = false;
+      QuitMenuItem = true;
+    };
+    trackpad.Clicking = true;
   };
-
-  system.defaults.dock = {
-    autohide = true;
-    mru-spaces = false;
-    orientation = "right";
-    showhidden = true;
-  };
-
-  system.defaults.finder = {
-    AppleShowAllExtensions = true;
-    FXEnableExtensionChangeWarning = false;
-    QuitMenuItem = true;
-  };
-
-  system.defaults.trackpad.Clicking = true;
-
 }

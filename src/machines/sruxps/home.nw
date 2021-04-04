@@ -88,6 +88,7 @@ home.file."src/gitlab.sportradar.ag/.envrc".text = ''
 home.packages = with pkgs; (
   [
     aws-iam-authenticator
+    awscli
     ec2instanceconnectcli
 @
 

@@ -75,7 +75,15 @@ in
 
   networking.interfaces.wlp1s0.useDHCP = true;
   networking.useDHCP = false; # NOTE: Deprecated, so set it false.
-  nix.trustedUsers = [ "root" username ];
+  nix = {
+    binaryCaches = [
+      # TODO: "https://sportradar.cachix.org"
+    ];
+    binaryCachePublicKeys = [
+      # TODO: "sportradar.cachix.org-1:TODO"
+    ];
+    trustedUsers = [ "root" username ];
+  };
   security.sudo = {
     enable = true;
     extraConfig = ''

@@ -62,6 +62,7 @@
   home.packages = with pkgs; (
     [
       aws-iam-authenticator
+      awscli
       ec2instanceconnectcli
       bpytop
       docker-credential-helpers

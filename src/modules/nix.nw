@@ -1,0 +1,51 @@
+\section{Nix}
+
+<<modules/nix.nix>>=
+{ pkgs, ... }:
+{
+  nix = {
+    <<Configure binary caches>>
+    # TODO: daemonNiceLevel = 19;
+    <<Configure extra options>>
+    <<Configure garbage collection>>
+    optimise.automatic = true;
+    package = pkgs.nixUnstable;
+  };
+  <<Install Cachix>>
+}
+@
+
+
+Install \hrefootnote{https://cachix.org}{Cachix} and configure \hrefootnote{https://yurrriq.cachix.org}}{my personal binary cache}.
+
+<<Install Cachix>>=
+environment.systemPackages = with pkgs; [
+  cachix
+];
+@
+
+<<Configure binary caches>>=
+binaryCaches = [
+  "https://yurrriq.cachix.org"
+];
+binaryCachePublicKeys = [
+  "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
+];
+@
+
+
+<<Configure extra options>>=
+extraOptions = ''
+  experimental-features = flakes nix-command
+'';
+@
+
+
+Configure garbage collection (\nix{gc}) to run automatically and delete paths older than 30 days.
+
+<<Configure garbage collection>>=
+gc = {
+  automatic = true;
+  options = "--delete-older-than 30d";
+};
+@

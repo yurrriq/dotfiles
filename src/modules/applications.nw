@@ -1,0 +1,57 @@
+\section{Applications}
+
+<<modules/applications.nix>>=
+{ lib, pkgs, ... }:
+{
+  environment.systemPackages = with pkgs; (
+    [
+      <<Install some cross-platform applications>>
+    ]
+  ) ++ lib.optionals stdenv.isLinux (
+    [
+      <<Install some Linux applications>>
+    ]
+  ) ++ lib.optionals stdenv.isDarwin (
+    [
+      <<Install some Darwin applications>>
+    ]
+  );
+}
+@
+
+
+\subsection{Cross-platform applications}
+
+\hrefootnote{https://www.clementine-player.org}{Clementine} is a great music player.
+
+\hrefootnote{https://freedesktop.org/software/pulseaudio/pavucontrol/}{PulseAudio Volume Control} is useful for configuring Bluetooth audio.
+
+<<Install some cross-platform applications>>=
+clementine
+pavucontrol
+spotify
+@
+
+
+<<Install some cross-platform applications>>=
+slack
+@
+
+
+\subsection{Linux applications}
+
+<<Install some Linux applications>>=
+dolphin
+libreoffice
+qpdfview
+(signal-desktop.override { spellcheckerLanguage = "en_US"; })
+@
+
+
+\subsection{Darwin applications}
+
+<<Install some Darwin applications>>=
+m-cli
+onyx
+sourcetree
+@
