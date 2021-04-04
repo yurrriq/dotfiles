@@ -29,6 +29,7 @@
           self.nixosModules.nix
           self.nixosModules.nixos
           self.nixosModules.nixpkgs
+          self.nixosModules.bootyjams
           self.nixosModules.packages
           (./machines + "/${name}/configuration.nix")
         ];
@@ -113,6 +114,7 @@
         inherit pkgs;
       };
       nixosModules = {
+        bootyjams = import ./modules/bootyjams.nix;
         common = import ./modules/common.nix;
         location = import ./modules/location.nix;
         nix = {

@@ -75,14 +75,6 @@ fileSystems."/var/lib/docker/overlay2" = {
 };
 @
 
-<<Configure the file systems>>=
-fileSystems."/mnt/music" = {
-  device = "192.168.1.147:/volume1/homes/eric/music";
-  fsType = "nfs";
-  options = [ "noatime" "noauto" "rw" "x-systemd.automount" ];
-};
-@
-
 \todoo{Figure out wtf is going on here}%
 \hrefootnote{https://github.com/NixOS/nixpkgs/issues/24711}{NixOS/nixpkgs\#24711}
 
