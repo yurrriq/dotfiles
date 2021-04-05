@@ -63,7 +63,7 @@
     [
       aws-iam-authenticator
       awscli
-      ec2instanceconnectcli
+      # FIXME: ec2instanceconnectcli
       bpytop
       docker-credential-helpers
       fd
