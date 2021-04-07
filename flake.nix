@@ -168,7 +168,7 @@
 
       nixosConfigurations = {
         "nixps" = mkSystem "nixps" "dell-xps-15-9560-intel";
-        "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-9380";
+        "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-7390";
       };
     };
 }

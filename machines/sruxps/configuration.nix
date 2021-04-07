@@ -5,15 +5,13 @@ in
 {
   airportCode = "MSP";
   boot.initrd.luks.devices = {
-    cryptkey.device = "/dev/disk/by-uuid/603b64c6-8544-4b43-9b6a-7d8a08091514";
-
+    cryptkey.device = "/dev/disk/by-uuid/2a44a760-206c-448d-a126-527b8b63f5d0";
     cryptroot = {
-      device = "/dev/disk/by-uuid/c4e26a93-c0c9-4680-bb79-8c0ca47df96c";
+      device = "/dev/disk/by-uuid/6cd51820-547b-4378-b566-47f8cdbc46df";
       keyFile = "/dev/mapper/cryptkey";
     };
-
     cryptswap = {
-      device = "/dev/disk/by-uuid/565c0358-110e-4279-ba59-619cb2cc1ebf";
+      device = "/dev/disk/by-uuid/7d80e701-3a6b-4bb0-b8a3-dd5dfb432cdd";
       keyFile = "/dev/mapper/cryptkey";
     };
   };
@@ -22,6 +20,7 @@ in
   };
   boot.kernelModules = [
     "coretemp"
+    "i915.enable_psr=0"
   ];
   environment.homeBinInPath = true;
   environment.pathsToLink = [
@@ -34,34 +33,15 @@ in
     kubelogin
   ];
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/71cfcb8a-13a9-49f0-b034-a9c8841be07b";
-    fsType = "btrfs";
-    options = [ "subvol=@" "rw" "noatime" "compress=zstd" "ssd" "space_cache" ];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/71cfcb8a-13a9-49f0-b034-a9c8841be07b";
-    fsType = "btrfs";
-    options = [ "subvol=@home" "rw" "noatime" "compress=zstd" "ssd" "space_cache" ];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/71cfcb8a-13a9-49f0-b034-a9c8841be07b";
-    fsType = "btrfs";
-    options = [ "subvol=@nix" "rw" "noatime" "compress=zstd" "ssd" "space_cache" ];
-  };
-
-  fileSystems."/var" = {
-    device = "/dev/disk/by-uuid/71cfcb8a-13a9-49f0-b034-a9c8841be07b";
-    fsType = "btrfs";
-    options = [ "subvol=@var" "rw" "noatime" "compress=zstd" "ssd" "space_cache" ];
+    device = "/dev/disk/by-uuid/75e8b8ef-8143-4f93-a60b-c5d53adb80d3";
+    fsType = "ext4";
+    options = [ "noatime" "nodiratime" "discard" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/54D0-C859";
+    device = "/dev/disk/by-uuid/DF46-7ADE";
     fsType = "vfat";
   };
-
   hardware.bluetooth = {
     enable = true;
     config = {
@@ -70,10 +50,10 @@ in
       };
     };
   };
+  hardware.opengl.enable = true;
   home-manager.users."${username}" = import ./home.nix;
   networking.hostName = "MSP-EBAILEY01";
-
-  networking.interfaces.wlp1s0.useDHCP = true;
+  networking.interfaces.wlp2s0.useDHCP = true;
   networking.useDHCP = false; # NOTE: Deprecated, so set it false.
   nix = {
     binaryCaches = [
@@ -95,6 +75,8 @@ in
   services.fwupd.enable = true;
 
   services.lorri.enable = false;
+
+  services.thermald.enable = lib.mkForce false; # FIXME
 
   services.tlp.enable = true;
 

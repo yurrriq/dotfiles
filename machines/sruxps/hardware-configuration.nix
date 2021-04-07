@@ -9,13 +9,13 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/3992eb2a-d93a-41be-b0a4-9026d7425b43"; }];
+    [{ device = "/dev/disk/by-uuid/68896b3e-7f2d-4fe3-b5d2-97c68a8ff88e"; }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   # high-resolution display

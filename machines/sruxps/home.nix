@@ -86,4 +86,9 @@
     )
   );
 
+  services.picom = {
+    backend = "xrender";
+    refreshRate = 60;
+    vSync = true;
+  };
 }
