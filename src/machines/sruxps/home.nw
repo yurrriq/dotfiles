@@ -100,7 +100,7 @@ nodePackages.aws-azure-login
 # FIXME: naal
 @
 
-\newthough{Install some miscellaneous tools.}
+\newthought{Install some miscellaneous tools.}
 
 \begin{itemize}
 \item ...
