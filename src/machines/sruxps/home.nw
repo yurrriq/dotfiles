@@ -91,7 +91,7 @@ home.packages = with pkgs; (
   [
     aws-iam-authenticator
     awscli
-    # FIXME: ec2instanceconnectcli
+    ec2instanceconnectcli
 @
 
 <<Install some user packages>>=
