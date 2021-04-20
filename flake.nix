@@ -62,20 +62,8 @@
       overlays = {
         nodePackages = final: prev: {
           nodePackages =
-            let
-              _nodePackages = prev.callPackage ./pkgs/development/node-packages {
-                inherit (prev) pkgs nodejs;
-              };
-            in
-            prev.nodePackages // _nodePackages // {
-              aws-azure-login = _nodePackages.aws-azure-login.override {
-                PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true";
-                buildInputs = [ prev.pkgs.makeWrapper ];
-                postInstall = ''
-                  wrapProgram "$out/bin/aws-azure-login" \
-                      --set PUPPETEER_EXECUTABLE_PATH "${prev.pkgs.chromium}/bin/chromium"
-                '';
-              };
+            unstable-pkgs.nodePackages // prev.callPackage ./pkgs/development/node-packages {
+              inherit (prev) pkgs nodejs;
             };
         };
         noweb = final: prev: {
