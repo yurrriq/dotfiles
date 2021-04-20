@@ -18,7 +18,7 @@
       ]
     ) ++ (
       with gitAndTools; [
-        git-crypt
+        git-extras
         # gitflow
         hub
         lab
