@@ -14,6 +14,8 @@
 
   <<Install some user packages>>
 
+  <<Configure picom>>
+
 }
 @
 
@@ -158,4 +160,12 @@ Try to improve battery life.
     ]
   )
 );
+@
+
+<<Configure picom>>=
+services.picom = {
+  backend = "xrender";
+  refreshRate = 60;
+  vSync = true;
+};
 @

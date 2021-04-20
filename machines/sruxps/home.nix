@@ -91,4 +91,5 @@
     refreshRate = 60;
     vSync = true;
   };
+
 }
