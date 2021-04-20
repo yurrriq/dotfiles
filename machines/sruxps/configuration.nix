@@ -6,10 +6,12 @@ in
   airportCode = "MSP";
   boot.initrd.luks.devices = {
     cryptkey.device = "/dev/disk/by-uuid/2a44a760-206c-448d-a126-527b8b63f5d0";
+
     cryptroot = {
       device = "/dev/disk/by-uuid/6cd51820-547b-4378-b566-47f8cdbc46df";
       keyFile = "/dev/mapper/cryptkey";
     };
+
     cryptswap = {
       device = "/dev/disk/by-uuid/7d80e701-3a6b-4bb0-b8a3-dd5dfb432cdd";
       keyFile = "/dev/mapper/cryptkey";
