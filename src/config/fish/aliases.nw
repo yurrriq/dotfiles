@@ -1,20 +1,35 @@
+\newthought{Define} some shell aliases.
+
 <<config/fish/aliases.nix>>=
 { ... }:
 
 {
 
-  programs.fish.shellAliases = rec {
-    gpg = "gpg2";
-
-    k = "clear";
-
-    l = "exa --color=auto -G";
-    ll = "exa --color=auto -Gla";
-
-    # Old Darwin habits
-    pbcopy = "xclip -sel clipboard";
-    pbpaste = "${pbcopy} -o";
+  programs.fish.shellAliases = {
+    <<Define some shell aliases>>
   };
 
 }
+@
+
+I've aliased \bash{k} to \bash{clear} for years and am too stubborn to change,
+even though all the cool kids alias \fish{k} to \fish{kubectl} these days.
+
+<<Define some shell aliases>>=
+k = "clear";
+@
+
+Define some short exa\todoo{add link} aliases.
+
+<<Define some shell aliases>>=
+l = "exa --color=auto -G";
+ll = "exa --color=auto -Gla";
+@
+
+I liked \fish{pbcopy} and \fish{pbpaste} on Darwin,
+so I ``ported'' them to NixOS.
+
+<<Define some shell aliases>>=
+pbcopy = "xclip -sel clipboard";
+pbpaste = "xclip -sel clipboard -o";
 @

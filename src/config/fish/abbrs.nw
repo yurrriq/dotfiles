@@ -44,9 +44,12 @@ kc = "kubectl";
 kcd = "kubectl drain --delete-local-data --ignore-daemonsets";
 kcnp = "kubectl get pods --field-selector=spec.nodeName=";
 kcx = "kubectl --context";
-kgno = "kubectl get nodes";
+kg = "kubectl get";
+kgy = "kubectl get -o yaml";
 kn = "kubens";
 kns = "kubens";
+krr = "kubectl rollout restart";
+krs = "kubectl rollout status";
 kt = "stern";
 kx = "kubectx";
 @
