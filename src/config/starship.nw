@@ -14,61 +14,67 @@ infinitely customizable prompt for any shell!
         success_symbol = "[λ](bold green)";
         error_symbol = "[λ](bold red)";
       };
-      format = builtins.concatStringsSep "" (
-        lib.splitString "\n" ''
-          $username
-          $hostname
-          $shlvl
-          $kubernetes
-          $directory
-          $git_branch
-          $git_commit
-          $git_state
-          $git_status
-          $hg_branch
-          $docker_context
-          $package
-          $cmake
-          $dart
-          $dotnet
-          $elixir
-          $elm
-          $erlang
-          $golang
-          $helm
-          $java
-          $julia
-          $nim
-          $nodejs
-          $ocaml
-          $perl
-          $php
-          $purescript
-          $python
-          $ruby
-          $rust
-          $swift
-          $terraform
-          $zig
-          $nix_shell
-          $conda
-          $memory_usage
-          $aws
-          $gcloud
-          $openstack
-          $env_var
-          $crystal
-          $cmd_duration
-          $custom
-          $lua
-          $jobs
-          $battery
-          $time
-          $line_break
-          $status
-          $character
-        ''
-      );
+      format = builtins.concatStringsSep "" [
+        "$username"
+        "$hostname"
+        "$shlvl"
+        "$kubernetes"
+        "$directory"
+        # "$vcsh"
+        "$git_branch"
+        "$git_commit"
+        "$git_state"
+        "$git_status"
+        # "$hg_branch"
+        # "$docker_context"
+        "$package"
+        # "$cmake"
+        # "$dart"
+        # "$deno"
+        # "$dotnet"
+        "$elixir"
+        # "$elm"
+        "$erlang"
+        "$golang"
+        "$helm"
+        "$java"
+        # "$julia"
+        # "$kotlin"
+        # "$nim"
+        "$nodejs"
+        "$ocaml"
+        "$perl"
+        # "$php"
+        "$purescript"
+        "$python"
+        # "$red"
+        "$ruby"
+        "$rust"
+        # "$scala"
+        # "$swift"
+        "$terraform"
+        # "$vagrant"
+        # "$zig"
+        "$nix_shell"
+        # "$conda"
+        "$memory_usage"
+        "$aws"
+        # "$gcloud"
+        # "$openstack"
+        "$env_var"
+        # "$crystal"
+        # "$custom"
+        "$cmd_duration"
+        # "$line_break"
+        # "$lua"
+        "$jobs"
+        # "$battery"
+        "$time"
+        "$line_break" # added
+        "$status"
+        # "$shell"
+        "$character"
+      ];
       git_branch.symbol = "🌱 ";
       git_commit.tag_disabled = false;
       git_status = {
@@ -84,7 +90,6 @@ infinitely customizable prompt for any shell!
         pure_msg = "﻿ρ";
         symbol = "❄️";
       };
-      stats.disabled = false;
       time.disabled = false;
     };
   };
