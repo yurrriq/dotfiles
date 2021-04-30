@@ -7,7 +7,7 @@ in
     nfs-utils
   ];
   fileSystems."/mnt/music" = {
-    device = "//rackcity/homes/eric/music";
+    device = "//192.168.1.147/homes/eric/music";
     fsType = "cifs";
     options = [
       "credentials=/etc/nixos/secrets/bootyjams.club"
