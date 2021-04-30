@@ -1,12 +1,12 @@
 PATH := $(PWD)/bin:$(PATH)
 
-machine    ?= sruxps
-nixos_dir  ?= /etc/nixos
-cpif   ?= | cpif
+machine   ?= sruxps
+nixos_dir ?= /etc/nixos
+cpif      ?= | cpif
 
 
 ifneq (,$(findstring B,$(MAKEFLAGS)))
-latexmk_flags = -gg
+latexmk_flags  = -gg
 endif
 latexmk_flags += -cd -shell-escape -xelatex
 
@@ -93,17 +93,6 @@ ${SRCS}::
 
 ${SH_SRCS}::
 	chmod a+x $@
-
-
-.PHONY: .envrc
-.envrc:
-	$(file >$@,${envrc_text})
-	@ direnv allow
-
-define envrc_text
-export machine=${machine}
-eval "$$(lorri direnv)"
-endef
 
 
 .PHONY: .stow-local-ignore
