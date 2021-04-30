@@ -10,29 +10,37 @@ Enable the \hrefootnote{https://github.com/sharkdp/bat}{bat} module.
   programs.bat = {
     enable = true;
     config = {
-@
-
-For the pager, use \bash{less}.
-
-<<config/bat.nix>>=
-      pager = "less -FR";
-@
-
-Set the style to \bash{changes}.
-
-<<config/bat.nix>>=
-      style = "changes";
-@
-
-Use the Monokai Extended theme.
-
-<<config/bat.nix>>=
-      theme = "Monokai Extended";
-@
-
-<<config/bat.nix>>=
+      <<Configure bat>>
     };
   };
 
 }
+@
+
+
+Use YAML syntax for \fish{.yaml.gotmpl} files.
+
+<<Configure bat>>=
+map-syntax = "*.yaml.gotmpl:YAML";
+@
+
+
+For the pager, use \bash{less}.
+
+<<Configure bat>>=
+pager = "less -FR";
+@
+
+
+Set the style to \bash{changes}.
+
+<<Configure bat>>=
+style = "changes";
+@
+
+
+Use the Monokai Extended theme.
+
+<<Configure bat>>=
+theme = "Monokai Extended";
 @
