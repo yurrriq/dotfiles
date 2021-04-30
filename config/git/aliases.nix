@@ -28,10 +28,7 @@
     cp = "cherry-pick";
     cpa = "${cp} --abort";
     cpc = "${cp} --continue";
-    cs = "crypt status";
-    cse = "crypt status -e";
     csm = "commit -S -m";
-    csu = "crypt status -u";
     d = "diff";
     dad = "add";
     dc = "diff --cached";
