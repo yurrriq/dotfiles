@@ -25,9 +25,10 @@
     cnm = "commit -nm";
     co = "checkout";
     cob = "${co} -b";
-    cp = "cherry-pick";
-    cpa = "${cp} --abort";
-    cpc = "${cp} --continue";
+    # FIXME: conflicts with git-extras
+    # cp = "cherry-pick";
+    cpa = "cherry-pick --abort";
+    cpc = "cherry-pick --continue";
     csm = "commit -S -m";
     d = "diff";
     dad = "add";
