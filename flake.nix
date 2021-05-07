@@ -88,6 +88,7 @@
             signal-desktop
             sops
             starship
+            super-productivity
             tomb
             yq
             zoom-us

@@ -70,6 +70,7 @@
     kubectx
     stern
     zoom-us
+    super-productivity
   ];
   services.picom = {
     backend = "xrender";

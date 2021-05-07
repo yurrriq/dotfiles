@@ -163,6 +163,14 @@ zoom-us
 nyxt
 @
 
+
+\hrefootnote{https://super-productivity.com}{Super Productivity} is a nice tool
+for time/work tracking and syncing with Jira.
+
+<<Install some user packages>>=
+super-productivity
+@
+
 <<Configure picom>>=
 services.picom = {
   backend = "xrender";
