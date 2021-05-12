@@ -59,10 +59,10 @@ in
   networking.useDHCP = false; # NOTE: Deprecated, so set it false.
   nix = {
     binaryCaches = [
-      # TODO: "https://sportradar.cachix.org"
+      "https://sportradar.cachix.org"
     ];
     binaryCachePublicKeys = [
-      # TODO: "sportradar.cachix.org-1:TODO"
+      "sportradar.cachix.org-1:6MyCzOfUMeMTxU5QnogkyYOBtr5f5atW/qeS+TjmUfE="
     ];
     trustedUsers = [ "root" username ];
   };
