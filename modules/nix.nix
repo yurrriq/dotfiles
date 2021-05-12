@@ -9,7 +9,7 @@
     ];
     # TODO: daemonNiceLevel = 19;
     extraOptions = ''
-      experimental-features = flakes nix-command
+      experimental-features = ca-references flakes nix-command
     '';
     gc = {
       automatic = true;
