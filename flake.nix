@@ -60,6 +60,9 @@
       # TODO: overlay = final: prev: {};
 
       overlays = {
+        fish-completions = final: prev: {
+          fish-kubectl-completions = prev.callPackage ./pkgs/shells/fish/kubectl-completions { };
+        };
         nodePackages = final: prev: {
           nodePackages =
             unstable-pkgs.nodePackages // prev.callPackage ./pkgs/development/node-packages {
@@ -104,7 +107,10 @@
         inherit pkgs;
         yurrriq-dotfiles = self.defaultPackage.x86_64-linux;
       };
-      packages.x86_64-linux.yurrriq-dotfiles = self.defaultPackage.x86_64-linux;
+      packages.x86_64-linux = {
+        fish-kubectl-completions = pkgs.callPackage ./pkgs/shells/fish/kubectl-completions { };
+        yurrriq-dotfiles = self.defaultPackage.x86_64-linux;
+      };
       defaultPackage.x86_64-linux = pkgs.callPackage ./default.nix {
         inherit pkgs;
       };
