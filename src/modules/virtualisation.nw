@@ -4,8 +4,12 @@
 <<modules/virtualisation.nix>>=
 { config, lib, pkgs, ... }:
 {
-  <<Install crun>>
+  <<Install crun and tini>>
   virtualisation = {
+    containers.containersConf.extraConfig = ''
+      [containers]
+      init_path = "${pkgs.tini}/bin/tini"
+    '';
     <<Configure Docker>>
     <<Configure Podman>>
     <<Configure VirtualBox>>
@@ -35,8 +39,8 @@ It seems there is a bug in podman such that it doesn't properly handle
   WARN[0000] Found default OCIruntime /nix/store/.../bin/crun path which is missing from [engine.runtimes] in containers.conf
 \end{minted}
 
-<<Install crun>>=
-environment.systemPackages = lib.optionals config.virtualisation.podman.enable [ pkgs.crun ];
+<<Install crun and tini>>=
+environment.systemPackages = lib.optionals config.virtualisation.podman.enable (with pkgs; [ crun tini ] );
 @
 
 Install Podman by default, if the Docker daemon is disabled.

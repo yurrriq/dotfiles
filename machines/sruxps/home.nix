@@ -58,7 +58,9 @@
     scc
     docker-credential-helpers
     # TODO: podman-compose
+    k3s
     krew
+    kube3d
     kubectl
     kubectx
     kubelogin
