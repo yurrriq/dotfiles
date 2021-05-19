@@ -235,3 +235,9 @@ Null prefix argument turns off the mode."
   :demand
   :config (global-whitespace-cleanup-mode t))
 @
+
+Use \elisp{yaml-mode} for \texttt{.yaml.gotmpl} files.
+
+<<config/emacs/init.el>>=
+(add-to-list 'auto-mode-alist '("\\.yaml.gotmpl\\'" . yaml-mode))
+@
