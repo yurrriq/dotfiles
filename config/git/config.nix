@@ -24,15 +24,23 @@
         changed = "yellow";
         untracked = "cyan";
       };
+      ui = true;
     };
 
     commit.template = "${config.xdg.dataHome}/git/commit.template";
 
-    core.pager = "diff-so-fancy | less --tabs=4 -RFX";
+    core.pager = "delta";
 
     credential = {
       helper = "${pkgs.gitAndTools.pass-git-helper}/bin/pass-git-helper";
       useHttpPath = true;
+    };
+
+    delta = {
+      plus-style = "syntax #012800";
+      minus-style = "syntax #340001";
+      syntax-theme = "Monokai Extended";
+      navigate = true;
     };
 
     diff = {
@@ -49,11 +57,11 @@
 
     fetch.prune = true;
 
+    interactive.diffFilter = "delta --color-only";
+
     pull.ff = "only";
 
     rerere.enabled = true;
-
-    ui.color = true;
 
     url."git@gitlab.sportradar.ag:" = {
       insteadOf = "https://gitlab.sportradar.ag/";

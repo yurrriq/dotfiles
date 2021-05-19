@@ -81,6 +81,7 @@
             autojump
             browserpass
             conftest
+            delta
             eksctl
             kubectx
             kubelogin

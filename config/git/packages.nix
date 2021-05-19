@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; (
     [
+      delta
       diff-pdf
       git
       git-lfs
@@ -26,7 +27,6 @@
     ) ++ (
       with nodePackages; [
         codeowners
-        diff-so-fancy
       ]
     )
   );
