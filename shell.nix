@@ -13,7 +13,6 @@ mkShell {
     nixpkgs-fmt
     nodePackages.node2nix
     python3Packages.pygments
-    python3Packages.yamllint
     shellcheck
     shfmt
     sops
