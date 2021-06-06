@@ -97,7 +97,7 @@ aws-iam-authenticator
 awscli
 ec2instanceconnectcli
 nodePackages.aws-azure-login
-# FIXME: naal
+naal
 @
 
 \newthought{Install some miscellaneous tools.}

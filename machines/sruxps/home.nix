@@ -59,7 +59,7 @@
     awscli
     ec2instanceconnectcli
     nodePackages.aws-azure-login
-    # FIXME: naal
+    naal
     bpytop
     fd
     powertop

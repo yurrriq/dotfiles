@@ -7,6 +7,10 @@
       url = "github:nix-community/home-manager/release-20.09";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    naal = {
+      url = "github:yurrriq/naal";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/release-20.09";
     nixpkgs-unstable.url = "github:nixos/nixpkgs";
@@ -163,6 +167,7 @@
             "steam-runtime"
           ];
           nixpkgs.overlays = lib.attrValues self.overlays ++ [
+            inputs.naal.overlays.naal
             inputs.nur.overlay
           ];
         };

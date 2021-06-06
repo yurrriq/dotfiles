@@ -21,6 +21,26 @@
         "type": "github"
       }
     },
+    "naal": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1622953088,
+        "narHash": "sha256-hYAk+Oem+gWE+EUIp059Dcuvmt/Bk/WIKl8cp/bSKnI=",
+        "owner": "yurrriq",
+        "repo": "naal",
+        "rev": "d7aaf9c4048cbdbdb43df7578e8b264c9c430f50",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yurrriq",
+        "repo": "naal",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1622521809,
@@ -85,6 +105,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "naal": "naal",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
