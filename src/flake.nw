@@ -1,4 +1,4 @@
-The main entrypoint is \texttt{flake.nix}.
+The main entrypoint is \hrefootnote{https://github.com/yurrriq/dotfiles/blob/main/flake.nix}{flake.nix}.
 
 <<flake.nix>>=
 {
@@ -31,6 +31,9 @@ Someday, I'd like to \hrefootnote{https://github.com/yurrriq/dotfiles/issues/15}
     inputs.nixpkgs.follows = "nixpkgs";
   };
 \end{minted}
+
+\hrefootnote{https://github.com/nix-community/home-manager}{home-manager} is an
+invaluable tool for managing deterministic \bash{$HOME}.
 
 <<inputs>>=
 home-manager = {
