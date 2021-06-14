@@ -33,6 +33,7 @@
     calibre
     fd
     frescobaldi
+    lutris
     musescore
     openscad
     powertop
