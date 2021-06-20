@@ -3,29 +3,41 @@
 
   inputs = {
     dotfiles.url = "path:../..";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     nixpkgs.follows = "nixpkgs";
+    nixpkgs-unstable.follows = "nixpkgs-unstable";
   };
 
-  outputs = { self, dotfiles, ... }:
+  outputs = { self, dotfiles, emacs-overlay, ... }:
     let
-      pkgs = dotfiles.inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
+      pkgs = import dotfiles.inputs.nixpkgs-unstable {
+        overlays = [
+          emacs-overlay.overlay
+          self.overlay
+        ];
+        system = "x86_64-linux";
+      };
     in
     {
+      overlay = final: prev: {
+        myEmacs = prev.emacsWithPackagesFromUsePackage {
+          alwaysEnsure = true;
+          config = ./emacs.el;
+        };
+      };
+
       defaultPackage.x86_64-linux = self.packages.x86_64-linux.my-xmonad;
 
       devShell.x86_64-linux = pkgs.mkShell {
-        buildInputs = (
-          with pkgs; [
-            gitAndTools.pre-commit
-          ]
-        ) ++ (
-          with pkgs.haskellPackages; [
-            cabal2nix
-            ormolu
-            pointfree
-          ]
-        )
-        ++ self.defaultPackage.x86_64-linux.env.nativeBuildInputs;
+        buildInputs = with pkgs; [
+          cabal-install
+          ghcid
+          gitAndTools.pre-commit
+          haskell-language-server
+          haskellPackages.ormolu
+          haskellPackages.pointfree
+          myEmacs
+        ] ++ self.defaultPackage.x86_64-linux.env.nativeBuildInputs;
       };
 
       packages.x86_64-linux.my-xmonad =
