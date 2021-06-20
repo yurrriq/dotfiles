@@ -1,10 +1,8 @@
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE LambdaCase #-}
 {-# OPTIONS_GHC -Wno-missing-signatures #-}
 
-module Main
-  ( main,
-  )
-where
+module Main (main) where
 
 import Data.List (intercalate)
 import Data.Map (Map)
@@ -17,6 +15,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.BinarySpacePartition
+import XMonad.Layout.Decoration (ModifiedLayout)
 import XMonad.Layout.LayoutCombinators (JumpToLayout (..), (|||))
 import XMonad.Layout.NoBorders
 import XMonad.Layout.TwoPane
@@ -26,7 +25,10 @@ import XMonad.Util.NamedScratchpad
 import XMonad.Util.Scratchpad
 
 main :: IO ()
-main = xmonad =<< statusBar "xmobar" myPP toggleStrutsKey myConfig
+main = xmonad =<< myXmobar myConfig
+
+myXmobar :: LayoutClass l Window => XConfig l -> IO (XConfig (ModifiedLayout AvoidStruts l))
+myXmobar = statusBar "xmobar" myPP toggleStrutsKey
 
 -- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/src/XMonad.Hooks.DynamicLog.html#toggleStrutsKey
 toggleStrutsKey :: XConfig t -> (KeyMask, KeySym)
@@ -53,7 +55,7 @@ myConfig =
         }
 
 bringMouse :: (Direction2D -> Bool -> X ()) -> (Direction2D -> Bool -> X ())
-bringMouse windowAction dir wrap = windowAction dir wrap >> warpToWindow (1 / 2) (1 / 2)
+bringMouse windowAction dir rap = windowAction dir rap >> warpToWindow (1 / 2) (1 / 2)
 
 myLayout =
   avoidStruts $
