@@ -12,7 +12,7 @@ This modules manages some common configuration on NixOS systems.
   <<Enable networkmanager>>
   <<Configure services>>
   <<Configure audio>>
-  system.stateVersion = "20.09";
+  system.stateVersion = "21.05";
 }
 @
 
@@ -106,10 +106,12 @@ Use \href{https://discourse.nixos.org/t/opening-i3-from-home-manager-automatical
 <<Configure libinput>>=
 libinput = {
   enable = true;
-  accelSpeed = "1.0";
-  disableWhileTyping = true;
-  naturalScrolling = false;
-  tapping = true;
+  touchpad = {
+    accelSpeed = "1.0";
+    disableWhileTyping = true;
+    naturalScrolling = false;
+    tapping = true;
+  };
 };
 @
 

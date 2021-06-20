@@ -107,7 +107,8 @@ Null prefix argument turns off the mode."
   :config (global-hl-todo-mode t))
 (use-package magit
   :demand
-  :config (global-magit-file-mode t))
+  ;; FIXME: :config (global-magit-file-mode t)
+  )
 (use-package multiple-cursors
   :demand
   :config (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines))

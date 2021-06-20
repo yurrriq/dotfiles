@@ -189,7 +189,8 @@ Null prefix argument turns off the mode."
 <<config/emacs/init.el>>=
 (use-package magit
   :demand
-  :config (global-magit-file-mode t))
+  ;; FIXME: :config (global-magit-file-mode t)
+  )
 @
 
 <<config/emacs/init.el>>=

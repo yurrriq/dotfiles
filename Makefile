@@ -8,7 +8,6 @@ cpif      ?= | cpif
 ifneq (,$(findstring B,$(MAKEFLAGS)))
 latexmk_flags  = -gg
 endif
-latexmk_flags += -cd -shell-escape -xelatex
 
 
 stow_flags := -R

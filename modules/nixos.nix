@@ -39,10 +39,12 @@
 
       libinput = {
         enable = true;
-        accelSpeed = "1.0";
-        disableWhileTyping = true;
-        naturalScrolling = false;
-        tapping = true;
+        touchpad = {
+          accelSpeed = "1.0";
+          disableWhileTyping = true;
+          naturalScrolling = false;
+          tapping = true;
+        };
       };
 
       videoDrivers = lib.mkDefault [ "intel" ];
@@ -56,5 +58,5 @@
     package = pkgs.pulseaudioFull;
   };
   sound.enable = true;
-  system.stateVersion = "20.09";
+  system.stateVersion = "21.05";
 }

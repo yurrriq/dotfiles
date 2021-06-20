@@ -15,7 +15,7 @@ Install the \hrefootnote{https://www.nerdfonts.com}{Nerd Fonts} patched \hrefoot
 
 <<Configure fonts>>=
 fonts = {
-  enableFontDir = true;
+  fontDir.enable = true;
   fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "Iosevka" ]; })
   ];

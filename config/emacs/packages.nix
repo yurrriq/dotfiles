@@ -29,7 +29,7 @@
       elixir-mode
       emojify
       # enh-ruby-mode
-      erlang
+      # FIXME: erlang
       fill-column-indicator
       fish-mode
       frames-only-mode

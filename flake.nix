@@ -3,9 +3,12 @@
   description = "My (semi-)literate, Nix-based dotfiles";
 
   inputs = {
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
-      url = "github:nix-community/home-manager/release-20.09";
+      url = "github:nix-community/home-manager/release-21.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     naal = {
@@ -13,7 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    nixpkgs.url = "github:nixos/nixpkgs/release-20.09";
+    nixpkgs.url = "github:nixos/nixpkgs/release-21.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs";
     nur.url = "github:nix-community/nur";
   };
@@ -163,6 +166,7 @@
             "reaper"
             "slack"
             "spotify"
+            "spotify-unwrapped"
             "steam"
             "steam-original"
             "steam-runtime"

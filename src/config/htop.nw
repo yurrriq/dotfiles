@@ -7,10 +7,12 @@
 
   programs.htop = {
     enable = true;
-    colorScheme = 6;
-    cpuCountFromZero = true;
-    showCpuUsage = true;
-    highlightBaseName = true;
+    settings = {
+      color_scheme = 6;
+      cpu_count_from_zero = true;
+      highlight_base_name = true;
+      show_cpu_usage = true;
+    };
   };
 
 }

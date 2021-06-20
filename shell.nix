@@ -13,7 +13,7 @@ mkShell {
     nixpkgs-fmt
     nodePackages.node2nix
     python3Packages.pygments
-    python2Packages.pywatchman
+    # FIXME: python2Packages.pywatchman
     shellcheck
     shfmt
     sops
