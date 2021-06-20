@@ -45,17 +45,21 @@ accounts.email.accounts.primary = {
 
 <<Add some more user packages>>=
 home.packages = with pkgs; [
+  amdvlk
   appimage-run
   calibre
   fd
   frescobaldi
+  gnutls
   lutris
   musescore
   openscad
   powertop
+  protontricks
   reaper
   steam
   tellico
+  winetricks
   zoom-us
 ];
 @

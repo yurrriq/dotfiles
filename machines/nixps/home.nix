@@ -29,17 +29,21 @@
     realName = "Eric Bailey";
   };
   home.packages = with pkgs; [
+    amdvlk
     appimage-run
     calibre
     fd
     frescobaldi
+    gnutls
     lutris
     musescore
     openscad
     powertop
+    protontricks
     reaper
     steam
     tellico
+    winetricks
     zoom-us
   ];
 }
