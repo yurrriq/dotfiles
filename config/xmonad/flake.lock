@@ -2,6 +2,7 @@
   "nodes": {
     "dotfiles": {
       "inputs": {
+        "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
         "naal": "naal",
         "nixos-hardware": "nixos-hardware",
@@ -10,7 +11,7 @@
         "nur": "nur"
       },
       "locked": {
-        "narHash": "sha256-cie+0ohnGQcfVxSJ7ZAIYVaqFo0LNWIOIijySxQ9Zy8=",
+        "narHash": "sha256-Srp5n7FZlQVaZWHmNb3SmDTL/2l6GvyIbkvvuB3UfMc=",
         "path": "../..",
         "type": "path"
       },
@@ -139,11 +140,16 @@
     "root": {
       "inputs": {
         "dotfiles": "dotfiles",
-        "emacs-overlay": "emacs-overlay",
+        "emacs-overlay": [
+          "dotfiles",
+          "emacs-overlay"
+        ],
         "nixpkgs": [
+          "dotfiles",
           "nixpkgs"
         ],
         "nixpkgs-unstable": [
+          "dotfiles",
           "nixpkgs-unstable"
         ]
       }

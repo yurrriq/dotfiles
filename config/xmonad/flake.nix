@@ -3,9 +3,9 @@
 
   inputs = {
     dotfiles.url = "path:../..";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    nixpkgs.follows = "nixpkgs";
-    nixpkgs-unstable.follows = "nixpkgs-unstable";
+    emacs-overlay.follows = "dotfiles/emacs-overlay";
+    nixpkgs.follows = "dotfiles/nixpkgs";
+    nixpkgs-unstable.follows = "dotfiles/nixpkgs-unstable";
   };
 
   outputs = { self, dotfiles, emacs-overlay, ... }:

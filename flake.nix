@@ -3,6 +3,7 @@
   description = "My (semi-)literate, Nix-based dotfiles";
 
   inputs = {
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     home-manager = {
       url = "github:nix-community/home-manager/release-20.09";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -167,6 +168,7 @@
             "steam-runtime"
           ];
           nixpkgs.overlays = lib.attrValues self.overlays ++ [
+            inputs.emacs-overlay.overlay
             inputs.naal.overlays.naal
             inputs.nur.overlay
           ];
