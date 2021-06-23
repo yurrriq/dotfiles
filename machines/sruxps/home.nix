@@ -40,7 +40,7 @@
   home.file."src/gitlab.sportradar.ag/.envrc".text = ''
     case $(kubectl config current-context) in
         *k8s.srus*|sapi*nov1*)
-            export AWS_PROFILE=msp-admin
+            export AWS_PROFILE=msp
             ;;
         *)
             export AWS_PROFILE=default
