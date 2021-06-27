@@ -5,9 +5,7 @@
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
-(let ((font "Iosevka-10"))
-  (set-face-attribute 'default t :font font)
-  (set-frame-font font nil t))
+(set-face-attribute 'default t :family "Iosevka" :height 120)
 (require 'package)
 (setq-default frames-only-mode t
               indent-tabs-mode nil
@@ -70,9 +68,15 @@ Null prefix argument turns off the mode."
 (load-theme 'wombat)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "s-u") 'revert-buffer)
+(use-package fill-column-indicator)
+
+(use-package paredit)
+
+(use-package rainbow-delimiters)
 (setq c-default-style      "k&r"
       c-basic-offset       4
-      emacs-lisp-mode-hook '(fci-mode paredit-mode
+      emacs-lisp-mode-hook '(fci-mode
+                             paredit-mode
                              rainbow-delimiters-mode)
       js-indent-level      2
       text-mode-hook       '(text-mode-hook-identify))

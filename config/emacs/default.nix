@@ -2,11 +2,13 @@
 
 {
 
-  imports = [
-    ./packages.nix
-  ];
-
   home.file.".emacs.d/init.el".source = ./init.el;
+
+  home.packages = with pkgs; [
+    graphviz
+    noweb
+    sqlite
+  ];
 
   home.sessionVariables = rec {
     EDITOR = ''emacsclient -nw -a \"\"'';
@@ -14,7 +16,16 @@
     VISUAL = ''emacsclient -cna \"\"'';
   };
 
-  programs.emacs.enable = true;
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacsWithPackagesFromUsePackage {
+      alwaysEnsure = true;
+      config = ./init.el;
+      override = epkgs: epkgs // {
+        noweb-mode = pkgs.noweb;
+      };
+    };
+  };
 
   programs.fish.shellAliases = lib.mkIf (config.programs.fish.enable) rec {
     e = "emacsclient -na \"\"";
