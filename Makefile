@@ -48,7 +48,7 @@ tex: ${TEX_SRCS}
 .PHONY: clean
 clean:
 	@ rm -f ${TEX_SRCS} ${DEFS} src/all.defs src/dotfiles.nwi
-	@ latexmk $(latexmk_flags) -c -f docs/dotfiles.pdf
+	@ latexmk -c -f docs/dotfiles.pdf
 	@ rm -fr docs/_minted-dotfiles
 
 
@@ -67,27 +67,27 @@ install: all clean
 docs/%.pdf: export TZ='America/Chicago'
 docs/%.pdf: src/%.tex src/preamble.tex src/glossary.tex src/%.bib ${TEX_SRCS}
 	@ mkdir -p $(@D)
-	@ latexmk $(latexmk_flags) -outdir=../$(@D) $<
+	latexmk $(latexmk_flags) -cd -f -outdir=$(CURDIR)/$(@D) -pdf $<
 	@ noindex src/dotfiles
-	@ latexmk $(latexmk_flags) -outdir=../$(@D) $<
+	latexmk $(latexmk_flags) -cd -f -outdir=$(CURDIR)/$(@D) -pdf $<
 
 
 src/%.defs: src/%.nw
-	nodefs $< >$@
+	@ nodefs $< >$@
 
 
 src/all.defs: ${DEFS}
-	sort -u $^ ${cpif} $@
+	@ sort -u $^ ${cpif} $@
 
 
 # .INTERMEDIATE: ${TEX_SRCS}
 src/%.tex: src/%.nw src/all.defs
-	noweave -delay -indexfrom src/all.defs -latex -n -filter fix-underscores $^ ${cpif} $@
+	@ noweave -delay -indexfrom src/all.defs -latex -n -filter fix-underscores $^ ${cpif} $@
 
 
 ${SRCS}::
 	@ mkdir -p $(@D)
-	notangle -R$@ src/$(basename $@).nw ${cpif} $@
+	@ notangle -R$@ src/$(basename $@).nw ${cpif} $@
 
 
 ${SH_SRCS}::
