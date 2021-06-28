@@ -1,4 +1,5 @@
-\documentclass[a4paper,titlepage,xelatex]{tufte-book}
+%% FIXME: remove nobib
+\documentclass[a4paper,nobib,titlepage,xelatex]{tufte-book}
 \input{preamble}
 \title{dotfiles}
 \date{%
@@ -75,9 +76,10 @@
 \phantomsection
 \printglossaries
 
-\nocite{*}
-\bibliographystyle{plainnat}
-\bibliography{dotfiles}
+%% FIXME
+%% \nocite{*}
+%% \bibliographystyle{plainnat}
+%% \bibliography{dotfiles.bib}
 
 \newpage
 \listoftodos[To-Do]

@@ -8,7 +8,7 @@
   abbreviated to \fish{gco}. After entering \fish{gco} and pressing
   \texttt{Space} or \texttt{Enter}, the full text \fish{git checkout} will
   appear in the command line.%
-}\cite{fish_abbr}
+}% FIXME: \cite{fish_abbr}
 
 <<config/fish/abbrs.nix>>=
 { ... }:
@@ -70,7 +70,7 @@ I'm also a lazy typist, so define some memorable abbreviations.
 \say{%
   Searches case insensitively if the pattern is all lowercase.
   Search case sensitively otherwise.%
-}\cite{ripgrep}
+}% FIXME: \cite{ripgrep}
 
 <<ripgrep fish abbreviations>>=
 rg = "rg -S";
@@ -82,7 +82,7 @@ rgf = "rg -F";
 @
 
 \say{Never print the file path with the matched lines}, and
-\say{[s]uppress line numbers.}\cite{ripgrep}
+\say{[s]uppress line numbers.}% FIXME: \cite{ripgrep}
 
 <<ripgrep fish abbreviations>>=
 rgin = "rg -IN";
