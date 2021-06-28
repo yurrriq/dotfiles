@@ -2,7 +2,7 @@
 
 $bibtex_use = 2;
 $clean_ext .= ' %R.ist %R.xdy %R.xdv';
-$pdflatex = q/xelatex %O -cd -interaction=nonstopmode -shell-escape %S/;
+$pdflatex = q/xelatex %O -file-line-error -interaction=nonstopmode -shell-escape -synctex=1 %S/;
 
 add_cus_dep('glo', 'gls', 0, 'run_makeglossaries');
 add_cus_dep('acn', 'acr', 0, 'run_makeglossaries');

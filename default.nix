@@ -36,6 +36,7 @@ stdenv.mkDerivation rec {
           hardwrap
           ifplatform
           latexmk
+          mathpazo
           mfirstuc
           minted
           substr

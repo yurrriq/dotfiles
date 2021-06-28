@@ -23,8 +23,6 @@ The main entrypoint is \hrefootnote{https://github.com/yurrriq/dotfiles/blob/mai
 
 \section{Inputs}
 
-Someday soon, I'd like to \hrefootnote{https://github.com/yurrriq/dotfiles/issues/15}{adopt the \nix{emacs-overlay} flake}.
-
 <<inputs>>=
 emacs-overlay = {
   url = "github:nix-community/emacs-overlay";
