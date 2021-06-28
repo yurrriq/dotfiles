@@ -111,6 +111,7 @@
             tomb
             yq
             zoom-us
+            zoxide
             ;
           inherit (unstable-pkgs.python3Packages)
             bugwarrior

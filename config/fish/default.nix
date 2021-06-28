@@ -17,8 +17,6 @@
     };
   };
 
-  programs.autojump.enable = true;
-
   programs.fish =
     let
       inherit (lib.strings) fileContents;
@@ -32,5 +30,7 @@
       '';
       shellInit = fileContents ./shellInit.fish;
     };
+
+  programs.zoxide.enable = true;
 
 }

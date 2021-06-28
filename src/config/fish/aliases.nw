@@ -12,6 +12,12 @@
 }
 @
 
+Help me replace autojump with zoxide.
+
+<<Define some shell aliases>>=
+j = "z";
+@
+
 I've aliased \bash{k} to \bash{clear} for years and am too stubborn to change,
 even though all the cool kids alias \fish{k} to \fish{kubectl} these days.
 
