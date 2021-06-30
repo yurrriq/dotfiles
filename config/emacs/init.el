@@ -136,4 +136,6 @@ Null prefix argument turns off the mode."
 (use-package whitespace-cleanup-mode
   :demand
   :config (global-whitespace-cleanup-mode t))
-(add-to-list 'auto-mode-alist '("\\.yaml.gotmpl\\'" . yaml-mode))
+(use-package yaml-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.yaml.gotmpl\\'" . yaml-mode)))
