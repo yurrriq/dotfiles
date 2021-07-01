@@ -68,11 +68,37 @@ Null prefix argument turns off the mode."
 (load-theme 'wombat)
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 (global-set-key (kbd "s-u") 'revert-buffer)
-(use-package fill-column-indicator)
+(use-package better-defaults)
+
+(use-package direnv
+  :ensure t)
+
+(use-package dockerfile-mode)
+
+(use-package fill-column-indicator
+  :config
+  (setq-default fill-column 80)
+  (global-display-fill-column-indicator-mode))
+
+;; (use-package frames-only-mode)
+
+(use-package kubernetes-tramp)
 
 (use-package paredit)
 
 (use-package rainbow-delimiters)
+(use-package elixir-mode)
+(use-package fish-mode)
+(use-package gap-mode)
+(use-package go-mode)
+(use-package haskell-mode)
+(use-package idris-mode)
+(use-package j-mode)
+(use-package markdown-mode)
+(use-package nix-mode
+  :mode ("\\.nix\\'"))
+(use-package rust-mode)
+(use-package terraform-mode)
 (setq c-default-style      "k&r"
       c-basic-offset       4
       emacs-lisp-mode-hook '(fci-mode
@@ -81,7 +107,6 @@ Null prefix argument turns off the mode."
       js-indent-level      2
       text-mode-hook       '(text-mode-hook-identify))
 
-(setq-default fill-column 80)
 (require 'org-tempo)
 
 (org-babel-do-load-languages
@@ -116,8 +141,6 @@ Null prefix argument turns off the mode."
 (use-package multiple-cursors
   :demand
   :config (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines))
-(use-package nix-mode
-  :mode ("\\.nix\\'"))
 (use-package noweb-mode
   :load-path "/run/current-system/sw/share/emacs/site-lisp"
   :mode ("\\.nw\\'")

@@ -120,11 +120,40 @@ Null prefix argument turns off the mode."
 @
 
 <<config/emacs/init.el>>=
-(use-package fill-column-indicator)
+(use-package better-defaults)
+
+(use-package direnv
+  :ensure t)
+
+(use-package dockerfile-mode)
+
+(use-package fill-column-indicator
+  :config
+  (setq-default fill-column 80)
+  (global-display-fill-column-indicator-mode))
+
+;; (use-package frames-only-mode)
+
+(use-package kubernetes-tramp)
 
 (use-package paredit)
 
 (use-package rainbow-delimiters)
+@
+
+<<config/emacs/init.el>>=
+(use-package elixir-mode)
+(use-package fish-mode)
+(use-package gap-mode)
+(use-package go-mode)
+(use-package haskell-mode)
+(use-package idris-mode)
+(use-package j-mode)
+(use-package markdown-mode)
+(use-package nix-mode
+  :mode ("\\.nix\\'"))
+(use-package rust-mode)
+(use-package terraform-mode)
 @
 
 <<config/emacs/init.el>>=
@@ -136,10 +165,6 @@ Null prefix argument turns off the mode."
       js-indent-level      2
       text-mode-hook       '(text-mode-hook-identify))
 
-@
-
-<<config/emacs/init.el>>=
-(setq-default fill-column 80)
 @
 
 %% https://orgmode.org/manual/Structure-Templates.html
@@ -202,11 +227,6 @@ Null prefix argument turns off the mode."
 (use-package multiple-cursors
   :demand
   :config (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines))
-@
-
-<<config/emacs/init.el>>=
-(use-package nix-mode
-  :mode ("\\.nix\\'"))
 @
 
 <<config/emacs/init.el>>=
