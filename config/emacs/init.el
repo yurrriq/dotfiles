@@ -5,7 +5,7 @@
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
-(set-face-attribute 'default t :family "Iosevka" :height 120)
+(set-face-attribute 'default t :family "Iosevka" :height 100)
 (require 'package)
 (setq-default frames-only-mode t
               indent-tabs-mode nil
