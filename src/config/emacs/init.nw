@@ -192,6 +192,10 @@ Null prefix argument turns off the mode."
 @
 
 <<config/emacs/init.el>>=
+(use-package direnv)
+@
+
+<<config/emacs/init.el>>=
 (use-package editorconfig
   :ensure t
   :config

@@ -121,6 +121,7 @@ Null prefix argument turns off the mode."
 (use-package crux
   :demand
   :config (global-set-key (kbd "C-a") 'crux-move-beginning-of-line))
+(use-package direnv)
 (use-package editorconfig
   :ensure t
   :config
