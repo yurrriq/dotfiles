@@ -41,7 +41,7 @@ It's definitely \href{https://xkcd.com/1205/}{worth the time}.
 
 <<Kubernetes fish abbreviations>>=
 kc = "kubectl";
-kcd = "kubectl drain --delete-local-data --ignore-daemonsets";
+kcd = "kubectl drain --delete-emptydir-data --ignore-daemonsets";
 kcnp = "kubectl get pods --field-selector=spec.nodeName=";
 kcx = "kubectl --context";
 kg = "kubectl get";
