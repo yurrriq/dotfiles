@@ -6,6 +6,7 @@ module Main (main) where
 
 import Data.List (intercalate)
 import Data.Map (Map)
+import qualified Data.Map as M
 import Data.Maybe (catMaybes)
 import XMonad hiding ((|||))
 import XMonad.Actions.Navigation2D
@@ -136,7 +137,7 @@ myKeys cfg =
       ("M-<Esc>", getXMonadDataDir >>= spawn . wrap "i3lock -i " "/matrix.png"),
       ("M-<Return>", spawn (terminal cfg)),
       ("M-<Tab>", spawn "rofi -show window"),
-      ("M-S-<Space>", withFocused (windows . W.sink)),
+      ("M-S-<Space>", toggleFloat),
       ("M-S-b", sendMessage (JumpToLayout "BSP")),
       ("M-S-e", spawn "emacsclient -nc -e '(switch-to-buffer nil)'"),
       ("M-S-l", sendMessage NextLayout),
@@ -160,6 +161,14 @@ myKeys cfg =
              (f, maybeShift) <-
                [(W.greedyView, Nothing), (W.shift, Just "S")]
          ]
+
+toggleFloat :: X ()
+toggleFloat = withFocused $ \this ->
+  do
+    isFloating <- gets (M.member this . W.floating . windowset)
+    if isFloating
+      then withFocused $ windows . W.sink
+      else float this
 
 nthWorkspace :: Int -> String
 nthWorkspace = (myWorkspaces !!) . subtract 1
