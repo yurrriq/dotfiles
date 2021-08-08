@@ -29,7 +29,11 @@ DEFS := $(patsubst src/%.nw,src/%.defs,${NW_SRCS})
 
 
 .PHONY: all
-all: generate-config nix-srcs ${SH_SRCS} ${OTHER_SRCS} docs/dotfiles.pdf
+all: generate-config srcs docs/dotfiles.pdf
+
+
+.PHONY: srcs
+srcs: nix-srcs ${SH_SRCS} ${OTHER_SRCS}
 
 
 .PHONY: nix-srcs
