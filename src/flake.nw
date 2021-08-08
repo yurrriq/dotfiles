@@ -68,7 +68,7 @@ nur.url = "github:nix-community/nur";
 
 <<outputs>>=
 overlays = {
-  <<outputs.overlays>>
+  <<Overlays>>
 };
 
 devShell.x86_64-linux = pkgs.callPackage ./shell.nix {
@@ -84,7 +84,7 @@ packages.x86_64-linux = {
 defaultPackage.x86_64-linux = self.packages.x86_64-linux.yurrriq-dotfiles;
 
 nixosModules = {
-  <<outputs.nixosModules>>
+  <<Modules>>
 };
 
 nixosConfigurations = {
@@ -161,13 +161,13 @@ unstable-pkgs = import inputs.nixpkgs-unstable {
 
 \subsection{Overlays}
 
-<<outputs.overlays>>=
+<<Overlays>>=
 fish-completions = final: prev: {
   fish-kubectl-completions = prev.callPackage ./pkgs/shells/fish/kubectl-completions { };
 };
 @
 
-<<outputs.overlays>>=
+<<Overlays>>=
 nodePackages = final: prev: {
   nodePackages =
     unstable-pkgs.nodePackages // prev.callPackage ./pkgs/development/node-packages {
@@ -176,7 +176,7 @@ nodePackages = final: prev: {
 };
 @
 
-<<outputs.overlays>>=
+<<Overlays>>=
 noweb = final: prev: {
   noweb = unstable-pkgs.noweb.override {
     icon-lang = unstable-pkgs.icon-lang.override {
@@ -186,7 +186,7 @@ noweb = final: prev: {
 };
 @
 
-<<outputs.overlays>>=
+<<Overlays>>=
 unstable = final: prev: {
   inherit (unstable-pkgs)
     autojump
@@ -218,7 +218,7 @@ unstable = final: prev: {
 
 \subsection{NixOS Modules}
 
-<<outputs.nixosModules>>=
+<<Modules>>=
 applications = import ./modules/applications.nix;
 
 bootyjams = import ./modules/bootyjams.nix;
