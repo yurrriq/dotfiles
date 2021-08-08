@@ -1,4 +1,5 @@
 \section{Firefox}
+\label{sec:firefox}
 
 <<config/firefox.nix>>=
 { pkgs, ... }:

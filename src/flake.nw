@@ -1,4 +1,8 @@
-The main entrypoint is \hrefootnote{https://github.com/yurrriq/dotfiles/blob/main/flake.nix}{flake.nix}.
+The main entrypoint is
+\href{https://github.com/yurrriq/dotfiles/blob/main/flake.nix}{flake.nix},
+which defines a \hrefootnote{https://nixos.wiki/wiki/Flakes}{Nix Flake}.
+
+At the top-level, the flake defines [[<<inputs>>]] and [[<<outputs>>]].
 
 <<flake.nix>>=
 {
@@ -22,6 +26,14 @@ The main entrypoint is \hrefootnote{https://github.com/yurrriq/dotfiles/blob/mai
 @
 
 \section{Inputs}
+\label{sec:inputs}
+
+The \hrefootnote{https://github.com/nix-community/emacs-overlay}{Emacs overlay}
+\say{comes with extra functions to generate an Emacs closure from various types
+  of dependency declaration.} Notably, \nix{emacsWithPackagesFromUsePackage},
+which generates an Emacs closure from an Emacs config file, by way of
+\hrefootnote{https://jwiegley.github.io/use-package/}{\emacs{use-package}}.  See
+\hyperref[sec:emacs]{the Emacs section} on page~\pageref{sec:emacs} for usage.
 
 <<inputs>>=
 emacs-overlay = {
@@ -31,7 +43,7 @@ emacs-overlay = {
 @
 
 \hrefootnote{https://github.com/nix-community/home-manager}{home-manager} is an
-invaluable tool for managing deterministic \bash{$HOME}.
+invaluable tool for managing a deterministic \bash{$HOME}.
 
 <<inputs>>=
 home-manager = {
@@ -40,6 +52,11 @@ home-manager = {
 };
 @
 
+\href{https://github.com/yurrriq/naal}{naal} is a literate
+\hrefootnote{https://core.tcl-lang.org/expect/index}{Expect} script I wrote,
+for non-interactive
+\href{https://github.com/sportradar/aws-azure-login}{AWS Azure Login}.
+
 <<inputs>>=
 naal = {
   url = "github:yurrriq/naal";
@@ -47,14 +64,26 @@ naal = {
 };
 @
 
+\hrefootnote{https://github.com/NixOS/nixos-hardware}{nixos-hardware} is
+\say{a collection of NixOS modules covering hardware quirks.}
+
 <<inputs>>=
 nixos-hardware.url = "github:nixos/nixos-hardware";
 @
+
+Of course, pin a version of the
+\hrefootnote{https://github.com/NixOS/nixpkgs}{Nix Packages collection}.
 
 <<inputs>>=
 nixpkgs.url = "github:nixos/nixpkgs/release-21.05";
 nixpkgs-unstable.url = "github:nixos/nixpkgs";
 @
+
+The \hrefootnote{https://github.com/nix-community/NUR}{Nix User Repository}
+provides \say{user contributed Nix packages.} Notably, I use some of
+\href{https://rycee.net}{Robert Helgesson}'s
+\hrefootnote{https://gitlab.com/rycee/nur-expressions/-/blob/master/pkgs/firefox-addons/default.nix}{Firefox
+  add-ons} (see \hyperref[sec:firefox]{Firefox} on page~\pageref{sec:firefox}).
 
 <<inputs>>=
 nur.url = "github:nix-community/nur";

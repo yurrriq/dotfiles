@@ -27,6 +27,7 @@ stdenv.mkDerivation rec {
           datatool
           datetime
           dirtytalk
+          fancyref
           fmtcount
           framed
           frankenstein
