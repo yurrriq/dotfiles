@@ -14,7 +14,6 @@ in
   <<Configure the LUKS device>>
   <<Configure the environment>>
   <<Configure the file systems>>
-  <<Tweak hardware config>>
   <<Configure Bluetooth>>
   <<Configure PulseAudio and OpenGL>>
   <<Configure home-manager>>
@@ -26,7 +25,7 @@ in
 }
 @
 
-Configure the \ref{sec:location}\todor{FIXME} \gls{module}.
+Configure the \hyperref[sec:location]{\nix{location}} \gls{module}.
 
 <<Set the location to MSP>>=
 airportCode = "MSP";
@@ -81,29 +80,6 @@ fileSystems."/var/lib/docker/overlay2" = {
   options = [ "bind" ];
 };
 @
-
-\todoo{Figure out wtf is going on here}%
-\hrefootnote{https://github.com/NixOS/nixpkgs/issues/24711}{NixOS/nixpkgs\#24711}
-
-<<Tweak hardware config>>=
-hardware.bumblebee.enable = false;
-hardware.nvidiaOptimus.disable = false;
-@
-
-\begin{minted}{nix}
-  hardware.bumblebee.enable = true;
-  hardware.bumblebee.connectDisplay = true;
-  hardware.bumblebee.pmMethod = "bbswitch";
-  hardware.opengl.driSupport32Bit = true;
-  hardware.nvidia = {
-    modesetting.enable = true;
-    optimus_prime = {
-      enable = true;
-      nvidiaBusId = "PCI:1:0:0";
-      intelBusId = "PCI:0:2:0";
-    };
-  };
-\end{minted}
 
 <<Configure Bluetooth>>=
 services.blueman.enable = true;

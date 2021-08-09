@@ -74,6 +74,8 @@
       };
     in
     {
+      overlay = lib.composeManyExtensions (lib.attrValues self.overlays);
+
       overlays = {
         fish-completions = final: prev: {
           fish-kubectl-completions = prev.callPackage ./pkgs/shells/fish/kubectl-completions { };
@@ -119,19 +121,16 @@
             ;
         };
       };
-
       devShell.x86_64-linux = pkgs.callPackage ./shell.nix {
         inherit pkgs;
         yurrriq-dotfiles = self.defaultPackage.x86_64-linux;
       };
-
       packages.x86_64-linux = {
         fish-kubectl-completions = pkgs.callPackage ./pkgs/shells/fish/kubectl-completions { };
         yurrriq-dotfiles = pkgs.callPackage ./default.nix { inherit pkgs; };
       };
 
       defaultPackage.x86_64-linux = self.packages.x86_64-linux.yurrriq-dotfiles;
-
       nixosModules = {
         applications = import ./modules/applications.nix;
 
@@ -144,12 +143,10 @@
         location = import ./modules/location.nix;
 
         nix = import ./modules/nix.nix;
-
         nixPath = {
           nix.nixPath = lib.mapAttrsToList (n: v: "${n}=${v}")
             (lib.filterAttrs (n: _: n != "self") inputs);
         };
-
         nixRegistry = {
           nix.registry = {
             home-manager.flake = inputs.home-manager;
@@ -158,9 +155,7 @@
             nur.flake = inputs.nur;
           };
         };
-
         nixos = import ./modules/nixos.nix;
-
         nixpkgs = {
           nixpkgs.config.allowUnfreePredicate = pkgNameElem [
             "lastpass-password-manager"
@@ -172,16 +167,15 @@
             "steam-original"
             "steam-runtime"
           ];
-          nixpkgs.overlays = lib.attrValues self.overlays ++ [
+          nixpkgs.overlays = [
+            self.overlay
             inputs.emacs-overlay.overlay
             inputs.naal.overlays.naal
             inputs.nur.overlay
           ];
         };
-
         virtualisation = import ./modules/virtualisation.nix;
       };
-
       nixosConfigurations = {
         "nixps" = mkSystem "nixps" "dell-xps-15-9560-intel";
         "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-7390";

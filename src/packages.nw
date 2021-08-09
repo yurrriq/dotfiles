@@ -1,4 +1,5 @@
 \section{kubectl completions for fish}
+\label{sec:fish-kubectl-completions}
 
 A derivation for
 \hrefootnote{https://github.com/evanlucas/fish-kubectl-completions}{%
@@ -27,6 +28,7 @@ stdenv.mkDerivation rec {
 @ %def fish-kubectl-completions
 
 \section{Additional Node packages}
+\label{sec:node-packages}
 
 Augment the upstream \nix{nodePackages}. At the moment, add only
 \hrefootnote{https://www.npmjs.com/package/codeowners}{codeowners}.

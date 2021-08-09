@@ -2,7 +2,8 @@ The main entrypoint is
 \href{https://github.com/yurrriq/dotfiles/blob/main/flake.nix}{flake.nix},
 which defines a \hrefootnote{https://nixos.wiki/wiki/Flakes}{Nix Flake}.
 
-At the top-level, the flake defines [[<<inputs>>]] and [[<<outputs>>]].
+At the top-level, the flake defines \hyperref[sec:inputs}{\nix{inputs}} and
+\hyperref[sec:outputs]{\nix{outputs}}.
 
 <<flake.nix>>=
 {
@@ -28,11 +29,13 @@ At the top-level, the flake defines [[<<inputs>>]] and [[<<outputs>>]].
 \section{Inputs}
 \label{sec:inputs}
 
+\subsection{emacs-overlay}
+
 The \hrefootnote{https://github.com/nix-community/emacs-overlay}{Emacs overlay}
 \say{comes with extra functions to generate an Emacs closure from various types
   of dependency declaration.} Notably, \nix{emacsWithPackagesFromUsePackage},
 which generates an Emacs closure from an Emacs config file, by way of
-\hrefootnote{https://jwiegley.github.io/use-package/}{\emacs{use-package}}.  See
+\hrefootnote{https://jwiegley.github.io/use-package/}{\elisp{use-package}}.  See
 \hyperref[sec:emacs]{the Emacs section} on page~\pageref{sec:emacs} for usage.
 
 <<inputs>>=
@@ -41,6 +44,8 @@ emacs-overlay = {
   inputs.nixpkgs.follows = "nixpkgs";
 };
 @
+
+\subsection{home-manager}
 
 \hrefootnote{https://github.com/nix-community/home-manager}{home-manager} is an
 invaluable tool for managing a deterministic \bash{$HOME}.
@@ -51,6 +56,8 @@ home-manager = {
   inputs.nixpkgs.follows = "nixpkgs";
 };
 @
+
+\subsection{naal}
 
 \href{https://github.com/yurrriq/naal}{naal} is a literate
 \hrefootnote{https://core.tcl-lang.org/expect/index}{Expect} script I wrote,
@@ -64,6 +71,8 @@ naal = {
 };
 @
 
+\subsection{nixos-hardware}
+
 \hrefootnote{https://github.com/NixOS/nixos-hardware}{nixos-hardware} is
 \say{a collection of NixOS modules covering hardware quirks.}
 
@@ -71,13 +80,19 @@ naal = {
 nixos-hardware.url = "github:nixos/nixos-hardware";
 @
 
-Of course, pin a version of the
+\subsection{nixpkgs}
+
+Of course, pin a stable version of the
 \hrefootnote{https://github.com/NixOS/nixpkgs}{Nix Packages collection}.
+
+Additionally, pin an unstable version of the collection.
 
 <<inputs>>=
 nixpkgs.url = "github:nixos/nixpkgs/release-21.05";
 nixpkgs-unstable.url = "github:nixos/nixpkgs";
 @
+
+\subsection{NUR}
 
 The \hrefootnote{https://github.com/nix-community/NUR}{Nix User Repository}
 provides \say{user contributed Nix packages.} Notably, I use some of
@@ -90,32 +105,68 @@ nur.url = "github:nix-community/nur";
 @
 
 \section{Outputs}
+\label{sec:outputs}
 
-\begin{minted}{nix}
-  overlay = final: prev: {};
-\end{minted}
+\subsection{Overlays}
+
+Use \nix{composeManyExtensions} to compose all the [[<<overlays>>]] into one.
+
+\marginnote{%
+  \say{%
+    Compose several extending functions of the type expected by \nix{extends} into
+    one where changes made in preceding functions are made available to subsequent
+    ones.%
+  } --- \href{https://github.com/NixOS/nixpkgs/commit/c3b35f21}{NixOS/nixpkgs@c3b35f21}%
+}
 
 <<outputs>>=
-overlays = {
-  <<Overlays>>
-};
+overlay = lib.composeManyExtensions (lib.attrValues self.overlays);
 
+overlays = {
+  <<overlays>>
+};
+@
+
+\subsection{Development environment}
+
+\todoo{Document \nix{devShell}}
+
+<<outputs>>=
 devShell.x86_64-linux = pkgs.callPackage ./shell.nix {
   inherit pkgs;
   yurrriq-dotfiles = self.defaultPackage.x86_64-linux;
 };
+@
 
+\subsection{Packages}
+
+See \hyperref[chap:packages]{Packages}.
+
+<<outputs>>=
 packages.x86_64-linux = {
   fish-kubectl-completions = pkgs.callPackage ./pkgs/shells/fish/kubectl-completions { };
   yurrriq-dotfiles = pkgs.callPackage ./default.nix { inherit pkgs; };
 };
 
 defaultPackage.x86_64-linux = self.packages.x86_64-linux.yurrriq-dotfiles;
+@
 
+\subsection{Modules}
+
+\todoo{Document \nix{nixosModules}}
+
+<<outputs>>=
 nixosModules = {
   <<Modules>>
 };
+@
 
+\subsection{NixOS configurations}
+
+Define system configurations for \hyperref[sec:nixps]{my personal laptop} and
+\hyperref[sec:sruxps]{my work laptop}.
+
+<<outputs>>=
 nixosConfigurations = {
   "nixps" = mkSystem "nixps" "dell-xps-15-9560-intel";
   "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-7390";
@@ -123,6 +174,9 @@ nixosConfigurations = {
 @
 
 \subsection{Variables}
+
+Define a helper function, [[mkSystem]], for creating system configurations.
+\todoo{Document \nix{mkSystem}}
 
 \begin{minted}{haskell}
   mkSystem :: String -> String -> AttrSet
@@ -159,6 +213,8 @@ mkSystem = name: machine: lib.nixosSystem {
 };
 @
 
+\todoo{Document \nix{pkgNameElem}}
+
 <<outputs variables>>=
 pkgNameElem = names: pkg:
   builtins.elem
@@ -168,6 +224,8 @@ pkgNameElem = names: pkg:
       else "")).name
     names;
 @
+
+\todoo{Document \nix{pkgs}}
 
 <<outputs variables>>=
 pkgs = import inputs.nixpkgs {
@@ -179,6 +237,8 @@ pkgs = import inputs.nixpkgs {
 };
 @
 
+\todoo{Document \nix{unstable-pkgs}}
+
 <<outputs variables>>=
 unstable-pkgs = import inputs.nixpkgs-unstable {
   config.allowUnfreePredicate = pkgNameElem [
@@ -186,17 +246,22 @@ unstable-pkgs = import inputs.nixpkgs-unstable {
   ];
   system = "x86_64-linux";
 };
-@
+@ % def unstable-pkgs
 
 \subsection{Overlays}
 
-<<Overlays>>=
+Define an overlay that adds [[fish-kubectl-completions]].\todor{Fix this noweb xref}
+
+<<overlays>>=
 fish-completions = final: prev: {
   fish-kubectl-completions = prev.callPackage ./pkgs/shells/fish/kubectl-completions { };
 };
 @
 
-<<Overlays>>=
+Define an overlay that adds \hyperref[sec:node-packages]{my custom
+  \nix{nodePackages}}.
+
+<<overlays>>=
 nodePackages = final: prev: {
   nodePackages =
     unstable-pkgs.nodePackages // prev.callPackage ./pkgs/development/node-packages {
@@ -205,7 +270,11 @@ nodePackages = final: prev: {
 };
 @
 
-<<Overlays>>=
+Define an overlay that overrides
+\hrefootnote{https://www.cs.tufts.edu/~nr/noweb/}{noweb} to build with a
+non-graphical version of \hrefootnote{https://www2.cs.arizona.edu/icon/}{Icon}.
+
+<<overlays>>=
 noweb = final: prev: {
   noweb = unstable-pkgs.noweb.override {
     icon-lang = unstable-pkgs.icon-lang.override {
@@ -215,7 +284,12 @@ noweb = final: prev: {
 };
 @
 
-<<Overlays>>=
+Define an overlay to overrides several packages with their counterparts from
+[[unstable-pkgs]].
+
+\todoo{Highlight especially interesting packages in \nix{overlays.unstable}}
+
+<<overlays>>=
 unstable = final: prev: {
   inherit (unstable-pkgs)
     autojump
@@ -247,6 +321,8 @@ unstable = final: prev: {
 
 \subsection{NixOS Modules}
 
+\todoo{Document (or better yet: refactor) the other \nix{nixosModules}}
+
 <<Modules>>=
 applications = import ./modules/applications.nix;
 
@@ -259,12 +335,20 @@ common = import ./modules/common.nix;
 location = import ./modules/location.nix;
 
 nix = import ./modules/nix.nix;
+@
 
+\todoo{Document this \nix{nixPath} hack}
+
+<<Modules>>=
 nixPath = {
   nix.nixPath = lib.mapAttrsToList (n: v: "${n}=${v}")
     (lib.filterAttrs (n: _: n != "self") inputs);
 };
+@
 
+\todoo{Document \nix{nixRegistry}}
+
+<<Modules>>=
 nixRegistry = {
   nix.registry = {
     home-manager.flake = inputs.home-manager;
@@ -273,9 +357,15 @@ nixRegistry = {
     nur.flake = inputs.nur;
   };
 };
+@
 
+<<Modules>>=
 nixos = import ./modules/nixos.nix;
+@
 
+\todoo{Document \nix{nixpkgs} config}
+
+<<Modules>>=
 nixpkgs = {
   nixpkgs.config.allowUnfreePredicate = pkgNameElem [
     "lastpass-password-manager"
@@ -287,13 +377,18 @@ nixpkgs = {
     "steam-original"
     "steam-runtime"
   ];
-  nixpkgs.overlays = lib.attrValues self.overlays ++ [
+  nixpkgs.overlays = [
+    self.overlay
     inputs.emacs-overlay.overlay
     inputs.naal.overlays.naal
     inputs.nur.overlay
   ];
 };
+@
 
+See \hyperref[sec:virtualisation]{Virtualisation}.
+
+<<Modules>>=
 virtualisation = import ./modules/virtualisation.nix;
 @
 
