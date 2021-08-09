@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "fish-kubectl-completions";
-  version = "f32c4658";
+  version = "bbe3b831";
 
   src = fetchFromGitHub {
     owner = "evanlucas";
     repo = pname;
     rev = version;
-    hash = "sha256-7bZV1bONJggj8c3J2J8DFTrRML0J7HCsddiRFZ6raO8=";
+    hash = "sha256-+jo6Zx6nlA5QhQ+3Vru+QbKjCwIxPEvrlKWctffG3OQ=";
   };
   dontBuild = true;
   dontCheck = true;

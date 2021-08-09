@@ -19,8 +19,11 @@ stow       := stow ${stow_flags}
 
 NW_SRCS := $(shell find src -name '*.nw')
 
-SRCS := $(shell awk '/<<[^ *]+\.\w+>>=$$/{ gsub(/(<<|>>=)/, ""); print $$0 }' ${NW_SRCS} | sort -u)
-NIX_SRCS := $(filter %.nix, ${SRCS})
+WEIRD_SRCS := \
+pkgs/development/node-packages/node-packages.json \
+pkgs/shells/fish/kubectl-completions/default.nix
+SRCS := $(filter-out ${WEIRD_SRCS}, $(shell awk '/<<[^ *]+\.\w+>>=$$/{ gsub(/(<<|>>=)/, ""); print $$0 }' ${NW_SRCS} | sort -u))
+NIX_SRCS := $(filter %.nix, ${SRCS}) pkgs/development/node-packages/node-packages.nix
 SH_SRCS := $(filter %.sh, ${SRCS})
 OTHER_SRCS := $(filter-out ${NIX_SRCS} ${SH_SRCS} ${TEX_SRCS}, ${SRCS})
 TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
@@ -33,7 +36,7 @@ all: generate-config srcs docs/dotfiles.pdf
 
 
 .PHONY: srcs
-srcs: nix-srcs ${SH_SRCS} ${OTHER_SRCS}
+srcs: nix-srcs ${SH_SRCS} ${OTHER_SRCS} ${WEIRD_SRCS}
 
 
 .PHONY: nix-srcs
@@ -87,6 +90,20 @@ src/all.defs: ${DEFS}
 # .INTERMEDIATE: ${TEX_SRCS}
 src/%.tex: src/%.nw src/all.defs
 	@ noweave -delay -indexfrom src/all.defs -latex -n -filter fix-underscores $^ ${cpif} $@
+
+
+pkgs/development/node-packages/node-packages.json: src/packages.nw
+	@ mkdir -p $(@D)
+	@ notangle -R$@ $< ${cpif} $@
+
+
+pkgs/development/node-packages/node-packages.nix: pkgs/development/node-packages/node-packages.json
+	@ ${MAKE} -C $(@D)
+
+
+pkgs/shells/fish/kubectl-completions/default.nix: src/packages.nw
+	@ mkdir -p $(@D)
+	@ notangle -R$@ $< ${cpif} $@
 
 
 ${SRCS}::

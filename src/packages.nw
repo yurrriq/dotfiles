@@ -1,0 +1,38 @@
+\section{kubectl completions for fish}
+
+A derivation for
+\hrefootnote{https://github.com/evanlucas/fish-kubectl-completions}{%
+  \fish{kubectl} completions for \fish{fish}}, since they're not provided
+upstream.
+
+<<pkgs/shells/fish/kubectl-completions/default.nix>>=
+{ stdenv, fetchFromGitHub }:
+
+stdenv.mkDerivation rec {
+  pname = "fish-kubectl-completions";
+  version = "bbe3b831";
+
+  src = fetchFromGitHub {
+    owner = "evanlucas";
+    repo = pname;
+    rev = version;
+    hash = "sha256-+jo6Zx6nlA5QhQ+3Vru+QbKjCwIxPEvrlKWctffG3OQ=";
+  };
+  dontBuild = true;
+  dontCheck = true;
+  installPhase = ''
+    install -m555 -Dt $out/share/fish/vendor_completions.d/ completions/kubectl.fish
+  '';
+}
+@ %def fish-kubectl-completions
+
+\section{Additional Node packages}
+
+Augment the upstream \nix{nodePackages}. At the moment, add only
+\hrefootnote{https://www.npmjs.com/package/codeowners}{codeowners}.
+
+<<pkgs/development/node-packages/node-packages.json>>=
+[
+  "codeowners"
+]
+@ %def codeowners
