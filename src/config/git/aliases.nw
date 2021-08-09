@@ -9,42 +9,42 @@
 
   programs.fish.shellAbbrs = lib.mkIf (config.programs.fish.enable) {
     g = "git";
-    gd = "git d";
-    gdc = "git dc";
+    gd = "git diff";
+    gdc = "git diff --cached";
     gm = "git merge";
-    gs = "git st";
+    gs = "git status --short --untracked-files=no";
     gt = "git tree";
   };
 
   programs.git.aliases = rec {
-    ap = "add -p";
+    ap = "add --patch";
     bm = "branch --merged";
     bnm = "branch --no-merged";
     ca = "commit --amend";
-    cam = "${ca} -m";
+    cam = "${ca} --message";
     can = "${ca} --no-edit";
-    cans = "${can} -S";
-    cas = "${ca} -S";
-    casm = "${cas} -m";
-    cm = "commit -m";
-    cnm = "commit -nm";
+    cans = "${can} --gpg-sign";
+    cas = "${ca} --gpg-sign";
+    casm = "${cas} --message";
+    cm = "commit --message";
+    cnm = "commit --no-verify --message";
     co = "checkout";
     cob = "${co} -b";
     # FIXME: conflicts with git-extras
     # cp = "cherry-pick";
     cpa = "cherry-pick --abort";
     cpc = "cherry-pick --continue";
-    csm = "commit -S -m";
+    csm = "commit --gpg-sign --mesage";
     d = "diff";
     dad = "add";
     dc = "diff --cached";
     ds = "diff --stat";
-    ffco = "flow feature checkout";
-    ffr = "flow feature rebase";
-    ffs = "flow feature start";
-    frf = "flow release finish";
-    frfs = "flow release finish -s";
-    frs = "flow release start";
+    # ffco = "flow feature checkout";
+    # ffr = "flow feature rebase";
+    # ffs = "flow feature start";
+    # frf = "flow release finish";
+    # frfs = "flow release finish -s";
+    # frs = "flow release start";
     r = "reset";
     rb = "rebase";
     rba = "rebase --abort";
@@ -59,7 +59,8 @@
     sp = "stash pop";
     spa = "stash --patch";
     ss = "stash save";
-    st = "status -s";
+    st = "status --short";
+    stu = "status --short --untracked-files=no";
     stat = "status";
     tree = "log --all --graph --oneline";
   };
