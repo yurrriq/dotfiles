@@ -87,6 +87,7 @@ Null prefix argument turns off the mode."
 (use-package paredit)
 
 (use-package rainbow-delimiters)
+(use-package rainbow-mode)
 (use-package elixir-mode)
 (use-package fish-mode)
 (use-package gap-mode)
