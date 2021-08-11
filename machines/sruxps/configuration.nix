@@ -83,14 +83,31 @@ in
 
   services.tlp.enable = true;
 
-  services.xserver.displayManager.autoLogin = {
-    enable = true;
-    user = username;
-  };
+  services.xserver = {
+    config = ''
+      Section "Device"
+        Identifier  "Intel Graphics"
+        Driver      "intel"
+        Option      "TearFree"        "true"
+        Option      "SwapbuffersWait" "true"
+        BusID       "PCI:0:2:0"
+      EndSection
+    '';
 
-  services.xserver.monitorSection = ''
-    DisplaySize 406 228
-  '';
+    displayManager.autoLogin = {
+      enable = true;
+      user = username;
+    };
+
+    monitorSection = ''
+      DisplaySize 406 228
+    '';
+
+    screenSection = ''
+      Option         "AllowIndirectGLXProtocol" "off"
+      Option         "TripleBuffer" "on"
+    '';
+  };
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;

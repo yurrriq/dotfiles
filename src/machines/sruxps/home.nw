@@ -174,8 +174,10 @@ super-productivity
 
 <<Configure picom>>=
 services.picom = {
-  backend = "xrender";
-  refreshRate = 60;
+  experimentalBackends = true;
+  extraOptions = ''
+    unredir-if-possible = true;
+  '';
   vSync = true;
 };
 @
