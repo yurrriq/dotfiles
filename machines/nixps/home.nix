@@ -46,4 +46,8 @@
     winetricks
     zoom-us
   ];
+  home.keyboard.options = [
+    "compose:ralt"
+    "ctrl:nocaps"
+  ];
 }

@@ -6,6 +6,10 @@
   <<Import some modules>>
   <<Configure account>>
   <<Add some more user packages>>
+  home.keyboard.options = [
+    "compose:ralt"
+    "ctrl:nocaps"
+  ];
 }
 @
 
