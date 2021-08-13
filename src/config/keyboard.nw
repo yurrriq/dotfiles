@@ -1,0 +1,14 @@
+\section{Keyboard}
+
+<<config/keyboard.nix>>=
+{ ... }:
+
+{
+
+  home.keyboard.options = [
+    "compose:ralt"
+    "ctrl:nocaps"
+  ];
+
+}
+@

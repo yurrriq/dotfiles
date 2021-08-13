@@ -15,6 +15,7 @@
     ../../config/gpg.nix
     ../../config/htop.nix
     ../../config/jq.nix
+    ../../config/keyboard.nix
     ../../config/kitty.nix
     ../../config/man.nix
     ../../config/password-store.nix
