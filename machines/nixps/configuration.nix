@@ -33,6 +33,8 @@ in
     fsType = "none";
     options = [ "bind" ];
   };
+  hardware.bumblebee.enable = false;
+  hardware.nvidiaOptimus.disable = false;
   services.blueman.enable = true;
   hardware.bluetooth = {
     enable = true;

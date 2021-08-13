@@ -14,6 +14,7 @@ in
   <<Configure the LUKS device>>
   <<Configure the environment>>
   <<Configure the file systems>>
+  <<Tweak hardware config>>
   <<Configure Bluetooth>>
   <<Configure PulseAudio and OpenGL>>
   <<Configure home-manager>>
@@ -79,6 +80,11 @@ fileSystems."/var/lib/docker/overlay2" = {
   fsType = "none";
   options = [ "bind" ];
 };
+@
+
+<<Tweak hardware config>>=
+hardware.bumblebee.enable = false;
+hardware.nvidiaOptimus.disable = false;
 @
 
 <<Configure Bluetooth>>=
