@@ -11,6 +11,7 @@ This modules manages some common configuration on NixOS systems.
   <<Configure location>>
   <<Enable networkmanager>>
   <<Configure services>>
+  hardware.acpilight.enable = true;
   <<Configure audio>>
   system.stateVersion = "21.05";
 }

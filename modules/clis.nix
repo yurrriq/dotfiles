@@ -25,7 +25,6 @@
       tree
       watch
       xclip
-      xorg.xbacklight
       yq
       playerctl
       wirelesstools

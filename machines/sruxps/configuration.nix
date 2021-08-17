@@ -53,6 +53,7 @@ in
       };
     };
   };
+  hardware.acpilight.enable = true;
   hardware.opengl.enable = true;
   home-manager.users."${username}" = import ./home.nix;
   networking.hostName = "MSP-EBAILEY01";
