@@ -34,6 +34,8 @@
     # cp = "cherry-pick";
     cpa = "cherry-pick --abort";
     cpc = "cherry-pick --continue";
+    cpm = "cherry-pick -xm1";
+    cpx = "cherry-pick -x";
     csm = "commit --gpg-sign --mesage";
     d = "diff";
     dad = "add";
