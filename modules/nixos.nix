@@ -52,7 +52,6 @@
       xkbOptions = "ctrl:nocaps,compose:ralt";
     };
   };
-  hardware.acpilight.enable = true;
   hardware.pulseaudio = {
     enable = true;
     extraModules = [ pkgs.pulseaudio-modules-bt ];

@@ -23,6 +23,9 @@ in
   <<Configure sudo>>
   <<Configure X Server>>
   <<Configure user>>
+  environment.systemPackages = with pkgs; [
+    xorg.xbacklight
+  ];
 }
 @
 
