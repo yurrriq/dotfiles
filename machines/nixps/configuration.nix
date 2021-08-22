@@ -70,7 +70,10 @@ in
       enable = true;
       user = username;
     };
-    dpi = 180;
+    monitorSection = ''
+      DisplaySize 508 285
+    '';
+    dpi = 220;
   };
   users.mutableUsers = false;
   users.users."${username}" = {
