@@ -139,7 +139,9 @@
         nix = import ./modules/nix.nix;
         nixPath = {
           nix.nixPath = lib.mapAttrsToList (n: v: "${n}=${v}")
-            (lib.filterAttrs (n: _: n != "self") inputs);
+            (lib.filterAttrs (n: _: n != "self") inputs) ++ [
+            "nixos-config=/etc/nixos/configuration.nix"
+          ];
         };
         nixRegistry = {
           nix.registry = {
