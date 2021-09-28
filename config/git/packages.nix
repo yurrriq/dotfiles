@@ -26,7 +26,7 @@
       ]
     ) ++ (
       with nodePackages; [
-        codeowners
+        # codeowners
       ]
     )
   );

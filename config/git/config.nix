@@ -11,6 +11,7 @@
         newNormal = "green bold";
         newHighlight = "green bold 22";
       };
+
       diff = {
         meta = 227;
         frag = "magenta bold";
@@ -19,6 +20,9 @@
         new = "green bold";
         whitespace = "red reverse";
       };
+
+      init.defaultBranch = "main";
+
       status = {
         added = "green";
         changed = "yellow";
