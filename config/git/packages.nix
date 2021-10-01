@@ -24,10 +24,6 @@
         hub
         lab
       ]
-    ) ++ (
-      with nodePackages; [
-        # codeowners
-      ]
     )
   );
 

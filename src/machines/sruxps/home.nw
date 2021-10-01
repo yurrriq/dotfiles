@@ -7,6 +7,7 @@
   <<Configure the primary email account>>
   <<Configure Docker credentials>>
   <<Configure a convenient high-level .envrc>>
+  <<Configure the keyboard>>
   home.packages = with pkgs; [
     <<Install some user packages>>
   ];
@@ -80,6 +81,15 @@ home.file."src/gitlab.sportradar.ag/.envrc".text = ''
          GITLAB_TOKEN="$CI_JOB_TOKEN"
   export GITLAB_REGISTRY_ACCESS_TOKEN="$CI_REGISTRY_PASSWORD"
 '';
+@
+
+<<Configure the keyboard>>=
+home.keyboard = {
+  options = [
+    "ctrl:nocaps"
+    "compose:ralt"
+  ];
+};
 @
 
 \newthought{Install some tools for authenticating} with AWS and Azure.

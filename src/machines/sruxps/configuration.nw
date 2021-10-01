@@ -17,6 +17,7 @@ in
   <<Install system-wide packages>>
   <<Configure the file systems>>
   <<Configure Bluetooth>>
+  hardware.acpilight.enable = true;
   hardware.opengl.enable = true;
   <<Configure home-manager>>
   <<Configure networking>>
