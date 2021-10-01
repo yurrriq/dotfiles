@@ -261,14 +261,14 @@ fish-completions = final: prev: {
 Define an overlay that adds \hyperref[sec:node-packages]{my custom
   \nix{nodePackages}}.
 
-<<overlays>>=
-nodePackages = final: prev: {
-  nodePackages =
-    unstable-pkgs.nodePackages // prev.callPackage ./pkgs/development/node-packages {
-      inherit (prev) pkgs nodejs;
-    };
-};
-@
+\begin{minted}{nix}
+  nodePackages = final: prev: {
+    nodePackages =
+      unstable-pkgs.nodePackages // prev.callPackage ./pkgs/development/node-packages {
+        inherit (prev) pkgs nodejs;
+      };
+  };
+\end{minted}
 
 Define an overlay that overrides
 \hrefootnote{https://www.cs.tufts.edu/~nr/noweb/}{noweb} to build with a

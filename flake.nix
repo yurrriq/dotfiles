@@ -80,12 +80,6 @@
         fish-completions = final: prev: {
           fish-kubectl-completions = prev.callPackage ./pkgs/shells/fish/kubectl-completions { };
         };
-        nodePackages = final: prev: {
-          nodePackages =
-            unstable-pkgs.nodePackages // prev.callPackage ./pkgs/development/node-packages {
-              inherit (prev) pkgs nodejs;
-            };
-        };
         noweb = final: prev: {
           noweb = unstable-pkgs.noweb.override {
             icon-lang = unstable-pkgs.icon-lang.override {
