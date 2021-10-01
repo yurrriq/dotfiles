@@ -24,6 +24,7 @@ in
     "coretemp"
     "i915.enable_psr=0"
   ];
+  boot.kernelParams = [ "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=igfx_off" ];
   environment.homeBinInPath = true;
   environment.pathsToLink = [
     "/lib/aspell"

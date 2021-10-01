@@ -13,6 +13,7 @@ in
   <<Configure the LUKS devices>>
   <<Configure vm.swappiness>>
   <<Add some kernel modules>>
+  boot.kernelParams = [ "acpi_rev_override" "mem_sleep_default=deep" "intel_iommu=igfx_off" ];
   <<Link some extra paths>>
   <<Install system-wide packages>>
   <<Configure the file systems>>
