@@ -3,6 +3,7 @@
   environment.systemPackages = with pkgs; (
     [
       (aspellWithDicts (dicts: [ dicts.en dicts.es dicts.nb dicts.sv ]))
+      ansifilter
       bind
       curl
       httpie

@@ -22,6 +22,7 @@
 
 
 <<Install some cross-platform command-line tools>>=
+ansifilter
 bind
 curl
 httpie
