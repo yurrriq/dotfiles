@@ -21,8 +21,6 @@
         whitespace = "red reverse";
       };
 
-      init.defaultBranch = "main";
-
       status = {
         added = "green";
         changed = "yellow";
@@ -60,6 +58,8 @@
     };
 
     fetch.prune = true;
+
+    init.defaultBranch = "main";
 
     interactive.diffFilter = "delta --color-only";
 
