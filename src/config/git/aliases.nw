@@ -36,7 +36,7 @@
     cpc = "cherry-pick --continue";
     cpm = "cherry-pick -xm1";
     cpx = "cherry-pick -x";
-    csm = "commit --gpg-sign --mesage";
+    csm = "commit --gpg-sign --message";
     d = "diff";
     dad = "add";
     dc = "diff --cached";
