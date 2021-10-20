@@ -58,8 +58,6 @@ in
   hardware.opengl.enable = true;
   home-manager.users."${username}" = import ./home.nix;
   networking.hostName = "MSP-EBAILEY01";
-  networking.interfaces.wlp2s0.useDHCP = true;
-  networking.useDHCP = false; # NOTE: Deprecated, so set it false.
   nix = {
     binaryCaches = [
       "https://sportradar.cachix.org"
