@@ -45,6 +45,6 @@
     steam
     tellico
     winetricks
-    # zoom-us
+    zoom-us
   ];
 }

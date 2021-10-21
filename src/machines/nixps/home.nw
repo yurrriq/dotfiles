@@ -61,6 +61,6 @@ home.packages = with pkgs; [
   steam
   tellico
   winetricks
-  # zoom-us
+  zoom-us
 ];
 @
