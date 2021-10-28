@@ -12,7 +12,7 @@
       dolphin
       libreoffice
       qpdfview
-      # FIXME: Electron 1.5.0 EOL
+      # FIXME: Electron 11.5.0 EOL
       # (signal-desktop.override { spellcheckerLanguage = "en_US"; })
     ]
   );

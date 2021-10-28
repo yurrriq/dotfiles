@@ -56,6 +56,12 @@
            GITLAB_TOKEN="$CI_JOB_TOKEN"
     export GITLAB_REGISTRY_ACCESS_TOKEN="$CI_REGISTRY_PASSWORD"
   '';
+  home.keyboard = {
+    options = [
+      "ctrl:nocaps"
+      "compose:ralt"
+    ];
+  };
   home.packages = with pkgs; [
     aws-iam-authenticator
     awscli
