@@ -180,7 +180,8 @@ nyxt
 for time/work tracking and syncing with Jira.
 
 <<Install some user packages>>=
-super-productivity
+# FIXME: Electron 11.5.0 EOL
+# super-productivity
 @
 
 <<Configure picom>>=

@@ -72,7 +72,8 @@
     kubectx
     stern
     zoom-us
-    super-productivity
+    # FIXME: Electron 11.5.0 EOL
+    # super-productivity
   ];
   services.picom = {
     experimentalBackends = true;
