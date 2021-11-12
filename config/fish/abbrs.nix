@@ -4,6 +4,9 @@
 
   programs.fish.shellAbbrs = {
     aal = "aws-azure-login --no-prompt";
+    da = "direnv allow";
+    dn = "direnv deny";
+    dr = "direnv reload";
     kc = "kubectl";
     kcd = "kubectl drain --delete-emptydir-data --ignore-daemonsets";
     kcnp = "kubectl get pods --field-selector=spec.nodeName=";

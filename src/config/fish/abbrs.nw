@@ -17,6 +17,7 @@
 
   programs.fish.shellAbbrs = {
     <<AWS Azure login abbreviation>>
+    <<Direnv fish abbreviations>>
     <<Kubernetes fish abbreviations>>
     <<Nix fish abbreviations>>
     <<ripgrep fish abbreviations>>
@@ -34,6 +35,14 @@ bit less annoying.
 aal = "aws-azure-login --no-prompt";
 @
 
+\newthought{\hrefootnote{https://direnv.net/}{direnv} is great} for
+directory-specific environments, and saving keystrokes is great, too.
+
+<<Direnv fish abbreviations>>=
+da = "direnv allow";
+dn = "direnv deny";
+dr = "direnv reload";
+@
 
 \newthought{\fish{kubectl} is very cumbersome} to type all the time.
 Using fish abbrevations, save some precious keystrokes.
