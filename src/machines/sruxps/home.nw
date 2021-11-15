@@ -177,11 +177,15 @@ nyxt
 
 
 \hrefootnote{https://super-productivity.com}{Super Productivity} is a nice tool
-for time/work tracking and syncing with Jira.
+for time/work tracking and syncing with Jira. For now, patch it to use Electron
+13. \todoo{Open a pull request to fix and update super-productivity.}
 
 <<Install some user packages>>=
-# FIXME: Electron 11.5.0 EOL
-# super-productivity
+(
+  super-productivity.override {
+    electron_11 = pkgs.electron_13;
+  }
+)
 @
 
 <<Configure picom>>=

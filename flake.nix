@@ -94,6 +94,7 @@
             conftest
             delta
             eksctl
+            electron_13
             kubectx
             kubelogin
             pass
