@@ -2,7 +2,7 @@ The main entrypoint is
 \href{https://github.com/yurrriq/dotfiles/blob/main/flake.nix}{flake.nix},
 which defines a \hrefootnote{https://nixos.wiki/wiki/Flakes}{Nix Flake}.
 
-At the top-level, the flake defines \hyperref[sec:inputs}{\nix{inputs}} and
+At the top-level, the flake defines \hyperref[sec:inputs]{\nix{inputs}} and
 \hyperref[sec:outputs]{\nix{outputs}}.
 
 <<flake.nix>>=
