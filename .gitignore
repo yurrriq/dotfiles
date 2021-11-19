@@ -1,3 +1,4 @@
+.direnv/
 /machines/*/secrets/*
 !/machines/*/secrets/*.enc
-/result*
+result*

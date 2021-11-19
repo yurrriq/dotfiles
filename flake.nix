@@ -97,6 +97,7 @@
             electron_13
             kubectx
             kubelogin
+            nix-direnv
             pass
             renderizer
             ripgrep
@@ -119,6 +120,35 @@
       devShell.x86_64-linux = pkgs.callPackage ./shell.nix {
         inherit pkgs;
         yurrriq-dotfiles = self.defaultPackage.x86_64-linux;
+      };
+      devShells.x86_64-linux = {
+        xmonad =
+          let
+            _pkgs = import inputs.nixpkgs-unstable {
+              overlays = [
+                inputs.emacs-overlay.overlay
+              ];
+              system = "x86_64-linux";
+            };
+            myXMonad =
+              _pkgs.haskellPackages.callCabal2nix "my-xmonad" ./config/xmonad { };
+          in
+          _pkgs.mkShell {
+            buildInputs = with _pkgs; [
+              cabal-install
+              ghcid
+              gitAndTools.pre-commit
+              haskell-language-server
+              haskellPackages.ormolu
+              haskellPackages.pointfree
+              (
+                emacsWithPackagesFromUsePackage {
+                  alwaysEnsure = true;
+                  config = ./config/xmonad/emacs.el;
+                }
+              )
+            ] ++ myXMonad.env.nativeBuildInputs;
+          };
       };
       packages.x86_64-linux = {
         fish-kubectl-completions = pkgs.callPackage ./pkgs/shells/fish/kubectl-completions { };
