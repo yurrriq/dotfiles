@@ -95,6 +95,7 @@
             delta
             eksctl
             electron_13
+            # TODO: haskellPackages
             kubectx
             kubelogin
             nix-direnv
@@ -117,9 +118,25 @@
             ;
         };
       };
-      devShell.x86_64-linux = pkgs.callPackage ./shell.nix {
-        inherit pkgs;
-        yurrriq-dotfiles = self.defaultPackage.x86_64-linux;
+      devShell.x86_64-linux = pkgs.mkShell {
+        inherit (self.defaultPackage.x86_64-linux) FONTCONFIG_FILE;
+        buildInputs = with pkgs; [
+          biber
+          cargo
+          git
+          gitAndTools.pre-commit
+          gnumake
+          gnupg
+          mkpasswd
+          nixpkgs-fmt
+          nodePackages.node2nix
+          python3Packages.pygments
+          # FIXME: python2Packages.pywatchman
+          shellcheck
+          shfmt
+          sops
+          stow
+        ] ++ self.defaultPackage.x86_64-linux.nativeBuildInputs;
       };
       devShells.x86_64-linux = {
         xmonad =
@@ -152,7 +169,7 @@
       };
       packages.x86_64-linux = {
         fish-kubectl-completions = pkgs.callPackage ./pkgs/shells/fish/kubectl-completions { };
-        yurrriq-dotfiles = pkgs.callPackage ./default.nix { inherit pkgs; };
+        yurrriq-dotfiles = pkgs.callPackage ./. { };
       };
 
       defaultPackage.x86_64-linux = self.packages.x86_64-linux.yurrriq-dotfiles;

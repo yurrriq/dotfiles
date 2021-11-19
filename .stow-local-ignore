@@ -13,8 +13,8 @@ latexmkrc
 machines
 Makefile
 .pre-commit-config.yaml
+result
 scripts
-shell.nix
 .sops.yaml
 src
 .stow-local-ignore

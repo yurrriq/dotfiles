@@ -1,9 +1,23 @@
-{ pkgs ? import <nixpkgs> { } }:
-with pkgs;
+{ stdenv
+, nix-gitignore
+, makeFontsConf
+, iosevka
+, gawk
+, noweb
+, python3Packages
+, texlive
+, which
+}:
+
 stdenv.mkDerivation rec {
   pname = "yurrriq-dotfiles";
   version = builtins.readFile ./VERSION;
-  src = nix-gitignore.gitignoreSource [ ".git/" "docs" "result" "machines/*/secrets/" ] ./.;
+  src = nix-gitignore.gitignoreSource [
+    ".git/"
+    "docs"
+    "result*"
+    "machines/*/secrets/"
+  ] ./.;
 
   FONTCONFIG_FILE = makeFontsConf {
     fontDirectories = [ iosevka ];
