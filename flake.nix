@@ -95,7 +95,7 @@
             delta
             eksctl
             electron_13
-            # TODO: haskellPackages
+            haskellPackages
             kubectx
             kubelogin
             nix-direnv
