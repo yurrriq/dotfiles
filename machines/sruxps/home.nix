@@ -64,7 +64,7 @@
   };
   home.packages = with pkgs; [
     aws-iam-authenticator
-    awscli
+    awscli2
     ec2instanceconnectcli
     nodePackages.aws-azure-login
     naal

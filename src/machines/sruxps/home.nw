@@ -106,7 +106,7 @@ non-interactive AWS Azure login.
 
 <<Install some user packages>>=
 aws-iam-authenticator
-awscli
+awscli2
 ec2instanceconnectcli
 nodePackages.aws-azure-login
 naal
