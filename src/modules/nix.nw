@@ -38,7 +38,7 @@ Enable Flakes and the Nix command.
 
 <<Configure extra options>>=
 extraOptions = ''
-  experimental-features = ca-references flakes nix-command
+  experimental-features = flakes nix-command
 '';
 @
 

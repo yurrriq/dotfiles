@@ -85,7 +85,7 @@
         buildInputs = [ python3 ];
         src = fetchurl {
           url = "https://raw.githubusercontent.com/GothenburgBitFactory/timewarrior/v${version}/ext/on-modify.timewarrior";
-          sha512 = "sha512-CaaELr0JaDJ/LNvwUGDQUQPoKEOapGkJMycD9ujv0DWgfTQzoYkw/JCDPChreT4xCEJ303sAx4NpUqb+260orw==";
+          sha512 = "sha512-GsDqetyfQOUU+VTZbgdKH1X6n5tM7q3Q0B5X/zk+JHgzw6vVk48IxGvCaDnpIJXCASIgSGsKLxLvv7RPDdlPAw==";
         };
         dontUnpack = true;
         installPhase = ''
