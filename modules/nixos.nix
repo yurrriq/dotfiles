@@ -58,5 +58,5 @@
     package = pkgs.pulseaudioFull;
   };
   sound.enable = true;
-  system.stateVersion = "21.05";
+  system.stateVersion = "21.11";
 }
