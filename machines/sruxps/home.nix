@@ -78,11 +78,7 @@
     kubectx
     stern
     zoom-us
-    (
-      super-productivity.override {
-        electron_11 = pkgs.electron_13;
-      }
-    )
+    super-productivity
   ];
   services.picom = {
     experimentalBackends = true;
