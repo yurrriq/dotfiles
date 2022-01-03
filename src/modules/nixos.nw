@@ -3,7 +3,7 @@
 This modules manages some common configuration on NixOS systems.
 
 <<modules/nixos.nix>>=
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   <<Configure boot loader>>

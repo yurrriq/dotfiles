@@ -4,7 +4,7 @@ The NiXPS configuration is an expression that takes, at least, \nix{config},
 \nix{lib}, and \nix{pkgs}.
 
 <<machines/nixps/configuration.nix>>=
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   username = "yurrriq";
 in

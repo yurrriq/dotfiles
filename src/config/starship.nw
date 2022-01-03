@@ -4,7 +4,7 @@
 infinitely customizable prompt for any shell!
 
 <<config/starship.nix>>=
-{ lib, ... }:
+{ ... }:
 {
   programs.starship = {
     enable = true;

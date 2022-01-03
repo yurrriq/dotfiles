@@ -1,7 +1,7 @@
 \subsection{home-manager configuration}
 
 <<machines/nixps/home.nix>>=
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
   <<Import some modules>>
   <<Configure account>>

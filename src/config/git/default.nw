@@ -1,5 +1,5 @@
 <<config/git/default.nix>>=
-{ config, lib, pkgs, ... }:
+{ config, ... }:
 
 {
   imports = [
