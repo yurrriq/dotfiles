@@ -9,6 +9,7 @@ import Data.Map (Map)
 import qualified Data.Map as M
 import Data.Maybe (catMaybes)
 import XMonad hiding ((|||))
+import XMonad.Actions.CycleWS (WSType (EmptyWS, NonEmptyWS), doTo, moveTo)
 import XMonad.Actions.Navigation2D
 import XMonad.Actions.RotSlaves
 import XMonad.Actions.Warp
@@ -24,6 +25,7 @@ import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Scratchpad
+import XMonad.Util.WorkspaceCompare (getSortByIndex)
 
 main :: IO ()
 main = xmonad =<< myXmobar myConfig
@@ -152,7 +154,12 @@ myKeys cfg =
       ("M-w", sendMessage (JumpToLayout "TwoPane")),
       ("M1-<Space>", spawn "rofi -modi combi,window -show combi -combi-modi run,drun"),
       ("C-M-M1-x", spawn "xmonad --restart"),
-      ("C-M-M1-c", spawn "systemctl --user picom.service")
+      ("C-M-M1-c", spawn "systemctl --user picom.service"),
+      ("C-M-<Left>", moveTo Prev NonEmptyWS),
+      ("C-M-<Right>", moveTo Next NonEmptyWS),
+      ("C-M-M1-<Left>", shiftAndMoveTo Prev EmptyWS),
+      ("C-M-M1-<Right>", shiftAndMoveTo Next EmptyWS),
+      ("C-M-M1-f", shiftAndMoveTo Next EmptyWS)
     ]
       ++ [ ( intercalate "-" (catMaybes [Just "M", maybeShift, Just key]),
              windows (f workspace)
@@ -162,6 +169,12 @@ myKeys cfg =
              (f, maybeShift) <-
                [(W.greedyView, Nothing), (W.shift, Just "S")]
          ]
+
+shiftAndMoveTo :: Direction1D -> WSType -> X ()
+shiftAndMoveTo dir t = doTo dir t getSortByIndex shiftAndMove
+
+shiftAndMove :: WorkspaceId -> X ()
+shiftAndMove n = windows (W.shift n) *> windows (W.greedyView n)
 
 toggleFloat :: X ()
 toggleFloat = withFocused $ \this ->
