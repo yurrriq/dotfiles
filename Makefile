@@ -160,3 +160,9 @@ generate-config: machines/${machine}/hardware-configuration.nix
 machines/${machine}/hardware-configuration.nix:
 	nixos-generate-config --root ${PWD} --dir /$(@D)
 	nixpkgs-fmt $@
+
+
+part ?= patch
+.PHONY: bump-version
+bump-version:
+	semver bump ${part} $(file <VERSION) | tr -d '\n' >VERSION
