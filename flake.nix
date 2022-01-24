@@ -94,7 +94,7 @@
             conftest
             delta
             eksctl
-            electron_13
+            electron
             haskellPackages
             kubectx
             kubelogin

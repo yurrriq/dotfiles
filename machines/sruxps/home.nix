@@ -78,7 +78,7 @@
     kubectx
     stern
     zoom-us
-    super-productivity
+    # super-productivity
   ];
   services.picom = {
     experimentalBackends = true;
