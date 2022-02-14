@@ -153,11 +153,23 @@ docker-credential-helpers
 docker-compose
 @
 
+<<Install some user packages>>=
+podman-compose
+@
+
 \newthought{Install some convenient Kubernetes tools.}
 
 <<Install some user packages>>=
+kubectl
 kubectx
 stern
+@
+
+\newthought{Install some tools for testing alert pipelines.}
+
+<<Install some user packages>>=
+fortune
+prometheus-alertmanager
 @
 
 \newthought{Install some miscellaneous GUI programs.}

@@ -75,8 +75,12 @@
     renderizer
     scc
     docker-credential-helpers
+    podman-compose
+    kubectl
     kubectx
     stern
+    fortune
+    prometheus-alertmanager
     zoom-us
     # super-productivity
   ];
