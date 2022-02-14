@@ -27,6 +27,10 @@
       watch
       xclip
       yq
+      mdcat
+      smos
+      nixpkgs-fmt
+      nixpkgs-review
       playerctl
       wirelesstools
     ]

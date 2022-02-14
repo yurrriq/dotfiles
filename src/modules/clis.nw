@@ -60,11 +60,22 @@ xclip
 yq
 @
 
+<<Install some cross-platform command-line tools>>=
+mdcat
+@
+
+<<Install some cross-platform command-line tools>>=
+smos
+@
+
+<<Install some cross-platform command-line tools>>=
+nixpkgs-fmt
+nixpkgs-review
+@
 
 <<Install some cross-platform command-line tools>>=
 playerctl
 @
-
 
 <<Install some cross-platform command-line tools>>=
 wirelesstools
