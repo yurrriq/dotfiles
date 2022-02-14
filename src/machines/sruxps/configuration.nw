@@ -9,6 +9,9 @@ let
   username = "e.bailey";
 in
 {
+  imports = [
+    <nixpkgs/nixos/modules/profiles/hardened.nix>
+  ];
   <<Set the location to MSP>>
   <<Configure the LUKS devices>>
   <<Configure vm.swappiness>>
