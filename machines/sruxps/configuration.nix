@@ -3,9 +3,6 @@ let
   username = "e.bailey";
 in
 {
-  imports = [
-    <nixpkgs/nixos/modules/profiles/hardened.nix>
-  ];
   airportCode = "MSP";
   boot.initrd.luks.devices = {
     cryptkey.device = "/dev/disk/by-uuid/2a44a760-206c-448d-a126-527b8b63f5d0";
