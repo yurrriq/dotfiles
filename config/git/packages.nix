@@ -13,14 +13,9 @@
       nix-prefetch-github
       sops
     ] ++ (
-      lib.optionals pkgs.stdenv.isLinux [
-        # git-cola
-      ]
-    ) ++ (
       with gitAndTools; [
         git-extras
         gita
-        # gitflow
         hub
         lab
       ]
