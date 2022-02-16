@@ -165,6 +165,10 @@ kubectx
 stern
 @
 
+<<Install some user packages>>=
+vault
+@
+
 \newthought{Install some tools for testing alert pipelines.}
 
 <<Install some user packages>>=

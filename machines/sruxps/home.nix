@@ -79,6 +79,7 @@
     kubectl
     kubectx
     stern
+    vault
     fortune
     prometheus-alertmanager
     zoom-us
