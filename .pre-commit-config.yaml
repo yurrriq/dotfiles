@@ -13,12 +13,6 @@ repos:
     name: Check pre-commit config
   repo: git://github.com/pre-commit/pre-commit-hooks
   rev: v4.0.1
-# FIXME
-# - hooks:
-#   - id: nixpkgs-fmt
-#     name: Format .nix files
-#   repo: git://github.com/nix-community/nixpkgs-fmt
-#   rev: v1.2.0
 - hooks:
   - args: ["--format=tty"]
     id: shell-lint
@@ -30,6 +24,12 @@ repos:
   repo: git://github.com/detailyang/pre-commit-shell
   rev: v1.0.6
 - hooks:
+  - description: Format nix code with nixpkgs-fmt.
+    id: nixpkgs-fmt
+    name: nixpkgs-fmt
+    entry: nixpkgs-fmt
+    language: system
+    files: \.nix$
   - description: Use Biber to format .bib files
     entry: scripts/format-biber.sh
     files: '.+\.bib$'

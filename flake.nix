@@ -122,7 +122,6 @@
         inherit (self.defaultPackage.x86_64-linux) FONTCONFIG_FILE;
         buildInputs = with pkgs; [
           biber
-          cargo
           git
           gitAndTools.pre-commit
           gnumake
