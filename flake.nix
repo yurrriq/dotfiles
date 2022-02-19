@@ -129,8 +129,6 @@
           mkpasswd
           nixpkgs-fmt
           nodePackages.node2nix
-          python3Packages.pygments
-          # FIXME: python2Packages.pywatchman
           semver-tool
           shellcheck
           shfmt
