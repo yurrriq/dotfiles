@@ -30,6 +30,7 @@ At the top-level, the flake defines \hyperref[sec:inputs]{\nix{inputs}} and
 \label{sec:inputs}
 
 \subsection{emacs-overlay}
+\label{subsec:inputs-emacs-overlay}
 
 The \hrefootnote{https://github.com/nix-community/emacs-overlay}{Emacs overlay}
 \say{comes with extra functions to generate an Emacs closure from various types
@@ -85,10 +86,13 @@ nixos-hardware.url = "github:nixos/nixos-hardware";
 Of course, pin a stable version of the
 \hrefootnote{https://github.com/NixOS/nixpkgs}{Nix Packages collection}.
 
+<<inputs>>=
+nixpkgs.url = "github:nixos/nixpkgs/release-21.11";
+@
+
 Additionally, pin an unstable version of the collection.
 
 <<inputs>>=
-nixpkgs.url = "github:nixos/nixpkgs/release-21.11";
 nixpkgs-unstable.url = "github:nixos/nixpkgs";
 @
 
@@ -109,15 +113,13 @@ nur.url = "github:nix-community/nur";
 
 \subsection{Overlays}
 
-Use \nix{composeManyExtensions} to compose all the [[<<overlays>>]] into one.
-
-\marginnote{%
+Use \nix{composeManyExtensions}\footnote{
   \say{%
     Compose several extending functions of the type expected by \nix{extends} into
     one where changes made in preceding functions are made available to subsequent
     ones.%
   } --- \href{https://github.com/NixOS/nixpkgs/commit/c3b35f21}{NixOS/nixpkgs@c3b35f21}%
-}
+} to compose all the [[<<overlays>>]] into one.
 
 <<outputs>>=
 overlay = lib.composeManyExtensions (lib.attrValues self.overlays);
@@ -129,7 +131,21 @@ overlays = {
 
 \subsection{Development environments}
 
-\todoo{Document \nix{devShell}}
+Define some development environments, which Nix will cache, including an unnamed
+default.  One of the main benefits is the super fast
+\hrefootnote{https://direnv.net}{direnv} integration.
+
+Define the default \nix{devShell}, including tools to build
+\hrefootnote{https://yurrriq.codes/dotfiles/dotfiles.pdf}{the PDF,}
+\hrefootnote{https://github.com/mozilla/sops}{manage secrets},
+\hrefootnote{https://linux.die.net/man/1/mkpasswd}{generate passwords},
+\hrefootnote{https://github.com/fsaintjacques/semver-tool}{bump the version},
+run \hrefootnote{https://github.com/nix-community/nixpkgs-fmt}{a}
+\hrefootnote{https://github.com/mvdan/sh}{few}
+\hrefootnote{https://www.shellcheck.net/}{linters} (with or without
+\hrefootnote{https://pre-commit.com}{pre-commit}), and
+\hrefootnote{https://www.gnu.org/software/stow/}{manage the non-Nix symlink
+  farm}.
 
 <<outputs>>=
 devShell.x86_64-linux = pkgs.mkShell {
@@ -152,7 +168,13 @@ devShell.x86_64-linux = pkgs.mkShell {
 };
 @
 
-Configure a development environment for my XMonad config.
+Configure a development environment for my
+\hrefootnote{https://xmonad.org}{XMonad} config. Use the
+\hyperref[subsec:inputs-emacs-overlay]{Emacs overlay} to configure a nice Emacs
+setup using \hrefootnote{https://emacs-lsp.github.io/lsp-haskell/}{lsp-haskell},
+\hrefootnote{https://github.com/tweag/ormolu}{Ormolu} to format Haskell code,
+and include \hrefootnote{https://github.com/bmillwood/pointfree}{pointfree}
+for... reasons.
 
 <<outputs>>=
 devShells.x86_64-linux = {
@@ -188,7 +210,7 @@ devShells.x86_64-linux = {
 
 \subsection{Packages}
 
-See \hyperref[chap:packages]{Packages}.
+See also: \hyperref[chap:packages]{Packages}.
 
 <<outputs>>=
 packages.x86_64-linux = {
@@ -196,12 +218,18 @@ packages.x86_64-linux = {
   yurrriq-dotfiles = pkgs.callPackage ./. { };
 };
 
+@
+
+The default package builds
+\hrefootnote{https://yurrriq.codes/dotfiles/dotfiles.pdf}{the PDF}.
+
+<<outputs>>=
 defaultPackage.x86_64-linux = self.packages.x86_64-linux.yurrriq-dotfiles;
 @
 
 \subsection{Modules}
 
-\todoo{Document \nix{nixosModules}}
+See \hyperref[subsec:modules]{Modules}.
 
 <<outputs>>=
 nixosModules = {
@@ -371,6 +399,7 @@ unstable = final: prev: {
 @
 
 \subsection{NixOS Modules}
+\label{subsec:modules}
 
 \todoo{Document (or better yet: refactor) the other \nix{nixosModules}}
 
