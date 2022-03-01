@@ -160,8 +160,11 @@ podman-compose
 \newthought{Install some convenient Kubernetes tools.}
 
 <<Install some user packages>>=
+krew
 kubectl
 kubectx
+kustomize
+lens
 stern
 @
 

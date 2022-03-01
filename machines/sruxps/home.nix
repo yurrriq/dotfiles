@@ -76,8 +76,11 @@
     scc
     docker-credential-helpers
     podman-compose
+    krew
     kubectl
     kubectx
+    kustomize
+    lens
     stern
     vault
     fortune

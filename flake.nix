@@ -97,8 +97,11 @@
             eksctl
             electron
             haskellPackages
+            krew
             kubectx
             kubelogin
+            kustomize
+            lens
             pass
             renderizer
             ripgrep
