@@ -11,19 +11,7 @@ integration, by default, and disable the zsh integration, since I don't use zsh.
   programs.direnv = {
     enable = true;
     enableZshIntegration = false;
-    <<Configure nix-direnv>>
   };
 
 }
-@
-
-Configure \hrefootnote{https://github.com/nix-community/nix-direnv}{nix-direnv}
-for fast, reproducible directory-local environments, by way of
-\hrefootnote{https://nixos.wiki/wiki/Flakes}{Nix flakes}.
-
-<<Configure nix-direnv>>=
-nix-direnv = {
-  enable = true;
-  enableFlakes = true;
-};
 @

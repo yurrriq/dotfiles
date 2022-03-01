@@ -93,12 +93,12 @@
             browserpass
             conftest
             delta
+            direnv
             eksctl
             electron
             haskellPackages
             kubectx
             kubelogin
-            nix-direnv
             pass
             renderizer
             ripgrep
