@@ -83,7 +83,7 @@
     fortune
     prometheus-alertmanager
     zoom-us
-    # super-productivity
+    super-productivity
   ];
   services.picom = {
     experimentalBackends = true;

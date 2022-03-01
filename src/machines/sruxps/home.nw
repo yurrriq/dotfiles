@@ -196,7 +196,7 @@ nyxt
 for time/work tracking and syncing with Jira.
 
 <<Install some user packages>>=
-# super-productivity
+super-productivity
 @
 
 <<Configure picom>>=

@@ -366,7 +366,7 @@ Define an overlay to overrides several packages with their counterparts from
 \todoo{Highlight especially interesting packages in \nix{overlays.unstable}}
 
 <<overlays>>=
-unstable = final: prev: {
+unstable = final: prev: prev.lib.fix (this: {
   inherit (unstable-pkgs)
     autojump
     browserpass
@@ -385,17 +385,19 @@ unstable = final: prev: {
     signal-desktop
     sops
     starship
-    super-productivity
     tomb
     yq
     zoom-us
     zoxide
     ;
+  super-productivity = unstable-pkgs.super-productivity.override {
+    inherit (this) electron;
+  };
   inherit (unstable-pkgs.python3Packages)
     bugwarrior
     ec2instanceconnectcli
     ;
-};
+});
 @
 
 \subsection{NixOS Modules}

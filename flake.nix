@@ -87,7 +87,7 @@
             };
           };
         };
-        unstable = final: prev: {
+        unstable = final: prev: prev.lib.fix (this: {
           inherit (unstable-pkgs)
             autojump
             browserpass
@@ -106,17 +106,19 @@
             signal-desktop
             sops
             starship
-            super-productivity
             tomb
             yq
             zoom-us
             zoxide
             ;
+          super-productivity = unstable-pkgs.super-productivity.override {
+            inherit (this) electron;
+          };
           inherit (unstable-pkgs.python3Packages)
             bugwarrior
             ec2instanceconnectcli
             ;
-        };
+        });
       };
       devShell.x86_64-linux = pkgs.mkShell {
         inherit (self.defaultPackage.x86_64-linux) FONTCONFIG_FILE;
