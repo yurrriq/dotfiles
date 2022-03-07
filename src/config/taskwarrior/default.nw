@@ -22,7 +22,7 @@ using \hrefootnote{https://taskwarrior.org/docs/context.html}{contexts} requires
 Taskwarrior to be able to modify the it, use the following hacky workaround.
 
 Set \bash{$TASKRC} to \bash{~/.taskrc-dirty}, which must contain at least
-\ini{include ~/.taskrc}.
+\ini{include ~/.config/task/taskrc}.
 
 <<config/taskwarrior/default.nix>>=
   home.sessionVariables = {
@@ -59,46 +59,8 @@ Set \bash{$TASKRC} to \bash{~/.taskrc-dirty}, which must contain at least
     enable = true;
     colorTheme = "solarized-dark-256";
     config = {
-      context.other = "jiraurl.none or -work";
-      context.work = "jiraurl.any or +work";
-      uda = {
-        jiracreatedts = {
-          label = "Created At";
-          type = "date";
-        };
-        jiradescription = {
-          label = "Jira Description";
-          type = "string";
-        };
-        jiraestimate = {
-          label = "Estimate";
-          type = "numeric";
-        };
-        jirafixversion = {
-          label = "Fix Version";
-          type = "string";
-        };
-        jiraid = {
-          label = "Jira Issue ID";
-          type = "string";
-        };
-        jiraissuetype = {
-          label = "Issue Type";
-          type = "string";
-        };
-        jirastatus = {
-          label = "Jira Status";
-          type = "string";
-        };
-        jirasummary = {
-          label = "Jira Summary";
-          type = "string";
-        };
-        jiraurl = {
-          label = "Jira URL";
-          type = "string";
-        };
-      };
+      context.other = "-work";
+      context.work = "+work";
     };
   };
 

@@ -4,7 +4,7 @@
     ../../config/bash.nix
     ../../config/bat.nix
     ../../config/browserpass.nix
-    ../../config/bugwarrior.nix
+    # ../../config/bugwarrior.nix
     ../../config/direnv.nix
     ../../config/dunst.nix
     ../../config/emacs
