@@ -93,7 +93,7 @@ nixpkgs.url = "github:nixos/nixpkgs/release-21.11";
 Additionally, pin an unstable version of the collection.
 
 <<inputs>>=
-nixpkgs-unstable.url = "github:nixos/nixpkgs";
+nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 @
 
 \subsection{NUR}
