@@ -20,8 +20,10 @@
 
 Install some cross-platform applications:
 \begin{itemize}
-\item \hrefootnote{https://www.clementine-player.org}{Clementine} is a great music player
-\item \hrefootnote{https://freedesktop.org/software/pulseaudio/pavucontrol/}{PulseAudio Volume Control} is useful for configuring Bluetooth audio
+\item \hrefootnote{https://www.clementine-player.org}{Clementine} is a great music player.
+\item \hrefootnote{https://freedesktop.org/software/pulseaudio/pavucontrol/}{PulseAudio Volume Control} is useful for configuring Bluetooth audio.
+\item Slack is for chatting.
+\item Spotify is for music that's not on my server.
 \end{itemize}
 
 Install Slack and Spotify, too.
@@ -38,16 +40,21 @@ spotify
 
 Install some Linux-specific applications:
 \begin{itemize}
-\item Dolphin is a convenient graphical file manager
-\item Libreoffice is ``a free and open-source office productivity software suite''
-\item qpdfivew is a nice, lightweight PDF reader
-\item Signal is a ``simple, powerful, and secure messenger''
+\item Dolphin is a convenient graphical file manager, but I never use it.
+\item Libreoffice is ``a free and open-source office productivity software
+  suite'', but it takes a while to build and I almost never need it. On the rare
+  occasion I need to do some office-y stuff, I'll use Office 365.
+\item qpdfview is a nice, lightweight PDF reader.
+\item Signal is a ``simple, powerful, and secure messenger''.
+  Configure a US English spell checker, too.
 \end{itemize}
 
+\begin{minted}{nix}
+  dolphin
+  libreoffice
+\end{minted}
+
 <<Install some Linux applications>>=
-dolphin
-# TODO(e.bailey): This takes a while to build and I rarely use it.
-# libreoffice
 qpdfview
 (signal-desktop.override { spellcheckerLanguage = "en_US"; })
 @
