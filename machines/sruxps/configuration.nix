@@ -3,7 +3,7 @@ let
   username = "e.bailey";
 in
 {
-  airportCode = "MSP";
+  airportCode = "ATL";
   boot.initrd.luks.devices = {
     cryptkey.device = "/dev/disk/by-uuid/2a44a760-206c-448d-a126-527b8b63f5d0";
 

@@ -9,7 +9,7 @@ let
   username = "e.bailey";
 in
 {
-  <<Set the location to MSP>>
+  <<Set the location>>
   <<Configure the LUKS devices>>
   <<Configure vm.swappiness>>
   <<Add some kernel modules>>
@@ -31,8 +31,8 @@ in
 
 \todoo{Describe the location module}
 
-<<Set the location to MSP>>=
-airportCode = "MSP";
+<<Set the location>>=
+airportCode = "ATL";
 @
 
 Configure the \href{https://gitlab.com/cryptsetup/cryptsetup/}{\acrshort{luks}}
