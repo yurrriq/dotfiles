@@ -39,7 +39,7 @@ imports = [
   ../../config/rebar3.nix
   ../../config/screen-locker.nix
   ../../config/starship.nix
-  ../../config/taskwarrior
+  # ../../config/taskwarrior
   ../../config/xmonad
 ];
 @
@@ -200,6 +200,64 @@ for time/work tracking and syncing with Jira.
 
 <<Install some user packages>>=
 super-productivity
+@
+
+
+\todor{Organize this better}
+
+%% modules/applications.nix
+<<Install some user packages>>=
+clementine
+qpdfview
+pavucontrol
+slack
+spotify
+@
+
+%% modules/clis.nix
+<<Install some user packages>>=
+(aspellWithDicts (dicts: [ dicts.en dicts.es dicts.nb dicts.sv ]))
+ansifilter
+bind
+curl
+httpie
+cachix
+nixUnstable
+gnutar
+gzip
+unzip
+clac
+coreutils
+expect
+gawk
+gnumake
+gnused
+moreutils
+ripgrep
+shellcheck
+shfmt
+silver-searcher # TODO: find helm-rg solution
+tree
+watch
+xclip
+yq
+mdcat
+smos
+nixpkgs-fmt
+nixpkgs-review
+playerctl
+wirelesstools
+libnotify
+lm_sensors
+mtr
+networkmanager-openconnect
+openconnect
+@
+
+%% modules/nix.nix
+\todoo{Configure Nix, incl. GC}
+<<Install some user packages>>=
+cachix
 @
 
 <<Configure picom>>=

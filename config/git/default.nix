@@ -13,7 +13,6 @@
       "*~"
       ".DS_Store"
     ];
-    lfs.enable = true;
   } // (
     with config.accounts.email.accounts.primary; {
       signing.key = gpg.key;

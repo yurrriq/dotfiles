@@ -1,12 +1,10 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; (
     [
-      delta
       diff-pdf
       git
-      git-lfs
       github-cli
       kdiff3
       nix-prefetch-git

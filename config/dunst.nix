@@ -13,7 +13,7 @@
         font = "Iosevka Term 10";
         markup = "yes";
         plain_text = "no";
-        format = "<b>%s</b>\n%b";
+        format = "<b>%s</b>\\n%b";
         sort = "yes";
         indicate_hidden = "yes";
         alignment = "center";
@@ -42,11 +42,6 @@
         max_icon_size = 80;
         frame_width = 0;
         frame_color = "#8EC07C";
-      };
-      shortcuts = {
-        close = "mod4+space";
-        close_all = "mod4+mod1+space";
-        history = "ctrl+grave";
       };
       urgency_low = {
         frame_color = "#3B7C87";

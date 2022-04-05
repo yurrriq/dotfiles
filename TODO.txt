@@ -1,0 +1,35 @@
+# https://gist.github.com/freizl/3246474#file-xmonad-desktop-L1
+
+setxkbmap -option "ctrl:nocaps,compose:ralt"
+
+sudo apt install curl git network-manager-openconnect
+
+sh <(curl -L https://nixos.org/nix/install) --daemon
+
+echo "export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}" >>~/.bashrc
+
+mkdir -p ~/.config/nix
+echo "experimental-features = flakes nix-command" >>~/.config/nix/nix.conf
+
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
+
+rmdir ~/.local/share/applications
+ln -s ~/.nix-profile/share/applications ~/.local/share/
+
+sudo snap install zoom-client
+
+# λ xinput list --name-only | grep -m1 Touchpad | xargs -I% xinput list --id-only '%'
+# 13
+
+xinput --set-prop 13 "libinput Accel Speed" 1
+xinput --set-prop 13 "libinput Tapping Enabled" 1
+
+# Fix/replace xbacklight
+
+# programs.ssh and/or this ~/.ssh/config
+# Host 10.*.*.*
+#     LogLevel QUIET
+#     StrictHostKeyChecking accept-new
+#     UserKnownHostsFile /dev/null

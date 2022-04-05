@@ -1,6 +1,6 @@
 { lib, pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; (
+  home.packages = with pkgs; (
     [
       clementine
       pavucontrol
@@ -10,7 +10,6 @@
   ) ++ lib.optionals stdenv.isLinux (
     [
       qpdfview
-      (signal-desktop.override { spellcheckerLanguage = "en_US"; })
     ]
   );
 }

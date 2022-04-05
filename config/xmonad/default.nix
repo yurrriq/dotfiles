@@ -2,26 +2,19 @@
 
 {
 
-  home.file.".xmonad/matrix.png".source = ./matrix.png;
+  imports = [
+    ../dunst.nix
+    ../fonts.nix
+    ../rofi.nix
+  ];
 
   home.packages = with pkgs; [
     flameshot
     # font-awesome_4
-    i3lock
     haskellPackages.xmobar
+    playerctl
+    xorg.xbacklight
   ];
-
-  programs.rofi = {
-    enable = true;
-    font = "Iosevka Term 18";
-    pass = {
-      enable = true;
-      stores = [ "~/.password-store" ];
-    };
-    theme = "purple";
-  };
-
-  services.picom.enable = true;
 
   xdg.configFile."xmobar/xmobarrc" = {
     source = ../xmobar/xmobarrc;
@@ -34,13 +27,15 @@
     '';
   };
 
+  home.pointerCursor = {
+    package = pkgs.vanilla-dmz;
+    name = "Vanilla-DMZ-AA";
+    size = 36;
+    x11.enable = true;
+  };
+
   xsession = {
     enable = true;
-    pointerCursor = {
-      package = pkgs.vanilla-dmz;
-      name = "Vanilla-DMZ-AA";
-      size = 36;
-    };
     scriptPath = ".hm-xsession";
     windowManager.xmonad = {
       enable = true;

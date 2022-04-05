@@ -1,14 +1,12 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; (
+  home.packages = with pkgs; (
     [
       (aspellWithDicts (dicts: [ dicts.en dicts.es dicts.nb dicts.sv ]))
       ansifilter
       bind
       curl
       httpie
-      cachix
-      nixUnstable
       gnutar
       gzip
       unzip
@@ -28,10 +26,9 @@
       xclip
       yq
       mdcat
-      smos
+      # smos
       nixpkgs-fmt
       nixpkgs-review
-      playerctl
       wirelesstools
     ]
   ) ++ lib.optionals stdenv.isLinux [

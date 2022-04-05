@@ -2,6 +2,12 @@
 
 {
 
+  home.file.".xmonad/matrix.png".source = ./matrix.png;
+
+  home.packages = with pkgs; [
+    i3lock
+  ];
+
   services.screen-locker = {
     enable = true;
     inactiveInterval = 5;

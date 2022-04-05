@@ -1,28 +1,31 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
+    ../../config/applications.nix
     ../../config/bash.nix
     ../../config/bat.nix
     ../../config/browserpass.nix
     # ../../config/bugwarrior.nix
+    ../../config/clis.nix
     ../../config/direnv.nix
-    ../../config/dunst.nix
     ../../config/emacs
     ../../config/firefox.nix
     ../../config/fish
     ../../config/fzf.nix
     ../../config/git
+    ../../config/git/lab.nix
     ../../config/gpg.nix
     ../../config/htop.nix
     ../../config/jq.nix
     ../../config/keyboard.nix
     ../../config/kitty.nix
     ../../config/man.nix
+    ../../config/nix.nix
     ../../config/password-store.nix
     ../../config/rebar3.nix
-    ../../config/screen-locker.nix
+    # FIXME ../../config/screen-locker.nix
     ../../config/starship.nix
-    ../../config/taskwarrior
+    # ../../config/taskwarrior
     ../../config/xmonad
   ];
   accounts.email.accounts.primary = {
@@ -31,6 +34,7 @@
     primary = true;
     realName = "Eric Bailey";
   };
+
   home.file.".docker/config.json".text = ''
     {
         "credHelpers": {
@@ -65,29 +69,46 @@
   home.packages = with pkgs; [
     aws-iam-authenticator
     awscli2
-    ec2instanceconnectcli
+    python3Packages.ec2instanceconnectcli
     nodePackages.aws-azure-login
     naal
     bpytop
     fd
     powertop
     progress
-    renderizer
+    gomplate
     scc
     docker-credential-helpers
-    podman-compose
+    # TODO podman-compose
     krew
     kubectl
     kubectx
+    kubelogin
     kustomize
     lens
     stern
     vault
     fortune
     prometheus-alertmanager
-    zoom-us
+    # FIXME
+    # zoom-us
     super-productivity
+    bind
+    curl
+    httpie
+    cachix
+    nixUnstable
+    home-manager
+    nixgl.auto.nixGLDefault
+    networkmanager
   ];
+
+  home.sessionPath = [
+    "${config.home.homeDirectory}/bin"
+  ];
+
+  programs.kitty.settings.font_size = 12;
+
   services.picom = {
     experimentalBackends = true;
     extraOptions = ''
@@ -95,4 +116,15 @@
     '';
     vSync = true;
   };
+
+  xresources.properties = {
+    "Xft.dpi" = 220;
+  };
+
+  services.random-background = {
+    enable = true;
+    imageDirectory = "/usr/share/backgrounds/";
+    display = "scale";
+  };
+
 }
