@@ -8,6 +8,7 @@
   virtualisation = {
     <<Configure Docker>>
     <<Configure Podman>>
+    <<Configure VirtualBox>>
   };
 }
 @
@@ -45,4 +46,11 @@ podman = {
   enable = lib.mkDefault (!config.virtualisation.docker.enable);
   dockerCompat = lib.mkDefault true;
 };
+@
+
+\subsection{VirtualBox}
+
+<<Configure VirtualBox>>=
+virtualbox.host.enable = lib.mkDefault false;
+virtualbox.host.enableExtensionPack = lib.mkDefault (config.virtualisation.virtualbox.host.enable);
 @

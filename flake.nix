@@ -205,6 +205,7 @@
         nixos = import ./modules/nixos.nix;
         nixpkgs = {
           nixpkgs.config.allowUnfreePredicate = pkgNameElem [
+            "Oracle_VM_VirtualBox_Extension_Pack"
             "lastpass-password-manager"
             "reaper"
             "slack"

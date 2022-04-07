@@ -10,5 +10,7 @@
       enable = lib.mkDefault (!config.virtualisation.docker.enable);
       dockerCompat = lib.mkDefault true;
     };
+    virtualbox.host.enable = lib.mkDefault false;
+    virtualbox.host.enableExtensionPack = lib.mkDefault (config.virtualisation.virtualbox.host.enable);
   };
 }
