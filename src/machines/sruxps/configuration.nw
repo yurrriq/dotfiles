@@ -32,7 +32,7 @@ in
 \todoo{Describe the location module}
 
 <<Set the location>>=
-airportCode = "ATL";
+airportCode = "MSP";
 @
 
 Configure the \href{https://gitlab.com/cryptsetup/cryptsetup/}{\acrshort{luks}}
