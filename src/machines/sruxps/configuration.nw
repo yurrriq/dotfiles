@@ -26,6 +26,7 @@ in
   <<Configure sudo>>
   <<Configure services>>
   <<Configure user>>
+  virtualisation.virtualbox.host.enable = true;
 }
 @
 
@@ -192,6 +193,7 @@ users.users."${username}" = {
     "http"
     "networkmanager"
     "systemd-journal"
+    "vboxusers"
     "video"
     "wheel"
   ];

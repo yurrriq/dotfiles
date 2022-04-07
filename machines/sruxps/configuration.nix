@@ -120,10 +120,12 @@ in
       "http"
       "networkmanager"
       "systemd-journal"
+      "vboxusers"
       "video"
       "wheel"
     ];
     uid = 1001;
     shell = "/etc/profiles/per-user/${username}/bin/fish";
   };
+  virtualisation.virtualbox.host.enable = true;
 }
