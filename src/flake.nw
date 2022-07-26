@@ -159,6 +159,7 @@ devShell.x86_64-linux = pkgs.mkShell {
     biber
     deadnix
     git
+    git-lfs
     gitAndTools.pre-commit
     gnumake
     gnupg

@@ -14,7 +14,7 @@ stow_flags := -R
 ifneq (,$(findstring trace,$(MAKEFLAGS)))
 stow_flags += -v
 endif
-stow       := stow ${stow_flags}
+stow       := $(shell type -p stow) ${stow_flags}
 
 
 NW_SRCS := $(shell find src -name '*.nw')
@@ -136,10 +136,16 @@ diff: build
 	@ nix store diff-closures /run/current-system ./result
 
 
-.PHONY: build-hm switch-hm
+.PHONY: build-hm switch-hm xsessions
+
+switch-hm: cachix xsessions
 
 build-hm switch-hm:
 	@ home-manager --impure --flake .#ebailey ${@:-hm=}
+
+xsessions:
+	@ sudo ${stow} -t /usr/share/$@ $@
+
 
 .PHONY: cachix
 cachix: cachix/cachix.dhall

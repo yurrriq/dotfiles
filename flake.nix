@@ -93,6 +93,7 @@
           biber
           deadnix
           git
+          git-lfs
           gitAndTools.pre-commit
           gnumake
           gnupg
