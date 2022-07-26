@@ -6,6 +6,7 @@
       ansifilter
       bind
       curl
+      deadnix
       httpie
       gnutar
       gzip
