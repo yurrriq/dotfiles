@@ -9,6 +9,7 @@
     dr = "direnv reload";
     kc = "kubectl";
     kcd = "kubectl drain --delete-emptydir-data --ignore-daemonsets";
+    kcn = "kubectl --namespace";
     kcnp = "kubectl get pods --field-selector=spec.nodeName=";
     kcx = "kubectl --context";
     kg = "kubectl get";
