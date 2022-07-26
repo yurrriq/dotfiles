@@ -136,6 +136,11 @@ diff: build
 	@ nix store diff-closures /run/current-system ./result
 
 
+.PHONY: build-hm switch-hm
+
+build-hm switch-hm:
+	@ home-manager --impure --flake .#ebailey ${@:-hm=}
+
 .PHONY: cachix
 cachix: cachix/cachix.dhall
 	@ mkdir -p ~/.config/$@ $@
