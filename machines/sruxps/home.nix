@@ -113,9 +113,9 @@
 
   services.picom = {
     experimentalBackends = true;
-    extraOptions = ''
+    settings = {
       unredir-if-possible = true;
-    '';
+    };
     vSync = true;
   };
 

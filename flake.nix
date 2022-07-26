@@ -58,7 +58,7 @@
         builtins.elem (lib.getName pkg) names;
       pkgs = import inputs.nixpkgs {
         overlays = [
-          inputs.deadnix.overlay
+          inputs.deadnix.overlays.default
           self.overlays.home-manager
           self.overlays.noweb
         ];
@@ -178,7 +178,7 @@
           ];
           nixpkgs.overlays = [
             self.overlay
-            inputs.deadnix.overlay
+            inputs.deadnix.overlays.default
             inputs.emacs-overlay.overlay
             inputs.naal.overlays.naal
             inputs.nur.overlay
@@ -192,10 +192,21 @@
         "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-7390";
       };
       homeConfigurations.ebailey = inputs.home-manager.lib.homeManagerConfiguration {
-        # FIXME: There's gotta be a better way...
-        configuration = { pkgs, ... }@args:
-          ((import ./machines/sruxps/home.nix) args) //
-          self.nixosModules.nixRegistry;
+        modules = [
+          # FIXME: There's gotta be a better way...
+          (
+            { pkgs, ... }@args:
+            ((import ./machines/sruxps/home.nix) args) //
+            self.nixosModules.nixRegistry
+          )
+          {
+            home = {
+              username = "ebailey";
+              homeDirectory = "/home/ebailey";
+              stateVersion = "22.05";
+            };
+          }
+        ];
         pkgs = import inputs.nixpkgs {
           inherit (self.nixosModules.nixpkgs.nixpkgs) config;
           overlays = self.nixosModules.nixpkgs.nixpkgs.overlays ++ [
@@ -208,10 +219,6 @@
           ];
           system = "x86_64-linux";
         };
-        system = "x86_64-linux";
-        username = "ebailey";
-        homeDirectory = "/home/ebailey";
-        stateVersion = "21.11";
       };
     };
 
