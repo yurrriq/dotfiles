@@ -13,7 +13,7 @@
         font = "Iosevka Term 10";
         markup = "yes";
         plain_text = "no";
-        format = "<b>%s</b>\n%b";
+        format = "<b>%s</b>\\n%b";
         sort = "yes";
         indicate_hidden = "yes";
         alignment = "center";
@@ -46,6 +46,7 @@
       shortcuts = {
         close = "mod4+space";
         close_all = "mod4+mod1+space";
+        # context = "ctrl+shift+period";
         history = "ctrl+grave";
       };
       urgency_low = {

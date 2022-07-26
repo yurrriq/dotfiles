@@ -3,21 +3,22 @@
   description = "My (semi-)literate, Nix-based dotfiles";
 
   inputs = {
+    deadnix.url = "github:astro/deadnix";
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-21.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    naal = {
-      url = "github:yurrriq/naal";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nixgl = {
+      url = "github:guibou/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    nixpkgs.url = "github:nixos/nixpkgs/release-21.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.05";
     nur.url = "github:nix-community/nur";
   };
 
@@ -37,7 +38,6 @@
               verbose = true;
             };
           }
-          self.nixosModules.common
           self.nixosModules.location
           self.nixosModules.nix
           self.nixosModules.nixPath
@@ -45,30 +45,18 @@
           self.nixosModules.nixos
           self.nixosModules.nixpkgs
           self.nixosModules.bootyjams
-          self.nixosModules.clis
-          self.nixosModules.applications
           self.nixosModules.virtualisation
           (./machines + "/${name}/configuration.nix")
         ];
         system = "x86_64-linux";
       };
       pkgNameElem = names: pkg:
-        builtins.elem
-          (builtins.parseDrvName
-            (if builtins.hasAttr "pname" pkg then pkg.pname
-            else if builtins.hasAttr "name" pkg then pkg.name
-            else "")).name
-          names;
+        builtins.elem (lib.getName pkg) names;
       pkgs = import inputs.nixpkgs {
         overlays = [
+          inputs.deadnix.overlays.default
+          self.overlays.home-manager
           self.overlays.noweb
-          self.overlays.unstable
-        ];
-        system = "x86_64-linux";
-      };
-      unstable-pkgs = import inputs.nixpkgs-unstable {
-        config.allowUnfreePredicate = pkgNameElem [
-          "zoom"
         ];
         system = "x86_64-linux";
       };
@@ -80,57 +68,35 @@
         fish-completions = final: prev: {
           fish-kubectl-completions = prev.callPackage ./pkgs/shells/fish/kubectl-completions { };
         };
+        home-manager = final: prev: {
+          home-manager = inputs.home-manager.packages.${prev.system}.home-manager;
+        };
+        nixGLWrap = final: prev: {
+          lib = prev.lib // {
+            nixGLWrap = { pkg, binName ? prev.lib.getName pkg }:
+              prev.writeShellScriptBin binName ''
+                exec ${final.nixgl.auto.nixGLDefault}/bin/nixGL ${pkg}/bin/${binName} "$@"
+              '';
+          };
+        };
         noweb = final: prev: {
-          noweb = unstable-pkgs.noweb.override {
-            icon-lang = unstable-pkgs.icon-lang.override {
+          noweb = prev.noweb.override {
+            icon-lang = prev.icon-lang.override {
               withGraphics = false;
             };
           };
         };
-        unstable = final: prev: prev.lib.fix (this: {
-          inherit (unstable-pkgs)
-            autojump
-            browserpass
-            conftest
-            delta
-            direnv
-            eksctl
-            electron
-            haskellPackages
-            krew
-            kubectx
-            kubelogin
-            kustomize
-            lens
-            pass
-            renderizer
-            ripgrep
-            scc
-            signal-desktop
-            sops
-            starship
-            tomb
-            yq
-            zoom-us
-            zoxide
-            ;
-          super-productivity = unstable-pkgs.super-productivity.override {
-            inherit (this) electron;
-          };
-          inherit (unstable-pkgs.python3Packages)
-            bugwarrior
-            ec2instanceconnectcli
-            ;
-        });
       };
       devShell.x86_64-linux = pkgs.mkShell {
         inherit (self.defaultPackage.x86_64-linux) FONTCONFIG_FILE;
         buildInputs = with pkgs; [
           biber
+          deadnix
           git
           gitAndTools.pre-commit
           gnumake
           gnupg
+          home-manager
           mkpasswd
           nixpkgs-fmt
           nodePackages.node2nix
@@ -144,7 +110,7 @@
       devShells.x86_64-linux = {
         xmonad =
           let
-            _pkgs = import inputs.nixpkgs-unstable {
+            _pkgs = import inputs.nixpkgs {
               overlays = [
                 inputs.emacs-overlay.overlay
               ];
@@ -177,16 +143,8 @@
 
       defaultPackage.x86_64-linux = self.packages.x86_64-linux.yurrriq-dotfiles;
       nixosModules = {
-        applications = import ./modules/applications.nix;
-
         bootyjams = import ./modules/bootyjams.nix;
-
-        clis = import ./modules/clis.nix;
-
-        common = import ./modules/common.nix;
-
         location = import ./modules/location.nix;
-
         nix = import ./modules/nix.nix;
         nixPath = {
           nix.nixPath = lib.mapAttrsToList (n: v: "${n}=${v}")
@@ -195,12 +153,7 @@
           ];
         };
         nixRegistry = {
-          nix.registry = {
-            home-manager.flake = inputs.home-manager;
-            nixpkgs.flake = inputs.nixpkgs;
-            nixpkgs-unstable.flake = inputs.nixpkgs-unstable;
-            nur.flake = inputs.nur;
-          };
+          nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
         };
         nixos = import ./modules/nixos.nix;
         nixpkgs = {
@@ -214,11 +167,13 @@
             "steam"
             "steam-original"
             "steam-runtime"
+            "zoom"
           ];
           nixpkgs.overlays = [
             self.overlay
+            inputs.deadnix.overlays.default
             inputs.emacs-overlay.overlay
-            inputs.naal.overlays.naal
+            inputs.nixgl.overlay
             inputs.nur.overlay
           ];
         };
@@ -227,6 +182,35 @@
       nixosConfigurations = {
         "nixps" = mkSystem "nixps" "dell-xps-15-9560-intel";
         "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-7390";
+      };
+      homeConfigurations.ebailey = inputs.home-manager.lib.homeManagerConfiguration {
+        modules = [
+          # FIXME: There's gotta be a better way...
+          (
+            { pkgs, ... }@args:
+            ((import ./machines/sruxps/home.nix) args) //
+            self.nixosModules.nixRegistry
+          )
+          {
+            home = {
+              username = "ebailey";
+              homeDirectory = "/home/ebailey";
+              stateVersion = "22.05";
+            };
+          }
+        ];
+        pkgs = import inputs.nixpkgs {
+          inherit (self.nixosModules.nixpkgs.nixpkgs) config;
+          overlays = self.nixosModules.nixpkgs.nixpkgs.overlays ++ [
+            # https://github.com/nix-community/home-manager/issues/2251#issuecomment-895338427
+            (final: prev: {
+              kitty = prev.lib.nixGLWrap { pkg = prev.kitty; };
+              # FIXME
+              # zoom-us = prev.lib.nixGLWrap { pkg = prev.zoom-us; binName = "zoom"; };
+            })
+          ];
+          system = "x86_64-linux";
+        };
       };
     };
 

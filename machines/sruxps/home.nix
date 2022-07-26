@@ -1,28 +1,30 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
+    ../../config/applications.nix
     ../../config/bash.nix
     ../../config/bat.nix
     ../../config/browserpass.nix
     # ../../config/bugwarrior.nix
+    ../../config/clis.nix
     ../../config/direnv.nix
-    ../../config/dunst.nix
     ../../config/emacs
     ../../config/firefox.nix
     ../../config/fish
     ../../config/fzf.nix
     ../../config/git
+    ../../config/git/lab.nix
     ../../config/gpg.nix
     ../../config/htop.nix
     ../../config/jq.nix
     ../../config/keyboard.nix
     ../../config/kitty.nix
     ../../config/man.nix
+    ../../config/nix.nix
     ../../config/password-store.nix
     ../../config/rebar3.nix
-    ../../config/screen-locker.nix
     ../../config/starship.nix
-    ../../config/taskwarrior
+    # ../../config/taskwarrior
     ../../config/xmonad
   ];
   accounts.email.accounts.primary = {
@@ -53,7 +55,9 @@
     export CI_REGISTRY="$CI_SERVER_HOST":4567 \
            CI_REGISTRY_USER=gitlab-ci-token \
            CI_REGISTRY_PASSWORD="$CI_JOB_TOKEN" \
-           GITLAB_TOKEN="$CI_JOB_TOKEN"
+           GITLAB_TOKEN="$CI_JOB_TOKEN" \
+           JIRA_API_TOKEN="$(pass jira.sportradar.ag/e.bailey)" \
+           JIRA_AUTH_TYPE=bearer
     export GITLAB_REGISTRY_ACCESS_TOKEN="$CI_REGISTRY_PASSWORD"
   '';
   home.keyboard = {
@@ -65,34 +69,54 @@
   home.packages = with pkgs; [
     aws-iam-authenticator
     awscli2
-    ec2instanceconnectcli
-    nodePackages.aws-azure-login
-    naal
+    python3Packages.ec2instanceconnectcli
     bpytop
     fd
+    gomplate
     powertop
     progress
-    renderizer
     scc
     docker-credential-helpers
-    podman-compose
+    # TODO: podman-compose
     krew
     kubectl
     kubectx
+    kubelogin
     kustomize
     lens
     stern
     vault
     fortune
     prometheus-alertmanager
-    zoom-us
-    super-productivity
+    bind
+    curl
+    httpie
+    cachix
+    nixUnstable
+    home-manager
+    nixgl.auto.nixGLDefault
+    networkmanager
   ];
   services.picom = {
     experimentalBackends = true;
-    extraOptions = ''
+    settings = {
       unredir-if-possible = true;
-    '';
+    };
     vSync = true;
+  };
+  home.sessionPath = [
+    "${config.home.homeDirectory}/bin"
+  ];
+
+  programs.kitty.settings.font_size = 12;
+
+  services.random-background = {
+    enable = true;
+    imageDirectory = "/usr/share/backgrounds/";
+    display = "scale";
+  };
+
+  xresources.properties = {
+    "Xft.dpi" = 220;
   };
 }

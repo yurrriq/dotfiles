@@ -6,19 +6,23 @@
   <<Import some modules>>
   <<Configure account>>
   <<Add some more user packages>>
+  services.picom.enable = true;
 }
 @
 
 <<Import some modules>>=
 imports = [
+  ../../config/applications.nix
   ../../config/bash.nix
   ../../config/bat.nix
   ../../config/browserpass.nix
+  ../../config/clis.nix
   ../../config/direnv.nix
   ../../config/dunst.nix
   ../../config/emacs
   ../../config/firefox.nix
   ../../config/fish
+  ../../config/fonts.nix
   ../../config/fzf.nix
   ../../config/git
   ../../config/gpg.nix
@@ -58,6 +62,7 @@ home.packages = with pkgs; [
   powertop
   protontricks
   reaper
+  (signal-desktop.override { spellcheckerLanguage = "en_US"; })
   steam
   tellico
   winetricks

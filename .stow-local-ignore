@@ -18,5 +18,7 @@ scripts
 .sops.yaml
 src
 .stow-local-ignore
+todo
+TODO.txt
 VERSION
 .yamllint

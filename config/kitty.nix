@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
 
@@ -19,7 +19,7 @@
     };
     settings = {
       editor = ''emacsclient -nw -a ""'';
-      font_size = 24;
+      font_size = lib.mkDefault 24;
       kitty_mod = "ctrl+shift";
       scrollback_lines = -1;
       shell = ".";

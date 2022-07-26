@@ -1,14 +1,17 @@
 { pkgs, ... }:
 {
   imports = [
+    ../../config/applications.nix
     ../../config/bash.nix
     ../../config/bat.nix
     ../../config/browserpass.nix
+    ../../config/clis.nix
     ../../config/direnv.nix
     ../../config/dunst.nix
     ../../config/emacs
     ../../config/firefox.nix
     ../../config/fish
+    ../../config/fonts.nix
     ../../config/fzf.nix
     ../../config/git
     ../../config/gpg.nix
@@ -42,9 +45,11 @@
     powertop
     protontricks
     reaper
+    (signal-desktop.override { spellcheckerLanguage = "en_US"; })
     steam
     tellico
     winetricks
     zoom-us
   ];
+  services.picom.enable = true;
 }
