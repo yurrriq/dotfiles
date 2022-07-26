@@ -29,6 +29,14 @@ At the top-level, the flake defines \hyperref[sec:inputs]{\nix{inputs}} and
 \section{Inputs}
 \label{sec:inputs}
 
+\subsection{deadnix}
+
+\todoo{Describe deadnix}
+
+<<inputs>>=
+deadnix.url = "github:astro/deadnix";
+@
+
 \subsection{emacs-overlay}
 \label{subsec:inputs-emacs-overlay}
 
@@ -53,22 +61,19 @@ invaluable tool for managing a deterministic \bash{$HOME}.
 
 <<inputs>>=
 home-manager = {
-  url = "github:nix-community/home-manager/release-21.11";
+  url = "github:nix-community/home-manager";
   inputs.nixpkgs.follows = "nixpkgs";
 };
 @
 
-\subsection{naal}
+\subsection{nixGL}
 
-\href{https://github.com/yurrriq/naal}{naal} is a literate
-\hrefootnote{https://core.tcl-lang.org/expect/index}{Expect} script I wrote,
-for non-interactive
-\href{https://github.com/sportradar/aws-azure-login}{AWS Azure Login}.
+\todoo{Describe nixGL}
 
 <<inputs>>=
-naal = {
-  url = "github:yurrriq/naal";
-  inputs.nixpkgs.follows = "nixpkgs-unstable";
+nixgl = {
+  url = "github:guibou/nixGL";
+  inputs.nixpkgs.follows = "nixpkgs";
 };
 @
 
@@ -83,17 +88,17 @@ nixos-hardware.url = "github:nixos/nixos-hardware";
 
 \subsection{nixpkgs}
 
-Of course, pin a stable version of the
+Prefer to live on the edge.
+
+<<inputs>>=
+nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+@
+
+Of course, pin a stable version of the too
 \hrefootnote{https://github.com/NixOS/nixpkgs}{Nix Packages collection}.
 
 <<inputs>>=
-nixpkgs.url = "github:nixos/nixpkgs/release-21.11";
-@
-
-Additionally, pin an unstable version of the collection.
-
-<<inputs>>=
-nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.05";
 @
 
 \subsection{NUR}
@@ -152,10 +157,12 @@ devShell.x86_64-linux = pkgs.mkShell {
   inherit (self.defaultPackage.x86_64-linux) FONTCONFIG_FILE;
   buildInputs = with pkgs; [
     biber
+    deadnix
     git
     gitAndTools.pre-commit
     gnumake
     gnupg
+    home-manager
     mkpasswd
     nixpkgs-fmt
     nodePackages.node2nix
@@ -180,7 +187,7 @@ for... reasons.
 devShells.x86_64-linux = {
   xmonad =
     let
-      _pkgs = import inputs.nixpkgs-unstable {
+      _pkgs = import inputs.nixpkgs {
         overlays = [
           inputs.emacs-overlay.overlay
         ];
@@ -249,6 +256,42 @@ nixosConfigurations = {
 };
 @
 
+\subsection{home-manager configurations}
+
+\todoo{Describe this}
+
+<<outputs>>=
+homeConfigurations.ebailey = inputs.home-manager.lib.homeManagerConfiguration {
+  modules = [
+    # FIXME: There's gotta be a better way...
+    (
+      { pkgs, ... }@args:
+      ((import ./machines/sruxps/home.nix) args) //
+      self.nixosModules.nixRegistry
+    )
+    {
+      home = {
+        username = "ebailey";
+        homeDirectory = "/home/ebailey";
+        stateVersion = "22.05";
+      };
+    }
+  ];
+  pkgs = import inputs.nixpkgs {
+    inherit (self.nixosModules.nixpkgs.nixpkgs) config;
+    overlays = self.nixosModules.nixpkgs.nixpkgs.overlays ++ [
+      # https://github.com/nix-community/home-manager/issues/2251#issuecomment-895338427
+      (final: prev: {
+        kitty = prev.lib.nixGLWrap { pkg = prev.kitty; };
+        # FIXME
+        # zoom-us = prev.lib.nixGLWrap { pkg = prev.zoom-us; binName = "zoom"; };
+      })
+    ];
+    system = "x86_64-linux";
+  };
+};
+@
+
 \subsection{Variables}
 
 Define a helper function, [[mkSystem]], for creating system configurations.
@@ -272,7 +315,6 @@ mkSystem = name: machine: lib.nixosSystem {
         verbose = true;
       };
     }
-    self.nixosModules.common
     self.nixosModules.location
     self.nixosModules.nix
     self.nixosModules.nixPath
@@ -280,8 +322,6 @@ mkSystem = name: machine: lib.nixosSystem {
     self.nixosModules.nixos
     self.nixosModules.nixpkgs
     self.nixosModules.bootyjams
-    self.nixosModules.clis
-    self.nixosModules.applications
     self.nixosModules.virtualisation
     (./machines + "/${name}/configuration.nix")
   ];
@@ -293,12 +333,7 @@ mkSystem = name: machine: lib.nixosSystem {
 
 <<outputs variables>>=
 pkgNameElem = names: pkg:
-  builtins.elem
-    (builtins.parseDrvName
-      (if builtins.hasAttr "pname" pkg then pkg.pname
-      else if builtins.hasAttr "name" pkg then pkg.name
-      else "")).name
-    names;
+  builtins.elem (lib.getName pkg) names;
 @
 
 \todoo{Document \nix{pkgs}}
@@ -306,23 +341,13 @@ pkgNameElem = names: pkg:
 <<outputs variables>>=
 pkgs = import inputs.nixpkgs {
   overlays = [
+    inputs.deadnix.overlays.default
+    self.overlays.home-manager
     self.overlays.noweb
-    self.overlays.unstable
   ];
   system = "x86_64-linux";
 };
 @
-
-\todoo{Document \nix{unstable-pkgs}}
-
-<<outputs variables>>=
-unstable-pkgs = import inputs.nixpkgs-unstable {
-  config.allowUnfreePredicate = pkgNameElem [
-    "zoom"
-  ];
-  system = "x86_64-linux";
-};
-@ % def unstable-pkgs
 
 \subsection{Overlays}
 
@@ -331,6 +356,27 @@ Define an overlay that adds [[fish-kubectl-completions]].\todor{Fix this noweb x
 <<overlays>>=
 fish-completions = final: prev: {
   fish-kubectl-completions = prev.callPackage ./pkgs/shells/fish/kubectl-completions { };
+};
+@
+
+Define an overlay with a pinned version of home-manager.
+
+<<overlays>>=
+home-manager = final: prev: {
+  home-manager = inputs.home-manager.packages.${prev.system}.home-manager;
+};
+@
+
+\todoo{Describe this nixGL nonsense.}
+
+<<overlays>>=
+nixGLWrap = final: prev: {
+  lib = prev.lib // {
+    nixGLWrap = { pkg, binName ? prev.lib.getName pkg }:
+      prev.writeShellScriptBin binName ''
+        exec ${final.nixgl.auto.nixGLDefault}/bin/nixGL ${pkg}/bin/${binName} "$@"
+      '';
+  };
 };
 @
 
@@ -352,55 +398,12 @@ non-graphical version of \hrefootnote{https://www2.cs.arizona.edu/icon/}{Icon}.
 
 <<overlays>>=
 noweb = final: prev: {
-  noweb = unstable-pkgs.noweb.override {
-    icon-lang = unstable-pkgs.icon-lang.override {
+  noweb = prev.noweb.override {
+    icon-lang = prev.icon-lang.override {
       withGraphics = false;
     };
   };
 };
-@
-
-Define an overlay to overrides several packages with their counterparts from
-[[unstable-pkgs]].
-
-\todoo{Highlight especially interesting packages in \nix{overlays.unstable}}
-
-<<overlays>>=
-unstable = final: prev: prev.lib.fix (this: {
-  inherit (unstable-pkgs)
-    autojump
-    browserpass
-    conftest
-    delta
-    direnv
-    eksctl
-    electron
-    haskellPackages
-    krew
-    kubectx
-    kubelogin
-    kustomize
-    lens
-    pass
-    renderizer
-    ripgrep
-    scc
-    signal-desktop
-    sops
-    starship
-    tomb
-    yq
-    zoom-us
-    zoxide
-    ;
-  super-productivity = unstable-pkgs.super-productivity.override {
-    inherit (this) electron;
-  };
-  inherit (unstable-pkgs.python3Packages)
-    bugwarrior
-    ec2instanceconnectcli
-    ;
-});
 @
 
 \subsection{NixOS Modules}
@@ -409,16 +412,8 @@ unstable = final: prev: prev.lib.fix (this: {
 \todoo{Document (or better yet: refactor) the other \nix{nixosModules}}
 
 <<Modules>>=
-applications = import ./modules/applications.nix;
-
 bootyjams = import ./modules/bootyjams.nix;
-
-clis = import ./modules/clis.nix;
-
-common = import ./modules/common.nix;
-
 location = import ./modules/location.nix;
-
 nix = import ./modules/nix.nix;
 @
 
@@ -437,12 +432,7 @@ nixPath = {
 
 <<Modules>>=
 nixRegistry = {
-  nix.registry = {
-    home-manager.flake = inputs.home-manager;
-    nixpkgs.flake = inputs.nixpkgs;
-    nixpkgs-unstable.flake = inputs.nixpkgs-unstable;
-    nur.flake = inputs.nur;
-  };
+  nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
 };
 @
 
@@ -464,11 +454,13 @@ nixpkgs = {
     "steam"
     "steam-original"
     "steam-runtime"
+    "zoom"
   ];
   nixpkgs.overlays = [
     self.overlay
+    inputs.deadnix.overlays.default
     inputs.emacs-overlay.overlay
-    inputs.naal.overlays.naal
+    inputs.nixgl.overlay
     inputs.nur.overlay
   ];
 };

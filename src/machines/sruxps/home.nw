@@ -1,7 +1,7 @@
 \subsection{home-manager configuration}
 
 <<machines/sruxps/home.nix>>=
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   <<Import various program configs>>
   <<Configure the primary email account>>
@@ -12,32 +12,35 @@
     <<Install some user packages>>
   ];
   <<Configure picom>>
+  <<Miscellaneous config>>
 }
 @
 
 \todoo{Consider looping here or something}
 <<Import various program configs>>=
 imports = [
+  ../../config/applications.nix
   ../../config/bash.nix
   ../../config/bat.nix
   ../../config/browserpass.nix
   # ../../config/bugwarrior.nix
+  ../../config/clis.nix
   ../../config/direnv.nix
-  ../../config/dunst.nix
   ../../config/emacs
   ../../config/firefox.nix
   ../../config/fish
   ../../config/fzf.nix
   ../../config/git
+  ../../config/git/lab.nix
   ../../config/gpg.nix
   ../../config/htop.nix
   ../../config/jq.nix
   ../../config/keyboard.nix
   ../../config/kitty.nix
   ../../config/man.nix
+  ../../config/nix.nix
   ../../config/password-store.nix
   ../../config/rebar3.nix
-  ../../config/screen-locker.nix
   ../../config/starship.nix
   # ../../config/taskwarrior
   ../../config/xmonad
@@ -79,7 +82,9 @@ home.file."src/gitlab.sportradar.ag/.envrc".text = ''
   export CI_REGISTRY="$CI_SERVER_HOST":4567 \
          CI_REGISTRY_USER=gitlab-ci-token \
          CI_REGISTRY_PASSWORD="$CI_JOB_TOKEN" \
-         GITLAB_TOKEN="$CI_JOB_TOKEN"
+         GITLAB_TOKEN="$CI_JOB_TOKEN" \
+         JIRA_API_TOKEN="$(pass jira.sportradar.ag/e.bailey)" \
+         JIRA_AUTH_TYPE=bearer
   export GITLAB_REGISTRY_ACCESS_TOKEN="$CI_REGISTRY_PASSWORD"
 '';
 @
@@ -107,9 +112,7 @@ non-interactive AWS Azure login.
 <<Install some user packages>>=
 aws-iam-authenticator
 awscli2
-ec2instanceconnectcli
-nodePackages.aws-azure-login
-naal
+python3Packages.ec2instanceconnectcli
 @
 
 \newthought{Install some miscellaneous tools.}
@@ -126,9 +129,9 @@ naal
 <<Install some user packages>>=
 bpytop
 fd
+gomplate
 powertop
 progress
-renderizer
 scc
 @
 
@@ -154,7 +157,7 @@ docker-compose
 @
 
 <<Install some user packages>>=
-podman-compose
+# TODO: podman-compose
 @
 
 \newthought{Install some convenient Kubernetes tools.}
@@ -163,6 +166,7 @@ podman-compose
 krew
 kubectl
 kubectx
+kubelogin
 kustomize
 lens
 stern
@@ -186,8 +190,9 @@ prometheus-alertmanager
   some lazy day.
 \end{itemize}
 
-<<Install some user packages>>=
-zoom-us
+<<*>>=
+# FIXME
+# zoom-us
 @
 
 <<*>>=
@@ -198,74 +203,48 @@ nyxt
 \hrefootnote{https://super-productivity.com}{Super Productivity} is a nice tool
 for time/work tracking and syncing with Jira.
 
-<<Install some user packages>>=
+<<*>>=
 super-productivity
 @
 
 
 \todor{Organize this better}
 
-%% modules/applications.nix
 <<Install some user packages>>=
-clementine
-qpdfview
-pavucontrol
-slack
-spotify
-@
-
-%% modules/clis.nix
-<<Install some user packages>>=
-(aspellWithDicts (dicts: [ dicts.en dicts.es dicts.nb dicts.sv ]))
-ansifilter
 bind
 curl
 httpie
 cachix
 nixUnstable
-gnutar
-gzip
-unzip
-clac
-coreutils
-expect
-gawk
-gnumake
-gnused
-moreutils
-ripgrep
-shellcheck
-shfmt
-silver-searcher # TODO: find helm-rg solution
-tree
-watch
-xclip
-yq
-mdcat
-smos
-nixpkgs-fmt
-nixpkgs-review
-playerctl
-wirelesstools
-libnotify
-lm_sensors
-mtr
-networkmanager-openconnect
-openconnect
-@
-
-%% modules/nix.nix
-\todoo{Configure Nix, incl. GC}
-<<Install some user packages>>=
-cachix
+home-manager
+nixgl.auto.nixGLDefault
+networkmanager
 @
 
 <<Configure picom>>=
 services.picom = {
   experimentalBackends = true;
-  extraOptions = ''
+  settings = {
     unredir-if-possible = true;
-  '';
+  };
   vSync = true;
+};
+@
+
+<<Miscellaneous config>>=
+home.sessionPath = [
+  "${config.home.homeDirectory}/bin"
+];
+
+programs.kitty.settings.font_size = 12;
+
+services.random-background = {
+  enable = true;
+  imageDirectory = "/usr/share/backgrounds/";
+  display = "scale";
+};
+
+xresources.properties = {
+  "Xft.dpi" = 220;
 };
 @

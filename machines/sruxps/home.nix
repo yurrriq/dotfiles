@@ -23,7 +23,6 @@
     ../../config/nix.nix
     ../../config/password-store.nix
     ../../config/rebar3.nix
-    # FIXME ../../config/screen-locker.nix
     ../../config/starship.nix
     # ../../config/taskwarrior
     ../../config/xmonad
@@ -34,7 +33,6 @@
     primary = true;
     realName = "Eric Bailey";
   };
-
   home.file.".docker/config.json".text = ''
     {
         "credHelpers": {
@@ -74,12 +72,12 @@
     python3Packages.ec2instanceconnectcli
     bpytop
     fd
+    gomplate
     powertop
     progress
-    gomplate
     scc
     docker-credential-helpers
-    # TODO podman-compose
+    # TODO: podman-compose
     krew
     kubectl
     kubectx
@@ -90,9 +88,6 @@
     vault
     fortune
     prometheus-alertmanager
-    # FIXME
-    # zoom-us
-    super-productivity
     bind
     curl
     httpie
@@ -102,13 +97,6 @@
     nixgl.auto.nixGLDefault
     networkmanager
   ];
-
-  home.sessionPath = [
-    "${config.home.homeDirectory}/bin"
-  ];
-
-  programs.kitty.settings.font_size = 12;
-
   services.picom = {
     experimentalBackends = true;
     settings = {
@@ -116,10 +104,11 @@
     };
     vSync = true;
   };
+  home.sessionPath = [
+    "${config.home.homeDirectory}/bin"
+  ];
 
-  xresources.properties = {
-    "Xft.dpi" = 220;
-  };
+  programs.kitty.settings.font_size = 12;
 
   services.random-background = {
     enable = true;
@@ -127,4 +116,7 @@
     display = "scale";
   };
 
+  xresources.properties = {
+    "Xft.dpi" = 220;
+  };
 }

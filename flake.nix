@@ -144,11 +144,8 @@
       defaultPackage.x86_64-linux = self.packages.x86_64-linux.yurrriq-dotfiles;
       nixosModules = {
         bootyjams = import ./modules/bootyjams.nix;
-
         location = import ./modules/location.nix;
-
         nix = import ./modules/nix.nix;
-
         nixPath = {
           nix.nixPath = lib.mapAttrsToList (n: v: "${n}=${v}")
             (lib.filterAttrs (n: _: n != "self") inputs) ++ [
@@ -176,8 +173,8 @@
             self.overlay
             inputs.deadnix.overlays.default
             inputs.emacs-overlay.overlay
-            inputs.nur.overlay
             inputs.nixgl.overlay
+            inputs.nur.overlay
           ];
         };
         virtualisation = import ./modules/virtualisation.nix;

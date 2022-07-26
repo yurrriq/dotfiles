@@ -16,7 +16,6 @@
 {
 
   programs.fish.shellAbbrs = {
-    <<AWS Azure login abbreviation>>
     <<Direnv fish abbreviations>>
     <<Kubernetes fish abbreviations>>
     <<Nix fish abbreviations>>
@@ -24,15 +23,6 @@
   };
 
 }
-@
-
-\newthought{\hrefootnote{https://github.com/yurrriq/naal}{naal} is cool and all, but...}
-
-... it's a bad habit too. the \fish{aal} abbeviation makes being not so sneaky a
-bit less annoying.
-
-<<AWS Azure login abbreviation>>=
-aal = "aws-azure-login --no-prompt";
 @
 
 \newthought{\hrefootnote{https://direnv.net/}{direnv} is great} for
@@ -51,6 +41,7 @@ It's definitely \href{https://xkcd.com/1205/}{worth the time}.
 <<Kubernetes fish abbreviations>>=
 kc = "kubectl";
 kcd = "kubectl drain --delete-emptydir-data --ignore-daemonsets";
+kcn = "kubectl --namespace";
 kcnp = "kubectl get pods --field-selector=spec.nodeName=";
 kcx = "kubectl --context";
 kg = "kubectl get";

@@ -43,6 +43,12 @@
         frame_width = 0;
         frame_color = "#8EC07C";
       };
+      shortcuts = {
+        close = "mod4+space";
+        close_all = "mod4+mod1+space";
+        # context = "ctrl+shift+period";
+        history = "ctrl+grave";
+      };
       urgency_low = {
         frame_color = "#3B7C87";
         foreground = "#3B7C87";

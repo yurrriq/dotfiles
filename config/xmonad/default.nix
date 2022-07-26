@@ -6,6 +6,7 @@
     ../dunst.nix
     ../fonts.nix
     ../rofi.nix
+    # FIXME: ../screen-locker.nix
   ];
 
   home.packages = with pkgs; [
@@ -13,8 +14,15 @@
     # font-awesome_4
     haskellPackages.xmobar
     playerctl
-    xorg.xbacklight
+    # FIXME: xorg.xbacklight
   ];
+
+  home.pointerCursor = {
+    package = pkgs.vanilla-dmz;
+    name = "Vanilla-DMZ-AA";
+    size = 36;
+    x11.enable = true;
+  };
 
   xdg.configFile."xmobar/xmobarrc" = {
     source = ../xmobar/xmobarrc;
@@ -25,13 +33,6 @@
           $DRY_RUN_CMD ${config.xsession.windowManager.command} --restart
       fi
     '';
-  };
-
-  home.pointerCursor = {
-    package = pkgs.vanilla-dmz;
-    name = "Vanilla-DMZ-AA";
-    size = 36;
-    x11.enable = true;
   };
 
   xsession = {
