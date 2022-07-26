@@ -22,7 +22,7 @@
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-21.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.05";
     nur.url = "github:nix-community/nur";
   };
 
