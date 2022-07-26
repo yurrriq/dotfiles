@@ -140,6 +140,12 @@ Define some development environments, which Nix will cache, including an unnamed
 default.  One of the main benefits is the super fast
 \hrefootnote{https://direnv.net}{direnv} integration.
 
+<<outputs>>=
+devShells.x86_64-linux = {
+  <<devShells x86_64-linux>>
+};
+@
+
 Define the default \nix{devShell}, including tools to build
 \hrefootnote{https://yurrriq.codes/dotfiles/dotfiles.pdf}{the PDF,}
 \hrefootnote{https://github.com/mozilla/sops}{manage secrets},
@@ -152,8 +158,8 @@ run \hrefootnote{https://github.com/nix-community/nixpkgs-fmt}{a}
 \hrefootnote{https://www.gnu.org/software/stow/}{manage the non-Nix symlink
   farm}.
 
-<<outputs>>=
-devShell.x86_64-linux = pkgs.mkShell {
+<<devShells x86_64-linux>>=
+default = pkgs.mkShell {
   inherit (self.defaultPackage.x86_64-linux) FONTCONFIG_FILE;
   buildInputs = with pkgs; [
     biber
@@ -184,36 +190,34 @@ setup using \hrefootnote{https://emacs-lsp.github.io/lsp-haskell/}{lsp-haskell},
 and include \hrefootnote{https://github.com/bmillwood/pointfree}{pointfree}
 for... reasons.
 
-<<outputs>>=
-devShells.x86_64-linux = {
-  xmonad =
-    let
-      _pkgs = import inputs.nixpkgs {
-        overlays = [
-          inputs.emacs-overlay.overlay
-        ];
-        system = "x86_64-linux";
-      };
-      myXMonad =
-        _pkgs.haskellPackages.callCabal2nix "my-xmonad" ./config/xmonad { };
-    in
-    _pkgs.mkShell {
-      buildInputs = with _pkgs; [
-        cabal-install
-        ghcid
-        gitAndTools.pre-commit
-        haskell-language-server
-        haskellPackages.ormolu
-        haskellPackages.pointfree
-        (
-          emacsWithPackagesFromUsePackage {
-            alwaysEnsure = true;
-            config = ./config/xmonad/emacs.el;
-          }
-        )
-      ] ++ myXMonad.env.nativeBuildInputs;
+<<devShells x86_64-linux>>=
+xmonad =
+  let
+    _pkgs = import inputs.nixpkgs {
+      overlays = [
+        inputs.emacs-overlay.overlay
+      ];
+      system = "x86_64-linux";
     };
-};
+    myXMonad =
+      _pkgs.haskellPackages.callCabal2nix "my-xmonad" ./config/xmonad { };
+  in
+  _pkgs.mkShell {
+    buildInputs = with _pkgs; [
+      cabal-install
+      ghcid
+      gitAndTools.pre-commit
+      haskell-language-server
+      haskellPackages.ormolu
+      haskellPackages.pointfree
+      (
+        emacsWithPackagesFromUsePackage {
+          alwaysEnsure = true;
+          config = ./config/xmonad/emacs.el;
+        }
+      )
+    ] ++ myXMonad.env.nativeBuildInputs;
+  };
 @
 
 \subsection{Packages}

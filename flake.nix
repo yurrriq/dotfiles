@@ -87,28 +87,28 @@
           };
         };
       };
-      devShell.x86_64-linux = pkgs.mkShell {
-        inherit (self.defaultPackage.x86_64-linux) FONTCONFIG_FILE;
-        buildInputs = with pkgs; [
-          biber
-          deadnix
-          git
-          git-lfs
-          gitAndTools.pre-commit
-          gnumake
-          gnupg
-          home-manager
-          mkpasswd
-          nixpkgs-fmt
-          nodePackages.node2nix
-          semver-tool
-          shellcheck
-          shfmt
-          sops
-          stow
-        ] ++ self.defaultPackage.x86_64-linux.nativeBuildInputs;
-      };
       devShells.x86_64-linux = {
+        default = pkgs.mkShell {
+          inherit (self.defaultPackage.x86_64-linux) FONTCONFIG_FILE;
+          buildInputs = with pkgs; [
+            biber
+            deadnix
+            git
+            git-lfs
+            gitAndTools.pre-commit
+            gnumake
+            gnupg
+            home-manager
+            mkpasswd
+            nixpkgs-fmt
+            nodePackages.node2nix
+            semver-tool
+            shellcheck
+            shfmt
+            sops
+            stow
+          ] ++ self.defaultPackage.x86_64-linux.nativeBuildInputs;
+        };
         xmonad =
           let
             _pkgs = import inputs.nixpkgs {
