@@ -72,8 +72,6 @@
     aws-iam-authenticator
     awscli2
     python3Packages.ec2instanceconnectcli
-    nodePackages.aws-azure-login
-    naal
     bpytop
     fd
     powertop

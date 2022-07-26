@@ -3,7 +3,6 @@
 {
 
   programs.fish.shellAbbrs = {
-    aal = "aws-azure-login --no-prompt";
     da = "direnv allow";
     dn = "direnv deny";
     dr = "direnv reload";

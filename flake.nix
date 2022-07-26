@@ -12,10 +12,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    naal = {
-      url = "github:yurrriq/naal";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixgl = {
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -180,7 +176,6 @@
             self.overlay
             inputs.deadnix.overlays.default
             inputs.emacs-overlay.overlay
-            inputs.naal.overlays.naal
             inputs.nur.overlay
             inputs.nixgl.overlay
           ];
