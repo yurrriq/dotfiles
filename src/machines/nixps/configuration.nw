@@ -126,8 +126,10 @@ networking.hostName = "nixps";
 
 <<Configure Nix>>=
 nix = {
-  buildCores = 8;
-  trustedUsers = [ "root" username ];
+  settings = {
+    cores = 8;
+    trusted-users = [ "root" username ];
+  };
 };
 @
 

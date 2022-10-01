@@ -12,7 +12,7 @@ This modules manages some common configuration on NixOS systems.
   <<Enable networkmanager>>
   <<Configure services>>
   <<Configure audio>>
-  system.stateVersion = "21.11";
+  system.stateVersion = "22.05";
 }
 @
 
@@ -121,7 +121,8 @@ Also enable ALSA sound.
 <<Configure audio>>=
 hardware.pulseaudio = {
   enable = true;
-  extraModules = [ pkgs.pulseaudio-modules-bt ];
+  # FIXME
+  # extraModules = [ pkgs.pulseaudio-modules-bt ];
   package = pkgs.pulseaudioFull;
 };
 sound.enable = true;

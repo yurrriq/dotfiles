@@ -54,9 +54,10 @@
   };
   hardware.pulseaudio = {
     enable = true;
-    extraModules = [ pkgs.pulseaudio-modules-bt ];
+    # FIXME
+    # extraModules = [ pkgs.pulseaudio-modules-bt ];
     package = pkgs.pulseaudioFull;
   };
   sound.enable = true;
-  system.stateVersion = "21.11";
+  system.stateVersion = "22.05";
 }

@@ -4,7 +4,9 @@
 { pkgs, ... }:
 {
   nix = {
-    <<Configure binary caches>>
+    settings = {
+      <<Configure binary caches>>
+    };
     # TODO: daemonNiceLevel = 19;
     <<Configure extra options>>
     <<Configure garbage collection>>
@@ -25,10 +27,10 @@ environment.systemPackages = with pkgs; [
 @
 
 <<Configure binary caches>>=
-binaryCaches = [
+substituters = [
   "https://yurrriq.cachix.org"
 ];
-binaryCachePublicKeys = [
+trusted-public-keys = [
   "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
 ];
 @

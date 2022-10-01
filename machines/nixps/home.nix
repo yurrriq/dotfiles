@@ -45,11 +45,13 @@
     powertop
     protontricks
     reaper
-    (signal-desktop.override { spellcheckerLanguage = "en_US"; })
+    # FIXME
+    # (signal-desktop.override { spellcheckerLanguage = "en_US"; })
     steam
     tellico
     winetricks
     zoom-us
   ];
+  home.stateVersion = "22.05";
   services.picom.enable = true;
 }

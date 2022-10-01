@@ -1,12 +1,14 @@
 { pkgs, ... }:
 {
   nix = {
-    binaryCaches = [
-      "https://yurrriq.cachix.org"
-    ];
-    binaryCachePublicKeys = [
-      "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
-    ];
+    settings = {
+      substituters = [
+        "https://yurrriq.cachix.org"
+      ];
+      trusted-public-keys = [
+        "yurrriq.cachix.org-1:evpJ5wKluf7QOCcv69VkIxCOtHgubrqXlZpp3JAXLBE="
+      ];
+    };
     # TODO: daemonNiceLevel = 19;
     extraOptions = ''
       experimental-features = flakes nix-command

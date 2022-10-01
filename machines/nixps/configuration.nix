@@ -56,8 +56,10 @@ in
 
   networking.hostName = "nixps";
   nix = {
-    buildCores = 8;
-    trustedUsers = [ "root" username ];
+    settings = {
+      cores = 8;
+      trusted-users = [ "root" username ];
+    };
   };
   security.sudo = {
     enable = true;
