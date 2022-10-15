@@ -167,7 +167,7 @@
             "spotify-unwrapped"
             "steam"
             "steam-original"
-            "steam-runtime"
+            "steam-run"
             "zoom"
           ];
           nixpkgs.overlays = [
