@@ -28,6 +28,7 @@
       yq
       mdcat
       # smos
+      nix-output-monitor
       nixpkgs-fmt
       nixpkgs-review
       wirelesstools
