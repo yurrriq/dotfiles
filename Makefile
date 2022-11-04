@@ -169,7 +169,7 @@ stow: .stow-local-ignore cachix secrets
 generate-config: machines/${machine}/hardware-configuration.nix
 
 machines/${machine}/hardware-configuration.nix:
-	nixos-generate-config --root ${PWD} --dir /$(@D)
+	nixos-generate-config --root ${PWD} --dir $(@D)
 	nixpkgs-fmt $@
 
 
