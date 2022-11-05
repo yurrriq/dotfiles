@@ -157,7 +157,7 @@ myKeys cfg =
       ("M-w", sendMessage (JumpToLayout "TwoPane")),
       ("M1-<Space>", spawn "rofi -modi combi,window -show combi -combi-modi run,drun"),
       ("C-M-M1-x", spawn "xmonad --restart"),
-      ("C-M-M1-c", spawn "systemctl --user picom.service"),
+      ("C-M-M1-c", spawn "systemctl --user restart picom.service"),
       ("C-M-<Left>", moveTo Prev NonEmptyWS),
       ("C-M-<Right>", moveTo Next NonEmptyWS),
       ("C-M-M1-<Left>", shiftAndMoveTo Prev EmptyWS),
