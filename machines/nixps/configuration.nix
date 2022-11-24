@@ -35,18 +35,21 @@ in
   };
   hardware.bumblebee.enable = false;
   hardware.nvidiaOptimus.disable = false;
-  services.blueman.enable = true;
+  services.blueman.enable = false;
   hardware.bluetooth = {
-    enable = true;
-    settings = {
-      General = {
-        Enable = "Source,Sink,Media,Socket";
-      };
-    };
+    enable = false;
+    # settings = {
+    #   General = {
+    #     Enable = "Source,Sink,Media,Socket";
+    #   };
+    # };
   };
   hardware.pulseaudio.support32Bit = true;
   hardware.opengl.driSupport32Bit = true;
   home-manager.users."${username}" = import ./home.nix;
+
+  # musnix.enable = true;
+
   networking.firewall = {
     enable = true;
     allowedTCPPortRanges = [
