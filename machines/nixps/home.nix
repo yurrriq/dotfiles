@@ -45,8 +45,7 @@
     powertop
     protontricks
     reaper
-    # FIXME
-    # (signal-desktop.override { spellcheckerLanguage = "en_US"; })
+    signal-desktop
     steam
     tellico
     winetricks
