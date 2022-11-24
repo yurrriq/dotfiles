@@ -18,7 +18,7 @@
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.11";
     nur.url = "github:nix-community/nur";
   };
 
@@ -196,7 +196,7 @@
             home = {
               username = "ebailey";
               homeDirectory = "/home/ebailey";
-              stateVersion = "22.05";
+              stateVersion = "22.11";
             };
           }
         ];

@@ -98,7 +98,6 @@
     networkmanager
   ];
   services.picom = {
-    experimentalBackends = true;
     settings = {
       unredir-if-possible = true;
     };

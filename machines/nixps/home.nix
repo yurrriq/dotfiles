@@ -52,6 +52,6 @@
     winetricks
     zoom-us
   ];
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
   services.picom.enable = true;
 }

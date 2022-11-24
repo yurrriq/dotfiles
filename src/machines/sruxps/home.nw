@@ -223,7 +223,6 @@ networkmanager
 
 <<Configure picom>>=
 services.picom = {
-  experimentalBackends = true;
   settings = {
     unredir-if-possible = true;
   };

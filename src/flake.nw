@@ -98,7 +98,7 @@ Of course, pin a stable version of the too
 \hrefootnote{https://github.com/NixOS/nixpkgs}{Nix Packages collection}.
 
 <<inputs>>=
-nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.05";
+nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.11";
 @
 
 \subsection{NUR}
@@ -278,7 +278,7 @@ homeConfigurations.ebailey = inputs.home-manager.lib.homeManagerConfiguration {
       home = {
         username = "ebailey";
         homeDirectory = "/home/ebailey";
-        stateVersion = "22.05";
+        stateVersion = "22.11";
       };
     }
   ];

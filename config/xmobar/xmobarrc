@@ -1,10 +1,10 @@
 Config
-  { font = "xft:Iosevka:size=12",
-    additionalFonts = ["xft:Noto Color Emoji:size=12"],
+  { font = "Iosevka 24",
+    additionalFonts = ["Noto Color Emoji 24"],
     allDesktops = True,
     bgColor = "#242424",
     fgColor = "#f6f3e8",
-    position = Bottom,
+    position = BottomH 36,
     commands =
       [
         Run DateZone "%a %H:%M" "nb_NO.UTF-8" "Europe/Oslo" "nodate" 50,
