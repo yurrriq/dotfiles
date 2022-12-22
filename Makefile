@@ -143,6 +143,13 @@ switch-hm: cachix xsessions
 build-hm switch-hm:
 	@ home-manager --impure --flake .#ebailey ${@:-hm=}
 
+diff-hm: build-hm
+	@ home-manager generations | \
+	head -n1 | \
+	awk '{ print $NF }' | \
+	xargs -I% nix store diff-closures % ./result
+
+
 xsessions:
 	@ sudo ${stow} -t /usr/share/$@ $@
 
