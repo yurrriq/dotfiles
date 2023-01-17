@@ -2,7 +2,7 @@
 
 {
 
-  home.file.".xmonad/matrix.png".source = ./matrix.png;
+  home.file.".xmonad/matrix.png".source = ./xmonad/matrix.png;
 
   home.packages = with pkgs; [
     i3lock

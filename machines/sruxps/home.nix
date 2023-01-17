@@ -23,6 +23,7 @@
     ../../config/nix.nix
     ../../config/password-store.nix
     ../../config/rebar3.nix
+    ../../config/screen-locker.nix
     ../../config/starship.nix
     # ../../config/taskwarrior
     ../../config/xmonad
