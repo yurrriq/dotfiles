@@ -33,3 +33,5 @@ xinput --set-prop 13 "libinput Tapping Enabled" 1
 #     LogLevel QUIET
 #     StrictHostKeyChecking accept-new
 #     UserKnownHostsFile /dev/null
+
+sudo apt install i3lock -y

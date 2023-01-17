@@ -136,7 +136,7 @@ myKeys cfg =
       ("<Print>", spawn "flameshot gui"),
       ("M-S--", namedScratchpadAction scratchpads "emacs"),
       ("M--", namedScratchpadAction scratchpads "kitty"),
-      -- FIXME: ("M-<Esc>", getXMonadDataDir >>= spawn . wrap "i3lock -i " "/matrix.png"),
+      ("M-<Esc>", getXMonadDataDir >>= spawn . wrap "i3lock -i " "/matrix.png"),
       ("M-<Space>", spawn "dunstctl close"),
       ("M-M1-<Space>", spawn "dunstctl close-all"),
       ("C-`", spawn "dunstctl history-pop"),
