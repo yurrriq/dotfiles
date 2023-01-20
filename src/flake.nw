@@ -266,7 +266,7 @@ nixosConfigurations = {
 \todoo{Describe this}
 
 <<outputs>>=
-homeConfigurations.ebailey = inputs.home-manager.lib.homeManagerConfiguration {
+homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
   modules = [
     # FIXME: There's gotta be a better way...
     (
@@ -276,8 +276,8 @@ homeConfigurations.ebailey = inputs.home-manager.lib.homeManagerConfiguration {
     )
     {
       home = {
-        username = "ebailey";
-        homeDirectory = "/home/ebailey";
+        username = "eric";
+        homeDirectory = "/home/eric";
         stateVersion = "22.11";
       };
     }

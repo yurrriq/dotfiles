@@ -7,7 +7,6 @@
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       browserpass
       darkreader
-      https-everywhere
       lastpass-password-manager
       privacy-badger
     ];

@@ -18,6 +18,11 @@ nix-shell '<home-manager>' -A install
 rmdir ~/.local/share/applications
 ln -s ~/.nix-profile/share/applications ~/.local/share/
 
+# nix profile install nixpkgs#direnv
+sudo apt install direnv -y
+
+direnv allow
+
 sudo snap install zoom-client
 
 # λ xinput list --name-only | grep -m1 Touchpad | xargs -I% xinput list --id-only '%'

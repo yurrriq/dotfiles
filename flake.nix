@@ -184,7 +184,7 @@
         "nixps" = mkSystem "nixps" "dell-xps-15-9560-intel";
         "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-7390";
       };
-      homeConfigurations.ebailey = inputs.home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
         modules = [
           # FIXME: There's gotta be a better way...
           (
@@ -194,8 +194,8 @@
           )
           {
             home = {
-              username = "ebailey";
-              homeDirectory = "/home/ebailey";
+              username = "eric";
+              homeDirectory = "/home/eric";
               stateVersion = "22.11";
             };
           }

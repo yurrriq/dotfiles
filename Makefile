@@ -138,10 +138,12 @@ diff: build
 
 .PHONY: build-hm switch-hm xsessions
 
-switch-hm: cachix xsessions
+# FIXME
+# switch-hm: cachix xsessions
+switch-hm: xsessions
 
 build-hm switch-hm:
-	@ home-manager --impure --flake .#ebailey ${@:-hm=}
+	@ home-manager --impure --flake .#eric ${@:-hm=}
 
 diff-hm: build-hm
 	@ home-manager generations | \

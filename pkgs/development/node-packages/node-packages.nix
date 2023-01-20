@@ -67,13 +67,13 @@ let
         sha512 = "/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==";
       };
     };
-    "fastq-1.13.0" = {
+    "fastq-1.15.0" = {
       name = "fastq";
       packageName = "fastq";
-      version = "1.13.0";
+      version = "1.15.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/fastq/-/fastq-1.13.0.tgz";
-        sha512 = "YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw==";
+        url = "https://registry.npmjs.org/fastq/-/fastq-1.15.0.tgz";
+        sha512 = "wBrocU2LCXXa+lWBt8RoIRD89Fi8OdABODa/kEnyeyjS5aZO5/GNvI5sEINADqP/h8M29UHTHUb53sUu5Ihqdw==";
       };
     };
     "find-up-2.1.0" = {
@@ -302,7 +302,7 @@ in
       sources."brace-expansion-1.1.11"
       sources."commander-6.2.1"
       sources."concat-map-0.0.1"
-      sources."fastq-1.13.0"
+      sources."fastq-1.15.0"
       sources."find-up-2.1.0"
       sources."fs.realpath-1.0.0"
       sources."glob-7.2.3"
