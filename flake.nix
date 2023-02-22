@@ -3,17 +3,24 @@
   description = "My (semi-)literate, Nix-based dotfiles";
 
   inputs = {
-    deadnix.url = "github:astro/deadnix";
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
+    deadnix = {
+      url = "github:astro/deadnix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
     };
     nixgl = {
       url = "github:guibou/nixGL";
+      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";

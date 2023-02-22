@@ -34,7 +34,10 @@ At the top-level, the flake defines \hyperref[sec:inputs]{\nix{inputs}} and
 \todoo{Describe deadnix}
 
 <<inputs>>=
-deadnix.url = "github:astro/deadnix";
+deadnix = {
+  url = "github:astro/deadnix";
+  inputs.nixpkgs.follows = "nixpkgs";
+};
 @
 
 \subsection{emacs-overlay}
@@ -50,9 +53,18 @@ which generates an Emacs closure from an Emacs config file, by way of
 <<inputs>>=
 emacs-overlay = {
   url = "github:nix-community/emacs-overlay";
+  inputs.flake-utils.follows = "flake-utils";
   inputs.nixpkgs.follows = "nixpkgs";
 };
 @
+
+\subsection{flake-utils}
+
+\todoo{Describe flake-utils}
+<<inputs>>=
+flake-utils.url = "github:numtide/flake-utils";
+@
+
 
 \subsection{home-manager}
 
@@ -63,6 +75,7 @@ invaluable tool for managing a deterministic \bash{$HOME}.
 home-manager = {
   url = "github:nix-community/home-manager";
   inputs.nixpkgs.follows = "nixpkgs";
+  inputs.utils.follows = "flake-utils";
 };
 @
 
@@ -73,6 +86,7 @@ home-manager = {
 <<inputs>>=
 nixgl = {
   url = "github:guibou/nixGL";
+  inputs.flake-utils.follows = "flake-utils";
   inputs.nixpkgs.follows = "nixpkgs";
 };
 @
