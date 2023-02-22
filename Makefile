@@ -140,7 +140,7 @@ diff: build
 
 # FIXME
 # switch-hm: cachix xsessions
-switch-hm: xsessions
+switch-hm: # xsessions
 
 build-hm switch-hm:
 	@ home-manager --impure --flake .#eric ${@:-hm=}
