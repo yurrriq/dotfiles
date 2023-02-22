@@ -88,7 +88,7 @@ Try to commit the changes, or else.
 }
 
 <<config/taskwarrior/on-exit-git.sh>>=
-elif ! git -C "$data" commit -qm "$command: ${args#task $command}"; then
+elif ! git -C "$data" commit -qm "$command: ${args#task "$command"}"; then
     echo 'Failed to record changes to the repository'
     exit 101
 @
