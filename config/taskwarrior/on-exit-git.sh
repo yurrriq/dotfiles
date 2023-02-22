@@ -16,7 +16,7 @@ if git -C "$data" diff --quiet; then
 elif ! git -C "$data" add -A; then
     echo 'Failed to add files to the index'
     exit 100
-elif ! git -C "$data" commit -qm "$command: ${args#task $command}"; then
+elif ! git -C "$data" commit -qm "$command: ${args#task "$command"}"; then
     echo 'Failed to record changes to the repository'
     exit 101
 elif [ -n "${DEBUG:-}" ]; then

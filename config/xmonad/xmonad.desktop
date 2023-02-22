@@ -1,7 +1,6 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=XMonad
 Comment=Lightweight tiling window manager
-Exec=/home/eric/.hm-xsession
-# Icon=xmonad.png
+Exec=xmonad-session
+Icon=xmonad.png
 Type=XSession

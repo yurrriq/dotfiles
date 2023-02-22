@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# shellcheck disable=SC1091
+if [ -r ".xmonad/xmonad-session-rc" ]
+then
+  . .xmonad/xmonad-session-rc
+fi
+
+exec xmonad "$@"

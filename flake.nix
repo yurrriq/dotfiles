@@ -3,17 +3,24 @@
   description = "My (semi-)literate, Nix-based dotfiles";
 
   inputs = {
-    deadnix.url = "github:astro/deadnix";
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
+    deadnix = {
+      url = "github:astro/deadnix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    emacs-overlay = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
     };
     nixgl = {
       url = "github:guibou/nixGL";
+      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -184,7 +191,7 @@
         "nixps" = mkSystem "nixps" "dell-xps-15-9560-intel";
         "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-7390";
       };
-      homeConfigurations.ebailey = inputs.home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
         modules = [
           # FIXME: There's gotta be a better way...
           (
@@ -194,8 +201,8 @@
           )
           {
             home = {
-              username = "ebailey";
-              homeDirectory = "/home/ebailey";
+              username = "eric";
+              homeDirectory = "/home/eric";
               stateVersion = "22.11";
             };
           }

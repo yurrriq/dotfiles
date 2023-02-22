@@ -2,7 +2,13 @@
 
 setxkbmap -option "ctrl:nocaps,compose:ralt"
 
-sudo apt install curl git network-manager-openconnect
+# λ xinput list --name-only | grep -m1 Touchpad | xargs -I% xinput list --id-only '%'
+# 13
+
+xinput --set-prop 13 "libinput Accel Speed" 1
+xinput --set-prop 13 "libinput Tapping Enabled" 1
+
+sudo apt install curl git
 
 sh <(curl -L https://nixos.org/nix/install) --daemon
 
@@ -18,13 +24,12 @@ nix-shell '<home-manager>' -A install
 rmdir ~/.local/share/applications
 ln -s ~/.nix-profile/share/applications ~/.local/share/
 
+# nix profile install nixpkgs#direnv
+sudo apt install direnv -y
+
+direnv allow
+
 sudo snap install zoom-client
-
-# λ xinput list --name-only | grep -m1 Touchpad | xargs -I% xinput list --id-only '%'
-# 13
-
-xinput --set-prop 13 "libinput Accel Speed" 1
-xinput --set-prop 13 "libinput Tapping Enabled" 1
 
 # Fix/replace xbacklight
 
@@ -34,4 +39,4 @@ xinput --set-prop 13 "libinput Tapping Enabled" 1
 #     StrictHostKeyChecking accept-new
 #     UserKnownHostsFile /dev/null
 
-sudo apt install i3lock -y
+sudo apt install i3lock xmonad -y
