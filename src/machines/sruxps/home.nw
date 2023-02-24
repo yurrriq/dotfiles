@@ -102,7 +102,7 @@ home.keyboard = {
 \newthought{Install some tools for authenticating} with AWS and Azure.
 
 \begin{itemize}
-\item The AWS IAM Authenticator was used for interacting with EKS clusters.
+\item The AWS IAM Authenticator is used for interacting with EKS clusters.
 \item EC2 Instance Connect allows you to use your AWS CLI credentials to SSH
   into EC2 instances.
 \item AWS Azure Login ...
@@ -111,7 +111,7 @@ non-interactive AWS Azure login.
 \end{itemize}
 
 <<Install some user packages>>=
-# aws-iam-authenticator
+aws-iam-authenticator
 awscli2
 python3Packages.ec2instanceconnectcli
 @
@@ -128,7 +128,7 @@ python3Packages.ec2instanceconnectcli
 \end{itemize}
 
 <<Install some user packages>>=
-# btop
+bpytop
 fd
 gomplate
 powertop
