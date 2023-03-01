@@ -5,7 +5,7 @@
 
 {
 
-  home.file.".xmonad/matrix.png".source = ./xmonad/matrix.png;
+  home.file.".xmonad/skyrim.raw".source = ./xmonad/skyrim.raw;
 
   home.packages = with pkgs; [
     # FIXME
@@ -16,7 +16,11 @@
     enable = true;
     inactiveInterval = 5;
     # FIXME: ${pkgs.i3lock}/bin/i3lock
-    lockCmd = "i3lock -i ${config.home.homeDirectory}/.xmonad/matrix.png";
+    lockCmd = ''
+      i3lock \
+        --image ${config.home.homeDirectory}/.xmonad/skyrim.raw \
+        --raw 3840x2400:rgb
+    '';
   };
 
 }

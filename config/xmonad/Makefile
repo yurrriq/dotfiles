@@ -1,0 +1,2 @@
+%.raw: %.jpg
+	convert $< RGB:$@
