@@ -218,7 +218,7 @@ httpie
 cachix
 nixUnstable
 home-manager
-nixgl.auto.nixGLDefault
+# nixgl.auto.nixGLDefault
 networkmanager
 @
 

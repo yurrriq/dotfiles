@@ -18,11 +18,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
     };
-    nixgl = {
-      url = "github:guibou/nixGL";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.11";
@@ -181,7 +176,7 @@
             self.overlay
             inputs.deadnix.overlays.default
             inputs.emacs-overlay.overlay
-            inputs.nixgl.overlay
+            # inputs.nixgl.overlay
             inputs.nur.overlay
           ];
         };
@@ -209,14 +204,7 @@
         ];
         pkgs = import inputs.nixpkgs {
           inherit (self.nixosModules.nixpkgs.nixpkgs) config;
-          overlays = self.nixosModules.nixpkgs.nixpkgs.overlays ++ [
-            # https://github.com/nix-community/home-manager/issues/2251#issuecomment-895338427
-            (final: prev: {
-              kitty = prev.lib.nixGLWrap { pkg = prev.kitty; };
-              # FIXME
-              # zoom-us = prev.lib.nixGLWrap { pkg = prev.zoom-us; binName = "zoom"; };
-            })
-          ];
+          overlays = self.nixosModules.nixpkgs.nixpkgs.overlays;
           system = "x86_64-linux";
         };
       };

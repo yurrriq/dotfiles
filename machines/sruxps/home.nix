@@ -95,7 +95,7 @@
     cachix
     nixUnstable
     home-manager
-    nixgl.auto.nixGLDefault
+    # nixgl.auto.nixGLDefault
     networkmanager
   ];
   services.picom = {

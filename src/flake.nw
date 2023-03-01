@@ -83,13 +83,13 @@ home-manager = {
 
 \todoo{Describe nixGL}
 
-<<inputs>>=
-nixgl = {
-  url = "github:guibou/nixGL";
-  inputs.flake-utils.follows = "flake-utils";
-  inputs.nixpkgs.follows = "nixpkgs";
-};
-@
+\begin{minted}{nix}
+  nixgl = {
+    url = "github:guibou/nixGL";
+    inputs.flake-utils.follows = "flake-utils";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+\end{minted}
 
 \subsection{nixos-hardware}
 
@@ -298,14 +298,21 @@ homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
   ];
   pkgs = import inputs.nixpkgs {
     inherit (self.nixosModules.nixpkgs.nixpkgs) config;
-    overlays = self.nixosModules.nixpkgs.nixpkgs.overlays ++ [
-      # https://github.com/nix-community/home-manager/issues/2251#issuecomment-895338427
+    overlays = self.nixosModules.nixpkgs.nixpkgs.overlays;
+@
+
+\begin{minted}{nix}
+  ++ [
+    # https://github.com/nix-community/home-manager/issues/2251#issuecomment-895338427
       (final: prev: {
         kitty = prev.lib.nixGLWrap { pkg = prev.kitty; };
         # FIXME
         # zoom-us = prev.lib.nixGLWrap { pkg = prev.zoom-us; binName = "zoom"; };
       })
-    ];
+  ];
+\end{minted}
+
+<<outputs>>=
     system = "x86_64-linux";
   };
 };
@@ -479,7 +486,7 @@ nixpkgs = {
     self.overlay
     inputs.deadnix.overlays.default
     inputs.emacs-overlay.overlay
-    inputs.nixgl.overlay
+    # inputs.nixgl.overlay
     inputs.nur.overlay
   ];
 };
