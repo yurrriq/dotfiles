@@ -22,7 +22,6 @@
     ../../config/man.nix
     ../../config/nix.nix
     ../../config/password-store.nix
-    ../../config/rbw.nix
     ../../config/rebar3.nix
     ../../config/screen-locker.nix
     ../../config/starship.nix
