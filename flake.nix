@@ -18,6 +18,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
     };
+    nixgl = {
+      url = "github:guibou/nixGL";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.11";
@@ -77,7 +82,7 @@
           lib = prev.lib // {
             nixGLWrap = { pkg, binName ? prev.lib.getName pkg }:
               prev.writeShellScriptBin binName ''
-                exec ${final.nixgl.auto.nixGLDefault}/bin/nixGL ${pkg}/bin/${binName} "$@"
+                exec ${final.nixgl.nixGLIntel}/bin/nixGLIntel ${pkg}/bin/${binName} "$@"
               '';
           };
         };
@@ -163,6 +168,7 @@
           nixpkgs.config.allowUnfreePredicate = pkgNameElem [
             "Oracle_VM_VirtualBox_Extension_Pack"
             "lastpass-password-manager"
+            "nvidia"
             "reaper"
             "slack"
             "spotify"
@@ -176,7 +182,7 @@
             self.overlay
             inputs.deadnix.overlays.default
             inputs.emacs-overlay.overlay
-            # inputs.nixgl.overlay
+            inputs.nixgl.overlay
             inputs.nur.overlay
           ];
         };
@@ -204,7 +210,14 @@
         ];
         pkgs = import inputs.nixpkgs {
           inherit (self.nixosModules.nixpkgs.nixpkgs) config;
-          overlays = self.nixosModules.nixpkgs.nixpkgs.overlays;
+          overlays = self.nixosModules.nixpkgs.nixpkgs.overlays ++ [
+            # https://github.com/nix-community/home-manager/issues/2251#issuecomment-895338427
+            (final: prev: {
+              kitty = prev.lib.nixGLWrap { pkg = prev.kitty; };
+              # FIXME
+              # zoom-us = prev.lib.nixGLWrap { pkg = prev.zoom-us; binName = "zoom"; };
+            })
+          ];
           system = "x86_64-linux";
         };
       };

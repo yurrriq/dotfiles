@@ -95,10 +95,11 @@
     cachix
     nixUnstable
     home-manager
-    # nixgl.auto.nixGLDefault
+    nixgl.nixGLIntel
     networkmanager
   ];
   services.picom = {
+    enable = true;
     settings = {
       unredir-if-possible = true;
     };
@@ -117,6 +118,6 @@
   };
 
   xresources.properties = {
-    "Xft.dpi" = 220;
+    "Xft.dpi" = 290;
   };
 }

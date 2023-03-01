@@ -136,7 +136,7 @@ diff: build
 	@ nix store diff-closures /run/current-system ./result
 
 
-.PHONY: build-hm switch-hm xsessions
+.PHONY: build-hm switch-hm xorg.conf.d xsessions
 
 # FIXME
 # switch-hm: cachix xsessions
@@ -150,6 +150,10 @@ diff-hm: build-hm
 	head -n1 | \
 	awk '{ print $NF }' | \
 	xargs -I% nix store diff-closures % ./result
+
+
+xorg.conf.d:
+	@ sudo ${stow} -t /etc/X11/$@ $@
 
 
 xsessions:

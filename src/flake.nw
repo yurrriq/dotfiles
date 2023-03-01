@@ -83,13 +83,13 @@ home-manager = {
 
 \todoo{Describe nixGL}
 
-\begin{minted}{nix}
-  nixgl = {
-    url = "github:guibou/nixGL";
-    inputs.flake-utils.follows = "flake-utils";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-\end{minted}
+<<inputs>>=
+nixgl = {
+  url = "github:guibou/nixGL";
+  inputs.flake-utils.follows = "flake-utils";
+  inputs.nixpkgs.follows = "nixpkgs";
+};
+@
 
 \subsection{nixos-hardware}
 
@@ -298,21 +298,14 @@ homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
   ];
   pkgs = import inputs.nixpkgs {
     inherit (self.nixosModules.nixpkgs.nixpkgs) config;
-    overlays = self.nixosModules.nixpkgs.nixpkgs.overlays;
-@
-
-\begin{minted}{nix}
-  ++ [
-    # https://github.com/nix-community/home-manager/issues/2251#issuecomment-895338427
+    overlays = self.nixosModules.nixpkgs.nixpkgs.overlays ++ [
+      # https://github.com/nix-community/home-manager/issues/2251#issuecomment-895338427
       (final: prev: {
         kitty = prev.lib.nixGLWrap { pkg = prev.kitty; };
         # FIXME
         # zoom-us = prev.lib.nixGLWrap { pkg = prev.zoom-us; binName = "zoom"; };
       })
-  ];
-\end{minted}
-
-<<outputs>>=
+    ];
     system = "x86_64-linux";
   };
 };
@@ -400,7 +393,7 @@ nixGLWrap = final: prev: {
   lib = prev.lib // {
     nixGLWrap = { pkg, binName ? prev.lib.getName pkg }:
       prev.writeShellScriptBin binName ''
-        exec ${final.nixgl.auto.nixGLDefault}/bin/nixGL ${pkg}/bin/${binName} "$@"
+        exec ${final.nixgl.nixGLIntel}/bin/nixGLIntel ${pkg}/bin/${binName} "$@"
       '';
   };
 };
@@ -473,6 +466,7 @@ nixpkgs = {
   nixpkgs.config.allowUnfreePredicate = pkgNameElem [
     "Oracle_VM_VirtualBox_Extension_Pack"
     "lastpass-password-manager"
+    "nvidia"
     "reaper"
     "slack"
     "spotify"
@@ -486,7 +480,7 @@ nixpkgs = {
     self.overlay
     inputs.deadnix.overlays.default
     inputs.emacs-overlay.overlay
-    # inputs.nixgl.overlay
+    inputs.nixgl.overlay
     inputs.nur.overlay
   ];
 };

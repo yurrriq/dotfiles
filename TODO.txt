@@ -40,3 +40,7 @@ sudo snap install zoom-client
 #     UserKnownHostsFile /dev/null
 
 sudo apt install i3lock xmonad -y
+
+sudo hostnamectl set-hostname MSP1-LINUX-(sudo dmidecode -s system-serial-numb
+
+xrandr --output eDP-1 --scale '2'
