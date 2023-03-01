@@ -44,3 +44,8 @@ sudo apt install i3lock xmonad -y
 sudo hostnamectl set-hostname MSP1-LINUX-(sudo dmidecode -s system-serial-numb
 
 xrandr --output eDP-1 --scale '2'
+systemctl --user restart random-background.service
+
+sudo apt remove gnome-remote-desktop evince -y
+sudo apt autoremove -y
+sudo apt autoclean -y
