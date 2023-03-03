@@ -109,6 +109,8 @@
     "${config.home.homeDirectory}/bin"
   ];
 
+  nix.enable = true;
+
   programs.kitty.settings.font_size = 12;
 
   services.random-background = {
