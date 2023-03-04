@@ -246,7 +246,6 @@ See also: \hyperref[chap:packages]{Packages}.
 
 <<outputs>>=
 packages.x86_64-linux = {
-  fish-kubectl-completions = pkgs.callPackage ./pkgs/shells/fish/kubectl-completions { };
   yurrriq-dotfiles = pkgs.callPackage ./. { };
 };
 
@@ -376,14 +375,6 @@ pkgs = import inputs.nixpkgs {
 @
 
 \subsection{Overlays}
-
-Define an overlay that adds [[fish-kubectl-completions]].\todor{Fix this noweb xref}
-
-<<overlays>>=
-fish-completions = final: prev: {
-  fish-kubectl-completions = prev.callPackage ./pkgs/shells/fish/kubectl-completions { };
-};
-@
 
 Define an overlay with a pinned version of home-manager.
 

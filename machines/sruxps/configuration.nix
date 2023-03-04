@@ -33,7 +33,6 @@ in
     # FIXME: "/share/icons"
   ];
   environment.systemPackages = with pkgs; [
-    fish-kubectl-completions
     kubelogin
   ];
   fileSystems."/" = {

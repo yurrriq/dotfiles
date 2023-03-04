@@ -20,8 +20,7 @@ stow       := $(shell type -p stow) ${stow_flags}
 NW_SRCS := $(shell find src -name '*.nw')
 
 WEIRD_SRCS := \
-pkgs/development/node-packages/node-packages.json \
-pkgs/shells/fish/kubectl-completions/default.nix
+pkgs/development/node-packages/node-packages.json
 SRCS := $(filter-out ${WEIRD_SRCS}, $(shell awk '/<<[^ *]+\.\w+>>=$$/{ gsub(/(<<|>>=)/, ""); print $$0 }' ${NW_SRCS} | sort -u))
 NIX_SRCS := $(filter %.nix, ${SRCS}) # pkgs/development/node-packages/node-packages.nix
 SH_SRCS := $(filter %.sh, ${SRCS})

@@ -82,7 +82,6 @@ environment.pathsToLink = [
 
 <<Install system-wide packages>>=
 environment.systemPackages = with pkgs; [
-  fish-kubectl-completions
   kubelogin
 ];
 @

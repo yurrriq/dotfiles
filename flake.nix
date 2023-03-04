@@ -73,9 +73,6 @@
       overlay = lib.composeManyExtensions (lib.attrValues self.overlays);
 
       overlays = {
-        fish-completions = final: prev: {
-          fish-kubectl-completions = prev.callPackage ./pkgs/shells/fish/kubectl-completions { };
-        };
         home-manager = final: prev: {
           home-manager = inputs.home-manager.packages.${prev.system}.home-manager;
         };
@@ -152,7 +149,6 @@
           };
       };
       packages.x86_64-linux = {
-        fish-kubectl-completions = pkgs.callPackage ./pkgs/shells/fish/kubectl-completions { };
         yurrriq-dotfiles = pkgs.callPackage ./. { };
       };
 
