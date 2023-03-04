@@ -50,4 +50,10 @@ repos:
     id: shfmt
     language: script
     name: Format .sh files
+  - always_run: true
+    description: Ensure Noweb sources are up to date
+    entry: make srcs
+    id: make-srcs
+    language: system
+    name: make srcs
   repo: local
