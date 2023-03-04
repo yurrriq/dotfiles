@@ -62,6 +62,7 @@
       pkgs = import inputs.nixpkgs {
         overlays = [
           inputs.deadnix.overlays.default
+          inputs.emacs-overlay.overlay
           self.overlays.home-manager
           self.overlays.noweb
         ];
@@ -100,6 +101,12 @@
           buildInputs = with pkgs; [
             biber
             deadnix
+            (
+              emacsWithPackagesFromUsePackage {
+                alwaysEnsure = true;
+                config = ./config/emacs/init.el;
+              }
+            )
             git
             git-lfs
             gnumake
