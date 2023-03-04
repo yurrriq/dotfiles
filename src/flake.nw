@@ -353,7 +353,13 @@ mkSystem = name: machine: lib.nixosSystem {
 };
 @
 
-\todoo{Document \nix{pkgNameElem}}
+\nix{pkgNameElem} takes a list of package names and returns a function suitable
+for an
+\hrefootnote{https://nixos.org/manual/nixpkgs/unstable/\#sec-allow-unfree}{\nix{allowUnfreePredicate}}.
+
+\begin{minted}{haskell}
+  mkSystem :: [String] -> (String -> Bool)
+\end{minted}
 
 <<outputs variables>>=
 pkgNameElem = names: pkg:

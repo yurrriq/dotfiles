@@ -3,9 +3,9 @@
   home.packages = with pkgs; (
     [
       clementine
+      spotify
       pavucontrol
       slack
-      spotify
     ]
   ) ++ lib.optionals stdenv.isLinux (
     [

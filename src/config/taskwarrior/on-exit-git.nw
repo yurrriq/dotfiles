@@ -27,11 +27,10 @@ fi
 
 Don't include the [[api]] version, [[rc]] file, or Taskwarrior [[version]].
 \marginnote{%
-  N.B. The positional arguments are formatted as \bash{foo:bar}, where
-  \bash{foo} is the name of the argument, and \bash{bar} is the value.%
+  N.B. The positional arguments are formatted as \bash{name:value}.%
 }
 
-\begin{minted}[gobble=2]{bash}
+\begin{minted}{bash}
   api="${1#api:}"
   rc="${4#rc:}"
   version="${6#version:}"

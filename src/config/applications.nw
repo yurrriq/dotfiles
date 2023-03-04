@@ -1,19 +1,47 @@
-\section{Configure applications}
+\section{Applications}
 
 <<config/applications.nix>>=
 { lib, pkgs, ... }:
 {
   home.packages = with pkgs; (
     [
-      clementine
-      pavucontrol
-      slack
-      spotify
+      <<Common applications>>
     ]
   ) ++ lib.optionals stdenv.isLinux (
     [
-      qpdfview
+      <<Linux applications>>
     ]
   );
 }
+@
+
+\subsection{Common applications}
+
+\hrefootnote{https://www.clementine-player.org}{Clementine} is my favorite music
+player for local (network) files, and Spotify is my streaming service of choice.
+
+<<Common applications>>=
+clementine
+spotify
+@
+
+I find \hrefootnote{https://gitlab.freedesktop.org/pulseaudio/pavucontrol}{Pulse Audio Volume Control} to be a necessary evil, for the moment.
+
+<<Common applications>>=
+pavucontrol
+@
+
+Slack is great for communicating with open source communities, and we also use
+it at work, so it's convenient to just install it everywhere.
+
+<<Common applications>>=
+slack
+@
+
+\subsection{Linux-specific applications}
+
+Install \hrefootnote{https://launchpad.net/qpdfview}{qpdfview} only on Linux.
+
+<<Linux applications>>=
+qpdfview
 @
