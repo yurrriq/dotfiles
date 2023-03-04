@@ -21,7 +21,6 @@
       ripgrep
       shellcheck
       shfmt
-      silver-searcher # TODO: find helm-rg solution
       tree
       watch
       xclip

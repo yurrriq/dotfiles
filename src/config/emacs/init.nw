@@ -194,6 +194,12 @@ Null prefix argument turns off the mode."
 @
 
 <<config/emacs/init.el>>=
+(use-package deadgrep
+  :demand
+  :config (global-set-key (kbd "M-s-f") #'deadgrep))
+@
+
+<<config/emacs/init.el>>=
 (use-package direnv)
 @
 
@@ -206,14 +212,6 @@ Null prefix argument turns off the mode."
 
 <<config/emacs/init.el>>=
 (use-package emojify)
-@
-
-<<config/emacs/init.el>>=
-(use-package helm
-  :demand
-  :config
-  (global-set-key (kbd "M-s-f") 'helm-do-grep-ag)
-  (global-set-key (kbd "M-s-ƒ") 'helm-do-grep-ag))
 @
 
 <<config/emacs/init.el>>=

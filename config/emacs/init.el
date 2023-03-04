@@ -122,17 +122,15 @@ Null prefix argument turns off the mode."
 (use-package crux
   :demand
   :config (global-set-key (kbd "C-a") 'crux-move-beginning-of-line))
+(use-package deadgrep
+  :demand
+  :config (global-set-key (kbd "M-s-f") #'deadgrep))
 (use-package direnv)
 (use-package editorconfig
   :ensure t
   :config
   (editorconfig-mode 1))
 (use-package emojify)
-(use-package helm
-  :demand
-  :config
-  (global-set-key (kbd "M-s-f") 'helm-do-grep-ag)
-  (global-set-key (kbd "M-s-ƒ") 'helm-do-grep-ag))
 (use-package hl-todo
   :demand
   :config (global-hl-todo-mode t))
