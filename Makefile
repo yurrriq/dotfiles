@@ -28,8 +28,6 @@ SH_SRCS := $(filter %.sh, ${SRCS})
 OTHER_SRCS := $(filter-out ${NIX_SRCS} ${SH_SRCS} ${TEX_SRCS}, ${SRCS})
 TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
 
-DEFS := $(patsubst src/%.nw,src/%.defs,${NW_SRCS})
-
 
 .PHONY: all
 all: generate-config srcs docs/dotfiles.pdf
@@ -54,7 +52,7 @@ tex: ${TEX_SRCS}
 
 .PHONY: clean
 clean:
-	@ rm -f ${TEX_SRCS} ${DEFS} src/all.defs src/dotfiles.nwi
+	@ rm -f ${TEX_SRCS} src/dotfiles.nwi
 	@ latexmk -c -f docs/dotfiles.pdf
 	@ rm -fr docs/_minted-dotfiles
 
@@ -79,17 +77,9 @@ docs/%.pdf: src/%.tex src/preamble.tex src/glossary.tex src/%.bib ${TEX_SRCS}
 	latexmk $(latexmk_flags) -cd -f -outdir=$(CURDIR)/$(@D) -pdf $<
 
 
-src/%.defs: src/%.nw
-	@ nodefs $< >$@
-
-
-src/all.defs: ${DEFS}
-	@ sort -u $^ ${cpif} $@
-
-
 # .INTERMEDIATE: ${TEX_SRCS}
-src/%.tex: src/%.nw src/all.defs
-	@ noweave -delay -indexfrom src/all.defs -latex -n -filter fix-underscores $^ ${cpif} $@
+src/%.tex: src/%.nw
+	@ noweave -delay -latex -n -filter fix-underscores $^ ${cpif} $@
 
 
 pkgs/development/node-packages/node-packages.json: src/packages.nw
