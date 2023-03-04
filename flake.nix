@@ -102,13 +102,13 @@
             deadnix
             git
             git-lfs
-            gitAndTools.pre-commit
             gnumake
             gnupg
             home-manager
             mkpasswd
             nixpkgs-fmt
             nodePackages.node2nix
+            pre-commit
             semver-tool
             shellcheck
             shfmt
@@ -130,17 +130,17 @@
           _pkgs.mkShell {
             buildInputs = with _pkgs; [
               cabal-install
-              ghcid
-              gitAndTools.pre-commit
-              haskell-language-server
-              haskellPackages.ormolu
-              haskellPackages.pointfree
               (
                 emacsWithPackagesFromUsePackage {
                   alwaysEnsure = true;
                   config = ./config/xmonad/emacs.el;
                 }
               )
+              ghcid
+              haskell-language-server
+              haskellPackages.ormolu
+              haskellPackages.pointfree
+              pre-commit
             ] ++ myXMonad.env.nativeBuildInputs;
           };
       };
