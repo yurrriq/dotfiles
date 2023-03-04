@@ -23,7 +23,7 @@ WEIRD_SRCS := \
 pkgs/development/node-packages/node-packages.json \
 pkgs/shells/fish/kubectl-completions/default.nix
 SRCS := $(filter-out ${WEIRD_SRCS}, $(shell awk '/<<[^ *]+\.\w+>>=$$/{ gsub(/(<<|>>=)/, ""); print $$0 }' ${NW_SRCS} | sort -u))
-NIX_SRCS := $(filter %.nix, ${SRCS}) pkgs/development/node-packages/node-packages.nix
+NIX_SRCS := $(filter %.nix, ${SRCS}) # pkgs/development/node-packages/node-packages.nix
 SH_SRCS := $(filter %.sh, ${SRCS})
 OTHER_SRCS := $(filter-out ${NIX_SRCS} ${SH_SRCS} ${TEX_SRCS}, ${SRCS})
 TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
