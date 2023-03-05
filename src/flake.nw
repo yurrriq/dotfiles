@@ -31,7 +31,7 @@ At the top-level, the flake defines \hyperref[sec:inputs]{\nix{inputs}} and
 
 \subsection{deadnix}
 
-\todoo{Describe deadnix}
+\hrefootnote{https://github.com/astro/deadnix}{deadnix} scans Nix files for dead code (unused variable bindings).
 
 <<inputs>>=
 deadnix = {
@@ -60,7 +60,8 @@ emacs-overlay = {
 
 \subsection{flake-utils}
 
-\todoo{Describe flake-utils}
+\hrefootnote{https://github.com/numtide/flake-utils}{flake-utils} is a set of pure Nix functions that are useful when writing flakes.
+
 <<inputs>>=
 flake-utils.url = "github:numtide/flake-utils";
 @
@@ -81,7 +82,7 @@ home-manager = {
 
 \subsection{nixGL}
 
-\todoo{Describe nixGL}
+\hrefootnote{https://github.com/guibou/nixGL}{nixGL} is a wrapper tool that solves \hrefootnote{https://github.com/NixOS/nixpkgs/issues/9415}{the OpenGL problem with Nix.}
 
 <<inputs>>=
 nixgl = {
@@ -390,7 +391,11 @@ home-manager = final: prev: {
 };
 @
 
-\todoo{Describe this nixGL nonsense.}
+OpenGL is a kind of a nightmare on non-NixOS, and nixGL makes it Just
+Work\texttrademark. Define a convenience function
+\hs{nixGLWrap :: AttrSet -> Derivation} to wrap the wrapper.
+Since most of my machines have Intel video cards and I haven't adopted Nvidia
+drivers, use \nix{nixGLIntel}.
 
 <<overlays>>=
 nixGLWrap = final: prev: {
