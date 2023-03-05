@@ -321,12 +321,11 @@ homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
 
 \subsection{Variables}
 
-Define a helper function, [[mkSystem]], for creating system configurations.
-\todoo{Document \nix{mkSystem}}
-
-\begin{minted}{haskell}
-  mkSystem :: String -> String -> AttrSet
-\end{minted}
+Define a helper function \hs{mkSystem :: String -> String -> AttrSet} for
+creating system configurations.  Given a (NixOS system) \nix{name} and a
+\nix{machine} name, which corresponds to directories in
+\hrefootnote{https://github.com/yurrriq/dotfiles/tree/main/machines}{machines/}
+containing \texttt{configuration.nix} and \texttt{hardware-configuration.nix}.
 
 <<outputs variables>>=
 mkSystem = name: machine: lib.nixosSystem {
