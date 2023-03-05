@@ -1,8 +1,6 @@
-PATH := $(PWD)/bin:$(PATH)
-
-machine   ?= sruxps
-nixos_dir ?= /etc/nixos
-cpif      ?= | cpif
+PATH           := $(PWD)/bin:$(PATH)
+cpif           ?= | cpif
+kernel_version := $(uname -v)
 
 
 ifneq (,$(findstring B,$(MAKEFLAGS)))
@@ -14,7 +12,7 @@ stow_flags := -R
 ifneq (,$(findstring trace,$(MAKEFLAGS)))
 stow_flags += -v
 endif
-stow       := $(shell type -p stow) ${stow_flags}
+stow       := stow ${stow_flags}
 
 
 NW_SRCS := $(shell find src -name '*.nw')
@@ -30,7 +28,7 @@ TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
 
 
 .PHONY: all
-all: generate-config srcs docs/dotfiles.pdf
+all:: srcs docs/dotfiles.pdf
 
 
 .PHONY: srcs
@@ -91,8 +89,7 @@ pkgs/development/node-packages/node-packages.nix: pkgs/development/node-packages
 	@ ${MAKE} -C $(@D)
 
 
-pkgs/shells/fish/kubectl-completions/default.nix: src/packages.nw
-	@ mkdir -p $(@D)
+default.nix: src/packages.nw
 	@ notangle -R$@ $< ${cpif} $@
 
 
@@ -109,45 +106,30 @@ ${SH_SRCS}::
 .stow-local-ignore:
 	@ ls -A1 | sed '/^\(config\|flake\.\(nix\|lock\)\|modules\|nix\|overlays\|pkgs\)$$/d' >$@
 
+stow:: .stow-local-ignore cachix
+
 
 %: %.enc
 	@ sops -d $< >${@:.enc=}
 
 
-.PHONY: build diff dry-build switch test
+.PHONY: build diff dry-build stow switch test
 
-build dry-build: stow
-	@ nixos-rebuild --option pure-eval false $@
+ifneq (,$(findstring NixOS,${kernel_version}))
+include Makefile.nixos
+else
+include Makefile.home-manager
+endif
 
-switch test: stow
-	@ sudo nixos-rebuild --option pure-eval false $@
-
-diff: build
-	@ nix store diff-closures /run/current-system ./result
-
-
-.PHONY: build-hm switch-hm xorg.conf.d xsessions
-
-# FIXME
-# switch-hm: cachix xsessions
-switch-hm: # xsessions
-
-build-hm switch-hm:
-	@ home-manager --impure --flake .#eric ${@:-hm=}
-
-diff-hm: build-hm
-	@ home-manager generations | \
-	head -n1 | \
-	awk '{ print $NF }' | \
-	xargs -I% nix store diff-closures % ./result
+ifeq (,$(findstring Ubuntu,${kernel_version}))
+include Makefile.ubuntu
+endif
 
 
-xorg.conf.d:
-	@ sudo ${stow} -t /etc/X11/$@ $@
-
-
-xsessions:
-	@ sudo ${stow} -t /usr/share/$@ $@
+.PHONY: bump-version
+bump-version: part ?= patch
+bump-version:
+	semver bump ${part} $(file <VERSION) | tr -d '\n' >VERSION
 
 
 .PHONY: cachix
@@ -156,27 +138,4 @@ cachix: cachix/cachix.dhall
 	@ ${stow} -t ~/.config/$@ $@
 
 
-.PHONY: secrets
-secrets: $(patsubst %.enc,%,$(wildcard machines/${machine}/secrets/*.enc))
-	@ sudo mkdir -p ${nixos_dir}/$@
-	@ sudo ${stow} -t ${nixos_dir}/$@ -d machines/${machine} $@
-
-
-.PHONY: stow
-stow: .stow-local-ignore cachix secrets
-	@ sudo ${stow} -t ${nixos_dir} .
-	@ sudo ${stow} -t ${nixos_dir} -d machines ${machine}
-
-
-.PHONY: generate-config
-generate-config: machines/${machine}/hardware-configuration.nix
-
-machines/${machine}/hardware-configuration.nix:
-	nixos-generate-config --root ${PWD} --dir $(@D)
-	nixpkgs-fmt $@
-
-
-part ?= patch
-.PHONY: bump-version
-bump-version:
-	semver bump ${part} $(file <VERSION) | tr -d '\n' >VERSION
+stow:: cachix
