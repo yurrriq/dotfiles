@@ -1,0 +1,15 @@
+# -*- mode: makefile -*-
+
+username ?= eric
+
+build switch:
+	@ home-manager --impure --flake .#${username} $@
+
+diff: build
+	@ home-manager generations | \
+	head -n1 | \
+	awk '{ print $NF }' | \
+	xargs -I% nix store diff-closures % ./result
+
+# FIXME
+# switch: xsessions

@@ -1,0 +1,9 @@
+# -*- mode: makefile -*-
+
+stow:: xorg.conf.d # FIXME: xsessions
+
+xorg.conf.d:
+	@ sudo ${stow} -t /etc/X11/$@ $@
+
+xsessions:
+	@ sudo ${stow} -t /usr/share/$@ $@
