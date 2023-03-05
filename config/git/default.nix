@@ -4,6 +4,7 @@
   imports = [
     ./aliases.nix
     ./config.nix
+    ./lab.nix
     ./packages.nix
   ];
 

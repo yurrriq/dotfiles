@@ -5,6 +5,10 @@ let
 in
 
 {
+  imports = [
+    ../password-store.nix
+  ];
+
   home.packages = [
     pkgs.gitAndTools.lab
   ];
