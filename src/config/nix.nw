@@ -15,7 +15,7 @@
 
       substituters = [
         "https://cache.nixos.org"
-        "https://devenv.nixos.org"
+        "https://devenv.cachix.org"
         "https://sportradar.cachix.org"
         "https://yurrriq.cachix.org"
       ];
