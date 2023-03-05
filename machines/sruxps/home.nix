@@ -119,6 +119,8 @@
     display = "scale";
   };
 
+  targets.genericLinux.enable = true;
+
   xresources.properties = {
     "Xft.dpi" = 290;
   };

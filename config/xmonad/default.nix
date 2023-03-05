@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
 
@@ -37,6 +37,11 @@
 
   xsession = {
     enable = true;
+    initExtra = lib.mkIf (config.targets.genericLinux.enable) ''
+      xrandr -s 1920x1200 --output eDP-1 --scale 2
+      xmonad --restart
+      systemctl --user restart picom.service random-background.service
+    '';
     scriptPath = ".hm-xsession";
     windowManager.xmonad = {
       enable = true;
