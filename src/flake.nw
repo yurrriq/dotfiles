@@ -139,12 +139,14 @@ Use \nix{composeManyExtensions}\footnote{
     one where changes made in preceding functions are made available to subsequent
     ones.%
   } --- \href{https://github.com/NixOS/nixpkgs/commit/c3b35f21}{NixOS/nixpkgs@c3b35f21}%
-} to compose all the [[<<overlays>>]] into one.
+} to compose all the other [[<<overlays>>]] into one, \nix{overlays.default}.
 
 <<outputs>>=
-overlay = lib.composeManyExtensions (lib.attrValues self.overlays);
-
 overlays = {
+  default =
+    lib.composeManyExtensions
+      (lib.attrValues
+        (lib.filterAttrs (name: _: name != "default") self.overlays));
   <<overlays>>
 };
 @
@@ -486,7 +488,7 @@ nixpkgs = {
     "zoom"
   ];
   nixpkgs.overlays = [
-    self.overlay
+    self.overlays.default
     inputs.deadnix.overlays.default
     inputs.emacs-overlay.overlay
     inputs.nixgl.overlay

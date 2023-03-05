@@ -70,9 +70,11 @@
       };
     in
     {
-      overlay = lib.composeManyExtensions (lib.attrValues self.overlays);
-
       overlays = {
+        default =
+          lib.composeManyExtensions
+            (lib.attrValues
+              (lib.filterAttrs (name: _: name != "default") self.overlays));
         home-manager = final: prev: {
           home-manager = inputs.home-manager.packages.${prev.system}.home-manager;
         };
@@ -182,7 +184,7 @@
             "zoom"
           ];
           nixpkgs.overlays = [
-            self.overlay
+            self.overlays.default
             inputs.deadnix.overlays.default
             inputs.emacs-overlay.overlay
             inputs.nixgl.overlay
