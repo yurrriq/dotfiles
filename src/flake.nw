@@ -1,9 +1,4 @@
-The main entrypoint is
-\href{https://github.com/yurrriq/dotfiles/blob/main/flake.nix}{flake.nix},
-which defines a \hrefootnote{https://nixos.wiki/wiki/Flakes}{Nix Flake}.
-
-At the top-level, the flake defines \hyperref[sec:inputs]{\nix{inputs}} and
-\hyperref[sec:outputs]{\nix{outputs}}.
+The main entrypoint \hrefootnote{https://github.com/yurrriq/dotfiles/blob/main/flake.nix}{flake.nix} defines a \hrefootnote{https://nixos.wiki/wiki/Flakes}{Nix Flake}.  At the top-level, the flake defines \hyperref[sec:inputs]{\nix{inputs}} and \hyperref[sec:outputs]{\nix{outputs}}.
 
 <<flake.nix>>=
 {
@@ -31,7 +26,7 @@ At the top-level, the flake defines \hyperref[sec:inputs]{\nix{inputs}} and
 
 \subsection{deadnix}
 
-\hrefootnote{https://github.com/astro/deadnix}{deadnix} scans Nix files for dead code (unused variable bindings).
+\hrefootnote{https://github.com/astro/deadnix}{deadnix} scans Nix files for dead code (unused variable bindings).  Follow the top-level pinned \nix{nixpkgs} to dedupe \nix{inputs}.
 
 <<inputs>>=
 deadnix = {
@@ -48,7 +43,7 @@ The \hrefootnote{https://github.com/nix-community/emacs-overlay}{Emacs overlay}
   of dependency declaration.} Notably, \nix{emacsWithPackagesFromUsePackage},
 which generates an Emacs closure from an Emacs config file, by way of
 \hrefootnote{https://jwiegley.github.io/use-package/}{\elisp{use-package}}.  See
-\hyperref[sec:emacs]{the Emacs section} on page~\pageref{sec:emacs} for usage.
+\hyperref[sec:emacs]{the Emacs section} on page~\pageref{sec:emacs} for usage.  Follow the top-level \nix{flake-utils} and \nix{nixpkgs} to dedupe \nix{inputs}.
 
 <<inputs>>=
 emacs-overlay = {
@@ -60,7 +55,7 @@ emacs-overlay = {
 
 \subsection{flake-utils}
 
-\hrefootnote{https://github.com/numtide/flake-utils}{flake-utils} is a set of pure Nix functions that are useful when writing flakes.
+\hrefootnote{https://github.com/numtide/flake-utils}{flake-utils} is a set of pure Nix functions that are useful when writing flakes.  Pin a version to dedupe \nix{inputs}.  It's not used directly.
 
 <<inputs>>=
 flake-utils.url = "github:numtide/flake-utils";
@@ -70,7 +65,7 @@ flake-utils.url = "github:numtide/flake-utils";
 \subsection{home-manager}
 
 \hrefootnote{https://github.com/nix-community/home-manager}{home-manager} is an
-invaluable tool for managing a deterministic \bash{$HOME}.
+invaluable tool for managing a deterministic \bash{$HOME}.  Pin a version and follow the top-level \nix{nixpkgs} and \nix{flake-utils} to dedupe \nix{inputs}.
 
 <<inputs>>=
 home-manager = {
@@ -82,7 +77,7 @@ home-manager = {
 
 \subsection{nixGL}
 
-\hrefootnote{https://github.com/guibou/nixGL}{nixGL} is a wrapper tool that solves \hrefootnote{https://github.com/NixOS/nixpkgs/issues/9415}{the OpenGL problem with Nix.}
+\hrefootnote{https://github.com/guibou/nixGL}{nixGL} is a wrapper tool that solves \hrefootnote{https://github.com/NixOS/nixpkgs/issues/9415}{the OpenGL problem with Nix.}  Pin a version and follow the top-level \nix{flake-utils} and \nix{nixpkgs} to dedupe \nix{inputs}. See [[nixGLWrap]] for usage.
 
 <<inputs>>=
 nixgl = {
@@ -103,13 +98,13 @@ nixos-hardware.url = "github:nixos/nixos-hardware";
 
 \subsection{nixpkgs}
 
-Prefer to live on the edge.
+Prefer to live on the edge and pin \nix{nixpkgs} to the \textit{nixpkgs-unstable} branch.
 
 <<inputs>>=
 nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 @
 
-Of course, pin a stable version of the too
+Additionally, pin a stable version of the
 \hrefootnote{https://github.com/NixOS/nixpkgs}{Nix Packages collection}.
 
 <<inputs>>=
@@ -153,9 +148,8 @@ overlays = {
 
 \subsection{Development environments}
 
-Define some development environments, which Nix will cache, including an unnamed
-default.  One of the main benefits is the super fast
-\hrefootnote{https://direnv.net}{direnv} integration.
+Define some development environments.  One of the main benefits is the super
+fast \hrefootnote{https://direnv.net}{direnv} integration.
 
 <<outputs>>=
 devShells.x86_64-linux = {
@@ -177,7 +171,7 @@ run \hrefootnote{https://github.com/nix-community/nixpkgs-fmt}{a}
 
 <<devShells x86_64-linux>>=
 default = pkgs.mkShell {
-  inherit (self.defaultPackage.x86_64-linux) FONTCONFIG_FILE;
+  inherit (self.packages.x86_64-linux.default) FONTCONFIG_FILE;
   buildInputs = with pkgs; [
     biber
     deadnix
@@ -201,7 +195,7 @@ default = pkgs.mkShell {
     shfmt
     sops
     stow
-  ] ++ self.defaultPackage.x86_64-linux.nativeBuildInputs;
+  ] ++ self.packages.x86_64-linux.default.nativeBuildInputs;
 };
 @
 
@@ -258,7 +252,7 @@ The default package builds
 \hrefootnote{https://yurrriq.codes/dotfiles/dotfiles.pdf}{the PDF}.
 
 <<outputs>>=
-defaultPackage.x86_64-linux = self.packages.x86_64-linux.yurrriq-dotfiles;
+packages.x86_64-linux.default = self.packages.x86_64-linux.yurrriq-dotfiles;
 @
 
 \subsection{Modules}
@@ -407,7 +401,7 @@ nixGLWrap = final: prev: {
       '';
   };
 };
-@
+@ %def nixGLWrap
 
 Define an overlay that adds \hyperref[sec:node-packages]{my custom
   \nix{nodePackages}}.
