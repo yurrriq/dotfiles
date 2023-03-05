@@ -1,0 +1,9 @@
+*.nwi
+*.tex
+!config/emacs.tex
+!config/fish.tex
+!config/git.tex
+!config/taskwarrior.tex
+!dotfiles.tex
+!glossary.tex
+!preamble.tex
