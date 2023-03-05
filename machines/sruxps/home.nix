@@ -1,33 +1,24 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
-  imports = [
-    ../../config/applications.nix
-    ../../config/bash.nix
-    ../../config/bat.nix
-    ../../config/browserpass.nix
-    # ../../config/bugwarrior.nix
-    ../../config/clis.nix
-    ../../config/direnv.nix
-    ../../config/emacs
-    ../../config/firefox.nix
-    ../../config/fish
-    ../../config/fzf.nix
-    ../../config/git
-    ../../config/git/lab.nix
-    ../../config/gpg.nix
-    ../../config/htop.nix
-    ../../config/jq.nix
-    ../../config/keyboard.nix
-    ../../config/kitty.nix
-    ../../config/man.nix
-    ../../config/nix.nix
-    ../../config/password-store.nix
-    ../../config/rebar3.nix
-    ../../config/screen-locker.nix
-    ../../config/starship.nix
-    # ../../config/taskwarrior
-    ../../config/xmonad
-  ];
+  imports =
+    let
+      inherit (builtins) any attrNames filter match pathExists readDir toPath;
+      inherit (lib.strings) hasSuffix;
+      resolveConfig = relativePath:
+        toPath (../../config + ("/" + relativePath));
+      isConfig = path:
+        hasSuffix ".nix" path ||
+        pathExists (../../config + ("/" + path + "/default.nix"));
+      allConfigs =
+        map resolveConfig (filter isConfig (attrNames (readDir ../../config)));
+      excludes = [
+        ".*bugwarrior\\.nix$"
+        ".*taskwarrior$"
+      ];
+    in
+    filter
+      (path: !(any (pattern: match pattern path != null) excludes))
+      allConfigs;
   accounts.email.accounts.primary = {
     address = "e.bailey@sportradar.com";
     gpg.key = "86BAD22D1F8DBBEC486C49012C32D5C1C17A8045";
