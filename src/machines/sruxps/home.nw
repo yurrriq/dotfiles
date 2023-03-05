@@ -1,9 +1,10 @@
 \subsection{home-manager configuration}
 
 <<machines/sruxps/home.nix>>=
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 {
-  <<Import various program configs>>
+  imports =
+    <<Import configs>>
   <<Configure the primary email account>>
   <<Configure Docker credentials>>
   <<Configure a convenient high-level .envrc>>
@@ -16,36 +17,28 @@
 }
 @
 
-\todoo{Consider looping here or something}
-<<Import various program configs>>=
-imports = [
-  ../../config/applications.nix
-  ../../config/bash.nix
-  ../../config/bat.nix
-  ../../config/browserpass.nix
-  # ../../config/bugwarrior.nix
-  ../../config/clis.nix
-  ../../config/direnv.nix
-  ../../config/emacs
-  ../../config/firefox.nix
-  ../../config/fish
-  ../../config/fzf.nix
-  ../../config/git
-  ../../config/git/lab.nix
-  ../../config/gpg.nix
-  ../../config/htop.nix
-  ../../config/jq.nix
-  ../../config/keyboard.nix
-  ../../config/kitty.nix
-  ../../config/man.nix
-  ../../config/nix.nix
-  ../../config/password-store.nix
-  ../../config/rebar3.nix
-  ../../config/screen-locker.nix
-  ../../config/starship.nix
-  # ../../config/taskwarrior
-  ../../config/xmonad
-];
+Exclude the bugwarrior and taskwarrior configs, since I'm not using those tools
+at the moment.  Otherwise, import all the configs.  I should probably refactor
+these into proper home-manager modules someday.
+
+<<Import configs>>=
+let
+  inherit (builtins) any attrNames filter match pathExists readDir toPath;
+  resolveConfig = relativePath:
+    toPath (../../config + ("/" + relativePath));
+  isConfig = path:
+    hasSuffix ".nix" path ||
+    pathExists (../../config + ("/" + path + "/default.nix"));
+  allConfigs =
+    map resolveConfig (filter isConfig (attrNames (readDir ../../config)));
+  excludes = [
+    ".*bugwarrior\\.nix$"
+    ".*taskwarrior$"
+  ];
+in
+filter
+  (path: !(any (pattern: match pattern path != null) excludes))
+  allConfigs;
 @
 
 <<Configure the primary email account>>=
