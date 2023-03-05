@@ -16,8 +16,6 @@
     ];
   } // (
     with config.accounts.email.accounts.primary; {
-      signing.key = gpg.key;
-      userEmail = address;
       userName = realName;
     }
   );

@@ -2,6 +2,20 @@
 
 {
 
+  home.file = {
+    "src/github.com/.gitconfig".text = ''
+      [user]
+      email = "eric@ericb.me"
+    '';
+
+    "src/gitlab.sportradar.ag/.gitconfig".text = with config.accounts.email.accounts.primary; ''
+      [signing]
+      key = ${gpg.key}
+      [user]
+      email = ${address}
+    '';
+  };
+
   programs.git = {
     delta = {
       enable = true;
@@ -60,6 +74,15 @@
 
       fetch.prune = true;
 
+      includeIf = {
+        "gitdir:~/src/github.com/" = {
+          path = "${config.home.homeDirectory}/src/github.com/.gitconfig";
+        };
+        "gitdir:~/src/gitlab.sportradar.ag/" = {
+          path = "${config.home.homeDirectory}/src/gitlab.sportradar.ag/.gitconfig";
+        };
+      };
+
       init.defaultBranch = "main";
 
       pull.ff = "only";
@@ -72,6 +95,8 @@
     };
 
     lfs.enable = true;
+
+    userName = config.accounts.email.accounts.primary.realName;
   };
 
   xdg.configFile."pass-git-helper/git-pass-mapping.ini" = {
