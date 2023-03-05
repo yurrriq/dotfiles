@@ -15,9 +15,14 @@ The main entrypoint \hrefootnote{https://github.com/yurrriq/dotfiles/blob/main/f
       <<outputs variables>>
     in
     {
-      <<outputs>>
-    };
-
+      <<system-agnostic outputs>>
+    } // inputs.flake-utils.lib.eachDefaultSystem (system:
+      let
+        <<per-system outputs variables>>
+      in
+      {
+        <<per-system outputs>>
+      });
 }
 @
 
@@ -55,11 +60,11 @@ emacs-overlay = {
 
 \subsection{flake-utils}
 
-\hrefootnote{https://github.com/numtide/flake-utils}{flake-utils} is a set of pure Nix functions that are useful when writing flakes.  Pin a version to dedupe \nix{inputs}.  It's not used directly.
+\hrefootnote{https://github.com/numtide/flake-utils}{flake-utils} is a set of pure Nix functions that are useful when writing flakes.  Pin a version to dedupe \nix{inputs}.
 
 <<inputs>>=
 flake-utils.url = "github:numtide/flake-utils";
-@
+@ %def eachDefaultSystem
 
 
 \subsection{home-manager}
@@ -136,7 +141,7 @@ Use \nix{composeManyExtensions}\footnote{
   } --- \href{https://github.com/NixOS/nixpkgs/commit/c3b35f21}{NixOS/nixpkgs@c3b35f21}%
 } to compose all the other [[<<overlays>>]] into one, \nix{overlays.default}.
 
-<<outputs>>=
+<<system-agnostic outputs>>=
 overlays = {
   default =
     lib.composeManyExtensions
@@ -146,14 +151,30 @@ overlays = {
 };
 @
 
+\subsection{Per-system pkgs}
+
+For each \nix{system}, define a package collection that composes the overlays from \nix{deadnix} and \nix{emacs-overlay}, as well as the locally-defined \nix{home-manager} and \nix{noweb} overlays.
+
+<<per-system outputs variables>>=
+pkgs = import inputs.nixpkgs {
+  overlays = [
+    inputs.deadnix.overlays.default
+    inputs.emacs-overlay.overlay
+    self.overlays.home-manager
+    self.overlays.noweb
+  ];
+  inherit system;
+};
+@
+
 \subsection{Development environments}
 
 Define some development environments.  One of the main benefits is the super
 fast \hrefootnote{https://direnv.net}{direnv} integration.
 
-<<outputs>>=
-devShells.x86_64-linux = {
-  <<devShells x86_64-linux>>
+<<per-system outputs>>=
+devShells = {
+  <<devShells>>
 };
 @
 
@@ -169,9 +190,9 @@ run \hrefootnote{https://github.com/nix-community/nixpkgs-fmt}{a}
 \hrefootnote{https://www.gnu.org/software/stow/}{manage the non-Nix symlink
   farm}.
 
-<<devShells x86_64-linux>>=
+<<devShells>>=
 default = pkgs.mkShell {
-  inherit (self.packages.x86_64-linux.default) FONTCONFIG_FILE;
+  inherit (self.packages.${system}.default) FONTCONFIG_FILE;
   buildInputs = with pkgs; [
     biber
     deadnix
@@ -195,7 +216,7 @@ default = pkgs.mkShell {
     shfmt
     sops
     stow
-  ] ++ self.packages.x86_64-linux.default.nativeBuildInputs;
+  ] ++ self.packages.${system}.default.nativeBuildInputs;
 };
 @
 
@@ -207,20 +228,14 @@ setup using \hrefootnote{https://emacs-lsp.github.io/lsp-haskell/}{lsp-haskell},
 and include \hrefootnote{https://github.com/bmillwood/pointfree}{pointfree}
 for... reasons.
 
-<<devShells x86_64-linux>>=
+<<devShells>>=
 xmonad =
   let
-    _pkgs = import inputs.nixpkgs {
-      overlays = [
-        inputs.emacs-overlay.overlay
-      ];
-      system = "x86_64-linux";
-    };
     myXMonad =
-      _pkgs.haskellPackages.callCabal2nix "my-xmonad" ./config/xmonad { };
+      pkgs.haskellPackages.callCabal2nix "my-xmonad" ./config/xmonad { };
   in
-  _pkgs.mkShell {
-    buildInputs = with _pkgs; [
+  pkgs.mkShell {
+    buildInputs = with pkgs; [
       cabal-install
       (
         emacsWithPackagesFromUsePackage {
@@ -239,27 +254,21 @@ xmonad =
 
 \subsection{Packages}
 
-See also: \hyperref[chap:packages]{Packages}.
+The default package builds
+\hrefootnote{https://yurrriq.codes/dotfiles/dotfiles.pdf}{the PDF}.  See also: \hyperref[chap:packages]{Packages}.
 
-<<outputs>>=
-packages.x86_64-linux = {
+<<per-system outputs>>=
+packages = {
+  default = self.packages.${system}.yurrriq-dotfiles;
   yurrriq-dotfiles = pkgs.callPackage ./. { };
 };
-
-@
-
-The default package builds
-\hrefootnote{https://yurrriq.codes/dotfiles/dotfiles.pdf}{the PDF}.
-
-<<outputs>>=
-packages.x86_64-linux.default = self.packages.x86_64-linux.yurrriq-dotfiles;
 @
 
 \subsection{Modules}
 
 See \hyperref[subsec:modules]{Modules}.
 
-<<outputs>>=
+<<system-agnostic outputs>>=
 nixosModules = {
   <<Modules>>
 };
@@ -270,7 +279,7 @@ nixosModules = {
 Define system configurations for \hyperref[sec:nixps]{my personal laptop} and
 \hyperref[sec:sruxps]{my work laptop}.
 
-<<outputs>>=
+<<system-agnostic outputs>>=
 nixosConfigurations = {
   "nixps" = mkSystem "nixps" "dell-xps-15-9560-intel";
   "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-7390";
@@ -281,7 +290,7 @@ nixosConfigurations = {
 
 \todoo{Describe this}
 
-<<outputs>>=
+<<system-agnostic outputs>>=
 homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
   modules = [
     # FIXME: There's gotta be a better way...
@@ -360,20 +369,6 @@ for an
 <<outputs variables>>=
 pkgNameElem = names: pkg:
   builtins.elem (lib.getName pkg) names;
-@
-
-\todoo{Document \nix{pkgs}}
-
-<<outputs variables>>=
-pkgs = import inputs.nixpkgs {
-  overlays = [
-    inputs.deadnix.overlays.default
-    inputs.emacs-overlay.overlay
-    self.overlays.home-manager
-    self.overlays.noweb
-  ];
-  system = "x86_64-linux";
-};
 @
 
 \subsection{Overlays}

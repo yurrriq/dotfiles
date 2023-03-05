@@ -59,15 +59,6 @@
       };
       pkgNameElem = names: pkg:
         builtins.elem (lib.getName pkg) names;
-      pkgs = import inputs.nixpkgs {
-        overlays = [
-          inputs.deadnix.overlays.default
-          inputs.emacs-overlay.overlay
-          self.overlays.home-manager
-          self.overlays.noweb
-        ];
-        system = "x86_64-linux";
-      };
     in
     {
       overlays = {
@@ -94,67 +85,6 @@
           };
         };
       };
-      devShells.x86_64-linux = {
-        default = pkgs.mkShell {
-          inherit (self.defaultPackage.x86_64-linux) FONTCONFIG_FILE;
-          buildInputs = with pkgs; [
-            biber
-            deadnix
-            (
-              emacsWithPackagesFromUsePackage {
-                alwaysEnsure = true;
-                config = ./config/emacs/init.el;
-              }
-            )
-            git
-            git-lfs
-            gnumake
-            gnupg
-            home-manager
-            mkpasswd
-            nixpkgs-fmt
-            nodePackages.node2nix
-            pre-commit
-            semver-tool
-            shellcheck
-            shfmt
-            sops
-            stow
-          ] ++ self.defaultPackage.x86_64-linux.nativeBuildInputs;
-        };
-        xmonad =
-          let
-            _pkgs = import inputs.nixpkgs {
-              overlays = [
-                inputs.emacs-overlay.overlay
-              ];
-              system = "x86_64-linux";
-            };
-            myXMonad =
-              _pkgs.haskellPackages.callCabal2nix "my-xmonad" ./config/xmonad { };
-          in
-          _pkgs.mkShell {
-            buildInputs = with _pkgs; [
-              cabal-install
-              (
-                emacsWithPackagesFromUsePackage {
-                  alwaysEnsure = true;
-                  config = ./config/xmonad/emacs.el;
-                }
-              )
-              ghcid
-              haskell-language-server
-              haskellPackages.ormolu
-              haskellPackages.pointfree
-              pre-commit
-            ] ++ myXMonad.env.nativeBuildInputs;
-          };
-      };
-      packages.x86_64-linux = {
-        yurrriq-dotfiles = pkgs.callPackage ./. { };
-      };
-
-      defaultPackage.x86_64-linux = self.packages.x86_64-linux.yurrriq-dotfiles;
       nixosModules = {
         bootyjams = import ./modules/bootyjams.nix;
         location = import ./modules/location.nix;
@@ -226,6 +156,72 @@
           system = "x86_64-linux";
         };
       };
-    };
-
+    } // inputs.flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import inputs.nixpkgs {
+          overlays = [
+            inputs.deadnix.overlays.default
+            inputs.emacs-overlay.overlay
+            self.overlays.home-manager
+            self.overlays.noweb
+          ];
+          inherit system;
+        };
+      in
+      {
+        devShells = {
+          default = pkgs.mkShell {
+            inherit (self.packages.${system}.default) FONTCONFIG_FILE;
+            buildInputs = with pkgs; [
+              biber
+              deadnix
+              (
+                emacsWithPackagesFromUsePackage {
+                  alwaysEnsure = true;
+                  config = ./config/emacs/init.el;
+                }
+              )
+              git
+              git-lfs
+              gnumake
+              gnupg
+              home-manager
+              mkpasswd
+              nixpkgs-fmt
+              nodePackages.node2nix
+              pre-commit
+              semver-tool
+              shellcheck
+              shfmt
+              sops
+              stow
+            ] ++ self.packages.${system}.default.nativeBuildInputs;
+          };
+          xmonad =
+            let
+              myXMonad =
+                pkgs.haskellPackages.callCabal2nix "my-xmonad" ./config/xmonad { };
+            in
+            pkgs.mkShell {
+              buildInputs = with pkgs; [
+                cabal-install
+                (
+                  emacsWithPackagesFromUsePackage {
+                    alwaysEnsure = true;
+                    config = ./config/xmonad/emacs.el;
+                  }
+                )
+                ghcid
+                haskell-language-server
+                haskellPackages.ormolu
+                haskellPackages.pointfree
+                pre-commit
+              ] ++ myXMonad.env.nativeBuildInputs;
+            };
+        };
+        packages = {
+          default = self.packages.${system}.yurrriq-dotfiles;
+          yurrriq-dotfiles = pkgs.callPackage ./. { };
+        };
+      });
 }
