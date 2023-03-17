@@ -211,6 +211,12 @@ Null prefix argument turns off the mode."
 @
 
 <<config/emacs/init.el>>=
+(use-package graphviz-dot-mode
+  :config
+  (setq graphviz-dot-indent-width 4))
+@
+
+<<config/emacs/init.el>>=
 (use-package hl-todo
   :demand
   :config (global-hl-todo-mode t))

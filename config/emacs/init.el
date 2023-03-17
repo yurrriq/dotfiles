@@ -127,6 +127,9 @@ Null prefix argument turns off the mode."
   :config
   (editorconfig-mode 1))
 (use-package emojify)
+(use-package graphviz-dot-mode
+  :config
+  (setq graphviz-dot-indent-width 4))
 (use-package hl-todo
   :demand
   :config (global-hl-todo-mode t))
