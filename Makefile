@@ -1,6 +1,6 @@
 PATH           := $(PWD)/bin:$(PATH)
 cpif           ?= | cpif
-kernel_version := $(uname -v)
+kernel_version := $(shell uname -v)
 
 
 ifneq (,$(findstring B,$(MAKEFLAGS)))
