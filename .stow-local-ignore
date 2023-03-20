@@ -12,6 +12,9 @@ default.nix
 latexmkrc
 machines
 Makefile
+Makefile.home-manager
+Makefile.nixos
+Makefile.ubuntu
 .pre-commit-config.yaml
 result
 scripts
@@ -20,5 +23,6 @@ src
 .stow-local-ignore
 TODO.txt
 VERSION
+xorg.conf.d
 xsessions
 .yamllint
