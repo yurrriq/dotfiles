@@ -3,17 +3,17 @@
 
 {
 
-  home.file = {
-    "src/github.com/.gitconfig".text = ''
+  home.file = with config.accounts.email.accounts; {
+    ".gitconfig-personal".text = ''
       [user]
       email = "eric@ericb.me"
     '';
 
-    "src/gitlab.sportradar.ag/.gitconfig".text = with config.accounts.email.accounts.primary; ''
+    "src/gitlab.sportradar.ag/.gitconfig".text = ''
       [signing]
-      key = ${gpg.key}
+      key = ${primary.gpg.key}
       [user]
-      email = ${address}
+      email = ${primary.address}
     '';
   };
 
@@ -75,14 +75,17 @@
 
       fetch.prune = true;
 
-      includeIf = {
-        "gitdir:~/src/github.com/" = {
-          path = "${config.home.homeDirectory}/src/github.com/.gitconfig";
+      includeIf =
+        let
+          personal = "${config.home.homeDirectory}/.gitconfig-personal";
+          work = "${config.home.homeDirectory}/src/gitlab.sportradar.ag/.gitconfig";
+        in
+        {
+          "gitdir:~/src/git.sr.ht/".path = personal;
+          "gitdir:~/src/github.com/".path = personal;
+          "gitdir:~/src/gitlab.com/".path = personal;
+          "gitdir:~/src/gitlab.sportradar.ag/".path = work;
         };
-        "gitdir:~/src/gitlab.sportradar.ag/" = {
-          path = "${config.home.homeDirectory}/src/gitlab.sportradar.ag/.gitconfig";
-        };
-      };
 
       init.defaultBranch = "main";
 
