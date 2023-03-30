@@ -9,6 +9,9 @@
 
   programs.fish.shellAbbrs = lib.mkIf (config.programs.fish.enable) {
     g = "git";
+    ga = "gita";
+    gaf = "gita fetch";
+    gall = "gita ll";
     gd = "git diff";
     gdc = "git diff --cached";
     gm = "git merge";

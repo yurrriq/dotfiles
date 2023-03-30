@@ -12,6 +12,7 @@
     kcnp = "kubectl get pods --field-selector=spec.nodeName=";
     kcx = "kubectl --context";
     kg = "kubectl get";
+    kgp = "kubectl get pods";
     kgy = "kubectl get -o yaml";
     kn = "kubens";
     kns = "kubens";
