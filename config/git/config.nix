@@ -2,20 +2,6 @@
 
 {
 
-  home.file = with config.accounts.email.accounts; {
-    ".gitconfig-personal".text = ''
-      [user]
-      email = "eric@ericb.me"
-    '';
-
-    "src/gitlab.sportradar.ag/.gitconfig".text = ''
-      [signing]
-      key = ${primary.gpg.key}
-      [user]
-      email = ${primary.address}
-    '';
-  };
-
   programs.git = {
     delta = {
       enable = true;
@@ -74,18 +60,6 @@
 
       fetch.prune = true;
 
-      includeIf =
-        let
-          personal = "${config.home.homeDirectory}/.gitconfig-personal";
-          work = "${config.home.homeDirectory}/src/gitlab.sportradar.ag/.gitconfig";
-        in
-        {
-          "gitdir:~/src/git.sr.ht/".path = personal;
-          "gitdir:~/src/github.com/".path = personal;
-          "gitdir:~/src/gitlab.com/".path = personal;
-          "gitdir:~/src/gitlab.sportradar.ag/".path = work;
-        };
-
       init.defaultBranch = "main";
 
       pull.ff = "only";
@@ -96,6 +70,35 @@
         insteadOf = "https://gitlab.sportradar.ag/";
       };
     };
+
+    includes =
+      let
+        personal = {
+          user.email = "eric@ericb.me";
+        };
+        work = with config.accounts.email.accounts.primary; {
+          signing.key = gpg.key;
+          user.email = address;
+        };
+      in
+      [
+        {
+          condition = "gitdir:~/src/git.sr.ht/";
+          contents = personal;
+        }
+        {
+          condition = "gitdir:~/src/github.com/";
+          contents = personal;
+        }
+        {
+          condition = "gitdir:~/src/gitlab.com/";
+          contents = personal;
+        }
+        {
+          condition = "gitdir:~/src/gitlab.sportradar.ag/";
+          contents = work;
+        }
+      ];
 
     lfs.enable = true;
 
