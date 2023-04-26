@@ -25,6 +25,10 @@
     primary = true;
     realName = "Eric Bailey";
   };
+  accounts.email.accounts.personal = {
+    address = "eric@ericb.me";
+    realName = "Eric Bailey";
+  };
   home.file.".docker/config.json".text = ''
     {
         "credHelpers": {

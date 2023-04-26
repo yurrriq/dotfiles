@@ -74,12 +74,13 @@
 
     includes =
       let
+        inherit (config.accounts.email) accounts;
         personal = {
-          user.email = "eric@ericb.me";
+          user.email = accounts.personal.address;
         };
-        work = with config.accounts.email.accounts.primary; {
-          signing.key = gpg.key;
-          user.email = address;
+        work = {
+          signing.key = accounts.primary.gpg.key;
+          user.email = accounts.primary.address;
         };
       in
       [
