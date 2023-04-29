@@ -1,31 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [
-    ../../config/applications.nix
-    ../../config/bash.nix
-    ../../config/bat.nix
-    ../../config/browserpass.nix
-    ../../config/clis.nix
-    ../../config/direnv.nix
-    ../../config/dunst.nix
-    ../../config/emacs
-    ../../config/firefox.nix
-    ../../config/fish
-    ../../config/fonts.nix
-    ../../config/fzf.nix
-    ../../config/git
-    ../../config/gpg.nix
-    ../../config/htop.nix
-    ../../config/jq.nix
-    ../../config/keyboard.nix
-    ../../config/kitty.nix
-    ../../config/man.nix
-    ../../config/password-store.nix
-    ../../config/rebar3.nix
-    ../../config/starship.nix
-    ../../config/taskwarrior
-    ../../config/xmonad
-  ];
   accounts.email.accounts = {
     personal = {
       address = "eric@ericb.me";

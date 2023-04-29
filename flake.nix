@@ -40,6 +40,17 @@
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
+              sharedModules =
+                let
+                  excluded = [
+                    "bugwarrior"
+                    "nix"
+                    "screen-locker"
+                    "taskwarrior"
+                  ];
+                  notExcluded = lib.filterAttrs (name: _: !(builtins.elem name excluded));
+                in
+                builtins.attrValues (notExcluded self.homeManagerModules);
               useGlobalPkgs = true;
               useUserPackages = true;
               verbose = true;
@@ -127,6 +138,23 @@
         "nixps" = mkSystem "nixps" "dell-xps-15-9560-intel";
         "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-7390";
       };
+      homeManagerModules =
+        let
+          inherit (builtins) attrNames baseNameOf filter listToAttrs pathExists readDir toPath;
+          inherit (lib.attrsets) nameValuePair;
+          inherit (lib.strings) hasSuffix removeSuffix;
+          resolveModule = relativePath:
+            nameValuePair
+              (removeSuffix ".nix" (baseNameOf relativePath))
+              (import (toPath (./config + ("/" + relativePath))));
+          isModule = path:
+            hasSuffix ".nix" path ||
+            pathExists (./config + ("/" + path + "/default.nix"));
+        in
+        listToAttrs
+          (map resolveModule
+            (filter isModule
+              (attrNames (readDir ./config))));
       homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
         modules = [
           # FIXME: There's gotta be a better way...

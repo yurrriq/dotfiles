@@ -2,12 +2,13 @@
 
 {
 
-  imports = [
-    ../dunst.nix
-    ../fonts.nix
-    ../rofi.nix
-    # FIXME: ../screen-locker.nix
-  ];
+  # FIXME
+  # imports = [
+  #   ../dunst.nix
+  #   ../fonts.nix
+  #   ../rofi.nix
+  #   ../screen-locker.nix
+  # ];
 
   home.packages = with pkgs; [
     flameshot

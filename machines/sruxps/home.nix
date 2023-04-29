@@ -1,24 +1,9 @@
 { config, lib, pkgs, ... }:
 {
-  imports =
-    let
-      inherit (builtins) any attrNames filter match pathExists readDir toPath;
-      inherit (lib.strings) hasSuffix;
-      resolveConfig = relativePath:
-        toPath (../../config + ("/" + relativePath));
-      isConfig = path:
-        hasSuffix ".nix" path ||
-        pathExists (../../config + ("/" + path + "/default.nix"));
-      allConfigs =
-        map resolveConfig (filter isConfig (attrNames (readDir ../../config)));
-      excludes = [
-        ".*bugwarrior\\.nix$"
-        ".*taskwarrior$"
-      ];
-    in
-    filter
-      (path: !(any (pattern: match pattern path != null) excludes))
-      allConfigs;
+  imports = [
+    ../../config/nix.nix
+    ../../config/screen-locker.nix
+  ];
   accounts.email.accounts = {
     personal.address = "eric@ericb.me";
     work = {

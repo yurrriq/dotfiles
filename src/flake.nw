@@ -286,6 +286,28 @@ nixosConfigurations = {
 };
 @
 
+\subsection{home-manager modules}
+
+<<system-agnostic outputs>>=
+homeManagerModules =
+  let
+    inherit (builtins) attrNames baseNameOf filter listToAttrs pathExists readDir toPath;
+    inherit (lib.attrsets) nameValuePair;
+    inherit (lib.strings) hasSuffix removeSuffix;
+    resolveModule = relativePath:
+      nameValuePair
+        (removeSuffix ".nix" (baseNameOf relativePath))
+        (import (toPath (./config + ("/" + relativePath))));
+    isModule = path:
+      hasSuffix ".nix" path ||
+      pathExists (./config + ("/" + path + "/default.nix"));
+  in
+  listToAttrs
+    (map resolveModule
+      (filter isModule
+        (attrNames (readDir ./config))));
+@
+
 \subsection{home-manager configurations}
 
 \todoo{Describe this}
@@ -339,6 +361,17 @@ mkSystem = name: machine: lib.nixosSystem {
     inputs.home-manager.nixosModules.home-manager
     {
       home-manager = {
+        sharedModules =
+          let
+            excluded = [
+              "bugwarrior"
+              "nix"
+              "screen-locker"
+              "taskwarrior"
+            ];
+            notExcluded = lib.filterAttrs (name: _: !(builtins.elem name excluded));
+          in
+          builtins.attrValues (notExcluded self.homeManagerModules);
         useGlobalPkgs = true;
         useUserPackages = true;
         verbose = true;
