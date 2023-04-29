@@ -14,10 +14,6 @@
       "*~"
       ".DS_Store"
     ];
-  } // (
-    with config.accounts.email.accounts.primary; {
-      userName = realName;
-    }
-  );
+  };
 
 }

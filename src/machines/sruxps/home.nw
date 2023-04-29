@@ -5,8 +5,7 @@
 {
   imports =
     <<Import configs>>
-  <<Configure the primary email account>>
-  <<Configure my personal email account>>
+  <<Configure email accounts>>
   <<Configure Docker credentials>>
   <<Configure a convenient high-level .envrc>>
   <<Configure the keyboard>>
@@ -43,19 +42,15 @@ filter
   allConfigs;
 @
 
-<<Configure the primary email account>>=
-accounts.email.accounts.primary = {
-  address = "e.bailey@sportradar.com";
-  gpg.key = "86BAD22D1F8DBBEC486C49012C32D5C1C17A8045";
-  primary = true;
-  realName = "Eric Bailey";
-};
-@
-
-<<Configure my personal email account>>=
-accounts.email.accounts.personal = {
-  address = "eric@ericb.me";
-  realName = "Eric Bailey";
+<<Configure email accounts>>=
+accounts.email.accounts = {
+  personal.address = "eric@ericb.me";
+  work = {
+    address = "e.bailey@sportradar.com";
+    gpg.key = "86BAD22D1F8DBBEC486C49012C32D5C1C17A8045";
+    primary = true;
+    realName = "Eric Bailey";
+  };
 };
 @
 

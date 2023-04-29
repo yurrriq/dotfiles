@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
 
@@ -75,11 +75,18 @@
       let
         inherit (config.accounts.email) accounts;
         personal = {
+          signing.key =
+            lib.optional
+              (lib.hasAttrByPath [ "gpg" "key" ] accounts.personal)
+              accounts.personal.gpg.key;
           user.email = accounts.personal.address;
         };
         work = {
-          signing.key = accounts.primary.gpg.key;
-          user.email = accounts.primary.address;
+          signing.key =
+            lib.optional
+              (lib.hasAttrByPath [ "gpg" "key" ] accounts.work)
+              accounts.work.gpg.key;
+          user.email = accounts.work.address;
         };
       in
       [
@@ -103,7 +110,10 @@
 
     lfs.enable = true;
 
-    userName = config.accounts.email.accounts.primary.realName;
+    userName =
+      (builtins.head
+        (lib.filter (account: account.primary)
+          (lib.attrValues config.accounts.email.accounts))).realName;
   };
 
   xdg.configFile."pass-git-helper/git-pass-mapping.ini" = {

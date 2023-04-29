@@ -1,11 +1,14 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 {
 
   programs.gpg = {
     enable = true;
     settings = {
-      default-key = config.accounts.email.accounts.primary.gpg.key;
+      default-key =
+        (builtins.head
+          (lib.filter (account: account.primary)
+            (lib.attrValues config.accounts.email.accounts))).gpg.key;
       keyid-format = "long";
       no-emit-version = true;
     };
