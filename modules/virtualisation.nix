@@ -1,7 +1,11 @@
 { config, lib, pkgs, ... }:
 {
-  environment.systemPackages = lib.optionals config.virtualisation.podman.enable [ pkgs.crun ];
+  environment.systemPackages = lib.optionals config.virtualisation.podman.enable (with pkgs; [ crun tini ] );
   virtualisation = {
+    containers.containersConf.extraConfig = ''
+      [containers]
+      init_path = "${pkgs.tini}/bin/tini"
+    '';
     docker = {
       enable = lib.mkDefault false;
       liveRestore = lib.mkDefault false;

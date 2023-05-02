@@ -143,7 +143,9 @@ docker-compose
 \newthought{Install some convenient Kubernetes tools.}
 
 <<Install some user packages>>=
+k3s
 krew
+kube3d
 kubectl
 kubectx
 kubelogin
