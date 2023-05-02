@@ -49,3 +49,5 @@ systemctl --user restart random-background.service
 sudo apt remove gnome-remote-desktop evince -y
 sudo apt autoremove -y
 sudo apt autoclean -y
+
+echo '{"ServerURL": "...", "Username": "...", "Secret": "'$(pass ...)'"}' | docker-credential-pass store
