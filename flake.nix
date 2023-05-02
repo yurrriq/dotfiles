@@ -157,7 +157,7 @@
             (filter isModule
               (attrNames (readDir ./config))));
       homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
-        modules = [
+        modules = self.nixosModules.home-manager.home-manager.sharedModules ++ [
           # FIXME: There's gotta be a better way...
           (
             { pkgs, ... }@args:
