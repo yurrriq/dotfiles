@@ -37,6 +37,7 @@ The main entrypoint \hrefootnote{https://github.com/yurrriq/dotfiles/blob/main/f
 deadnix = {
   url = "github:astro/deadnix";
   inputs.nixpkgs.follows = "nixpkgs";
+  inputs.utils.follows = "flake-utils";
 };
 @
 
@@ -74,7 +75,7 @@ invaluable tool for managing a deterministic \bash{$HOME}.  Pin a version and fo
 
 <<inputs>>=
 home-manager = {
-  url = "github:nix-community/home-manager";
+  url = "github:nix-community/home-manager/release-22.11";
   inputs.nixpkgs.follows = "nixpkgs";
   inputs.utils.follows = "flake-utils";
 };
@@ -103,17 +104,17 @@ nixos-hardware.url = "github:nixos/nixos-hardware";
 
 \subsection{nixpkgs}
 
-Prefer to live on the edge and pin \nix{nixpkgs} to the \textit{nixpkgs-unstable} branch.
+Someday soon again, prefer to live on the edge and pin \nix{nixpkgs} to the \textit{nixpkgs-unstable} branch.
 
 <<inputs>>=
-nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+nixpkgs.url = "github:nixos/nixpkgs/release-22.11";
 @
 
-Additionally, pin a stable version of the
-\hrefootnote{https://github.com/NixOS/nixpkgs}{Nix Packages collection}.
+%% Additionally, pin a stable version of the
+%% \hrefootnote{https://github.com/NixOS/nixpkgs}{Nix Packages collection}.
 
 <<inputs>>=
-nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.11";
+# nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.11";
 @
 
 \subsection{NUR}
