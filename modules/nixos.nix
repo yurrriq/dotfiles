@@ -56,7 +56,7 @@
     enable = true;
     # FIXME
     # extraModules = [ pkgs.pulseaudio-modules-bt ];
-    package = pkgs.pulseaudioFull;
+    # package = pkgs.pulseaudioFull;
   };
   sound.enable = true;
   system.stateVersion = "22.11";

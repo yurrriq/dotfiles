@@ -19,6 +19,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
     };
+    # musnix = {
+    #   url = "github:musnix/musnix";
+    # };
     nixgl = {
       url = "github:guibou/nixGL";
       inputs.flake-utils.follows = "flake-utils";
@@ -39,6 +42,7 @@
           inputs.nixos-hardware.nixosModules.${machine}
           inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
           inputs.home-manager.nixosModules.home-manager
+          # inputs.musnix.nixosModules.musnix
           self.nixosModules.home-manager
           self.nixosModules.location
           self.nixosModules.nix
