@@ -158,12 +158,8 @@
               (attrNames (readDir ./config))));
       homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
         modules = self.nixosModules.home-manager.home-manager.sharedModules ++ [
-          # FIXME: There's gotta be a better way...
-          (
-            { pkgs, ... }@args:
-            ((import ./machines/sruxps/home.nix) args) //
-            self.nixosModules.nixRegistry
-          )
+          self.nixosModules.nixRegistry
+          ./machines/sruxps/home.nix
           {
             home = {
               username = "eric";
