@@ -6,6 +6,7 @@
     deadnix = {
       url = "github:astro/deadnix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
     };
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
@@ -14,7 +15,7 @@
     };
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
     };
@@ -24,8 +25,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/release-22.11";
+    # nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.11";
     nur.url = "github:nix-community/nur";
   };
 

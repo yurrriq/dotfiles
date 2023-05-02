@@ -50,7 +50,7 @@
     aws-iam-authenticator
     awscli2
     python3Packages.ec2instanceconnectcli
-    bpytop
+    btop
     fd
     gomplate
     powertop

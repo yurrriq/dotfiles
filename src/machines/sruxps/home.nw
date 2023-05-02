@@ -107,7 +107,7 @@ python3Packages.ec2instanceconnectcli
 \end{itemize}
 
 <<Install some user packages>>=
-bpytop
+btop
 fd
 gomplate
 powertop
