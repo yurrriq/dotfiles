@@ -8,7 +8,7 @@ build switch:
 diff: build
 	@ home-manager generations | \
 	head -n1 | \
-	awk '{ print $NF }' | \
+	awk '{ print $$NF }' | \
 	xargs -I% nix store diff-closures % ./result
 
 # FIXME
