@@ -38,24 +38,7 @@
           inputs.nixos-hardware.nixosModules.${machine}
           inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
           inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              sharedModules =
-                let
-                  excluded = [
-                    "bugwarrior"
-                    "nix"
-                    "screen-locker"
-                    "taskwarrior"
-                  ];
-                  notExcluded = lib.filterAttrs (name: _: !(builtins.elem name excluded));
-                in
-                builtins.attrValues (notExcluded self.homeManagerModules);
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              verbose = true;
-            };
-          }
+          self.nixosModules.home-manager
           self.nixosModules.location
           self.nixosModules.nix
           self.nixosModules.nixPath
@@ -98,6 +81,24 @@
       };
       nixosModules = {
         bootyjams = import ./modules/bootyjams.nix;
+        home-manager = {
+          home-manager = {
+            sharedModules =
+              let
+                excluded = [
+                  "bugwarrior"
+                  "nix"
+                  "screen-locker"
+                  "taskwarrior"
+                ];
+                notExcluded = lib.filterAttrs (name: _: !(builtins.elem name excluded));
+              in
+              builtins.attrValues (notExcluded self.homeManagerModules);
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            verbose = true;
+          };
+        };
         location = import ./modules/location.nix;
         nix = import ./modules/nix.nix;
         nixPath = {
