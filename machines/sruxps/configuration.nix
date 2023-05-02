@@ -78,6 +78,8 @@ in
 
   services.lorri.enable = false;
 
+  services.opensnitch.enable = true;
+
   services.thermald.enable = lib.mkForce false; # FIXME
 
   services.tlp.enable = true;
