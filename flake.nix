@@ -3,11 +3,6 @@
   description = "My (semi-)literate, Nix-based dotfiles";
 
   inputs = {
-    deadnix = {
-      url = "github:astro/deadnix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "flake-utils";
-    };
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.flake-utils.follows = "flake-utils";
@@ -28,6 +23,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/release-22.11";
     # nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.11";
     nur.url = "github:nix-community/nur";
+    treefmt-nix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:numtide/treefmt-nix";
+    };
   };
 
   outputs = { self, ... }@inputs:
@@ -128,7 +127,6 @@
           ];
           nixpkgs.overlays = [
             self.overlays.default
-            inputs.deadnix.overlays.default
             inputs.emacs-overlay.overlay
             inputs.nixgl.overlay
             inputs.nur.overlay
@@ -186,7 +184,6 @@
       let
         pkgs = import inputs.nixpkgs {
           overlays = [
-            inputs.deadnix.overlays.default
             inputs.emacs-overlay.overlay
             self.overlays.home-manager
             self.overlays.noweb
@@ -200,7 +197,6 @@
             inherit (self.packages.${system}.default) FONTCONFIG_FILE;
             buildInputs = with pkgs; [
               biber
-              deadnix
               (
                 emacsWithPackagesFromUsePackage {
                   alwaysEnsure = true;
@@ -213,12 +209,9 @@
               gnupg
               home-manager
               mkpasswd
-              nixpkgs-fmt
               nodePackages.node2nix
               pre-commit
               semver-tool
-              shellcheck
-              shfmt
               sops
               stow
             ] ++ self.packages.${system}.default.nativeBuildInputs;
@@ -244,6 +237,34 @@
                 pre-commit
               ] ++ myXMonad.env.nativeBuildInputs;
             };
+        };
+        formatter = inputs.treefmt-nix.lib.mkWrapper pkgs {
+          projectRootFile = "flake.nix";
+          programs = {
+            deadnix = {
+              enable = true;
+              no-lambda-arg = true;
+              no-lambda-pattern-names = true;
+            };
+            nixpkgs-fmt.enable = true;
+            shellcheck.enable = true;
+            shfmt.enable = true;
+          };
+          settings.formatter = rec {
+            deadnix.excludes = nixpkgs-fmt.excludes;
+            nixpkgs-fmt.excludes = [
+              "machines/*/hardware-configuration.nix"
+              "pkgs/development/node-packages/node-env.nix"
+              "pkgs/development/node-packages/node-packages.nix"
+            ];
+            shfmt.options = [
+              "-i"
+              "4"
+              "-ci"
+              "-s"
+              "-w"
+            ];
+          };
         };
         packages = {
           default = self.packages.${system}.yurrriq-dotfiles;

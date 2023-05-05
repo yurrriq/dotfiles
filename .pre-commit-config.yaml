@@ -24,32 +24,16 @@ repos:
   repo: https://github.com/detailyang/pre-commit-shell
   rev: v1.0.6
 - hooks:
-  - description: Scan Nix files for dead code
-    id: deadnix
-    name: deadnix
-    entry: deadnix --edit --fail --no-lambda-arg --no-lambda-pattern-names
+  - entry: nix fmt
+    id: treefmt
     language: system
-    files: \.nix$
-    exclude: |-
-      pkgs/development/node-packages/node-env\.nix$
-  - description: Format nix code with nixpkgs-fmt.
-    id: nixpkgs-fmt
-    name: nixpkgs-fmt
-    entry: nixpkgs-fmt
-    language: system
-    files: \.nix$
+    name: Format code with treefmt
   - description: Use Biber to format .bib files
     entry: scripts/format-biber.sh
     files: '.+\.bib$'
     id: biber-format
     language: script
     name: Format .bib files
-  - description: Use shfmt to format .sh files
-    entry: scripts/format-scripts.sh
-    files: '.+\.sh$'
-    id: shfmt
-    language: script
-    name: Format .sh files
   - always_run: true
     description: Ensure Noweb sources are up to date
     entry: make srcs

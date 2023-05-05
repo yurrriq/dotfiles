@@ -1,29 +1,5 @@
 {
   "nodes": {
-    "deadnix": {
-      "inputs": {
-        "naersk": "naersk",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": [
-          "flake-utils"
-        ]
-      },
-      "locked": {
-        "lastModified": 1682793465,
-        "narHash": "sha256-IcxupBqG3/h13sHgNYcO/oHKYfnK1LYd8Ehercz/Z/w=",
-        "owner": "astro",
-        "repo": "deadnix",
-        "rev": "c912ac1925da06b7f6d357f96d31061160f25ed0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "astro",
-        "repo": "deadnix",
-        "type": "github"
-      }
-    },
     "emacs-overlay": {
       "inputs": {
         "flake-utils": [
@@ -86,28 +62,6 @@
         "owner": "nix-community",
         "ref": "release-22.11",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "naersk": {
-      "inputs": {
-        "nixpkgs": [
-          "deadnix",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1679567394,
-        "narHash": "sha256-ZvLuzPeARDLiQUt6zSZFGOs+HZmE+3g4QURc8mkBsfM=",
-        "owner": "nix-community",
-        "repo": "naersk",
-        "rev": "88cd22380154a2c36799fe8098888f0f59861a15",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "ref": "master",
-        "repo": "naersk",
         "type": "github"
       }
     },
@@ -182,14 +136,14 @@
     },
     "root": {
       "inputs": {
-        "deadnix": "deadnix",
         "emacs-overlay": "emacs-overlay",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nixgl": "nixgl",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "nur": "nur"
+        "nur": "nur",
+        "treefmt-nix": "treefmt-nix"
       }
     },
     "systems": {
@@ -204,6 +158,26 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1683117219,
+        "narHash": "sha256-IyNRNRxw0slA3VQySVA7QPXHMOxlbx0ePWvj9oln+Wk=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "c8c3731dc404f837f38f89c2c5ffc2afc02e249d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
         "type": "github"
       }
     }

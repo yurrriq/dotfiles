@@ -29,18 +29,6 @@ The main entrypoint \hrefootnote{https://github.com/yurrriq/dotfiles/blob/main/f
 \section{Inputs}
 \label{sec:inputs}
 
-\subsection{deadnix}
-
-\hrefootnote{https://github.com/astro/deadnix}{deadnix} scans Nix files for dead code (unused variable bindings).  Follow the top-level pinned \nix{nixpkgs} to dedupe \nix{inputs}.
-
-<<inputs>>=
-deadnix = {
-  url = "github:astro/deadnix";
-  inputs.nixpkgs.follows = "nixpkgs";
-  inputs.utils.follows = "flake-utils";
-};
-@
-
 \subsection{emacs-overlay}
 \label{subsec:inputs-emacs-overlay}
 
@@ -129,6 +117,15 @@ provides \say{user contributed Nix packages.} Notably, I use some of
 nur.url = "github:nix-community/nur";
 @
 
+\subsection{treefmt}
+
+<<inputs>>=
+treefmt-nix = {
+  inputs.nixpkgs.follows = "nixpkgs";
+  url = "github:numtide/treefmt-nix";
+};
+@
+
 \section{Outputs}
 \label{sec:outputs}
 
@@ -159,7 +156,6 @@ For each \nix{system}, define a package collection that composes the overlays fr
 <<per-system outputs variables>>=
 pkgs = import inputs.nixpkgs {
   overlays = [
-    inputs.deadnix.overlays.default
     inputs.emacs-overlay.overlay
     self.overlays.home-manager
     self.overlays.noweb
@@ -184,9 +180,6 @@ Define the default \nix{devShell}, including tools to build
 \hrefootnote{https://github.com/mozilla/sops}{manage secrets},
 \hrefootnote{https://linux.die.net/man/1/mkpasswd}{generate passwords},
 \hrefootnote{https://github.com/fsaintjacques/semver-tool}{bump the version},
-run \hrefootnote{https://github.com/nix-community/nixpkgs-fmt}{a}
-\hrefootnote{https://github.com/mvdan/sh}{few}
-\hrefootnote{https://www.shellcheck.net/}{linters} (with or without
 \hrefootnote{https://pre-commit.com}{pre-commit}), and
 \hrefootnote{https://www.gnu.org/software/stow/}{manage the non-Nix symlink
   farm}.
@@ -196,7 +189,6 @@ default = pkgs.mkShell {
   inherit (self.packages.${system}.default) FONTCONFIG_FILE;
   buildInputs = with pkgs; [
     biber
-    deadnix
     (
       emacsWithPackagesFromUsePackage {
         alwaysEnsure = true;
@@ -209,12 +201,9 @@ default = pkgs.mkShell {
     gnupg
     home-manager
     mkpasswd
-    nixpkgs-fmt
     nodePackages.node2nix
     pre-commit
     semver-tool
-    shellcheck
-    shfmt
     sops
     stow
   ] ++ self.packages.${system}.default.nativeBuildInputs;
@@ -251,6 +240,82 @@ xmonad =
       pre-commit
     ] ++ myXMonad.env.nativeBuildInputs;
   };
+@
+
+\subsection{Formatters}
+
+Use \hrefootnote{https://github.com/numtide/treefmt}{treefmt} (via \hrefootnote{https://github.com/numtide/treefmt-nix}{treefmt-nix}) to format code, as a pre-commit hook or by calling \bash{nix fmt} directly.
+
+<<per-system outputs>>=
+formatter = inputs.treefmt-nix.lib.mkWrapper pkgs {
+  projectRootFile = "flake.nix";
+  programs = {
+    <<deadnix>>
+    <<nixpkgs-fmt>>
+    <<shellcheck>>
+    <<shfmt>>
+  };
+  settings.formatter = rec {
+    <<deadnix settings>>
+    <<nixpkgs-fmt settings>>
+    <<shfmt settings>>
+  };
+};
+@
+
+Use \hrefootnote{https://github.com/astro/deadnix}{deadnix} to scan Nix files for dead code (unused variable bindings).
+
+<<deadnix>>=
+deadnix = {
+  enable = true;
+  no-lambda-arg = true;
+  no-lambda-pattern-names = true;
+};
+@
+
+Use the same \nix{excludes} from the [[<<nixpkgs-fmt settings>>]], to exclude
+some generated Nix files.
+
+<<deadnix settings>>=
+deadnix.excludes = nixpkgs-fmt.excludes;
+@
+
+Use \hrefootnote{https://github.com/nix-community/nixpkgs-fmt}{nixpkgs-fmt} to format Nix files.
+
+<<nixpkgs-fmt>>=
+nixpkgs-fmt.enable = true;
+@
+
+<<nixpkgs-fmt settings>>=
+nixpkgs-fmt.excludes = [
+  "machines/*/hardware-configuration.nix"
+  "pkgs/development/node-packages/node-env.nix"
+  "pkgs/development/node-packages/node-packages.nix"
+];
+@
+
+Use \hrefootnote{https://www.shellcheck.net/}{ShellCheck} to lint shell scripts.
+
+<<shellcheck>>=
+shellcheck.enable = true;
+@
+
+Use \hrefootnote{https://github.com/mvdan/sh}{shfmt} to format shell scripts.
+
+<<shfmt>>=
+shfmt.enable = true;
+@
+
+Configure my preferred shfmt settings.
+
+<<shfmt settings>>=
+shfmt.options = [
+  "-i"
+  "4"
+  "-ci"
+  "-s"
+  "-w"
+];
 @
 
 \subsection{Packages}
@@ -514,7 +579,6 @@ nixpkgs = {
   ];
   nixpkgs.overlays = [
     self.overlays.default
-    inputs.deadnix.overlays.default
     inputs.emacs-overlay.overlay
     inputs.nixgl.overlay
     inputs.nur.overlay
