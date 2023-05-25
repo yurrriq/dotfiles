@@ -21,6 +21,7 @@
     ca = "commit --amend";
     cam = "${ca} --message";
     can = "${ca} --no-edit";
+    cann = "${can} --no-verify";
     cans = "${can} --gpg-sign";
     cas = "${ca} --gpg-sign";
     casm = "${cas} --message";
