@@ -10,7 +10,7 @@
     };
     settings = {
       global = {
-        font = "Iosevka Term 10";
+        font = "Iosevka Nerd Font 10";
         markup = "yes";
         plain_text = "no";
         format = "<b>%s</b>\\n%b";

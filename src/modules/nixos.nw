@@ -12,7 +12,7 @@ This modules manages some common configuration on NixOS systems.
   <<Enable networkmanager>>
   <<Configure services>>
   <<Configure audio>>
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 }
 @
 

@@ -5,7 +5,7 @@
 {
   <<Configure email accounts>>
   <<Add some more user packages>>
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
   services.picom.enable = true;
 }
 @
