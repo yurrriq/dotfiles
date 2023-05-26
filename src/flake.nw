@@ -259,6 +259,7 @@ formatter = inputs.treefmt-nix.lib.mkWrapper pkgs {
   settings.formatter = rec {
     <<deadnix settings>>
     <<nixpkgs-fmt settings>>
+    <<shellcheck settings>>
     <<shfmt settings>>
   };
 };
@@ -301,6 +302,19 @@ Use \hrefootnote{https://www.shellcheck.net/}{ShellCheck} to lint shell scripts.
 shellcheck.enable = true;
 @
 
+<<shellcheck settings>>=
+shellcheck = {
+  includes = [
+    "*.sh"
+    ".envrc"
+  ];
+  options = [
+    "--format=tty"
+    "--shell=bash"
+  ];
+};
+@
+
 Use \hrefootnote{https://github.com/mvdan/sh}{shfmt} to format shell scripts.
 
 <<shfmt>>=
@@ -310,13 +324,19 @@ shfmt.enable = true;
 Configure my preferred shfmt settings.
 
 <<shfmt settings>>=
-shfmt.options = [
-  "-i"
-  "4"
-  "-ci"
-  "-s"
-  "-w"
-];
+shfmt = {
+  includes = [
+    "*.sh"
+    ".envrc"
+  ];
+  options = [
+    "-i"
+    "4"
+    "-ci"
+    "-s"
+    "-w"
+  ];
+};
 @
 
 \subsection{Packages}

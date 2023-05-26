@@ -258,13 +258,29 @@
               "pkgs/development/node-packages/node-env.nix"
               "pkgs/development/node-packages/node-packages.nix"
             ];
-            shfmt.options = [
-              "-i"
-              "4"
-              "-ci"
-              "-s"
-              "-w"
-            ];
+            shellcheck = {
+              includes = [
+                "*.sh"
+                ".envrc"
+              ];
+              options = [
+                "--format=tty"
+                "--shell=bash"
+              ];
+            };
+            shfmt = {
+              includes = [
+                "*.sh"
+                ".envrc"
+              ];
+              options = [
+                "-i"
+                "4"
+                "-ci"
+                "-s"
+                "-w"
+              ];
+            };
           };
         };
         packages = {
