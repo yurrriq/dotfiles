@@ -11,7 +11,7 @@
       include theme.conf
     '';
     font = {
-      name = "Iosevka Term";
+      name = "Iosevka Nerd Font Mono";
       package = (pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; });
     };
     keybindings = {

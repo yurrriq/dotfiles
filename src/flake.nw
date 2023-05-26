@@ -63,9 +63,8 @@ invaluable tool for managing a deterministic \bash{$HOME}.  Pin a version and fo
 
 <<inputs>>=
 home-manager = {
-  url = "github:nix-community/home-manager/release-22.11";
+  url = "github:nix-community/home-manager";
   inputs.nixpkgs.follows = "nixpkgs";
-  inputs.utils.follows = "flake-utils";
 };
 @
 
@@ -95,14 +94,14 @@ nixos-hardware.url = "github:nixos/nixos-hardware";
 Someday soon again, prefer to live on the edge and pin \nix{nixpkgs} to the \textit{nixpkgs-unstable} branch.
 
 <<inputs>>=
-nixpkgs.url = "github:nixos/nixpkgs/release-22.11";
+nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
 @
 
 %% Additionally, pin a stable version of the
 %% \hrefootnote{https://github.com/NixOS/nixpkgs}{Nix Packages collection}.
 
 <<inputs>>=
-# nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.11";
+# nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
 @
 
 \subsection{NUR}
@@ -408,7 +407,7 @@ homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
       home = {
         username = "eric";
         homeDirectory = "/home/eric";
-        stateVersion = "22.11";
+        stateVersion = "23.05";
       };
     }
   ];
@@ -588,6 +587,7 @@ nixpkgs = {
   nixpkgs.config.allowUnfreePredicate = pkgNameElem [
     "Oracle_VM_VirtualBox_Extension_Pack"
     "lastpass-password-manager"
+    "lens"
     "nvidia"
     "reaper"
     "slack"

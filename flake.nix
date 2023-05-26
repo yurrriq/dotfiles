@@ -10,9 +10,8 @@
     };
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "flake-utils";
     };
     nixgl = {
       url = "github:guibou/nixGL";
@@ -20,8 +19,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    nixpkgs.url = "github:nixos/nixpkgs/release-22.11";
-    # nixpkgs-stable.url = "github:nixos/nixpkgs/release-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
+    # nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
     nur.url = "github:nix-community/nur";
     treefmt-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -115,6 +114,7 @@
           nixpkgs.config.allowUnfreePredicate = pkgNameElem [
             "Oracle_VM_VirtualBox_Extension_Pack"
             "lastpass-password-manager"
+            "lens"
             "nvidia"
             "reaper"
             "slack"
@@ -163,7 +163,7 @@
             home = {
               username = "eric";
               homeDirectory = "/home/eric";
-              stateVersion = "22.11";
+              stateVersion = "23.05";
             };
           }
         ];
