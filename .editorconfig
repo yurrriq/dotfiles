@@ -8,6 +8,9 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+[{*.el,*.enc,*.hs,*.nw}]
+indent_size = none
+
 [*.json]
 indent_size = 4
 
@@ -16,3 +19,6 @@ indent_style = tab
 
 [VERSION]
 insert_final_newline = false
+
+[node-packages.json]
+indent_size = none

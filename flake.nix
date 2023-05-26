@@ -203,6 +203,7 @@
                   config = ./config/emacs/init.el;
                 }
               )
+              editorconfig-checker
               git
               git-lfs
               gnumake

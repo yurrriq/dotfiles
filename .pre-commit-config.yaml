@@ -14,16 +14,6 @@ repos:
   repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.0.1
 - hooks:
-  - args: ["--format=tty"]
-    id: shell-lint
-  - args: ["--format=tty", "--shell=bash"]
-    files: ^.envrc$
-    id: shell-lint
-    name: Lint .envrc
-    types: [text]
-  repo: https://github.com/detailyang/pre-commit-shell
-  rev: v1.0.6
-- hooks:
   - entry: nix fmt
     id: treefmt
     language: system
@@ -40,4 +30,11 @@ repos:
     id: make-srcs
     language: system
     name: make srcs
+  - always_run: true
+    description: Ensure conformance to .editorconfig
+    entry: editorconfig-checker
+    id: editorconfig-checker
+    language: system
+    name: editorconfig-checker
+    pass_filenames: false
   repo: local
