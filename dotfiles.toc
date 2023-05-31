@@ -1,0 +1,75 @@
+\contentsline {chapter}{Flake}{7}{chapter*.2}%
+\contentsline {section}{Inputs}{7}{section*.3}%
+\contentsline {subsection}{emacs-overlay}{7}{subsection*.4}%
+\contentsline {subsection}{flake-utils}{8}{subsection*.5}%
+\contentsline {subsection}{home-manager}{8}{subsection*.6}%
+\contentsline {subsection}{nixGL}{8}{subsection*.7}%
+\contentsline {subsection}{nixos-hardware}{8}{subsection*.8}%
+\contentsline {subsection}{nixpkgs}{8}{subsection*.9}%
+\contentsline {subsection}{NUR}{9}{subsection*.10}%
+\contentsline {subsection}{treefmt}{9}{subsection*.11}%
+\contentsline {section}{Outputs}{9}{section*.12}%
+\contentsline {subsection}{Overlays}{9}{subsection*.13}%
+\contentsline {subsection}{Per-system pkgs}{9}{subsection*.14}%
+\contentsline {subsection}{Development environments}{9}{subsection*.15}%
+\contentsline {subsection}{Formatters}{11}{subsection*.16}%
+\contentsline {subsection}{Packages}{12}{subsection*.17}%
+\contentsline {subsection}{Modules}{12}{subsection*.18}%
+\contentsline {subsection}{NixOS configurations}{13}{subsection*.19}%
+\contentsline {subsection}{home-manager modules}{13}{subsection*.20}%
+\contentsline {subsection}{home-manager configurations}{14}{subsection*.21}%
+\contentsline {subsection}{Variables}{14}{subsection*.23}%
+\contentsline {subsection}{Overlays}{15}{subsection*.24}%
+\contentsline {subsection}{NixOS Modules}{15}{subsection*.25}%
+\contentsline {chapter}{Packages}{19}{chapter*.30}%
+\contentsline {section}{The yurrriq-dotfiles (PDF) derivation}{19}{section*.31}%
+\contentsline {section}{Additional Node packages}{20}{section*.32}%
+\contentsline {chapter}{Machines}{21}{chapter*.33}%
+\contentsline {section}{NiXPS}{21}{section*.34}%
+\contentsline {subsection}{NixOS configuration}{21}{subsection*.35}%
+\contentsline {subsection}{home-manager configuration}{24}{subsection*.36}%
+\contentsline {section}{SRUXPS}{25}{section*.37}%
+\contentsline {subsection}{NixOS configuration}{25}{subsection*.38}%
+\contentsline {subsection}{home-manager configuration}{28}{subsection*.41}%
+\contentsline {chapter}{Modules}{33}{chapter*.43}%
+\contentsline {section}{Location}{33}{section*.44}%
+\contentsline {section}{NixOS}{35}{section*.45}%
+\contentsline {section}{Nix}{37}{section*.47}%
+\contentsline {section}{Virtualisation}{37}{section*.48}%
+\contentsline {subsection}{Docker}{38}{subsection*.50}%
+\contentsline {subsection}{Podman}{38}{subsection*.51}%
+\contentsline {subsection}{VirtualBox}{38}{subsection*.52}%
+\contentsline {chapter}{Software configuration}{41}{chapter*.53}%
+\contentsline {section}{Applications}{41}{section*.54}%
+\contentsline {subsection}{Common applications}{41}{subsection*.55}%
+\contentsline {subsection}{Linux-specific applications}{41}{subsection*.56}%
+\contentsline {section}{Bash}{42}{section*.57}%
+\contentsline {section}{bat}{42}{section*.58}%
+\contentsline {section}{Browserpass}{43}{section*.59}%
+\contentsline {section}{bugwarrior}{43}{section*.60}%
+\contentsline {section}{direnv}{45}{section*.61}%
+\contentsline {section}{Dunst}{46}{section*.62}%
+\contentsline {section}{Emacs}{49}{section*.63}%
+\contentsline {subsection}{Init File}{49}{subsection*.64}%
+\contentsline {section}{Firefox}{55}{section*.65}%
+\contentsline {section}{fish}{56}{section*.66}%
+\contentsline {subsection}{Fish abbreviations}{56}{subsection*.67}%
+\contentsline {section}{fzf}{61}{section*.69}%
+\contentsline {section}{Git}{61}{section*.70}%
+\contentsline {subsection}{Aliases}{66}{subsection*.71}%
+\contentsline {section}{GPG}{67}{section*.72}%
+\contentsline {section}{htop}{68}{section*.73}%
+\contentsline {section}{jq}{68}{section*.74}%
+\contentsline {section}{Keyboard}{68}{section*.75}%
+\contentsline {section}{kitty}{69}{section*.76}%
+\contentsline {subsection}{Theme}{69}{subsection*.77}%
+\contentsline {section}{man}{70}{section*.78}%
+\contentsline {section}{rebar3}{71}{section*.79}%
+\contentsline {section}{Starship}{72}{section*.80}%
+\contentsline {section}{Taskwarrior}{73}{section*.81}%
+\contentsline {subsection}{Config}{73}{subsection*.82}%
+\contentsline {subsection}{on-exit Git hook}{75}{subsection*.83}%
+\contentsline {section}{xmonad}{77}{section*.84}%
+\contentsline {chapter}{Glossary}{79}{section*.86}%
+\contentsline {chapter}{Acronyms}{81}{section*.88}%
+\contentsfinish 

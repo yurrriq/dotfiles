@@ -1,0 +1,13 @@
+;; This logfile was generated automatically by `xindy'
+;; at 31.05.2023  18:38:08
+;; Indexstyle: "/build/IOelDdTtIt", Rawindex: "/build/ZkSxFMghxa", Output: "dotfiles.gls"
+
+
+Building indexentry-tree:
+Hierdepth of index is :TREE
+
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+
+Forming letter-groups:
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "�Íഗ" -> "M"
