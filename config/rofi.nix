@@ -1,8 +1,13 @@
-{ ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
     ./fonts.nix
+  ];
+
+  home.packages = with pkgs; lib.optionals config.programs.rbw.enable [
+    rofi-rbw
+    xdotool
   ];
 
   programs.rofi = {

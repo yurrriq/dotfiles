@@ -1,11 +1,12 @@
 \subsection{home-manager configuration}
 
 <<machines/nixps/home.nix>>=
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   <<Configure email accounts>>
   <<Add some more user packages>>
   home.stateVersion = "23.05";
+  <<Try rbw>>
   services.picom.enable = true;
 }
 @
@@ -42,4 +43,13 @@ home.packages = with pkgs; [
   winetricks
   zoom-us
 ];
+@
+
+<<Try rbw>>=
+programs.rbw = {
+  enable = true;
+  settings = {
+    email = config.accounts.email.accounts.personal.address;
+  };
+};
 @

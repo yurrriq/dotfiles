@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   accounts.email.accounts = {
     personal = {
@@ -29,5 +29,11 @@
     zoom-us
   ];
   home.stateVersion = "23.05";
+  programs.rbw = {
+    enable = true;
+    settings = {
+      email = config.accounts.email.accounts.personal.address;
+    };
+  };
   services.picom.enable = true;
 }
