@@ -155,6 +155,7 @@ services.xserver = {
   '';
   dpi = 220;
   upscaleDefaultCursor = true;
+  videoDrivers = [ "modesetting" ];
 };
 @
 
