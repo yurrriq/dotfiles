@@ -2,9 +2,9 @@
 
 {
   boot = {
-    cleanTmpDir = true;
     loader.systemd-boot.enable = lib.mkDefault true;
     loader.efi.canTouchEfiVariables = lib.mkDefault true;
+    tmp.cleanOnBoot = true;
   };
   console.font = "Lat2-Terminus16";
   console.useXkbConfig = true;

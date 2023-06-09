@@ -20,9 +20,9 @@ Delete all files in \bash{/tmp} during boot, and steal some useful bits from \hr
 
 <<Configure boot loader>>=
 boot = {
-  cleanTmpDir = true;
   loader.systemd-boot.enable = lib.mkDefault true;
   loader.efi.canTouchEfiVariables = lib.mkDefault true;
+  tmp.cleanOnBoot = true;
 };
 @
 

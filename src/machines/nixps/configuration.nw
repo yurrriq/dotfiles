@@ -114,14 +114,16 @@ home-manager.users."${username}" = import ./home.nix;
 @
 
 <<Configure networking>>=
-networking.firewall = {
-  enable = true;
-  allowedTCPPortRanges = [
-    # { from = 8000; to = 8000; }
-  ];
+networking = {
+  firewall = {
+    enable = true;
+    allowedTCPPortRanges = [
+      # { from = 8000; to = 8000; }
+    ];
+  };
+  hostName = "nixps";
+  networkmanager.enable = true;
 };
-
-networking.hostName = "nixps";
 @
 
 <<Configure Nix>>=
@@ -152,6 +154,7 @@ services.xserver = {
     DisplaySize 508 285
   '';
   dpi = 220;
+  upscaleDefaultCursor = true;
 };
 @
 

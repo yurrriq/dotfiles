@@ -47,14 +47,16 @@ in
   hardware.pulseaudio.support32Bit = true;
   hardware.opengl.driSupport32Bit = true;
   home-manager.users."${username}" = import ./home.nix;
-  networking.firewall = {
-    enable = true;
-    allowedTCPPortRanges = [
-      # { from = 8000; to = 8000; }
-    ];
+  networking = {
+    firewall = {
+      enable = true;
+      allowedTCPPortRanges = [
+        # { from = 8000; to = 8000; }
+      ];
+    };
+    hostName = "nixps";
+    networkmanager.enable = true;
   };
-
-  networking.hostName = "nixps";
   nix = {
     settings = {
       cores = 8;
@@ -76,6 +78,7 @@ in
       DisplaySize 508 285
     '';
     dpi = 220;
+    upscaleDefaultCursor = true;
   };
   users.mutableUsers = false;
   users.users."${username}" = {
