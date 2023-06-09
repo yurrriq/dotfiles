@@ -16,6 +16,7 @@ in
   <<Configure the file systems>>
   <<Tweak hardware config>>
   <<Configure Bluetooth>>
+  <<Configure fwupd>>
   <<Configure PulseAudio and OpenGL>>
   <<Configure home-manager>>
   <<Configure networking>>
@@ -100,6 +101,10 @@ hardware.bluetooth = {
     };
   };
 };
+@
+
+<<Configure fwupd>>=
+services.fwupd.enable = true;
 @
 
 Tweak PulseAudio and OpenGL settings for \hrefootnote{https://store.steampowered.com/linux}{Steam}.
