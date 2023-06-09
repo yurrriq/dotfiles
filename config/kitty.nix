@@ -24,7 +24,7 @@
     settings = {
       cursor_shape = "block";
       editor = ''emacsclient -nw -a ""'';
-      font_size = lib.mkDefault 24;
+      font_size = lib.mkDefault 20;
       kitty_mod = "ctrl+shift";
       scrollback_lines = -1;
       shell = ".";

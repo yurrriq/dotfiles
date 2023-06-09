@@ -90,7 +90,7 @@
 
   nix.enable = true;
 
-  programs.kitty.settings.font_size = 12;
+  programs.kitty.settings.font_size = 10;
 
   services.random-background = {
     enable = true;
