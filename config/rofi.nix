@@ -18,6 +18,9 @@
     font = "Iosevka Nerd Font 18";
     pass = {
       enable = true;
+      extraConfig = ''
+        help_color="#003152"
+      '';
       stores = [ "~/.password-store" ];
     };
     plugins = with pkgs; [
