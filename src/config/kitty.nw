@@ -20,7 +20,12 @@
         combine : clear_terminal scrollback active : send_text normal \x0c
       '';
     };
+    shellIntegration = {
+      enableFishIntegration = true;
+      mode = "no-cursor enabled";
+    };
     settings = {
+      cursor_shape = "block";
       editor = ''emacsclient -nw -a ""'';
       font_size = lib.mkDefault 24;
       kitty_mod = "ctrl+shift";
