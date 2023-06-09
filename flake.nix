@@ -233,9 +233,11 @@
                 )
                 ghcid
                 haskell-language-server
+                haskellPackages.hlint
                 haskellPackages.ormolu
                 haskellPackages.pointfree
                 pre-commit
+                rnix-lsp
               ] ++ myXMonad.env.nativeBuildInputs;
             };
         };
