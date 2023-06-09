@@ -5,7 +5,10 @@
     ./fonts.nix
   ];
 
-  home.packages = with pkgs; lib.optionals config.programs.rbw.enable [
+  home.packages = with pkgs; [
+    rofi-bluetooth
+    rofi-systemd
+  ] ++ lib.optionals config.programs.rbw.enable [
     rofi-rbw
     xdotool
   ];
@@ -17,6 +20,10 @@
       enable = true;
       stores = [ "~/.password-store" ];
     };
+    plugins = with pkgs; [
+      rofi-calc
+      rofi-top
+    ];
     theme = "purple";
   };
 }
