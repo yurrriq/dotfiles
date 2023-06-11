@@ -3,12 +3,20 @@
 
 <<modules/virtualisation.nix>>=
 { config, lib, pkgs, ... }:
+let
+  username = lib.head (lib.attrNames config.home-manager.users);
+in
 {
-  <<Install crun>>
+  environment.systemPackages =
+    <<Install crun>> ++
+    <<Install virt-manager>>;
+  <<Enable dconf>>
+  <<Add user to libvirtd group>>
   virtualisation = {
     <<Configure Docker>>
     <<Configure Podman>>
     <<Configure VirtualBox>>
+    <<Configure virt-manager>>
   };
 }
 @
@@ -36,7 +44,7 @@ It seems there is a bug in podman such that it doesn't properly handle
 \end{minted}
 
 <<Install crun>>=
-environment.systemPackages = lib.optionals config.virtualisation.podman.enable [ pkgs.crun ];
+lib.optionals config.virtualisation.podman.enable [ pkgs.crun ]
 @
 
 Install Podman by default, if the Docker daemon is disabled.
@@ -53,4 +61,22 @@ podman = {
 <<Configure VirtualBox>>=
 virtualbox.host.enable = lib.mkDefault false;
 virtualbox.host.enableExtensionPack = lib.mkDefault (config.virtualisation.virtualbox.host.enable);
+@
+
+\subsection{virt-manager}
+
+<<Install virt-manager>>=
+lib.optionals config.virtualisation.libvirtd.enable [ pkgs.virt-manager ]
+@
+
+<<Configure virt-manager>>=
+libvirtd.enable = lib.mkDefault false;
+@
+
+<<Enable dconf>>=
+programs.dconf.enable = config.virtualisation.libvirtd.enable;
+@
+
+<<Add user to libvirtd group>>=
+users.users."${username}".extraGroups = [ "libvirtd" ];
 @
