@@ -24,6 +24,7 @@ in
   <<Configure sudo>>
   <<Configure X Server>>
   <<Configure user>>
+  virtualisation.libvirtd.enable = true;
 }
 @
 

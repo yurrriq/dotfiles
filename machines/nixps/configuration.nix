@@ -100,4 +100,5 @@ in
     uid = 1000;
     shell = "/etc/profiles/per-user/${username}/bin/fish";
   };
+  virtualisation.libvirtd.enable = true;
 }
