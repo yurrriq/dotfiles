@@ -7,10 +7,11 @@
       url = "github:nix-community/emacs-overlay";
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl = {
@@ -20,7 +21,7 @@
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
-    # nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
     nur.url = "github:nix-community/nur";
     treefmt-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
