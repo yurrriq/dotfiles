@@ -29,7 +29,7 @@ Define some short exa\todoo{add link} aliases.
 
 <<Define some shell aliases>>=
 l = "exa --color=auto -G";
-ll = "exa --color=auto -Gla";
+ll = "exa --color=auto -la";
 @
 
 I liked \fish{pbcopy} and \fish{pbpaste} on Darwin,
