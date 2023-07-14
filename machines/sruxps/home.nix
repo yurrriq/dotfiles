@@ -36,8 +36,8 @@
     export CI_REGISTRY_USER=gitlab-ci-token
     export CI_REGISTRY_PASSWORD="$CI_JOB_TOKEN"
     export GITLAB_TOKEN="$CI_JOB_TOKEN"
-    export JIRA_API_TOKEN="$(pass jira.sportradar.ag/e.bailey)"
-    export JIRA_AUTH_TYPE=bearer
+    # export JIRA_API_TOKEN="$(pass jira.sportradar.ag/e.bailey)"
+    # export JIRA_AUTH_TYPE=bearer
     export GITLAB_REGISTRY_ACCESS_TOKEN="$CI_REGISTRY_PASSWORD"
   '';
   home.keyboard = {
