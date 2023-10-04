@@ -23,7 +23,7 @@
 @
 
 <<config/emacs/init.el>>=
-(set-face-attribute 'default t :family "Iosevka Nerd Font" :height 110)
+(set-face-attribute 'default t :family "Iosevka Nerd Font Mono" :height 110)
 @
 
 <<config/emacs/init.el>>=
