@@ -63,6 +63,7 @@ nb = "nix build";
 nbd = "nix build --dry-run";
 nbn = "nix build --no-link";
 nbo = "nix build -o";
+nfc = "nix flake check --log-format internal-json --verbose &| nom --json";
 @
 
 \newthought{I'm not quite used to} all the \fish{ripgrep} flags yet.

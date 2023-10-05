@@ -24,6 +24,7 @@
     nbd = "nix build --dry-run";
     nbn = "nix build --no-link";
     nbo = "nix build -o";
+    nfc = "nix flake check --log-format internal-json --verbose &| nom --json";
     rg = "rg -S";
     rga = "rg --hidden --iglob !.git";
     rgf = "rg -F";
