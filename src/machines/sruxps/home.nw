@@ -13,6 +13,7 @@
   ];
   <<Configure picom>>
   <<Miscellaneous config>>
+  <<Install rbw>>
 }
 @
 
@@ -230,5 +231,14 @@ targets.genericLinux.enable = true;
 
 xresources.properties = {
   "Xft.dpi" = 290;
+};
+@
+
+<<Install rbw>>=
+programs.rbw = {
+  enable = true;
+  settings = {
+    email = config.accounts.email.accounts.personal.address;
+  };
 };
 @

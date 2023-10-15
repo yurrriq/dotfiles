@@ -103,4 +103,10 @@
   xresources.properties = {
     "Xft.dpi" = 290;
   };
+  programs.rbw = {
+    enable = true;
+    settings = {
+      email = config.accounts.email.accounts.personal.address;
+    };
+  };
 }
