@@ -31,6 +31,11 @@ TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
 all:: srcs docs/dotfiles.pdf
 
 
+.PHONY: deps
+deps:
+	nix flake update --commit-lock-file
+
+
 .PHONY: srcs
 srcs: nix-srcs ${SH_SRCS} ${OTHER_SRCS} ${WEIRD_SRCS}
 

@@ -9,6 +9,8 @@ The main entrypoint \hrefootnote{https://github.com/yurrriq/dotfiles/blob/main/f
     <<inputs>>
   };
 
+  <<nixConfig>>
+
   outputs = { self, ... }@inputs:
     let
       inherit (inputs.nixpkgs) lib;
@@ -24,6 +26,15 @@ The main entrypoint \hrefootnote{https://github.com/yurrriq/dotfiles/blob/main/f
         <<per-system outputs>>
       });
 }
+@
+
+Automate the workflow for updating Nix dependencies via \bash{nix flake update
+  --commit-lock-file}.
+
+<<nixConfig>>=
+nixConfig = {
+  commit-lockfile-summary = "build(deps): nix flake update";
+};
 @
 
 \section{Inputs}

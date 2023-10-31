@@ -29,6 +29,10 @@
     };
   };
 
+  nixConfig = {
+    commit-lockfile-summary = "build(deps): nix flake update";
+  };
+
   outputs = { self, ... }@inputs:
     let
       inherit (inputs.nixpkgs) lib;
