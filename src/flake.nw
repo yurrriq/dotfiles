@@ -252,6 +252,12 @@ xmonad =
       haskellPackages.pointfree
       pre-commit
       rnix-lsp
+      xorg.libX11
+      xorg.libXScrnSaver
+      xorg.libXext
+      xorg.libXft
+      xorg.libXinerama
+      xorg.libXrandr
     ] ++ myXMonad.env.nativeBuildInputs;
   };
 @

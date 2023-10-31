@@ -8,34 +8,41 @@ import Data.List (intercalate)
 import Data.Map (Map)
 import qualified Data.Map as M
 import Data.Maybe (catMaybes)
-import XMonad hiding ((|||))
-import XMonad.Actions.CycleWS (WSType (EmptyWS, NonEmptyWS), doTo, moveTo)
-import XMonad.Actions.Navigation2D
-import XMonad.Actions.RotSlaves
-import XMonad.Actions.Warp
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.EwmhDesktops
+import XMonad
+import XMonad.Actions.CycleWS (WSType (Not), doTo, emptyWS, moveTo)
+import XMonad.Actions.Navigation2D (navigation2DP, windowGo, windowSwap)
+import XMonad.Actions.RotSlaves (rotSlavesDown, rotSlavesUp)
+import XMonad.Actions.Warp (warpToWindow)
+import XMonad.Hooks.DynamicLog (PP (..), shorten, statusBar, wrap, xmobarColor)
+import XMonad.Hooks.EwmhDesktops (ewmh)
 import XMonad.Hooks.ManageDocks
-import XMonad.Layout.BinarySpacePartition
+  ( AvoidStruts,
+    Direction1D (..),
+    Direction2D,
+    avoidStruts,
+    docks,
+  )
+import XMonad.Hooks.StatusBar (defToggleStrutsKey)
+import XMonad.Layout.BinarySpacePartition (emptyBSP)
 import XMonad.Layout.Decoration (ModifiedLayout)
-import XMonad.Layout.LayoutCombinators (JumpToLayout (..), (|||))
-import XMonad.Layout.NoBorders
-import XMonad.Layout.TwoPane
+import XMonad.Layout.NoBorders (noBorders)
+import XMonad.Layout.TwoPane (TwoPane (TwoPane))
 import qualified XMonad.StackSet as W
-import XMonad.Util.EZConfig
+import XMonad.Util.EZConfig (mkKeymap)
 import XMonad.Util.NamedScratchpad
-import XMonad.Util.Scratchpad
-import XMonad.Util.WorkspaceCompare (getSortByIndex)
+  ( NamedScratchpad (NS),
+    customFloating,
+    namedScratchpadAction,
+    scratchpadWorkspaceTag,
+  )
+import XMonad.Util.Scratchpad (scratchpadManageHook)
+import XMonad.Util.WorkspaceCompare (filterOutWs, getSortByIndex)
 
 main :: IO ()
 main = xmonad =<< myXmobar myConfig
 
 myXmobar :: LayoutClass l Window => XConfig l -> IO (XConfig (ModifiedLayout AvoidStruts l))
-myXmobar = statusBar "xmobar" myPP toggleStrutsKey
-
--- https://hackage.haskell.org/package/xmonad-contrib-0.16/docs/src/XMonad.Hooks.DynamicLog.html#toggleStrutsKey
-toggleStrutsKey :: XConfig t -> (KeyMask, KeySym)
-toggleStrutsKey XConfig {modMask = modm} = (modm, xK_b)
+myXmobar = statusBar "xmobar" myPP defToggleStrutsKey
 
 myConfig =
   navigation2DP
@@ -43,11 +50,11 @@ myConfig =
     ("<U>", "<L>", "<D>", "<R>")
     [("M-", bringMouse windowGo), ("M-S-", windowSwap)]
     False
+    . docks
     $ ewmh
       def
         { borderWidth = 0,
           focusFollowsMouse = True,
-          handleEventHook = handleEventHook def <+> docksEventHook,
           keys = myKeys,
           layoutHook = myLayout,
           -- TODO: namedScratchpadManageHook scratchpads,
@@ -87,7 +94,7 @@ myPP =
         "BSP" -> "<fn=1>🐚</fn>"
         layout -> layout,
       ppSep = " ",
-      ppSort = (. namedScratchpadFilterOutWorkspace) <$> ppSort def,
+      ppSort = (. filterOutWs [scratchpadWorkspaceTag]) <$> ppSort def,
       ppTitle = xmobarColor "#fdf6e3" "" . shorten 80,
       ppUrgent = xmobarColor "#ff605a" ""
     }
@@ -136,7 +143,7 @@ myKeys cfg =
       ("<Print>", spawn "flameshot gui"),
       ("M-S--", namedScratchpadAction scratchpads "emacs"),
       ("M--", namedScratchpadAction scratchpads "kitty"),
-      ("M-<Esc>", getXMonadDataDir >>= spawn . wrap "i3lock --raw 3840x2400:rgb --image " "/skyrim.raw"),
+      ("M-<Esc>", asks (cfgDir . directories) >>= spawn . wrap "i3lock --raw 3840x2400:rgb --image " "/skyrim.raw"),
       ("M-<Space>", spawn "dunstctl close"),
       ("M-M1-<Space>", spawn "dunstctl close-all"),
       ("M-M1-b", spawn "rofi-bluetooth"),
@@ -163,11 +170,11 @@ myKeys cfg =
       ("M1-<Space>", spawn "rofi -modi combi,window -show combi -combi-modi run,drun"),
       ("C-M-M1-x", spawn "xmonad --restart"),
       ("C-M-M1-c", spawn "systemctl --user restart picom.service"),
-      ("C-M-<Left>", moveTo Prev NonEmptyWS),
-      ("C-M-<Right>", moveTo Next NonEmptyWS),
-      ("C-M-M1-<Left>", shiftAndMoveTo Prev EmptyWS),
-      ("C-M-M1-<Right>", shiftAndMoveTo Next EmptyWS),
-      ("C-M-M1-f", shiftAndMoveTo Next EmptyWS)
+      ("C-M-<Left>", moveTo Prev (Not emptyWS)),
+      ("C-M-<Right>", moveTo Next (Not emptyWS)),
+      ("C-M-M1-<Left>", shiftAndMoveTo Prev emptyWS),
+      ("C-M-M1-<Right>", shiftAndMoveTo Next emptyWS),
+      ("C-M-M1-f", shiftAndMoveTo Next emptyWS)
     ]
       ++ [ ( intercalate "-" (catMaybes [Just "M", maybeShift, Just key]),
              windows (f workspace)
