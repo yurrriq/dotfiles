@@ -63,7 +63,8 @@
     kubectx
     kubelogin
     kustomize
-    lens
+    # NOTE: unfree license now
+    # lens
     stern
     vault
     fortune
