@@ -26,8 +26,8 @@ accounts.email.accounts = {
 <<Add some more user packages>>=
 home.packages = with pkgs; [
   amdvlk
-  appimage-run
   calibre
+  electronplayer
   fd
   frescobaldi
   gnutls

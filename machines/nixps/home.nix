@@ -11,8 +11,8 @@
   };
   home.packages = with pkgs; [
     amdvlk
-    appimage-run
     calibre
+    electronplayer
     fd
     frescobaldi
     gnutls
