@@ -64,6 +64,21 @@
           lib.composeManyExtensions
             (lib.attrValues
               (lib.filterAttrs (name: _: name != "default") self.overlays));
+        iosevka-custom = final: prev: {
+          # https://typeof.net/Iosevka/customizer
+          iosevka-custom = prev.iosevka.override {
+            privateBuildPlan = ''
+              [buildPlans.iosevka-custom]
+              family = "Iosevka Custom"
+              spacing = "normal"
+              serifs = "sans"
+              export-glyph-names = true
+              [buildPlans.iosevka-custom.ligations]
+              inherits = "dlig"
+            '';
+            set = "custom";
+          };
+        };
         home-manager = final: prev: {
           home-manager = inputs.home-manager.packages.${prev.system}.home-manager;
         };
@@ -191,6 +206,7 @@
           overlays = [
             inputs.emacs-overlay.overlay
             self.overlays.home-manager
+            self.overlays.iosevka-custom
             self.overlays.noweb
           ];
           inherit system;
@@ -298,6 +314,7 @@
         };
         packages = {
           default = self.packages.${system}.yurrriq-dotfiles;
+          inherit (pkgs) iosevka-custom;
           yurrriq-dotfiles = pkgs.callPackage ./. { };
         };
       });

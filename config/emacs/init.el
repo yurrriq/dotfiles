@@ -5,7 +5,7 @@
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
-(set-face-attribute 'default t :family "Iosevka Nerd Font Mono" :height 110)
+(set-face-attribute 'default t :family "Iosevka Custom" :height 110)
 (require 'package)
 (setq-default frames-only-mode t
               indent-tabs-mode nil
@@ -133,6 +133,17 @@ Null prefix argument turns off the mode."
 (use-package hl-todo
   :demand
   :config (global-hl-todo-mode t))
+(use-package ligature
+  :config
+  (ligature-set-ligatures
+   'prog-mode
+   '("-<<" "-<" "-<-" "<--" "<---" "<<-" "<-" "->" "->>" "-->" "--->" "->-" ">-" ">>-"
+     "=<<" "=<" "=<=" "<==" "<<=" "<=" "=>" "=>>" "==>" "===>" "=>=" ">=" ">>="
+     "<->" "<-->" "<--->" "<---->" "<=>" "<==>" "<===>" "<====>" "::" ":::" "__"
+     "<~~" "</" "</>" "/>" "~~>" "==" "!=" "/=" "~=" "<>" "===" "!==" "!===" "=/=" "=!="
+     "<:" ":=" "*=" "*+" "<*" "<*>" "*>" "<|" "<|>" "|>" "<." "<.>" ".>" "+*" "=*" "=:" ":>"
+     "(*" "*)" "/*" "*/" "[|" "|]" "{|" "|}" "++" "+++" "\\/" "/\\" "|-" "-|" "<!--" "<!---"))
+  (global-ligature-mode t))
 (use-package magit
   :demand
   ;; FIXME: :config (global-magit-file-mode t)

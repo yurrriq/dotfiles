@@ -23,7 +23,7 @@
 @
 
 <<config/emacs/init.el>>=
-(set-face-attribute 'default t :family "Iosevka Nerd Font Mono" :height 110)
+(set-face-attribute 'default t :family "Iosevka Custom" :height 110)
 @
 
 <<config/emacs/init.el>>=
@@ -220,6 +220,22 @@ Null prefix argument turns off the mode."
 (use-package hl-todo
   :demand
   :config (global-hl-todo-mode t))
+@
+
+Use \hrefootnote{https://github.com/mickeynp/ligature.el}{ligature.el} for
+pretty ligatures.
+<<config/emacs/init.el>>=
+(use-package ligature
+  :config
+  (ligature-set-ligatures
+   'prog-mode
+   '("-@<<" "-<" "-<-" "<--" "<---" "@<<-" "<-" "->" "->>" "-->" "--->" "->-" ">-" ">>-"
+     "=@<<" "=<" "=<=" "<==" "@<<=" "<=" "=>" "=>>" "==>" "===>" "=>=" ">=" ">>="
+     "<->" "<-->" "<--->" "<---->" "<=>" "<==>" "<===>" "<====>" "::" ":::" "__"
+     "<~~" "</" "</>" "/>" "~~>" "==" "!=" "/=" "~=" "<>" "===" "!==" "!===" "=/=" "=!="
+     "<:" ":=" "*=" "*+" "<*" "<*>" "*>" "<|" "<|>" "|>" "<." "<.>" ".>" "+*" "=*" "=:" ":>"
+     "(*" "*)" "/*" "*/" "[|" "|]" "{|" "|}" "++" "+++" "\\/" "/\\" "|-" "-|" "<!--" "<!---"))
+  (global-ligature-mode t))
 @
 
 <<config/emacs/init.el>>=

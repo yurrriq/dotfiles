@@ -1,5 +1,5 @@
 Config
-  { font = "Iosevka Nerd Font 24",
+  { font = "Iosevka Custom 24",
     additionalFonts = ["Noto Color Emoji 24"],
     allDesktops = True,
     bgColor = "#242424",

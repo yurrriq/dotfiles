@@ -8,8 +8,8 @@
       include theme.conf
     '';
     font = {
-      name = "Iosevka Nerd Font Mono";
-      package = (pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; });
+      name = "Iosevka Custom";
+      package = pkgs.iosevka-custom;
     };
     keybindings = {
       "kitty_mod+enter" = "new_window_with_cwd";

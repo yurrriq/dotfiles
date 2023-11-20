@@ -1,7 +1,7 @@
 { stdenv
 , nix-gitignore
 , makeFontsConf
-, iosevka
+, iosevka-custom
 , gawk
 , noweb
 , python3Packages
@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
   ] ./.;
 
   FONTCONFIG_FILE = makeFontsConf {
-    fontDirectories = [ iosevka ];
+    fontDirectories = [ iosevka-custom ];
   };
 
   configurePhase = ''

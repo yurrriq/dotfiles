@@ -162,13 +162,16 @@ overlays = {
 
 \subsection{Per-system pkgs}
 
-For each \nix{system}, define a package collection that composes the overlays from \nix{deadnix} and \nix{emacs-overlay}, as well as the locally-defined \nix{home-manager} and \nix{noweb} overlays.
+For each \nix{system}, define a package collection that composes the overlays
+from \nix{deadnix} and \nix{emacs-overlay}, as well as the locally-defined
+\nix{home-manager}, \nix{iosevka-custom}, and \nix{noweb} overlays.
 
 <<per-system outputs variables>>=
 pkgs = import inputs.nixpkgs {
   overlays = [
     inputs.emacs-overlay.overlay
     self.overlays.home-manager
+    self.overlays.iosevka-custom
     self.overlays.noweb
   ];
   inherit system;
@@ -366,6 +369,7 @@ The default package builds
 <<per-system outputs>>=
 packages = {
   default = self.packages.${system}.yurrriq-dotfiles;
+  inherit (pkgs) iosevka-custom;
   yurrriq-dotfiles = pkgs.callPackage ./. { };
 };
 @
@@ -490,6 +494,26 @@ pkgNameElem = names: pkg:
 @
 
 \subsection{Overlays}
+
+Define a custom build of \hrefootnote{}{Iosevka}.
+
+<<overlays>>=
+iosevka-custom = final: prev: {
+  # https://typeof.net/Iosevka/customizer
+  iosevka-custom = prev.iosevka.override {
+    privateBuildPlan = ''
+      [buildPlans.iosevka-custom]
+      family = "Iosevka Custom"
+      spacing = "normal"
+      serifs = "sans"
+      export-glyph-names = true
+      [buildPlans.iosevka-custom.ligations]
+      inherits = "dlig"
+    '';
+    set = "custom";
+  };
+};
+@
 
 Define an overlay with a pinned version of home-manager.
 

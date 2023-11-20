@@ -15,7 +15,7 @@
 
   programs.rofi = {
     enable = true;
-    font = "Iosevka Nerd Font 18";
+    font = "Iosevka Custom 18";
     pass = {
       enable = true;
       extraConfig = ''
