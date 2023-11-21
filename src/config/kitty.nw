@@ -19,6 +19,7 @@
       "kitty_mod+k" = ''
         combine : clear_terminal scrollback active : send_text normal \x0c
       '';
+      "kitty_mod+w" = "close_window_with_confirmation";
     };
     shellIntegration = {
       enableFishIntegration = true;
