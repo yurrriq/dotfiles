@@ -16,7 +16,7 @@ jobs:
       with:
         github_access_token: ${{ secrets.GITHUB_TOKEN }}
         nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/tarball/master
-    - uses: cachix/cachix-action@v12
+    - uses: cachix/cachix-action@v13
       with:
         name: yurrriq
         skipPush: true
