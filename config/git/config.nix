@@ -47,6 +47,9 @@
       };
 
       diff = {
+        gpg = {
+          textconv = "gpg --no-tty --decrypt";
+        };
         sopsdiffer = {
           textconv = "sops -d";
         };
@@ -115,6 +118,10 @@
         (lib.filter (account: account.primary)
           (lib.attrValues config.accounts.email.accounts))).realName;
   };
+
+  xdg.configFile."git/attributes".text = ''
+    *.gpg filter=gpg diff=gpg
+  '';
 
   xdg.configFile."pass-git-helper/git-pass-mapping.ini" = {
     source = ./git-pass-mapping.ini;
