@@ -28,8 +28,8 @@ The main entrypoint \hrefootnote{https://github.com/yurrriq/dotfiles/blob/main/f
 }
 @
 
-Automate the workflow for updating Nix dependencies via \bash{nix flake update
-  --commit-lock-file}.
+Automate the workflow for updating Nix dependencies via
+\bash{nix flake update --commit-lock-file}.
 
 <<nixConfig>>=
 nixConfig = {
@@ -75,7 +75,7 @@ invaluable tool for managing a deterministic \bash{$HOME}.  Pin a version and fo
 
 <<inputs>>=
 home-manager = {
-  url = "github:nix-community/home-manager/release-23.05";
+  url = "github:nix-community/home-manager/release-23.11";
   inputs.nixpkgs.follows = "nixpkgs";
 };
 @
@@ -103,17 +103,18 @@ nixos-hardware.url = "github:nixos/nixos-hardware";
 
 \subsection{nixpkgs}
 
-Someday soon again, prefer to live on the edge and pin \nix{nixpkgs} to the \textit{nixpkgs-unstable} branch.
+Someday soon again, prefer to live on the edge and pin \nix{nixpkgs} to the
+\textit{nixpkgs-unstable} branch.
 
 <<inputs>>=
-nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
+nixpkgs.url = "github:nixos/nixpkgs/release-23.11";
 @
 
 Additionally, pin a stable version of the
 \hrefootnote{https://github.com/NixOS/nixpkgs}{Nix Packages collection}.
 
 <<inputs>>=
-nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.05";
+nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.11";
 @
 
 \subsection{NUR}
@@ -431,7 +432,7 @@ homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
       home = {
         username = "eric";
         homeDirectory = "/home/eric";
-        stateVersion = "23.05";
+        stateVersion = "23.11";
       };
     }
   ];

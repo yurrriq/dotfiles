@@ -25,11 +25,11 @@ even though all the cool kids alias \fish{k} to \fish{kubectl} these days.
 k = "clear";
 @
 
-Define some short exa\todoo{add link} aliases.
+Define some short eza\todoo{add link} aliases.
 
 <<Define some shell aliases>>=
-l = "exa --color=auto -G";
-ll = "exa --color=auto -la";
+l = "eza --color=auto -G";
+ll = "eza --color=auto -la";
 @
 
 I liked \fish{pbcopy} and \fish{pbpaste} on Darwin,

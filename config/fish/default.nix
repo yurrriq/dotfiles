@@ -9,7 +9,7 @@
 
   home = {
     packages = with pkgs; [
-      exa
+      eza
     ];
     sessionVariables = {
       SHELL = "fish";

@@ -16,8 +16,4 @@
 
   swapDevices =
     [{ device = "/dev/disk/by-uuid/68896b3e-7f2d-4fe3-b5d2-97c68a8ff88e"; }];
-
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
 }

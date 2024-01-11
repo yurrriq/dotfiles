@@ -5,7 +5,7 @@
 {
   <<Configure email accounts>>
   <<Add some more user packages>>
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
   <<Try rbw>>
   services.picom.enable = true;
 }

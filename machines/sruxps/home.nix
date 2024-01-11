@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ../../config/nix.nix
     ../../config/screen-locker.nix
   ];
   accounts.email.accounts = {
@@ -78,6 +77,7 @@
     nixgl.nixGLIntel
     networkmanager
   ];
+  home.stateVersion = "23.11";
   services.picom = {
     enable = true;
     settings = {
