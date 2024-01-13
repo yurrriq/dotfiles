@@ -67,7 +67,9 @@ Null prefix argument turns off the mode."
 (use-package better-defaults)
 
 (use-package direnv
-  :ensure t)
+  :ensure t
+  :config
+  (direnv-mode))
 
 (use-package dockerfile-mode)
 
@@ -151,8 +153,19 @@ Null prefix argument turns off the mode."
 (use-package multiple-cursors
   :demand
   :config (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines))
+(eval-and-compile
+  (defun yurrriq/noweb-load-path ()
+    (file-name-as-directory
+      (expand-file-name "site-lisp"
+        (expand-file-name "emacs"
+          (expand-file-name "share"
+            (file-name-directory
+              (directory-file-name
+                (file-name-directory
+                  (executable-find "noweb"))))))))))
+
 (use-package noweb-mode
-  :load-path "/run/current-system/sw/share/emacs/site-lisp"
+  :load-path (lambda () (list (yurrriq/noweb-load-path)))
   :mode ("\\.nw\\'")
   :demand)
 (use-package nyan-mode
