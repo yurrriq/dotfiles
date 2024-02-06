@@ -64,16 +64,14 @@
   :config (global-hl-todo-mode t))
 
 (use-package lsp-mode
-  :hook ((haskell-mode . lsp-deferred))
+  :hook ((haskell-mode
+          nix-mode)
+         . lsp-deferred)
   :commands (lsp lsp-deferred)
   :config
   (advice-add 'lsp :before #'direnv-update-environment)
-  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
-  (setq lsp-modeline-code-actions-enable nil)
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("rnix-lsp"))
-                    :major-modes '(nix-mode)
-                    :server-id 'nix)))
+  ;; (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
+  (setq lsp-modeline-code-actions-enable nil))
 
 (use-package lsp-ui
   :hook (haskell-mode . lsp-ui-mode)

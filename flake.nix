@@ -257,8 +257,8 @@
                 haskellPackages.hlint
                 haskellPackages.ormolu
                 haskellPackages.pointfree
+                nixd
                 pre-commit
-                rnix-lsp
                 xorg.libX11
                 xorg.libXScrnSaver
                 xorg.libXext
