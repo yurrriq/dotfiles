@@ -56,6 +56,7 @@
       };
 
       difftool = {
+        dyff.cmd = "dyff --color auto between --omit-header \"$LOCAL\" \"$REMOTE\"";
         pdfdiffer.cmd = "diff-pdf --view \"$LOCAL\" \"$REMOTE\"";
         prompt = false;
         trustExitCode = true;

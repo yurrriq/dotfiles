@@ -4,6 +4,7 @@
   home.packages = with pkgs; (
     [
       diff-pdf
+      dyff
       git
       github-cli
       kdiff3
