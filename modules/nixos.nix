@@ -18,6 +18,15 @@
       temperature.night = 2300;
     };
     thermald.enable = lib.mkDefault true;
+    libinput = {
+      enable = true;
+      touchpad = {
+        accelSpeed = "1.0";
+        disableWhileTyping = true;
+        naturalScrolling = false;
+        tapping = true;
+      };
+    };
     xserver = {
       enable = true;
 
@@ -37,19 +46,9 @@
         ];
       };
 
-      libinput = {
-        enable = true;
-        touchpad = {
-          accelSpeed = "1.0";
-          disableWhileTyping = true;
-          naturalScrolling = false;
-          tapping = true;
-        };
-      };
-
       videoDrivers = lib.mkDefault [ "intel" ];
 
-      xkbOptions = "ctrl:nocaps,compose:ralt";
+      xkb.options = "ctrl:nocaps,compose:ralt";
     };
   };
   hardware.pulseaudio = {

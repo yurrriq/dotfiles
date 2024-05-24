@@ -64,6 +64,7 @@ services = {
 Enable the X server, start it automatically,
 
 <<Configure the X server>>=
+<<Configure libinput>>
 xserver = {
   enable = true;
 
@@ -71,11 +72,9 @@ xserver = {
 
   <<Configure the display manager>>
 
-  <<Configure libinput>>
-
   videoDrivers = lib.mkDefault [ "intel" ];
 
-  xkbOptions = "ctrl:nocaps,compose:ralt";
+  xkb.options = "ctrl:nocaps,compose:ralt";
 };
 @
 
