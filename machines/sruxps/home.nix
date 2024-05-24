@@ -72,7 +72,7 @@
     curl
     httpie
     cachix
-    nixUnstable
+    nix
     home-manager
     nixgl.nixGLIntel
     networkmanager

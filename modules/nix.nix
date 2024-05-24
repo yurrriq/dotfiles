@@ -18,7 +18,6 @@
       options = "--delete-older-than 30d";
     };
     optimise.automatic = true;
-    package = pkgs.nixUnstable;
   };
   environment.systemPackages = with pkgs; [
     cachix

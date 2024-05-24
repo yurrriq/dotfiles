@@ -11,7 +11,7 @@
     };
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl = {
@@ -20,8 +20,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    nixpkgs.url = "github:nixos/nixpkgs/release-23.11";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.05";
     nur.url = "github:nix-community/nur";
     treefmt-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -68,12 +68,12 @@
           # https://typeof.net/Iosevka/customizer
           iosevka-custom = prev.iosevka.override {
             privateBuildPlan = ''
-              [buildPlans.iosevka-custom]
+              [buildPlans.Iosevkacustom]
               family = "Iosevka Custom"
               spacing = "normal"
               serifs = "sans"
-              export-glyph-names = true
-              [buildPlans.iosevka-custom.ligations]
+              exportGlyphNames = true
+              [buildPlans.Iosevkacustom.ligations]
               inherits = "dlig"
             '';
             set = "custom";
@@ -183,7 +183,7 @@
             home = {
               username = "eric";
               homeDirectory = "/home/eric";
-              stateVersion = "23.11";
+              stateVersion = "24.05";
             };
           }
         ];
