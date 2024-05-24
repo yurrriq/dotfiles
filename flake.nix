@@ -73,8 +73,28 @@
               spacing = "normal"
               serifs = "sans"
               exportGlyphNames = true
+              [buildPlans.Iosevkacustom.weights.Regular]
+              shape = 400
+              menu = 400
+              css = 400
+              [buildPlans.Iosevkacustom.weights.Bold]
+              shape = 700
+              menu = 700
+              css = 700
+              [buildPlans.Iosevkacustom.slopes.Upright]
+              angle = 0
+              shape = "upright"
+              menu = "upright"
+              css = "normal"
+              [buildPlans.Iosevkacustom.slopes.Italic]
+              angle = 9.4
+              shape = "italic"
+              menu = "italic"
+              css = "italic"
               [buildPlans.Iosevkacustom.ligations]
               inherits = "dlig"
+              [buildPlans.Iosevkacustom.variants.design]
+              lower-lambda = "curly-tailed-turn"
             '';
             set = "custom";
           };
