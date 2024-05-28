@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
 
@@ -19,6 +19,7 @@
     defaultCacheTtl = 28800;
     enableSshSupport = true;
     maxCacheTtl = 28800;
+    pinentryPackage = pkgs.pinentry;
   };
 
 }
