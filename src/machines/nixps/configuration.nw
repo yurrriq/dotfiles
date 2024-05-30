@@ -22,6 +22,7 @@ in
   <<Configure networking>>
   <<Configure Nix>>
   <<Configure sudo>>
+  <<Configure displayManager>>
   <<Configure X Server>>
   <<Configure user>>
   virtualisation.libvirtd.enable = true;
@@ -147,12 +148,15 @@ security.sudo = {
 };
 @
 
+<<Configure displayManager>>=
+services.displayManager.autoLogin = {
+  enable = true;
+  user = username;
+};
+@
+
 <<Configure X Server>>=
 services.xserver = {
-  displayManager.autoLogin = {
-    enable = true;
-    user = username;
-  };
   monitorSection = ''
     DisplaySize 508 285
   '';

@@ -70,11 +70,11 @@ in
       ${username} ALL=(ALL) NOPASSWD: ALL
     '';
   };
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = username;
+  };
   services.xserver = {
-    displayManager.autoLogin = {
-      enable = true;
-      user = username;
-    };
     monitorSection = ''
       DisplaySize 508 285
     '';
