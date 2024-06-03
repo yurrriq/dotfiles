@@ -32,7 +32,11 @@
   programs.rbw = {
     enable = true;
     settings = {
+      base_url = "https://api.bitwarden.com/";
       email = config.accounts.email.accounts.personal.address;
+      identity_url = "https://identity.bitwarden.com/";
+      notifications_url = "https://notifications.bitwarden.com/";
+      pinentry = pkgs.pinentry;
     };
   };
   services.picom.enable = true;
