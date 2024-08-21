@@ -11,6 +11,7 @@ integration, by default, and disable the zsh integration, since I don't use zsh.
   programs.direnv = {
     enable = true;
     enableZshIntegration = false;
+    nix-direnv.enable = true;
   };
 
 }
