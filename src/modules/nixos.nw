@@ -11,8 +11,7 @@ This modules manages some common configuration on NixOS systems.
   <<Configure location>>
   <<Enable networkmanager>>
   <<Configure services>>
-  <<Configure audio>>
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
 }
 @
 
@@ -113,20 +112,6 @@ libinput = {
   };
 };
 @
-
-Enable the PulseAudio soudn server, including extra Bluetooth modules.
-Also enable ALSA sound.
-
-<<Configure audio>>=
-hardware.pulseaudio = {
-  enable = true;
-  # FIXME
-  # extraModules = [ pkgs.pulseaudio-modules-bt ];
-  package = pkgs.pulseaudioFull;
-};
-sound.enable = true;
-@
-
 
 %% Local Variables:
 %% noweb-code-mode: nix-mode

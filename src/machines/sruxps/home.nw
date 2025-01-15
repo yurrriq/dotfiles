@@ -11,7 +11,7 @@
   home.packages = with pkgs; [
     <<Install some user packages>>
   ];
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
   <<Configure picom>>
   <<Miscellaneous config>>
   <<Install rbw>>

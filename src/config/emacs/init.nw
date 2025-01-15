@@ -3,24 +3,34 @@
 \subsection{Init File}
 \label{sec:init.el}
 
+Start the server and prefer using the selected window over popping up a new
+window or frame.
+
 <<config/emacs/init.el>>=
 (server-start)
 (setq server-window 'pop-to-buffer-same-window)
 @
 
+Show the column number in the mode line.
+
 <<config/emacs/init.el>>=
 (column-number-mode 1)
 @
 
+Add \texttt{/run/current-system/sw/bin} to the exec path.
+
 <<config/emacs/init.el>>=
 (add-to-list 'exec-path "/run/current-system/sw/bin")
 @
+Disable the menu bar, vertical scroll bars, and tool bar.
 
 <<config/emacs/init.el>>=
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 @
+
+Set the default font to my custom Iosevka build.
 
 <<config/emacs/init.el>>=
 (set-face-attribute 'default t :family "Iosevka Custom" :height 110)
@@ -133,7 +143,7 @@ Null prefix argument turns off the mode."
 
 ;; (use-package frames-only-mode)
 
-(use-package kubernetes-tramp)
+;; (use-package tramp-container)
 
 (use-package paredit)
 

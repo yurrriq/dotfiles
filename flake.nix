@@ -5,13 +5,14 @@
   inputs = {
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "nixpkgs-stable";
+      };
     };
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl = {
@@ -20,8 +21,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    nixpkgs.url = "github:nixos/nixpkgs/release-24.05";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/release-24.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.11";
     nur.url = "github:nix-community/nur";
     treefmt-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -161,15 +162,16 @@
             "spotify"
             "spotify-unwrapped"
             "steam"
-            "steam-original"
-            "steam-run"
+            # "steam-original"
+            # "steam-run"
+            "steam-unwrapped"
             "zoom"
           ];
           nixpkgs.overlays = [
             self.overlays.default
             inputs.emacs-overlay.overlay
             inputs.nixgl.overlay
-            inputs.nur.overlay
+            inputs.nur.overlays.default
           ];
         };
         virtualisation = import ./modules/virtualisation.nix;
@@ -203,7 +205,7 @@
             home = {
               username = "eric";
               homeDirectory = "/home/eric";
-              stateVersion = "24.05";
+              stateVersion = "24.11";
             };
           }
         ];

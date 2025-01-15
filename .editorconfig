@@ -9,16 +9,16 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 
 [{*.el,*.enc,*.hs,*.nw}]
-indent_size = none
+indent_size = unset
 
 [*.json]
 indent_size = 4
 
-[Makefile*]
+[{Makefile*,*.enc}]
 indent_style = tab
 
 [VERSION]
 insert_final_newline = false
 
 [node-packages.json]
-indent_size = none
+indent_size = unset

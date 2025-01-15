@@ -45,8 +45,7 @@ in
     };
   };
   services.fwupd.enable = true;
-  hardware.pulseaudio.support32Bit = true;
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable32Bit = true;
   home-manager.users."${username}" = import ./home.nix;
   networking = {
     firewall = {

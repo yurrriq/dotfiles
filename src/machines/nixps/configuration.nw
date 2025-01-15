@@ -17,7 +17,7 @@ in
   <<Tweak hardware config>>
   <<Configure Bluetooth>>
   <<Configure fwupd>>
-  <<Configure PulseAudio and OpenGL>>
+  <<Configure graphics>>
   <<Configure home-manager>>
   <<Configure networking>>
   <<Configure Nix>>
@@ -106,11 +106,11 @@ hardware.bluetooth = {
 services.fwupd.enable = true;
 @
 
-Tweak PulseAudio and OpenGL settings for \hrefootnote{https://store.steampowered.com/linux}{Steam}.
+Tweak graphics settings for
+\hrefootnote{https://store.steampowered.com/linux}{Steam}.
 
-<<Configure PulseAudio and OpenGL>>=
-hardware.pulseaudio.support32Bit = true;
-hardware.opengl.driSupport32Bit = true;
+<<Configure graphics>>=
+hardware.graphics.enable32Bit = true;
 @
 
 <<Configure home-manager>>=

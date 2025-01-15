@@ -80,7 +80,7 @@ Null prefix argument turns off the mode."
 
 ;; (use-package frames-only-mode)
 
-(use-package kubernetes-tramp)
+;; (use-package tramp-container)
 
 (use-package paredit)
 

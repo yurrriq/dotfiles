@@ -26,9 +26,9 @@
     steam
     tellico
     winetricks
-    zoom-us
+    # zoom-us
   ];
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
   programs.rbw = {
     enable = true;
     settings = {

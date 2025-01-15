@@ -51,12 +51,5 @@
       xkb.options = "ctrl:nocaps,compose:ralt";
     };
   };
-  hardware.pulseaudio = {
-    enable = true;
-    # FIXME
-    # extraModules = [ pkgs.pulseaudio-modules-bt ];
-    package = pkgs.pulseaudioFull;
-  };
-  sound.enable = true;
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
 }

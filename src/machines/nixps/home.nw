@@ -5,7 +5,7 @@
 {
   <<Configure email accounts>>
   <<Add some more user packages>>
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
   <<Try rbw>>
   services.picom.enable = true;
 }
@@ -41,7 +41,7 @@ home.packages = with pkgs; [
   steam
   tellico
   winetricks
-  zoom-us
+  # zoom-us
 ];
 @
 
