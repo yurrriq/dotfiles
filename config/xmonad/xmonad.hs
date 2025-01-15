@@ -132,9 +132,9 @@ scratchpads =
 myKeys :: XConfig l -> Map (KeyMask, KeySym) (X ())
 myKeys cfg =
   mkKeymap cfg $
-    [ ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),
-      ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%"),
-      ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%"),
+    [ ("<XF86AudioMute>", spawn "wpctl set-mute @DEFAULT_SINK@ toggle"),
+      ("<XF86AudioLowerVolume>", spawn "wpctl set-volume @DEFAULT_SINK@ 5%-"),
+      ("<XF86AudioRaiseVolume>", spawn "wpctl set-volume @DEFAULT_SINK@ 5%+"),
       ("<XF86AudioPrev>", spawn "playerctl previous"),
       ("<XF86AudioPlay>", spawn "playerctl play-pause"),
       ("<XF86AudioNext>", spawn "playerctl next"),
