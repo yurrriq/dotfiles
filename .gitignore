@@ -1,4 +1,5 @@
 .direnv/
+/.pre-commit-config.yaml
 /docs/
 /machines/*/secrets/*
 !/machines/*/secrets/*.enc

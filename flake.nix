@@ -12,6 +12,12 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-utils.url = "github:numtide/flake-utils";
+    git-hooks-nix = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:cachix/git-hooks.nix";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,6 +49,7 @@
   outputs = { flake-parts, self, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
+        inputs.git-hooks-nix.flakeModule
         inputs.treefmt-nix.flakeModule
         ./config/xmonad/flake-module.nix
       ];
@@ -237,7 +244,7 @@
       systems = [
         "x86_64-linux"
       ];
-      perSystem = { config, pkgs, system, ... }: {
+      perSystem = { config, pkgs, self', system, ... }: {
         _module.args.pkgs = import inputs.nixpkgs {
           overlays = [
             inputs.emacs-overlay.overlay
@@ -250,7 +257,11 @@
         devShells = {
           default = pkgs.mkShell {
             inherit (self.packages.${system}.default) FONTCONFIG_FILE;
-            buildInputs = with pkgs; [
+            inputsFrom = [
+              config.pre-commit.devShell
+              self'.packages.default
+            ];
+            nativeBuildInputs = with pkgs; [
               biber
               (
                 emacsWithPackagesFromUsePackage {
@@ -258,7 +269,6 @@
                   config = ./config/emacs/init.el;
                 }
               )
-              editorconfig-checker
               git
               git-lfs
               gnumake
@@ -266,17 +276,71 @@
               home-manager
               mkpasswd
               nodePackages.node2nix
-              pre-commit
               semver-tool
               sops
               stow
-            ] ++ self.packages.${system}.default.nativeBuildInputs;
+            ];
           };
         };
         packages = {
           default = self.packages.${system}.yurrriq-dotfiles;
           inherit (pkgs) iosevka-custom;
           yurrriq-dotfiles = pkgs.callPackage ./. { };
+        };
+        pre-commit.settings.hooks = {
+          biber-format = {
+            description = "Use Biber to format .bib files";
+            enable = true;
+            entry =
+              let
+                biber-format = pkgs.writeShellApplication {
+                  name = "biber-format";
+                  runtimeInputs = with pkgs; [
+                    biber
+                    moreutils
+                  ];
+                  text = ''
+                    biber \
+                      --nolog \
+                      --output-align \
+                      --output-fieldcase=lower \
+                      --output-file /dev/stdout \
+                      --output-resolve \
+                      --output-safechars \
+                      --quiet --quiet \
+                      --tool \
+                      "$1" |
+                      head -n-1 |
+                      sponge "$1"
+                  '';
+                };
+              in
+              "${biber-format}/bin/biber-format";
+            files = "\\.bib$";
+            language = "system";
+            name = "Format .bib files";
+          };
+          editorconfig-checker.enable = true;
+          make-srcs = {
+            description = "Ensure Noweb sources are up to date";
+            enable = true;
+            entry =
+              let
+                make-srcs = pkgs.writeShellApplication {
+                  name = "make-srcs";
+                  runtimeInputs = with pkgs; [
+                    gnumake
+                    noweb
+                  ];
+                  text = "make srcs";
+                };
+              in
+              "${make-srcs}/bin/make-srcs";
+            always_run = true;
+            language = "system";
+            name = "make srcs";
+          };
+          treefmt.enable = true;
         };
         treefmt = {
           programs = rec {
@@ -289,6 +353,7 @@
               "pkgs/development/node-packages/node-env.nix"
               "pkgs/development/node-packages/node-packages.nix"
             ];
+            prettier.enable = false;
             shellcheck.enable = true;
             shellcheck.includes = [
               "*.sh"

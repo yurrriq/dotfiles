@@ -17,7 +17,6 @@ Makefile.nixos
 Makefile.ubuntu
 .pre-commit-config.yaml
 result
-scripts
 .sops.yaml
 src
 .stow-local-ignore

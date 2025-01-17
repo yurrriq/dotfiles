@@ -23,9 +23,10 @@ The main entrypoint \hrefootnote{https://github.com/yurrriq/dotfiles/blob/main/f
       systems = [
         "x86_64-linux"
       ];
-      perSystem = { config, pkgs, system, ... }: {
+      perSystem = { config, pkgs, self', system, ... }: {
         <<per-system outputs variables>>
         <<per-system outputs>>
+        <<configure pre-commit hooks>>
         <<configure treefmt-nix>>
       };
     };
@@ -77,6 +78,7 @@ flake-parts.url = "github:hercules-ci/flake-parts";
 
 <<flake submodule imports>>=
 imports = [
+  <<git-hooks-nix flake module>>
   <<treefmt-nix flake module>>
   ./config/xmonad/flake-module.nix
 ];
@@ -92,6 +94,78 @@ pure Nix functions that are useful when writing flakes.  Pin a version to dedupe
 flake-utils.url = "github:numtide/flake-utils";
 @ %def eachDefaultSystem
 
+\subsection{pre-commit hooks}
+
+<<inputs>>=
+git-hooks-nix = {
+  inputs = {
+    nixpkgs.follows = "nixpkgs";
+  };
+  url = "github:cachix/git-hooks.nix";
+};
+@
+
+<<git-hooks-nix flake module>>=
+inputs.git-hooks-nix.flakeModule
+@
+
+<<configure pre-commit hooks>>=
+pre-commit.settings.hooks = {
+  biber-format = {
+    description = "Use Biber to format .bib files";
+    enable = true;
+    entry =
+      let
+        biber-format = pkgs.writeShellApplication {
+          name = "biber-format";
+          runtimeInputs = with pkgs; [
+            biber
+            moreutils
+          ];
+          text = ''
+            biber \
+              --nolog \
+              --output-align \
+              --output-fieldcase=lower \
+              --output-file /dev/stdout \
+              --output-resolve \
+              --output-safechars \
+              --quiet --quiet \
+              --tool \
+              "$1" |
+              head -n-1 |
+              sponge "$1"
+          '';
+        };
+      in
+      "${biber-format}/bin/biber-format";
+    files = "\\.bib$";
+    language = "system";
+    name = "Format .bib files";
+  };
+  editorconfig-checker.enable = true;
+  make-srcs = {
+    description = "Ensure Noweb sources are up to date";
+    enable = true;
+    entry =
+      let
+        make-srcs = pkgs.writeShellApplication {
+          name = "make-srcs";
+          runtimeInputs = with pkgs; [
+            gnumake
+            noweb
+          ];
+          text = "make srcs";
+        };
+      in
+      "${make-srcs}/bin/make-srcs";
+    always_run = true;
+    language = "system";
+    name = "make srcs";
+  };
+  treefmt.enable = true;
+};
+@
 
 \subsection{home-manager}
 
@@ -316,7 +390,11 @@ Define the default \nix{devShell}, including tools to build
 <<devShells>>=
 default = pkgs.mkShell {
   inherit (self.packages.${system}.default) FONTCONFIG_FILE;
-  buildInputs = with pkgs; [
+  inputsFrom = [
+    config.pre-commit.devShell
+    self'.packages.default
+  ];
+  nativeBuildInputs = with pkgs; [
     biber
     (
       emacsWithPackagesFromUsePackage {
@@ -324,7 +402,6 @@ default = pkgs.mkShell {
         config = ./config/emacs/init.el;
       }
     )
-    editorconfig-checker
     git
     git-lfs
     gnumake
@@ -332,11 +409,10 @@ default = pkgs.mkShell {
     home-manager
     mkpasswd
     nodePackages.node2nix
-    pre-commit
     semver-tool
     sops
     stow
-  ] ++ self.packages.${system}.default.nativeBuildInputs;
+  ];
 };
 @
 
