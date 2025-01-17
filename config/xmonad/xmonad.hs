@@ -33,15 +33,15 @@ import XMonad.Util.NamedScratchpad
   ( NamedScratchpad (NS),
     customFloating,
     namedScratchpadAction,
+    namedScratchpadManageHook,
     scratchpadWorkspaceTag,
   )
-import XMonad.Util.Scratchpad (scratchpadManageHook)
 import XMonad.Util.WorkspaceCompare (filterOutWs, getSortByIndex)
 
 main :: IO ()
 main = xmonad =<< myXmobar myConfig
 
-myXmobar :: LayoutClass l Window => XConfig l -> IO (XConfig (ModifiedLayout AvoidStruts l))
+myXmobar :: (LayoutClass l Window) => XConfig l -> IO (XConfig (ModifiedLayout AvoidStruts l))
 myXmobar = statusBar "xmobar" myPP defToggleStrutsKey
 
 myConfig =
@@ -57,8 +57,7 @@ myConfig =
           focusFollowsMouse = True,
           keys = myKeys,
           layoutHook = myLayout,
-          -- TODO: namedScratchpadManageHook scratchpads,
-          manageHook = manageScratchPad <+> myManageHook,
+          manageHook = namedScratchpadManageHook scratchpads <+> myManageHook,
           modMask = mod4Mask,
           terminal = "kitty",
           workspaces = myWorkspaces
@@ -110,10 +109,6 @@ myManageHook =
         (8, ["Signal"]),
         (9, ["Clementine", "Spotify", "spotify"])
       ]
-
-manageScratchPad :: ManageHook
-manageScratchPad =
-  scratchpadManageHook (W.RationalRect (1 / 6) (1 / 6) (2 / 3) (2 / 3))
 
 scratchpads :: [NamedScratchpad]
 scratchpads =
