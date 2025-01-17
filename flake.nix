@@ -196,7 +196,6 @@
         };
         nixosConfigurations = {
           "nixps" = self.lib.mkSystem "nixps" "dell-xps-15-9560-intel";
-          "MSP-EBAILEY01" = self.lib.mkSystem "sruxps" "dell-xps-13-7390";
         };
         homeManagerModules =
           let
