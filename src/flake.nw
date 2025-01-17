@@ -150,7 +150,12 @@ provides \say{user contributed Nix packages.} Notably, I use some of
   add-ons} (see \hyperref[sec:firefox]{Firefox} on page~\pageref{sec:firefox}).
 
 <<inputs>>=
-nur.url = "github:nix-community/nur";
+nur = {
+  inputs.flake-parts.follows = "flake-parts";
+  inputs.nixpkgs.follows = "nixpkgs";
+  inputs.treefmt-nix.follows = "treefmt-nix";
+  url = "github:nix-community/nur";
+};
 @
 
 \subsection{treefmt}

@@ -24,7 +24,12 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs.url = "github:nixos/nixpkgs/release-24.11";
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.11";
-    nur.url = "github:nix-community/nur";
+    nur = {
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+      url = "github:nix-community/nur";
+    };
     treefmt-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:numtide/treefmt-nix";
