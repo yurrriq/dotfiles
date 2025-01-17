@@ -44,6 +44,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         inputs.treefmt-nix.flakeModule
+        ./config/xmonad/flake-module.nix
       ];
       flake = let inherit (inputs.nixpkgs) lib; in {
         lib = {
@@ -271,35 +272,6 @@
               stow
             ] ++ self.packages.${system}.default.nativeBuildInputs;
           };
-          xmonad =
-            let
-              myXMonad =
-                pkgs.haskellPackages.callCabal2nix "my-xmonad" ./config/xmonad { };
-            in
-            pkgs.mkShell {
-              buildInputs = with pkgs; [
-                cabal-install
-                (
-                  emacsWithPackagesFromUsePackage {
-                    alwaysEnsure = true;
-                    config = ./config/xmonad/emacs.el;
-                  }
-                )
-                ghcid
-                haskell-language-server
-                haskellPackages.hlint
-                haskellPackages.ormolu
-                haskellPackages.pointfree
-                nixd
-                pre-commit
-                xorg.libX11
-                xorg.libXScrnSaver
-                xorg.libXext
-                xorg.libXft
-                xorg.libXinerama
-                xorg.libXrandr
-              ] ++ myXMonad.env.nativeBuildInputs;
-            };
         };
         packages = {
           default = self.packages.${system}.yurrriq-dotfiles;

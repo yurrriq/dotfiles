@@ -1,0 +1,51 @@
+\subsection{Flake submodule}
+
+<<config/xmonad/flake-module.nix>>=
+{ ... }:
+
+{
+  perSystem = { config, pkgs, self', ... }: {
+    <<xmonad development environment>>
+    packages.my-xmonad =
+      pkgs.haskellPackages.callCabal2nix "my-xmonad" ./. { };
+  };
+}
+@
+
+Configure a development environment for my
+\hrefootnote{https://xmonad.org}{xmonad} config. Use the
+\hyperref[subsec:inputs-emacs-overlay]{Emacs overlay} to configure a nice Emacs
+setup using \hrefootnote{https://emacs-lsp.github.io/lsp-haskell/}{lsp-haskell},
+\hrefootnote{https://github.com/tweag/ormolu}{Ormolu} to format Haskell code,
+and include \hrefootnote{https://github.com/bmillwood/pointfree}{pointfree}
+for... reasons.
+
+<<xmonad development environment>>=
+devShells.xmonad = pkgs.mkShell {
+  inputsFrom = [
+    self'.packages.my-xmonad.env
+  ];
+  nativeBuildInputs = with pkgs; [
+    cabal-install
+    (
+      emacsWithPackagesFromUsePackage {
+        alwaysEnsure = true;
+        config = ./emacs.el;
+      }
+    )
+    ghcid
+    haskell-language-server
+    haskellPackages.hlint
+    haskellPackages.ormolu
+    haskellPackages.pointfree
+    nixd
+    pre-commit
+    xorg.libX11
+    xorg.libXScrnSaver
+    xorg.libXext
+    xorg.libXft
+    xorg.libXinerama
+    xorg.libXrandr
+  ];
+};
+@
