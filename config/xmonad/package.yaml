@@ -1,5 +1,5 @@
 name: my-xmonad
-version: 0.1.0.2
+version: 0.1.0.3
 synopsis: My XMonad config
 author: Eric Bailey
 maintainer: eric@ericb.me
@@ -7,19 +7,19 @@ github: yurrriq/dotfiles
 license: Unlicense
 
 dependencies:
-- base
-- containers
-- xmonad
-- xmonad-contrib
+  - base
+  - containers
+  - xmonad
+  - xmonad-contrib
 
 ghc-options:
-- -Wall
-- -Werror
-- -Wincomplete-patterns
-- -Wincomplete-uni-patterns
+  - -Wall
+  - -Werror
+  - -Wincomplete-patterns
+  - -Wincomplete-uni-patterns
 
 executable:
   main: xmonad.hs
   ghc-options:
-  - -O0
-  - -threaded
+    - -O0
+    - -threaded

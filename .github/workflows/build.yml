@@ -3,33 +3,33 @@ name: Publish PDF to site
 on:
   push:
     branches:
-    - main
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Install Nix
-      uses: cachix/install-nix-action@V27
-      with:
-        github_access_token: ${{ secrets.GITHUB_TOKEN }}
-        nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/tarball/master
-    - uses: cachix/cachix-action@v14
-      with:
-        name: yurrriq
-        skipPush: true
-    - name: Build PDF
-      run: |
-        nix build
-        mkdir site
-        cp -rv result/* site/
-    - name: Deploy to GitHub Pages
-      if: success()
-      uses: crazy-max/ghaction-github-pages@v4
-      with:
-        target_branch: gh-pages
-        build_dir: site
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@V27
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/tarball/master
+      - uses: cachix/cachix-action@v14
+        with:
+          name: yurrriq
+          skipPush: true
+      - name: Build PDF
+        run: |
+          nix build
+          mkdir site
+          cp -rv result/* site/
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: gh-pages
+          build_dir: site
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -255,6 +255,7 @@ treefmt = {
   programs = rec {
     <<deadnix>>
     <<nixpkgs-fmt>>
+    <<prettier>>
     <<shellcheck>>
     <<shfmt>>
   };
@@ -295,6 +296,12 @@ nixpkgs-fmt.excludes = [
   "pkgs/development/node-packages/node-env.nix"
   "pkgs/development/node-packages/node-packages.nix"
 ];
+@
+
+Use \hrefootnote{https://prettier.io/}{Prettier}.
+
+<<prettier>>=
+prettier.enable = true;
 @
 
 Use \hrefootnote{https://www.shellcheck.net/}{ShellCheck} to lint shell scripts.

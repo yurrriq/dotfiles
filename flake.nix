@@ -353,7 +353,7 @@
               "pkgs/development/node-packages/node-env.nix"
               "pkgs/development/node-packages/node-packages.nix"
             ];
-            prettier.enable = false;
+            prettier.enable = true;
             shellcheck.enable = true;
             shellcheck.includes = [
               "*.sh"
