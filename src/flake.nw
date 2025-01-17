@@ -177,17 +177,14 @@ inputs.treefmt-nix.flakeModule
 
 <<configure treefmt-nix>>=
 treefmt = {
-  programs = {
+  programs = rec {
     <<deadnix>>
     <<nixpkgs-fmt>>
     <<shellcheck>>
     <<shfmt>>
   };
-  settings.formatter = rec {
-    <<deadnix settings>>
-    <<nixpkgs-fmt settings>>
+  settings.formatter = {
     <<shellcheck settings>>
-    <<shfmt settings>>
   };
 };
 @
@@ -196,18 +193,18 @@ Use \hrefootnote{https://github.com/astro/deadnix}{deadnix} to scan Nix files
 for dead code (unused variable bindings).
 
 <<deadnix>>=
-deadnix = {
-  enable = true;
-  no-lambda-arg = true;
-  no-lambda-pattern-names = true;
-};
+deadnix.enable = true;
 @
 
 Use the same \nix{excludes} from the [[<<nixpkgs-fmt settings>>]], to exclude
 some generated Nix files.
 
-<<deadnix settings>>=
+<<deadnix>>=
 deadnix.excludes = nixpkgs-fmt.excludes;
+@
+
+<<deadnix>>=
+deadnix.no-lambda-arg = true;
 @
 
 Use \hrefootnote{https://github.com/nix-community/nixpkgs-fmt}{nixpkgs-fmt} to
@@ -217,7 +214,7 @@ format Nix files.
 nixpkgs-fmt.enable = true;
 @
 
-<<nixpkgs-fmt settings>>=
+<<nixpkgs-fmt>>=
 nixpkgs-fmt.excludes = [
   "machines/*/hardware-configuration.nix"
   "pkgs/development/node-packages/node-env.nix"
@@ -231,40 +228,26 @@ Use \hrefootnote{https://www.shellcheck.net/}{ShellCheck} to lint shell scripts.
 shellcheck.enable = true;
 @
 
+<<shellcheck>>=
+shellcheck.includes = [
+  "*.sh"
+  ".envrc"
+];
+@
+
 <<shellcheck settings>>=
-shellcheck = {
-  includes = [
-    "*.sh"
-    ".envrc"
-  ];
-  options = [
-    "--format=tty"
-    "--shell=bash"
-  ];
-};
+shellcheck.options = [
+  "--format=tty"
+  "--shell=bash"
+];
 @
 
 Use \hrefootnote{https://github.com/mvdan/sh}{shfmt} to format shell scripts.
 
 <<shfmt>>=
-shfmt.enable = true;
-@
-
-Configure my preferred shfmt settings.
-
-<<shfmt settings>>=
 shfmt = {
-  includes = [
-    "*.sh"
-    ".envrc"
-  ];
-  options = [
-    "-i"
-    "4"
-    "-ci"
-    "-s"
-    "-w"
-  ];
+  enable = true;
+  indent_size = 4;
 };
 @
 
@@ -684,7 +667,7 @@ nixos = import ./modules/nixos.nix;
 <<Modules>>=
 nixpkgs = {
   nixpkgs.config.allowUnfreePredicate = self.lib.pkgNameElem [
-    "Oracle_VM_VirtualBox_Extension_Pack"
+    "Oracle_VirtualBox_Extension_Pack"
     "lastpass-password-manager"
     "lens"
     "nvidia"
@@ -696,6 +679,7 @@ nixpkgs = {
     # "steam-original"
     # "steam-run"
     "steam-unwrapped"
+    "vault"
     "zoom"
   ];
   nixpkgs.overlays = [

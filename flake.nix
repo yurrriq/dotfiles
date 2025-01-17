@@ -162,7 +162,7 @@
           nixos = import ./modules/nixos.nix;
           nixpkgs = {
             nixpkgs.config.allowUnfreePredicate = self.lib.pkgNameElem [
-              "Oracle_VM_VirtualBox_Extension_Pack"
+              "Oracle_VirtualBox_Extension_Pack"
               "lastpass-password-manager"
               "lens"
               "nvidia"
@@ -174,6 +174,7 @@
               # "steam-original"
               # "steam-run"
               "steam-unwrapped"
+              "vault"
               "zoom"
             ];
             nixpkgs.overlays = [
@@ -306,46 +307,31 @@
           yurrriq-dotfiles = pkgs.callPackage ./. { };
         };
         treefmt = {
-          programs = {
-            deadnix = {
-              enable = true;
-              no-lambda-arg = true;
-              no-lambda-pattern-names = true;
-            };
-            nixpkgs-fmt.enable = true;
-            shellcheck.enable = true;
-            shfmt.enable = true;
-          };
-          settings.formatter = rec {
+          programs = rec {
+            deadnix.enable = true;
             deadnix.excludes = nixpkgs-fmt.excludes;
+            deadnix.no-lambda-arg = true;
+            nixpkgs-fmt.enable = true;
             nixpkgs-fmt.excludes = [
               "machines/*/hardware-configuration.nix"
               "pkgs/development/node-packages/node-env.nix"
               "pkgs/development/node-packages/node-packages.nix"
             ];
-            shellcheck = {
-              includes = [
-                "*.sh"
-                ".envrc"
-              ];
-              options = [
-                "--format=tty"
-                "--shell=bash"
-              ];
-            };
+            shellcheck.enable = true;
+            shellcheck.includes = [
+              "*.sh"
+              ".envrc"
+            ];
             shfmt = {
-              includes = [
-                "*.sh"
-                ".envrc"
-              ];
-              options = [
-                "-i"
-                "4"
-                "-ci"
-                "-s"
-                "-w"
-              ];
+              enable = true;
+              indent_size = 4;
             };
+          };
+          settings.formatter = {
+            shellcheck.options = [
+              "--format=tty"
+              "--shell=bash"
+            ];
           };
         };
       };

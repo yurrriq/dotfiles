@@ -11,7 +11,7 @@ trim_trailing_whitespace = true
 [{*.el,*.enc,*.hs,*.nw}]
 indent_size = unset
 
-[*.json]
+[{*.json,*.sh}]
 indent_size = 4
 
 [{Makefile*,*.enc}]

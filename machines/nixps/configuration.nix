@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, ... }:
 let
   username = "yurrriq";
 in
@@ -79,7 +79,6 @@ in
     '';
     dpi = 220;
     upscaleDefaultCursor = true;
-    videoDrivers = [ "modesetting" ];
   };
   users.mutableUsers = false;
   users.users."${username}" = {

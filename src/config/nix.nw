@@ -1,7 +1,7 @@
 \section{Configure Nix}
 
 <<config/nix.nix>>=
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
   nix = {

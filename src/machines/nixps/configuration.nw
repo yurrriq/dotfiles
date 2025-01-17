@@ -4,7 +4,7 @@ The NiXPS configuration is an expression that takes, at least, \nix{config},
 \nix{lib}, and \nix{pkgs}.
 
 <<machines/nixps/configuration.nix>>=
-{ lib, pkgs, ... }:
+{ lib, ... }:
 let
   username = "yurrriq";
 in
@@ -162,7 +162,6 @@ services.xserver = {
   '';
   dpi = 220;
   upscaleDefaultCursor = true;
-  videoDrivers = [ "modesetting" ];
 };
 @
 

@@ -46,7 +46,7 @@
         ];
       };
 
-      videoDrivers = lib.mkDefault [ "intel" ];
+      videoDrivers = lib.mkDefault [ "modesetting" ];
 
       xkb.options = "ctrl:nocaps,compose:ralt";
     };
