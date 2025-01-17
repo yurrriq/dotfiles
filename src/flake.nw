@@ -11,20 +11,24 @@ The main entrypoint \hrefootnote{https://github.com/yurrriq/dotfiles/blob/main/f
 
   <<nixConfig>>
 
-  outputs = { self, ... }@inputs:
-    let
-      inherit (inputs.nixpkgs) lib;
-      <<outputs variables>>
-    in
-    {
-      <<system-agnostic outputs>>
-    } // inputs.flake-utils.lib.eachDefaultSystem (system:
-      let
+  outputs = { flake-parts, self, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      <<flake submodule imports>>
+      flake = let inherit (inputs.nixpkgs) lib; in {
+        lib = {
+          <<outputs variables>>
+        };
+        <<system-agnostic outputs>>
+      };
+      systems = [
+        "x86_64-linux"
+      ];
+      perSystem = { config, pkgs, system, ... }: {
         <<per-system outputs variables>>
-      in
-      {
         <<per-system outputs>>
-      });
+        <<configure treefmt-nix>>
+      };
+    };
 }
 @
 
@@ -62,9 +66,26 @@ emacs-overlay = {
 };
 @
 
+\subsection{flake-parts}
+
+\hrefootnote{https://flake.parts}{flake-parts} supports flake modules that can
+be shared.
+
+<<inputs>>=
+flake-parts.url = "github:hercules-ci/flake-parts";
+@
+
+<<flake submodule imports>>=
+imports = [
+  <<treefmt-nix flake module>>
+];
+@
+
 \subsection{flake-utils}
 
-\hrefootnote{https://github.com/numtide/flake-utils}{flake-utils} is a set of pure Nix functions that are useful when writing flakes.  Pin a version to dedupe \nix{inputs}.
+\hrefootnote{https://github.com/numtide/flake-utils}{flake-utils} is a set of
+pure Nix functions that are useful when writing flakes.  Pin a version to dedupe
+\nix{inputs}.
 
 <<inputs>>=
 flake-utils.url = "github:numtide/flake-utils";
@@ -134,10 +155,111 @@ nur.url = "github:nix-community/nur";
 
 \subsection{treefmt}
 
+Use \hrefootnote{https://github.com/numtide/treefmt}{treefmt} (via
+\hrefootnote{https://github.com/numtide/treefmt-nix}{treefmt-nix}) to format
+code, as a pre-commit hook or by calling \bash{nix fmt} directly.
+
 <<inputs>>=
 treefmt-nix = {
   inputs.nixpkgs.follows = "nixpkgs";
   url = "github:numtide/treefmt-nix";
+};
+@
+
+<<treefmt-nix flake module>>=
+inputs.treefmt-nix.flakeModule
+@
+
+<<configure treefmt-nix>>=
+treefmt = {
+  programs = {
+    <<deadnix>>
+    <<nixpkgs-fmt>>
+    <<shellcheck>>
+    <<shfmt>>
+  };
+  settings.formatter = rec {
+    <<deadnix settings>>
+    <<nixpkgs-fmt settings>>
+    <<shellcheck settings>>
+    <<shfmt settings>>
+  };
+};
+@
+
+Use \hrefootnote{https://github.com/astro/deadnix}{deadnix} to scan Nix files
+for dead code (unused variable bindings).
+
+<<deadnix>>=
+deadnix = {
+  enable = true;
+  no-lambda-arg = true;
+  no-lambda-pattern-names = true;
+};
+@
+
+Use the same \nix{excludes} from the [[<<nixpkgs-fmt settings>>]], to exclude
+some generated Nix files.
+
+<<deadnix settings>>=
+deadnix.excludes = nixpkgs-fmt.excludes;
+@
+
+Use \hrefootnote{https://github.com/nix-community/nixpkgs-fmt}{nixpkgs-fmt} to
+format Nix files.
+
+<<nixpkgs-fmt>>=
+nixpkgs-fmt.enable = true;
+@
+
+<<nixpkgs-fmt settings>>=
+nixpkgs-fmt.excludes = [
+  "machines/*/hardware-configuration.nix"
+  "pkgs/development/node-packages/node-env.nix"
+  "pkgs/development/node-packages/node-packages.nix"
+];
+@
+
+Use \hrefootnote{https://www.shellcheck.net/}{ShellCheck} to lint shell scripts.
+
+<<shellcheck>>=
+shellcheck.enable = true;
+@
+
+<<shellcheck settings>>=
+shellcheck = {
+  includes = [
+    "*.sh"
+    ".envrc"
+  ];
+  options = [
+    "--format=tty"
+    "--shell=bash"
+  ];
+};
+@
+
+Use \hrefootnote{https://github.com/mvdan/sh}{shfmt} to format shell scripts.
+
+<<shfmt>>=
+shfmt.enable = true;
+@
+
+Configure my preferred shfmt settings.
+
+<<shfmt settings>>=
+shfmt = {
+  includes = [
+    "*.sh"
+    ".envrc"
+  ];
+  options = [
+    "-i"
+    "4"
+    "-ci"
+    "-s"
+    "-w"
+  ];
 };
 @
 
@@ -171,7 +293,7 @@ from \nix{deadnix} and \nix{emacs-overlay}, as well as the locally-defined
 \nix{home-manager}, \nix{iosevka-custom}, and \nix{noweb} overlays.
 
 <<per-system outputs variables>>=
-pkgs = import inputs.nixpkgs {
+_module.args.pkgs = import inputs.nixpkgs {
   overlays = [
     inputs.emacs-overlay.overlay
     self.overlays.home-manager
@@ -269,102 +391,6 @@ xmonad =
   };
 @
 
-\subsection{Formatters}
-
-Use \hrefootnote{https://github.com/numtide/treefmt}{treefmt} (via \hrefootnote{https://github.com/numtide/treefmt-nix}{treefmt-nix}) to format code, as a pre-commit hook or by calling \bash{nix fmt} directly.
-
-<<per-system outputs>>=
-formatter = inputs.treefmt-nix.lib.mkWrapper pkgs {
-  projectRootFile = "flake.nix";
-  programs = {
-    <<deadnix>>
-    <<nixpkgs-fmt>>
-    <<shellcheck>>
-    <<shfmt>>
-  };
-  settings.formatter = rec {
-    <<deadnix settings>>
-    <<nixpkgs-fmt settings>>
-    <<shellcheck settings>>
-    <<shfmt settings>>
-  };
-};
-@
-
-Use \hrefootnote{https://github.com/astro/deadnix}{deadnix} to scan Nix files for dead code (unused variable bindings).
-
-<<deadnix>>=
-deadnix = {
-  enable = true;
-  no-lambda-arg = true;
-  no-lambda-pattern-names = true;
-};
-@
-
-Use the same \nix{excludes} from the [[<<nixpkgs-fmt settings>>]], to exclude
-some generated Nix files.
-
-<<deadnix settings>>=
-deadnix.excludes = nixpkgs-fmt.excludes;
-@
-
-Use \hrefootnote{https://github.com/nix-community/nixpkgs-fmt}{nixpkgs-fmt} to format Nix files.
-
-<<nixpkgs-fmt>>=
-nixpkgs-fmt.enable = true;
-@
-
-<<nixpkgs-fmt settings>>=
-nixpkgs-fmt.excludes = [
-  "machines/*/hardware-configuration.nix"
-  "pkgs/development/node-packages/node-env.nix"
-  "pkgs/development/node-packages/node-packages.nix"
-];
-@
-
-Use \hrefootnote{https://www.shellcheck.net/}{ShellCheck} to lint shell scripts.
-
-<<shellcheck>>=
-shellcheck.enable = true;
-@
-
-<<shellcheck settings>>=
-shellcheck = {
-  includes = [
-    "*.sh"
-    ".envrc"
-  ];
-  options = [
-    "--format=tty"
-    "--shell=bash"
-  ];
-};
-@
-
-Use \hrefootnote{https://github.com/mvdan/sh}{shfmt} to format shell scripts.
-
-<<shfmt>>=
-shfmt.enable = true;
-@
-
-Configure my preferred shfmt settings.
-
-<<shfmt settings>>=
-shfmt = {
-  includes = [
-    "*.sh"
-    ".envrc"
-  ];
-  options = [
-    "-i"
-    "4"
-    "-ci"
-    "-s"
-    "-w"
-  ];
-};
-@
-
 \subsection{Packages}
 
 The default package builds
@@ -395,8 +421,8 @@ Define system configurations for \hyperref[sec:nixps]{my personal laptop} and
 
 <<system-agnostic outputs>>=
 nixosConfigurations = {
-  "nixps" = mkSystem "nixps" "dell-xps-15-9560-intel";
-  "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-7390";
+  "nixps" = self.lib.mkSystem "nixps" "dell-xps-15-9560-intel";
+  "MSP-EBAILEY01" = self.lib.mkSystem "sruxps" "dell-xps-13-7390";
 };
 @
 
@@ -652,7 +678,7 @@ nixos = import ./modules/nixos.nix;
 
 <<Modules>>=
 nixpkgs = {
-  nixpkgs.config.allowUnfreePredicate = pkgNameElem [
+  nixpkgs.config.allowUnfreePredicate = self.lib.pkgNameElem [
     "Oracle_VM_VirtualBox_Extension_Pack"
     "lastpass-password-manager"
     "lens"

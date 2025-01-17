@@ -10,6 +10,7 @@
         nixpkgs-stable.follows = "nixpkgs-stable";
       };
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -34,197 +35,203 @@
     commit-lockfile-summary = "build(deps): nix flake update";
   };
 
-  outputs = { self, ... }@inputs:
-    let
-      inherit (inputs.nixpkgs) lib;
-      mkSystem = name: machine: lib.nixosSystem {
-        modules = [
-          (./machines + "/${name}/hardware-configuration.nix")
-          inputs.nixos-hardware.nixosModules.${machine}
-          inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
-          inputs.home-manager.nixosModules.home-manager
-          self.nixosModules.home-manager
-          self.nixosModules.location
-          self.nixosModules.nix
-          self.nixosModules.nixPath
-          self.nixosModules.nixRegistry
-          self.nixosModules.nixos
-          self.nixosModules.nixpkgs
-          self.nixosModules.bootyjams
-          self.nixosModules.virtualisation
-          (./machines + "/${name}/configuration.nix")
-        ];
-        system = "x86_64-linux";
-      };
-      pkgNameElem = names: pkg:
-        builtins.elem (lib.getName pkg) names;
-    in
-    {
-      overlays = {
-        default =
-          lib.composeManyExtensions
-            (lib.attrValues
-              (lib.filterAttrs (name: _: name != "default") self.overlays));
-        iosevka-custom = final: prev: {
-          # https://typeof.net/Iosevka/customizer
-          iosevka-custom = prev.iosevka.override {
-            privateBuildPlan = ''
-              [buildPlans.Iosevkacustom]
-              family = "Iosevka Custom"
-              spacing = "normal"
-              serifs = "sans"
-              exportGlyphNames = true
-              [buildPlans.Iosevkacustom.weights.Regular]
-              shape = 400
-              menu = 400
-              css = 400
-              [buildPlans.Iosevkacustom.weights.Bold]
-              shape = 700
-              menu = 700
-              css = 700
-              [buildPlans.Iosevkacustom.slopes.Upright]
-              angle = 0
-              shape = "upright"
-              menu = "upright"
-              css = "normal"
-              [buildPlans.Iosevkacustom.slopes.Italic]
-              angle = 9.4
-              shape = "italic"
-              menu = "italic"
-              css = "italic"
-              [buildPlans.Iosevkacustom.ligations]
-              inherits = "dlig"
-              [buildPlans.Iosevkacustom.variants.design]
-              lower-lambda = "curly-tailed-turn"
-            '';
-            set = "custom";
+  outputs = { flake-parts, self, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        inputs.treefmt-nix.flakeModule
+      ];
+      flake = let inherit (inputs.nixpkgs) lib; in {
+        lib = {
+          mkSystem = name: machine: lib.nixosSystem {
+            modules = [
+              (./machines + "/${name}/hardware-configuration.nix")
+              inputs.nixos-hardware.nixosModules.${machine}
+              inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
+              inputs.home-manager.nixosModules.home-manager
+              self.nixosModules.home-manager
+              self.nixosModules.location
+              self.nixosModules.nix
+              self.nixosModules.nixPath
+              self.nixosModules.nixRegistry
+              self.nixosModules.nixos
+              self.nixosModules.nixpkgs
+              self.nixosModules.bootyjams
+              self.nixosModules.virtualisation
+              (./machines + "/${name}/configuration.nix")
+            ];
+            system = "x86_64-linux";
           };
+          pkgNameElem = names: pkg:
+            builtins.elem (lib.getName pkg) names;
         };
-        home-manager = final: prev: {
-          home-manager = inputs.home-manager.packages.${prev.system}.home-manager;
-        };
-        nixGLWrap = final: prev: {
-          lib = prev.lib // {
-            nixGLWrap = { pkg, binName ? prev.lib.getName pkg }:
-              prev.writeShellScriptBin binName ''
-                exec ${final.nixgl.nixGLIntel}/bin/nixGLIntel ${pkg}/bin/${binName} "$@"
+        overlays = {
+          default =
+            lib.composeManyExtensions
+              (lib.attrValues
+                (lib.filterAttrs (name: _: name != "default") self.overlays));
+          iosevka-custom = final: prev: {
+            # https://typeof.net/Iosevka/customizer
+            iosevka-custom = prev.iosevka.override {
+              privateBuildPlan = ''
+                [buildPlans.Iosevkacustom]
+                family = "Iosevka Custom"
+                spacing = "normal"
+                serifs = "sans"
+                exportGlyphNames = true
+                [buildPlans.Iosevkacustom.weights.Regular]
+                shape = 400
+                menu = 400
+                css = 400
+                [buildPlans.Iosevkacustom.weights.Bold]
+                shape = 700
+                menu = 700
+                css = 700
+                [buildPlans.Iosevkacustom.slopes.Upright]
+                angle = 0
+                shape = "upright"
+                menu = "upright"
+                css = "normal"
+                [buildPlans.Iosevkacustom.slopes.Italic]
+                angle = 9.4
+                shape = "italic"
+                menu = "italic"
+                css = "italic"
+                [buildPlans.Iosevkacustom.ligations]
+                inherits = "dlig"
+                [buildPlans.Iosevkacustom.variants.design]
+                lower-lambda = "curly-tailed-turn"
               '';
+              set = "custom";
+            };
           };
-        };
-        noweb = final: prev: {
-          noweb = prev.noweb.override {
-            icon-lang = prev.icon-lang.override {
-              withGraphics = false;
+          home-manager = final: prev: {
+            home-manager = inputs.home-manager.packages.${prev.system}.home-manager;
+          };
+          nixGLWrap = final: prev: {
+            lib = prev.lib // {
+              nixGLWrap = { pkg, binName ? prev.lib.getName pkg }:
+                prev.writeShellScriptBin binName ''
+                  exec ${final.nixgl.nixGLIntel}/bin/nixGLIntel ${pkg}/bin/${binName} "$@"
+                '';
+            };
+          };
+          noweb = final: prev: {
+            noweb = prev.noweb.override {
+              icon-lang = prev.icon-lang.override {
+                withGraphics = false;
+              };
             };
           };
         };
-      };
-      nixosModules = {
-        bootyjams = import ./modules/bootyjams.nix;
-        home-manager = {
+        nixosModules = {
+          bootyjams = import ./modules/bootyjams.nix;
           home-manager = {
-            sharedModules =
-              let
-                excluded = [
-                  "bugwarrior"
-                  "nix"
-                  "screen-locker"
-                  "taskwarrior"
-                ];
-                notExcluded = lib.filterAttrs (name: _: !(builtins.elem name excluded));
-              in
-              builtins.attrValues (notExcluded self.homeManagerModules);
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            verbose = true;
+            home-manager = {
+              sharedModules =
+                let
+                  excluded = [
+                    "bugwarrior"
+                    "nix"
+                    "screen-locker"
+                    "taskwarrior"
+                  ];
+                  notExcluded = lib.filterAttrs (name: _: !(builtins.elem name excluded));
+                in
+                builtins.attrValues (notExcluded self.homeManagerModules);
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              verbose = true;
+            };
+          };
+          location = import ./modules/location.nix;
+          nix = import ./modules/nix.nix;
+          nixPath = {
+            nix.nixPath = lib.mapAttrsToList (n: v: "${n}=${v}")
+              (lib.filterAttrs (n: _: n != "self") inputs) ++ [
+              "nixos-config=/etc/nixos/configuration.nix"
+            ];
+          };
+          nixRegistry = {
+            nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
+          };
+          nixos = import ./modules/nixos.nix;
+          nixpkgs = {
+            nixpkgs.config.allowUnfreePredicate = self.lib.pkgNameElem [
+              "Oracle_VM_VirtualBox_Extension_Pack"
+              "lastpass-password-manager"
+              "lens"
+              "nvidia"
+              "reaper"
+              "slack"
+              "spotify"
+              "spotify-unwrapped"
+              "steam"
+              # "steam-original"
+              # "steam-run"
+              "steam-unwrapped"
+              "zoom"
+            ];
+            nixpkgs.overlays = [
+              self.overlays.default
+              inputs.emacs-overlay.overlay
+              inputs.nixgl.overlay
+              inputs.nur.overlays.default
+            ];
+          };
+          virtualisation = import ./modules/virtualisation.nix;
+        };
+        nixosConfigurations = {
+          "nixps" = self.lib.mkSystem "nixps" "dell-xps-15-9560-intel";
+          "MSP-EBAILEY01" = self.lib.mkSystem "sruxps" "dell-xps-13-7390";
+        };
+        homeManagerModules =
+          let
+            inherit (builtins) attrNames baseNameOf filter listToAttrs pathExists readDir toPath;
+            inherit (lib.attrsets) nameValuePair;
+            inherit (lib.strings) hasSuffix removeSuffix;
+            resolveModule = relativePath:
+              nameValuePair
+                (removeSuffix ".nix" (baseNameOf relativePath))
+                (import (toPath (./config + ("/" + relativePath))));
+            isModule = path:
+              hasSuffix ".nix" path ||
+              pathExists (./config + ("/" + path + "/default.nix"));
+          in
+          listToAttrs
+            (map resolveModule
+              (filter isModule
+                (attrNames (readDir ./config))));
+        homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
+          modules = self.nixosModules.home-manager.home-manager.sharedModules ++ [
+            self.nixosModules.nixRegistry
+            ./machines/sruxps/home.nix
+            {
+              home = {
+                username = "eric";
+                homeDirectory = "/home/eric";
+                stateVersion = "24.11";
+              };
+            }
+          ];
+          pkgs = import inputs.nixpkgs {
+            inherit (self.nixosModules.nixpkgs.nixpkgs) config;
+            overlays = self.nixosModules.nixpkgs.nixpkgs.overlays ++ [
+              # https://github.com/nix-community/home-manager/issues/2251#issuecomment-895338427
+              (final: prev: {
+                kitty = prev.lib.nixGLWrap { pkg = prev.kitty; };
+                # FIXME
+                # zoom-us = prev.lib.nixGLWrap { pkg = prev.zoom-us; binName = "zoom"; };
+              })
+            ];
+            system = "x86_64-linux";
           };
         };
-        location = import ./modules/location.nix;
-        nix = import ./modules/nix.nix;
-        nixPath = {
-          nix.nixPath = lib.mapAttrsToList (n: v: "${n}=${v}")
-            (lib.filterAttrs (n: _: n != "self") inputs) ++ [
-            "nixos-config=/etc/nixos/configuration.nix"
-          ];
-        };
-        nixRegistry = {
-          nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
-        };
-        nixos = import ./modules/nixos.nix;
-        nixpkgs = {
-          nixpkgs.config.allowUnfreePredicate = pkgNameElem [
-            "Oracle_VM_VirtualBox_Extension_Pack"
-            "lastpass-password-manager"
-            "lens"
-            "nvidia"
-            "reaper"
-            "slack"
-            "spotify"
-            "spotify-unwrapped"
-            "steam"
-            # "steam-original"
-            # "steam-run"
-            "steam-unwrapped"
-            "zoom"
-          ];
-          nixpkgs.overlays = [
-            self.overlays.default
-            inputs.emacs-overlay.overlay
-            inputs.nixgl.overlay
-            inputs.nur.overlays.default
-          ];
-        };
-        virtualisation = import ./modules/virtualisation.nix;
       };
-      nixosConfigurations = {
-        "nixps" = mkSystem "nixps" "dell-xps-15-9560-intel";
-        "MSP-EBAILEY01" = mkSystem "sruxps" "dell-xps-13-7390";
-      };
-      homeManagerModules =
-        let
-          inherit (builtins) attrNames baseNameOf filter listToAttrs pathExists readDir toPath;
-          inherit (lib.attrsets) nameValuePair;
-          inherit (lib.strings) hasSuffix removeSuffix;
-          resolveModule = relativePath:
-            nameValuePair
-              (removeSuffix ".nix" (baseNameOf relativePath))
-              (import (toPath (./config + ("/" + relativePath))));
-          isModule = path:
-            hasSuffix ".nix" path ||
-            pathExists (./config + ("/" + path + "/default.nix"));
-        in
-        listToAttrs
-          (map resolveModule
-            (filter isModule
-              (attrNames (readDir ./config))));
-      homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
-        modules = self.nixosModules.home-manager.home-manager.sharedModules ++ [
-          self.nixosModules.nixRegistry
-          ./machines/sruxps/home.nix
-          {
-            home = {
-              username = "eric";
-              homeDirectory = "/home/eric";
-              stateVersion = "24.11";
-            };
-          }
-        ];
-        pkgs = import inputs.nixpkgs {
-          inherit (self.nixosModules.nixpkgs.nixpkgs) config;
-          overlays = self.nixosModules.nixpkgs.nixpkgs.overlays ++ [
-            # https://github.com/nix-community/home-manager/issues/2251#issuecomment-895338427
-            (final: prev: {
-              kitty = prev.lib.nixGLWrap { pkg = prev.kitty; };
-              # FIXME
-              # zoom-us = prev.lib.nixGLWrap { pkg = prev.zoom-us; binName = "zoom"; };
-            })
-          ];
-          system = "x86_64-linux";
-        };
-      };
-    } // inputs.flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import inputs.nixpkgs {
+      systems = [
+        "x86_64-linux"
+      ];
+      perSystem = { config, pkgs, system, ... }: {
+        _module.args.pkgs = import inputs.nixpkgs {
           overlays = [
             inputs.emacs-overlay.overlay
             self.overlays.home-manager
@@ -233,8 +240,6 @@
           ];
           inherit system;
         };
-      in
-      {
         devShells = {
           default = pkgs.mkShell {
             inherit (self.packages.${system}.default) FONTCONFIG_FILE;
@@ -290,8 +295,12 @@
               ] ++ myXMonad.env.nativeBuildInputs;
             };
         };
-        formatter = inputs.treefmt-nix.lib.mkWrapper pkgs {
-          projectRootFile = "flake.nix";
+        packages = {
+          default = self.packages.${system}.yurrriq-dotfiles;
+          inherit (pkgs) iosevka-custom;
+          yurrriq-dotfiles = pkgs.callPackage ./. { };
+        };
+        treefmt = {
           programs = {
             deadnix = {
               enable = true;
@@ -334,10 +343,6 @@
             };
           };
         };
-        packages = {
-          default = self.packages.${system}.yurrriq-dotfiles;
-          inherit (pkgs) iosevka-custom;
-          yurrriq-dotfiles = pkgs.callPackage ./. { };
-        };
-      });
+      };
+    };
 }
