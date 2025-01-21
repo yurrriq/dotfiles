@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 let
   username = "yurrriq";
 in
@@ -80,6 +80,12 @@ in
     dpi = 220;
     upscaleDefaultCursor = true;
   };
+  programs.light.enable = true;
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="backlight", \
+    RUN+="${pkgs.coreutils}/bin/chgrp video /sys/class/backlight/%k/brightness", \
+    RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/%k/brightness"
+  '';
   users.mutableUsers = false;
   users.users."${username}" = {
     name = username;

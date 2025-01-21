@@ -4,7 +4,7 @@ The NiXPS configuration is an expression that takes, at least, \nix{config},
 \nix{lib}, and \nix{pkgs}.
 
 <<machines/nixps/configuration.nix>>=
-{ lib, ... }:
+{ lib, pkgs, ... }:
 let
   username = "yurrriq";
 in
@@ -24,6 +24,7 @@ in
   <<Configure sudo>>
   <<Configure displayManager>>
   <<Configure X Server>>
+  <<Configure light and udev rules>>
   <<Configure user>>
   virtualisation.libvirtd.enable = true;
 }
@@ -163,6 +164,15 @@ services.xserver = {
   dpi = 220;
   upscaleDefaultCursor = true;
 };
+@
+
+<<Configure light and udev rules>>=
+programs.light.enable = true;
+services.udev.extraRules = ''
+  ACTION=="add", SUBSYSTEM=="backlight", \
+  RUN+="${pkgs.coreutils}/bin/chgrp video /sys/class/backlight/%k/brightness", \
+  RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/%k/brightness"
+'';
 @
 
 <<Configure user>>=
