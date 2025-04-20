@@ -12,6 +12,7 @@
   home.packages = with pkgs; [
     amdvlk
     calibre
+    devenv
     electronplayer
     fd
     frescobaldi
