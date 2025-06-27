@@ -52,6 +52,10 @@ in
       enable = true;
       allowedTCPPortRanges = [
         # { from = 8000; to = 8000; }
+        { from = 27036; to = 27037; }
+      ];
+      allowedUDPPortRanges = [
+        { from = 27031; to = 27036; }
       ];
     };
     hostName = "nixps";
