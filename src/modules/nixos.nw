@@ -45,12 +45,12 @@ networking.networkmanager.enable = true;
 @
 
 
-Hibernate when the laptop lid is closed, mount the Keybase filesystem, enable Redshift, and configure the X server.
+Hibernate when the laptop lid is closed, enable Redshift, and configure the X server.
 
 <<Configure services>>=
 services = {
   logind.lidSwitch = "hibernate";
-  kbfs.enable = true;
+  kbfs.enable = false;
   redshift = {
     enable = true;
     temperature.night = 2300;

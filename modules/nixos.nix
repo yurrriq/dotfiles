@@ -12,7 +12,7 @@
   networking.networkmanager.enable = true;
   services = {
     logind.lidSwitch = "hibernate";
-    kbfs.enable = true;
+    kbfs.enable = false;
     redshift = {
       enable = true;
       temperature.night = 2300;
