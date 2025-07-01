@@ -5,7 +5,7 @@
 {
   <<Configure email accounts>>
   <<Add some more user packages>>
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
   <<Try rbw>>
   services.picom.enable = true;
 }
@@ -28,7 +28,6 @@ home.packages = with pkgs; [
   amdvlk
   calibre
   devenv
-  electronplayer
   fd
   frescobaldi
   gnutls

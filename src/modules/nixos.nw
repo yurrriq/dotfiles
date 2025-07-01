@@ -11,7 +11,7 @@ This modules manages some common configuration on NixOS systems.
   <<Configure location>>
   <<Enable networkmanager>>
   <<Configure services>>
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }
 @
 

@@ -174,7 +174,7 @@ invaluable tool for managing a deterministic \bash{$HOME}.  Pin a version and fo
 
 <<inputs>>=
 home-manager = {
-  url = "github:nix-community/home-manager/release-24.11";
+  url = "github:nix-community/home-manager/release-25.05";
   inputs.nixpkgs.follows = "nixpkgs";
 };
 @
@@ -206,14 +206,14 @@ Someday soon again, prefer to live on the edge and pin \nix{nixpkgs} to the
 \textit{nixpkgs-unstable} branch.
 
 <<inputs>>=
-nixpkgs.url = "github:nixos/nixpkgs/release-24.11";
+nixpkgs.follows = "nixpkgs-stable";
 @
 
 Additionally, pin a stable version of the
 \hrefootnote{https://github.com/NixOS/nixpkgs}{Nix Packages collection}.
 
 <<inputs>>=
-nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.11";
+nixpkgs-stable.url = "github:nixos/nixpkgs/release-25.05";
 @
 
 \subsection{NUR}
@@ -492,7 +492,7 @@ homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
       home = {
         username = "eric";
         homeDirectory = "/home/eric";
-        stateVersion = "24.11";
+        stateVersion = "25.05";
       };
     }
   ];

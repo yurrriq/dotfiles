@@ -6,12 +6,13 @@
     enable = true;
     profiles = {
       default = {
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          browserpass
-          darkreader
-          lastpass-password-manager
-          privacy-badger
-        ];
+        extensions = {
+          packages = with pkgs.nur.repos.rycee.firefox-addons; [
+            browserpass
+            darkreader
+            privacy-badger
+          ];
+        };
         settings = {
           # http://kb.mozillazine.org/About:config_entries
           "browser.ctrlTab.recentlyUsedOrder" = false;
