@@ -1,4 +1,5 @@
 { config, pkgs, ... }:
+
 {
   accounts.email.accounts = {
     personal = {
@@ -17,7 +18,13 @@
     frescobaldi
     gnutls
     lutris
-    musescore
+    (
+      musescore.overrideAttrs (old: {
+        qtWrapperArgs = old.qtWrapperArgs ++ [
+          "--set QT_SCREEN_SCALE_FACTORS 2"
+        ];
+      })
+    )
     openscad
     powertop
     protontricks

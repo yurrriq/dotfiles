@@ -2,6 +2,7 @@
 
 <<machines/nixps/home.nix>>=
 { config, pkgs, ... }:
+
 {
   <<Configure email accounts>>
   <<Add some more user packages>>
@@ -32,7 +33,13 @@ home.packages = with pkgs; [
   frescobaldi
   gnutls
   lutris
-  musescore
+  (
+    musescore.overrideAttrs (old: {
+      qtWrapperArgs = old.qtWrapperArgs ++ [
+        "--set QT_SCREEN_SCALE_FACTORS 2"
+      ];
+    })
+  )
   openscad
   powertop
   protontricks
