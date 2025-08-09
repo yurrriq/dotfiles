@@ -33,7 +33,6 @@
     nur = {
       inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.treefmt-nix.follows = "treefmt-nix";
       url = "github:nix-community/nur";
     };
     treefmt-nix = {

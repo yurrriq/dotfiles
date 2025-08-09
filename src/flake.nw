@@ -228,7 +228,6 @@ provides \say{user contributed Nix packages.} Notably, I use some of
 nur = {
   inputs.flake-parts.follows = "flake-parts";
   inputs.nixpkgs.follows = "nixpkgs";
-  inputs.treefmt-nix.follows = "treefmt-nix";
   url = "github:nix-community/nur";
 };
 @
