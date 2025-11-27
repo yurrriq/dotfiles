@@ -29,6 +29,7 @@ home.packages = with pkgs; [
   amdvlk
   calibre
   devenv
+  duf
   fd
   frescobaldi
   gnutls

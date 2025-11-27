@@ -14,6 +14,7 @@
     amdvlk
     calibre
     devenv
+    duf
     fd
     frescobaldi
     gnutls
