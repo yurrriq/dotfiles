@@ -16,9 +16,19 @@
     devenv
     duf
     fd
-    frescobaldi
     gnutls
     lutris
+    openscad
+    powertop
+    protontricks
+    signal-desktop
+    steam
+    tellico
+    winetricks
+    # zoom-us
+    alsa-scarlett-gui
+    alsa-utils
+    frescobaldi
     (
       musescore.overrideAttrs (old: {
         qtWrapperArgs = old.qtWrapperArgs ++ [
@@ -26,15 +36,8 @@
         ];
       })
     )
-    openscad
-    powertop
-    protontricks
     reaper
-    signal-desktop
-    steam
-    tellico
-    winetricks
-    # zoom-us
+    scarlett2
   ];
   home.stateVersion = "25.05";
   programs.rbw = {

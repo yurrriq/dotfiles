@@ -31,26 +31,33 @@ home.packages = with pkgs; [
   devenv
   duf
   fd
-  frescobaldi
   gnutls
   lutris
-  (
-    musescore.overrideAttrs (old: {
-      qtWrapperArgs = old.qtWrapperArgs ++ [
-        "--set QT_SCREEN_SCALE_FACTORS 2"
-      ];
-    })
-  )
   openscad
   powertop
   protontricks
-  reaper
   signal-desktop
   steam
   tellico
   winetricks
   # zoom-us
+  <<Add some music packages>>
 ];
+@
+
+<<Add some music packages>>=
+alsa-scarlett-gui
+alsa-utils
+frescobaldi
+(
+  musescore.overrideAttrs (old: {
+    qtWrapperArgs = old.qtWrapperArgs ++ [
+      "--set QT_SCREEN_SCALE_FACTORS 2"
+    ];
+  })
+)
+reaper
+scarlett2
 @
 
 <<Try rbw>>=

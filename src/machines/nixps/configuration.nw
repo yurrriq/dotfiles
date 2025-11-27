@@ -16,6 +16,7 @@ in
   <<Configure the file systems>>
   <<Tweak hardware config>>
   <<Configure Bluetooth>>
+  <<Configure for recording>>
   <<Configure fwupd>>
   <<Configure graphics>>
   <<Configure home-manager>>
@@ -100,6 +101,19 @@ hardware.bluetooth = {
       Enable = "Source,Sink,Media,Socket";
     };
   };
+};
+@
+
+Borrow some \hrefootnote{https://nixos.wiki/wiki/PipeWire}{ideas from the NixOS
+  Wiki}.
+
+<<Configure for recording>>=
+security.rtkit.enable = true;
+services.pipewire = {
+  enable = true;
+  alsa.enable = true;
+  alsa.support32Bit = true;
+  pulse.enable = true;
 };
 @
 
