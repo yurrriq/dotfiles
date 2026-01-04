@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    gitAndTools.pass-git-helper
+    pass-git-helper
   ];
 
   programs.password-store = {

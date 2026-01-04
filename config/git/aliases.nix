@@ -14,7 +14,7 @@
     gt = "git tree";
   };
 
-  programs.git.aliases = rec {
+  programs.git.settings.alias = rec {
     ap = "add --patch";
     bm = "branch --merged";
     bnm = "branch --no-merged";

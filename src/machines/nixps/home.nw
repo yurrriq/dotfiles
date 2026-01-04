@@ -6,7 +6,7 @@
 {
   <<Configure email accounts>>
   <<Add some more user packages>>
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
   <<Try rbw>>
   services.picom.enable = true;
 }
@@ -26,7 +26,6 @@ accounts.email.accounts = {
 
 <<Add some more user packages>>=
 home.packages = with pkgs; [
-  amdvlk
   calibre
   devenv
   duf
@@ -48,14 +47,14 @@ home.packages = with pkgs; [
 <<Add some music packages>>=
 alsa-scarlett-gui
 alsa-utils
-frescobaldi
-(
-  musescore.overrideAttrs (old: {
-    qtWrapperArgs = old.qtWrapperArgs ++ [
-      "--set QT_SCREEN_SCALE_FACTORS 2"
-    ];
-  })
-)
+# frescobaldi
+# (
+#   musescore.overrideAttrs (old: {
+#     qtWrapperArgs = old.qtWrapperArgs ++ [
+#       "--set QT_SCREEN_SCALE_FACTORS 2"
+#     ];
+#   })
+# )
 reaper
 scarlett2
 @
@@ -68,7 +67,7 @@ programs.rbw = {
     email = config.accounts.email.accounts.personal.address;
     identity_url = "https://identity.bitwarden.com/";
     notifications_url = "https://notifications.bitwarden.com/";
-    pinentry = pkgs.pinentry;
+    pinentry = pkgs.pinentry-gnome3;
   };
 };
 @

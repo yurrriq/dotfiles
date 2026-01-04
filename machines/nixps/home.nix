@@ -11,7 +11,6 @@
     work.address = "e.bailey@sportradar.com";
   };
   home.packages = with pkgs; [
-    amdvlk
     calibre
     devenv
     duf
@@ -28,18 +27,18 @@
     # zoom-us
     alsa-scarlett-gui
     alsa-utils
-    frescobaldi
-    (
-      musescore.overrideAttrs (old: {
-        qtWrapperArgs = old.qtWrapperArgs ++ [
-          "--set QT_SCREEN_SCALE_FACTORS 2"
-        ];
-      })
-    )
+    # frescobaldi
+    # (
+    #   musescore.overrideAttrs (old: {
+    #     qtWrapperArgs = old.qtWrapperArgs ++ [
+    #       "--set QT_SCREEN_SCALE_FACTORS 2"
+    #     ];
+    #   })
+    # )
     reaper
     scarlett2
   ];
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
   programs.rbw = {
     enable = true;
     settings = {
@@ -47,7 +46,7 @@
       email = config.accounts.email.accounts.personal.address;
       identity_url = "https://identity.bitwarden.com/";
       notifications_url = "https://notifications.bitwarden.com/";
-      pinentry = pkgs.pinentry;
+      pinentry = pkgs.pinentry-gnome3;
     };
   };
   services.picom.enable = true;

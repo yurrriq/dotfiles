@@ -49,7 +49,7 @@ Hibernate when the laptop lid is closed, enable Redshift, and configure the X se
 
 <<Configure services>>=
 services = {
-  logind.lidSwitch = "hibernate";
+  logind.settings.Login.HandleLidSwitch = "hibernate";
   kbfs.enable = false;
   redshift = {
     enable = true;

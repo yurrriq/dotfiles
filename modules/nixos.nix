@@ -11,7 +11,7 @@
   location.provider = "manual";
   networking.networkmanager.enable = true;
   services = {
-    logind.lidSwitch = "hibernate";
+    logind.settings.Login.HandleLidSwitch = "hibernate";
     kbfs.enable = false;
     redshift = {
       enable = true;

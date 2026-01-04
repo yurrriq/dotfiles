@@ -19,7 +19,7 @@
       url = "github:cachix/git-hooks.nix";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl = {
@@ -29,7 +29,7 @@
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs.follows = "nixpkgs-stable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-25.11";
     nur = {
       inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -221,7 +221,7 @@
               home = {
                 username = "eric";
                 homeDirectory = "/home/eric";
-                stateVersion = "25.05";
+                stateVersion = "25.11";
               };
             }
           ];

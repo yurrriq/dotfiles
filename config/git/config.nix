@@ -2,18 +2,19 @@
 
 {
 
-  programs.git = {
-    delta = {
-      enable = true;
-      options = {
-        plus-style = "syntax #012800";
-        minus-style = "syntax #340001";
-        syntax-theme = "Monokai Extended";
-        navigate = true;
-      };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      plus-style = "syntax #012800";
+      minus-style = "syntax #340001";
+      syntax-theme = "Monokai Extended";
+      navigate = true;
     };
+  };
 
-    extraConfig = {
+  programs.git = {
+    settings = {
       color = {
         diff-highlight = {
           oldNormal = "red bold";
@@ -42,7 +43,7 @@
       commit.template = "${config.xdg.dataHome}/git/commit.template";
 
       credential = {
-        helper = "${pkgs.gitAndTools.pass-git-helper}/bin/pass-git-helper";
+        helper = "${pkgs.pass-git-helper}/bin/pass-git-helper";
         useHttpPath = true;
       };
 
@@ -114,7 +115,7 @@
 
     lfs.enable = true;
 
-    userName =
+    settings.user.name =
       (builtins.head
         (lib.filter (account: account.primary)
           (lib.attrValues config.accounts.email.accounts))).realName;

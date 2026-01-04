@@ -9,7 +9,7 @@ in
 
 {
   home.packages = [
-    pkgs.gitAndTools.lab
+    pkgs.lab
   ];
 } // lib.mkIf (config.programs.password-store.enable) {
   xdg.configFile."lab/lab.toml".source = tomlFormat.generate "lab-config" {
