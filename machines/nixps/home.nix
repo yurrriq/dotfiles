@@ -10,6 +10,16 @@
     };
     work.address = "e.bailey@sportradar.com";
   };
+  xdg.configFile."REAPER" = {
+    source = pkgs.symlinkJoin {
+      name = "reaper-userplugins";
+      paths = with pkgs; [
+        # reaper-sws-extension
+        reaper-reapack-extension
+      ];
+    };
+    recursive = true;
+  };
   home.packages = with pkgs; [
     calibre
     devenv
@@ -35,7 +45,21 @@
     #     ];
     #   })
     # )
-    reaper
+    (
+      reaper.overrideAttrs (oldAttrs: {
+        nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ makeWrapper ];
+        postInstall = (oldAttrs.postInstall or "") + ''
+          wrapProgram $out/bin/reaper \
+            --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [
+              glibc
+              stdenv.cc.cc
+              udev
+              xdotool
+              xorg.libX11
+            ]}"
+        '';
+      })
+    )
     scarlett2
   ];
   home.stateVersion = "25.11";

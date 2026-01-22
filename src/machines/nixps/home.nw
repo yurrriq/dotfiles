@@ -5,6 +5,7 @@
 
 {
   <<Configure email accounts>>
+  <<Configure REAPER extensions>>
   <<Add some more user packages>>
   home.stateVersion = "25.11";
   <<Try rbw>>
@@ -55,8 +56,35 @@ alsa-utils
 #     ];
 #   })
 # )
-reaper
+(
+  reaper.overrideAttrs (oldAttrs: {
+    nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ makeWrapper ];
+    postInstall = (oldAttrs.postInstall or "") + ''
+      wrapProgram $out/bin/reaper \
+        --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [
+          glibc
+          stdenv.cc.cc
+          udev
+          xdotool
+          xorg.libX11
+        ]}"
+    '';
+  })
+)
 scarlett2
+@
+
+<<Configure REAPER extensions>>=
+xdg.configFile."REAPER" = {
+  source = pkgs.symlinkJoin {
+    name = "reaper-userplugins";
+    paths = with pkgs; [
+      # reaper-sws-extension
+      reaper-reapack-extension
+    ];
+  };
+  recursive = true;
+};
 @
 
 <<Try rbw>>=
