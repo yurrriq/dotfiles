@@ -111,7 +111,7 @@ ${SH_SRCS}::
 .stow-local-ignore:
 	@ ls -A1 | sed '/^\(config\|flake\.\(nix\|lock\)\|modules\|nix\|overlays\|pkgs\)$$/d' >$@
 
-stow:: .stow-local-ignore cachix
+stow:: .stow-local-ignore
 
 
 %: %.enc
@@ -143,4 +143,4 @@ cachix: cachix/cachix.dhall
 	@ ${stow} -t ~/.config/$@ $@
 
 
-stow:: cachix
+# stow:: cachix
