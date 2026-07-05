@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  perSystem = { config, pkgs, self', ... }: {
+  perSystem = { pkgs, self', ... }: {
     devShells.xmonad = pkgs.mkShell {
       inputsFrom = [
         self'.packages.my-xmonad.env
@@ -19,9 +19,9 @@
         haskellPackages.hlint
         haskellPackages.ormolu
         haskellPackages.pointfree
+        libX11
         nixd
         pre-commit
-        xorg.libX11
         xorg.libXScrnSaver
         xorg.libXext
         xorg.libXft

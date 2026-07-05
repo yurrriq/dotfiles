@@ -21,6 +21,7 @@
     recursive = true;
   };
   home.packages = with pkgs; [
+    brightnessctl
     calibre
     devenv
     duf
@@ -52,17 +53,17 @@
           wrapProgram $out/bin/reaper \
             --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [
               glibc
+              libX11
               stdenv.cc.cc
               udev
               xdotool
-              xorg.libX11
             ]}"
         '';
       })
     )
     scarlett2
   ];
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
   programs.rbw = {
     enable = true;
     settings = {

@@ -4,7 +4,7 @@
 { ... }:
 
 {
-  perSystem = { config, pkgs, self', ... }: {
+  perSystem = { pkgs, self', ... }: {
     <<xmonad development environment>>
     packages.my-xmonad =
       pkgs.haskellPackages.callCabal2nix "my-xmonad" ./. { };
@@ -38,9 +38,9 @@ devShells.xmonad = pkgs.mkShell {
     haskellPackages.hlint
     haskellPackages.ormolu
     haskellPackages.pointfree
+    libX11
     nixd
     pre-commit
-    xorg.libX11
     xorg.libXScrnSaver
     xorg.libXext
     xorg.libXft

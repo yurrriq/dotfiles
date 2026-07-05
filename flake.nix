@@ -19,7 +19,7 @@
       url = "github:cachix/git-hooks.nix";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl = {
@@ -29,7 +29,7 @@
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixpkgs.follows = "nixpkgs-stable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-25.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/release-26.05";
     nur = {
       inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -175,8 +175,6 @@
               "nvidia"
               "reaper"
               "slack"
-              "spotify"
-              "spotify-unwrapped"
               "steam"
               # "steam-original"
               # "steam-run"
@@ -221,7 +219,7 @@
               home = {
                 username = "eric";
                 homeDirectory = "/home/eric";
-                stateVersion = "25.11";
+                stateVersion = "26.05";
               };
             }
           ];
@@ -273,7 +271,7 @@
               gnupg
               home-manager
               mkpasswd
-              nodePackages.node2nix
+              # nodePackages.node2nix
               semver-tool
               sops
               stow

@@ -18,11 +18,10 @@
 \subsection{Common applications}
 
 \hrefootnote{https://www.clementine-player.org}{Clementine} is my favorite music
-player for local (network) files, and Spotify is my streaming service of choice.
+player for local (network) files.
 
 <<Common applications>>=
 clementine
-spotify
 @
 
 I find \hrefootnote{https://gitlab.freedesktop.org/pulseaudio/pavucontrol}{Pulse Audio Volume Control} to be a necessary evil, for the moment.

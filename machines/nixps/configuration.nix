@@ -6,6 +6,8 @@ in
   airportCode = "MSP";
   boot.blacklistedKernelModules = [ "nouveau" "nvidia" "psmouse" ];
   boot.initrd.luks.devices.root.device = "/dev/nvme0n1p2";
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
   environment.homeBinInPath = true;
   environment.pathsToLink = [
     "/lib/aspell"
@@ -15,6 +17,9 @@ in
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/024a1168-9949-4cb2-bbd1-4b19a9d49ef2";
     fsType = "ext4";
+    options = [
+      "x-systemd.device-timeout=infinity"
+    ];
   };
 
   fileSystems."/boot" = {
@@ -92,7 +97,6 @@ in
     dpi = 220;
     upscaleDefaultCursor = true;
   };
-  programs.light.enable = true;
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", \
     RUN+="${pkgs.coreutils}/bin/chgrp video /sys/class/backlight/%k/brightness", \

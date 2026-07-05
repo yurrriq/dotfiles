@@ -21,7 +21,7 @@ WEIRD_SRCS := \
 default.nix \
 pkgs/development/node-packages/node-packages.json
 SRCS := $(filter-out ${WEIRD_SRCS}, $(shell awk '/<<[^ *]+\.\w+>>=$$/{ gsub(/(<<|>>=)/, ""); print $$0 }' ${NW_SRCS} | sort -u))
-NIX_SRCS := $(filter %.nix, ${SRCS}) # pkgs/development/node-packages/node-packages.nix
+NIX_SRCS := $(filter %.nix, ${SRCS})
 SH_SRCS := $(filter %.sh, ${SRCS})
 OTHER_SRCS := $(filter-out ${NIX_SRCS} ${SH_SRCS} ${TEX_SRCS}, ${SRCS})
 TEX_SRCS := $(patsubst src/%.nw,src/%.tex,${NW_SRCS})
@@ -37,7 +37,7 @@ deps:
 
 
 .PHONY: srcs
-srcs: nix-srcs ${SH_SRCS} ${OTHER_SRCS} ${WEIRD_SRCS}
+srcs: nix-srcs ${SH_SRCS} ${OTHER_SRCS} default.nix # ${WEIRD_SRCS}
 
 
 .PHONY: nix-srcs

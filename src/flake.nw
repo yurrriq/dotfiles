@@ -174,7 +174,7 @@ invaluable tool for managing a deterministic \bash{$HOME}.  Pin a version and fo
 
 <<inputs>>=
 home-manager = {
-  url = "github:nix-community/home-manager/release-25.11";
+  url = "github:nix-community/home-manager/release-26.05";
   inputs.nixpkgs.follows = "nixpkgs";
 };
 @
@@ -213,7 +213,7 @@ Additionally, pin a stable version of the
 \hrefootnote{https://github.com/NixOS/nixpkgs}{Nix Packages collection}.
 
 <<inputs>>=
-nixpkgs-stable.url = "github:nixos/nixpkgs/release-25.11";
+nixpkgs-stable.url = "github:nixos/nixpkgs/release-26.05";
 @
 
 \subsection{NUR}
@@ -414,7 +414,7 @@ default = pkgs.mkShell {
     gnupg
     home-manager
     mkpasswd
-    nodePackages.node2nix
+    # nodePackages.node2nix
     semver-tool
     sops
     stow
@@ -491,7 +491,7 @@ homeConfigurations.eric = inputs.home-manager.lib.homeManagerConfiguration {
       home = {
         username = "eric";
         homeDirectory = "/home/eric";
-        stateVersion = "25.11";
+        stateVersion = "26.05";
       };
     }
   ];
@@ -715,8 +715,6 @@ nixpkgs = {
     "nvidia"
     "reaper"
     "slack"
-    "spotify"
-    "spotify-unwrapped"
     "steam"
     # "steam-original"
     # "steam-run"

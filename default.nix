@@ -1,12 +1,13 @@
-{ stdenv
-, nix-gitignore
-, makeFontsConf
+{ gawk
 , iosevka-custom
-, gawk
+, makeFontsConf
+, nix-gitignore
 , noweb
 , python3Packages
-, texlive
+, stdenv
+, texliveSmall
 , which
+, writableTmpDirAsHomeHook
 }:
 
 stdenv.mkDerivation rec {
@@ -33,40 +34,39 @@ stdenv.mkDerivation rec {
     noweb
     python3Packages.pygments
     (
-      texlive.combine {
-        inherit noweb;
-        inherit (texlive) scheme-small
-          braket
-          catchfile
-          datatool
-          datetime
-          dirtytalk
-          fancyref
-          fmtcount
-          framed
-          frankenstein
-          fvextra
-          glossaries
-          glossaries-extra
-          hardwrap
-          ifplatform
-          latexmk
-          mathpazo
-          mfirstuc
-          minted
-          substr
-          titlesec
-          tkz-base
-          todonotes
-          tufte-latex
-          xetex
-          xindy
-          xfor
-          xstring
-          ;
-      }
+      texliveSmall.withPackages (ps: with ps; [
+        braket
+        catchfile
+        datatool
+        datetime
+        dirtytalk
+        fancyref
+        fmtcount
+        framed
+        frankenstein
+        fvextra
+        glossaries
+        glossaries-extra
+        hardwrap
+        ifplatform
+        latexmk
+        mathpazo
+        mfirstuc
+        minted
+        noweb.tex
+        substr
+        titlesec
+        tkz-base
+        todonotes
+        tufte-latex
+        xetex
+        xfor
+        xindy
+        xstring
+      ])
     )
     which
+    writableTmpDirAsHomeHook
   ];
 
   makeFlags = [

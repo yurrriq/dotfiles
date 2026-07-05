@@ -3,7 +3,6 @@
   home.packages = with pkgs; (
     [
       clementine
-      spotify
       pavucontrol
       slack
     ]
