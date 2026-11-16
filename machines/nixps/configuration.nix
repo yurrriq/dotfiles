@@ -26,18 +26,6 @@ in
     device = "/dev/disk/by-uuid/7574-B246";
     fsType = "vfat";
   };
-
-  fileSystems."/var/lib/docker/plugins" = {
-    device = "/var/lib/docker/plugins";
-    fsType = "none";
-    options = [ "bind" ];
-  };
-
-  fileSystems."/var/lib/docker/overlay2" = {
-    device = "/var/lib/docker/overlay2";
-    fsType = "none";
-    options = [ "bind" ];
-  };
   hardware.bumblebee.enable = false;
   hardware.nvidiaOptimus.disable = false;
   services.blueman.enable = true;
