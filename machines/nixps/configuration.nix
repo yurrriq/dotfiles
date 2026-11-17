@@ -5,6 +5,8 @@ in
 {
   airportCode = "MSP";
   boot.blacklistedKernelModules = [ "nouveau" "nvidia" "psmouse" ];
+  boot.initrd.systemd.tpm2.enable = false;
+  systemd.tpm2.enable = false;
   boot.initrd.luks.devices.root.device = "/dev/nvme0n1p2";
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

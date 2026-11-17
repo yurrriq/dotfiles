@@ -11,6 +11,7 @@ in
 {
   <<Set the location to MSP>>
   <<Blacklist a few kernel modules>>
+  <<Disable TPM2>>
   <<Configure the LUKS device>>
   <<Configure the boot loader>>
   <<Configure the environment>>
@@ -40,6 +41,13 @@ airportCode = "MSP";
 
 <<Blacklist a few kernel modules>>=
 boot.blacklistedKernelModules = [ "nouveau" "nvidia" "psmouse" ];
+@
+
+Disable TPM2 to avoid waiting 1m30s when it fails.
+
+<<Disable TPM2>>=
+boot.initrd.systemd.tpm2.enable = false;
+systemd.tpm2.enable = false;
 @
 
 Configure the \hrefootnote{https://gitlab.com/cryptsetup/cryptsetup/}{\acrshort{luks}} devices.
